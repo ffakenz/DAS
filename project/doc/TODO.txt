@@ -1,0 +1,8 @@
+TODO
+
+Informar a la concesionaria del ganador
+Enviar mail al ganador
+Consultar estado plan ganador
+Consultar planes
+Notificar ganador a todas las concesionarias
+Notificar ganador a las pendientes
