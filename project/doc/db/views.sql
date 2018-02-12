@@ -1,3 +1,4 @@
+USE das_final_gobierno;
 GO
 DROP VIEW compradores;
 GO

@@ -1,3 +1,5 @@
+USE das_final_gobierno;
+GO
 DROP TABLE ganadores;
 DROP TABLE consecionarias_notificadas;
 DROP TABLE sorteos;

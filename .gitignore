@@ -27,3 +27,7 @@ project/doc/Analisis SOA/Consultar estado cuenta/~$antilla de análisis.dot
 project/doc/Analisis SOA/Sorteo/~$antilla de análisis.dot
 project/workspace/Servers/
 project/workspace/Herramientas/
+project/workspace/.metadata/
+project/workspace/.recommenders/
+project/workspace/RemoteSystemsTempFiles/
+project/workspace/MVC3.2/build/classes/.gitignore
