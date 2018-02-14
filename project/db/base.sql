@@ -1,6 +1,5 @@
-USE das_final_gobierno;
-GO
 DROP TABLE ganadores;
+DROP TABLE estado_ganador;
 DROP TABLE consecionarias_notificadas;
 DROP TABLE sorteos;
 DROP TABLE estado_sorteo;
@@ -84,10 +83,16 @@ CREATE TABLE sorteos (
 	, UNIQUE(fecha)
 );
 
+CREATE TABLE estado_ganador (
+	nombre VARCHAR(100) PRIMARY KEY
+);
+
+
 CREATE TABLE ganadores (
 	id INT IDENTITY PRIMARY KEY
 	, sorteo_id INT NOT NULL FOREIGN KEY REFERENCES sorteos(id)
 	, plan_id INT NOT NULL FOREIGN KEY REFERENCES planes(id)
+	, estado VARCHAR(100) NOT NULL FOREIGN KEY REFERENCES estado_ganador(nombre) DEFAULT 'pendiente'
 );
 
 CREATE TABLE consecionarias_notificadas (

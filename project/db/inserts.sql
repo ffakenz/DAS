@@ -1,4 +1,3 @@
-USE das_final_gobierno;
 GO
 INSERT INTO roles(nombre)
 VALUES('comprador'),('gobierno'); 
@@ -52,3 +51,23 @@ INSERT INTO sorteos(fecha) VALUES('2018-02-08');
 		,(1, 2, 2, '2018-02-08 20:58:00')
 		,(2, 3, 1, '2018-02-08 20:58:00')
 		,(3, 2, 2, '2018-02-08 20:58:00');
+
+
+
+INSERT INTO estado_ganador(nombre)
+VALUES ('pendiente'), ('cancelado');
+-- Registrar ganador
+	INSERT INTO ganadores(sorteo_id, plan_id)
+	VALUES(1, 1);
+	-- constraints:
+		-- sorteo es completado
+		-- plan al dia y entre cuotas 24 y 36
+
+
+-- Obtener concesionarias las pendientes de auditoria
+	SELECT *
+	FROM consecionarias
+	WHERE id NOT IN ( 
+		SELECT consecionaria
+		FROM consecionarias_notificadas
+	);

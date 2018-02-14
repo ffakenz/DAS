@@ -1,4 +1,3 @@
-USE das_final_gobierno;
 GO
 DROP TRIGGER validate_pendientes;
 GO
@@ -58,3 +57,5 @@ SET NOCOUNT ON
 		RAISERROR(15600,-1,-1, 'no puede haber mas de un sorteo nuevo por mes')
 	END
 END;
+
+

@@ -46,14 +46,17 @@
 
 
 
+-- Consultar calendario sorteos
+	SELECT DISTINCT fecha
+	FROM sorteos
+	ORDER BY fecha ASC;
 
-
-
--- ultimo ganador
+-- consultar ultimo ganador
 	SElECT TOP 1 plan_id FROM ganadores ORDER BY id DESC;
 
 -- verifica estado ultimo ganador: consultar si el ultimo ganador tiene premio
-
+	-- Actualizar estado ganador
+		
 -- hay sorteo pendiente
 	DECLARE @sorteo_id INT; 
 	DECLARE @mes INT;
@@ -66,7 +69,7 @@
 	SELECT  @mes = mes_sorteo FROM sorteos WHERE fecha = CAST(GETDATE() AS DATE);
 
 -- hay planes desactualizados para el sorteo
-	SELECT * FROM planes WHERE DATEPART(MONTH, fecha_ultima_actualizacion) < 2
+	SELECT * FROM planes WHERE DATEPART(MONTH, fecha_ultima_actualizacion) < @mes
 
 -- actualiza los planes
 
