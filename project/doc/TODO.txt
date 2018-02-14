@@ -1,8 +1,21 @@
 TODO
-
-Informar a la concesionaria del ganador
-Enviar mail al ganador
-Consultar estado plan ganador
-Consultar planes
-Notificar ganador a todas las concesionarias
-Notificar ganador a las pendientes
+    Registrar ganador
+    Consultar ultimo ganador
+    Actualizar estado ganador
+    
+    Consultar calendario sorteos
+    Obtener sorteos    
+    Obtener datos sorteo    
+    Obtener planes del sorteo
+    Actualizar plan   
+    
+    Consultar concesionarias    
+    
+    Consultar auditoria
+    Obtener las pendientes de auditoria
+    Registrar auditoria   
+    
+    Actualizar estado sorteo a expirado
+    Actualizar estado sorteo a ejecucion
+    Actualizar estado sorteo a pendiente
+    Actualizar estado sorteo a completado
