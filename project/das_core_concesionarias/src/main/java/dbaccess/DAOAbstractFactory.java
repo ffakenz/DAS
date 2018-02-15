@@ -1,7 +1,6 @@
 package dbaccess;
 
 import dao.PlanDAO;
-
 import java.sql.Connection;
 import java.util.function.Function;
 

@@ -3,7 +3,6 @@ package dbaccess.implementations;
 import dao.PlanDAO;
 import dbaccess.ConnectionConfig;
 import dbaccess.DAOAbstractFactory;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -37,7 +36,6 @@ public class MSSQLDAOFactory extends DAOAbstractFactory implements ConnectionCon
     }
 
     public PlanDAO getPlanDAO() {
-        // OracleDbCustomerDAO implements CustomerDAO
         return new MSSQLPlanDAO();
     }
 }

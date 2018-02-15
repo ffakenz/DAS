@@ -2,8 +2,7 @@ package beans;
 
 import annotations.Column;
 import annotations.Entity;
-
-import java.util.Date;
+import java.sql.Timestamp;
 
 @Entity
 public class PlanBean implements java.io.Serializable {
@@ -22,6 +21,10 @@ public class PlanBean implements java.io.Serializable {
     Long documento;
     @Column(name="clientId")
     String clientId;
+    @Column(name="fecha_alta")
+    Timestamp fechaAlta;
+    @Column(name="fecha_ultima_actualizacion")
+    Timestamp fechaUltimoUpdate;
 
     public Integer getId() {
         return id;
@@ -79,6 +82,22 @@ public class PlanBean implements java.io.Serializable {
         this.clientId = clientId;
     }
 
+    public Timestamp getFechaAlta() {
+        return fechaAlta;
+    }
+
+    public void setFechaAlta(Timestamp fechaAlta) {
+        this.fechaAlta = fechaAlta;
+    }
+
+    public Timestamp getFechaUltimoUpdate() {
+        return fechaUltimoUpdate;
+    }
+
+    public void setFechaUltimoUpdate(Timestamp fechaUltimoUpdate) {
+        this.fechaUltimoUpdate = fechaUltimoUpdate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -105,7 +124,9 @@ public class PlanBean implements java.io.Serializable {
                 ", concesionaria='" + concesionaria + '\'' +
                 ", concesionariaId=" + concesionariaId +
                 ", documento=" + documento +
-                ", clientId=" + clientId +
+                ", clientId='" + clientId + '\'' +
+                ", fechaAlta=" + fechaAlta +
+                ", fechaUltimoUpdate=" + fechaUltimoUpdate +
                 '}';
     }
 }

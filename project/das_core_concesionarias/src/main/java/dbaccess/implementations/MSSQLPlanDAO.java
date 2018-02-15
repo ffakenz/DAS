@@ -2,10 +2,9 @@ package dbaccess.implementations;
 
 import annotations.MyResultSet;
 import beans.PlanBean;
-import com.sun.org.apache.xalan.internal.xsltc.compiler.util.VoidType;
 import dao.PlanDAO;
-
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -14,7 +13,7 @@ public class MSSQLPlanDAO implements PlanDAO {
     @Override
     public Function<Connection, List<PlanBean>> consultarPlanes() {
 
-        String consultarPlanesQuery = "SELECT planId, cant_cuotas_pagas, vehiculo, concesionaria, concesionariaId, documento, clientId FROM compradores;";
+        String consultarPlanesQuery = "SELECT * clientId FROM compradores;";
 
         return (Connection c) -> {
             try(Statement stm = c.createStatement()){
@@ -26,13 +25,13 @@ public class MSSQLPlanDAO implements PlanDAO {
                 System.out.println(e.getMessage());
                 e.printStackTrace();
             }
-            return null; // non reacheable statement
+            return new ArrayList<>();
         };
     }
 
     @Override
     public Function<Connection, Optional<PlanBean>> consultarPlan(Long id) {
-        String consultarPlanQuery = "SELECT planId, cant_cuotas_pagas, vehiculo, concesionaria, concesionariaId, documento, clientId FROM compradores WHERE planId = ?;";
+        String consultarPlanQuery = "SELECT * FROM compradores WHERE planId = ?;";
 
         return (Connection c) -> {
             try(PreparedStatement ps = c.prepareStatement(consultarPlanQuery)){
@@ -45,7 +44,7 @@ public class MSSQLPlanDAO implements PlanDAO {
                 System.out.println(e.getMessage());
                 e.printStackTrace();
             }
-            return Optional.ofNullable(null); // non reacheable statement
+            return Optional.empty();
         };
     }
 
