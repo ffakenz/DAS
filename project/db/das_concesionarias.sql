@@ -1,4 +1,4 @@
-USE das_consecionarias;
+USE das_concesionarias;
 
 DROP TABLE planes;
 DROP TABLE clientes;
@@ -110,7 +110,7 @@ FROM planes p
 	GO
 	DROP PROCEDURE consultarPlan;
 	GO
-	CREATE PROCEDURE getPlan(@idPlan INT) AS
+	CREATE PROCEDURE consultarPlan(@idPlan INT) AS
 	SELECT *
 	FROM compradores
 	WHERE planId = @idPlan;
