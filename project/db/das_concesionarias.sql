@@ -1,8 +1,9 @@
+// DROP TABLE consecionarias 
 USE das_concesionarias;
 
 DROP TABLE planes;
 DROP TABLE clientes;
-DROP TABLE consecionarias;
+DROP TABLE concesionarias;
 DROP TABLE vehiculos;
 DROP TABLE tipos_vehiculo;
 
@@ -26,26 +27,27 @@ VALUES ('taxi', 'Corsa')
 	, ('utilitario', 'Fiorino'), ('utilitario', 'Saveiro')
 ;
 
-CREATE TABLE consecionarias (
+
+CREATE TABLE concesionarias (
 	id INT IDENTITY PRIMARY KEY
 	, nombre VARCHAR(100) NOT NULL
 	, fecha_de_alta DATETIME NOT NULL DEFAULT GETDATE()
 	, UNIQUE(nombre)
 );
-INSERT INTO consecionarias(nombre)
+INSERT INTO concesionarias(nombre)
 VALUES('C1'), ('C2'), ('C3'), ('C4'), ('C5');
 
 
 CREATE TABLE clientes (
-	id_consecionaria INT FOREIGN KEY REFERENCES consecionarias(id)
+	id_concesionaria INT FOREIGN KEY REFERENCES concesionarias(id)
 	, correlativo INT NOT NULL -- informado por la consecionaria
 	, documento BIGINT NOT NULL
-	, id AS CAST(id_consecionaria AS VARCHAR(50)) + '-' + CAST(correlativo AS VARCHAR(50))
+	, id AS CAST(id_concesionaria AS VARCHAR(50)) + '-' + CAST(correlativo AS VARCHAR(50))
 	, fecha_de_alta DATETIME NOT NULL DEFAULT GETDATE()
-	, PRIMARY KEY(correlativo, id_consecionaria) -- unico por consecionaria
+	, PRIMARY KEY(correlativo, id_concesionaria) -- unico por consecionaria
 );
 -- after actualization process
-INSERT INTO clientes(id_consecionaria, correlativo, documento)
+INSERT INTO clientes(id_concesionaria, correlativo, documento)
 VALUES(1, 1, 100), (2, 1, 200), (3, 1, 300), (4, 1, 400)
 , (1, 2, 500), (2, 2, 600), (3, 2, 700), (4, 2, 800)
 , (1, 3, 900), (2, 3, 1000), (3, 3, 1100)
@@ -58,17 +60,17 @@ VALUES(1, 1, 100), (2, 1, 200), (3, 1, 300), (4, 1, 400)
 
 CREATE TABLE planes (
 	id INT IDENTITY PRIMARY KEY
-	, consecionaria INT FOREIGN KEY REFERENCES consecionarias(id)
+	, concesionaria INT FOREIGN KEY REFERENCES concesionarias(id)
 	, cliente INT NOT NULL 
 	, vehiculo INT FOREIGN KEY REFERENCES vehiculos(id)
 	, cant_cuotas_pagas INT NOT NULL DEFAULT 0 -- se actualiza por cada actualizacion
 	, fecha_alta DATETIME NOT NULL -- informado por la consecionaria
 	, fecha_ultima_actualizacion DATETIME NOT NULL DEFAULT GETDATE() -- se actualiza por cada actualizacion
-	, FOREIGN KEY(cliente, consecionaria) REFERENCES clientes(correlativo, id_consecionaria)
-	, UNIQUE(consecionaria, vehiculo, cliente, fecha_alta)
+	, FOREIGN KEY(cliente, concesionaria) REFERENCES clientes(correlativo, id_concesionaria)
+	, UNIQUE(concesionaria, vehiculo, cliente, fecha_alta)
 );
 
-INSERT INTO planes(consecionaria, cliente, vehiculo, fecha_alta)
+INSERT INTO planes(concesionaria, cliente, vehiculo, fecha_alta)
 VALUES(1, 1, 1, '2018-02-08 20:58:00')
 	,(2, 1, 2, '2018-02-08 20:58:00')
 	,(3, 1, 3, '2018-02-08 20:58:00')
@@ -87,14 +89,15 @@ SELECT
 	, p.cant_cuotas_pagas
 	, p.fecha_alta
 	, p.fecha_ultima_actualizacion
-	, v.nombre AS nombreVehiculo
-	, c.nombre AS nombreCliente
+	, v.nombre AS vehiculo
+	, c.nombre AS concesionaria
+	, c.id AS concesionariaId
 	, u.documento
 	, u.id AS clientId
 FROM planes p
 	INNER JOIN vehiculos v ON p.vehiculo = v.id
-	INNER JOIN consecionarias c ON p.consecionaria = c.id
-	INNER JOIN clientes u ON p.cliente = u.correlativo and p.consecionaria = u.id_consecionaria;
+	INNER JOIN concesionarias c ON p.concesionaria = c.id
+	INNER JOIN clientes u ON p.cliente = u.correlativo and p.concesionaria = u.id_concesionaria;
 
 
 -- cancelarPlan
@@ -116,4 +119,4 @@ FROM planes p
 	WHERE planId = @idPlan;
 
 -- consultarPlanes
-	SELECT * FROM compradores;
+	SELECT planId, cant_cuotas_pagas, vehiculo, concesionaria, concesionariaId, documento, clientId FROM compradores;
