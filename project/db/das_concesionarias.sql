@@ -109,24 +109,10 @@ FROM planes p
 	WHERE planId = @idPlan;
 
 -- consultarPlan
-	SELECT 
-		planId
-		, cant_cuotas_pagas
-		, vehiculo
-		, concesionaria
-		, concesionariaId
-		, documento
-		, clientId 
+	SELECT *
 	FROM compradores
 	WHERE planId = @idPlan;
 
 -- consultarPlanes
-	SELECT 
-		planId
-		, cant_cuotas_pagas
-		, vehiculo
-		, concesionaria
-		, concesionariaId
-		, documento
-		, clientId 
+	SELECT *
 	FROM compradores;

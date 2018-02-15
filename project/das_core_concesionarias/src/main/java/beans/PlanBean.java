@@ -2,6 +2,7 @@ package beans;
 
 import annotations.Column;
 import annotations.Entity;
+
 import java.sql.Timestamp;
 
 @Entity

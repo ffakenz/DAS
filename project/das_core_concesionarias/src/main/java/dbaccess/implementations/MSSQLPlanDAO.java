@@ -13,7 +13,7 @@ public class MSSQLPlanDAO implements PlanDAO {
     @Override
     public Function<Connection, List<PlanBean>> consultarPlanes() {
 
-        String consultarPlanesQuery = "SELECT * clientId FROM compradores;";
+        String consultarPlanesQuery = "SELECT * FROM compradores;";
 
         return (Connection c) -> {
             try(Statement stm = c.createStatement()){

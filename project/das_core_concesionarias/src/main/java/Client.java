@@ -2,7 +2,6 @@ import beans.PlanBean;
 import dao.PlanDAO;
 import dbaccess.DAOAbstractFactory;
 import dbaccess.DAOFactory;
-
 import java.sql.Connection;
 import java.util.List;
 import java.util.Optional;
