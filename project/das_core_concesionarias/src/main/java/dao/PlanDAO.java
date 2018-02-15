@@ -6,18 +6,13 @@ import javax.sql.RowSet;
 import java.sql.Connection;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 
 public interface PlanDAO {
-    PlanBean findPlan(Long id);
-    boolean cancelPlan(PlanBean plan);
-    RowSet selectPlanesRS();
-    Collection selectCustomersTO();
-
-    // functional approach
-    Function<Connection, List<PlanBean>> findAll();
-    Function<Connection, PlanBean> findById(Long id);
-    Function<Connection, Boolean> notifyPlanGanador(PlanBean planGanador);
+    Function<Connection, List<PlanBean>> consultarPlanes();
+    Function<Connection, Optional<PlanBean>> consultarPlan(Long id);
+    Function<Connection, Void> cancelarPlan(PlanBean planGanador);
 }
 
 

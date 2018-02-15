@@ -1,4 +1,3 @@
-// DROP TABLE consecionarias 
 USE das_concesionarias;
 
 DROP TABLE planes;
@@ -110,13 +109,24 @@ FROM planes p
 	WHERE planId = @idPlan;
 
 -- consultarPlan
-	GO
-	DROP PROCEDURE consultarPlan;
-	GO
-	CREATE PROCEDURE consultarPlan(@idPlan INT) AS
-	SELECT *
+	SELECT 
+		planId
+		, cant_cuotas_pagas
+		, vehiculo
+		, concesionaria
+		, concesionariaId
+		, documento
+		, clientId 
 	FROM compradores
 	WHERE planId = @idPlan;
 
 -- consultarPlanes
-	SELECT planId, cant_cuotas_pagas, vehiculo, concesionaria, concesionariaId, documento, clientId FROM compradores;
+	SELECT 
+		planId
+		, cant_cuotas_pagas
+		, vehiculo
+		, concesionaria
+		, concesionariaId
+		, documento
+		, clientId 
+	FROM compradores;

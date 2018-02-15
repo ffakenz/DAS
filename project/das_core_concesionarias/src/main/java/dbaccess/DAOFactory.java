@@ -1,22 +1,16 @@
 package dbaccess;
 
-import dao.PlanDAO;
+import dbaccess.implementations.MSSQLDAOFactory;
 
-public abstract class DAOFactory {
+public enum DAOFactory {
     // List of DAO types supported by the factory
-    public static final int MSSQL = 1;
-
-    // There will be a method for each DAO that can be
-    // created. The concrete factories will have to
-    // implement these methods.
-    public abstract PlanDAO getPlanDAO();
-
-    public static DAOFactory getDAOFactory(int whichFactory) {
-        switch (whichFactory) {
-            case MSSQL:
-                return new MSSQLDbDAOFactory();
-            default:
-                return null;
+    // EACH TYPE SHOULD BE COMMA SEPARATED
+    MSSQL {
+        @Override
+        public DAOAbstractFactory getInstance() {
+            return new MSSQLDAOFactory();
         }
-    }
+    };
+
+    public abstract DAOAbstractFactory getInstance();
 }
