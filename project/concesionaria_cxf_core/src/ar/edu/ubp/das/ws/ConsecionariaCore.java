@@ -12,16 +12,18 @@ import javax.xml.ws.RequestWrapper;
 import javax.xml.ws.ResponseWrapper;
 
 import beans.PlanBean;
+import contract.ConcesionariaServiceContract;
 import contract.implementors.MSSQLConsecionaria;
 
 
 
 @WebService(targetNamespace = "http://ws.das.ubp.edu.ar/", portName = "ConsecionariaCorePort", serviceName = "ConsecionariaCoreService")
-public class ConsecionariaCore extends MSSQLConsecionaria {
+public class ConsecionariaCore extends MSSQLConsecionaria implements ConcesionariaServiceContract {
 	@WebMethod(operationName = "consultarPlanes", action = "urn:ConsultarPlanes")
 	@RequestWrapper(className = "ar.edu.ubp.das.ws.jaxws.ConsultarPlanes", localName = "consultarPlanes", targetNamespace = "http://ws.das.ubp.edu.ar/")
 	@ResponseWrapper(className = "ar.edu.ubp.das.ws.jaxws.ConsultarPlanesResponse", localName = "consultarPlanesResponse", targetNamespace = "http://ws.das.ubp.edu.ar/")
 	@WebResult(name = "return")
+	@Override
 	public List<PlanBean> consultarPlanes() {
         return this.abstractFactory.withConnection(planDAO.consultarPlanes());
     };
@@ -30,6 +32,7 @@ public class ConsecionariaCore extends MSSQLConsecionaria {
 	@RequestWrapper(className = "ar.edu.ubp.das.ws.jaxws.ConsultarPlan", localName = "consultarPlan", targetNamespace = "http://ws.das.ubp.edu.ar/")
 	@ResponseWrapper(className = "ar.edu.ubp.das.ws.jaxws.ConsultarPlanResponse", localName = "consultarPlanResponse", targetNamespace = "http://ws.das.ubp.edu.ar/")
 	@WebResult(name = "return")
+	@Override
 	public PlanBean consultarPlan(@WebParam(name = "arg0") Long planId) {
         return abstractFactory.withConnection(planDAO.consultarPlan(planId)).get();
     }
@@ -38,6 +41,7 @@ public class ConsecionariaCore extends MSSQLConsecionaria {
 	@RequestWrapper(className = "ar.edu.ubp.das.ws.jaxws.CancelarPlan", localName = "cancelarPlan", targetNamespace = "http://ws.das.ubp.edu.ar/")
 	@ResponseWrapper(className = "ar.edu.ubp.das.ws.jaxws.CancelarPlanResponse", localName = "cancelarPlanResponse", targetNamespace = "http://ws.das.ubp.edu.ar/")
 	@WebResult(name = "return")
+	@Override
 	public void cancelarPlan(@WebParam(name = "arg0") PlanBean planGanador) {
         abstractFactory.withConnection(planDAO.cancelarPlan(planGanador));
     }
