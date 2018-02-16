@@ -4,9 +4,9 @@
 	xmlns:soap="http://cxf.apache.org/bindings/soap"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://cxf.apache.org/bindings/soap http://cxf.apache.org/schemas/configuration/soap.xsd http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
 	<jaxws:endpoint xmlns:tns="http://ws.das.ubp.edu.ar/"
-		id="consecionariacore" implementor="ar.edu.ubp.das.ws.ConsecionariaCore"
-		wsdlLocation="wsdl/consecionariacore.wsdl" endpointName="tns:ConsecionariaCorePort"
-		serviceName="tns:ConsecionariaCoreService" address="/ConsecionariaCorePort">
+		id="consecionariacxfcore" implementor="ar.edu.ubp.das.ws.ConsecionariaCXFCore"
+		wsdlLocation="wsdl/consecionariacxfcore.wsdl" endpointName="tns:ConsecionariaCXFCorePort"
+		serviceName="tns:ConsecionariaCXFCoreService" address="/ConsecionariaCXFCorePort">
 		<jaxws:features>
 			<bean class="org.apache.cxf.feature.LoggingFeature" />
 		</jaxws:features>

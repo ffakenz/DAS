@@ -11,6 +11,3 @@ public interface PlanDAO {
     Function<Connection, Optional<PlanBean>> consultarPlan(Long id);
     Function<Connection, Void> cancelarPlan(PlanBean planGanador);
 }
-
-
-
