@@ -12,10 +12,8 @@ import javax.xml.ws.ResponseWrapper;
 import beans.PlanBean;
 import contract.implementors.MSSQLConsecionaria;
 
-
-
-@WebService(targetNamespace = "http://ws.das.ubp.edu.ar/", portName = "ConsecionariaCXFCorePort", serviceName = "ConsecionariaCXFCoreService")
-public class ConsecionariaCXFCore extends MSSQLConsecionaria  {
+@WebService(targetNamespace = "http://ws.das.ubp.edu.ar/", portName = "ConcesionariaCXFOnePort", serviceName = "ConcesionariaCXFOneService")
+public class ConcesionariaCXFOne extends MSSQLConsecionaria  {
 	@WebMethod(operationName = "consultarPlanes", action = "urn:ConsultarPlanes")
 	@RequestWrapper(className = "ar.edu.ubp.das.ws.jaxws.ConsultarPlanes", localName = "consultarPlanes", targetNamespace = "http://ws.das.ubp.edu.ar/")
 	@ResponseWrapper(className = "ar.edu.ubp.das.ws.jaxws.ConsultarPlanesResponse", localName = "consultarPlanesResponse", targetNamespace = "http://ws.das.ubp.edu.ar/")

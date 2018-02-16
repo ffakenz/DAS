@@ -2,7 +2,9 @@
     <wb-module deploy-name="concesionaria_cxf_one">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/.apt_generated"/>
+        <dependent-module archiveName="das_core_concesionarias.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/das_core_concesionarias/das_core_concesionarias">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="concesionaria_cxf_one"/>
         <property name="java-output-path" value="/concesionaria_cxf_one/build/classes"/>
     </wb-module>

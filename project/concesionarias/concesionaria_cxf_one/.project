@@ -3,6 +3,7 @@
 	<name>concesionaria_cxf_one</name>
 	<comment></comment>
 	<projects>
+		<project>das_core_concesionarias</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

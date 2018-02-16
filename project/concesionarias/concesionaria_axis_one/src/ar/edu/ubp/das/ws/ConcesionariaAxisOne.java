@@ -4,7 +4,7 @@ import java.util.List;
 import beans.PlanBean;
 import contract.implementors.MSSQLConsecionaria;
 
-public class ConcesionariaAxisCore  extends MSSQLConsecionaria {
+public class ConcesionariaAxisOne  extends MSSQLConsecionaria {
 	
 	@Override
 	public List<PlanBean> consultarPlanes() {
