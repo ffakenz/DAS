@@ -12,6 +12,8 @@ import javax.xml.ws.ResponseWrapper;
 import beans.PlanBean;
 import contract.implementors.MSSQLConsecionaria;
 
+
+
 @WebService(targetNamespace = "http://ws.das.ubp.edu.ar/", portName = "ConsecionariaCXFCorePort", serviceName = "ConsecionariaCXFCoreService")
 public class ConsecionariaCXFCore extends MSSQLConsecionaria  {
 	@WebMethod(operationName = "consultarPlanes", action = "urn:ConsultarPlanes")

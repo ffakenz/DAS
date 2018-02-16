@@ -31,3 +31,6 @@ project/workspace/.metadata/
 project/workspace/.recommenders/
 project/workspace/RemoteSystemsTempFiles/
 project/workspace/MVC3.2/build/classes/.gitignore
+
+# lib
+project/lib/
