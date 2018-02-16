@@ -9,23 +9,13 @@ import java.util.Optional;
 
 public abstract class ConsecionariaService {
     // create mssql factory
-    private DAOAbstractFactory abstractFactory;
+	protected DAOAbstractFactory abstractFactory;
 
+	// get dao for plans
+	protected PlanDAO planDAO;
+	
     public ConsecionariaService(DAOFactory type) {
         abstractFactory = DAOAbstractFactory.getDAOFactory(type);
-    }
-
-    // get dao for plans
-    private final PlanDAO planDAO = abstractFactory.getPlanDAO();
-
-    public List<PlanBean> consultarPlanes() {
-        return abstractFactory.withConnection(planDAO.consultarPlanes());
-    };
-
-    public Optional<PlanBean> consultarPlan(Long planId) {
-        return abstractFactory.withConnection(planDAO.consultarPlan(planId));
-    }
-    public void cancelarPlan(PlanBean planGanador) {
-        abstractFactory.withConnection(planDAO.cancelarPlan(planGanador));
-    }
+        planDAO = abstractFactory.getPlanDAO();
+    }     
 }
