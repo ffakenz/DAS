@@ -1,0 +1,130 @@
+Apache CXF 3.1.6 Release Notes
+
+1. Overview
+
+The 3.1.6 version of Apache CXF is a significant new version of CXF 
+that provides several new features and enhancements.  
+
+New features include: 
+
+* New Metrics feature for collecting metrics about a CXF services.  
+* New Throttling feature for easily throttling CXF services.  
+* New Logging feature for more advanced logging than the logging 
+  available in cxf-core
+* New Metadata service for SAML SSO to allow you to publish SAML SSO 
+  metadata for your service provider.
+* Enhancements to the code generator to be more "Java7" friendly
+* Update to OpenSAML 3.0
+* Support for Karaf 4, Jetty 9
+
+Important notes:
+CXF 3.1.x no longer supports Java 6.   You must upgrade to Java 7 or later.
+
+Users are encourage to review the migration guide at:
+http://cxf.apache.org/docs/31-migration-guide.html
+for further information and requirements for upgrading from earlier
+versions of CXF.
+
+3.1.6 fixes over 45 JIRA issues reported by users and the community.
+
+
+
+2. Installation Prerequisites 
+
+Before installing Apache CXF, make sure the following products,
+with the specified versions, are installed on your system:
+
+    * Java 7 Development Kit
+    * Apache Maven 3.x to build the samples
+
+
+3.  Integrating CXF Into Your Application
+
+If you use Maven to build your application, you need merely add
+appropriate dependencies. See the pom.xml files in the samples.
+
+If you don't use Maven, you'll need to add one or more jars to your
+classpath. The file lib/WHICH_JARS should help you decide which 
+jars you need.
+
+4. Building the Samples
+
+Building the samples included in the binary distribution is easy. Change to
+the samples directory and follow the build instructions in the README.txt file 
+included with each sample.
+
+5. Reporting Problems
+
+If you have any problems or want to send feedback of any kind, please e-mail the
+CXF dev list, dev@cxf.apache.org.  You can also file issues in JIRA at:
+
+http://issues.apache.org/jira/browse/CXF
+
+6. Migration notes:
+
+See the migration guide at:
+http://cxf.apache.org/docs/31-migration-guide.html
+for caveats when upgrading from CXF 2.7.x and 3.0.x
+to 3.1.
+
+
+
+7. Specific issues, features, and improvements fixed in this version
+
+** Bug
+    * [CXF-6435] - Support base64 for attachment encoding in CXF
+    * [CXF-6492] - AbstractHTTPDestination class incorrectly assume only one empty space after "Basic" in Authorization header value. 
+    * [CXF-6743] - Inconsistent versions of jax-rs specs can lead to OSGi pain
+    * [CXF-6764] - Should add RI JAXB Namespacemapper support
+    * [CXF-6769] - Underscores in values of FIQL search expressions are incorrectly escaped
+    * [CXF-6770] - PrettyLoggingFilter not working well when using camel-cxf-transport
+    * [CXF-6772] - HttpClientPolicy browserType is reported as BrowserType header 
+    * [CXF-6781] - InternalContextUtils should bak all the data from the input stream before send back partialResponse
+    * [CXF-6785] - AbstractHTTPDestination should handle the case when pathInfo of HttpServletRequest is null 
+    * [CXF-6787] - not sufficient WadlGenerator presence detection
+    * [CXF-6793] - InvocationCallback doesn't try to get response class type
+    * [CXF-6795] - WS-Discovery add support for discovery on localhost
+    * [CXF-6799] - java.lang.ClassCastException: sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl cannot be cast to java.lang.reflect.TypeVariable
+    * [CXF-6805] - cxf-rt-transports-http adds Content-Type header to GET request
+    * [CXF-6806] - don't mark the optional "encoding" parameter as required for cxf-java2wadl-plugin
+    * [CXF-6809] - SAMLRequest ID must not start with a Number
+    * [CXF-6810] - JAX-RS Client one way requests do not work with jms-transport
+    * [CXF-6812] - WebTargetImpl should always check if client is closed first
+    * [CXF-6813] - MediaTypeHeaderProvider doesn't check the illegal media type string like "s//tt;type=text/plain"
+    * [CXF-6819] - ConfigurationImp returns wrong value for isRegistered(Object obj)
+    * [CXF-6820] - LinkBuilderImpl#link() doesn't throw exception for invalid input
+    * [CXF-6823] - Duplicate injectedProviders in ProviderFactory impacting throughput by ~30%
+    * [CXF-6828] - [OAuth] AbstractGrant set wrong value(scope) for audience
+    * [CXF-6832] - Attachment content-disposition modification-date not parsed correctly
+    * [CXF-6838] - AsyncResponse doesn't use 204 when body is empty
+
+** Improvement
+    * [CXF-5193] - Support fixed data type
+    * [CXF-5439] - Introduce annotations for marking CXF interceptors and features to enable the auto-discovery
+    * [CXF-6767] - OSGI ServletImporter should be able to accept extra properties
+    * [CXF-6771] - JAX-RS ContextProvider should be able to support Servlet contexts
+    * [CXF-6774] - Allow ClientImpl to be thread-safe
+    * [CXF-6779] - Swagger Feature should become discoverable
+    * [CXF-6786] - avoid Error log from NamePasswordCallbackHandler
+    * [CXF-6789] - SwaggerFeature default resource package calculation should try to support multiple resource classes better
+    * [CXF-6802] - Decode ContentDisposition filename encoded with codepoints only
+    * [CXF-6808] - Update JWS/JWE utils to load named properties
+    * [CXF-6826] - Cache MediaTypeHeaderProvider.valueOf(String mType) results
+    * [CXF-6827] - OAuthRequestFilter should be able to cache token validation results
+    * [CXF-6831] - should be able to configure the certStore key type
+    * [CXF-6840] - xsd:import without schemaLocation does not get resolved in SchemaHandler
+
+** New Feature
+    * [CXF-6085] - JWE JSON Serialization
+    * [CXF-6784] - WS-Notification subscription should support renew
+
+** Task
+    * [CXF-6815] - Upgrade Reflections bundle to version 0.9.10_3
+
+** Test
+    * [CXF-6792] - Some STS tests fails locally and on CI server
+    * [CXF-6797] - a lot tests failure on 3.1.x-fixes/3.0.x-fixes branch with java8
+
+** Wish
+    * [CXF-6790] - change accessibility of WadlGenerator.getBaseUri(...) to protected
+
