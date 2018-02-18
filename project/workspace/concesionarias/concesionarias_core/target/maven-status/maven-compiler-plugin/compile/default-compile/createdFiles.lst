@@ -1,0 +1,17 @@
+contract\ConcesionariaServiceContract.class
+dbaccess\DAOAbstractFactory.class
+Client.class
+ClientSerializer.class
+dbaccess\ConnectionConfig.class
+annotations\MyResultSet.class
+annotations\Column.class
+dbaccess\DAOFactory$1.class
+dbaccess\implementations\MSSQLDAOFactory.class
+contract\implementors\MSSQLConsecionaria.class
+annotations\Entity.class
+annotations\NoEntityException.class
+beans\PlanBean.class
+dao\PlanDAO.class
+dbaccess\implementations\MSSQLPlanDAO.class
+contract\ConsecionariaService.class
+dbaccess\DAOFactory.class

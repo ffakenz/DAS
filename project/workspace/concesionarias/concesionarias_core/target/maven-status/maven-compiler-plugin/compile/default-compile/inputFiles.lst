@@ -1,0 +1,16 @@
+D:\Usuario\Desktop\DAS\Repo\project\workspace\concesionarias\concesionarias_core\src\main\java\dao\PlanDAO.java
+D:\Usuario\Desktop\DAS\Repo\project\workspace\concesionarias\concesionarias_core\src\main\java\dbaccess\implementations\MSSQLDAOFactory.java
+D:\Usuario\Desktop\DAS\Repo\project\workspace\concesionarias\concesionarias_core\src\main\java\beans\PlanBean.java
+D:\Usuario\Desktop\DAS\Repo\project\workspace\concesionarias\concesionarias_core\src\main\java\dbaccess\DAOFactory.java
+D:\Usuario\Desktop\DAS\Repo\project\workspace\concesionarias\concesionarias_core\src\main\java\dbaccess\implementations\MSSQLPlanDAO.java
+D:\Usuario\Desktop\DAS\Repo\project\workspace\concesionarias\concesionarias_core\src\main\java\annotations\MyResultSet.java
+D:\Usuario\Desktop\DAS\Repo\project\workspace\concesionarias\concesionarias_core\src\main\java\ClientSerializer.java
+D:\Usuario\Desktop\DAS\Repo\project\workspace\concesionarias\concesionarias_core\src\main\java\Client.java
+D:\Usuario\Desktop\DAS\Repo\project\workspace\concesionarias\concesionarias_core\src\main\java\contract\ConcesionariaServiceContract.java
+D:\Usuario\Desktop\DAS\Repo\project\workspace\concesionarias\concesionarias_core\src\main\java\contract\ConsecionariaService.java
+D:\Usuario\Desktop\DAS\Repo\project\workspace\concesionarias\concesionarias_core\src\main\java\annotations\Entity.java
+D:\Usuario\Desktop\DAS\Repo\project\workspace\concesionarias\concesionarias_core\src\main\java\annotations\NoEntityException.java
+D:\Usuario\Desktop\DAS\Repo\project\workspace\concesionarias\concesionarias_core\src\main\java\dbaccess\ConnectionConfig.java
+D:\Usuario\Desktop\DAS\Repo\project\workspace\concesionarias\concesionarias_core\src\main\java\contract\implementors\MSSQLConsecionaria.java
+D:\Usuario\Desktop\DAS\Repo\project\workspace\concesionarias\concesionarias_core\src\main\java\annotations\Column.java
+D:\Usuario\Desktop\DAS\Repo\project\workspace\concesionarias\concesionarias_core\src\main\java\dbaccess\DAOAbstractFactory.java
