@@ -1,3 +1,2 @@
-0:0:0:0:0:0:0:1 - - [18/Feb/2018:07:04:30 -0300] "GET /concesionarias_axis_one_war/services/ConcesionariaAxisOne/ping?text=HOLAaaaaaaa HTTP/1.1" 200 161 http-bio-8001-exec-1 322
-0:0:0:0:0:0:0:1 - - [18/Feb/2018:07:05:02 -0300] "GET /concesionarias_axis_one_war/services/ConcesionariaAxisOne/ping?text=HOLAaaaaaaa HTTP/1.1" 200 161 http-bio-8001-exec-2 4
-0:0:0:0:0:0:0:1 - - [18/Feb/2018:07:05:02 -0300] "GET /concesionarias_axis_one_war/services/ConcesionariaAxisOne/ping?text=HOLAaaaaaaa HTTP/1.1" 200 161 http-bio-8001-exec-3 2
+0:0:0:0:0:0:0:1 - - [18/Feb/2018:17:46:43 -0300] "GET /concesionarias_axis_one_war/services/ConcesionariaAxisOne/consultarPlanes HTTP/1.1" 200 5429 http-bio-8001-exec-1 1112
+0:0:0:0:0:0:0:1 - - [18/Feb/2018:17:47:00 -0300] "GET /concesionarias_axis_one_war/services/ConcesionariaAxisOne?wsdl HTTP/1.1" 200 10928 http-bio-8001-exec-3 618

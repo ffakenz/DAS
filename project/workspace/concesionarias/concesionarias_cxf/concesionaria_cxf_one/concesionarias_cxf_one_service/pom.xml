@@ -16,7 +16,6 @@
     <!-- Dependency properties -->
     <properties>
         <serviceLocation>ws.ConcesionariaCXFOne</serviceLocation>
-        <serviceBuildPath>${project.build.directory}/concesionaria_cxf/concesionaria_cxf_one/concesionaria_cxf_one_service/cxf</serviceBuildPath>
     </properties>
 
     <!-- Plugin configuration -->
@@ -34,7 +33,6 @@
                         <phase>process-classes</phase>
                         <configuration>
                             <className>${serviceLocation}</className>
-                            <outputFile>${serviceBuildPath}</outputFile>
                             <genWsdl>true</genWsdl>
                             <verbose>true</verbose>
                             <genServer>true</genServer>
