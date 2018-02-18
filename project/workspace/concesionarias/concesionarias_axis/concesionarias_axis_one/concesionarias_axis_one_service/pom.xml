@@ -16,7 +16,6 @@
     <!-- Dependency properties -->
     <properties>
         <serviceLocation>ws.ConcesionariaAxisOne</serviceLocation>
-        <serviceBuildPath>${project.build.directory}/concesionaria_axis/concesionaria_axis_one/concesionaria_axis_one_service/axis</serviceBuildPath>
     </properties>
 
     <!-- Plugin configuration -->
@@ -38,7 +37,7 @@
                 </executions>
                 <configuration>
                     <className>${serviceLocation}</className>
-                    <outputFileName>${serviceBuildPath}/ConcesionariaAxisOne.wsdl</outputFileName>
+                    <outputFileName>${project.build.directory}/classes/ws/ConcesionariaAxisOne.wsdl</outputFileName>
                 </configuration>
             </plugin>
         </plugins>
@@ -48,12 +47,5 @@
             <groupId>concesionarias</groupId>
             <artifactId>concesionarias_core</artifactId>
             <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
+        </dependency>    </dependencies>
 </project>
