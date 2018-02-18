@@ -17,11 +17,23 @@
         <module>concesionarias_rest</module>
     </modules>
 
+    <prerequisites>
+        <maven>3.3.9</maven>
+    </prerequisites>
+
+    <!-- Dependency properties -->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
+    </properties>
+
+    <!-- Plugin configuration -->
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>

@@ -13,6 +13,12 @@
     <artifactId>concesionarias_cxf_one_service</artifactId>
     <packaging>jar</packaging>
 
+    <!-- Dependency properties -->
+    <properties>
+        <serviceLocation>ws.ConcesionariaCXFOne</serviceLocation>
+        <serviceBuildPath>${project.build.directory}/concesionaria_cxf/concesionaria_cxf_one/concesionaria_cxf_one_service/cxf</serviceBuildPath>
+    </properties>
+
     <!-- Plugin configuration -->
     <build>
         <!-- Name of the generated WAR file -->
@@ -28,7 +34,7 @@
                         <phase>process-classes</phase>
                         <configuration>
                             <className>${serviceLocation}</className>
-                            <outputFile>${project.build.directory}/concesionaria_cxf/concesionaria_cxf_one/concesionaria_cxf_one_service/cxf</outputFile>
+                            <outputFile>${serviceBuildPath}</outputFile>
                             <genWsdl>true</genWsdl>
                             <verbose>true</verbose>
                             <genServer>true</genServer>
