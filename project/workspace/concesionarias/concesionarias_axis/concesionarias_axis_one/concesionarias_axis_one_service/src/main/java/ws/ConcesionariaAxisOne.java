@@ -3,10 +3,6 @@ package ws;
 import beans.PlanBean;
 import contract.ConcesionariaServiceContract;
 import contract.implementors.MSSQLConsecionaria;
-
-import javax.jws.WebMethod;
-import javax.jws.WebParam;
-import javax.jws.WebService;
 import java.util.List;
 
 public class ConcesionariaAxisOne extends MSSQLConsecionaria implements ConcesionariaServiceContract {
@@ -14,7 +10,6 @@ public class ConcesionariaAxisOne extends MSSQLConsecionaria implements Concesio
     public List<PlanBean> consultarPlanes() {
         return abstractFactory.withConnection(planDAO.consultarPlanes());
     };
-
 
     @Override
     public PlanBean consultarPlan(Long planId) {

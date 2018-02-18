@@ -1,2 +1,5 @@
-0:0:0:0:0:0:0:1 - - [18/Feb/2018:17:46:43 -0300] "GET /concesionarias_axis_one_war/services/ConcesionariaAxisOne/consultarPlanes HTTP/1.1" 200 5429 http-bio-8001-exec-1 1112
-0:0:0:0:0:0:0:1 - - [18/Feb/2018:17:47:00 -0300] "GET /concesionarias_axis_one_war/services/ConcesionariaAxisOne?wsdl HTTP/1.1" 200 10928 http-bio-8001-exec-3 618
+0:0:0:0:0:0:0:1 - - [18/Feb/2018:19:54:33 -0300] "GET /concesionarias_axis_one_war/services/ConcesionariaAxisOne?wsdl HTTP/1.1" 200 10928 http-bio-8001-exec-1 1651
+127.0.0.1 - - [18/Feb/2018:20:25:20 -0300] "POST /concesionarias_axis_one_war/services/ConcesionariaAxisOne.ConcesionariaAxisOneHttpEndpoint/ HTTP/1.1" 500 3086 http-bio-8001-exec-4 159
+0:0:0:0:0:0:0:1 - - [18/Feb/2018:20:25:35 -0300] "GET /concesionarias_axis_one_war/services/ConcesionariaAxisOne?wsdl HTTP/1.1" 200 10928 http-bio-8001-exec-5 44
+127.0.0.1 - - [18/Feb/2018:20:26:04 -0300] "POST /concesionarias_axis_one_war/services/ConcesionariaAxisOne.ConcesionariaAxisOneHttpEndpoint/ HTTP/1.1" 500 4069 http-bio-8001-exec-8 16
+127.0.0.1 - - [18/Feb/2018:20:27:12 -0300] "POST /concesionarias_axis_one_war/services/ConcesionariaAxisOne.ConcesionariaAxisOneHttpEndpoint/ HTTP/1.1" 200 1056 http-bio-8001-exec-9 1079
