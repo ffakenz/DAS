@@ -1,31 +1,32 @@
-package beans;
+package dynamic_proxy;
 
-import annotations.Column;
-import annotations.Entity;
+import com.google.gson.annotations.JsonAdapter;
 
 import java.sql.Timestamp;
 
-@Entity
 public class PlanBean {
 	// member variables
-    @Column(name="planId")
     Integer id;
-    @Column(name="cant_cuotas_pagas")
     Integer cuotasPagadas;
-    @Column(name="vehiculo")
     String vehiculo;
-    @Column(name="concesionaria")
     String concesionaria;
-    @Column(name="concesionariaId")
     Integer concesionariaId;
-    @Column(name="documento")
     Long documento;
-    @Column(name="clientId")
     String clientId;
-    @Column(name="fecha_alta")
     Timestamp fechaAlta;
-    @Column(name="fecha_ultima_actualizacion")
     Timestamp fechaUltimoUpdate;
+
+    public PlanBean(Integer id, Integer cuotasPagadas, String vehiculo, String concesionaria, Integer concesionariaId, Long documento, String clientId, Timestamp fechaAlta, Timestamp fechaUltimoUpdate) {
+        this.id = id;
+        this.cuotasPagadas = cuotasPagadas;
+        this.vehiculo = vehiculo;
+        this.concesionaria = concesionaria;
+        this.concesionariaId = concesionariaId;
+        this.documento = documento;
+        this.clientId = clientId;
+        this.fechaAlta = fechaAlta;
+        this.fechaUltimoUpdate = fechaUltimoUpdate;
+    }
 
     public Integer getId() {
         return id;

@@ -9,5 +9,5 @@ import java.util.function.Function;
 public interface PlanDAO {
     Function<Connection, List<PlanBean>> consultarPlanes();
     Function<Connection, Optional<PlanBean>> consultarPlan(Long id);
-    Function<Connection, Void> cancelarPlan(PlanBean planGanador);
+    Function<Connection, Void> cancelarPlan(Long id);
 }

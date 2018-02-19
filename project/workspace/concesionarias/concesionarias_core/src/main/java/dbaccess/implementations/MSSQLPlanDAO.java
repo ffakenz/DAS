@@ -49,14 +49,14 @@ public class MSSQLPlanDAO implements PlanDAO {
     }
 
     @Override
-    public Function<Connection, Void> cancelarPlan(PlanBean planGanador) {
+    public Function<Connection, Void> cancelarPlan(Long id) {
         String cancelarPlanQuery = "{ CALL cancelarPlan(?) };";
 
         return (Connection c) -> {
             try(CallableStatement cs = c.prepareCall(cancelarPlanQuery)) {
                 c.setAutoCommit(false);
 
-                cs.setInt(1, planGanador.getId());
+                cs.setLong(1, id);
                 cs.execute();
 
                 c.commit();

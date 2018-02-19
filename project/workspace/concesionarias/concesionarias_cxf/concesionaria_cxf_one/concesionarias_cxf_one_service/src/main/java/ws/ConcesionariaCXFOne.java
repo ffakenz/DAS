@@ -25,7 +25,7 @@ public class ConcesionariaCXFOne extends MSSQLConsecionaria implements Concesion
 
     @WebMethod(operationName = "cancelarPlan", action = "urn:CancelarPlan")
     @Override
-    public void cancelarPlan(@WebParam(name = "planGanador") PlanBean planGanador) {
-        abstractFactory.withConnection(planDAO.cancelarPlan(planGanador));
+    public void cancelarPlan(@WebParam(name = "planId") Long planId) {
+        abstractFactory.withConnection(planDAO.cancelarPlan(planId));
     }
 }

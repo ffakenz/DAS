@@ -31,7 +31,7 @@ public class Client {
         System.out.println(result);
 
         // use api 3
-        mssqlFactory.withConnection(planDAO.cancelarPlan(plan.get())::apply);
+        mssqlFactory.withConnection(planDAO.cancelarPlan(plan.get().getId().longValue())::apply);
 
         // use api 2
         Optional<PlanBean> planCancelado = mssqlFactory.withConnection(planDAO.consultarPlan(1L)::apply);

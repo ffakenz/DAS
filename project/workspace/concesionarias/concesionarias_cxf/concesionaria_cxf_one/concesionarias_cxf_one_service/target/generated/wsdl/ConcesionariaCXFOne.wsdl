@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="ConcesionariaCXFOneService" targetNamespace="http://ws.das.edu.ubp.ar/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://ws.das.edu.ubp.ar/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/">
+  <wsdl:types>
+<xs:schema xmlns:tns="http://ws.das.edu.ubp.ar/" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://ws.das.edu.ubp.ar/" version="1.0">
+
+  <xs:element name="cancelarPlan" type="tns:cancelarPlan"/>
+
+  <xs:element name="cancelarPlanResponse" type="tns:cancelarPlanResponse"/>
+
+  <xs:element name="consultarPlan" type="tns:consultarPlan"/>
+
+  <xs:element name="consultarPlanResponse" type="tns:consultarPlanResponse"/>
+
+  <xs:element name="consultarPlanes" type="tns:consultarPlanes"/>
+
+  <xs:element name="consultarPlanesResponse" type="tns:consultarPlanesResponse"/>
+
+  <xs:complexType name="cancelarPlan">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="planId" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="cancelarPlanResponse">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="consultarPlanes">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="consultarPlanesResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:planBean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="planBean">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="clientId" type="xs:string"/>
+      <xs:element minOccurs="0" name="concesionaria" type="xs:string"/>
+      <xs:element minOccurs="0" name="concesionariaId" type="xs:int"/>
+      <xs:element minOccurs="0" name="cuotasPagadas" type="xs:int"/>
+      <xs:element minOccurs="0" name="documento" type="xs:long"/>
+      <xs:element minOccurs="0" name="fechaAlta" type="tns:timestamp"/>
+      <xs:element minOccurs="0" name="fechaUltimoUpdate" type="tns:timestamp"/>
+      <xs:element minOccurs="0" name="id" type="xs:int"/>
+      <xs:element minOccurs="0" name="vehiculo" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="timestamp">
+    <xs:sequence>
+      <xs:element name="nanos" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="consultarPlan">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="planId" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="consultarPlanResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:planBean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="consultarPlanResponse">
+    <wsdl:part name="parameters" element="tns:consultarPlanResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="cancelarPlan">
+    <wsdl:part name="parameters" element="tns:cancelarPlan">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="consultarPlanes">
+    <wsdl:part name="parameters" element="tns:consultarPlanes">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="consultarPlan">
+    <wsdl:part name="parameters" element="tns:consultarPlan">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="cancelarPlanResponse">
+    <wsdl:part name="parameters" element="tns:cancelarPlanResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="consultarPlanesResponse">
+    <wsdl:part name="parameters" element="tns:consultarPlanesResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ConcesionariaCXFOne">
+    <wsdl:operation name="cancelarPlan">
+      <wsdl:input name="cancelarPlan" message="tns:cancelarPlan">
+    </wsdl:input>
+      <wsdl:output name="cancelarPlanResponse" message="tns:cancelarPlanResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarPlanes">
+      <wsdl:input name="consultarPlanes" message="tns:consultarPlanes">
+    </wsdl:input>
+      <wsdl:output name="consultarPlanesResponse" message="tns:consultarPlanesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarPlan">
+      <wsdl:input name="consultarPlan" message="tns:consultarPlan">
+    </wsdl:input>
+      <wsdl:output name="consultarPlanResponse" message="tns:consultarPlanResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ConcesionariaCXFOneServiceSoapBinding" type="tns:ConcesionariaCXFOne">
+    <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="cancelarPlan">
+      <soap12:operation soapAction="urn:CancelarPlan" style="document"/>
+      <wsdl:input name="cancelarPlan">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="cancelarPlanResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarPlanes">
+      <soap12:operation soapAction="urn:ConsultarPlanes" style="document"/>
+      <wsdl:input name="consultarPlanes">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="consultarPlanesResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarPlan">
+      <soap12:operation soapAction="urn:ConsultarPlan" style="document"/>
+      <wsdl:input name="consultarPlan">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="consultarPlanResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ConcesionariaCXFOneService">
+    <wsdl:port name="ConcesionariaCXFOnePort" binding="tns:ConcesionariaCXFOneServiceSoapBinding">
+      <soap12:address location="http://localhost:9090/ConcesionariaCXFOnePort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

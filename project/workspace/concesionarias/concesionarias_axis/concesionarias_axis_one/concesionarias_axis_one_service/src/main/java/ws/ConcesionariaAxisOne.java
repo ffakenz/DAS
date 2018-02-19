@@ -17,7 +17,7 @@ public class ConcesionariaAxisOne extends MSSQLConsecionaria implements Concesio
     }
 
     @Override
-    public void cancelarPlan(PlanBean planGanador) {
-        abstractFactory.withConnection(planDAO.cancelarPlan(planGanador));
+    public void cancelarPlan(Long planId) {
+        abstractFactory.withConnection(planDAO.cancelarPlan(planId));
     }
 }
