@@ -1,47 +1,18 @@
 package clients;
 
+import beans.PlanBeanDeserializer;
 import com.google.gson.*;
-import com.google.gson.internal.Primitives;
-import com.google.gson.reflect.TypeToken;
-import dynamic_proxy.PlanBean;
+import beans.PlanBean;
 import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.jaxws.endpoint.dynamic.JaxWsDynamicClientFactory;
 
-import javax.rmi.PortableRemoteObject;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-import java.awt.*;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.lang.reflect.Type;
 import java.sql.Timestamp;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 public class CXFClient implements ConcesionariaServiceContract {
 
     private final String wsdlUrl;
-
-    // change serialization for specific types
-    JsonDeserializer<PlanBean> deserializer = (json, typeOfT, context) -> {
-        JsonObject jsonObject = json.getAsJsonObject();
-
-        /// {"clientId":"1-1","concesionaria":"C1","concesionariaId":1,"cuotasPagadas":60,"documento":100,"fechaAlta":{"nanos":0},"fechaUltimoUpdate":{"nanos":797000000},"id":1,"vehiculo":"Corsa"}
-        PlanBean plan = new PlanBean(
-                jsonObject.get("id").getAsInt()
-                , jsonObject.get("cuotasPagadas").getAsInt()
-                , jsonObject.get("vehiculo").getAsString()
-                , jsonObject.get("concesionaria").getAsString()
-                , jsonObject.get("concesionariaId").getAsInt()
-                , jsonObject.get("documento").getAsLong()
-                , jsonObject.get("clientId").getAsString()
-                , new Timestamp(jsonObject.get("fechaAlta").getAsJsonObject().get("nanos").getAsLong())
-                , new Timestamp(jsonObject.get("fechaUltimoUpdate").getAsJsonObject().get("nanos").getAsLong())
-        );
-        return plan;
-    };
 
     public CXFClient(String wsdlUrl) {
         this.wsdlUrl = wsdlUrl; // "http://localhost:8000/concesionarias_cxf_one_war/services/concesionaria_cxf_one_service?wsdl"
@@ -73,7 +44,7 @@ public class CXFClient implements ConcesionariaServiceContract {
 
         // deserialization process
         GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeAdapter(PlanBean.class, deserializer);
+        gsonBuilder.registerTypeAdapter(PlanBean.class, PlanBeanDeserializer.deserializer);
         Gson customGson = gsonBuilder.create();
 
         PlanBean[] planes = customGson.fromJson(jsonPlans, PlanBean[].class);
@@ -92,7 +63,7 @@ public class CXFClient implements ConcesionariaServiceContract {
 
         // deserialization process
         GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeAdapter(PlanBean.class, deserializer);
+        gsonBuilder.registerTypeAdapter(PlanBean.class, PlanBeanDeserializer.deserializer);
         Gson customGson = gsonBuilder.create();
         PlanBean plan = customGson.fromJson(planJSON, PlanBean.class);
 

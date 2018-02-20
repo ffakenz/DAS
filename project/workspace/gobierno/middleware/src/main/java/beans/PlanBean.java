@@ -1,6 +1,4 @@
-package dynamic_proxy;
-
-import com.google.gson.annotations.JsonAdapter;
+package beans;
 
 import java.sql.Timestamp;
 

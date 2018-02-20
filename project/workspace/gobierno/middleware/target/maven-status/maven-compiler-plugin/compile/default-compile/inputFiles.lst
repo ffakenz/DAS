@@ -1,5 +1,6 @@
-D:\Usuario\Desktop\DAS\Repo\project\workspace\gobierno\middleware\src\main\java\ClientExample.java
-D:\Usuario\Desktop\DAS\Repo\project\workspace\gobierno\middleware\src\main\java\clients\AxisClient.java
-D:\Usuario\Desktop\DAS\Repo\project\workspace\gobierno\middleware\src\main\java\dynamic_proxy\PlanBean.java
-D:\Usuario\Desktop\DAS\Repo\project\workspace\gobierno\middleware\src\main\java\clients\ConcesionariaServiceContract.java
-D:\Usuario\Desktop\DAS\Repo\project\workspace\gobierno\middleware\src\main\java\clients\CXFClient.java
+/home/cthulhu/Documents/DAS/DAS/project/workspace/gobierno/middleware/src/main/java/beans/PlanBean.java
+/home/cthulhu/Documents/DAS/DAS/project/workspace/gobierno/middleware/src/main/java/ClientExample.java
+/home/cthulhu/Documents/DAS/DAS/project/workspace/gobierno/middleware/src/main/java/clients/ConcesionariaServiceContract.java
+/home/cthulhu/Documents/DAS/DAS/project/workspace/gobierno/middleware/src/main/java/beans/PlanBeanDeserializer.java
+/home/cthulhu/Documents/DAS/DAS/project/workspace/gobierno/middleware/src/main/java/clients/CXFClient.java
+/home/cthulhu/Documents/DAS/DAS/project/workspace/gobierno/middleware/src/main/java/clients/AxisClient.java

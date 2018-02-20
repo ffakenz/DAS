@@ -1,6 +1,6 @@
 package clients;
 
-import dynamic_proxy.PlanBean;
+import beans.PlanBean;
 import org.apache.axiom.om.OMAbstractFactory;
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.OMFactory;
@@ -9,6 +9,8 @@ import org.apache.axis2.AxisFault;
 import org.apache.axis2.addressing.EndpointReference;
 import org.apache.axis2.client.Options;
 import org.apache.axis2.client.ServiceClient;
+
+import javax.xml.namespace.QName;
 import java.util.List;
 
 public class AxisClient implements ConcesionariaServiceContract {
@@ -31,6 +33,8 @@ public class AxisClient implements ConcesionariaServiceContract {
             // create option object
             Options opts = new Options();
             opts.setTo(new EndpointReference(endpointUrl));
+            serviceClient.setOptions(opts);
+
             OMElement res = serviceClient.sendReceive(method);
             return res;
         } catch (AxisFault axisFault) {
@@ -39,6 +43,7 @@ public class AxisClient implements ConcesionariaServiceContract {
         }
         return null; // non reacheable statemet
     }
+
     private final OMElement createMethod(String methodName) {
         return fac.createOMElement("consultarPlanes", omNs);
     }
@@ -62,6 +67,19 @@ public class AxisClient implements ConcesionariaServiceContract {
         OMElement param = createParam("planId", planId);
         method.addChild(param);
         OMElement res = executeMethod(method);
+
+
+        System.out.println(res.getFirstElement().getText());
+
+        OMElement cre =
+                res.getFirstChildWithName(new QName("PlanBean")); // get to read <student>
+
+        OMElement cre1 =
+                cre.getFirstChildWithName(new QName("id")); //   get to read <id></id>
+        System.out.println(cre1.getLocalName()+":"+cre1.getText());
+
+
+
         System.out.println(res);
         return null;
     }

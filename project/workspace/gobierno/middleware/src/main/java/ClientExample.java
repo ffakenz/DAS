@@ -1,7 +1,16 @@
 import clients.AxisClient;
 import clients.CXFClient;
-import dynamic_proxy.PlanBean;
+import beans.PlanBean;
+import org.apache.axiom.om.OMElement;
+import org.apache.axiom.om.impl.builder.StAXOMBuilder;
 
+import javax.xml.namespace.QName;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 public class ClientExample {
@@ -17,18 +26,21 @@ public class ClientExample {
         System.out.println(strbr);
     }
 
+
+
+
     public static void main(String[] args) {
-        /*AxisClient axis =
+        AxisClient axis =
             new AxisClient(
-                "http://localhost:8001/concesionarias_axis_one_war/services/ConcesionariaAxisOne.ConcesionariaAxisOneHttpEndpoint/"
+                "http://192.168.0.6:8001/concesionarias_axis_one_war/services/ConcesionariaAxisOne.ConcesionariaAxisOneHttpEndpoint/"
                 , "http://ws.ConcesionariaAxisOne/"
             );
 
         PlanBean plan = axis.consultarPlan(1L);
-        log(plan);*/
+        log(plan);
 
-        CXFClient cxf =
-            new CXFClient("http://localhost:8000/concesionarias_cxf_one_war/services/concesionaria_cxf_one_service?wsdl");
+        /* CXFClient cxf =
+            new CXFClient("http://192.168.0.6:8000/concesionarias_cxf_one_war/services/concesionaria_cxf_one_service?wsdl");
 
         PlanBean plan2 = cxf.consultarPlan(7L);
         log(plan2);
@@ -36,6 +48,6 @@ public class ClientExample {
         cxf.cancelarPlan(7L);
 
         List<PlanBean> planes = cxf.consultarPlanes();
-        planes.forEach(ClientExample::log);
+        planes.forEach(ClientExample::log);*/
     }
 }

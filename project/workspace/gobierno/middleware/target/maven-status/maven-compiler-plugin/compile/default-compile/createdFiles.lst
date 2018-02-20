@@ -1,5 +1,6 @@
-clients\CXFClient.class
-dynamic_proxy\PlanBean.class
-clients\ConcesionariaServiceContract.class
+beans/PlanBean.class
+clients/CXFClient.class
+clients/ConcesionariaServiceContract.class
+clients/AxisClient.class
+beans/PlanBeanDeserializer.class
 ClientExample.class
-clients\AxisClient.class

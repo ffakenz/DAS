@@ -1,6 +1,6 @@
 package clients;
 
-import dynamic_proxy.PlanBean;
+import beans.PlanBean;
 
 import java.util.List;
 
