@@ -36,8 +36,14 @@ public class ClientExample {
                 , "http://ws.ConcesionariaAxisOne/"
             );
 
-        PlanBean plan = axis.consultarPlan(1L);
+        PlanBean plan = axis.consultarPlan(6L);
         log(plan);
+
+        axis.cancelarPlan(6L);
+
+        List<PlanBean> planes = axis.consultarPlanes();
+
+        planes.forEach(System.out::println);
 
         /* CXFClient cxf =
             new CXFClient("http://192.168.0.6:8000/concesionarias_cxf_one_war/services/concesionaria_cxf_one_service?wsdl");

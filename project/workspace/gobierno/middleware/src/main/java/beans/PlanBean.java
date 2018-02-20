@@ -14,6 +14,8 @@ public class PlanBean {
     Timestamp fechaAlta;
     Timestamp fechaUltimoUpdate;
 
+    public PlanBean(){}
+
     public PlanBean(Integer id, Integer cuotasPagadas, String vehiculo, String concesionaria, Integer concesionariaId, Long documento, String clientId, Timestamp fechaAlta, Timestamp fechaUltimoUpdate) {
         this.id = id;
         this.cuotasPagadas = cuotasPagadas;

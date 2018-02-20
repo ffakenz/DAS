@@ -1,6 +1,9 @@
 package clients;
 
 import beans.PlanBean;
+import beans.PlanBeanDeserializer;
+import com.google.gson.*;
+import com.sun.org.apache.xalan.internal.xsltc.compiler.util.VoidType;
 import org.apache.axiom.om.OMAbstractFactory;
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.OMFactory;
@@ -11,7 +14,11 @@ import org.apache.axis2.client.Options;
 import org.apache.axis2.client.ServiceClient;
 
 import javax.xml.namespace.QName;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class AxisClient implements ConcesionariaServiceContract {
 
@@ -45,11 +52,11 @@ public class AxisClient implements ConcesionariaServiceContract {
     }
 
     private final OMElement createMethod(String methodName) {
-        return fac.createOMElement("consultarPlanes", omNs);
+        return fac.createOMElement(methodName, omNs);
     }
     private final <A> OMElement createParam(String paramName, A paramValue) {
-        OMElement param = fac.createOMElement("consultarPlanes", omNs);
-        param.setText(param.toString());
+        OMElement param = fac.createOMElement(paramName, omNs);
+        param.setText(paramValue.toString());
         return param;
     }
 
@@ -57,8 +64,41 @@ public class AxisClient implements ConcesionariaServiceContract {
     public List<PlanBean> consultarPlanes() {
         OMElement method = createMethod("consultarPlanes");
         OMElement res = executeMethod(method);
-        System.out.println(res);
-        return null;
+
+
+        List<PlanBean> planes = new ArrayList<>();
+
+        Iterator it = res.getChildElements();
+        while(it.hasNext()) {
+            OMElement returnTag = (OMElement) it.next();
+            Iterator itRet = returnTag.getChildElements();
+            JsonObject result = deserializeXML(itRet, new JsonObject());
+
+            // deserialization process
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            gsonBuilder.registerTypeAdapter(PlanBean.class, PlanBeanDeserializer.deserializer);
+            Gson customGson = gsonBuilder.create();
+            PlanBean serializedResult = customGson.fromJson(result, PlanBean.class);
+            planes.add(serializedResult);
+        }
+
+        return planes;
+    }
+
+
+    private JsonObject deserializeXML(Iterator it, JsonObject bag) {
+        if(it.hasNext()) {
+            OMElement child = (OMElement) it.next();
+            String elementName = child.getLocalName();
+
+            if(!child.getChildElements().hasNext())
+                bag.addProperty(elementName, child.getText());
+            else
+                bag.add(elementName, deserializeXML(child.getChildElements(), new JsonObject()));
+
+            return deserializeXML(it, bag);
+        }
+        return bag;
     }
 
     @Override
@@ -66,22 +106,24 @@ public class AxisClient implements ConcesionariaServiceContract {
         OMElement method = createMethod("consultarPlan");
         OMElement param = createParam("planId", planId);
         method.addChild(param);
-        OMElement res = executeMethod(method);
 
 
-        System.out.println(res.getFirstElement().getText());
+        OMElement res = executeMethod(method); // response
 
-        OMElement cre =
-                res.getFirstChildWithName(new QName("PlanBean")); // get to read <student>
-
-        OMElement cre1 =
-                cre.getFirstChildWithName(new QName("id")); //   get to read <id></id>
-        System.out.println(cre1.getLocalName()+":"+cre1.getText());
+        OMElement returnTag = res.getFirstElement();
+        Iterator it = returnTag.getChildElements();
+        JsonObject result = deserializeXML(it, new JsonObject());
 
 
+        // deserialization process
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(PlanBean.class, PlanBeanDeserializer.deserializer);
+        Gson customGson = gsonBuilder.create();
+        PlanBean serializedResult = customGson.fromJson(result, PlanBean.class);
 
-        System.out.println(res);
-        return null;
+        System.out.println(serializedResult.toString());
+
+        return serializedResult;
     }
 
     @Override
@@ -89,7 +131,6 @@ public class AxisClient implements ConcesionariaServiceContract {
         OMElement method = createMethod("cancelarPlan");
         OMElement param = createParam("planId", planId);
         method.addChild(param);
-        OMElement res = executeMethod(method);
-        System.out.println(res);
+        Object res = executeMethod(method);
     }
 }
