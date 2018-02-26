@@ -1,6 +1,6 @@
-beans/PlanBean.class
-clients/CXFClient.class
-clients/ConcesionariaServiceContract.class
-clients/AxisClient.class
-beans/PlanBeanDeserializer.class
+beans\PlanBean.class
+beans\PlanBeanDeserializer.class
 ClientExample.class
+clients\CXFClient.class
+clients\ConcesionariaServiceContract.class
+clients\AxisClient.class

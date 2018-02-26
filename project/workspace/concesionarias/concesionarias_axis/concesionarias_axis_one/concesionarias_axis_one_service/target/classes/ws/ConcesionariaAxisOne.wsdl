@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://ws" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ax21="http://beans/xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://ws">
+    <wsdl:types>
+        <xs:schema xmlns:ax22="http://beans/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://ws">
+            <xs:import namespace="http://beans/xsd"/>
+            <xs:element name="cancelarPlan">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="planId" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="consultarPlan">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="planId" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="consultarPlanResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax22:PlanBean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="consultarPlanes">
+                <xs:complexType>
+                    <xs:sequence/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="consultarPlanesResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax22:PlanBean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://beans/xsd">
+            <xs:complexType name="PlanBean">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="clientId" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="concesionaria" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="concesionariaId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="cuotasPagadas" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="documento" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="fechaAlta" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="fechaUltimoUpdate" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="id" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="vehiculo" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="consultarPlanRequest">
+        <wsdl:part name="parameters" element="ns:consultarPlan"/>
+    </wsdl:message>
+    <wsdl:message name="consultarPlanResponse">
+        <wsdl:part name="parameters" element="ns:consultarPlanResponse"/>
+    </wsdl:message>
+    <wsdl:message name="consultarPlanesRequest">
+        <wsdl:part name="parameters" element="ns:consultarPlanes"/>
+    </wsdl:message>
+    <wsdl:message name="consultarPlanesResponse">
+        <wsdl:part name="parameters" element="ns:consultarPlanesResponse"/>
+    </wsdl:message>
+    <wsdl:message name="cancelarPlanRequest">
+        <wsdl:part name="parameters" element="ns:cancelarPlan"/>
+    </wsdl:message>
+    <wsdl:portType name="ConcesionariaAxisOnePortType">
+        <wsdl:operation name="consultarPlan">
+            <wsdl:input message="ns:consultarPlanRequest" wsaw:Action="urn:consultarPlan"/>
+            <wsdl:output message="ns:consultarPlanResponse" wsaw:Action="urn:consultarPlanResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="consultarPlanes">
+            <wsdl:input message="ns:consultarPlanesRequest" wsaw:Action="urn:consultarPlanes"/>
+            <wsdl:output message="ns:consultarPlanesResponse" wsaw:Action="urn:consultarPlanesResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="cancelarPlan">
+            <wsdl:input message="ns:cancelarPlanRequest" wsaw:Action="urn:cancelarPlan"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="ConcesionariaAxisOneSoap11Binding" type="ns:ConcesionariaAxisOnePortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="consultarPlan">
+            <soap:operation soapAction="urn:consultarPlan" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="consultarPlanes">
+            <soap:operation soapAction="urn:consultarPlanes" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="cancelarPlan">
+            <soap:operation soapAction="urn:cancelarPlan" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="ConcesionariaAxisOneSoap12Binding" type="ns:ConcesionariaAxisOnePortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="consultarPlan">
+            <soap12:operation soapAction="urn:consultarPlan" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="consultarPlanes">
+            <soap12:operation soapAction="urn:consultarPlanes" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="cancelarPlan">
+            <soap12:operation soapAction="urn:cancelarPlan" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="ConcesionariaAxisOneHttpBinding" type="ns:ConcesionariaAxisOnePortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="consultarPlan">
+            <http:operation location="consultarPlan"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="consultarPlanes">
+            <http:operation location="consultarPlanes"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="cancelarPlan">
+            <http:operation location="cancelarPlan"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="ConcesionariaAxisOne">
+        <wsdl:port name="ConcesionariaAxisOneHttpSoap11Endpoint" binding="ns:ConcesionariaAxisOneSoap11Binding">
+            <soap:address location="http://localhost:8080/axis2/services/ConcesionariaAxisOne"/>
+        </wsdl:port>
+        <wsdl:port name="ConcesionariaAxisOneHttpSoap12Endpoint" binding="ns:ConcesionariaAxisOneSoap12Binding">
+            <soap12:address location="http://localhost:8080/axis2/services/ConcesionariaAxisOne"/>
+        </wsdl:port>
+        <wsdl:port name="ConcesionariaAxisOneHttpEndpoint" binding="ns:ConcesionariaAxisOneHttpBinding">
+            <http:address location="http://localhost:8080/axis2/services/ConcesionariaAxisOne"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

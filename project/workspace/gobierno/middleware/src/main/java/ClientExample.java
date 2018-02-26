@@ -1,16 +1,7 @@
 import clients.AxisClient;
 import clients.CXFClient;
 import beans.PlanBean;
-import org.apache.axiom.om.OMElement;
-import org.apache.axiom.om.impl.builder.StAXOMBuilder;
 
-import javax.xml.namespace.QName;
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 public class ClientExample {
@@ -25,9 +16,6 @@ public class ClientExample {
 
         System.out.println(strbr);
     }
-
-
-
 
     public static void main(String[] args) {
         AxisClient axis =

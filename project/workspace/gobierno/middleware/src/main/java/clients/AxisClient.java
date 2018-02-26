@@ -50,7 +50,6 @@ public class AxisClient implements ConcesionariaServiceContract {
         }
         return null; // non reacheable statemet
     }
-
     private final OMElement createMethod(String methodName) {
         return fac.createOMElement(methodName, omNs);
     }
@@ -58,6 +57,20 @@ public class AxisClient implements ConcesionariaServiceContract {
         OMElement param = fac.createOMElement(paramName, omNs);
         param.setText(paramValue.toString());
         return param;
+    }
+    private final JsonObject deserializeXML(Iterator it, JsonObject bag) {
+        if(it.hasNext()) {
+            OMElement child = (OMElement) it.next();
+            String elementName = child.getLocalName();
+
+            if(!child.getChildElements().hasNext())
+                bag.addProperty(elementName, child.getText());
+            else
+                bag.add(elementName, deserializeXML(child.getChildElements(), new JsonObject()));
+
+            return deserializeXML(it, bag);
+        }
+        return bag;
     }
 
     @Override
@@ -83,22 +96,6 @@ public class AxisClient implements ConcesionariaServiceContract {
         }
 
         return planes;
-    }
-
-
-    private JsonObject deserializeXML(Iterator it, JsonObject bag) {
-        if(it.hasNext()) {
-            OMElement child = (OMElement) it.next();
-            String elementName = child.getLocalName();
-
-            if(!child.getChildElements().hasNext())
-                bag.addProperty(elementName, child.getText());
-            else
-                bag.add(elementName, deserializeXML(child.getChildElements(), new JsonObject()));
-
-            return deserializeXML(it, bag);
-        }
-        return bag;
     }
 
     @Override
