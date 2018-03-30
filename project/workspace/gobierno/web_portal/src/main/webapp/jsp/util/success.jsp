@@ -7,7 +7,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<link type="text/css" rel="stylesheet" href="/util/StyleSheet.do/load=page,messages" />
+	<link type="text/css" rel="stylesheet" href="/web_portal/util/StyleSheet.do/load=page,messages" />
 </head>
 <body>
 </c:if>

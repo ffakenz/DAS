@@ -17,9 +17,9 @@
         
         <title><fmt:message key="login_titulo" bundle="${etq}" /></title>
        
-        <link type="text/css" rel="stylesheet" href="/util/StyleSheet.do/load=page,messages,login" />
+        <link type="text/css" rel="stylesheet" href="/web_portal/util/StyleSheet.do/load=page,messages" />
         
-        <script type="text/javascript" src="/util/Javascript.do/load=jquery,jquery.i18n.properties,utils,ajax"> </script>
+        <script type="text/javascript" src="/web_portal/util/Javascript.do/load=jquery,jquery.i18n.properties,utils"> </script>
                 
     </head>
     

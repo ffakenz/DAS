@@ -128,7 +128,9 @@ public class ActionController extends HttpServlet {
 			        }
 
 			        try {
-						Action iaction = Action.class.cast(Class.forName(ModuleConfigImpl.getSrcPackage() + alias.getName() + ".actions." + action.getType()).newInstance());
+						String actionClassName = ModuleConfigImpl.getSrcPackage() + alias.getName() + ".actions." + action.getType();
+
+						Action iaction = Action.class.cast(Class.forName(actionClassName).newInstance());
 
 						forward = iaction.execute(mapping, form, request, response);
 						if(forward == null) {
