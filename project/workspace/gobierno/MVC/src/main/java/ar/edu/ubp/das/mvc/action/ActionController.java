@@ -74,6 +74,7 @@ public class ActionController extends HttpServlet {
 		}
 		
 		ResourceBundle bundle  = ResourceBundle.getBundle(ModuleConfigImpl.getFwkPackage() + "properties.messages");
+
 		AliasConfig    alias   = ModuleConfigImpl.getAliasByName(aliasUrl);
 		ForwardConfig  forward = null;
 		DynaActionForm form    = new DynaActionForm();

@@ -7,7 +7,7 @@
   </welcome-file-list>
   <context-param>
     <param-name>fwk.packages</param-name>
-    <param-value>ar.edu.ubp.das.mvc.</param-value>
+    <param-value></param-value>
   </context-param>
   <context-param>
     <param-name>src.packages</param-name>
