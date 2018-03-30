@@ -5,7 +5,7 @@
     pageEncoding="utf-8" %>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<fmt:setBundle basename="ar.edu.ubp.das.bundle.etiquetas.etiquetas" var="etq" scope="session"/>
+<fmt:setBundle basename="properties.etiquetas" var="etq" scope="session"/>
 
 <!DOCTYPE html>
 
