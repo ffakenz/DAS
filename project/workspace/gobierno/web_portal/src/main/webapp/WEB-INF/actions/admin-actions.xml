@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	     xsi:noNamespaceSchemaLocation="../schema/actions.xsd">
+    <form-beans>
+    </form-beans>
+    <action-mappings>
+        <action type="LoginAction" path="/Login.do">
+            <forward name="success" path="/admin/login.jsp" />
+        </action>
+    </action-mappings>
+</actions>

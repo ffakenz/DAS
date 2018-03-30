@@ -1,0 +1,42 @@
+@CHARSET "ISO-8859-1";
+
+.failure,
+.success,
+.warning,
+.information {
+    font:               normal 14px "Trebuchet MS", Tahoma, Helvetica, Arial, sans-serif;
+    background-position:top left;
+    background-repeat:  repeat-x;
+    padding:            3px 5px;
+    margin:             6px 0 6px 0;
+    border-width:       1px;
+    border-style:       solid;
+}
+
+.failure {
+    color:              #7f0000;
+    background-image:   url(../../img/failure.gif);
+	background-color:   #f1b5ac;
+    border-color:       #cd8263;
+}
+
+.success {
+    color:              #6b7300;
+    background-image:   url(../../img/success.gif);
+	background-color:   #d5d083;
+    border-color:       #9eb500;
+}
+
+.warning{
+    color:              #8a7800;
+    background-image:   url(../../img/warning.gif);
+	background-color:   #f8e08d;
+    border-color:       #f5cf00;
+}
+
+.information {
+    color:              #1b3d59;
+    background-image:   url(../../img/information.gif);
+	background-color:   #afc3db;
+    border-color:       #7fa5b1;
+}

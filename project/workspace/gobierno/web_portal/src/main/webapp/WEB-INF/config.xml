@@ -9,6 +9,7 @@
     </global-forwards>
     <alias-mappings>
         <!-- A -->
+        <alias name="admin" />
         <!-- B -->
         <!-- C -->
         <!-- D -->
