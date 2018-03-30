@@ -51,9 +51,6 @@ public final class ModuleConfigImpl {
 		try {
 			String      filename = "/WEB-INF/datasources.xml";
 
-			System.out.println("Context Path " + context.getContextPath());
-			System.out.println("Real Path " + context.getRealPath(filename));
-
 			InputStream input    = context.getResourceAsStream(filename);
 			if(input == null) {
 				throw new RuntimeException("El archivo " + filename + " no existe");

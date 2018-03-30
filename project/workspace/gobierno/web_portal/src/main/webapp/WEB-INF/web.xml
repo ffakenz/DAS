@@ -15,7 +15,7 @@
   </context-param>
   <context-param>
     <param-name>templates.path</param-name>
-    <param-value>/tpls</param-value>
+    <param-value>/jsp</param-value>
   </context-param>
   <context-param>
     <param-name>action.default.path</param-name>
