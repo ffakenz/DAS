@@ -1,2 +1,0 @@
-0:0:0:0:0:0:0:1 - - [17/Feb/2018:21:40:26 -0300] "GET /doubleit_war/services/doubleit_service?wsdl HTTP/1.1" 200 2422 http-bio-8888-exec-1 324
-0:0:0:0:0:0:0:1 - - [17/Feb/2018:21:40:27 -0300] "GET /favicon.ico HTTP/1.1" 404 - http-bio-8888-exec-3 0

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>web_portal</artifactId>
+        <groupId>gobierno</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>web_app</groupId>
+    <artifactId>war</artifactId>
+    <packaging>war</packaging>
+
+    <!-- Dependency definitions -->
+    <dependencies>
+        <dependency>
+            <groupId>web_portal</groupId>
+            <artifactId>app</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+    <!-- Dependency properties -->
+    <properties>
+        <maven-war-plugin.version>2.6</maven-war-plugin.version>
+        <webXml>src/WebContent/WEB-INF/web.xml</webXml>
+        <webResources.resource.directory>.</webResources.resource.directory>
+        <webResources.resource.targetPath>.</webResources.resource.targetPath>
+        <includePattern>*</includePattern>
+
+        <tomcat7-maven-plugin.version>2.2</tomcat7-maven-plugin.version>
+        <tomcat.server>myTomcat</tomcat.server>
+        <tomcat.url>http://localhost:8080/manager/text</tomcat.url>
+        <tomcat.path>/${project.build.finalName}</tomcat.path>
+        <tomcat.port>8000</tomcat.port>
+    </properties>
+
+    <build>
+        <!-- Name of the generated WAR file -->
+        <finalName>web_portal_war</finalName>
+        <resources>
+            <resource>
+                <directory>src/WebContent/</directory>
+                <targetPath>${basedir}/target/web_portal_war/</targetPath>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>${tomcat7-maven-plugin.version}</version>
+                <configuration>
+                    <server>${tomcat.server}</server>
+                    <url>${tomcat.url}</url>
+                    <path>${tomcat.path}</path>
+                    <port>${tomcat.port}</port>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>${maven-war-plugin.version}</version>
+                <configuration>
+                    <webXml>${webXml}</webXml>
+                    <webResources>
+                        <resource>
+                            <directory>${webResources.resource.directory}</directory>
+                            <targetPath>${webResources.resource.targetPath}</targetPath>
+                            <includes>
+                                <include>${includePattern}</include>
+                            </includes>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
