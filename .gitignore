@@ -34,4 +34,4 @@ project/workspace/MVC3.2/build/classes/.gitignore
 
 # lib
 project/lib/
-*/target/*
+target/
