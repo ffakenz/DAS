@@ -19,7 +19,7 @@
        
         <link type="text/css" rel="stylesheet" href="/web_portal/util/StyleSheet.do/load=page,messages" />
         
-        <script type="text/javascript" src="/web_portal/util/Javascript.do/load=jquery,jquery.i18n.properties,utils"> </script>
+        <script type="text/javascript" src="/web_portal/util/Javascript.do/load=jquery,jquery.i18n.properties,utils,login"> </script>
                 
     </head>
     

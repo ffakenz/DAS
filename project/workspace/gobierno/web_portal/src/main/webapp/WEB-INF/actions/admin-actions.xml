@@ -7,5 +7,10 @@
         <action type="LoginAction" path="/Login.do">
             <forward name="success" path="/admin/login.jsp" />
         </action>
+
+        <action type="SetearIdiomaAction" path="/SetearIdioma.do">
+            <forward name="success" path="/admin/setearIdioma.jsp" />
+        </action>
+
     </action-mappings>
 </actions>
