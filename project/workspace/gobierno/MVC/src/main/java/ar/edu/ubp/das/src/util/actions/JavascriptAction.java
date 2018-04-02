@@ -28,6 +28,7 @@ public class JavascriptAction implements Action {
 	        	if(request.getParameter("load") != null) {
 	        		String root      = ModuleConfigImpl.getContext().getRealPath("/js/") + "/";
 	        		String scripts[] = request.getParameter("load").split(",");
+					
 		        	for(String script : scripts) {
 		        		try {
 		        			List<String>  file  = Files.readAllLines(Paths.get(root + script + ".js"), Charset.defaultCharset());
