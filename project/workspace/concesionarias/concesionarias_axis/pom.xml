@@ -12,7 +12,7 @@
     <artifactId>concesionarias_axis</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>concesionarias_axis_one</module>
+        <module>concesionaria_axis_one</module>
     </modules>
 
     <!-- Dependency properties -->
@@ -41,6 +41,19 @@
             <groupId>org.apache.xmlbeans</groupId>
             <artifactId>xmlbeans</artifactId>
             <version>${xmlbeans.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>concesionarias</groupId>
+            <artifactId>concesionarias_core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/javax.servlet/servlet-api -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

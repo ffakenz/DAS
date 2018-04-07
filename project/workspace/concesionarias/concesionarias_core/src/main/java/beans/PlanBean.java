@@ -3,6 +3,7 @@ package beans;
 import annotations.Column;
 import annotations.Entity;
 
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.sql.Timestamp;
 
 @Entity
@@ -83,6 +84,7 @@ public class PlanBean {
         this.clientId = clientId;
     }
 
+    @XmlJavaTypeAdapter(value=SqlDateAdapter.class)
     public Timestamp getFechaAlta() {
         return fechaAlta;
     }
@@ -91,7 +93,8 @@ public class PlanBean {
         this.fechaAlta = fechaAlta;
     }
 
-    public Timestamp getFechaUltimoUpdate() {
+    @XmlJavaTypeAdapter(value=SqlDateAdapter.class)
+            public Timestamp getFechaUltimoUpdate() {
         return fechaUltimoUpdate;
     }
 
