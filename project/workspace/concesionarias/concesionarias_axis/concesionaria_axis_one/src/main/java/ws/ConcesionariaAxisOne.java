@@ -1,19 +1,22 @@
 package ws;
 
 import beans.PlanBean;
+import com.google.gson.Gson;
 import contract.ConcesionariaServiceContract;
 import contract.implementors.MSSQLConsecionaria;
-import java.util.List;
 
 public class ConcesionariaAxisOne extends MSSQLConsecionaria implements ConcesionariaServiceContract {
-    @Override
-    public List<PlanBean> consultarPlanes() {
-        return abstractFactory.withConnection(planDAO.consultarPlanes());
-    };
+
+    private Gson gson = new Gson();
 
     @Override
-    public PlanBean consultarPlan(Long planId) {
-        return abstractFactory.withConnection(planDAO.consultarPlan(planId)).get();
+    public String consultarPlanes() {
+        return gson.toJson(abstractFactory.withConnection(planDAO.consultarPlanes()));
+    }
+
+    @Override
+    public String consultarPlan(Long planId) {
+        return gson.toJson(abstractFactory.withConnection(planDAO.consultarPlan(planId)).get());
     }
 
     @Override

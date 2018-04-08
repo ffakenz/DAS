@@ -17,7 +17,7 @@ public class MSSQLDAOFactory extends DAOAbstractFactory implements ConnectionCon
     public MSSQLDAOFactory() {
         //Dependencies injected via ConnectionConfig
         DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-        URL = "jdbc:sqlserver://localhost;databaseName=" + getDBName() + ";integratedSecurity=true;";
+        URL = "jdbc:sqlserver://localhost;databaseName=" + getDBName() + ";";
         USERNAME = getUsername();
         PASSWORD = getPassword();
     }

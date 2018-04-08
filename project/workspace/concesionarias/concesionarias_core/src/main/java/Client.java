@@ -38,9 +38,6 @@ public class Client {
         String resultCancelado = planCancelado.map(p -> p.toString()).get();
         System.out.println(resultCancelado);
 
-
-
-
         /*mssqlFactory.withConnection((Connection c) -> {
             try(Statement stm = c.createStatement()){
                 ResultSet rs = stm.executeQuery("SELECT * FROM compradores");
