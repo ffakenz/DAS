@@ -2,16 +2,22 @@ package ws;
 
 import beans.PlanBean;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import contract.ConcesionariaServiceContract;
 import contract.implementors.MSSQLConsecionaria;
 
+import java.util.List;
+
 public class ConcesionariaAxisOne extends MSSQLConsecionaria implements ConcesionariaServiceContract {
 
-    private Gson gson = new Gson();
+    private Gson gson = new GsonBuilder()
+            .setDateFormat("yyyy-MM-dd hh:mm:ss.SSS")
+            .create();
 
     @Override
     public String consultarPlanes() {
-        return gson.toJson(abstractFactory.withConnection(planDAO.consultarPlanes()));
+        List<PlanBean> planes = abstractFactory.withConnection(planDAO.consultarPlanes());
+        return gson.toJson(planes);
     }
 
     @Override

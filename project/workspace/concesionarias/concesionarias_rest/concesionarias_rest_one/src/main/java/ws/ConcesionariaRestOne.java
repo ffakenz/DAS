@@ -5,6 +5,7 @@ import javax.ws.rs.core.MediaType;
 
 import beans.PlanBean;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import contract.ConcesionariaServiceContract;
 import contract.implementors.MSSQLConsecionaria;
 
@@ -15,7 +16,9 @@ import java.util.List;
 public class ConcesionariaRestOne extends MSSQLConsecionaria implements ConcesionariaServiceContract  {
 
 
-    private Gson gson = new Gson();
+    private Gson gson = new GsonBuilder()
+            .setDateFormat("yyyy-MM-dd hh:mm:ss.SSS")
+            .create();
 
     @GET
     @Path("/consultarPlanes")
@@ -30,7 +33,8 @@ public class ConcesionariaRestOne extends MSSQLConsecionaria implements Concesio
     @Produces(MediaType.APPLICATION_JSON)
     @Override
     public String consultarPlan(@PathParam("planId") Long planId) {
-        return gson.toJson(abstractFactory.withConnection(planDAO.consultarPlan(planId)).get());
+        List<PlanBean> planes = abstractFactory.withConnection(planDAO.consultarPlanes());
+        return gson.toJson(planes);
     }
 
     @PUT

@@ -84,7 +84,6 @@ public class PlanBean {
         this.clientId = clientId;
     }
 
-    @XmlJavaTypeAdapter(value=SqlDateAdapter.class)
     public Timestamp getFechaAlta() {
         return fechaAlta;
     }
@@ -93,8 +92,7 @@ public class PlanBean {
         this.fechaAlta = fechaAlta;
     }
 
-    @XmlJavaTypeAdapter(value=SqlDateAdapter.class)
-            public Timestamp getFechaUltimoUpdate() {
+    public Timestamp getFechaUltimoUpdate() {
         return fechaUltimoUpdate;
     }
 
