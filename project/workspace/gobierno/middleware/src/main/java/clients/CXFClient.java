@@ -1,15 +1,7 @@
 package clients;
 
-import beans.PlanBeanDeserializer;
-import com.google.gson.*;
-import beans.PlanBean;
 import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.jaxws.endpoint.dynamic.JaxWsDynamicClientFactory;
-
-import java.sql.Timestamp;
-import java.util.Arrays;
-import java.util.List;
-
 public class CXFClient implements ConcesionariaServiceContract {
 
     private final String wsdlUrl;
@@ -37,37 +29,15 @@ public class CXFClient implements ConcesionariaServiceContract {
     }
 
     @Override
-    public List<PlanBean> consultarPlanes() {
+    public String consultarPlanes() {
         Object res = executeMethod("consultarPlanes");
-        // serialization process
-        String jsonPlans = new Gson().toJson(res);
-
-        // deserialization process
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeAdapter(PlanBean.class, PlanBeanDeserializer.deserializer);
-        Gson customGson = gsonBuilder.create();
-
-        PlanBean[] planes = customGson.fromJson(jsonPlans, PlanBean[].class);
-
-        List<PlanBean> p = Arrays.asList(planes);
-        p.forEach(System.out::println);
-
-        return Arrays.asList(planes);
+        return res.toString();
     }
 
     @Override
-    public PlanBean consultarPlan(Long planId) {
+    public String consultarPlan(Long planId) {
         Object res = executeMethod("consultarPlan", planId);
-        // serialization process
-        String planJSON = new Gson().toJson(res);
-
-        // deserialization process
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeAdapter(PlanBean.class, PlanBeanDeserializer.deserializer);
-        Gson customGson = gsonBuilder.create();
-        PlanBean plan = customGson.fromJson(planJSON, PlanBean.class);
-
-        return plan;
+        return res.toString();
     }
 
     @Override

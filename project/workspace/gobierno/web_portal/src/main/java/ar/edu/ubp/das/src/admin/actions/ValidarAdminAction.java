@@ -27,7 +27,7 @@ public class ValidarAdminAction implements Action {
 			//MSAdministradoresDao dao = (MSAdministradoresDao)DaoFactory.getDao( "Administradores", "admin" );
 			//     				 dao.validar_admin( form );
 
-			form.setItem("respuesta", "b"); // debuggin purpouses
+			form.setItem("respuesta", "c"); // debuggin purpouses
 			request.setAttribute("respuesta", form.getItem("respuesta"));
 			
 			if( form.getItem( "respuesta" ).equals( "c" ) ) {
