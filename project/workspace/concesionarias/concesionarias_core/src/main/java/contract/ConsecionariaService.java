@@ -10,12 +10,13 @@ public abstract class ConsecionariaService {
 	protected DAOAbstractFactory abstractFactory;
 
 	abstract protected DatasourceEnum getDatasourceEnum();
+    abstract protected ClassLoader getClassLoader();
 
 	// get dao for plans
 	protected PlanDAO planDAO;
 	
     public ConsecionariaService(DAOFactory type) {
-        abstractFactory = DAOAbstractFactory.getDAOFactory(type, getDatasourceEnum());
+        abstractFactory = DAOAbstractFactory.getDAOFactory(type, getDatasourceEnum(), getClassLoader());
         planDAO = abstractFactory.getPlanDAO();
     }     
 }

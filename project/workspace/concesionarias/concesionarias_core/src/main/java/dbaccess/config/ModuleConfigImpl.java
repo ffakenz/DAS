@@ -28,17 +28,15 @@ public final class ModuleConfigImpl {
 		this.datasources = new HashMap<String, DatasourceConfig>();
 	}
 
-	public static void load() throws RuntimeException {
+	public static void load(ClassLoader classLoader) throws RuntimeException {
 		if(ModuleConfigImpl.instance == null) {
 			ModuleConfigImpl.instance = new ModuleConfigImpl();
-			ModuleConfigImpl.instance.loadDatasources();
+			ModuleConfigImpl.instance.loadDatasources(classLoader);
 		}
 	}
 	
-	private void loadDatasources() throws RuntimeException {
+	private void loadDatasources(ClassLoader classLoader) throws RuntimeException {
 		try {
-			ClassLoader classLoader = getClass().getClassLoader();
-
 			String schemaFileName = "./schema/datasources.xsd";
 			InputStream schemaInputStream = classLoader.getResourceAsStream(schemaFileName);
 

@@ -58,7 +58,7 @@ public class ClientExample {
 
         // TODO: change concesionarias_rest_one to concesionaria_rest_one
         RestClient rest =
-                new RestClient("http://192.168.1.6:8002/concesionarias_rest_one/concesionariaRestOne");
+                new RestClient("http://localhost:8002/concesionarias_rest_one/concesionariaRestOne");
 
 
         // System.out.println("AXIS");

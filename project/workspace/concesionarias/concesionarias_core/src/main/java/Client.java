@@ -16,8 +16,10 @@ import java.util.function.Function;
 
 public class Client {
     public static void main(String[] args) {
+
         // create mssql factory
-        DAOAbstractFactory mssqlFactory = DAOAbstractFactory.getDAOFactory(DAOFactory.MSSQL, DatasourceEnum.DEFAULT);
+        DAOAbstractFactory mssqlFactory =
+                DAOAbstractFactory.getDAOFactory(DAOFactory.MSSQL, DatasourceEnum.DEFAULT, Client.class.getClassLoader());
         // get dao for plans
         PlanDAO planDAO = mssqlFactory.getPlanDAO();
 

@@ -8,8 +8,8 @@ import java.util.function.Function;
 
 public abstract class DAOAbstractFactory {
     //FACTORY METHOD
-    public static DAOAbstractFactory getDAOFactory(DAOFactory type, DatasourceEnum datasourceEnum) {
-        return type.getInstance(datasourceEnum);
+    public static DAOAbstractFactory getDAOFactory(DAOFactory type, DatasourceEnum datasourceEnum, ClassLoader classLoader) {
+        return type.getInstance(datasourceEnum, classLoader);
     }
 
     // There will be a method for each DAO that can be created using factory Method

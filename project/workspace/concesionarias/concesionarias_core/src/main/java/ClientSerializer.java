@@ -10,7 +10,7 @@ import java.util.Optional;
 public class ClientSerializer {
     public static void main(String[] args) {
         // create mssql factory
-        DAOAbstractFactory mssqlFactory = DAOAbstractFactory.getDAOFactory(DAOFactory.MSSQL, DatasourceEnum.DEFAULT);
+        DAOAbstractFactory mssqlFactory = DAOAbstractFactory.getDAOFactory(DAOFactory.MSSQL, DatasourceEnum.DEFAULT, ClientSerializer.class.getClassLoader());
         // get dao for plans
         PlanDAO planDAO = mssqlFactory.getPlanDAO();
 

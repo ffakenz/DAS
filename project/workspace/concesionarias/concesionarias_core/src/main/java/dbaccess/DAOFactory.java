@@ -9,13 +9,13 @@ public enum DAOFactory {
     // EACH TYPE SHOULD BE COMMA SEPARATED
     MSSQL {
         @Override
-        public DAOAbstractFactory getInstance(DatasourceEnum datasourceEnum) {
+        public DAOAbstractFactory getInstance(DatasourceEnum datasourceEnum, ClassLoader classLoader) {
             // TODO: Improve ModuleConfigImpl
-            ModuleConfigImpl.load();
+            ModuleConfigImpl.load(classLoader);
             return new MSSQLDAOFactory(ModuleConfigImpl.getDatasourceById(datasourceEnum.getValue()));
         }
     };
 
-    public abstract DAOAbstractFactory getInstance(DatasourceEnum datasourceId);
+    public abstract DAOAbstractFactory getInstance(DatasourceEnum datasourceId, ClassLoader classLoader);
 }
 

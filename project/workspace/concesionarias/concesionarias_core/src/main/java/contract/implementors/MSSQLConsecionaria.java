@@ -14,4 +14,9 @@ public abstract class MSSQLConsecionaria extends ConsecionariaService {
     protected DatasourceEnum getDatasourceEnum() {
         return DatasourceEnum.DEFAULT;
     }
+
+    @Override
+    protected ClassLoader getClassLoader() {
+        return getClass().getClassLoader();
+    }
 }
