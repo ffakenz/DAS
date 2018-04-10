@@ -1,25 +1,26 @@
 package dbaccess.implementations;
 
 import dao.PlanDAO;
-import dbaccess.ConnectionConfig;
 import dbaccess.DAOAbstractFactory;
+import dbaccess.config.DatasourceConfig;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.function.Function;
 
-public class MSSQLDAOFactory extends DAOAbstractFactory implements ConnectionConfig {
+public class MSSQLDAOFactory extends DAOAbstractFactory {
     private static String DRIVER;
     private static String URL;
     private static String USERNAME;
     private static String PASSWORD;
 
-    public MSSQLDAOFactory() {
+    public MSSQLDAOFactory(DatasourceConfig datasource) {
         //Dependencies injected via ConnectionConfig
-        DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-        URL = "jdbc:sqlserver://localhost;databaseName=" + getDBName() + ";";
-        USERNAME = getUsername();
-        PASSWORD = getPassword();
+        DRIVER = datasource.getDriver();
+        URL = datasource.getUrl();
+        USERNAME = datasource.getUsername();
+        PASSWORD = datasource.getPassword();
     }
 
     // functional API
