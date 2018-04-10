@@ -1,6 +1,7 @@
 -- Evaluar necesidad de tener inicio o fin o una tabla secundaria con el historial de cambios por sorteo
 -- Falta validar las transiciones de ser necesario
 -- Actualizar fecha sorteo
+USE db_gobierno;
 GO
 DROP PROCEDURE definir_fecha_sorteo;
 GO

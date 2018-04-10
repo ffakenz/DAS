@@ -1,3 +1,5 @@
+USE db_gobierno;
+GO
 DROP TABLE ganadores;
 DROP TABLE estado_ganador;
 DROP TABLE consecionarias_notificadas;

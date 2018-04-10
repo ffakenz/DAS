@@ -1,3 +1,4 @@
+USE db_gobierno;
 GO
 DROP TRIGGER validate_pendientes;
 GO

@@ -1,3 +1,4 @@
+USE db_gobierno;
 GO
 INSERT INTO roles(nombre)
 VALUES('comprador'),('gobierno'); 

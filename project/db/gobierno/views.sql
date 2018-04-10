@@ -1,3 +1,4 @@
+USE db_gobierno;
 GO
 DROP VIEW compradores;
 GO

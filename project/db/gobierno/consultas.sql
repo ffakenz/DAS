@@ -1,3 +1,5 @@
+USE db_gobierno;
+GO
 -- consultar de clientes para el usuario que se loguea con su documento
 	DECLARE @documento INT = 400
 	SELECT * FROM clientes WHERE documento = @documento;
