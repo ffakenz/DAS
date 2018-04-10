@@ -67,5 +67,6 @@ public class ClientExample {
         // logClient.accept(cxf);
         System.out.println("REST");
         logClient.accept(rest);
+        // TODO : Create a logClient Unit Test Mockin up the Service Response
     }
 }

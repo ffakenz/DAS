@@ -69,11 +69,11 @@ public class RestClient implements ConcesionariaServiceContract {
 
     @Override
     public String consultarPlan(Long planId) {
-        return call.apply("GET", "/consultarPlan?" + planId.toString());
+        return call.apply("GET", "/consultarPlan?planId=" + planId.toString());
     }
-
+	// TODO: Create method that will parse multiple parameters
     @Override
     public void cancelarPlan(Long planId) {
-        fireAndForget.accept("PUT", "/cancelarPlan?" + planId.toString());
+        fireAndForget.accept("PUT", "/cancelarPlan?planId=" + planId.toString());
     }
 }
