@@ -1,5 +1,7 @@
 package dbaccess;
 
+import dbaccess.config.DatasourceEnum;
+import dbaccess.config.ModuleConfigImpl;
 import dbaccess.implementations.MSSQLDAOFactory;
 
 public enum DAOFactory {
@@ -7,10 +9,13 @@ public enum DAOFactory {
     // EACH TYPE SHOULD BE COMMA SEPARATED
     MSSQL {
         @Override
-        public DAOAbstractFactory getInstance() {
-            return new MSSQLDAOFactory();
+        public DAOAbstractFactory getInstance(DatasourceEnum datasourceEnum) {
+            // TODO: Improve ModuleConfigImpl
+            ModuleConfigImpl.load();
+            return new MSSQLDAOFactory(ModuleConfigImpl.getDatasourceById(datasourceEnum.getValue()));
         }
     };
 
-    public abstract DAOAbstractFactory getInstance();
+    public abstract DAOAbstractFactory getInstance(DatasourceEnum datasourceId);
 }
+

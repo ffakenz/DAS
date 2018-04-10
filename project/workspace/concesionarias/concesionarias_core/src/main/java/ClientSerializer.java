@@ -3,13 +3,14 @@ import beans.PlanBean;
 import dao.PlanDAO;
 import dbaccess.DAOAbstractFactory;
 import dbaccess.DAOFactory;
+import dbaccess.config.DatasourceEnum;
 
 import java.util.Optional;
 
 public class ClientSerializer {
     public static void main(String[] args) {
         // create mssql factory
-        DAOAbstractFactory mssqlFactory = DAOAbstractFactory.getDAOFactory(DAOFactory.MSSQL);
+        DAOAbstractFactory mssqlFactory = DAOAbstractFactory.getDAOFactory(DAOFactory.MSSQL, DatasourceEnum.DEFAULT);
         // get dao for plans
         PlanDAO planDAO = mssqlFactory.getPlanDAO();
 

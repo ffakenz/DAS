@@ -3,6 +3,8 @@ import beans.PlanBean;
 import dao.PlanDAO;
 import dbaccess.DAOAbstractFactory;
 import dbaccess.DAOFactory;
+import dbaccess.config.DatasourceEnum;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,7 +17,7 @@ import java.util.function.Function;
 public class Client {
     public static void main(String[] args) {
         // create mssql factory
-        DAOAbstractFactory mssqlFactory = DAOAbstractFactory.getDAOFactory(DAOFactory.MSSQL);
+        DAOAbstractFactory mssqlFactory = DAOAbstractFactory.getDAOFactory(DAOFactory.MSSQL, DatasourceEnum.DEFAULT);
         // get dao for plans
         PlanDAO planDAO = mssqlFactory.getPlanDAO();
 
@@ -25,6 +27,7 @@ public class Client {
         List<PlanBean> planes =  mssqlFactory.withConnection(planDAO.consultarPlanes());
         planes.forEach(System.out::print);
 
+        /*
         // use api 2
         Optional<PlanBean> plan = mssqlFactory.withConnection(planDAO.consultarPlan(1L)::apply);
         String result = plan.map(p -> p.toString()).get();
@@ -37,6 +40,7 @@ public class Client {
         Optional<PlanBean> planCancelado = mssqlFactory.withConnection(planDAO.consultarPlan(1L)::apply);
         String resultCancelado = planCancelado.map(p -> p.toString()).get();
         System.out.println(resultCancelado);
+        */
 
         /*mssqlFactory.withConnection((Connection c) -> {
             try(Statement stm = c.createStatement()){
