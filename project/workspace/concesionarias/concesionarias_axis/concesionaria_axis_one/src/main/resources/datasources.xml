@@ -3,7 +3,7 @@
 	         xsi:noNamespaceSchemaLocation="schema/datasources.xsd">
     <datasource id="default"
                 driver="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-                url="jdbc:sqlserver://localhost;databaseName=db_rest_one;integratedSecurity=true;"
+                url="jdbc:sqlserver://localhost;databaseName=db_axis_one;integratedSecurity=true;"
                 username="ftestagrossa"
                 password="123" />
 </datasources>
