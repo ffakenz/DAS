@@ -20,6 +20,8 @@
 *.ear
 *.zip
 *.tar.gz
+*.xsd
+*.xml
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
@@ -31,6 +33,10 @@ project/workspace/.metadata/
 project/workspace/.recommenders/
 project/workspace/RemoteSystemsTempFiles/
 project/workspace/MVC3.2/build/classes/.gitignore
+project/workspace/concesionarias/concesionarias_rest/concesionarias_rest_one/src/main/resources/*
+project/workspace/concesionarias/concesionarias_cxf/concesionarias_cxf_one/src/main/resources/*
+project/workspace/concesionarias/concesionarias_axis/concesionarias_axis_one/src/main/resources/*
+project/workspace/concesionarias/concesionarias_core/src/main/resources/*
 
 # lib
 project/lib/
