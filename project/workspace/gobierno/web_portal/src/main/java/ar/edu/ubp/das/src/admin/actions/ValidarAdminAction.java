@@ -18,7 +18,7 @@ public class ValidarAdminAction implements Action {
 	@Override
 	public ForwardConfig execute(ActionMapping mapping, DynaActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws SQLException, RuntimeException {
-		
+
 		if( form.getItem( "usuario" ) != null &&
 		    form.getItem( "clave" ) != null ) {
 	
@@ -28,13 +28,13 @@ public class ValidarAdminAction implements Action {
 			     				 dao.validar_admin( form );
 
 			// form.setItem("respuesta", "c"); // debuggin purpouses
-			// request.setAttribute("respuesta", form.getItem("respuesta"));
-			
+			request.setAttribute("respuesta", form.getItem("respuesta"));
+
 			if( form.getItem( "respuesta" ).equals( "c" ) ) {
 				
 				// Nombre de usuario y contrase�a correcta
 				// Almacenamos el nombre de usuario en la sesi�n
-				
+
 				HttpSession session = request.getSession();
 				
 				session.setAttribute( "usuario",  form.getItem( "usuario" ) );
