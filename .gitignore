@@ -37,6 +37,7 @@ project/workspace/concesionarias/concesionarias_rest/concesionarias_rest_one/src
 project/workspace/concesionarias/concesionarias_cxf/concesionarias_cxf_one/src/main/resources/*
 project/workspace/concesionarias/concesionarias_axis/concesionarias_axis_one/src/main/resources/*
 project/workspace/concesionarias/concesionarias_core/src/main/resources/*
+project/workspace/concesionarias/concesionarias_cxf/concesionaria_cxf_one/ws/jaxws/*
 
 # lib
 project/lib/

@@ -33,8 +33,12 @@ CREATE TABLE vehiculos (
 	id INT IDENTITY PRIMARY KEY
 	, tipo VARCHAR(100) NOT NULL FOREIGN KEY REFERENCES tipos_vehiculo(nombre)
 	, nombre VARCHAR(100) NOT NULL
+	, marca VARCHAR(100) NOT NULL
 	, fecha_de_alta DATETIME NOT NULL DEFAULT GETDATE()
-	, UNIQUE(tipo, nombre)
+	, precio BIGINT NOT NULL 
+	, color VARCHAR(100) NOT NULL
+	, modelo VARCHAR(100) NOT NULL
+	, UNIQUE(tipo, nombre, marca, modelo, color, precio)
 );
 
 CREATE TABLE config_tecnologicas (
@@ -59,7 +63,7 @@ CREATE TABLE clientes (
 );
 
 
-
+-- TODO: actualizar campo vehiculos a nombre y otros datos
 CREATE TABLE planes (
 	id INT IDENTITY PRIMARY KEY
 	, consecionaria INT FOREIGN KEY REFERENCES consecionarias(id)
@@ -71,7 +75,6 @@ CREATE TABLE planes (
 	, FOREIGN KEY(cliente, consecionaria) REFERENCES clientes(correlativo, id_consecionaria)
 	, UNIQUE(consecionaria, vehiculo, cliente, fecha_alta)
 );
-
 
 CREATE TABLE estado_sorteo (
 	nombre VARCHAR(100) PRIMARY KEY
@@ -98,9 +101,8 @@ CREATE TABLE ganadores (
 );
 
 CREATE TABLE consecionarias_notificadas (
-	sorteo INT NOT NULL FOREIGN KEY REFERENCES sorteos(id) PRIMARY KEY
+	sorteo INT NOT NULL FOREIGN KEY REFERENCES sorteos(id)
 	, consecionaria INT NOT NULL  FOREIGN KEY REFERENCES consecionarias(id)
 	, descripcion VARCHAR(100) NOT NULL  DEFAULT 'Consecionaria Auditada'
+	, PRIMARY KEY (sorteo, consecionaria)
 );
-
-
