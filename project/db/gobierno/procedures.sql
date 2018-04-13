@@ -11,7 +11,7 @@ CREATE PROCEDURE definir_fecha_sorteo(@id_sorteo INT, @fecha DATETIME) AS
 	WHERE id = @id_sorteo;
 		-- TODO: verify constraint on @fecha
 
-			
+
 /*
 	DECLARE @id_sorteo INT = 1
 	DECLARE @fecha DATETIME = '2018-02-08'
@@ -72,3 +72,20 @@ CREATE PROCEDURE planes_del_sorteo(@sorteo_id INT) AS
 		FROM sorteos s
 		WHERE s.id = @sorteo_id
 	);
+
+GO 
+DROP PROCEDURE validar_admin;
+GO CREATE PROCEDURE validar_admin(@usuario VARCHAR(50), @clave VARCHAR(50), @out CHAR(1) OUTPUT) AS
+	IF(@usuario = 'pepe' and @clave = '123')
+	BEGIN
+		SELECT @out = 'c'
+	END
+	ELSE
+	BEGIN
+		SELECT @out = 'e'
+	END
+
+-- unit test above
+DECLARE @example CHAR(1);
+EXEC validar_admin 'pepe', '123', @example OUTPUT
+SELECT @example

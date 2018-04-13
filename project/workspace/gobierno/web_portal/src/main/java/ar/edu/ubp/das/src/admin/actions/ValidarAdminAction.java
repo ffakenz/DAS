@@ -24,11 +24,11 @@ public class ValidarAdminAction implements Action {
 	
 			// Enviamos los datos para validacion
 
-			//MSAdministradoresDao dao = (MSAdministradoresDao)DaoFactory.getDao( "Administradores", "admin" );
-			//     				 dao.validar_admin( form );
+			MSAdministradoresDao dao = (MSAdministradoresDao)DaoFactory.getDao( "Administradores", "admin" );
+			     				 dao.validar_admin( form );
 
-			form.setItem("respuesta", "c"); // debuggin purpouses
-			request.setAttribute("respuesta", form.getItem("respuesta"));
+			// form.setItem("respuesta", "c"); // debuggin purpouses
+			// request.setAttribute("respuesta", form.getItem("respuesta"));
 			
 			if( form.getItem( "respuesta" ).equals( "c" ) ) {
 				

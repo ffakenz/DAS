@@ -92,9 +92,9 @@ GO
 		WHERE sorteo = @sorteo_id
 	);
 	-- por cada una
-	DECLARE @consecionaria INT;
+	-- DECLARE @consecionaria INT;
 		-- notifica las consecionarias
 			-- audita la consecionaria notificada		
-			INSERT INTO consecionarias_notificadas(sorteo, consecionaria) VALUES (@sorteo_id, @consecionaria);
+			-- INSERT INTO consecionarias_notificadas(sorteo, consecionaria) VALUES (@sorteo_id, @consecionaria);
 
 -- enviar mail al cliente

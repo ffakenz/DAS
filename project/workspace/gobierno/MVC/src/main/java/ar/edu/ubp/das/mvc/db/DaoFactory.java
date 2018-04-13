@@ -32,7 +32,13 @@ public class DaoFactory {
     private static String getDaoClassName(String daoName, String daoPackage) throws SQLException {
         try {
         	if(!DaoFactory.loadProp) {
+
+
                 InputStream file = DaoFactory.class.getResourceAsStream("DaoFactory.properties");
+                InputStream file1 = ClassLoader.class.getResourceAsStream("DaoFactory.properties");
+                InputStream file2 = ClassLoader.getSystemResourceAsStream("DaoFactory.properties");
+                InputStream file3 = ClassLoader.getSystemClassLoader().getResourceAsStream("DaoFactory.properties");
+
                 DaoFactory.propFile.load(file);
                 file.close();
 
