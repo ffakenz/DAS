@@ -20,7 +20,8 @@ public class DaoFactory {
     
     public static Dao getDao(String daoName, String daoPackage, String datasourceId) throws SQLException {
         try {
-        	DaoImpl dao = DaoImpl.class.cast(Class.forName(DaoFactory.getDaoClassName(daoName, daoPackage)).newInstance());
+            String daoClassName = DaoFactory.getDaoClassName(daoName, daoPackage);
+        	DaoImpl dao = DaoImpl.class.cast(Class.forName(daoClassName).newInstance());
         	        dao.setDatasource(ModuleConfigImpl.getDatasourceById(datasourceId));
             return dao;            
         }
@@ -34,10 +35,7 @@ public class DaoFactory {
         	if(!DaoFactory.loadProp) {
 
 
-                InputStream file = DaoFactory.class.getResourceAsStream("DaoFactory.properties");
-                InputStream file1 = ClassLoader.class.getResourceAsStream("DaoFactory.properties");
-                InputStream file2 = ClassLoader.getSystemResourceAsStream("DaoFactory.properties");
-                InputStream file3 = ClassLoader.getSystemClassLoader().getResourceAsStream("DaoFactory.properties");
+                InputStream file = DaoFactory.class.getResourceAsStream("/DaoFactory.properties");
 
                 DaoFactory.propFile.load(file);
                 file.close();
