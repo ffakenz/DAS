@@ -1,4 +1,4 @@
-package ar.edu.ubp.das.src.boundries.responses;
+package ar.edu.ubp.das.src.boundries.login;
 
 public class LogInResp {
 

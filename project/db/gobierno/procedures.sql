@@ -74,18 +74,10 @@ CREATE PROCEDURE planes_del_sorteo(@sorteo_id INT) AS
 	);
 
 GO 
-DROP PROCEDURE validar_admin;
-GO CREATE PROCEDURE validar_admin(@usuario VARCHAR(50), @clave VARCHAR(50), @out CHAR(1) OUTPUT) AS
-	IF(@usuario = 'pepe' and @clave = '123')
-	BEGIN
-		SELECT @out = 'c'
-	END
-	ELSE
-	BEGIN
-		SELECT @out = 'e'
-	END
+
+GO 
+DROP PROCEDURE get_usuarios;
+GO CREATE PROCEDURE get_usuarios AS SELECT * FROM usuarios;
 
 -- unit test above
-DECLARE @example CHAR(1);
-EXEC validar_admin 'pepe', '123', @example OUTPUT
-SELECT @example
+EXEC get_usuarios;

@@ -4,17 +4,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.List;
+import java.util.Optional;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
+import ar.edu.ubp.das.src.login.forms.UserForm;
 
-public class MSAdministradoresDao extends DaoImpl {
+public class MSUsuariosDao extends DaoImpl {
 
 	@Override
 	public DynaActionForm make(ResultSet result) throws SQLException { 
 		// TODO Auto-generated method stub
-		
-		return null;
+		UserForm user = new UserForm();
+		user.setNombre(result.getString("nombre"));
+		user.setPassword(result.getString("password"));
+		return user;
 	}
 
 	@Override
@@ -38,8 +42,16 @@ public class MSAdministradoresDao extends DaoImpl {
 	@Override
 	public List<DynaActionForm> select(DynaActionForm form) throws SQLException {
 		// TODO Auto-generated method stub
-		
-		return null;
+
+		this.connect();
+
+		this.setProcedure("dbo.get_usuarios", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+
+		List<DynaActionForm> usuarios  = this.executeQuery();
+
+		this.disconnect();
+
+		return usuarios;
 	}
 
 	@Override
@@ -47,28 +59,5 @@ public class MSAdministradoresDao extends DaoImpl {
 		// TODO Auto-generated method stub
 		
 		return true;
-	}
-	
-	public void validar_admin(DynaActionForm form) throws SQLException {
-
-		this.connect();
-		
-		/**
-		 * Aqui recibimos en el form el usuario y la contrase�a
-		 * y validamos el login en la base de datos utilizando
-		 * el procedimiento almacenado validar_admin(?,?,?)
-		 */
-		
-		this.setProcedure( "dbo.validar_admin(?,?,?)" );
-		
-		this.setParameter( 1, form.getItem( "usuario" ).orElseGet(() -> "FAIL"));
-		this.setParameter( 2, form.getItem( "clave" ).orElseGet(() -> "FAIL"));
-		this.setOutParameter( 3, Types.CHAR );
-		
-		this.getStatement().execute();
-		 
-		form.setItem("respuesta", this.getStatement().getString(3));
-		
-		this.disconnect();
 	}
 }

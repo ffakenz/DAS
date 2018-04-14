@@ -1,4 +1,4 @@
-package ar.edu.ubp.das.src.boundries.requests;
+package ar.edu.ubp.das.src.boundries.login;
 
 public class LogInReq {
     String usuario;
