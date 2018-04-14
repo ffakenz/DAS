@@ -8,7 +8,7 @@ import ar.edu.ubp.das.mvc.config.ForwardConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class SetearIdiomaAction implements Action {
+public class ChangeLanguageAction implements Action {
 
 	@Override
 	public ForwardConfig execute(ActionMapping mapping, DynaActionForm form, HttpServletRequest request,

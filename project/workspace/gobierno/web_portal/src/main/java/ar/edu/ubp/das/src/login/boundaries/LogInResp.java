@@ -1,7 +1,6 @@
-package ar.edu.ubp.das.src.boundries.login;
+package ar.edu.ubp.das.src.login.boundaries;
 
 public class LogInResp {
-
     String result;
 
     public LogInResp(String result) {

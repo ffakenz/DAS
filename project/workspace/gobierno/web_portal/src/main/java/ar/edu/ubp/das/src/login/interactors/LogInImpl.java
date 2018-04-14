@@ -1,20 +1,20 @@
-package ar.edu.ubp.das.src.interactors;
+package ar.edu.ubp.das.src.login.interactors;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.Dao;
-import ar.edu.ubp.das.src.boundries.login.LogIn;
-import ar.edu.ubp.das.src.boundries.login.LogInReq;
-import ar.edu.ubp.das.src.boundries.login.LogInResp;
+import ar.edu.ubp.das.src.login.boundaries.LogIn;
+import ar.edu.ubp.das.src.login.boundaries.LogInReq;
+import ar.edu.ubp.das.src.login.boundaries.LogInResp;
 import ar.edu.ubp.das.src.login.forms.UserForm;
 
 import java.sql.SQLException;
 import java.util.List;
 
-public class Auth implements LogIn {
+public class LogInImpl implements LogIn {
 
     private Dao usuariosDao;
 
-    public Auth(Dao usuariosDao) {
+    public LogInImpl(Dao usuariosDao) {
         this.usuariosDao = usuariosDao;
     }
 

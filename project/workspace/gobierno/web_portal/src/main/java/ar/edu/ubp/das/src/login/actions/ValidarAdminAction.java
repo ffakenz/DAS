@@ -11,10 +11,10 @@ import ar.edu.ubp.das.mvc.action.ActionMapping;
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.config.ForwardConfig;
 import ar.edu.ubp.das.mvc.db.DaoFactory;
-import ar.edu.ubp.das.src.boundries.login.LogIn;
-import ar.edu.ubp.das.src.interactors.Auth;
-import ar.edu.ubp.das.src.boundries.login.LogInReq;
-import ar.edu.ubp.das.src.boundries.login.LogInResp;
+import ar.edu.ubp.das.src.login.boundaries.LogIn;
+import ar.edu.ubp.das.src.login.interactors.LogInImpl;
+import ar.edu.ubp.das.src.login.boundaries.LogInReq;
+import ar.edu.ubp.das.src.login.boundaries.LogInResp;
 import ar.edu.ubp.das.src.login.daos.MSUsuariosDao;
 
 public class ValidarAdminAction implements Action {
@@ -31,7 +31,7 @@ public class ValidarAdminAction implements Action {
 						LogInReq req = new LogInReq(u, c);
 
 						// CREA UN INTERACTOR
-						LogIn auth = new Auth(dao);
+						LogIn auth = new LogInImpl(dao);
 
 						// EJECUTA EL INTERACTOR Y OBTIENE RESP
 						LogInResp resp = auth.logIn(req);

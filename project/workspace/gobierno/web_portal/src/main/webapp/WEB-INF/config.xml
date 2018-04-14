@@ -9,7 +9,6 @@
     </global-forwards>
     <alias-mappings>
         <!-- A -->
-        <alias name="login" />
         <!-- B -->
         <!-- C -->
         <!-- D -->
@@ -21,6 +20,7 @@
         <!-- J -->
         <!-- K -->
         <!-- L -->
+        <alias name="login" />
         <!-- M -->
         <!-- N -->
         <!-- O -->

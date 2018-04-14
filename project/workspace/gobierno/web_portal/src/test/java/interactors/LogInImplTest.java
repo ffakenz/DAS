@@ -1,9 +1,9 @@
 package interactors;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
-import ar.edu.ubp.das.src.boundries.login.LogInReq;
-import ar.edu.ubp.das.src.boundries.login.LogInResp;
-import ar.edu.ubp.das.src.interactors.Auth;
+import ar.edu.ubp.das.src.login.boundaries.LogInReq;
+import ar.edu.ubp.das.src.login.boundaries.LogInResp;
+import ar.edu.ubp.das.src.login.interactors.LogInImpl;
 import ar.edu.ubp.das.src.login.daos.MSUsuariosDao;
 import ar.edu.ubp.das.src.login.forms.UserForm;
 import org.junit.Test;
@@ -14,7 +14,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class AuthTest {
+public class LogInImplTest {
 
     class MSUsuariosDaoMock extends MSUsuariosDao {
         @Override
@@ -32,25 +32,29 @@ public class AuthTest {
 
 
     @Test
-    public void testLoginDummy() {
+    public void testLoginSuccessfully() {
         MSUsuariosDaoMock daoMock = new MSUsuariosDaoMock();
         LogInResp logInResp =
-            new Auth(daoMock).logIn(
+            new LogInImpl(daoMock).logIn(
                     new LogInReq("pepe", "123")
             );
 
         String result = logInResp.getResult();
 
         assertEquals("c", result);
+    }
 
+    @Test
+    public void testLoginDenied() {
+        MSUsuariosDaoMock daoMock = new MSUsuariosDaoMock();
 
-        LogInResp logInResp2 =
-                new Auth(daoMock).logIn(
+        LogInResp logInResp =
+                new LogInImpl(daoMock).logIn(
                         new LogInReq("lol", "123")
                 );
 
-        String result2 = logInResp2.getResult();
+        String result = logInResp.getResult();
 
-        assertEquals("e", result2);
+        assertEquals("e", result);
     }
 }

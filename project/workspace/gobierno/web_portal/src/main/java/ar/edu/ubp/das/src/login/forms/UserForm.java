@@ -2,7 +2,7 @@ package ar.edu.ubp.das.src.login.forms;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 
-public class UserForm extends DynaActionForm{
+public class UserForm extends DynaActionForm {
     private String nombre;
     private String password;
 

@@ -1,9 +1,8 @@
-package ar.edu.ubp.das.src.boundries.login;
+package ar.edu.ubp.das.src.login.boundaries;
 
 public class LogInReq {
     String usuario;
     String clave;
-
 
     public LogInReq(String usuario, String clave) {
         this.usuario = usuario;
