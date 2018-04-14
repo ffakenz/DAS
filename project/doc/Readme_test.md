@@ -5,9 +5,22 @@
 ![img](http://i.imgur.com/J4pTLvW.png)
 
 
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $122 |
-| zebra stripes | are neat      |    $1 |
-| <ul><li>item1</li><li>item2</li></ul>| See the list | from the first column![Imgur](https://i.imgur.com/bEINAzY.png)|
+
+#### Two parts
+###### Source packages, and the application.
+
+![Imgur](https://i.imgur.com/bEINAzY.png)
+
+
+| ![Imgur](https://i.imgur.com/ktklDiI.png)          | ![Imgur](https://i.imgur.com/wzqkOio.png)  |
+|:-----------------------------------------------------:| :----------------------------------------:|
+|The location for the source packages folder is defined inside `web.xml`. This is the path where each module will be located. ![Imgur](https://i.imgur.com/wERNqsm.png) | from the first column![Imgur](https://i.imgur.com/bEINAzY.png)|
+
+
+The location for the source packages folder is defined inside `web.xml`. This is the path where each module will be located.
+```xml
+  <context-param>
+    <param-name>src.packages</param-name>
+    <param-value>ar.edu.ubp.das.src.</param-value>
+  </context-param>
+```
