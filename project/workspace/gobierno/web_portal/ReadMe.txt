@@ -36,7 +36,7 @@ Implementation Walkthrough:
         - create SQL procedures needed under project\db\gobierno\${module}\procedures.sql      
     
     - FMW MAPPING
-        - add the module alias-mappings to \WEB-INFconfig.xml: <alias name="${module}" />
+        - add the module alias-mappings to \WEB-INF\config.xml: <alias name="${module}" />
         - create ${module}-actions.xml under \WEB-INF\actions 
         - add the action-mapping to \WEB-INF\actions\${module}-actions.xml:
             <action type="${someaction}Action" path="/${someaction}.do">
@@ -47,10 +47,10 @@ Implementation Walkthrough:
         - create module folder under: \webapp\jsp\${module}
         - create ${module}\${someaction}.jsp file
         - create a js file with same name: \js\${module}.js
-        - add an ajax call in ${module}.js to: "/web_portal/${module}/${someaction}.do"    
+        - add an ajax call in ${module}.js to: "/web_portal/${module}/${someaction}.do"
         
     -- FINAL
         - create a "Servlet" Action: ${module}\actions\${someaction}Action.java    
-        - implement the ${someaction}Action.java
+        - implement the ${someaction}Ac tion.java
         - run under \web_portal: mvn clean install tomcat7:run to verify above changes
     

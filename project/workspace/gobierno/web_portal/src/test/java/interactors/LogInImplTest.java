@@ -19,13 +19,10 @@ public class LogInImplTest {
     class MSUsuariosDaoMock extends MSUsuariosDao {
         @Override
         public List<DynaActionForm> select(DynaActionForm form) throws SQLException {
-            // TODO Auto-generated method stub
             UserForm userMock = new UserForm();
             userMock.setNombre("pepe");
             userMock.setPassword("123");
-
             List<DynaActionForm> usuarios  = Arrays.asList(userMock);
-
             return usuarios;
         }
     }
@@ -38,23 +35,18 @@ public class LogInImplTest {
             new LogInImpl(daoMock).logIn(
                     new LogInReq("pepe", "123")
             );
-
         String result = logInResp.getResult();
-
         assertEquals("c", result);
     }
 
     @Test
     public void testLoginDenied() {
         MSUsuariosDaoMock daoMock = new MSUsuariosDaoMock();
-
         LogInResp logInResp =
                 new LogInImpl(daoMock).logIn(
                         new LogInReq("lol", "123")
                 );
-
         String result = logInResp.getResult();
-
         assertEquals("e", result);
     }
 }
