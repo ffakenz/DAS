@@ -3,6 +3,7 @@ package ar.edu.ubp.das.mvc.action;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -40,11 +41,11 @@ public class DynaActionForm {
         return this.name;
     }
     
-    public String getItem(String name) {
+    public Optional<String> getItem(String name) {
         if(this.items.containsKey(name)) {
-            return String.valueOf(this.items.get(name));
+            return Optional.of(String.valueOf(this.items.get(name)));
         }
-        return null;
+        return Optional.empty();
     }
     
     public String[] getItemValues(String name) {

@@ -1,17 +1,19 @@
 package ar.edu.ubp.das.src.admin.actions;
 
 import java.sql.SQLException;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import ar.edu.ubp.das.mvc.action.Action;
 import ar.edu.ubp.das.mvc.action.ActionMapping;
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.config.ForwardConfig;
-import ar.edu.ubp.das.mvc.db.DaoFactory;
-import ar.edu.ubp.das.src.admin.daos.MSAdministradoresDao;
+import ar.edu.ubp.das.src.boundries.LogIn;
+import ar.edu.ubp.das.src.interactors.Auth;
+import ar.edu.ubp.das.src.boundries.requests.LogInReq;
+import ar.edu.ubp.das.src.boundries.responses.LogInResp;
 
 public class ValidarAdminAction implements Action {
 
@@ -19,34 +21,24 @@ public class ValidarAdminAction implements Action {
 	public ForwardConfig execute(ActionMapping mapping, DynaActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws SQLException, RuntimeException {
 
-		if( form.getItem( "usuario" ) != null &&
-		    form.getItem( "clave" ) != null ) {
-	
-			// Enviamos los datos para validacion
+		Optional<ForwardConfig> respuesta =
+				form.getItem( "usuario").flatMap( u -> {
+					return form.getItem( "clave").map( c -> {
+						LogInReq req = new LogInReq(u, c);
 
-			MSAdministradoresDao dao = (MSAdministradoresDao)DaoFactory.getDao( "Administradores", "admin" );
-			     				 dao.validar_admin( form );
+						// CREA UN INTERACTOR
+						LogIn auth = new Auth();
 
-			// form.setItem("respuesta", "c"); // debuggin purpouses
-			request.setAttribute("respuesta", form.getItem("respuesta"));
+						// EJECUTA EL INTERACTOR Y OBTIENE RESP
+						LogInResp resp = auth.logIn(req);
 
-			if( form.getItem( "respuesta" ).equals( "c" ) ) {
-				
-				// Nombre de usuario y contrase�a correcta
-				// Almacenamos el nombre de usuario en la sesi�n
+						request.setAttribute("respuesta", resp.getResult());
 
-				HttpSession session = request.getSession();
-				
-				session.setAttribute( "usuario",  form.getItem( "usuario" ) );
-			}
-			
-			
-			return mapping.getForwardByName( "success" );
-		}
-		else {
-			
-			return  mapping.getForwardByName( "failure" );
-		}
+						return mapping.getForwardByName( "success" );
+					});
+				});
+
+		return respuesta.orElseGet(() -> mapping.getForwardByName( "failure" ));
 	}
 
 }

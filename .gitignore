@@ -40,7 +40,6 @@ project/workspace/concesionarias/concesionarias_core/src/main/resources/*
 project/workspace/concesionarias/concesionarias_cxf/concesionaria_cxf_one/ws/jaxws/*
 
 project/workspace/gobierno/web_portal/src/main/webapp/WEB-INF/datasources.xml
-
 # lib
 project/lib/
 target/

@@ -54,15 +54,15 @@ public class MSAdministradoresDao extends DaoImpl {
 		this.connect();
 		
 		/**
-		 * Aqui recibimos en el form el usuario y la contraseña
+		 * Aqui recibimos en el form el usuario y la contraseï¿½a
 		 * y validamos el login en la base de datos utilizando
 		 * el procedimiento almacenado validar_admin(?,?,?)
 		 */
 		
 		this.setProcedure( "dbo.validar_admin(?,?,?)" );
 		
-		this.setParameter( 1, form.getItem( "usuario" ) );
-		this.setParameter( 2, form.getItem( "clave" ) );
+		this.setParameter( 1, form.getItem( "usuario" ).orElseGet(() -> "FAIL"));
+		this.setParameter( 2, form.getItem( "clave" ).orElseGet(() -> "FAIL"));
 		this.setOutParameter( 3, Types.CHAR );
 		
 		this.getStatement().execute();
