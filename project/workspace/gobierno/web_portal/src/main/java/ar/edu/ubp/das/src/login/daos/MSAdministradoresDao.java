@@ -1,4 +1,4 @@
-package ar.edu.ubp.das.src.admin.daos;
+package ar.edu.ubp.das.src.login.daos;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

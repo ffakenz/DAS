@@ -4,7 +4,7 @@ var administradores = {
 
         jUtils.executing( "mensaje" );
         $.ajax({
-            url: "/web_portal/admin/SetearIdioma.do",
+            url: "/web_portal/other/SetearIdioma.do",
             type: "post",
             data: "idioma=" + idioma,
             dataType: "html",
@@ -23,7 +23,7 @@ var administradores = {
 
         jUtils.executing( "mensaje" );
         $.ajax({
-            url: "/web_portal/admin/ValidarAdmin.do",
+            url: "/web_portal/login/ValidarAdmin.do",
             type: "post",
             data: $( "#formulario" ).serialize(),
             dataType: "html",

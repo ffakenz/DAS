@@ -19,7 +19,7 @@
   </context-param>
   <context-param>
     <param-name>action.default.path</param-name>
-    <param-value>/admin/Login.do</param-value>
+    <param-value>/login/Login.do</param-value>
   </context-param>
   <filter>
     <filter-name>UrlRewriteFilter</filter-name>

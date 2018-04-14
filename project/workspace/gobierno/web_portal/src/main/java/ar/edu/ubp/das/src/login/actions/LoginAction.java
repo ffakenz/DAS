@@ -1,4 +1,4 @@
-package ar.edu.ubp.das.src.admin.actions;
+package ar.edu.ubp.das.src.login.actions;
 
 import java.sql.SQLException;
 

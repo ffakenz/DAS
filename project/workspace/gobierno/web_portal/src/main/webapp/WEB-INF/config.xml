@@ -9,7 +9,7 @@
     </global-forwards>
     <alias-mappings>
         <!-- A -->
-        <alias name="admin" />
+        <alias name="login" />
         <!-- B -->
         <!-- C -->
         <!-- D -->
@@ -24,6 +24,7 @@
         <!-- M -->
         <!-- N -->
         <!-- O -->
+        <alias name="other" />
         <!-- P -->
         <!-- Q -->
         <!-- R -->
