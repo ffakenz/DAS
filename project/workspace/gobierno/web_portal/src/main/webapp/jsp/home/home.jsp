@@ -123,7 +123,7 @@
                <div class="col-md-7">
                  <!--Featured image -->
                  <div class="view overlay hm-white-light z-depth-1-half">
-                   <img src="https://mdbootstrap.com/images/proffesions/slides/socialmedia/img%20(2).jpg" class="img-fluid " alt="">
+                   <img src="/web_portal/img/concesionarias/central.png" class="img-fluid " alt="">
                    <div class="mask">
                    </div>
                  </div>
@@ -132,12 +132,12 @@
 
                <!--Main information-->
                <div class="col-md-5">
-                 <h2 class="h2-responsive wow fadeInDown">MDBoostrap CDN Starter Template <small>by Mr. M.</small></h2>
+                 <h2 class="h2-responsive wow fadeInDown">Planes de ahorro  <small>sponsoreados por Banco Nacional Argentino</small></h2>
                  <hr>
                  <p>
 
                    <ul class="wow fadeInUp">
-                     <li>This is a starter template using CDN (Content Delivery Network). </li>
+                     <li>Aguante Macri loco </li>
                      <li class="red-text">It's a great template to start learning <a href="https://mdbootstrap.com/">MDBootstrap</a>.</li>
                      <li>Everything you need to get started is in a <strong>single</strong> HTML page.</li>
                      <li><a href="https://www.thoughtco.com/content-delivery-network-3469509">Why use CDN's ?</a></li>
