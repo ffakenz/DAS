@@ -27,6 +27,7 @@
     
     <input type="button" onclick="javascript:administradores.setIdioma('es');" value="<fmt:message key="espanol" bundle="${etq}" />"/>
     <input type="button" onclick="javascript:administradores.setIdioma('en');" value="<fmt:message key="ingles" bundle="${etq}" />"/>
+
     <div id="resultIdioma"></div>
                 
         <div id="login-form">
