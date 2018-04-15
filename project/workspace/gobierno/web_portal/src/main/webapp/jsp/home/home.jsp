@@ -71,6 +71,11 @@
 
 
 
+        <div id="resultIdioma"></div>
+
+
+
+
          <!--Main Navigation-->
          <header>
 
@@ -83,12 +88,12 @@
              <div class="collapse navbar-collapse" id="navbarSupportedContent">
                <ul class="navbar-nav mr-auto">
                  <li class="nav-item active">
-                 <input type="image" src="/web_portal/img/i18n/spanish.png"  onclick="javascript:alert('you clicked spanish!');administradores.setIdioma('es');" style="width:60px;height:60px;"/>
+                 <input type="image" src="/web_portal/img/i18n/spanish.png"  onclick="javascript:administradores.setIdioma('es');" style="width:60px;height:60px;"/>
 
                  <!-- Commented out <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a> -->
                  </li>
                  <li class="nav-item">
-                    <input type="image" src="/web_portal/img/i18n/english.png"  onclick="javascript:alert('you clicked english!');administradores.setIdioma('en');" style="width:60px;height:60px;"/>
+                    <input type="image" src="/web_portal/img/i18n/english.png"  onclick="javascript:administradores.setIdioma('en');" style="width:60px;height:60px;"/>
                  </li>
                  <li class="nav-item">
                    <a class="nav-link" href="#">Pricing</a>
@@ -137,7 +142,7 @@
                  <p>
 
                    <ul class="wow fadeInUp">
-                     <li>Aguante Macri loco </li>
+                     <li>This is a starter template using CDN (Content Delivery Network). </li>
                      <li class="red-text">It's a great template to start learning <a href="https://mdbootstrap.com/">MDBootstrap</a>.</li>
                      <li>Everything you need to get started is in a <strong>single</strong> HTML page.</li>
                      <li><a href="https://www.thoughtco.com/content-delivery-network-3469509">Why use CDN's ?</a></li>
