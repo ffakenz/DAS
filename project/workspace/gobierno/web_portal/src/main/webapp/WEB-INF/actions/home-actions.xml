@@ -8,7 +8,7 @@
         <action type="HomeAction" path="/Home.do">
             <forward name="success" path="/home/home.jsp" />
         </action>
-        <action type="ChangeLanguageAction" path="/changeLanguage.do">
+        <action type="ChangeLanguageAction" path="/ChangeLanguage.do">
             <forward name="success" path="/other/changeLanguage.jsp" />
         </action>
         <action type="ValidarAdminAction" path="/ValidarAdmin.do">
