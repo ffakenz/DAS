@@ -8,8 +8,6 @@
 <fmt:setLocale value="${idioma}" scope="session" />
 
 <script>
-    console.log("pepe");
     jUtils.changeLang("Etiquetas_js", "${idioma}");
-    window.location.href = window.location.href + "?idioma=${idioma}";
-    
+    window.location.href = window.location.href.split("?")[0] + "?idioma=${idioma}";
 </script>
