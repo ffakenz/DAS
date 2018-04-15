@@ -5,7 +5,7 @@
     </form-beans>
     <action-mappings>
         <action type="LoginAction" path="/Login.do">
-            <forward name="success" path="/admin/login.jsp" />
+            <forward name="success" path="/login/login.jsp" />
         </action>
         <action type="ValidarAdminAction" path="/ValidarAdmin.do">
             <forward name="success" path="/login/validarAdmin.jsp" />

@@ -4,7 +4,7 @@ var administradores = {
 
         jUtils.executing( "mensaje" );
         $.ajax({
-            url: "/web_portal/other/changeLanguage.do",
+            url: "/web_portal/other/ChangeLanguage.do",
             type: "post",
             data: "idioma=" + idioma,
             dataType: "html",
