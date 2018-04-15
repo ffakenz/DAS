@@ -26,24 +26,24 @@ public class ValidarAdminAction implements Action {
 		MSUsuariosDao dao = (MSUsuariosDao) DaoFactory.getDao("Usuarios", "login");
 
 		Optional<ForwardConfig> respuesta =
-				form.getItem( "usuario").flatMap( u -> {
-					return form.getItem( "clave").map( c -> {
-						LogInReq req = new LogInReq(u, c);
+			form.getItem( "usuario").flatMap( u -> {
+				return form.getItem( "clave").map( c -> {
+					LogInReq req = new LogInReq(u, c);
 
-						// CREA UN INTERACTOR
-						LogIn auth = new LogInImpl(dao);
+					// CREA UN INTERACTOR
+					LogIn auth = new LogInImpl();
 
-						// EJECUTA EL INTERACTOR Y OBTIENE RESP
-						LogInResp resp = auth.logIn(req);
+					// EJECUTA EL INTERACTOR Y OBTIENE RESP
+					LogInResp resp = auth.logIn(req).apply(dao);
 
-						// form.setItem("respuesta", resp.getResult()); ??
-						request.setAttribute("respuesta", resp.getResult());
+					// form.setItem("respuesta", resp.getResult()); ??
+					request.setAttribute("respuesta", resp.getResult());
 
-						return mapping.getForwardByName( "success" );
-					});
+					return mapping.getForwardByName( "success" );
 				});
+			});
 
-		return respuesta.orElseGet(() -> mapping.getForwardByName( "failure" ));
+		return respuesta.orElse(mapping.getForwardByName( "failure" ));
 	}
 
 }

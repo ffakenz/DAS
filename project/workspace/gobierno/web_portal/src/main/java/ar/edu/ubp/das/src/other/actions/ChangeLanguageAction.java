@@ -15,7 +15,7 @@ public class ChangeLanguageAction implements Action {
 			HttpServletResponse response) throws RuntimeException {
 		// TODO Auto-generated method stub
 		
-		request.setAttribute("idioma", form.getItem("idioma").orElseGet(()->"FAILURE"));
+		request.setAttribute("idioma", form.getItem("idioma").orElse("FAILURE"));
 		
 		return mapping.getForwardByName("success");
 	}
