@@ -70,7 +70,6 @@
 
 
 
-
         <div id="resultIdioma"></div>
 
 
@@ -124,7 +123,7 @@
            <!--Main layout-->
            <div class="container">
              <!--First row-->
-             <div class="row">
+             <div class="row rellax">
                <div class="col-md-7">
                  <!--Featured image -->
                  <div class="view overlay hm-white-light z-depth-1-half">
@@ -155,7 +154,7 @@
              <hr class="extra-margins">
 
              <!--Second row-->
-             <div class="row">
+             <div class="row rellax" data-rellax-speed="7">
                <!--First columnn-->
                <div class="col-md-4">
                  <!--Card-->
@@ -263,7 +262,7 @@
            </div>
 
          <!--Footer-->
-         <footer class="page-footer primary-color-dark center-on-small-only">
+         <footer class="page-footer primary-color-dark center-on-small-only rellax" data-rellax-speed="-4">
 
            <!--Footer Links-->
            <div class="container">
@@ -298,6 +297,33 @@
          </footer>
          <!--/.Footer-->
 
+
+
+
+
+
+
+
+
+
+
+        <!-- parallax -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/rellax/1.6.2/rellax.min.js"></script>
+
+        <script>
+          // Accepts any class name
+          var rellax = new Rellax('.rellax');
+        </script>
+        <script>
+          // Also can pass in optional settings block
+          var rellax = new Rellax('.rellax', {
+            speed: -2,
+            center: false,
+            round: true,
+            vertical: true,
+            horizontal: false
+          });
+        </script>
 
          <!-- SCRIPTS -->
          <!-- Bootstrap tooltips -->
