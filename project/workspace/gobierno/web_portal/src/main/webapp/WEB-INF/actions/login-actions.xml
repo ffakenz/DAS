@@ -4,16 +4,11 @@
     <form-beans>
     </form-beans>
     <action-mappings>
-
         <action type="LoginAction" path="/Login.do">
             <forward name="success" path="/admin/login.jsp" />
         </action>
-        <action type="SetearIdiomaAction" path="/SetearIdioma.do">
-            <forward name="success" path="/admin/setearIdioma.jsp" />
-        </action>
         <action type="ValidarAdminAction" path="/ValidarAdmin.do">
-            <forward name="success" path="/admin/validarAdmin.jsp" />
+            <forward name="success" path="/login/validarAdmin.jsp" />
         </action>
-
     </action-mappings>
 </actions>

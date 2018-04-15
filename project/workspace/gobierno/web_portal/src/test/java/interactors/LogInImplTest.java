@@ -32,9 +32,9 @@ public class LogInImplTest {
     public void testLoginSuccessfully() {
         MSUsuariosDaoMock daoMock = new MSUsuariosDaoMock();
         LogInResp logInResp =
-            new LogInImpl(daoMock).logIn(
+            new LogInImpl().logIn(
                     new LogInReq("pepe", "123")
-            );
+            ).apply(daoMock);
         String result = logInResp.getResult();
         assertEquals("c", result);
     }
@@ -43,9 +43,9 @@ public class LogInImplTest {
     public void testLoginDenied() {
         MSUsuariosDaoMock daoMock = new MSUsuariosDaoMock();
         LogInResp logInResp =
-                new LogInImpl(daoMock).logIn(
+                new LogInImpl().logIn(
                         new LogInReq("lol", "123")
-                );
+                ).apply(daoMock);
         String result = logInResp.getResult();
         assertEquals("e", result);
     }

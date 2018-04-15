@@ -1,6 +1,6 @@
 Proyect structure:
     in web.xml: src.packages -> ar.edu.ubp.das.src. defines the path where each module will be located
-    the defined each module structure as following
+    each module should be defined as following
             module              // name of the module
                 \actions        // servlet functions: req => resp
                 \daos           // point of connections with the DB
