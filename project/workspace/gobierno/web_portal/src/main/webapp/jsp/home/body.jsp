@@ -59,7 +59,3 @@
 
 
 
-
-
-
-  <%@include file="../footer/footer.jsp" %>
