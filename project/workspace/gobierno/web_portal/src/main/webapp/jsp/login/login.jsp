@@ -19,14 +19,14 @@
        
         <link type="text/css" rel="stylesheet" href="/web_portal/util/StyleSheet.do/load=page,messages" />
         
-        <script type="text/javascript" src="/web_portal/util/Javascript.do/load=jquery,jquery.i18n.properties,utils,login"> </script>
+        <script type="text/javascript" src="/web_portal/util/Javascript.do/load=jquery,jquery.i18n.properties,utils,other,login"> </script>
                 
     </head>
     
     <body>
     
-    <input type="button" onclick="javascript:administradores.setIdioma('es');" value="<fmt:message key="espanol" bundle="${etq}" />"/>
-    <input type="button" onclick="javascript:administradores.setIdioma('en');" value="<fmt:message key="ingles" bundle="${etq}" />"/>
+    <input type="button" onclick="javascript:translator.setIdioma('es');" value="<fmt:message key="espanol" bundle="${etq}" />"/>
+    <input type="button" onclick="javascript:translator.setIdioma('en');" value="<fmt:message key="ingles" bundle="${etq}" />"/>
 
     <div id="resultIdioma"></div>
                 
@@ -36,7 +36,7 @@
     
             <fieldset>
     
-                <form id="formulario" action="javascript:administradores.validarAdmin();" method="post">
+                <form id="formulario" action="javascript:login.validarUsuario();" method="post">
     
                     <input type="text" name="usuario" id="usuario" required placeholder="<fmt:message key="login_usuario" bundle="${etq}" />"> 
     

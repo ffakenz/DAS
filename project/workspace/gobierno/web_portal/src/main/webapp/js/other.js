@@ -1,20 +1,19 @@
-var login = {
+var translator = {
 
-    validarUsuario : function() {
-
+    setIdioma : function(idioma) {
         jUtils.executing( "mensaje" );
         $.ajax({
-            url: "/web_portal/login/ValidarUsuario.do",
+            url: "/web_portal/other/ChangeLanguage.do",
             type: "post",
-            data: $( "#formulario" ).serialize(),
+            data: "idioma=" + idioma,
             dataType: "html",
             error: function(hr){
-                jUtils.hiding("mensaje");
+                jUtils.hiding("resultIdioma");
                 jUtils.showing("error", hr.responseText);
             },
             success: function(html) {
                 jUtils.hiding("error");
-                jUtils.showing("mensaje", html);
+                jUtils.showing("resultIdioma", html);
             }
         });
     }

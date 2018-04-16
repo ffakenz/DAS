@@ -17,7 +17,7 @@ import ar.edu.ubp.das.src.login.boundaries.LogInReq;
 import ar.edu.ubp.das.src.login.boundaries.LogInResp;
 import ar.edu.ubp.das.src.login.daos.MSUsuariosDao;
 
-public class ValidarAdminAction implements Action {
+public class ValidarUsuarioAction implements Action {
 
 	@Override
 	public ForwardConfig execute(ActionMapping mapping, DynaActionForm form, HttpServletRequest request,

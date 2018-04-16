@@ -62,7 +62,7 @@
          <!-- JQuery -->
          <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
          <!-- JQuery.i18n alongside with utils and login-->
-         <script type="text/javascript" src="/web_portal/util/Javascript.do/load=jquery.i18n.properties,utils,login"> </script>
+         <script type="text/javascript" src="/web_portal/util/Javascript.do/load=jquery.i18n.properties,utils,other,login"> </script>
 
        </head>
 
@@ -87,12 +87,13 @@
              <div class="collapse navbar-collapse" id="navbarSupportedContent">
                <ul class="navbar-nav mr-auto">
                  <li class="nav-item active">
-                 <input type="image" src="/web_portal/img/i18n/spanish.png"  onclick="javascript:administradores.setIdioma('es');" style="width:30px;height30px;"/>
+                 <input type="image" src="/web_portal/img/i18n/spanish.png"  onclick="javascript:translator.setIdioma('es');" style="width:60px;height:60px;"/>
+
 
                  <!-- Commented out <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a> -->
                  </li>
                  <li class="nav-item">
-                    <input type="image" src="/web_portal/img/i18n/english.png"  onclick="javascript:administradores.setIdioma('en');" style="width:30px;height:30px;"/>
+                    <input type="image" src="/web_portal/img/i18n/english.png"  onclick="javascript:translator.setIdioma('en');" style="width:30px;height:30px;"/>
                  </li>
                </ul>
 
