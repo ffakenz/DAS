@@ -25,7 +25,7 @@
 </c:if>
 
 <c:if test="${requestScope.respuesta eq 'c'}">
-    <script> window.location="/home/Home.do" </script>
+    <script> window.location="/web_portal/home/Home.do" </script>
 </c:if>
 
 <!-- JSTL -->
