@@ -87,20 +87,66 @@
              <div class="collapse navbar-collapse" id="navbarSupportedContent">
                <ul class="navbar-nav mr-auto">
                  <li class="nav-item active">
-                 <input type="image" src="/web_portal/img/i18n/spanish.png"  onclick="javascript:administradores.setIdioma('es');" style="width:60px;height:60px;"/>
+                 <input type="image" src="/web_portal/img/i18n/spanish.png"  onclick="javascript:administradores.setIdioma('es');" style="width:30px;height30px;"/>
 
                  <!-- Commented out <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a> -->
                  </li>
                  <li class="nav-item">
-                    <input type="image" src="/web_portal/img/i18n/english.png"  onclick="javascript:administradores.setIdioma('en');" style="width:60px;height:60px;"/>
-                 </li>
-                 <li class="nav-item">
-                   <a class="nav-link" href="#">Pricing</a>
-                 </li>
-                 <li class="nav-item">
-                   <a class="nav-link" href="#">Opinions</a>
+                    <input type="image" src="/web_portal/img/i18n/english.png"  onclick="javascript:administradores.setIdioma('en');" style="width:30px;height:30px;"/>
                  </li>
                </ul>
+
+               <!-- Trigger the modal with a button -->
+               <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+
+                        <!-- Login Modal -->
+                        <div id="myModal" class="modal fade" role="dialog">
+                          <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Modal Header</h4>
+                              </div>
+                              <div class="modal-body">
+
+
+                                 <!-- Form login -->
+                                 <form>
+                                 <p class="h5 text-center mb-4">Sample Form</p>
+
+                                 <div class="md-form">
+                                   <i class="fa fa-envelope prefix grey-text"></i>
+                                   <input type="text" id="defaultForm-email" class="form-control">
+                                   <label for="defaultForm-email">Your email</label>
+                                 </div>
+
+                                 <div class="md-form">
+                                   <i class="fa fa-lock prefix grey-text"></i>
+                                   <input type="password" id="defaultForm-pass" class="form-control">
+                                   <label for="defaultForm-pass">Your password</label>
+                                 </div>
+
+                                 <div class="text-center">
+                                   <button class="btn btn-default">Login</button>
+                                 </div>
+                               </form>
+                               <!-- Form login -->
+
+
+
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+
+             <!--
                <ul class="navbar-nav nav-flex-icons">
                  <li class="nav-item">
                    <a class="nav-link"><i class="fa fa-facebook"></i></a>
@@ -112,6 +158,8 @@
                    <a class="nav-link"><i class="fa fa-instagram"></i></a>
                  </li>
                </ul>
+             -->
+
              </div>
            </nav>
 
@@ -123,146 +171,112 @@
            <!--Main layout-->
            <div class="container">
              <!--First row-->
-             <div class="row rellax">
-               <div class="col-md-7">
-                 <!--Featured image -->
-                 <div class="view overlay hm-white-light z-depth-1-half">
-                   <img src="/web_portal/img/concesionarias/central.png" class="img-fluid " alt="">
-                   <div class="mask">
-                   </div>
-                 </div>
-                 <br>
-               </div>
+             <div class="row">
 
-               <!--Main information-->
-               <div class="col-md-5">
-                 <h2 class="h2-responsive wow fadeInDown">Planes de ahorro  <small>sponsoreados por Banco Nacional Argentino</small></h2>
-                 <hr>
-                 <p>
 
-                   <ul class="wow fadeInUp">
-                     <li>This is a starter template using CDN (Content Delivery Network). </li>
-                     <li class="red-text">It's a great template to start learning <a href="https://mdbootstrap.com/">MDBootstrap</a>.</li>
-                     <li>Everything you need to get started is in a <strong>single</strong> HTML page.</li>
-                     <li><a href="https://www.thoughtco.com/content-delivery-network-3469509">Why use CDN's ?</a></li>
-                   </ul>
-                   <a href="https://gist.github.com/mrmccormack/1c3ba355f020d9901f0bb5af25f871f2" class="btn btn-primary">Get it now from GitHub.com!</a>
+<!--Carousel Wrapper-->
+<div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel">
+    <!--Indicators-->
+    <ol class="carousel-indicators">
+        <li data-target="#carousel-example-1z" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-1z" data-slide-to="1"></li>
+        <li data-target="#carousel-example-1z" data-slide-to="2"></li>
+    </ol>
+    <!--/.Indicators-->
+    <!--Slides-->
+    <div class="carousel-inner" role="listbox">
+        <!--First slide-->
+        <div class="carousel-item active"> <!--Mask color-->
+            <div class="view">
+              <img src="/web_portal/img/concesionarias/1.jpg" class="img-fluid " alt="First slide">
+              <!-- maybe add a filter? <div class="mask rgba-black-light"></div> -->
+            </div>
+            <div class="carousel-caption">
+               <h3 class="h3-responsive">Banco Naciòn Lorem Ipsum</h3>
+               <div class="mask rgba-black-light">
+                    <p> Cras dapibus. Vivamus elementum semper nisi. Gobierno Argentino Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue.  </p>
                </div>
-             </div>
+            </div>
+        </div>
+        <!--/First slide-->
+        <!--Second slide-->
+        <div class="carousel-item">
+            <img class="d-block w-100" src="/web_portal/img/concesionarias/2.jpg" alt="Second slide">
+            <div class="carousel-caption">
+                <h3 class="h3-responsive">Sorteo Lorem Ipsum</h3>
+                <div class="mask rgba-black-strong">
+                    <p>Lorem ipsum dolor sit amet Sorteo, consectetuer adipiscing elit. Todos los meses Aenean commodo ligula eget dolor. Aenean massa. 0 KM. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. </p>
+                </div>
+            </div>
+        </div>
+        <!--/Second slide-->
+        <!--Third slide-->
+        <div class="carousel-item">
+            <img class="d-block w-100" src="/web_portal/img/concesionarias/3.png" alt="Third slide">
+            <div class="carousel-caption">
+                <h3 class="h3-responsive">Sorteo Lorem Ipsum</h3>
+                <div class="mask rgba-black-strong">
+                    <p>Lorem ipsum dolor sit amet Sorteo, consectetuer adipiscing elit. Todos los meses Aenean commodo ligula eget dolor. Aenean massa. 0 KM. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. </p>
+                </div>
+            </div>
+        </div>
+        <!--/Third slide-->
+    </div>
+    <!--/.Slides-->
+    <!--Controls-->
+    <a class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carousel-example-1z" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+    <!--/.Controls-->
+</div>
+<!--/.Carousel Wrapper-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
              <!--/.First row-->
 
              <hr class="extra-margins">
 
              <!--Second row-->
-             <div class="row rellax" data-rellax-speed="7">
-               <!--First columnn-->
-               <div class="col-md-4">
-                 <!--Card-->
-                 <div class="card">
 
-                   <!--Card image-->
-                   <div class="view overlay hm-white-slight">
-                     <img src="/web_portal/img/concesionarias/placer.jpg" class="img-fluid" alt="">
-                     <a href="#">
-                       <div class="mask"></div>
-                     </a>
-                   </div>
-                   <!--/.Card image-->
-
-                   <!--Card content-->
-                   <div class="card-block p-3">
-                     <!--Title-->
-                     <h4 class="card-title">Concesionaria 1</h4>
-                     <!--Text-->
-                     <p class="card-text">La concesionaria 1 se caracteriza por el importe de autos de lujo al país.</p>
-                     <a href="#" class="btn btn-primary">Read more</a>
-                   </div>
-                   <!--/.Card content-->
-
-                 </div>
-                 <!--/.Card-->
-               </div>
-               <!--First columnn-->
-
-               <!--Second columnn-->
-               <div class="col-md-4">
-                 <!--Card-->
-                 <div class="card">
-
-                   <!--Card image-->
-                   <div class="view overlay hm-white-slight">
-                     <img src="/web_portal/img/concesionarias/negocio.jpg" class="img-fluid" alt="">
-                     <a href="#">
-                       <div class="mask"></div>
-                     </a>
-                   </div>
-                   <!--/.Card image-->
-
-                   <!--Card content-->
-                   <div class="card-block p-3">
-                     <!--Title-->
-                     <h4 class="card-title">Concesionaria 2</h4>
-                     <!--Text-->
-                     <p class="card-text">La concesionaria 2 se caracteriza por la venta de vehículos orientados a el transporte de escala industrial.</p>
-                     <a href="#" class="btn btn-primary">Read more</a>
-                   </div>
-                   <!--/.Card content-->
-
-                 </div>
-                 <!--/.Card-->
-               </div>
-               <!--Second columnn-->
-
-
-             </div>
              <!--/.Second row-->
+
            </div>
            <!--/.Main layout-->
 
          </main>
 
-         <div class="container">
-
-           <!-- Example row of columns -->
-           <div class="row">
-             <div class="col-md-3">
-             </div>
-
-             <div class="col-md-6">
-               <!-- Form login -->
-               <form>
-                 <p class="h5 text-center mb-4">Sample Form</p>
-
-                 <div class="md-form">
-                   <i class="fa fa-envelope prefix grey-text"></i>
-                   <input type="text" id="defaultForm-email" class="form-control">
-                   <label for="defaultForm-email">Your email</label>
-                 </div>
-
-                 <div class="md-form">
-                   <i class="fa fa-lock prefix grey-text"></i>
-                   <input type="password" id="defaultForm-pass" class="form-control">
-                   <label for="defaultForm-pass">Your password</label>
-                 </div>
-
-                 <div class="text-center">
-                   <button class="btn btn-default">Login</button>
-                 </div>
-               </form>
-               <!-- Form login -->
-
-
-             </div>
-
-             <div class="col-md-3">
-
-             </div>
-
-           </div>
-           </div>
 
          <!--Footer-->
-         <footer class="page-footer primary-color-dark center-on-small-only rellax" data-rellax-speed="-4">
+         <footer class="page-footer primary-color-dark center-on-small-only">
 
            <!--Footer Links-->
            <div class="container">
@@ -307,23 +321,7 @@
 
 
 
-        <!-- parallax -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/rellax/1.6.2/rellax.min.js"></script>
 
-        <script>
-          // Accepts any class name
-          var rellax = new Rellax('.rellax');
-        </script>
-        <script>
-          // Also can pass in optional settings block
-          var rellax = new Rellax('.rellax', {
-            speed: -2,
-            center: false,
-            round: true,
-            vertical: true,
-            horizontal: false
-          });
-        </script>
 
          <!-- SCRIPTS -->
          <!-- Bootstrap tooltips -->
