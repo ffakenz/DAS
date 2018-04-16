@@ -113,9 +113,14 @@
                               </div>
                               <div class="modal-body">
 
+                                    <%@include file="../login/login.jsp" %>
+
+
 
                                  <!-- Form login -->
-                                 <form>
+
+                                  <!--
+                                 <form id="formulario" action="javascript:login.validarUsuario();" method="post">
                                  <p class="h5 text-center mb-4">Sample Form</p>
 
                                  <div class="md-form">
@@ -134,7 +139,13 @@
                                    <button class="btn btn-default">Login</button>
                                  </div>
                                </form>
+
+                                <div id="resultado">
+                                    <div id="mensaje"></div>
+                                    <div id="error"></div>
+                                </div>
                                <!-- Form login -->
+                                -->
 
 
 

@@ -1,36 +1,4 @@
-<%@ page
-
-    language="java"
-    contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8" %>
-
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<fmt:setBundle basename="properties.etiquetas" var="etq" scope="session"/>
-
-<!DOCTYPE html>
-
-<html>
-
-    <head>
-        
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        
-        <title><fmt:message key="login_titulo" bundle="${etq}" /></title>
-       
-        <link type="text/css" rel="stylesheet" href="/web_portal/util/StyleSheet.do/load=page,messages" />
-        
-        <script type="text/javascript" src="/web_portal/util/Javascript.do/load=jquery,jquery.i18n.properties,utils,other,login"> </script>
-                
-    </head>
-    
-    <body>
-    
-    <input type="button" onclick="javascript:translator.setIdioma('es');" value="<fmt:message key="espanol" bundle="${etq}" />"/>
-    <input type="button" onclick="javascript:translator.setIdioma('en');" value="<fmt:message key="ingles" bundle="${etq}" />"/>
-
-    <div id="resultIdioma"></div>
-                
-        <div id="login-form">
+    <div id="login-form">
     
             <h1><fmt:message key="login_cabecera" bundle="${etq}" /></h1>
     
@@ -69,7 +37,3 @@
 	        <div id="error"></div>
         
         </div>
-        
-    </body>
-
-</html>
