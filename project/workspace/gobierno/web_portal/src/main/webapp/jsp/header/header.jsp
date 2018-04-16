@@ -32,4 +32,6 @@
          <!-- JQuery -->
          <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
          <!-- JQuery.i18n alongside with utils and login-->
-         <script type="text/javascript" src="/web_portal/util/Javascript.do/load=external_libraries/jquery.i18n.properties,utils,other,login"> </script>
+         <script type="text/javascript"
+            src="/web_portal/util/Javascript.do/load=external_libraries/jquery.i18n.properties,util/utils,util/other,login/login">
+         </script>
