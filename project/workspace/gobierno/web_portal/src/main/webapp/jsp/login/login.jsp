@@ -5,13 +5,20 @@
             <fieldset>
     
                 <form id="formulario" action="javascript:login.validarUsuario();" method="post">
-    
-                    <input type="text" name="usuario" id="usuario" required placeholder="<fmt:message key="login_usuario" bundle="${etq}" />"> 
-    
-                    <input type="password" name="clave" id="clave" required placeholder="<fmt:message key="login_clave" bundle="${etq}" />"> 
-    
-                    <input type="submit" value="<fmt:message key="login_ingresar" bundle="${etq}" />">
-    
+
+                    <div class="md-form">
+                      <input type="text" name="usuario" id="usuario" required placeholder="<fmt:message key="login_usuario" bundle="${etq}" />">
+                    </div>
+
+                    <div class="md-form">
+                         <input type="password" name="clave" id="clave" required placeholder="<fmt:message key="login_clave" bundle="${etq}" />">
+                    </div>
+
+                                 <div class="text-center">
+                                    <button type="submit" class="btn btn-default" > <fmt:message key="login_ingresar" bundle="${etq}" /> </button>
+
+                                 </div>
+
                     <!-- 
     
                     <footer class="clearfix">
