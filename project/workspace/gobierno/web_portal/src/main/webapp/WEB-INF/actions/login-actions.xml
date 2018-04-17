@@ -4,10 +4,10 @@
     <form-beans>
     </form-beans>
     <action-mappings>
-        <action type="LoginAction" path="/Login.do">
-            <forward name="success" path="/login/login.jsp" />
+        <action type="ValidarUsuarioGobiernoAction" path="/ValidarUsuarioGobierno.do">
+            <forward name="success" path="/login/validarUsuario.jsp" />
         </action>
-        <action type="ValidarUsuarioAction" path="/ValidarUsuario.do">
+        <action type="ValidarUsuarioCompradorAction" path="/ValidarUsuarioComprador.do">
             <forward name="success" path="/login/validarUsuario.jsp" />
         </action>
     </action-mappings>

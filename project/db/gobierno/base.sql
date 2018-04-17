@@ -13,19 +13,7 @@ DROP TABLE concesionarias;
 DROP TABLE config_tecnologicas;
 DROP TABLE vehiculos;
 DROP TABLE tipos_vehiculo;
-DROP TABLE usuarios;
-DROP TABLE roles;
 
-CREATE TABLE roles (
-	nombre VARCHAR(100) PRIMARY KEY
-);
-
-CREATE TABLE usuarios (
-	documento BIGINT NOT NULL PRIMARY KEY
-	, nombre VARCHAR(100) NOT NULL
-	, password VARCHAR(100) NOT NULL
-	, rol VARCHAR(100) FOREIGN KEY REFERENCES roles(nombre)
-);
 
 CREATE TABLE tipos_vehiculo (
 	nombre VARCHAR(100) PRIMARY KEY 

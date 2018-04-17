@@ -1,10 +1,9 @@
-var login = {
-
-    validarUsuario : function() {
+var loginGobierno = {
+    validarUsuarioGobierno : function() {
 
         jUtils.executing( "mensaje" );
         $.ajax({
-            url: "/web_portal/login/ValidarUsuario.do",
+            url: "/web_portal/login/ValidarUsuarioGobierno.do",
             type: "post",
             data: $( "#formulario" ).serialize(),
             dataType: "html",

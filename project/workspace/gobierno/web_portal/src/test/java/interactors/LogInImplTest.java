@@ -1,52 +1,51 @@
 package interactors;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
-import ar.edu.ubp.das.src.login.boundaries.LogInReq;
-import ar.edu.ubp.das.src.login.boundaries.LogInResp;
+import ar.edu.ubp.das.src.login.daos.MSLogInDao;
+import ar.edu.ubp.das.src.login.forms.LogInForm;
 import ar.edu.ubp.das.src.login.interactors.LogInImpl;
-import ar.edu.ubp.das.src.login.daos.MSUsuariosDao;
-import ar.edu.ubp.das.src.login.forms.UserForm;
 import org.junit.Test;
 
+import java.sql.Date;
 import java.sql.SQLException;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+
 
 public class LogInImplTest {
 
-    class MSUsuariosDaoMock extends MSUsuariosDao {
+    private static List<DynaActionForm> db = new ArrayList<>();
+
+    private static class MSLogInDaoMock extends MSLogInDao {
+
         @Override
+        public void insert(DynaActionForm form) throws SQLException {
+            ((LogInForm) form).setLoginTime(Date.valueOf("2018-04-17"));
+            db.add(form);
+        }
+
+            @Override
         public List<DynaActionForm> select(DynaActionForm form) throws SQLException {
-            UserForm userMock = new UserForm();
-            userMock.setNombre("pepe");
-            userMock.setPassword("123");
-            List<DynaActionForm> usuarios  = Arrays.asList(userMock);
-            return usuarios;
+            return db;
         }
     }
 
 
     @Test
     public void testLoginSuccessfully() {
-        MSUsuariosDaoMock daoMock = new MSUsuariosDaoMock();
-        LogInResp logInResp =
-            new LogInImpl().logIn(
-                    new LogInReq("pepe", "123")
-            ).apply(daoMock);
-        String result = logInResp.getResult();
-        assertEquals("c", result);
-    }
+        MSLogInDaoMock daoMock = new MSLogInDaoMock();
 
-    @Test
-    public void testLoginDenied() {
-        MSUsuariosDaoMock daoMock = new MSUsuariosDaoMock();
-        LogInResp logInResp =
-                new LogInImpl().logIn(
-                        new LogInReq("lol", "123")
-                ).apply(daoMock);
-        String result = logInResp.getResult();
-        assertEquals("e", result);
+        LogInForm loginFormMock = new LogInForm();
+        loginFormMock.setTipo("gobierno");
+        loginFormMock.setUsername("pepe");
+
+        assertEquals(false, db.contains(loginFormMock));
+
+        LogInImpl logInImpl = new LogInImpl();
+        logInImpl.login(loginFormMock).accept(daoMock);
+
+        assertEquals(true, db.contains(loginFormMock));
     }
 }

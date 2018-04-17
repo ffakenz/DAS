@@ -1,9 +1,11 @@
 package ar.edu.ubp.das.src.login.boundaries;
 
-import ar.edu.ubp.das.src.login.daos.MSUsuariosDao;
+import ar.edu.ubp.das.src.login.daos.MSLogInDao;
+import ar.edu.ubp.das.src.login.forms.LogInForm;
 
-import java.util.function.Function;
+import java.util.function.Consumer;
 
 public interface LogIn {
-    Function<MSUsuariosDao, LogInResp> logIn(LogInReq req);
+    Consumer<MSLogInDao> login(LogInForm req);
 }
+
