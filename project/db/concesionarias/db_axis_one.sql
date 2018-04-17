@@ -1,5 +1,6 @@
 USE db_axis_one;
 
+DROP TABLE detalle_cuotas;
 DROP TABLE planes;
 DROP TABLE clientes;
 DROP TABLE vehiculos;
@@ -40,6 +41,7 @@ CREATE TABLE clientes (
 	id_cliente INT IDENTITY NOT NULL
 	, documento BIGINT NOT NULL
 	, nombre VARCHAR(100) NOT NULL
+	, apellido VARCHAR(100) NOT NULL
 	, nro_telefono VARCHAR(20)
 	, fecha_de_alta DATETIME NOT NULL DEFAULT GETDATE()
 	, PRIMARY KEY(id_cliente) -- unico por consecionaria
@@ -70,6 +72,13 @@ VALUES (1, 1, '2018-02-08 20:58:00', 'plan1')
 	,(3, 3, '2018-02-08 20:58:00', 'plan3')
 ;
 
+CREATE TABLE detalle_cuotas (
+	id_plan INT FOREIGN KEY REFERENCES planes(id)
+	, id_cuota INT NOT NULL
+	, fecha_pago DATETIME NULL
+	, fecha_vencimiento DATETIME NOT NULL
+	, PRIMARY KEY (id_plan, id_cuota)
+);
 
 GO
 DROP VIEW compradores;

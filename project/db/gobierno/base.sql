@@ -2,12 +2,14 @@ USE db_gobierno;
 GO
 DROP TABLE ganadores;
 DROP TABLE estado_ganador;
-DROP TABLE consecionarias_notificadas;
+DROP TABLE concesionarias_notificadas;
+DROP TABLE participantes;
 DROP TABLE sorteos;
 DROP TABLE estado_sorteo;
+DROP TABLE detalle_cuotas
 DROP TABLE planes;
 DROP TABLE clientes;
-DROP TABLE consecionarias;
+DROP TABLE concesionarias;
 DROP TABLE config_tecnologicas;
 DROP TABLE vehiculos;
 DROP TABLE tipos_vehiculo;
@@ -45,7 +47,7 @@ CREATE TABLE config_tecnologicas (
 	nombre VARCHAR(100) PRIMARY KEY
 );
 
-CREATE TABLE consecionarias (
+CREATE TABLE concesionarias (
 	id INT IDENTITY PRIMARY KEY
 	, nombre VARCHAR(100) NOT NULL
 	, config VARCHAR(100) FOREIGN KEY REFERENCES config_tecnologicas(nombre)
@@ -54,26 +56,44 @@ CREATE TABLE consecionarias (
 );
 
 CREATE TABLE clientes (
-	id_consecionaria INT FOREIGN KEY REFERENCES consecionarias(id)
-	, correlativo INT NOT NULL -- informado por la consecionaria
+	id_concesionaria INT FOREIGN KEY REFERENCES concesionarias(id)
+	, correlativo INT NOT NULL -- informado por la concesionaria
 	, documento BIGINT NOT NULL
-	, id AS CAST(id_consecionaria AS VARCHAR(50)) + '-' + CAST(correlativo AS VARCHAR(50))
+	, id AS CAST(id_concesionaria AS VARCHAR(50)) + '-' + CAST(correlativo AS VARCHAR(50))
 	, fecha_de_alta DATETIME NOT NULL DEFAULT GETDATE()
-	, PRIMARY KEY(correlativo, id_consecionaria) -- unico por consecionaria
+	, nombre VARCHAR(50) NOT NULL
+	, apellido VARCHAR(50) NOT NULL
+	, PRIMARY KEY(correlativo, id_concesionaria) -- unico por concesionaria
+	, UNIQUE(id)
 );
 
-
--- TODO: actualizar campo vehiculos a nombre y otros datos
 CREATE TABLE planes (
 	id INT IDENTITY PRIMARY KEY
-	, consecionaria INT FOREIGN KEY REFERENCES consecionarias(id)
+	, concesionaria INT FOREIGN KEY REFERENCES concesionarias(id)
 	, cliente INT NOT NULL 
-	, vehiculo INT FOREIGN KEY REFERENCES vehiculos(id)
+	, tipo_vehiculo VARCHAR(100) NOT NULL
+	, nombre_vehiculo VARCHAR(100) NOT NULL
+	, marca_vehiculo VARCHAR(100) NOT NULL
+	, modelo_vehiculo VARCHAR(100) NOT NULL 
+	, color_vehiculo VARCHAR(100) NOT NULL
+	, precio_vehiculo BIGINT NOT NULL
+	, fecha_de_alta DATETIME NOT NULL DEFAULT GETDATE()
 	, cant_cuotas_pagas INT NOT NULL DEFAULT 0 -- se actualiza por cada actualizacion
-	, fecha_alta DATETIME NOT NULL -- informado por la consecionaria
+	, fecha_alta DATETIME NOT NULL -- informado por la concesionaria
 	, fecha_ultima_actualizacion DATETIME NOT NULL DEFAULT GETDATE() -- se actualiza por cada actualizacion
-	, FOREIGN KEY(cliente, consecionaria) REFERENCES clientes(correlativo, id_consecionaria)
-	, UNIQUE(consecionaria, vehiculo, cliente, fecha_alta)
+	, estado VARCHAR(30) NOT NULL
+	, FOREIGN KEY(cliente, concesionaria) REFERENCES clientes(correlativo, id_concesionaria)
+	, FOREIGN KEY(tipo_vehiculo, nombre_vehiculo, marca_vehiculo, modelo_vehiculo, color_vehiculo, precio_vehiculo) REFERENCES vehiculos(tipo, nombre, marca, modelo, color, precio)
+	, UNIQUE(concesionaria, cliente, fecha_alta)
+);
+
+CREATE TABLE detalle_cuotas (
+	id_plan INT NOT NULL FOREIGN KEY REFERENCES planes(id)
+	, id_cuota INT NOT NULL
+	, estado VARCHAR(30) NOT NULL
+	, fecha_pago DATETIME NULL
+	, fecha_vencimiento DATETIME NOT NULL
+	, PRIMARY KEY (id_plan, id_cuota)
 );
 
 CREATE TABLE estado_sorteo (
@@ -88,10 +108,17 @@ CREATE TABLE sorteos (
 	, UNIQUE(fecha)
 );
 
+CREATE TABLE participantes (
+	id_sorteo INT NOT NULL FOREIGN KEY REFERENCES sorteos(id) 
+	, id_cliente INT NOT NULL
+	, id_concesionaria INT NOT NULL 
+	, PRIMARY KEY (id_sorteo, id_cliente, id_concesionaria)
+	, FOREIGN KEY (id_cliente, id_concesionaria) REFERENCES clientes(correlativo, id_concesionaria)
+);
+
 CREATE TABLE estado_ganador (
 	nombre VARCHAR(100) PRIMARY KEY
 );
-
 
 CREATE TABLE ganadores (
 	id INT IDENTITY PRIMARY KEY
@@ -100,9 +127,16 @@ CREATE TABLE ganadores (
 	, estado VARCHAR(100) NOT NULL FOREIGN KEY REFERENCES estado_ganador(nombre) DEFAULT 'pendiente'
 );
 
-CREATE TABLE consecionarias_notificadas (
+CREATE TABLE concesionarias_notificadas (
 	sorteo INT NOT NULL FOREIGN KEY REFERENCES sorteos(id)
-	, consecionaria INT NOT NULL  FOREIGN KEY REFERENCES consecionarias(id)
-	, descripcion VARCHAR(100) NOT NULL  DEFAULT 'Consecionaria Auditada'
-	, PRIMARY KEY (sorteo, consecionaria)
+	, concesionaria INT NOT NULL  FOREIGN KEY REFERENCES concesionarias(id)
+	, descripcion VARCHAR(100) NOT NULL  DEFAULT 'Concesionaria Auditada'
+	, PRIMARY KEY (sorteo, concesionaria)
+);
+
+CREATE TABLE concesionarias_x_sorteo_que_informaron (
+	sorteo INT NOT NULL FOREIGN KEY REFERENCES sorteos(id)
+	, concesionaria INT NOT NULL  FOREIGN KEY REFERENCES concesionarias(id)
+	, fecha_actualizacion DATETIME NOT NULL
+	, PRIMARY KEY (sorteo, concesionaria)
 );
