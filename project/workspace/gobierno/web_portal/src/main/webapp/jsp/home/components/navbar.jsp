@@ -6,46 +6,146 @@
 %>
 
 
+
+
 <header>
+  <nav>
+    <span class="movetext">Company Name</span>
+    <a class="navbar-brand" href="#"><strong><fmt:message key="home_cabecera" bundle="${etq}" /></strong></a>
 
-<nav class="navbar navbar-expand-lg navbar-dark primary-color-dark">
- <a class="navbar-brand" href="#"><strong><fmt:message key="home_cabecera" bundle="${etq}" /></strong></a>
- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-         <span class="navbar-toggler-icon"></span>
-     </button>
- <div class="collapse navbar-collapse" id="navbarSupportedContent">
-   <ul class="navbar-nav mr-auto">
-     <li class="nav-item active">
-     <input type="image" src="/web_portal/img/i18n/spanish.png"  onclick="javascript:translator.setIdioma('es');" style="width:60px;height:60px;"/>
+    <img class="" src="https://www.matchbook.com/assets/images/icons/white/Twitter_logo_white.png">
 
 
-     <!-- Commented out <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a> -->
-     </li>
-     <li class="nav-item">
-        <input type="image" src="/web_portal/img/i18n/english.png"  onclick="javascript:translator.setIdioma('en');" style="width:30px;height:30px;"/>
-     </li>
-   </ul>
+
+    <!--
+<jsp:include page="../reusable/collapsable.jsp" >
+  <jsp:param name="data_target" value="LanguageMenu" />
+  <jsp:param name="html_content" value="<h1>LanguageMenu</h1>" />
+  <jsp:param name="button_text" value="Collapsible" />
+</jsp:include>
+
+-->
 
 
-   <!-- Trigger the modal with a button -->
+  <a href="#demo" class="btn btn-info" data-toggle="collapse">Simple collapsible</a>
+  <div id="demo" class="collapse">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  </div>
+
+
+		<div class="container">
+            <div class="navbar-header">
+				<button class="btn btn-info" data-toggle="collapse" data-target="#mynavbar">Languages
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+            </div>
+			<div class="collapse navbar-collapse" id="mynavbar">
+				<ul class="nav navbar-nav navbar-left" >
+					<li><a href="">Home</a></li>
+					<li><a href="">about</a></li>
+					<li><a href="">contact</a></li>
+					<li><a href="">search</a></li>
+				</ul>
+			</div>
+		</div>
+
+
+
+
+ <!-- Trigger the modal with a button -->
    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
    <%@include file="./login_modal.jsp" %>
 
 
-
-   <ul class="navbar-nav nav-flex-icons">
-     <li class="nav-item">
-       <a class="nav-link"><i class="fa fa-facebook"></i></a>
-     </li>
-     <li class="nav-item">
-       <a class="nav-link"><i class="fa fa-twitter"></i></a>
-     </li>
-     <li class="nav-item">
-       <a class="nav-link"><i class="fa fa-instagram"></i></a>
-     </li>
-   </ul>
-
- </div>
-</nav>
-
+    <a href="#portion1" class="active">Portion1</a>
+    <a href="#portion2">Portion2</a>
+    <a href="#portion3">Portion3</a>
+    <a href="#portion4">Portion4</a>
+  </nav>
 </header>
+
+
+<!-- this is important. Do not delete. Doing so breaks translation. -->
+<div id="resultIdioma"></div>
+
+
+
+
+
+<script>
+
+
+
+
+
+
+// Smooth Scroll on clicking nav items
+jQuery('nav a[href^="#"]').click(function(e) {
+    jQuery('html,body').animate({ scrollTop: jQuery(this.hash).offset().top}, 1000);
+    return false;
+});
+
+
+
+// back to top
+$('#toTop a').click(function () {
+  $('body').animate({
+    scrollTop: 0
+  }, 1000);
+  return false;
+});
+
+// Smooth Scroll on clicking nav items
+$('nav a').click(function () {
+  var $href = $(this).attr('href');
+  $('body').stop().animate({
+    scrollTop: $($href).offset().top
+  }, 1000);
+  return false;
+});
+
+// back to top
+$('#toTop a').click(function () {
+  $('body').animate({
+    scrollTop: 0
+  }, 1000);
+  return false;
+});
+
+// Parallaxing + add class active on scroll
+$(document).scroll(function () {
+
+  // parallaxing
+  var $movebg = $(window).scrollTop() * -0.3;
+  $('.portion').css('background-positionY', ($movebg) + 'px');
+
+
+   // add class active to nav a on scroll
+  var scrollPos = $(document).scrollTop() + 100;
+  $('nav a').each(function () {
+
+  });
+
+  //changing padding of nav a on scroll
+    if (scrollPos > 250) {
+      $('nav a').addClass('small');
+      $('nav img').addClass('move');
+      $('nav span').removeClass('movetext');
+    } else {
+      $('nav a').removeClass('small');
+      $('nav img').removeClass('move');
+      $('nav span').addClass('movetext');
+    }
+
+});
+</script>
+
+
+<!-- stickyNavbar and parallax -->
+   <script type="text/javascript"
+            src="/web_portal/util/Javascript.do/load=presentation/parallaxAndStickyNavbar">
+         </script>

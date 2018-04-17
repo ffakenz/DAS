@@ -1,0 +1,6 @@
+
+  <a href="#${param.data_target}" class="btn btn-info" data-toggle="collapse">${param.button_text}</a>
+  <div id="${param.data_target}" class="collapse">
+
+        ${param.html_content}
+  </div>

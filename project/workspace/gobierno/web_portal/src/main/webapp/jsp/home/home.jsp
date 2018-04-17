@@ -12,36 +12,13 @@
 <html>
 
     <head>
-
-
-        <%@include file="../header/header.jsp" %>
-
-
-        <!-- Your custom styles (optional) -->
-        <!-- this had NOTHING in it ???  -->
-        <!-- link href="css/style.css" rel="stylesheet" -->
-
-        <style>
-        /* TEMPLATE STYLES */
-        main {
-         padding-top: 3rem;
-         padding-bottom: 2rem;
-        }
-        .extra-margins {
-         margin-top: 1rem;
-         margin-bottom: 2.5rem;
-        }
-        </style>
-        <link type="text/css" rel="stylesheet" href="/web_portal/util/StyleSheet.do/load=page,messages" />
-
+        <%@include file="./header.jsp" %>
     </head>
 
-       <body>
-         <%@include file="./body.jsp" %>
-       </body>
+    <body>
+     <%@include file="./body.jsp" %>
+    </body>
 
+    <%@include file="../footer/footer.jsp" %>
 
-
-
-  <%@include file="../footer/footer.jsp" %>
 </html>

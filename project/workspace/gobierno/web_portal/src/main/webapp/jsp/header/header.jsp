@@ -35,3 +35,4 @@
          <script type="text/javascript"
             src="/web_portal/util/Javascript.do/load=external_libraries/jquery.i18n.properties,util/utils,util/other,login/login">
          </script>
+
