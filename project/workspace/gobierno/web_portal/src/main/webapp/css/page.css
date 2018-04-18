@@ -22,6 +22,7 @@ header nav {
   font-size: 1em;
   position: fixed;
   width: 100%;
+  z-index: 10;
 }
 header nav a {
   color: inherit;
@@ -31,7 +32,7 @@ header nav a {
   -webkit-transition: all .3s ease-in;
 }
 .small {
-  padding: .7em 1em;
+  padding: 3em 1em;
 }
 header nav a:hover {
   text-decoration: underline;
@@ -43,12 +44,12 @@ header nav a:hover {
 
 .portion, .ParallaxBackground{
 
+
   background-image: url('/web_portal/img/concesionarias/central.png');
-  background-position: center center;
-  background-attachment: fixed;
-  background-size: cover;
-  text-align: center;
-  height: 20%;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
 }
 
 .portion h2 {
@@ -62,15 +63,15 @@ header nav a:hover {
 
 .ParallaxBackground.one {
   background-image: url('/web_portal/img/concesionarias/central.png');
-  padding: 20% 0;
+  padding: 5em 0;
 }
 .ParallaxBackground.two {
   background-image: url('/web_portal/img/concesionarias/banco_nacion_bigger-ConvertImage.jpg');
-  padding: 18% 0;
+  padding: 10em 0;
 }
 .ParallaxBackground.three {
   background-image: url('/web_portal/img/concesionarias/central.png');
-  padding: 5% 0;
+  padding: 5em 0;
 }
 
 .info {
@@ -128,3 +129,23 @@ nav span {
   font-weight: bold;
   transition: all 0.5s ease-in;
 }
+
+.move {
+  top: +100px;
+}
+
+.movetext {
+  top: +100px;
+}
+
+
+
+/*TODO
+Make the twitter icon represent either the spanish or the english logo using session
+*/
+
+
+/*FIX
+In mobile the parallax background images dont work that well,
+ they leave white space around them and the first one dissapears
+*/

@@ -1,61 +1,62 @@
+$(() =>   {
 
 
 
 
 
-
-// Smooth Scroll on clicking nav items
-jQuery('nav a[href^="#"]').click(function(e) {
-    jQuery('html,body').animate({ scrollTop: jQuery(this.hash).offset().top}, 1000);
+/* Smooth Scroll on clicking nav items*/
+jQuery('nav a[href^="#"]').click( function(e) {
+    $('html,body').animate({ scrollTop: jQuery(this.hash).offset().top - 150}, 1000);
     return false;
 });
 
 
 
-// back to top
-$('#toTop a').click(function () {
+/* back to top*/
+$('#toTop a').click(() =>  {
+  $('body').animate({
+    scrollTop: 0
+  }, 1000);
+
+  return false;
+});
+
+
+/* back to top*/
+$('#toTop a').click(() =>   {
   $('body').animate({
     scrollTop: 0
   }, 1000);
   return false;
 });
 
-// Smooth Scroll on clicking nav items
-$('nav a').click(function () {
-  var $href = $(this).attr('href');
-  $('body').stop().animate({
-    scrollTop: $($href).offset().top
-  }, 1000);
-  return false;
-});
+/* Parallaxing + add class active on scroll*/
+$(document).scroll(() =>   {
 
-// back to top
-$('#toTop a').click(function () {
-  $('body').animate({
-    scrollTop: 0
-  }, 1000);
-  return false;
-});
-
-// Parallaxing + add class active on scroll
-$(document).scroll(function () {
-
-  // parallaxing
-  var $movebg = $(window).scrollTop() * -0.3;
+  /* parallaxing*/
+  const $movebg = $(window).scrollTop() * -0.3;
   $('.portion').css('background-positionY', ($movebg) + 'px');
 
 
-   // add class active to nav a on scroll
-  var scrollPos = $(document).scrollTop() + 100;
-  $('nav a').each(function () {
+   /* add class active to nav a on scroll*/
+  const scrollPos = $(document).scrollTop() + 100;
+  $('nav a').each(() =>   {
 
   });
 
-  //changing padding of nav a on scroll
-    if (scrollPos > 250) {
+  /*changing padding of nav a on scroll*/
+    if (scrollPos / $(window).height() > 0.25) {
       $('nav a').addClass('small');
+      $('nav img').addClass('move');
+      $('nav span').removeClass('movetext');
     } else {
       $('nav a').removeClass('small');
+      $('nav img').removeClass('move');
+      $('nav span').addClass('movetext');
     }
+
+});
+
+
 
 });
