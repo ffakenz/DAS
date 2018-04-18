@@ -5,18 +5,14 @@ import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import java.sql.Date;
 
 public class LogInForm extends DynaActionForm {
-    String tipo;
+    Long id;
     String username;
     Date loginTime;
     Date logoutTime;
 
-    public String getTipo() {
-        return tipo;
-    }
+    public Long getId() { return id; }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
+    public void setId(Long id) { this.id = id; }
 
     public String getUsername() {
         return username;
@@ -40,5 +36,15 @@ public class LogInForm extends DynaActionForm {
 
     public void setLogoutTime(Date logoutTime) {
         this.logoutTime = logoutTime;
+    }
+
+    @Override
+    public String toString() {
+        return "LogInForm{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", loginTime=" + loginTime +
+                ", logoutTime=" + logoutTime +
+                '}';
     }
 }

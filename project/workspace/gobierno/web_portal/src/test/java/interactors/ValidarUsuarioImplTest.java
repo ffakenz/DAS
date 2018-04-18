@@ -19,9 +19,9 @@ public class ValidarUsuarioImplTest {
         @Override
         public List<DynaActionForm> select(DynaActionForm form) throws SQLException {
             UsuarioForm userMock = new UsuarioForm();
-            userMock.setTipo("gobierno");
             userMock.setUsername("pepe");
             userMock.setPassword("123");
+            userMock.setRol("gobierno");
             List<DynaActionForm> usuarios  = Arrays.asList(userMock);
             return usuarios;
         }
@@ -33,9 +33,9 @@ public class ValidarUsuarioImplTest {
         MSUsuariosDaoMock daoMock = new MSUsuariosDaoMock();
 
         UsuarioForm userMock = new UsuarioForm();
-        userMock.setTipo("gobierno");
         userMock.setUsername("pepe");
         userMock.setPassword("123");
+        userMock.setRol("gobierno");
 
         Boolean isUsuarioValido =  new ValidarUsuarioImpl().validarUsuario(userMock).apply(daoMock);
         assertEquals(true, isUsuarioValido);
@@ -46,9 +46,9 @@ public class ValidarUsuarioImplTest {
         MSUsuariosDaoMock daoMock = new MSUsuariosDaoMock();
 
         UsuarioForm userMock = new UsuarioForm();
-        userMock.setTipo("gobierno");
         userMock.setUsername("lol");
         userMock.setPassword("123");
+        userMock.setRol("gobierno");
 
         Boolean isUsuarioValido =  new ValidarUsuarioImpl().validarUsuario(userMock).apply(daoMock);
         assertEquals(false, isUsuarioValido);

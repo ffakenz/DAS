@@ -3,19 +3,19 @@ USE db_gobierno;
 INSERT INTO tipo_usuario(nombre)
 VALUES('comprador'),('gobierno'); 
 
-INSERT INTO usuario(tipo, username, password)
+INSERT INTO usuario(username, password, rol)
 VALUES
-	('gobierno', 'irocca', 'lam')
-	, ('gobierno', 'ffakenz', '123');
+	('irocca', 'lam', 'gobierno')
+	, ('ffakenz', '123', 'gobierno');
 
-INSERT INTO detalle_usuario(tipo, username, documento, nombre)
+INSERT INTO detalle_usuario(username, documento, nombre)
 VALUES
-	('gobierno', 'irocca', 37575567, 'Nacho')
-	, ('gobierno', 'ffakenz', 93337511, 'Franco');
+	('irocca', 37575567, 'Nacho')
+	, ('ffakenz', 93337511, 'Franco');
 
 
-INSERT INTO login(tipo, username)
+INSERT INTO login(username)
 VALUES
-	('gobierno', 'irocca')
-	, ('gobierno', 'ffakenz');
+	('irocca')
+	, ('ffakenz');
 

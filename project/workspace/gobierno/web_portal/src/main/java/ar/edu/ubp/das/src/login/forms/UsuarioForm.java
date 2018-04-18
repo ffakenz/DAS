@@ -3,18 +3,18 @@ package ar.edu.ubp.das.src.login.forms;
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 
 public class UsuarioForm extends DynaActionForm {
-    private String tipo;
     private String username;
     private String password;
+    private String rol;
 
     public UsuarioForm() {}
 
-    public String getTipo() {
-        return tipo;
+    public String getRol() {
+        return rol;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 
     public String getUsername() {
@@ -31,5 +31,14 @@ public class UsuarioForm extends DynaActionForm {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "UsuarioForm{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", rol='" + rol + '\'' +
+                '}';
     }
 }

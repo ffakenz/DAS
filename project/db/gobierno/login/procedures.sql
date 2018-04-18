@@ -17,17 +17,9 @@ EXEC get_logins;
 GO
 DROP PROCEDURE log_login;
 GO
-CREATE PROCEDURE log_login(@tipo VARCHAR(100), @username VARCHAR(100))  AS 
-INSERT INTO login(tipo, username)
-VALUES (@tipo, @username);
+CREATE PROCEDURE log_login(@username VARCHAR(100)) AS INSERT INTO login(username) VALUES (@username);	
 -- unit test above
-EXEC log_login 'gobierno', 'ffakenz';
+EXEC log_login 'ffakenz';
 
 
 
-
-SELECT du.*
-FROM usuarios u
-    join detalle_usuario du
-        on u.rol = du.rol
-        and u.username = du.username;

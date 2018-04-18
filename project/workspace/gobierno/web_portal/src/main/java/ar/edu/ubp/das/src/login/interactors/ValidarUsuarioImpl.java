@@ -15,8 +15,7 @@ public class ValidarUsuarioImpl implements ValidarUsuario {
         return msUsuariosDao -> {
             try {
                 return msUsuariosDao .select(null).stream().anyMatch( usr -> {
-                    return ((UsuarioForm) usr).getTipo() == user.getTipo() &&
-                            ((UsuarioForm) usr).getUsername() == user.getUsername() &&
+                    return ((UsuarioForm) usr).getUsername() == user.getUsername() &&
                             ((UsuarioForm) usr).getPassword() == user.getPassword();
                 });
             } catch (SQLException e) {

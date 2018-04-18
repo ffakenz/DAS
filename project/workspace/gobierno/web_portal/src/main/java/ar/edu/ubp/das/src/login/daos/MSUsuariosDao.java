@@ -13,9 +13,9 @@ public class MSUsuariosDao extends DaoImpl {
 	@Override
 	public DynaActionForm make(ResultSet result) throws SQLException {
 		UsuarioForm user = new UsuarioForm();
-		user.setTipo(result.getString("tipo"));
 		user.setUsername(result.getString("username"));
 		user.setPassword(result.getString("password"));
+		user.setRol(result.getString("rol"));
 		return user;
 	}
 

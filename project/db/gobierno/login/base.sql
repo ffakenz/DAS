@@ -6,30 +6,34 @@ DROP TABLE usuario;
 DROP TABLE tipo_usuario;
 
 CREATE TABLE tipo_usuario (
-	nombre VARCHAR(100) PRIMARY KEY
+	nombre VARCHAR(100)
+	, PRIMARY KEY(nombre)
 );
 
 CREATE TABLE usuario (
-	tipo VARCHAR(100) FOREIGN KEY REFERENCES tipo_usuario(nombre)
-	, username VARCHAR(100) NOT NULL
+	username VARCHAR(100) NOT NULL
 	, password VARCHAR(100) NOT NULL
-	, PRIMARY KEY(tipo, username)
+	, rol VARCHAR(100) NOT NULL
+	, PRIMARY KEY(username)
+	, FOREIGN KEY(rol) REFERENCES tipo_usuario(nombre)
+	, CHECK(rol IN ('comprador', 'gobierno'))
 );
 
+
+
 CREATE TABLE detalle_usuario (
-	tipo VARCHAR(100) NOT NULL
-	, username VARCHAR(100) NOT NULL
+	username VARCHAR(100) NOT NULL
 	, documento BIGINT NOT NULL
 	, nombre VARCHAR(100) NOT NULL
-	, PRIMARY KEY(tipo, username)
-	, FOREIGN KEY(tipo, username) REFERENCES usuario(tipo, username)
+	, PRIMARY KEY(username)
+	, FOREIGN KEY(username) REFERENCES usuario(username)
 );
 
 CREATE TABLE login (
-	id BIGINT IDENTITY NOT NULL PRIMARY KEY
-	, tipo VARCHAR(100) 
+	id BIGINT IDENTITY NOT NULL 
 	, username VARCHAR(100) NOT NULL
 	, loginTime DATETIME NOT NULL DEFAULT GETDATE()
 	, logoutTime DATETIME DEFAULT NULL
-	, FOREIGN KEY(tipo, username) REFERENCES usuario(tipo, username)
+	, PRIMARY KEY(id)
+	, FOREIGN KEY(username) REFERENCES usuario(username)
 );

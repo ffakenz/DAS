@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import ar.edu.ubp.das.mvc.action.Action;
 import ar.edu.ubp.das.mvc.action.ActionMapping;
@@ -19,9 +20,7 @@ import ar.edu.ubp.das.src.login.interactors.LogInImpl;
 import ar.edu.ubp.das.src.login.interactors.ValidarUsuarioImpl;
 import ar.edu.ubp.das.src.login.daos.MSUsuariosDao;
 
-abstract class AValidarUsuario implements Action {
-
-	abstract String getTipo();
+class ValidarUsuarioAction implements Action {
 
 	@Override
 	public ForwardConfig execute(ActionMapping mapping, DynaActionForm form, HttpServletRequest request,
@@ -34,7 +33,6 @@ abstract class AValidarUsuario implements Action {
 			form.getItem( "username").flatMap( u -> {
 				return form.getItem( "password").map( p -> {
 					UsuarioForm usr = new UsuarioForm();
-					usr.setTipo(getTipo());
 					usr.setUsername(u);
 					usr.setPassword(p);
 					ValidarUsuario auth = new ValidarUsuarioImpl();
@@ -42,10 +40,12 @@ abstract class AValidarUsuario implements Action {
 
 					if(isUserValid) {
 						LogInForm logInForm = new LogInForm();
-						logInForm.setTipo(getTipo());
 						logInForm.setUsername(u);
 						LogIn logger = new LogInImpl();
-						logger.login(logInForm).accept(logInDao);
+						Optional<Long> LogInId = logger.login(logInForm).apply(logInDao);
+
+						HttpSession session = request.getSession();
+						session.setAttribute("LogInId", LogInId.orElse(Long.MIN_VALUE));
 
 						return mapping.getForwardByName( "success" ); // LogIn Successfully
 					} else {
@@ -54,7 +54,7 @@ abstract class AValidarUsuario implements Action {
 				});
 			});
 
-		return respuesta.orElse(mapping.getForwardByName( "error" )); // Some error occur with username / password
+		return respuesta.orElse(mapping.getForwardByName( "warning" )); // Some error occur with username / password
 	}
 
 }

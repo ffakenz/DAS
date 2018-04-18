@@ -4,25 +4,35 @@ import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.src.login.daos.MSLogInDao;
 import ar.edu.ubp.das.src.login.forms.LogInForm;
 import ar.edu.ubp.das.src.login.interactors.LogInImpl;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 
 import static org.junit.Assert.assertEquals;
 
-
 public class LogInImplTest {
 
-    private static List<DynaActionForm> db = new ArrayList<>();
+
 
     private static class MSLogInDaoMock extends MSLogInDao {
+        ArrayList<DynaActionForm> db = new ArrayList<>();
 
         @Override
         public void insert(DynaActionForm form) throws SQLException {
-            ((LogInForm) form).setLoginTime(Date.valueOf("2018-04-17"));
+            Optional<Long> max =
+                    db.stream()
+                        .map(l -> ((LogInForm)l))
+                        .filter( l -> l.getUsername().equals(((LogInForm) form).getUsername()) )
+                        .map( l -> l.getId())
+                        .max(Comparable::compareTo);
+
+            ((LogInForm) form).setId(max.orElse(Long.valueOf(0)) + 1);
             db.add(form);
         }
 
@@ -32,20 +42,50 @@ public class LogInImplTest {
         }
     }
 
+    @Test
+    public void testMockDBIsEmpty() {
+        MSLogInDaoMock msLogInDaoMock = new MSLogInDaoMock();
+        LogInForm loginFormMock = new LogInForm();
+        loginFormMock.setUsername("pepe");
+
+        assertEquals(false, msLogInDaoMock.db.contains(loginFormMock));
+    }
 
     @Test
     public void testLoginSuccessfully() {
-        MSLogInDaoMock daoMock = new MSLogInDaoMock();
-
+        MSLogInDaoMock msLogInDaoMock = new MSLogInDaoMock();
         LogInForm loginFormMock = new LogInForm();
-        loginFormMock.setTipo("gobierno");
         loginFormMock.setUsername("pepe");
 
-        assertEquals(false, db.contains(loginFormMock));
+        LogInImpl logInImpl = new LogInImpl();
+        Optional<Long> logInId = logInImpl.login(loginFormMock).apply(msLogInDaoMock);
+
+        assertEquals(true, msLogInDaoMock.db.contains(loginFormMock));
+        assertEquals(logInId, Optional.of(new Long(1)));
+    }
+
+    @Test
+    public void loginTwice(){
+        MSLogInDaoMock msLogInDaoMock = new MSLogInDaoMock();
+        LogInForm loginFormMock = new LogInForm();
+        loginFormMock.setUsername("pepe");
 
         LogInImpl logInImpl = new LogInImpl();
-        logInImpl.login(loginFormMock).accept(daoMock);
+        Optional<Long> logInId = logInImpl.login(loginFormMock).apply(msLogInDaoMock);
+        Optional<Long> logInId2 = logInImpl.login(loginFormMock).apply(msLogInDaoMock);
 
-        assertEquals(true, db.contains(loginFormMock));
+        assertEquals(logInId2, Optional.of(new Long(2)));
+    }
+
+    @Test
+    public void loginOther(){
+        MSLogInDaoMock msLogInDaoMock = new MSLogInDaoMock();
+        LogInForm loginFormMock = new LogInForm();
+        loginFormMock.setUsername("other");
+
+        LogInImpl logInImpl = new LogInImpl();
+        Optional<Long> logInId2 = logInImpl.login(loginFormMock).apply(msLogInDaoMock);
+
+        assertEquals(logInId2, Optional.of(new Long(1)));
     }
 }
