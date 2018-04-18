@@ -19,30 +19,15 @@
         </div>
         <div class="collapse navbar-collapse" id="mynavbar">
             <ul class="nav navbar-left" >
-                <li>  <input type="image" src="/web_portal/img/i18n/spanish.png"  onclick="javascript:translator.setIdioma('es');" style="width:30px;height:30px;"/></li>
-                <li>  <input type="image" src="/web_portal/img/i18n/english.png"  onclick="javascript:translator.setIdioma('en');" style="width:30px;height:30px;"/></li>
+                <li>  <input type="image" src="/web_portal/img/i18n/spanish.png"  onclick="javascript:translator.setIdioma(\'es\');" style="width:30px;height:30px;"/></li>
+                <li>  <input type="image" src="/web_portal/img/i18n/english.png"  onclick="javascript:translator.setIdioma(\'en\');" style="width:30px;height:30px;"/></li>
                 <a class="navbar-brand" href="#"><strong><fmt:message key="home_cabecera" bundle="${etq}" /></strong></a>
             </ul>
-        </div>
+        </div>'
     </span>
 
 
-    <!--
-<jsp:include page="../reusable/collapsable.jsp" >
-  <jsp:param name="data_target" value="LanguageMenu" />
-  <jsp:param name="html_content" value="<h1>LanguageMenu</h1>" />
-  <jsp:param name="button_text" value="Collapsible" />
-</jsp:include>
-
--->
-
-
-
-
-
-
-
- <!-- Trigger the modal with a button -->
+<!-- Trigger the modal with a button -->
    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
 
 
@@ -53,7 +38,8 @@
   </nav>
 </header>
 
-  <%@include file="./login_modal.jsp" %>
+<!-- this is important. Do not delete. Doing so breaks login modal. -->
+<%@include file="./login_modal.jsp" %>
 
 <!-- this is important. Do not delete. Doing so breaks translation. -->
 <div id="resultIdioma"></div>

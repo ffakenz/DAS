@@ -4,3 +4,21 @@
 
         ${param.html_content}
   </div>
+
+
+
+
+
+
+
+
+
+
+  <!-- USAGE EXAMPLE -->
+  <!--
+  <jsp:include page="../reusable/collapsable.jsp" >
+    <jsp:param name="data_target" value="LanguageMenu" />
+    <jsp:param name="html_content" value="<h1>LanguageMenu</h1>" />
+    <jsp:param name="button_text" value="Collapsible" />
+  </jsp:include>
+  -->
