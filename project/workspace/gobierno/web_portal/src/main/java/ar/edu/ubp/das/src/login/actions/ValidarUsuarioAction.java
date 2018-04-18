@@ -20,7 +20,7 @@ import ar.edu.ubp.das.src.login.interactors.LogInImpl;
 import ar.edu.ubp.das.src.login.interactors.ValidarUsuarioImpl;
 import ar.edu.ubp.das.src.login.daos.MSUsuariosDao;
 
-class ValidarUsuarioAction implements Action {
+public class ValidarUsuarioAction implements Action {
 
 	@Override
 	public ForwardConfig execute(ActionMapping mapping, DynaActionForm form, HttpServletRequest request,

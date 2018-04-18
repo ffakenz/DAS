@@ -1,5 +1,5 @@
 var login = {
-    validarUsuarioComprador : function() {
+    validarUsuario : function() {
 
         jUtils.executing( "mensaje" );
         $.ajax({

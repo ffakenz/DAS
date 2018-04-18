@@ -40,8 +40,7 @@ public class MSLogInDao extends DaoImpl {
     @Override
     public List<DynaActionForm> select(DynaActionForm form) throws SQLException {
         this.connect();
-        this.setProcedure("dbo.get_logins(?)", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        this.setParameter( 1, ((LogInForm) form).getUsername());
+        this.setProcedure("dbo.get_logins", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
         List<DynaActionForm> logins  = this.executeQuery();
         this.disconnect();
         return logins;
