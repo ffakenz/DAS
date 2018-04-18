@@ -54,12 +54,8 @@ $(document).scroll(function () {
   //changing padding of nav a on scroll
     if (scrollPos > 250) {
       $('nav a').addClass('small');
-      $('nav img').addClass('move');
-      $('nav span').removeClass('movetext');
     } else {
       $('nav a').removeClass('small');
-      $('nav img').removeClass('move');
-      $('nav span').addClass('movetext');
     }
 
 });

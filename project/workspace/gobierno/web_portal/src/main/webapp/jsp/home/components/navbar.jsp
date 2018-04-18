@@ -10,11 +10,21 @@
 
 <header>
   <nav>
-    <span class="movetext">Company Name</span>
-    <a class="navbar-brand" href="#"><strong><fmt:message key="home_cabecera" bundle="${etq}" /></strong></a>
 
-    <img class="" src="https://www.matchbook.com/assets/images/icons/white/Twitter_logo_white.png">
 
+    <span>
+        <div class="nav navbar-left" >
+            <button class="btn btn-info" data-toggle="collapse" data-target="#mynavbar">Languages
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="mynavbar">
+            <ul class="nav navbar-left" >
+                <li>  <input type="image" src="/web_portal/img/i18n/spanish.png"  onclick="javascript:translator.setIdioma('es');" style="width:30px;height:30px;"/></li>
+                <li>  <input type="image" src="/web_portal/img/i18n/english.png"  onclick="javascript:translator.setIdioma('en');" style="width:30px;height:30px;"/></li>
+                <a class="navbar-brand" href="#"><strong><fmt:message key="home_cabecera" bundle="${etq}" /></strong></a>
+            </ul>
+        </div>
+    </span>
 
 
     <!--
@@ -27,31 +37,7 @@
 -->
 
 
-  <a href="#demo" class="btn btn-info" data-toggle="collapse">Simple collapsible</a>
-  <div id="demo" class="collapse">
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-  </div>
 
-
-		<div class="container">
-            <div class="navbar-header">
-				<button class="btn btn-info" data-toggle="collapse" data-target="#mynavbar">Languages
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-            </div>
-			<div class="collapse navbar-collapse" id="mynavbar">
-				<ul class="nav navbar-nav navbar-left" >
-					<li><a href="">Home</a></li>
-					<li><a href="">about</a></li>
-					<li><a href="">contact</a></li>
-					<li><a href="">search</a></li>
-				</ul>
-			</div>
-		</div>
 
 
 

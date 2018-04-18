@@ -48,18 +48,9 @@ header nav a:hover {
   background-attachment: fixed;
   background-size: cover;
   text-align: center;
+  height: 20%;
+}
 
-    height: 20%;
-}
-.portion.two {
-  background-image: url('/web_portal/img/concesionarias/banco_nacion_bigger-ConvertImage.jpg');
-}
-.portion.three {
-  background-image: url('/web_portal/img/concesionarias/central.png');
-}
-.portion.four {
-  background-image: url('/web_portal/img/concesionarias/central.png');
-}
 .portion h2 {
   color: white;
   font-weight: normal;
@@ -67,6 +58,19 @@ header nav a:hover {
   padding: 20% 0;
   margin: 0;
   text-shadow: 0 0 10px black;
+}
+
+
+.portion.two {
+  background-image: url('/web_portal/img/concesionarias/banco_nacion_bigger-ConvertImage.jpg');
+}
+.portion.three {
+  background-image: url('/web_portal/img/concesionarias/central.png');
+}
+.portion.four {
+  background-image: url('/web_portal/img/concesionarias/banco_nacion_bigger-ConvertImage.jpg');
+  padding: 10% 0 !important;
+  height: 10%  !important;
 }
 
 .info {
@@ -117,18 +121,10 @@ nav img {
   transition: all 0.5s linear;
 }
 
-.move {
-  top: -60px;
-}
-
 nav span {
   position: absolute;
   left: 40px;
   top: 10px;
   font-weight: bold;
   transition: all 0.5s ease-in;
-}
-
-.movetext {
-  top: -30px;
 }
