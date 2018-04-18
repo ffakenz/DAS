@@ -7,8 +7,7 @@
 
 
 
-<div class="portion">
-  <h2></h2>
+<div class="ParallaxBackground one">
 </div>
 
 <div id="portion1" class="info">
@@ -18,8 +17,7 @@
 </div>
 
 
-<div class="portion two">
-  <h2></h2>
+<div class="ParallaxBackground two">
 </div>
 
 <div id="portion2" class="info">
@@ -30,8 +28,7 @@
 </div>
 
 
-<div class="portion four">
-  <h2></h2>
+<div class="ParallaxBackground three">
 </div>
 
 

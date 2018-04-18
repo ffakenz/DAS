@@ -31,7 +31,7 @@ header nav a {
   -webkit-transition: all .3s ease-in;
 }
 .small {
-  padding: .5em 1em;
+  padding: .7em 1em;
 }
 header nav a:hover {
   text-decoration: underline;
@@ -41,7 +41,7 @@ header nav a:hover {
   background: rgba(255,255,255,0.3);
 }
 
-.portion {
+.portion, .ParallaxBackground{
 
   background-image: url('/web_portal/img/concesionarias/central.png');
   background-position: center center;
@@ -55,22 +55,22 @@ header nav a:hover {
   color: white;
   font-weight: normal;
   font-size: 3em;
-  padding: 20% 0;
   margin: 0;
   text-shadow: 0 0 10px black;
 }
 
 
-.portion.two {
-  background-image: url('/web_portal/img/concesionarias/banco_nacion_bigger-ConvertImage.jpg');
-}
-.portion.three {
+.ParallaxBackground.one {
   background-image: url('/web_portal/img/concesionarias/central.png');
+  padding: 20% 0;
 }
-.portion.four {
+.ParallaxBackground.two {
   background-image: url('/web_portal/img/concesionarias/banco_nacion_bigger-ConvertImage.jpg');
-  padding: 10% 0 !important;
-  height: 10%  !important;
+  padding: 18% 0;
+}
+.ParallaxBackground.three {
+  background-image: url('/web_portal/img/concesionarias/central.png');
+  padding: 5% 0;
 }
 
 .info {

@@ -44,7 +44,6 @@
 
  <!-- Trigger the modal with a button -->
    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
-   <%@include file="./login_modal.jsp" %>
 
 
     <a href="#portion1" class="active">Portion1</a>
@@ -54,6 +53,7 @@
   </nav>
 </header>
 
+  <%@include file="./login_modal.jsp" %>
 
 <!-- this is important. Do not delete. Doing so breaks translation. -->
 <div id="resultIdioma"></div>
