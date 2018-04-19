@@ -41,3 +41,5 @@ project/workspace/gobierno/web_portal/src/main/webapp/WEB-INF/datasources.xml
 # lib
 project/lib/
 target/
+
+project/workspace/gobierno/db/src/main/resources/db.properties
