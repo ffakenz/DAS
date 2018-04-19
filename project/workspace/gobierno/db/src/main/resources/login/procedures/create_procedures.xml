@@ -5,9 +5,9 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <!-- ************************************ -->
-    <!--   PROCEDURES POPULATION CHANGE-SETS  -->
-    <!-- ************************************ -->
+    <!-- ***************************** -->
+    <!--  DROP PROCEDURES CHANGE-SETS  -->
+    <!-- ***************************** -->
     <changeSet id="Drop procedure get_usuarios" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="1">
@@ -19,19 +19,6 @@
             </sqlCheck>
         </preConditions>
         <dropProcedure procedureName="get_usuarios"/>
-    </changeSet>
-
-    <changeSet id="Create procedure get_usuarios" author="DAS-Team" runAlways="true" runOnChange="true">
-        <preConditions onFail="MARK_RAN">
-            <sqlCheck expectedResult="0">
-                SELECT COUNT(*)
-                FROM information_schema.routines
-                WHERE ROUTINE_TYPE = 'PROCEDURE'
-                AND SPECIFIC_CATALOG = 'db_gobierno'
-                AND ROUTINE_NAME = 'get_usuarios'
-            </sqlCheck>
-        </preConditions>
-        <sqlFile path="/src/main/resources/login/procedures/get_usuarios.sql" />
     </changeSet>
 
     <changeSet id="Drop procedure get_logins" author="DAS-Team" runAlways="true" runOnChange="true">
@@ -47,19 +34,6 @@
         <dropProcedure procedureName="get_logins"/>
     </changeSet>
 
-    <changeSet id="Create procedure get_logins" author="DAS-Team" runAlways="true" runOnChange="true">
-        <preConditions onFail="MARK_RAN">
-            <sqlCheck expectedResult="0">
-                SELECT COUNT(*)
-                FROM information_schema.routines
-                WHERE ROUTINE_TYPE = 'PROCEDURE'
-                AND SPECIFIC_CATALOG = 'db_gobierno'
-                AND ROUTINE_NAME = 'get_logins'
-            </sqlCheck>
-        </preConditions>
-        <sqlFile path="/src/main/resources/login/procedures/get_logins.sql" />
-    </changeSet>
-
     <changeSet id="Drop procedure log_login" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="1">
@@ -71,6 +45,35 @@
             </sqlCheck>
         </preConditions>
         <dropProcedure procedureName="log_login"/>
+    </changeSet>
+
+    <!-- ******************************* -->
+    <!--  CREATE PROCEDURES CHANGE-SETS  -->
+    <!-- ******************************* -->
+    <changeSet id="Create procedure get_usuarios" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_usuarios'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile path="/src/main/resources/login/procedures/get_usuarios.sql" />
+    </changeSet>
+
+    <changeSet id="Create procedure get_logins" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_logins'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile path="/src/main/resources/login/procedures/get_logins.sql" />
     </changeSet>
 
     <changeSet id="Create procedure log_login" author="DAS-Team" runAlways="true" runOnChange="true">

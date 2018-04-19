@@ -11,7 +11,7 @@
     <packaging>jar</packaging>
 
     <groupId>gobierno</groupId>
-    <artifactId>MVC</artifactId>
+    <artifactId>mvc</artifactId>
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->

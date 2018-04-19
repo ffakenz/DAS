@@ -30,7 +30,7 @@
     <dependencies>
         <dependency>
             <groupId>gobierno</groupId>
-            <artifactId>MVC</artifactId>
+            <artifactId>mvc</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
