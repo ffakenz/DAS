@@ -23,7 +23,7 @@ if the interactor needs some DB connection, a Dao should be injected at creation
 
 - DB
   - define a `MS${someform}Dao` under `${module}\daos` to manage the form mapping and DB related calls
-  - create SQL procedures needed under `project\db\gobierno\${module}\procedures.sql`
+  - create SQL login.procedures needed under `project\db\gobierno\${module}\login.procedures.sql`
 
 - FMW MAPPING (framework mapping)
   - add the module alias-mappings to `\WEB-INFconfig.xml: <alias name="${module}" />`

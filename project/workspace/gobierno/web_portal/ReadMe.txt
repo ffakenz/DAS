@@ -33,7 +33,7 @@ Implementation Walkthrough:
         
     - DB
         - define a MS${someform}Dao under ${module}\daos to manage the form mapping and DB related calls
-        - create SQL procedures needed under project\db\gobierno\${module}\procedures.sql      
+        - create SQL login.procedures needed under project\db\gobierno\${module}\login.procedures.sql
     
     - FMW MAPPING
         - add the module alias-mappings to \WEB-INF\config.xml: <alias name="${module}" />

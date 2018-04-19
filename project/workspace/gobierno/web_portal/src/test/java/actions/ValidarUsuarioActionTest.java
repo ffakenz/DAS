@@ -47,7 +47,7 @@ public class ValidarUsuarioActionTest {
         actionMappingMock.setForwards(forwards);
 
         DynaActionForm userForm = new DynaActionForm();
-        userForm.setItem("username", "ffakenz");
+        userForm.setItem("username", "pepe");
         userForm.setItem("password", "123");
 
         HttpServletRequest request = mock(HttpServletRequest.class);

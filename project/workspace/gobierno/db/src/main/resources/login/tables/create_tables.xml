@@ -45,7 +45,7 @@
                 <tableExists tableName="tipo_usuario" />
             </not>
         </preConditions>
-        <sqlFile path="/src/main/resources/tables/tipo_usuario.sql" />
+        <sqlFile path="/src/main/resources/login/tables/tipo_usuario.sql" />
     </changeSet>
 
     <changeSet id="Create table usuario" author="DAS-Team" runAlways="true" runOnChange="true">
@@ -54,7 +54,7 @@
                 <tableExists tableName="usuario" />
             </not>
         </preConditions>
-        <sqlFile path="/src/main/resources/tables/usuario.sql" />
+        <sqlFile path="/src/main/resources/login/tables/usuario.sql" />
     </changeSet>
 
     <changeSet id="Create table detalle_usuario" author="DAS-Team" runAlways="true" runOnChange="true">
@@ -63,7 +63,7 @@
                 <tableExists tableName="detalle_usuario" />
             </not>
         </preConditions>
-        <sqlFile path="/src/main/resources/tables/detalle_usuario.sql" />
+        <sqlFile path="/src/main/resources/login/tables/detalle_usuario.sql" />
     </changeSet>
 
     <changeSet id="Create table login" author="DAS-Team" runAlways="true" runOnChange="true">
@@ -72,7 +72,7 @@
                 <tableExists tableName="login" />
             </not>
         </preConditions>
-        <sqlFile path="/src/main/resources/tables/login.sql" />
+        <sqlFile path="/src/main/resources/login/tables/login.sql" />
     </changeSet>
 
 </databaseChangeLog>

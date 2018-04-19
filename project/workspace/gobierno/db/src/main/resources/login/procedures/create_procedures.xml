@@ -31,7 +31,7 @@
                 AND ROUTINE_NAME = 'get_usuarios'
             </sqlCheck>
         </preConditions>
-        <sqlFile path="/src/main/resources/procedures/get_usuarios.sql" />
+        <sqlFile path="/src/main/resources/login/procedures/get_usuarios.sql" />
     </changeSet>
 
     <changeSet id="Drop procedure get_logins" author="DAS-Team" runAlways="true" runOnChange="true">
@@ -57,7 +57,7 @@
                 AND ROUTINE_NAME = 'get_logins'
             </sqlCheck>
         </preConditions>
-        <sqlFile path="/src/main/resources/procedures/get_logins.sql" />
+        <sqlFile path="/src/main/resources/login/procedures/get_logins.sql" />
     </changeSet>
 
     <changeSet id="Drop procedure log_login" author="DAS-Team" runAlways="true" runOnChange="true">
@@ -83,7 +83,7 @@
                 AND ROUTINE_NAME = 'log_login'
             </sqlCheck>
         </preConditions>
-        <sqlFile path="/src/main/resources/procedures/log_login.sql" />
+        <sqlFile path="/src/main/resources/login/procedures/log_login.sql" />
     </changeSet>
 
 </databaseChangeLog>

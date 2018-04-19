@@ -12,7 +12,7 @@ public class MSUsuariosDaoMock extends MSUsuariosDao {
     @Override
     public List<DynaActionForm> select(DynaActionForm form) throws SQLException {
         UsuarioForm userMock = new UsuarioForm();
-        userMock.setUsername("ffakenz");
+        userMock.setUsername("pepe");
         userMock.setPassword("123");
         userMock.setRol("gobierno");
         List<DynaActionForm> usuarios  = Arrays.asList(userMock);
