@@ -7,6 +7,8 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,38 +18,41 @@ import ar.edu.ubp.das.mvc.action.ActionMapping;
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.config.ForwardConfig;
 import ar.edu.ubp.das.mvc.config.ModuleConfigImpl;
+import ar.edu.ubp.das.mvc.db.Dao;
 
 public class JavascriptAction implements Action {
 
 	@Override
-	public ForwardConfig execute(ActionMapping mapping, DynaActionForm form, HttpServletRequest request, HttpServletResponse response) {
-        response.setContentType("text/javascript;charset=ISO-8859-1");
-        try {
-			PrintWriter out = response.getWriter();
-	        try {
-	        	if(request.getParameter("load") != null) {
-	        		String root      = ModuleConfigImpl.getContext().getRealPath("/js/") + "/";
-	        		String scripts[] = request.getParameter("load").split(",");
-					
-		        	for(String script : scripts) {
-		        		try {
-		        			List<String>  file  = Files.readAllLines(Paths.get(root + script + ".js"), Charset.defaultCharset());
-			        		StringBuilder lines = new StringBuilder();	        		
-			        		for(String line : file) {
-			        			lines.append(line);
-			        		}
-			        		out.println(lines);
-		        		}
-		        		catch(NoSuchFileException ex) { } 
-		        	}        		
-	        	}
-			} 
-	        finally {            
-	            out.close();
-	        }
-		} 
-		catch (IOException e) { }
-		return null;
+	public Function<BiFunction<String, String, Dao>, ForwardConfig> execute(ActionMapping mapping, DynaActionForm form, HttpServletRequest request, HttpServletResponse response) {
+        return (daoFactory) -> {
+			response.setContentType("text/javascript;charset=ISO-8859-1");
+			try {
+				PrintWriter out = response.getWriter();
+				try {
+					if(request.getParameter("load") != null) {
+						String root      = ModuleConfigImpl.getContext().getRealPath("/js/") + "/";
+						String scripts[] = request.getParameter("load").split(",");
+
+						for(String script : scripts) {
+							try {
+								List<String>  file  = Files.readAllLines(Paths.get(root + script + ".js"), Charset.defaultCharset());
+								StringBuilder lines = new StringBuilder();
+								for(String line : file) {
+									lines.append(line);
+								}
+								out.println(lines);
+							}
+							catch(NoSuchFileException ex) { }
+						}
+					}
+				}
+				finally {
+					out.close();
+				}
+			}
+			catch (IOException e) { }
+			return null;
+		};
 	}
 
 }

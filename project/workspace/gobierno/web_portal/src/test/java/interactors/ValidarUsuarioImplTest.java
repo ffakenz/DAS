@@ -1,32 +1,11 @@
 package interactors;
 
-import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.src.login.forms.UsuarioForm;
 import ar.edu.ubp.das.src.login.interactors.ValidarUsuarioImpl;
-import ar.edu.ubp.das.src.login.daos.MSUsuariosDao;
-import com.sun.org.apache.xpath.internal.operations.Bool;
+import mocks.MSUsuariosDaoMock;
 import org.junit.Test;
-
-import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.List;
-
 import static org.junit.Assert.*;
-
 public class ValidarUsuarioImplTest {
-
-    private static class MSUsuariosDaoMock extends MSUsuariosDao {
-        @Override
-        public List<DynaActionForm> select(DynaActionForm form) throws SQLException {
-            UsuarioForm userMock = new UsuarioForm();
-            userMock.setUsername("pepe");
-            userMock.setPassword("123");
-            userMock.setRol("gobierno");
-            List<DynaActionForm> usuarios  = Arrays.asList(userMock);
-            return usuarios;
-        }
-    }
-
 
     @Test
     public void testValidateSuccessfully() {
