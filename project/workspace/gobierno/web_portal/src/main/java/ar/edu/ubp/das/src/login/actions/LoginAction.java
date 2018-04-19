@@ -15,6 +15,7 @@ import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.config.ForwardConfig;
 import ar.edu.ubp.das.mvc.db.Dao;
 import ar.edu.ubp.das.mvc.db.DaoFactory;
+import ar.edu.ubp.das.src.Interactor;
 import ar.edu.ubp.das.src.InteractorResponse;
 import ar.edu.ubp.das.src.login.boundaries.*;
 import ar.edu.ubp.das.src.login.daos.MSLogInDao;
@@ -30,7 +31,7 @@ public class LoginAction implements Action {
 																			HttpServletResponse response) throws SQLException, RuntimeException {
 
 
-		LoginInteractor action = new LoginInteractor();
+		Interactor action = new LoginInteractor();
 		InteractorResponse result = action.execute(mapping, form).apply(DaoFactory::getDao);
 
 		Long logInId = ((Optional<Long>)result.getResult()).orElse(Long.MIN_VALUE);

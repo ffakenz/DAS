@@ -1,5 +1,6 @@
 package interactors;
 
+import ar.edu.ubp.das.src.login.boundaries.LogIn;
 import ar.edu.ubp.das.src.login.forms.LogInForm;
 import ar.edu.ubp.das.src.login.interactors.LoginInteractor;
 import mocks.MSLogInDaoMock;
@@ -26,7 +27,7 @@ public class LogInTest {
         LogInForm loginFormMock = new LogInForm();
         loginFormMock.setUsername("pepe");
 
-        LoginInteractor logInImpl = new LoginInteractor();
+        LogIn logInImpl = new LoginInteractor();
         Optional<Long> logInId = logInImpl.login(loginFormMock).apply(msLogInDaoMock);
 
         assertEquals(true, msLogInDaoMock.db.contains(loginFormMock));
@@ -39,7 +40,7 @@ public class LogInTest {
         LogInForm loginFormMock = new LogInForm();
         loginFormMock.setUsername("pepe");
 
-        LoginInteractor logInImpl = new LoginInteractor();
+        LogIn logInImpl = new LoginInteractor();
         Optional<Long> logInId = logInImpl.login(loginFormMock).apply(msLogInDaoMock);
         Optional<Long> logInId2 = logInImpl.login(loginFormMock).apply(msLogInDaoMock);
 
@@ -52,7 +53,7 @@ public class LogInTest {
         LogInForm loginFormMock = new LogInForm();
         loginFormMock.setUsername("other");
 
-        LoginInteractor logInImpl = new LoginInteractor();
+        LogIn logInImpl = new LoginInteractor();
         Optional<Long> logInId2 = logInImpl.login(loginFormMock).apply(msLogInDaoMock);
 
         assertEquals(logInId2, Optional.of(new Long(1)));
