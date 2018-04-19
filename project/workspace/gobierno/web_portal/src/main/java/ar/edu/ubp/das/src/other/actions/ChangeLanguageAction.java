@@ -14,9 +14,9 @@ import java.util.function.Function;
 public class ChangeLanguageAction implements Action {
 
 	@Override
-	public Function<BiFunction<String, String, Dao>, ForwardConfig> execute(ActionMapping mapping, DynaActionForm form, HttpServletRequest request,
+	public ForwardConfig execute(ActionMapping mapping, DynaActionForm form, HttpServletRequest request,
 																	 HttpServletResponse response) throws RuntimeException {
 		request.setAttribute("idioma", form.getItem("idioma").orElse("FAILURE"));
-		return (daoFactory) -> mapping.getForwardByName("success");
+		return mapping.getForwardByName("success");
 	}
 }

@@ -23,35 +23,32 @@ import ar.edu.ubp.das.mvc.db.Dao;
 public class StyleSheetAction implements Action {
 
 	@Override
-	public Function<BiFunction<String, String, Dao>, ForwardConfig> execute(ActionMapping mapping, DynaActionForm form, HttpServletRequest request, HttpServletResponse response) {
-        return (daoFactory) -> {
-			response.setContentType("text/css;charset=ISO-8859-1");
+	public ForwardConfig execute(ActionMapping mapping, DynaActionForm form, HttpServletRequest request, HttpServletResponse response) {
+		response.setContentType("text/css;charset=ISO-8859-1");
+		try {
+			PrintWriter out = response.getWriter();
 			try {
-				PrintWriter out = response.getWriter();
-				try {
-					if(request.getParameter("load") != null) {
-						String root      = ModuleConfigImpl.getContext().getRealPath("/css/") + "/";
-						String scripts[] = request.getParameter("load").split(",");
-						for(String script : scripts) {
-							try {
-								List<String>  file  = Files.readAllLines(Paths.get(root + script + ".css"), Charset.defaultCharset());
-								StringBuilder lines = new StringBuilder();
-								for(String line : file) {
-									lines.append(line);
-								}
-								out.println(lines);
+				if(request.getParameter("load") != null) {
+					String root      = ModuleConfigImpl.getContext().getRealPath("/css/") + "/";
+					String scripts[] = request.getParameter("load").split(",");
+					for(String script : scripts) {
+						try {
+							List<String>  file  = Files.readAllLines(Paths.get(root + script + ".css"), Charset.defaultCharset());
+							StringBuilder lines = new StringBuilder();
+							for(String line : file) {
+								lines.append(line);
 							}
-							catch(NoSuchFileException ex) { }
+							out.println(lines);
 						}
+						catch(NoSuchFileException ex) { }
 					}
 				}
-				finally {
-					out.close();
-				}
 			}
-			catch (IOException e) { }
-			return null;
-		};
-	}
-
+			finally {
+				out.close();
+			}
+		}
+		catch (IOException e) { }
+		return null;
+	};
 }

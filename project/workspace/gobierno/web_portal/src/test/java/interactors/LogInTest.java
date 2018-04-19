@@ -9,7 +9,7 @@ import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 
-public class LogInImplTest {
+public class LogInTest {
 
     @Test
     public void testMockDBIsEmpty() {

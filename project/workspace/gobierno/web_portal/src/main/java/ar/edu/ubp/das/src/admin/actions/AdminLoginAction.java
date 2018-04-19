@@ -15,9 +15,9 @@ import java.util.function.Supplier;
 public class AdminLoginAction implements Action {
 
     @Override
-    public Function<BiFunction<String, String, Dao>, ForwardConfig> execute(ActionMapping mapping, DynaActionForm form, HttpServletRequest request,
+    public ForwardConfig execute(ActionMapping mapping, DynaActionForm form, HttpServletRequest request,
                                                                           HttpServletResponse response) throws RuntimeException {
 
-        return (daoFactory) -> mapping.getForwardByName( "success" );
+        return mapping.getForwardByName( "success" );
     }
 }

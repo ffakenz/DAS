@@ -5,7 +5,7 @@ import ar.edu.ubp.das.src.login.interactors.LoginInteractor;
 import mocks.MSUsuariosDaoMock;
 import org.junit.Test;
 import static org.junit.Assert.*;
-public class ValidarUsuarioImplTest {
+public class ValidarUsuarioTest {
 
     @Test
     public void testValidateSuccessfully() {

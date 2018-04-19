@@ -2,27 +2,24 @@ package actions;
 
 import ar.edu.ubp.das.mvc.action.ActionMapping;
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
-import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.mvc.config.ForwardConfig;
 import ar.edu.ubp.das.mvc.db.Dao;
-import ar.edu.ubp.das.src.login.actions.ValidarUsuarioAction;
+import ar.edu.ubp.das.src.InteractorResponse;
 import ar.edu.ubp.das.src.login.daos.MSLogInDao;
 import ar.edu.ubp.das.src.login.daos.MSUsuariosDao;
-import mocks.HttpSessionMock;
+import ar.edu.ubp.das.src.login.interactors.LoginInteractor;
 import mocks.MSLogInDaoMock;
 import mocks.MSUsuariosDaoMock;
 import mocks.UtilsForwardsMock;
 import org.junit.Test;
 
-import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 import java.util.*;
 import java.util.function.BiFunction;
 
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
-public class ValidarUsuarioActionTest {
+public class LoginInteractorTest {
 
     BiFunction<String, String, Dao> daoFactoryMock = (daoName, daoPackage) -> {
         if(daoName.equals("Usuarios") && daoPackage.equals("login")) {
@@ -38,8 +35,8 @@ public class ValidarUsuarioActionTest {
 
 
     @Test
-    public void testThis() throws SQLException {
-        ValidarUsuarioAction action = new ValidarUsuarioAction();
+    public void testLoginInteractor() {
+        LoginInteractor action = new LoginInteractor();
 
         Map<String, ForwardConfig>   forwards = UtilsForwardsMock.forwardsMock();
 
@@ -50,15 +47,10 @@ public class ValidarUsuarioActionTest {
         userForm.setItem("username", "pepe");
         userForm.setItem("password", "123");
 
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpSessionMock session = new HttpSessionMock();
-        when(request.getSession()).thenReturn(session);
+        InteractorResponse response = action.execute(actionMappingMock, userForm).apply(daoFactoryMock);
 
-        ForwardConfig forward = action.execute(actionMappingMock, userForm, request, null).apply(daoFactoryMock);
-
-        assert(forward.getName().equals("success"));
-
-        assert(session.getAttribute("LogInId") == Long.valueOf(1));
+        assert(response.getForwardConfig().getName().equals("success"));
+        assert(((Optional<Long>)response.getResult()).orElse(Long.MIN_VALUE) == 1);
 
     }
 }

@@ -133,7 +133,7 @@ public class ActionController extends HttpServlet {
 
 						Action iaction = Action.class.cast(Class.forName(actionClassName).newInstance());
 
-						forward = iaction.execute(mapping, form, request, response).apply(DaoFactory::getDao);
+						forward = iaction.execute(mapping, form, request, response);
 						if(forward == null) {
 							if(action.isNoForward()) {
 								response.setStatus(200);

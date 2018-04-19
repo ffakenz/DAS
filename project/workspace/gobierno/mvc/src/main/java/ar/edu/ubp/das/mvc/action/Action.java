@@ -12,6 +12,6 @@ import ar.edu.ubp.das.mvc.db.Dao;
 
 public interface Action {
 
-     Function<BiFunction<String, String, Dao>, ForwardConfig> execute(ActionMapping mapping, DynaActionForm form, HttpServletRequest request, HttpServletResponse response) throws SQLException, RuntimeException;
+     ForwardConfig execute(ActionMapping mapping, DynaActionForm form, HttpServletRequest request, HttpServletResponse response) throws SQLException, RuntimeException;
 	
 }
