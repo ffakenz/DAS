@@ -1,11 +1,5 @@
 USE db_gobierno;
 GO
-INSERT INTO roles(nombre)
-VALUES('comprador'),('gobierno'); 
-
-INSERT INTO usuarios(documento, nombre, password, rol)
-VALUES(37575567, 'Nacho', 'lam', 'gobierno'), (93337511, 'Franco', '123', 'gobierno');
--- faltan crear usuarios para la autogestion de los clientes
 
 INSERT INTO tipos_vehiculo(nombre)
 VALUES('taxi'),('particular'),('comercial'),('camion'),('utilitario');

@@ -14,10 +14,15 @@ public class DaoFactory {
 
     private DaoFactory() {}
 
-    public static Dao getDao(String daoName, String daoPackage) throws SQLException {
-    	return DaoFactory.getDao(daoName, daoPackage, "default");	
+    public static Dao getDao(String daoName, String daoPackage) {
+        try {
+            return DaoFactory.getDao(daoName, daoPackage, "default");
+        } catch(SQLException ex) { // PROBLEMAS CON EL DAO FACTORY
+            ex.printStackTrace();
+            return null;
+        }
     }
-    
+
     public static Dao getDao(String daoName, String daoPackage, String datasourceId) throws SQLException {
         try {
             String daoClassName = DaoFactory.getDaoClassName(daoName, daoPackage);
@@ -42,7 +47,13 @@ public class DaoFactory {
 
                 DaoFactory.loadProp = true;
             }
-            return ModuleConfigImpl.getSrcPackage() + daoPackage + ".daos." + DaoFactory.propFile.getProperty("CurrentDaoFactory") + daoName + "Dao";
+
+            try {
+                return ModuleConfigImpl.getSrcPackage() + daoPackage + ".daos." + DaoFactory.propFile.getProperty("CurrentDaoFactory") + daoName + "Dao";
+            } catch(NullPointerException e) {
+        	    e.printStackTrace();
+                return ModuleConfigImpl.getSrcPackage() + daoPackage + ".daos." + DaoFactory.propFile.getProperty("CurrentDaoFactory") + daoName + "Dao";
+            }
         }
         catch(IOException ex) {
             throw new SQLException(ex.getMessage());

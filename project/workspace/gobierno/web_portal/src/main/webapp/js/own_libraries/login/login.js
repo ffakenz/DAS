@@ -1,5 +1,4 @@
 var login = {
-
     validarUsuario : function() {
 
         jUtils.executing( "mensaje" );

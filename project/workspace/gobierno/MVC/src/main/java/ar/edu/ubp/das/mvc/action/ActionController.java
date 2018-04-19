@@ -17,6 +17,7 @@ import ar.edu.ubp.das.mvc.config.FormBeanConfig;
 import ar.edu.ubp.das.mvc.config.ForwardConfig;
 import ar.edu.ubp.das.mvc.config.ModuleConfigImpl;
 import ar.edu.ubp.das.mvc.config.ParameterConfig;
+import ar.edu.ubp.das.mvc.db.DaoFactory;
 
 /**
  * Servlet implementation class ActionController
@@ -132,7 +133,7 @@ public class ActionController extends HttpServlet {
 
 						Action iaction = Action.class.cast(Class.forName(actionClassName).newInstance());
 
-						forward = iaction.execute(mapping, form, request, response);
+						forward = iaction.execute(mapping, form, request, response).apply(DaoFactory::getDao);
 						if(forward == null) {
 							if(action.isNoForward()) {
 								response.setStatus(200);

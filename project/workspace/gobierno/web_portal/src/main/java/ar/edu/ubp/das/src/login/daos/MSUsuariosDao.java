@@ -2,21 +2,20 @@ package ar.edu.ubp.das.src.login.daos;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 import java.util.List;
-import java.util.Optional;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
-import ar.edu.ubp.das.src.login.forms.UserForm;
+import ar.edu.ubp.das.src.login.forms.UsuarioForm;
 
 public class MSUsuariosDao extends DaoImpl {
 
 	@Override
 	public DynaActionForm make(ResultSet result) throws SQLException {
-		UserForm user = new UserForm();
-		user.setNombre(result.getString("nombre"));
+		UsuarioForm user = new UsuarioForm();
+		user.setUsername(result.getString("username"));
 		user.setPassword(result.getString("password"));
+		user.setRol(result.getString("rol"));
 		return user;
 	}
 
