@@ -33,6 +33,18 @@
          <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
          <!-- JQuery.i18n alongside with utils and login-->
          <script type="text/javascript"
-            src="/web_portal/util/Javascript.do/load=external_libraries/jquery.i18n.properties,util/utils,util/other,login/login">
+            src="/web_portal/util/Javascript.do/load=external_libraries/jquery.i18n.properties">
          </script>
 
+         <script type="text/javascript"
+            src="/web_portal/util/Javascript.do/load=own_libraries/util/utils,own_libraries/util/other,own_libraries/login/login,own_libraries/presentation/parallaxAndStickyNavbar">
+         </script>
+
+
+
+
+
+<script>
+
+//alert(concesionariasAPI.getJSON());
+</script>

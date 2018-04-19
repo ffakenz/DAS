@@ -1,12 +1,18 @@
 $(() =>   {
 
 
+  $('nav img').addClass('down');
 
 
 
 /* Smooth Scroll on clicking nav items*/
 jQuery('nav a[href^="#"]').click( function(e) {
     $('html,body').animate({ scrollTop: jQuery(this.hash).offset().top - 150}, 1000);
+
+    if ( window.lastClickedLink !== undefined)   window.lastClickedLink.removeClass("active");
+    $(this).addClass("active");
+
+    window.lastClickedLink = $(this);
     return false;
 });
 
@@ -40,19 +46,22 @@ $(document).scroll(() =>   {
 
    /* add class active to nav a on scroll*/
   const scrollPos = $(document).scrollTop() + 100;
-  $('nav a').each(() =>   {
 
-  });
 
   /*changing padding of nav a on scroll*/
     if (scrollPos / $(window).height() > 0.25) {
+
       $('nav a').addClass('small');
-      $('nav img').addClass('move');
-      $('nav span').removeClass('movetext');
+      $('nav img').removeClass('down');
+      $('nav span').addClass('down');
+
+ $("#languageNavbar").collapse('hide');
+
+
     } else {
       $('nav a').removeClass('small');
-      $('nav img').removeClass('move');
-      $('nav span').addClass('movetext');
+      $('nav img').addClass('down');
+      $('nav span').removeClass('down');
     }
 
 });
