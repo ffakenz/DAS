@@ -29,7 +29,12 @@
 
 
     <%
-    String language = (session.getAttribute("idioma").toString().equals("en"))? "english" : "spanish";
+    String language = "english";
+
+    if(null != session.getAttribute("idioma")){
+      language = (session.getAttribute("idioma").toString().equals("en"))? "english" : "spanish";
+    }
+
     String languageLogo = "/web_portal/img/i18n/"+language+".png";
     %>
 
