@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,14 +14,12 @@ import ar.edu.ubp.das.mvc.action.ActionMapping;
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.config.ForwardConfig;
 import ar.edu.ubp.das.mvc.db.Dao;
-import ar.edu.ubp.das.mvc.db.DaoFactory;
 import ar.edu.ubp.das.src.login.boundaries.*;
 import ar.edu.ubp.das.src.login.daos.MSLogInDao;
 import ar.edu.ubp.das.src.login.forms.LogInForm;
 import ar.edu.ubp.das.src.login.forms.UsuarioForm;
-import ar.edu.ubp.das.src.login.interactors.LogInImpl;
-import ar.edu.ubp.das.src.login.interactors.ValidarUsuarioImpl;
 import ar.edu.ubp.das.src.login.daos.MSUsuariosDao;
+import ar.edu.ubp.das.src.login.interactors.LoginInteractor;
 
 public class ValidarUsuarioAction implements Action {
 
@@ -41,14 +38,13 @@ public class ValidarUsuarioAction implements Action {
 							UsuarioForm usr = new UsuarioForm();
 							usr.setUsername(u);
 							usr.setPassword(p);
-							ValidarUsuario auth = new ValidarUsuarioImpl();
+							LoginInteractor auth = new LoginInteractor();
 							Boolean isUserValid = auth.validarUsuario(usr).apply(dao);
 
 							if(isUserValid) {
 								LogInForm logInForm = new LogInForm();
 								logInForm.setUsername(u);
-								LogIn logger = new LogInImpl();
-								Optional<Long> LogInId = logger.login(logInForm).apply(logInDao);
+								Optional<Long> LogInId = auth.login(logInForm).apply(logInDao);
 
 								HttpSession session = request.getSession();
 								session.setAttribute("LogInId", LogInId.orElse(Long.MIN_VALUE));

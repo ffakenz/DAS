@@ -1,7 +1,7 @@
 package interactors;
 
 import ar.edu.ubp.das.src.login.forms.UsuarioForm;
-import ar.edu.ubp.das.src.login.interactors.ValidarUsuarioImpl;
+import ar.edu.ubp.das.src.login.interactors.LoginInteractor;
 import mocks.MSUsuariosDaoMock;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -16,7 +16,7 @@ public class ValidarUsuarioImplTest {
         userMock.setPassword("123");
         userMock.setRol("gobierno");
 
-        Boolean isUsuarioValido =  new ValidarUsuarioImpl().validarUsuario(userMock).apply(daoMock);
+        Boolean isUsuarioValido =  new LoginInteractor().validarUsuario(userMock).apply(daoMock);
         assertEquals(true, isUsuarioValido);
     }
 
@@ -29,7 +29,7 @@ public class ValidarUsuarioImplTest {
         userMock.setPassword("123");
         userMock.setRol("gobierno");
 
-        Boolean isUsuarioValido =  new ValidarUsuarioImpl().validarUsuario(userMock).apply(daoMock);
+        Boolean isUsuarioValido =  new LoginInteractor().validarUsuario(userMock).apply(daoMock);
         assertEquals(false, isUsuarioValido);
     }
 }
