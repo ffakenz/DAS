@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!-- ***************************** -->
+    <!--   TABLE DROP CHANGE-SETS      -->
+    <!-- ***************************** -->
+    <changeSet id="Drop table login" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="login" />
+        </preConditions>
+        <dropTable tableName="login"/>
+    </changeSet>
+
+    <changeSet id="Drop table detalle_usuario" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="detalle_usuario" />
+        </preConditions>
+        <dropTable tableName="detalle_usuario"/>
+    </changeSet>
+
+    <changeSet id="Drop table usuario" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="usuario" />
+        </preConditions>
+        <dropTable tableName="usuario"/>
+    </changeSet>
+
+    <changeSet id="Drop table tipo_usuario" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="tipo_usuario" />
+        </preConditions>
+        <dropTable tableName="tipo_usuario"/>
+    </changeSet>
+
+    <!-- ***************************** -->
+    <!--   TABLE CREATION CHANGE-SETS  -->
+    <!-- ***************************** -->
+    <changeSet id="Create table tipo_usuario" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="tipo_usuario" />
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/tables/tipo_usuario.sql" />
+    </changeSet>
+
+    <changeSet id="Create table usuario" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="usuario" />
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/tables/usuario.sql" />
+    </changeSet>
+
+    <changeSet id="Create table detalle_usuario" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="detalle_usuario" />
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/tables/detalle_usuario.sql" />
+    </changeSet>
+
+    <changeSet id="Create table login" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="login" />
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/tables/login.sql" />
+    </changeSet>
+
+</databaseChangeLog>

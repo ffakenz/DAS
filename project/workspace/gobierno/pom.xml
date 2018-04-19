@@ -12,6 +12,7 @@
         <module>middleware</module>
         <module>MVC</module>
         <module>web_portal</module>
+        <module>db</module>
     </modules>
 
     <prerequisites>
