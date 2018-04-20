@@ -28,17 +28,31 @@
 
 
 
-         <!-- SCRIPTS -->
-         <!-- JQuery -->
-         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-         <!-- JQuery.i18n alongside with utils and login-->
-         <script type="text/javascript"
-            src="/web_portal/util/Javascript.do/load=external_libraries/jquery.i18n.properties">
-         </script>
+        <!-- SCRIPTS -->
 
-         <script type="text/javascript"
-            src="/web_portal/util/Javascript.do/load=own_libraries/util/utils,own_libraries/util/other,own_libraries/login/login,own_libraries/presentation/parallaxAndStickyNavbar">
-         </script>
+        <!-- JQuery -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+        <!-- JQuery.i18n-->
+        <script src="/web_portal/util/Javascript.do/load=external_libraries/jquery.i18n.properties"></script>
+
+        <!-- utils-->
+        <script src="/web_portal/util/Javascript.do/load=own_libraries/util/utils,own_libraries/util/other"></script>
+
+        <!-- login-->
+        <script src="/web_portal/util/Javascript.do/load=own_libraries/login/login"></script>
+
+        <!-- presentation-->
+        <script src="/web_portal/util/Javascript.do/load=own_libraries/presentation/parallaxAndStickyNavbar"></script>
+
+        <!-- Lunr -->
+        <script src="https://unpkg.com/lunr/lunr.js"></script>
+
+        <!-- concesionarias -->
+        <script src="/web_portal/util/Javascript.do/load=own_libraries/concesionarias/concesionarias"></script>
+
+        <!-- Lodash -->
+        <%@include file="../templates/lodash_setup.jsp" %>
 
 
 
