@@ -2,11 +2,10 @@ package ar.edu.ubp.das.src.login.daos;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
-import ar.edu.ubp.das.src.login.forms.LogInForm;
+import login.forms.LogInForm;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 import java.util.List;
 
 public class MSLogInDao extends DaoImpl {

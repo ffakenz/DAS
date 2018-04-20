@@ -1,8 +1,8 @@
-package interactors;
+package boundaries;
 
-import ar.edu.ubp.das.src.login.boundaries.LogIn;
-import ar.edu.ubp.das.src.login.forms.LogInForm;
-import ar.edu.ubp.das.src.login.interactors.LoginInteractor;
+import login.LoginInteractor;
+import login.boundaries.LogIn;
+import login.forms.LogInForm;
 import mocks.MSLogInDaoMock;
 import org.junit.Test;
 import java.util.Optional;

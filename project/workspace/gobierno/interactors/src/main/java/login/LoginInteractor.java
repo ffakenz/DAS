@@ -1,16 +1,14 @@
-package ar.edu.ubp.das.src.login.interactors;
+package login;
 
-import ar.edu.ubp.das.mvc.action.ActionMapping;
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.Dao;
-import ar.edu.ubp.das.src.Interactor;
-import ar.edu.ubp.das.src.InteractorResponse;
-import ar.edu.ubp.das.src.login.boundaries.LogIn;
-import ar.edu.ubp.das.src.login.boundaries.ValidarUsuario;
-import ar.edu.ubp.das.src.login.daos.MSLogInDao;
-import ar.edu.ubp.das.src.login.daos.MSUsuariosDao;
-import ar.edu.ubp.das.src.login.forms.LogInForm;
-import ar.edu.ubp.das.src.login.forms.UsuarioForm;
+import core.Interactor;
+import core.InteractorResponse;
+import core.ResponseForward;
+import login.boundaries.LogIn;
+import login.boundaries.ValidarUsuario;
+import login.forms.LogInForm;
+import login.forms.UsuarioForm;
 import java.sql.SQLException;
 import java.util.Optional;
 import java.util.function.BiFunction;
@@ -18,13 +16,13 @@ import java.util.function.Function;
 
 public class LoginInteractor implements Interactor, ValidarUsuario, LogIn {
     @Override
-    public Function<MSLogInDao, Optional<Long>> login(LogInForm req) {
+    public Function<Dao, Optional<Long>> login(LogInForm form) {
         return loginDao -> {
             try {
-                loginDao.insert(req);
+                loginDao.insert(form);
                 Optional<Long> max =
                         loginDao.select(null).stream()
-                                .filter( l -> ((LogInForm)l).getUsername().equals(req.getUsername()) )
+                                .filter( l -> ((LogInForm)l).getUsername().equals(form.getUsername()) )
                                 .map( l -> ((LogInForm) l).getId())
                                 .max(Comparable::compareTo);
 
@@ -37,12 +35,13 @@ public class LoginInteractor implements Interactor, ValidarUsuario, LogIn {
     }
     // is there any usuario in the repository suchthat is equals to the one sent by parameter ?
     @Override
-    public Function<MSUsuariosDao, Boolean> validarUsuario(UsuarioForm user) {
+    public Function<Dao, Boolean> validarUsuario(UsuarioForm user) {
         return msUsuariosDao -> {
             try {
                 return msUsuariosDao .select(null).stream().anyMatch( usr -> {
-                    return ((UsuarioForm) usr).getUsername().equals(user.getUsername()) &&
-                            ((UsuarioForm) usr).getPassword().equals(user.getPassword());
+                    UsuarioForm dbUser = ((UsuarioForm) usr);
+                    return dbUser.getUsername().equals(user.getUsername()) &&
+                            dbUser.getPassword().equals(user.getPassword());
                 });
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -52,10 +51,10 @@ public class LoginInteractor implements Interactor, ValidarUsuario, LogIn {
     }
 
     @Override
-    public Function<BiFunction<String, String, Dao>, InteractorResponse> execute(ActionMapping mapping, DynaActionForm form) {
+    public Function<BiFunction<String, String, Dao>, InteractorResponse> execute(DynaActionForm form) {
         return (daoFactory) -> {
-            MSUsuariosDao dao = (MSUsuariosDao) daoFactory.apply("Usuarios", "login");
-            MSLogInDao logInDao = (MSLogInDao) daoFactory.apply("LogIn", "login");
+            Dao dao = daoFactory.apply("Usuarios", "login");
+            Dao logInDao = daoFactory.apply("LogIn", "login");
 
             Optional<InteractorResponse> respuesta =
                     form.getItem( "username").flatMap( u -> {
@@ -72,12 +71,12 @@ public class LoginInteractor implements Interactor, ValidarUsuario, LogIn {
                                 Optional<Long> LogInId = auth.login(logInForm).apply(logInDao);
 
                                 InteractorResponse response = new InteractorResponse();
-                                response.setForwardConfig(mapping.getForwardByName( "success" ));
+                                response.setResponse(ResponseForward.SUCCESS);
                                 response.setResult(LogInId);
                                 return response; // LogIn Successfully
                             } else {
                                 InteractorResponse response = new InteractorResponse();
-                                response.setForwardConfig(mapping.getForwardByName( "failure" ));
+                                response.setResponse(ResponseForward.FAILURE);
                                 response.setResult(Optional.empty());
                                 return response; // LogIn Failed
                             }
@@ -85,7 +84,7 @@ public class LoginInteractor implements Interactor, ValidarUsuario, LogIn {
                     });
 
             InteractorResponse response = new InteractorResponse();
-            response.setForwardConfig(mapping.getForwardByName( "warning" ));
+            response.setResponse(ResponseForward.WARNING);
             response.setResult(Optional.empty());
 
             return respuesta.orElse(response); // Some error occur with username / password

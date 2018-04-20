@@ -1,16 +1,22 @@
 package mocks;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
-import ar.edu.ubp.das.src.login.daos.MSLogInDao;
-import ar.edu.ubp.das.src.login.forms.LogInForm;
+import ar.edu.ubp.das.mvc.db.Dao;
+import login.forms.LogInForm;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class MSLogInDaoMock extends MSLogInDao {
+public class MSLogInDaoMock implements Dao {
     public ArrayList<DynaActionForm> db = new ArrayList<>();
+
+    @Override
+    public DynaActionForm make(ResultSet result) throws SQLException {
+        return null;
+    }
 
     @Override
     public void insert(DynaActionForm form) throws SQLException {
@@ -26,7 +32,22 @@ public class MSLogInDaoMock extends MSLogInDao {
     }
 
     @Override
+    public void update(DynaActionForm form) throws SQLException {
+
+    }
+
+    @Override
+    public void delete(DynaActionForm form) throws SQLException {
+
+    }
+
+    @Override
     public List<DynaActionForm> select(DynaActionForm form) throws SQLException {
         return db;
+    }
+
+    @Override
+    public boolean valid(DynaActionForm form) throws SQLException {
+        return false;
     }
 }

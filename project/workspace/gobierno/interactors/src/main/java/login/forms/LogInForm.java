@@ -1,4 +1,4 @@
-package ar.edu.ubp.das.src.login.forms;
+package login.forms;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 

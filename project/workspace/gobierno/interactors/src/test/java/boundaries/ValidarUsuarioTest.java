@@ -1,7 +1,7 @@
-package interactors;
+package boundaries;
 
-import ar.edu.ubp.das.src.login.forms.UsuarioForm;
-import ar.edu.ubp.das.src.login.interactors.LoginInteractor;
+import login.LoginInteractor;
+import login.forms.UsuarioForm;
 import mocks.MSUsuariosDaoMock;
 import org.junit.Test;
 import static org.junit.Assert.*;

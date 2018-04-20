@@ -13,6 +13,7 @@
         <module>mvc</module>
         <module>web_portal</module>
         <module>db</module>
+        <module>interactors</module>
     </modules>
 
     <prerequisites>
