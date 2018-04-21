@@ -1,4 +1,4 @@
-package boundaries;
+package boundaries.login;
 
 import login.LoginInteractor;
 import login.boundaries.LogIn;
@@ -18,7 +18,7 @@ public class LogInTest {
         LogInForm loginFormMock = new LogInForm();
         loginFormMock.setUsername("pepe");
 
-        assertEquals(false, msLogInDaoMock.db.contains(loginFormMock));
+        assertEquals(false, msLogInDaoMock.logins.contains(loginFormMock));
     }
 
     @Test
@@ -30,7 +30,7 @@ public class LogInTest {
         LogIn logInImpl = new LoginInteractor();
         Optional<Long> logInId = logInImpl.login(loginFormMock).apply(msLogInDaoMock);
 
-        assertEquals(true, msLogInDaoMock.db.contains(loginFormMock));
+        assertEquals(true, msLogInDaoMock.logins.contains(loginFormMock));
         assertEquals(logInId, Optional.of(new Long(1)));
     }
 

@@ -6,7 +6,6 @@ import core.Interactor;
 import core.InteractorResponse;
 import core.ResponseForward;
 import login.boundaries.LogIn;
-import login.boundaries.ValidarUsuario;
 import login.forms.LogInForm;
 import login.forms.UsuarioForm;
 import java.sql.SQLException;
@@ -14,7 +13,7 @@ import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-public class LoginInteractor implements Interactor, ValidarUsuario, LogIn {
+public class LoginInteractor implements Interactor, LogIn {
     @Override
     public Function<Dao, Optional<Long>> login(LogInForm form) {
         return loginDao -> {

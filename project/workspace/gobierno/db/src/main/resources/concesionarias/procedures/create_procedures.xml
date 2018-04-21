@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!-- ***************************** -->
+    <!--  DROP PROCEDURES CHANGE-SETS  -->
+    <!-- ***************************** -->
+    <changeSet id="Drop procedure aprove_concesionaria" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'aprove_concesionaria'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="aprove_concesionaria"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure get_concesionarias" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_concesionarias'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_concesionarias"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure log_concesionaria" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_concesionaria'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="log_concesionaria"/>
+    </changeSet>
+
+    <!-- ******************************* -->
+    <!--  CREATE PROCEDURES CHANGE-SETS  -->
+    <!-- ******************************* -->
+    <changeSet id="Create procedure aprove_concesionaria" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'aprove_concesionaria'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile path="/src/main/resources/concesionarias/procedures/aprove_concesionaria.sql" />
+    </changeSet>
+
+    <changeSet id="Create procedure get_concesionarias" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_concesionarias'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile path="/src/main/resources/concesionarias/procedures/get_concesionarias.sql" />
+    </changeSet>
+
+    <changeSet id="Create procedure log_concesionaria" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_concesionaria'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile path="/src/main/resources/concesionarias/procedures/log_concesionaria.sql" />
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,4 +1,4 @@
-package boundaries;
+package boundaries.login;
 
 import login.LoginInteractor;
 import login.forms.UsuarioForm;

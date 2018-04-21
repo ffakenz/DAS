@@ -1,4 +1,4 @@
-package interactors;
+package interactors.login;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.Dao;

@@ -3,6 +3,7 @@ package mocks;
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.Dao;
 import login.forms.LogInForm;
+import login.forms.UsuarioForm;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class MSLogInDaoMock implements Dao {
-    public ArrayList<DynaActionForm> db = new ArrayList<>();
+    public List<DynaActionForm> logins = new ArrayList<>();
 
     @Override
     public DynaActionForm make(ResultSet result) throws SQLException {
@@ -21,14 +22,14 @@ public class MSLogInDaoMock implements Dao {
     @Override
     public void insert(DynaActionForm form) throws SQLException {
         Optional<Long> max =
-                db.stream()
+                logins.stream()
                         .map(l -> ((LogInForm)l))
                         .filter( l -> l.getUsername().equals(((LogInForm) form).getUsername()) )
                         .map( l -> l.getId())
                         .max(Comparable::compareTo);
 
         ((LogInForm) form).setId(max.orElse(Long.valueOf(0)) + 1);
-        db.add(form);
+        logins.add(form);
     }
 
     @Override
@@ -43,7 +44,7 @@ public class MSLogInDaoMock implements Dao {
 
     @Override
     public List<DynaActionForm> select(DynaActionForm form) throws SQLException {
-        return db;
+        return logins;
     }
 
     @Override

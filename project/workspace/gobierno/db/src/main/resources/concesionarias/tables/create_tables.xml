@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!-- ***************************** -->
+    <!--   TABLE DROP CHANGE-SETS      -->
+    <!-- ***************************** -->
+    <changeSet id="Drop table concesionaria" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="concesionaria" />
+        </preConditions>
+        <dropTable tableName="concesionaria"/>
+    </changeSet>
+
+    <changeSet id="Drop table config_tecnologica" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="config_tecnologica" />
+        </preConditions>
+        <dropTable tableName="config_tecnologica"/>
+    </changeSet>
+
+    <!-- ***************************** -->
+    <!--   TABLE CREATION CHANGE-SETS  -->
+    <!-- ***************************** -->
+    <changeSet id="Create table config_tecnologica" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="config_tecnologica" />
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/concesionarias/tables/config_tecnologica.sql" />
+    </changeSet>
+
+    <changeSet id="Create table concesionaria" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="concesionaria" />
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/concesionarias/tables/concesionaria.sql" />
+    </changeSet>
+
+</databaseChangeLog>

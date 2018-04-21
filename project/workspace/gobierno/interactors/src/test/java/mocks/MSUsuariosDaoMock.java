@@ -6,10 +6,22 @@ import login.forms.UsuarioForm;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class MSUsuariosDaoMock implements Dao {
+
+    List<DynaActionForm> usuarios  = new ArrayList<>();
+
+    public MSUsuariosDaoMock() {
+        UsuarioForm userMock = new UsuarioForm();
+        userMock.setUsername("pepe");
+        userMock.setPassword("123");
+        userMock.setRol("gobierno");
+        usuarios.add(userMock);
+    }
+
     @Override
     public DynaActionForm make(ResultSet result) throws SQLException {
         return null;
@@ -32,11 +44,8 @@ public class MSUsuariosDaoMock implements Dao {
 
     @Override
     public List<DynaActionForm> select(DynaActionForm form) throws SQLException {
-        UsuarioForm userMock = new UsuarioForm();
-        userMock.setUsername("pepe");
-        userMock.setPassword("123");
-        userMock.setRol("gobierno");
-        List<DynaActionForm> usuarios  = Arrays.asList(userMock);
+
+
         return usuarios;
     }
 

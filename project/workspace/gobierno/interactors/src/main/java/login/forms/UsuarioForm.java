@@ -7,8 +7,6 @@ public class UsuarioForm extends DynaActionForm {
     private String password;
     private String rol;
 
-    public UsuarioForm() {}
-
     public String getRol() {
         return rol;
     }
