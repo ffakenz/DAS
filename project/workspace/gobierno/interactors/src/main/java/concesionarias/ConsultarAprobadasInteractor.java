@@ -39,7 +39,7 @@ public class ConsultarAprobadasInteractor implements Interactor, ConsultarAproba
             InteractorResponse response = new InteractorResponse();
             response.setResult(aprobadas);
             if(aprobadas.isEmpty()) {
-                response.setResponse(ResponseForward.WARNING);
+                response.setResponse(ResponseForward.FAILURE);
             } else {
                 response.setResponse(ResponseForward.SUCCESS);
             }

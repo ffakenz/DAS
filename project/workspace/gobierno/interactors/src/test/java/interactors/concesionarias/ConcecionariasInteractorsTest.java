@@ -34,7 +34,7 @@ public class ConcecionariasInteractorsTest {
         // consultar aprobadas
         InteractorResponse r1 = a1.execute(null).apply(daoFactoryMock);
         // no hay aprobadas
-        assert(r1.getResponse() == ResponseForward.WARNING);
+        assert(r1.getResponse() == ResponseForward.FAILURE);
         assert(((List<ConcesionariaForm>)r1.getResult()).isEmpty() == true);
 
         // creamos concecionaria a aprobar

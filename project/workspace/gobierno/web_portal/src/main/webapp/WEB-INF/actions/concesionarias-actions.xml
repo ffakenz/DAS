@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="../schema/actions.xsd">
+    <form-beans>
+    </form-beans>
+    <action-mappings>
+        <action type="RegistrarConcesionariaAction" path="/RegistrarConcesionaria.do">
+            <forward name="success" path="/util/success.jsp" />
+            <forward name="failure" path="/util/failure.jsp" />
+        </action>
+        <action type="AprobarConcesionariaAction" path="/AprobarConcesionaria.do">
+            <forward name="success" path="/util/success.jsp" />
+            <forward name="failure" path="/util/failure.jsp" />
+        </action>
+        <action type="ConsultarAprobadasAction" path="/ConsultarAprobadas.do">
+            <forward name="success" path="/util/success.jsp" />
+            <forward name="failure" path="/util/failure.jsp" />
+        </action>
+    </action-mappings>
+</actions>
