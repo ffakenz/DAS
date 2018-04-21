@@ -14,18 +14,40 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class LoginInteractor implements Interactor, LogIn {
+
+    private Function<Dao, Boolean> isLoggedIn(LogInForm form) {
+        return loginDao -> {
+            try {
+                return
+                    loginDao.select(null).stream().anyMatch( l -> {
+                        LogInForm login = (LogInForm) l;
+                        return
+                            login.getUsername().equals(form.getUsername()) &&
+                                login.getLogoutTime() == null;
+                    });
+            } catch(SQLException ex) {
+                ex.printStackTrace();
+                return false;
+            }
+        };
+    }
+
     @Override
     public Function<Dao, Optional<Long>> login(LogInForm form) {
         return loginDao -> {
             try {
-                loginDao.insert(form);
-                Optional<Long> max =
-                        loginDao.select(null).stream()
-                                .filter( l -> ((LogInForm)l).getUsername().equals(form.getUsername()) )
-                                .map( l -> ((LogInForm) l).getId())
-                                .max(Comparable::compareTo);
+                if(!isLoggedIn(form).apply(loginDao)) {
+                    loginDao.insert(form);
+                    Optional<Long> max =
+                            loginDao.select(null).stream()
+                                    .filter( l -> ((LogInForm)l).getUsername().equals(form.getUsername()) )
+                                    .map( l -> ((LogInForm) l).getId())
+                                    .max(Comparable::compareTo);
 
-                return max;
+                    return max;
+                } else {
+                    return Optional.empty();
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
                 return Optional.empty();
@@ -64,21 +86,19 @@ public class LoginInteractor implements Interactor, LogIn {
                             LoginInteractor auth = new LoginInteractor();
                             Boolean isUserValid = auth.validarUsuario(usr).apply(dao);
 
+                            InteractorResponse response = new InteractorResponse();
                             if(isUserValid) {
                                 LogInForm logInForm = new LogInForm();
                                 logInForm.setUsername(u);
                                 Optional<Long> LogInId = auth.login(logInForm).apply(logInDao);
-
-                                InteractorResponse response = new InteractorResponse();
-                                response.setResponse(ResponseForward.SUCCESS);
                                 response.setResult(LogInId);
-                                return response; // LogIn Successfully
+
+                                if(LogInId.isPresent()) response.setResponse(ResponseForward.SUCCESS);
+                                else response.setResponse(ResponseForward.FAILURE);
                             } else {
-                                InteractorResponse response = new InteractorResponse();
                                 response.setResponse(ResponseForward.FAILURE);
-                                response.setResult(Optional.empty());
-                                return response; // LogIn Failed
                             }
+                            return response;
                         });
                     });
 

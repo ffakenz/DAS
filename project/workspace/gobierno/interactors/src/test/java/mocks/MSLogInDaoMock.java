@@ -10,9 +10,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class MSLogInDaoMock implements Dao {
-    public List<DynaActionForm> logins = new ArrayList<>();
+    public List<LogInForm> logins;
+
+    public MSLogInDaoMock() {
+        logins = new ArrayList<>();
+    }
 
     @Override
     public DynaActionForm make(ResultSet result) throws SQLException {
@@ -23,13 +28,13 @@ public class MSLogInDaoMock implements Dao {
     public void insert(DynaActionForm form) throws SQLException {
         Optional<Long> max =
                 logins.stream()
-                        .map(l -> ((LogInForm)l))
                         .filter( l -> l.getUsername().equals(((LogInForm) form).getUsername()) )
                         .map( l -> l.getId())
                         .max(Comparable::compareTo);
 
-        ((LogInForm) form).setId(max.orElse(Long.valueOf(0)) + 1);
-        logins.add(form);
+        LogInForm login = (LogInForm) form;
+        login.setId(max.orElse(Long.valueOf(0)) + 1);
+        logins.add(login);
     }
 
     @Override
@@ -44,7 +49,7 @@ public class MSLogInDaoMock implements Dao {
 
     @Override
     public List<DynaActionForm> select(DynaActionForm form) throws SQLException {
-        return logins;
+        return logins.stream().collect(Collectors.toList());
     }
 
     @Override

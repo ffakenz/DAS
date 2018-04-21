@@ -12,9 +12,11 @@ import java.util.List;
 
 public class MSUsuariosDaoMock implements Dao {
 
-    List<DynaActionForm> usuarios  = new ArrayList<>();
+    List<DynaActionForm> usuarios;
 
     public MSUsuariosDaoMock() {
+        usuarios  = new ArrayList<>();
+
         UsuarioForm userMock = new UsuarioForm();
         userMock.setUsername("pepe");
         userMock.setPassword("123");

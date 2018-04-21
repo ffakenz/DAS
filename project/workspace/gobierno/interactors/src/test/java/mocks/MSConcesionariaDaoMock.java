@@ -11,9 +11,11 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class MSConcesionariaDaoMock implements Dao {
-    public List<ConcesionariaForm> concesionarias = new ArrayList<>();
+    public List<ConcesionariaForm> concesionarias;
 
     public MSConcesionariaDaoMock() {
+        concesionarias = new ArrayList<>();
+
         ConcesionariaForm c1 = new ConcesionariaForm();
         c1.setNombre("C1");
         c1.setConfig("REST");

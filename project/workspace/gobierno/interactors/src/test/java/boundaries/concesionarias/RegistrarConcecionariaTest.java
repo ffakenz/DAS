@@ -1,7 +1,7 @@
 package boundaries.concesionarias;
 
-import concesionarias.ConcesionariaInteractor;
-import concesionarias.boundaries.Concesionaria;
+import concesionarias.RegistrarInteractor;
+import concesionarias.boundaries.Registrar;
 import concesionarias.forms.ConcesionariaForm;
 import mocks.MSConcesionariaDaoMock;
 import org.junit.Test;
@@ -29,7 +29,7 @@ public class RegistrarConcecionariaTest {
         concecionaria.setNombre("C10");
         concecionaria.setConfig("AXIS");
 
-        Concesionaria concImpl = new ConcesionariaInteractor();
+        Registrar concImpl = new RegistrarInteractor();
 
         Optional<Long> logInId = concImpl.registrarConcesionaria(concecionaria).apply(dao);
 
@@ -44,11 +44,11 @@ public class RegistrarConcecionariaTest {
         concecionaria.setNombre("C10");
         concecionaria.setConfig("AXIS");
 
-        Concesionaria concImpl = new ConcesionariaInteractor();
+        Registrar concImpl = new RegistrarInteractor();
         Optional<Long> logInId = concImpl.registrarConcesionaria(concecionaria).apply(dao);
         Optional<Long> logInId2 = concImpl.registrarConcesionaria(concecionaria).apply(dao);
 
         assertEquals(logInId, Optional.of(new Long(4)));
-        assertEquals(logInId2, Optional.of(new Long(4)));
+        assertEquals(logInId2, Optional.empty());
     }
 }

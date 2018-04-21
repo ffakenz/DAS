@@ -44,7 +44,7 @@ public class LogInTest {
         Optional<Long> logInId = logInImpl.login(loginFormMock).apply(msLogInDaoMock);
         Optional<Long> logInId2 = logInImpl.login(loginFormMock).apply(msLogInDaoMock);
 
-        assertEquals(logInId2, Optional.of(new Long(2)));
+        assertEquals(logInId2, Optional.empty());
     }
 
     @Test

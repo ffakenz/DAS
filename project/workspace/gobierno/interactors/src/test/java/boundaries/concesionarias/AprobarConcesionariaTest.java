@@ -1,16 +1,16 @@
 package boundaries.concesionarias;
 
-import concesionarias.ConcesionariaInteractor;
+import concesionarias.AprobarInteractor;
+import concesionarias.ConsultarAprobadasInteractor;
+import concesionarias.boundaries.Aprobar;
+import concesionarias.boundaries.ConsultarAprobadas;
 import concesionarias.forms.ConcesionariaForm;
 import mocks.MSConcesionariaDaoMock;
 import org.junit.Test;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Optional;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 
@@ -19,7 +19,7 @@ public class AprobarConcesionariaTest {
     @Test
     public void testAprobadasIsEmpty() {
         MSConcesionariaDaoMock dao = new MSConcesionariaDaoMock();
-        ConcesionariaInteractor concecionaria = new ConcesionariaInteractor();
+        ConsultarAprobadas concecionaria = new ConsultarAprobadasInteractor();
 
         assertEquals(new ArrayList<>(), concecionaria.consultarAprobadas().apply(dao));
     }
@@ -27,7 +27,8 @@ public class AprobarConcesionariaTest {
     @Test
     public void testAprobarConcecionaria() throws SQLException {
         MSConcesionariaDaoMock dao = new MSConcesionariaDaoMock();
-        ConcesionariaInteractor concecionaria = new ConcesionariaInteractor();
+        Aprobar concecionaria = new AprobarInteractor();
+        ConsultarAprobadas consultor = new ConsultarAprobadasInteractor();
 
         Optional<ConcesionariaForm> conc =
                 dao.select(null).stream().findFirst().map( c -> (ConcesionariaForm) c);
@@ -42,7 +43,7 @@ public class AprobarConcesionariaTest {
             }).orElse(false);
         }).map(c -> (ConcesionariaForm) c).findFirst();
 
-        assertEquals(true, concecionaria.consultarAprobadas().apply(dao).contains(concAprobada.get()));
+        assertEquals(true, consultor.consultarAprobadas().apply(dao).contains(concAprobada.get()));
         assertEquals(true, concAprobada.get().getFechaAlta() != null);
         assertEquals(true, codigo.isPresent());
     }
