@@ -8,6 +8,20 @@
     <!-- ***************************** -->
     <!--   TABLE DROP CHANGE-SETS      -->
     <!-- ***************************** -->
+    <changeSet id="Drop table concesionaria_config_params" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="concesionaria_config_params" />
+        </preConditions>
+        <dropTable tableName="concesionaria_config_params"/>
+    </changeSet>
+
+    <changeSet id="Drop table config_param" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="config_param" />
+        </preConditions>
+        <dropTable tableName="config_param"/>
+    </changeSet>
+
     <changeSet id="Drop table concesionaria" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <tableExists tableName="concesionaria" />
@@ -41,6 +55,24 @@
             </not>
         </preConditions>
         <sqlFile path="/src/main/resources/concesionarias/tables/concesionaria.sql" />
+    </changeSet>
+
+    <changeSet id="Create table config_param" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="config_param" />
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/concesionarias/tables/config_param.sql" />
+    </changeSet>
+
+    <changeSet id="Create table concesionaria_config_params" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="concesionaria_config_params" />
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/concesionarias/tables/concesionaria_config_params.sql" />
     </changeSet>
 
 </databaseChangeLog>
