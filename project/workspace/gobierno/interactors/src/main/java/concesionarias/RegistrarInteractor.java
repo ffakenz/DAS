@@ -36,7 +36,7 @@ public class RegistrarInteractor implements Interactor, Registrar, Utils {
     @Override
     public Function<BiFunction<String, String, Dao>, InteractorResponse> execute(DynaActionForm form) {
         return daoFactory -> {
-            Dao dao = daoFactory.apply("Concesionarias", "concesionarias");
+            Dao dao = daoFactory.apply("Concesionaria", "concesionarias");
             Optional<Long> concesionariaID = registrarConcesionaria((ConcesionariaForm) form).apply(dao);
 
             InteractorResponse response = new InteractorResponse();

@@ -16,5 +16,9 @@
             <forward name="success" path="/util/success.jsp" />
             <forward name="failure" path="/util/failure.jsp" />
         </action>
+        <action type="ConfigurarAction" path="/Configurar.do">
+            <forward name="success" path="/util/success.jsp" />
+            <forward name="failure" path="/util/failure.jsp" />
+        </action>
     </action-mappings>
 </actions>

@@ -16,7 +16,8 @@ public interface Utils {
                     return
                             conc.getNombre().equals(form.getNombre()) &&
                                     conc.getConfig().equals(form.getConfig()) &&
-                                    conc.getId() == form.getId();
+                                    conc.getId() == form.getId() &&
+                                    conc.getFechaRegistracion() != null;
                 });
             } catch(SQLException e) {
                 e.printStackTrace();
