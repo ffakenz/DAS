@@ -22,7 +22,6 @@ public class LoginAction implements Action {
 	public ForwardConfig execute(ActionMapping mapping, DynaActionForm form, HttpServletRequest request,
 																			HttpServletResponse response) throws SQLException, RuntimeException {
 
-
 		Interactor action = new LoginInteractor();
 		InteractorResponse result = action.execute(form).apply(DaoFactory::getDao);
 

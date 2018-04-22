@@ -21,16 +21,22 @@ public class MSConcesionariaDaoMock implements Dao {
         c1.setConfig("REST");
         c1.setId(Long.valueOf(1));
         c1.setFechaRegistracion(new Date(System.currentTimeMillis()));
+        c1.setFechaAlta(new Date(System.currentTimeMillis()));
+        c1.setCodigo("CODIGO SECRETO: C1");
         ConcesionariaForm c2 = new ConcesionariaForm();
         c2.setNombre("C2");
         c2.setConfig("CXF");
         c2.setId(Long.valueOf(2));
         c2.setFechaRegistracion(new Date(System.currentTimeMillis()));
+        c2.setFechaAlta(new Date(System.currentTimeMillis()));
+        c2.setCodigo("CODIGO SECRETO: C2");
         ConcesionariaForm c3 = new ConcesionariaForm();
         c3.setNombre("C3");
         c3.setConfig("AXIS");
         c3.setId(Long.valueOf(3));
         c3.setFechaRegistracion(new Date(System.currentTimeMillis()));
+        c3.setFechaAlta(new Date(System.currentTimeMillis()));
+        c3.setCodigo("CODIGO SECRETO: C3");
         concesionarias.addAll(Arrays.asList(c1, c2, c3));
     }
 

@@ -34,7 +34,7 @@ public interface Utils {
                                                 ((ConcesionariaForm)l).getConfig() == form.getConfig()
                                 )
                                 .map( l -> ((ConcesionariaForm) l).getId())
-                                .max(Comparable::compareTo);
+                                .findAny();
 
                 return max;
             } catch (SQLException e) {

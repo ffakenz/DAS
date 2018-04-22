@@ -34,8 +34,9 @@ public class ConcecionariasInteractorsTest {
         // consultar aprobadas
         InteractorResponse r1 = a1.execute(null).apply(daoFactoryMock);
         // no hay aprobadas
-        assert(r1.getResponse() == ResponseForward.FAILURE);
-        assert(((List<ConcesionariaForm>)r1.getResult()).isEmpty() == true);
+        assert(r1.getResponse() == ResponseForward.SUCCESS);
+        assert(((List<ConcesionariaForm>)r1.getResult()).isEmpty() == false);
+        assert(((List<ConcesionariaForm>)r1.getResult()).size() == 3);
 
         // creamos concecionaria a aprobar
         ConcesionariaForm concecionaria = new ConcesionariaForm();
@@ -47,7 +48,6 @@ public class ConcecionariasInteractorsTest {
         // concesionaria no aprobada ya que no existe
         assert(r2.getResponse() == ResponseForward.FAILURE);
         assert(((Optional<String>)r2.getResult()).isPresent() == false);
-
 
         // registramos concesionaria
         Interactor a3 = new RegistrarInteractor();
