@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class MSConcesionariaDao extends DaoImpl {
+public class MSConcesionariasDao extends DaoImpl {
 
     @Override
     public DynaActionForm make(ResultSet result) throws SQLException {

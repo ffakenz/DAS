@@ -1,6 +1,5 @@
 package interactors.concesionarias;
 
-import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.Dao;
 import concesionarias.AprobarInteractor;
 import concesionarias.ConsultarAprobadasInteractor;
@@ -9,7 +8,7 @@ import concesionarias.forms.ConcesionariaForm;
 import core.Interactor;
 import core.InteractorResponse;
 import core.ResponseForward;
-import mocks.MSConcesionariaDaoMock;
+import mocks.MSConcesionariasDaoMock;
 import org.junit.Test;
 
 import java.util.List;
@@ -18,7 +17,7 @@ import java.util.function.BiFunction;
 
 public class ConcecionariasInteractorsTest {
 
-    Dao daoLogin = new MSConcesionariaDaoMock();;
+    Dao daoLogin = new MSConcesionariasDaoMock();;
     BiFunction<String, String, Dao> daoFactoryMock = (daoName, daoPackage) -> {
         if(daoName.equals("Concesionarias") && daoPackage.equals("concesionarias")) {
             return daoLogin;

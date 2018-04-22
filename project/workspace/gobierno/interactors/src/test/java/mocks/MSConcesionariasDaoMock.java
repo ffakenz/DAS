@@ -10,10 +10,10 @@ import java.sql.Date;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class MSConcesionariaDaoMock implements Dao {
+public class MSConcesionariasDaoMock implements Dao {
     public List<ConcesionariaForm> concesionarias;
 
-    public MSConcesionariaDaoMock() {
+    public MSConcesionariasDaoMock() {
         concesionarias = new ArrayList<>();
 
         ConcesionariaForm c1 = new ConcesionariaForm();

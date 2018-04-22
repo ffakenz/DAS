@@ -3,7 +3,7 @@ package boundaries.concesionarias;
 import concesionarias.RegistrarInteractor;
 import concesionarias.boundaries.Registrar;
 import concesionarias.forms.ConcesionariaForm;
-import mocks.MSConcesionariaDaoMock;
+import mocks.MSConcesionariasDaoMock;
 import org.junit.Test;
 
 import java.util.Optional;
@@ -14,7 +14,7 @@ public class RegistrarConcecionariaTest {
 
     @Test
     public void testMockDBIsEmpty() {
-        MSConcesionariaDaoMock dao = new MSConcesionariaDaoMock();
+        MSConcesionariasDaoMock dao = new MSConcesionariasDaoMock();
         ConcesionariaForm concecionaria = new ConcesionariaForm();
         concecionaria.setNombre("C10");
         concecionaria.setConfig("AXIS");
@@ -24,7 +24,7 @@ public class RegistrarConcecionariaTest {
 
     @Test
     public void testRegistrarConcecionarias() {
-        MSConcesionariaDaoMock dao = new MSConcesionariaDaoMock();
+        MSConcesionariasDaoMock dao = new MSConcesionariasDaoMock();
         ConcesionariaForm concecionaria = new ConcesionariaForm();
         concecionaria.setNombre("C10");
         concecionaria.setConfig("AXIS");
@@ -39,7 +39,7 @@ public class RegistrarConcecionariaTest {
 
     @Test
     public void testRegistrarTwice(){
-        MSConcesionariaDaoMock dao = new MSConcesionariaDaoMock();
+        MSConcesionariasDaoMock dao = new MSConcesionariasDaoMock();
         ConcesionariaForm concecionaria = new ConcesionariaForm();
         concecionaria.setNombre("C10");
         concecionaria.setConfig("AXIS");

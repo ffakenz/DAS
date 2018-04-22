@@ -7,11 +7,10 @@ import concesionarias.boundaries.Aprobar;
 import concesionarias.boundaries.ConsultarAprobadas;
 import concesionarias.boundaries.Registrar;
 import concesionarias.forms.ConcesionariaForm;
-import mocks.MSConcesionariaDaoMock;
+import mocks.MSConcesionariasDaoMock;
 import org.junit.Test;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
@@ -20,7 +19,7 @@ public class AprobarConcesionariaTest {
 
     @Test
     public void testAprobadasIsNotEmpty() {
-        MSConcesionariaDaoMock dao = new MSConcesionariaDaoMock();
+        MSConcesionariasDaoMock dao = new MSConcesionariasDaoMock();
         ConsultarAprobadas concecionaria = new ConsultarAprobadasInteractor();
 
         assert(concecionaria.consultarAprobadas().apply(dao).size() == 3);
@@ -28,7 +27,7 @@ public class AprobarConcesionariaTest {
 
     @Test
     public void testAprobarConcecionaria() throws SQLException {
-        MSConcesionariaDaoMock dao = new MSConcesionariaDaoMock();
+        MSConcesionariasDaoMock dao = new MSConcesionariasDaoMock();
         Aprobar aprobador = new AprobarInteractor();
         ConsultarAprobadas consultor = new ConsultarAprobadasInteractor();
 

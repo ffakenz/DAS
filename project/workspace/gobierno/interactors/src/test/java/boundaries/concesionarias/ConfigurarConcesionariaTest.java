@@ -4,19 +4,17 @@ import ar.edu.ubp.das.mvc.db.Dao;
 import concesionarias.ConfigurarInteractor;
 import concesionarias.boundaries.Configurar;
 import concesionarias.forms.ConfigParamForm;
-import core.Interactor;
-import mocks.MSConcesionariaDaoMock;
+import mocks.MSConcesionariasDaoMock;
 import mocks.MSConfigurarConcesionariaDaoMock;
 import org.junit.Test;
 
 import java.sql.SQLException;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 public class ConfigurarConcesionariaTest {
 
     Dao confDao = new MSConfigurarConcesionariaDaoMock();
-    Dao concDao = new MSConcesionariaDaoMock();
+    Dao concDao = new MSConcesionariasDaoMock();
     BiFunction<String, String, Dao> daoFactoryMock = (daoName, daoPackage) -> {
         if(daoName.equals("Concesionarias") && daoPackage.equals("concesionarias")) {
             return concDao;
