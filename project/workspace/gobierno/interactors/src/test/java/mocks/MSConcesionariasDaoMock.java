@@ -62,7 +62,7 @@ public class MSConcesionariasDaoMock implements Dao {
     public void update(DynaActionForm form) throws SQLException {
         concesionarias.stream().filter( c -> {
             ConcesionariaForm formConc = (ConcesionariaForm) form;
-            return c.getCuit() == formConc.getCuit();
+            return c.getId() == formConc.getId();
         }).findFirst().ifPresent( c -> {
             concesionarias.remove(c);
             concesionarias.add((ConcesionariaForm) form);

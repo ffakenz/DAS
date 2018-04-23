@@ -35,7 +35,7 @@ public class AprobarInteractor implements Aprobar, Utils {
                         .filter( c -> {
                             return
                                 testConcesionariaRegistrada(form).apply(dao) &&
-                                c.getCuit().equals(form.getCuit()) &&
+                                c.getId() == form.getId() &&
                                 c.getFechaAlta() == null &&
                                 c.getCodigo() == null;
                         })
@@ -63,11 +63,11 @@ public class AprobarInteractor implements Aprobar, Utils {
 
 
     private Optional<ConcesionariaForm> makeFrom(DynaActionForm form) {
-        Optional<String> cuitForm = form.getItem("cuit");
+        Optional<String> idForm = form.getItem("id");
 
-        return cuitForm.map( cuitRqst -> {
+        return idForm.map( idRqst -> {
                                 ConcesionariaForm concesionaria = new ConcesionariaForm();
-                                concesionaria.setCuit(cuitRqst);
+                                concesionaria.setId(Long.valueOf(idRqst));
                                 return concesionaria;
         });
     }

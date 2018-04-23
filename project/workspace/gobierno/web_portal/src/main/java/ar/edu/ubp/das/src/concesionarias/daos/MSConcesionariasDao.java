@@ -52,7 +52,7 @@ public class MSConcesionariasDao extends DaoImpl {
     public void update(DynaActionForm form) throws SQLException {
         this.connect();
         this.setProcedure( "dbo.aprove_concesionaria(?, ?, ?)" );
-        this.setParameter( 1, ((ConcesionariaForm) form).getCuit());
+        this.setParameter( 1, ((ConcesionariaForm) form).getId());
         this.setParameter( 2, ((ConcesionariaForm) form).getFechaAlta());
         this.setParameter( 3, ((ConcesionariaForm) form).getCodigo());
         this.executeUpdate();

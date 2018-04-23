@@ -53,17 +53,18 @@ public class ConcecionariasInteractorsTest {
         Interactor a2 = new AprobarInteractor();
         InteractorResponse r2 =  a2.execute(form).apply(daoFactoryMock);
         // concesionaria no aprobada ya que no existe
-        assertEquals(ResponseForward.FAILURE, r2.getResponse());
+        assertEquals(ResponseForward.WARNING, r2.getResponse());
         assertEquals(false, ((Optional<String>)r2.getResult()).isPresent());
 
         // registramos concesionaria
         Interactor a3 = new RegistrarInteractor();
         InteractorResponse r3 = a3.execute(form).apply(daoFactoryMock);
         // concesionaria registrada
-        assert(r3.getResponse() == ResponseForward.SUCCESS);
-        assert(((Optional<Long>)r3.getResult()).isPresent() == true);
+        assertEquals(ResponseForward.SUCCESS, r3.getResponse());
+        assertEquals(true, ((Optional<Long>)r3.getResult()).isPresent());
 
         // aprobamos concesionaria
+        form.setItem("id", ((Optional<Long>)r3.getResult()).get().toString());
         InteractorResponse r4 =  a2.execute(form).apply(daoFactoryMock);
         // concesionaria aprobada
         assertEquals(ResponseForward.SUCCESS, r4.getResponse());
@@ -82,13 +83,14 @@ public class ConcecionariasInteractorsTest {
 
         // creamos concecionaria a aprobar
         DynaActionForm form = new DynaActionForm();
-        form.setItem("cuit", "21-93337511-1");
+        form.setItem("id", "3");
 
         // aprobar concesionaria
         Interactor a2 = new AprobarInteractor();
         InteractorResponse r2 =  a2.execute(form).apply(daoFactoryMock);
 
         assertEquals(ResponseForward.SUCCESS, r2.getResponse());
+
     }
 
     @Test
@@ -96,7 +98,7 @@ public class ConcecionariasInteractorsTest {
 
         // creamos concecionaria a aprobar
         DynaActionForm form = new DynaActionForm();
-        form.setItem("cuit", "no existe");
+        form.setItem("id", "5");
 
         // aprobar concesionaria
         Interactor a2 = new AprobarInteractor();

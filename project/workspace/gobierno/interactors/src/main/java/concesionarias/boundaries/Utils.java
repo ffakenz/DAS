@@ -13,8 +13,12 @@ public interface Utils {
     default Function<Dao, Boolean> testConcesionariaRegistrada(ConcesionariaForm form) {
         return dao -> {
             return exists(conc -> {
-                return  conc.getCuit().equals(form.getCuit()) &&
-                        conc.getFechaRegistracion() != null;
+                return
+                        // from registrar
+                        (conc.getCuit().equals(form.getCuit()) &&
+                        conc.getFechaRegistracion() != null ) ||
+                        // from aprobar
+                        conc.getId() == form.getId();
             }).apply(dao);
         };
     }
