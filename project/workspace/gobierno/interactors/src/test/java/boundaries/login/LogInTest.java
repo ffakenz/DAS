@@ -14,48 +14,25 @@ public class LogInTest {
 
     @Test
     public void testMockDBIsEmpty() {
-        MSLogInDaoMock msLogInDaoMock = new MSLogInDaoMock();
-        LogInForm loginFormMock = new LogInForm();
-        loginFormMock.setUsername("pepe");
+        MSLogInDaoMock loginDao = new MSLogInDaoMock();
+        LogInForm loginRqst = new LogInForm();
+        loginRqst.setUsername("pepe");
 
-        assertEquals(false, msLogInDaoMock.logins.contains(loginFormMock));
+        assertEquals(false, loginDao.logins.contains(loginRqst));
     }
 
     @Test
     public void testLoginSuccessfully() {
-        MSLogInDaoMock msLogInDaoMock = new MSLogInDaoMock();
-        LogInForm loginFormMock = new LogInForm();
-        loginFormMock.setUsername("pepe");
+        MSLogInDaoMock loginDao = new MSLogInDaoMock();
+        LogInForm loginRqst = new LogInForm();
+        loginRqst.setUsername("pepe");
 
-        LogIn logInImpl = new LoginInteractor();
-        Optional<Long> logInId = logInImpl.login(loginFormMock).apply(msLogInDaoMock);
+        LogIn logueador = new LoginInteractor();
+        Optional<Long> logInId = logueador.login(loginRqst).apply(loginDao);
 
-        assertEquals(true, msLogInDaoMock.logins.contains(loginFormMock));
+        assertEquals(true, loginDao.logins.contains(loginRqst));
         assertEquals(logInId, Optional.of(new Long(1)));
+        assert(logueador.isLoggedIn(loginRqst).apply(loginDao).equals(logInId));
     }
 
-    @Test
-    public void loginTwice(){
-        MSLogInDaoMock msLogInDaoMock = new MSLogInDaoMock();
-        LogInForm loginFormMock = new LogInForm();
-        loginFormMock.setUsername("pepe");
-
-        LogIn logInImpl = new LoginInteractor();
-        Optional<Long> logInId = logInImpl.login(loginFormMock).apply(msLogInDaoMock);
-        Optional<Long> logInId2 = logInImpl.login(loginFormMock).apply(msLogInDaoMock);
-
-        assertEquals(logInId2, Optional.empty());
-    }
-
-    @Test
-    public void loginOther(){
-        MSLogInDaoMock msLogInDaoMock = new MSLogInDaoMock();
-        LogInForm loginFormMock = new LogInForm();
-        loginFormMock.setUsername("other");
-
-        LogIn logInImpl = new LoginInteractor();
-        Optional<Long> logInId2 = logInImpl.login(loginFormMock).apply(msLogInDaoMock);
-
-        assertEquals(logInId2, Optional.of(new Long(1)));
-    }
 }

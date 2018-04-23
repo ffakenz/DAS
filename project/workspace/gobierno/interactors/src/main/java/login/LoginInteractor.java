@@ -8,26 +8,43 @@ import core.ResponseForward;
 import login.boundaries.LogIn;
 import login.forms.LogInForm;
 import login.forms.UsuarioForm;
+
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Optional;
 import java.util.function.BiFunction;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
-public class LoginInteractor implements Interactor, LogIn {
+public class LoginInteractor implements LogIn {
 
-    private Function<Dao, Boolean> isLoggedIn(LogInForm form) {
+    public Function<Dao, Optional<Long>> isLoggedIn(LogInForm form) {
         return loginDao -> {
             try {
                 return
-                    loginDao.select(null).stream().anyMatch( l -> {
+                    loginDao.select(null).stream().filter( l -> {
                         LogInForm login = (LogInForm) l;
                         return
                             login.getUsername().equals(form.getUsername()) &&
                                 login.getLogoutTime() == null;
+                    }).findFirst().map( l -> {
+                        LogInForm lf = (LogInForm)l;
+                        return lf.getId();
                     });
             } catch(SQLException ex) {
                 ex.printStackTrace();
-                return false;
+                return Optional.empty();
+            }
+        };
+    }
+
+    @Override
+    public Consumer<Dao> logout(LogInForm req) {
+        return loginDao -> {
+            try {
+                loginDao.update(req);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
             }
         };
     }
@@ -36,18 +53,13 @@ public class LoginInteractor implements Interactor, LogIn {
     public Function<Dao, Optional<Long>> login(LogInForm form) {
         return loginDao -> {
             try {
-                if(!isLoggedIn(form).apply(loginDao)) {
-                    loginDao.insert(form);
-                    Optional<Long> max =
-                            loginDao.select(null).stream()
-                                    .filter( l -> ((LogInForm)l).getUsername().equals(form.getUsername()) )
-                                    .map( l -> ((LogInForm) l).getId())
-                                    .max(Comparable::compareTo);
-
-                    return max;
-                } else {
-                    return Optional.empty();
-                }
+                loginDao.insert(form);
+                Optional<Long> max =
+                        loginDao.select(null).stream()
+                                .filter( l -> ((LogInForm)l).getUsername().equals(form.getUsername()) )
+                                .map( l -> ((LogInForm) l).getId())
+                                .max(Comparable::compareTo);
+                return max;
             } catch (SQLException e) {
                 e.printStackTrace();
                 return Optional.empty();
@@ -84,12 +96,20 @@ public class LoginInteractor implements Interactor, LogIn {
                             usr.setUsername(u);
                             usr.setPassword(p);
                             LoginInteractor auth = new LoginInteractor();
-                            Boolean isUserValid = auth.validarUsuario(usr).apply(dao);
+
 
                             InteractorResponse response = new InteractorResponse();
-                            if(isUserValid) {
+                            // is user valid ?
+                            if(auth.validarUsuario(usr).apply(dao)) {
                                 LogInForm logInForm = new LogInForm();
                                 logInForm.setUsername(u);
+                                // is user logged in ?
+                                auth.isLoggedIn(logInForm).apply(logInDao).ifPresent(loginId -> {
+                                    logInForm.setId(loginId);
+                                    logInForm.setLogoutTime(new Date(System.currentTimeMillis()));
+                                    auth.logout(logInForm).accept(logInDao);
+                                });
+
                                 Optional<Long> LogInId = auth.login(logInForm).apply(logInDao);
                                 response.setResult(LogInId);
 
@@ -97,6 +117,7 @@ public class LoginInteractor implements Interactor, LogIn {
                                 else response.setResponse(ResponseForward.FAILURE);
                             } else {
                                 response.setResponse(ResponseForward.FAILURE);
+                                response.setResult(Optional.empty());
                             }
                             return response;
                         });

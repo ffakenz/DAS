@@ -39,7 +39,6 @@ public class LoginInteractorTest {
 
         assert(response.getResponse() == ResponseForward.SUCCESS);
         assert(((Optional<Long>)response.getResult()).orElse(Long.MIN_VALUE) == 1);
-
     }
 
     @Test
@@ -57,7 +56,34 @@ public class LoginInteractorTest {
 
 
         InteractorResponse response2 = action.execute(userForm).apply(daoFactoryMock);
-        assert(response2.getResponse() == ResponseForward.FAILURE);
-        assert(((Optional<Long>)response2.getResult()).isPresent() == false);
+        assert(response2.getResponse() == ResponseForward.SUCCESS);
+        assert(((Optional<Long>)response2.getResult()).orElse(Long.MIN_VALUE) == 2);
+    }
+
+    @Test
+    public void testMissingCredentials() {
+        Interactor action = new LoginInteractor();
+
+        DynaActionForm userForm = new DynaActionForm();
+        userForm.setItem("username", "pepe");
+
+        InteractorResponse response = action.execute(userForm).apply(daoFactoryMock);
+
+        assert(response.getResponse() == ResponseForward.WARNING);
+        assert(((Optional<Long>)response.getResult()).equals(Optional.empty()));
+    }
+
+    @Test
+    public void testLoginFailure() {
+        Interactor action = new LoginInteractor();
+
+        DynaActionForm userForm = new DynaActionForm();
+        userForm.setItem("username", "no exists");
+        userForm.setItem("password", "no password");
+
+        InteractorResponse response = action.execute(userForm).apply(daoFactoryMock);
+
+        assert(response.getResponse() == ResponseForward.FAILURE);
+        assert(((Optional<Long>)response.getResult()).equals(Optional.empty()));
     }
 }

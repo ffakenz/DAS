@@ -26,15 +26,24 @@ public class MSConcesionariasDao extends DaoImpl {
         concesionariaForm.setFechaRegistracion(result.getDate("fecha_registracion"));
         concesionariaForm.setFechaAlta(result.getDate("fecha_alta"));
         concesionariaForm.setCodigo(result.getString("codigo"));
+        concesionariaForm.setDireccion(result.getString("direccion"));
+        concesionariaForm.setCuit(result.getString("cuit"));
+        concesionariaForm.setTel(result.getString("tel"));
+        concesionariaForm.setEmail(result.getString("email"));
+
         return concesionariaForm;
     }
 
     @Override
     public void insert(DynaActionForm form) throws SQLException {
         this.connect();
-        this.setProcedure( "dbo.log_concesionaria(?, ?)" );
+        this.setProcedure( "dbo.log_concesionaria(?, ?, ?, ?, ?, ?)" );
         this.setParameter( 1, ((ConcesionariaForm) form).getNombre());
         this.setParameter( 2, ((ConcesionariaForm) form).getConfig());
+        this.setParameter( 3, ((ConcesionariaForm) form).getDireccion());
+        this.setParameter( 4, ((ConcesionariaForm) form).getCuit());
+        this.setParameter( 5, ((ConcesionariaForm) form).getTel());
+        this.setParameter( 6, ((ConcesionariaForm) form).getEmail());
         this.executeUpdate();
         this.disconnect();
     }
@@ -43,7 +52,7 @@ public class MSConcesionariasDao extends DaoImpl {
     public void update(DynaActionForm form) throws SQLException {
         this.connect();
         this.setProcedure( "dbo.aprove_concesionaria(?, ?, ?)" );
-        this.setParameter( 1, ((ConcesionariaForm) form).getId());
+        this.setParameter( 1, ((ConcesionariaForm) form).getCuit());
         this.setParameter( 2, ((ConcesionariaForm) form).getFechaAlta());
         this.setParameter( 3, ((ConcesionariaForm) form).getCodigo());
         this.executeUpdate();

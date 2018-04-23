@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-public class ConfigurarInteractor implements Interactor, Configurar {
+public class ConfigurarInteractor implements Configurar {
 
     @Override
     public Function<BiFunction<String, String, Dao>, Boolean> configurarConcesionaria(ConfigParamForm configParam) {

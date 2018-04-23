@@ -28,6 +28,10 @@ public class RegistrarConcecionariaTest {
         ConcesionariaForm concecionaria = new ConcesionariaForm();
         concecionaria.setNombre("C10");
         concecionaria.setConfig("AXIS");
+        concecionaria.setCuit("CUIT10");
+        concecionaria.setItem("direccion", "whatever");
+        concecionaria.setItem("tel", "whatever");
+        concecionaria.setItem("email", "whatever");
 
         Registrar concImpl = new RegistrarInteractor();
 
@@ -43,6 +47,7 @@ public class RegistrarConcecionariaTest {
         ConcesionariaForm concecionaria = new ConcesionariaForm();
         concecionaria.setNombre("C10");
         concecionaria.setConfig("AXIS");
+        concecionaria.setCuit("CUIT10");
 
         Registrar concImpl = new RegistrarInteractor();
         Optional<Long> logInId = concImpl.registrarConcesionaria(concecionaria).apply(dao);
@@ -52,3 +57,4 @@ public class RegistrarConcecionariaTest {
         assertEquals(logInId2, Optional.empty());
     }
 }
+

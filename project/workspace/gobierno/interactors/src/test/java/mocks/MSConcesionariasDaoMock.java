@@ -19,6 +19,7 @@ public class MSConcesionariasDaoMock implements Dao {
         ConcesionariaForm c1 = new ConcesionariaForm();
         c1.setNombre("C1");
         c1.setConfig("REST");
+        c1.setCuit("CUIT1");
         c1.setId(Long.valueOf(1));
         c1.setFechaRegistracion(new Date(System.currentTimeMillis()));
         c1.setFechaAlta(new Date(System.currentTimeMillis()));
@@ -26,6 +27,7 @@ public class MSConcesionariasDaoMock implements Dao {
         ConcesionariaForm c2 = new ConcesionariaForm();
         c2.setNombre("C2");
         c2.setConfig("CXF");
+        c2.setCuit("CUIT2");
         c2.setId(Long.valueOf(2));
         c2.setFechaRegistracion(new Date(System.currentTimeMillis()));
         c2.setFechaAlta(new Date(System.currentTimeMillis()));
@@ -33,10 +35,9 @@ public class MSConcesionariasDaoMock implements Dao {
         ConcesionariaForm c3 = new ConcesionariaForm();
         c3.setNombre("C3");
         c3.setConfig("AXIS");
+        c3.setCuit("21-93337511-1");
         c3.setId(Long.valueOf(3));
         c3.setFechaRegistracion(new Date(System.currentTimeMillis()));
-        c3.setFechaAlta(new Date(System.currentTimeMillis()));
-        c3.setCodigo("CODIGO SECRETO: C3");
         concesionarias.addAll(Arrays.asList(c1, c2, c3));
     }
 
@@ -61,7 +62,7 @@ public class MSConcesionariasDaoMock implements Dao {
     public void update(DynaActionForm form) throws SQLException {
         concesionarias.stream().filter( c -> {
             ConcesionariaForm formConc = (ConcesionariaForm) form;
-            return c.getId() == formConc.getId();
+            return c.getCuit() == formConc.getCuit();
         }).findFirst().ifPresent( c -> {
             concesionarias.remove(c);
             concesionarias.add((ConcesionariaForm) form);

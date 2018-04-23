@@ -22,7 +22,7 @@ public class AprobarConcesionariaTest {
         MSConcesionariasDaoMock dao = new MSConcesionariasDaoMock();
         ConsultarAprobadas concecionaria = new ConsultarAprobadasInteractor();
 
-        assert(concecionaria.consultarAprobadas().apply(dao).size() == 3);
+        assertEquals(2, concecionaria.consultarAprobadas().apply(dao).size());
     }
 
     @Test
@@ -34,12 +34,12 @@ public class AprobarConcesionariaTest {
         ConcesionariaForm concecionaria = new ConcesionariaForm();
         concecionaria.setNombre("C10");
         concecionaria.setConfig("AXIS");
+        concecionaria.setCuit("CUIT10");
 
 
         Registrar registrador = new RegistrarInteractor();
         Optional<Long> registroID = registrador.registrarConcesionaria(concecionaria).apply(dao);
 
-        registroID.ifPresent(System.out::println);
         assert(registroID.isPresent());
 
 

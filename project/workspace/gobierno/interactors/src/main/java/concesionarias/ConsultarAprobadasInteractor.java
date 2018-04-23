@@ -15,7 +15,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class ConsultarAprobadasInteractor implements Interactor, ConsultarAprobadas {
+public class ConsultarAprobadasInteractor implements ConsultarAprobadas {
     @Override
     public Function<Dao, List<ConcesionariaForm>> consultarAprobadas() {
         return dao -> {

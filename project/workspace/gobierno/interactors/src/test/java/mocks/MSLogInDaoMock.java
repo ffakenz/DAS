@@ -7,6 +7,7 @@ import login.forms.UsuarioForm;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -39,7 +40,16 @@ public class MSLogInDaoMock implements Dao {
 
     @Override
     public void update(DynaActionForm form) throws SQLException {
-
+        logins.stream().filter( c -> {
+            LogInForm formConc = (LogInForm) form;
+            return c.getId() == formConc.getId();
+        }).findFirst().ifPresent( c -> {
+            logins.remove(c);
+            LogInForm newLogin = (LogInForm) form;
+            newLogin.setLoginTime(c.getLoginTime());
+            newLogin.setLogoutTime(new Date(System.currentTimeMillis()));
+            logins.add((LogInForm) form);
+        });
     }
 
     @Override

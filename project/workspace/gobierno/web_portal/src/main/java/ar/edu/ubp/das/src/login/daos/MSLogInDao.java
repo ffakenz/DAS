@@ -14,8 +14,8 @@ public class MSLogInDao extends DaoImpl {
         LogInForm logInForm = new LogInForm();
         logInForm.setId(result.getLong("id"));
         logInForm.setUsername(result.getString("username"));
-        logInForm.setLoginTime(result.getDate("loginTime"));
-        logInForm.setLogoutTime(result.getDate("logoutTime"));
+        logInForm.setLoginTime(result.getDate("log_in_time"));
+        logInForm.setLogoutTime(result.getDate("log_out_time"));
         return logInForm;
     }
 
@@ -30,6 +30,12 @@ public class MSLogInDao extends DaoImpl {
 
     @Override
     public void update(DynaActionForm form) throws SQLException {
+        this.connect();
+        this.setProcedure( "dbo.log_out(?, ?)" );
+        this.setParameter( 1, ((LogInForm) form).getId());
+        this.setParameter( 2, ((LogInForm) form).getLogoutTime());
+        this.executeUpdate();
+        this.disconnect();
     }
 
     @Override
