@@ -10,6 +10,7 @@
     <!-- ########################################### -->
 
     <include file="/src/main/resources/login/tables/create_tables.xml" />
+    <include file="/src/main/resources/estado_cuentas/tables/create_tables.xml" />
     <include file="/src/main/resources/concesionarias/tables/create_tables.xml" />
 
     <!-- ########################################### -->
@@ -26,4 +27,5 @@
 
     <include file="/src/main/resources/login/populate/populate_tables.xml" />
     <include file="/src/main/resources/concesionarias/populate/populate_tables.xml" />
+    <include file="/src/main/resources/estado_cuentas/populate/populate_tables.xml" />
 </databaseChangeLog>
