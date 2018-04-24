@@ -9,6 +9,7 @@
     <!-- ########################################### -->
     <!-- Main drop change-sets                -->
     <!-- ########################################### -->
+    <include file="/src/main/resources/estado_cuentas/drops/drop_tables.xml" />
     <include file="/src/main/resources/concesionarias/drops/drop_tables.xml" />
     <include file="/src/main/resources/login/drops/drop_tables.xml" />
 
@@ -17,8 +18,8 @@
     <!-- ########################################### -->
 
     <include file="/src/main/resources/login/tables/create_tables.xml" />
-    <include file="/src/main/resources/estado_cuentas/tables/create_tables.xml" />
     <include file="/src/main/resources/concesionarias/tables/create_tables.xml" />
+    <include file="/src/main/resources/estado_cuentas/tables/create_tables.xml" />
 
     <!-- ########################################### -->
     <!-- Procedures change-sets                -->
