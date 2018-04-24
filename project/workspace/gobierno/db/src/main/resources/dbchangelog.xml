@@ -7,13 +7,15 @@
 
 
     <!-- ########################################### -->
-    <!-- Main drop change-sets                -->
+    <!-- Main drop change-sets                       -->
     <!-- ########################################### -->
+    <include file="/src/main/resources/clientes/drops/drop_tables.xml" />
     <include file="/src/main/resources/concesionarias/drops/drop_tables.xml" />
     <include file="/src/main/resources/login/drops/drop_tables.xml" />
 
+
     <!-- ########################################### -->
-    <!-- Main change-sets                -->
+    <!-- Main change-sets                           -->
     <!-- ########################################### -->
 
     <include file="/src/main/resources/login/tables/create_tables.xml" />

@@ -6,15 +6,14 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <!-- ***************************** -->
-    <!--   TABLE CREATION CHANGE-SETS  -->
+    <!--   TABLE DROP CHANGE-SETS      -->
     <!-- ***************************** -->
-    <changeSet id="Create table clientes" author="DAS-Team" runAlways="true" runOnChange="true">
+    <changeSet id="Drop table clientes" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="clientes" />
-            </not>
+            <tableExists tableName="clientes" />
         </preConditions>
-        <sqlFile path="/src/main/resources/clientes/tables/clientes.sql" />
+        <dropTable tableName="clientes"/>
     </changeSet>
+
 
 </databaseChangeLog>
