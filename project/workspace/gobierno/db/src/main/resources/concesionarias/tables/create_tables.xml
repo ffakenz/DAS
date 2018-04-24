@@ -5,36 +5,6 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <!-- ***************************** -->
-    <!--   TABLE DROP CHANGE-SETS      -->
-    <!-- ***************************** -->
-    <changeSet id="Drop table concesionaria_config_params" author="DAS-Team" runAlways="true" runOnChange="true">
-        <preConditions onFail="MARK_RAN">
-            <tableExists tableName="concesionaria_config_params" />
-        </preConditions>
-        <dropTable tableName="concesionaria_config_params"/>
-    </changeSet>
-
-    <changeSet id="Drop table config_param" author="DAS-Team" runAlways="true" runOnChange="true">
-        <preConditions onFail="MARK_RAN">
-            <tableExists tableName="config_param" />
-        </preConditions>
-        <dropTable tableName="config_param"/>
-    </changeSet>
-
-    <changeSet id="Drop table concesionaria" author="DAS-Team" runAlways="true" runOnChange="true">
-        <preConditions onFail="MARK_RAN">
-            <tableExists tableName="concesionaria" />
-        </preConditions>
-        <dropTable tableName="concesionaria"/>
-    </changeSet>
-
-    <changeSet id="Drop table config_tecnologica" author="DAS-Team" runAlways="true" runOnChange="true">
-        <preConditions onFail="MARK_RAN">
-            <tableExists tableName="config_tecnologica" />
-        </preConditions>
-        <dropTable tableName="config_tecnologica"/>
-    </changeSet>
 
     <!-- ***************************** -->
     <!--   TABLE CREATION CHANGE-SETS  -->
