@@ -2,6 +2,7 @@ package mocks;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.Dao;
+import concesionarias.forms.ConcesionariaForm;
 import estado_cuentas.forms.EstadoCuentaForm;
 
 import java.sql.Date;
@@ -45,7 +46,15 @@ public class MSEstadoCuentaDaoMock implements Dao {
 
     @Override
     public void update(DynaActionForm form) throws SQLException {
-
+        estadoCuentas.stream().filter( c -> {
+            EstadoCuentaForm formConc = (EstadoCuentaForm) form;
+            return
+                    c.getConcesionariaId() == formConc.getConcesionariaId() &&
+                    c.getNroPlanConcesionaria() == formConc.getNroPlanConcesionaria();
+        }).findFirst().ifPresent( c -> {
+            estadoCuentas.remove(c);
+            estadoCuentas.add((EstadoCuentaForm) form);
+        });
     }
 
     @Override
