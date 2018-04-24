@@ -7,5 +7,5 @@ import java.util.Optional;
 import java.util.function.Function;
 
 public interface RegistrarCuota {
-    Function<Dao, Optional<Long>> registrarEstadoCuenta(CuotaForm form);
+    Function<Dao, Optional<Long>> registrarCuota(CuotaForm form);
 }

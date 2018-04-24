@@ -3,7 +3,7 @@ package boundaries.estado_cuentas;
 import estado_cuentas.EstadoCuentaInteractor;
 import estado_cuentas.boundaries.RegistrarEstadoCuenta;
 import estado_cuentas.forms.EstadoCuentaForm;
-import mocks.EstadoCuentaDaoMock;
+import mocks.MSEstadoCuentaDaoMock;
 import org.junit.Test;
 
 import java.sql.Timestamp;
@@ -16,7 +16,7 @@ public class RegistrarEstadoCuentaTest {
     @Test
     public void validarRegistrarSuccessfully(){
         RegistrarEstadoCuenta registador = new EstadoCuentaInteractor();
-        EstadoCuentaDaoMock estadoCuentaDao = new EstadoCuentaDaoMock();
+        MSEstadoCuentaDaoMock estadoCuentaDao = new MSEstadoCuentaDaoMock();
 
         EstadoCuentaForm estadoCuenta = new EstadoCuentaForm();
         estadoCuenta.setConcesionariaId(Long.valueOf(1));
@@ -27,9 +27,8 @@ public class RegistrarEstadoCuentaTest {
 
         Optional<Long> estadoCuentaId = registador.registrarEstadoCuenta(estadoCuenta).apply(estadoCuentaDao);
 
-        assertEquals(Optional.of(1), estadoCuentaId);
+        assertEquals(Optional.of(Long.valueOf(1)), estadoCuentaId);
 
         assertEquals(true, estadoCuentaDao.estadoCuentas.contains(estadoCuenta));
-
     }
 }

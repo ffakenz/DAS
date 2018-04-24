@@ -14,11 +14,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class EstadoCuentaDaoMock implements Dao {
+public class MSEstadoCuentaDaoMock implements Dao {
 
     public List<EstadoCuentaForm> estadoCuentas;
 
-    public EstadoCuentaDaoMock() {
+    public MSEstadoCuentaDaoMock() {
         estadoCuentas = new ArrayList<>();
     }
 

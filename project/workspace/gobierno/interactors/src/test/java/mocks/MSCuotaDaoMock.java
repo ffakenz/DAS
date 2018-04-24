@@ -12,11 +12,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class CuotaDaoMock implements Dao {
+public class MSCuotaDaoMock implements Dao {
 
     public List<CuotaForm> cuotas;
 
-    public CuotaDaoMock() {
+    public MSCuotaDaoMock() {
         cuotas = new ArrayList<>();
     }
 
@@ -33,7 +33,7 @@ public class CuotaDaoMock implements Dao {
         // get max id from dbMock
         Optional<Long> max =
                 cuotas.stream()
-                        .filter( c -> c.getId() == ecId)
+                        .filter( c -> c.getEstadoCuentaId() == ecId)
                         .map(c -> c.getId())
                         .max(Long::compareTo);
 

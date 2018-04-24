@@ -28,7 +28,11 @@ public class RegistrarInteractor implements Registrar, Utils {
                     e.printStackTrace();
                     return Optional.empty();
                 }
-                return getIdOf(form).apply(dao);
+                return getIdOf( d -> {
+                    ConcesionariaForm cf = (ConcesionariaForm)d;
+                    cf.setItem("id", cf.getId().toString());
+                    return cf.getCuit().equals(form.getCuit());
+                }).apply(dao);
             } else {
                 return Optional.empty();
             }
