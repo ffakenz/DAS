@@ -1,5 +1,6 @@
 package concesionarias.boundaries;
 
+import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.Dao;
 import concesionarias.forms.ConcesionariaForm;
 
@@ -37,21 +38,4 @@ public interface Utils {
             }
         };
     }
-
-    default Function<Dao, Optional<Long>> getIdOf(ConcesionariaForm form) {
-        return dao -> {
-            try {
-                Optional<Long> max =
-                        dao.select(null).stream()
-                                .filter( l -> ((ConcesionariaForm)l).getCuit().equals(form.getCuit()))
-                                .map( l -> ((ConcesionariaForm) l).getId())
-                                .findFirst();
-
-                return max;
-            } catch (SQLException e) {
-                e.printStackTrace();
-                return Optional.empty();
-            }
-        };
-    };
 }

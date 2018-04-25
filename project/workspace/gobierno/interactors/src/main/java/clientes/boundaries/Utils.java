@@ -2,20 +2,21 @@ package clientes.boundaries;
 
 import ar.edu.ubp.das.mvc.db.Dao;
 import clientes.forms.ClienteForm;
-import clientes.forms.ClienteForm;
+import concesionarias.forms.ConcesionariaForm;
 
 import java.sql.SQLException;
-import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
 public interface Utils {
 
     default Function<Dao, Boolean> testClienteRegistrado(ClienteForm form) {
-        return dao -> exists( cliente ->
-                    cliente.getDocumento().equals(form.getDocumento()) &&
-                    cliente.getConcesionaria().equals(form.getConcesionaria())
-        ).apply(dao);
+        return dao -> {
+            return exists(cl ->
+                        cl.getDocumento().equals(form.getDocumento()) &&
+                        cl.getConcesionaria().equals(form.getConcesionaria()))
+                    .apply(dao);
+        };
     }
 
 
@@ -23,8 +24,8 @@ public interface Utils {
         return dao -> {
             try {
                 return dao.select(null).stream().anyMatch( c -> {
-                    ClienteForm cliente = (ClienteForm) c;
-                    return predicate.test(cliente);
+                    ClienteForm cli = (ClienteForm) c;
+                    return predicate.test(cli);
                 });
             } catch(SQLException e) {
                 e.printStackTrace();
@@ -32,21 +33,4 @@ public interface Utils {
             }
         };
     }
-
-    default Function<Dao, Optional<Long>> getIdOf(ClienteForm form) {
-        return dao -> {
-            try {
-                Optional<Long> max =
-                        dao.select(null).stream()
-                                .filter( l -> ((ClienteForm)l).getDocumento().equals(form.getDocumento()))
-                                .map( l -> ((ClienteForm) l).getId())
-                                .findFirst();
-
-                return max;
-            } catch (SQLException e) {
-                e.printStackTrace();
-                return Optional.empty();
-            }
-        };
-    };
 }

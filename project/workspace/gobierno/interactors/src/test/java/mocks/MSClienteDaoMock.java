@@ -32,7 +32,7 @@ public class MSClienteDaoMock implements Dao {
         c1.setConcesionaria(1L);
 
         ClienteForm c2 = new ClienteForm();
-        c2.setId(1L);
+        c2.setId(2L);
         c2.setDocumento(2L);
         c2.setNombre("Leonardo");
         c2.setApellido("Ponzio");
@@ -42,7 +42,7 @@ public class MSClienteDaoMock implements Dao {
         c2.setConcesionaria(2L);
 
         ClienteForm c3 = new ClienteForm();
-        c3.setId(1L);
+        c3.setId(3L);
         c3.setDocumento(3L);
         c3.setNombre("Franco");
         c3.setApellido("Armani");
