@@ -24,10 +24,12 @@
         });
       }
 
-    function moveMap( pos) {
 
-        window.marker.setPosition( pos);
+    function moveMap(pos) {
+
+        window.marker.setPosition( pos );
         window.map.panTo( pos );
+        alert("pepe was here");
 
     };
     </script>

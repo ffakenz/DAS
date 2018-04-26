@@ -70,6 +70,22 @@
             <version>1.9.5</version>
             <scope>test</scope>
         </dependency>
+        <!-- the core, which includes Streaming API, shared low-level abstractions (but NOT data-binding)
+        (https://github.com/FasterXML/jackson-docs/wiki/Using-Jackson2-with-Maven)
+        -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.9.5</version>
+        </dependency>
+        <!-- databinding; ObjectMapper, JsonNode and related classes are here
+        (https://github.com/FasterXML/jackson-docs/wiki/Using-Jackson2-with-Maven)
+        -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.9.5</version>
+        </dependency>
     </dependencies>
 
     <build>
