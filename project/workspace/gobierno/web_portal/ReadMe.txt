@@ -23,7 +23,7 @@ Proyect structure:
                 
 Implementation Walkthrough:
     - BACKEND
-        - create a new module folder: src\${module} with above folder structure defien
+        - create a new module folder: src\${module} with above folder structure define
         - define login.boundaries ${module}Req, ${module}Resp and ${module} interface containing required behavior under ${module}\login.boundaries
         - define ${someform}Form under ${module}\forms if some new entity is required
         - define an interactor ${module}Impl.java implementing the ${module} interface under ${module}\login.boundaries.

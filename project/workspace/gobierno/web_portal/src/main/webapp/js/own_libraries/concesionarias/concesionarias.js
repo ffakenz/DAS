@@ -1,7 +1,5 @@
 var concesionariasAPI = {
 
-
-
     getJSON : function() {
 
             var lunr_result = {
@@ -11,7 +9,6 @@ var concesionariasAPI = {
                                  {"firstName":"Peter", "lastName":"Jones"}
                              ]
                              };
-
 
             var html = "";
 
@@ -28,5 +25,9 @@ var concesionariasAPI = {
             }
 
             return html
+      },
+
+      validarForm : function () {
+        console.log("entro");
       }
 };
