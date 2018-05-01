@@ -19,15 +19,35 @@
   <div class="row">
 
 
+        <div id="searchBox_template_here"></div>
+
         <script>
         function searchCallback(result){
-
-            alert(JSON.stringify(result));
+            console.log(JSON.stringify(result));
+            if (result.length > 0)
+                $('#carousel_template_here').carousel(result[0].index);
         };
+
+        /*
+        TODO ADD THIS BIND SO THAT CAROUSEL STOPS MOVING WHEN SEARCHING
+        $('#searchBoxConcesionarias').keyup(function() {
+            let searchFor = $(this).val();
+           if (searchFor === "")  {
+              $('#carousel_template_here').carousel('cycle');alert("resume");
+          }
+          else {
+              $('#carousel_template_here').carousel('pause');alert("pause");
+          }
+        });
+        */
         </script>
 
         <jsp:include page="../reusable/searchBox.jsp" >
+           <jsp:param name="id" value="'#searchBox_template_here'" />
+           <jsp:param name="searchTextBoxId" value="'#searchBoxConcesionarias'" />
            <jsp:param name="callback" value="searchCallback"   />
+           <jsp:param name="numberOfResults" value="1"   />
+           <jsp:param name="data" value="<%= ConcesionariasStringifiedJSON %>"   />
         </jsp:include>
   </div>
 
@@ -47,52 +67,6 @@
 
 
 
-<%@page import="org.codehaus.jackson.map.ObjectMapper"%>
-<%@page import="java.util.Arrays"%>
-<%@page import="java.util.List"%>
-<%@page import="java.util.Collections"%>
-
-<%
-
-
-    class CarouselItem {
-        class Pos {
-            public Pos(Double lat, Double lng){
-               this.lat = lat;
-               this.lng = lng;
-            }
-            public Double lat;
-            public Double lng;
-        };
-        public CarouselItem(String title, String text, Double lat, Double lng){
-            this.title = title;
-            this.text = text;
-            this.pos = new Pos(lat, lng);
-        }
-        public String title;
-        public String text;
-        public Pos pos;
-    };
-
-    ObjectMapper mapper = new ObjectMapper();
-
-    List<CarouselItem> list = Arrays.asList(
-        new CarouselItem(
-        "rio primero","This JSON was made in JAVA using Jackson for object serialization."
-        , new Double(-31.3317205),new Double(-63.622070199999996))
-    ,
-    new CarouselItem(
-        "rio segundo"," All hail Jackson!  It is better than GSON!"
-        , new Double(-31.650785),new Double(-63.90584530000001))
-    ,
-    new CarouselItem(
-        "rio tercero","It is better than GSON! Why? It supports local classes! Yay! :D"
-        , new Double(-32.1766541),new Double(-64.2059244))
-    );
-
-    String data = mapper.writeValueAsString(list);
-
-%>
 
 <script>
 function moveMapByItem(item){
@@ -101,10 +75,9 @@ function moveMapByItem(item){
 </script>
 
 <jsp:include page="../reusable/carousel.jsp" >
-   <jsp:param name="JQuery_ID_source" value="'#carousel1'" />
    <jsp:param name="JQuery_ID_target" value="'#carousel_template_here'" />
    <jsp:param name="callback" value="moveMapByItem" />
-   <jsp:param name="data" value="<%= data %>"   />
+   <jsp:param name="data" value="<%= ConcesionariasStringifiedJSON %>"   />
 </jsp:include>
 
 </div>

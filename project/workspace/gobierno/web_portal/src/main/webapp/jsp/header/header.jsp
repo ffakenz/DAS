@@ -57,11 +57,9 @@
         <!-- Lodash -->
         <%@include file="../templates/lodash_setup.jsp" %>
 
+        <!-- Data.Concesionarias -->
+        <%@include file="../data/concesionarias.jsp" %>
 
 
 
 
-<script>
-
-//alert(concesionariasAPI.getJSON());
-</script>

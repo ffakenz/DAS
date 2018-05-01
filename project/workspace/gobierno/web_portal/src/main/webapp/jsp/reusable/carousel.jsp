@@ -195,7 +195,7 @@
 
     let callback = ${param.callback};
     let target = ${param.JQuery_ID_target}; // "'#carousel_template_here'"
-    let source = ${param.JQuery_ID_source};
+    let source = "#carousel1";
     let parameters =  {data: data, "source_id": source, "callback": callback}
 
 

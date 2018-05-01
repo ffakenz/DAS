@@ -1,6 +1,14 @@
 var concesionariasAPI = {
 
+    data: [],
 
+    setData : function(data){
+        this.data = data;
+    },
+
+    getData : function(){
+        return this.data;
+    },
 
 
     search : function(search, N) {

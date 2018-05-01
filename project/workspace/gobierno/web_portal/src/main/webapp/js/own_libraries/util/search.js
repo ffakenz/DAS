@@ -2,44 +2,12 @@ var search = {
 
 
 
-search : function(search, N) {
+search : function(search, documents, N) {
 
-            var documents = [
-                {
-                "name": "rio primero",
-                "text": "aca vende mucho peugeot",
-                "pos": {lat:-31.3317205,lng: -63.622070199999996}
-                },
-                {
-                "name": "rio segundo",
-                "text": "aca se vende renault",
-                "pos": {lat:-31.650785,lng: -63.90584530000001}
-                },
-                {
-                "name": "rio tercero",
-                "text": "aca re pegaron las hilux, de toyota",
-                "pos": {lat:-32.1766541,lng: -64.2059244}
-                },
-                {
-                "name": "rio cuarto",
-                "text": "aca la gente anda en bondi",
-                "pos": {lat:-33.1231585,lng: -64.3493441}
-                },
-                {
-                "name": "rio quinto",
-                "text": "Mucho cuatriciclo",
-                "pos": {lat:-33.6541814,lng: -65.48783739999999}
-                },
-                {
-                "name": "cordoba capital",
-                "text": "aca la gente anda en bondi",
-                "pos": {lat:-31.42008329999999,lng: -64.18877609999998}
-                }
-                ];
 
             var idx = lunr(function () {
-                this.ref('name');
-                this.field('name');
+                this.ref('title');
+                this.field('title');
                 this.field('text');
 
                 documents.forEach(function (doc) {
@@ -68,7 +36,7 @@ search : function(search, N) {
             const orderedLunrResults = lunr_result.sort(compareLunrResults);
             const firstNResults = orderedLunrResults.slice(0, N);
             const enrichedWithText = firstNResults.map((result) => {
-                                                             return documents.find(function (obj) { return obj.name === result.ref; });
+                                                             return documents.find(function (obj) { return obj.title === result.ref; });
                                                            });
             return  enrichedWithText;
 
