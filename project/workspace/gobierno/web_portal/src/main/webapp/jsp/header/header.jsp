@@ -51,6 +51,9 @@
         <!-- concesionarias -->
         <script src="/web_portal/util/Javascript.do/load=own_libraries/concesionarias/concesionarias"></script>
 
+        <!-- search -->
+        <script src="/web_portal/util/Javascript.do/load=own_libraries/util/search"></script>
+
         <!-- Lodash -->
         <%@include file="../templates/lodash_setup.jsp" %>
 

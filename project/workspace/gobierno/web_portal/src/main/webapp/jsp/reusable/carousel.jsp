@@ -53,7 +53,7 @@
 
 <script type="text/html" id="carousel-item-passive">
          <div class="carousel-item">
-            <img class="d-block w-100" src="/web_portal/img/concesionarias/1.jpg" onclick='${param.callback_on_click}({%= JSON.stringify(carousel_item) %});'>
+            <img class="d-block w-100" src="/web_portal/img/concesionarias/1.jpg">
 
             {%= carousel_slide_base({"carousel_item":carousel_item}) %}
         </div>
@@ -134,7 +134,7 @@
         </ol>
 
 
-        <div class="carousel-inner" role="listbox">
+        <div class="carousel-inner w-100" role="listbox">
 {%
                     let carouse_slide_template = _.template($('#carousel-item-template').html());
 
@@ -193,14 +193,21 @@
 
 
 
-    let callback = ${param.callback_on_click};
-    let target = ${param.JQuery_ID_target};
+    let callback = ${param.callback};
+    let target = ${param.JQuery_ID_target}; // "'#carousel_template_here'"
     let source = ${param.JQuery_ID_source};
     let parameters =  {data: data, "source_id": source, "callback": callback}
 
 
     // render the template using the data
     $(target).append(carousel(parameters));
+
+    $(target).bind('slide.bs.carousel', function (e) {
+
+        let currentItemIndex = $(this).find('.active').index();
+        let currentItem = data[currentItemIndex];
+        callback(currentItem);
+    });
 
 
 

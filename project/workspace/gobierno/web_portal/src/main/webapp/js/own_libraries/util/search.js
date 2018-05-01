@@ -1,9 +1,8 @@
-var concesionariasAPI = {
+var search = {
 
 
 
-
-    search : function(search, N) {
+search : function(search, N) {
 
             var documents = [
                 {
@@ -74,4 +73,5 @@ var concesionariasAPI = {
             return  enrichedWithText;
 
           }
+
 };

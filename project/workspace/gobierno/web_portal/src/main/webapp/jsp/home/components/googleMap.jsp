@@ -14,7 +14,7 @@
         var myLatLng = {lat: -25.363, lng: 131.044};
 
         window.map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
+          zoom: 8,
           center: myLatLng
         });
 
@@ -26,10 +26,9 @@
 
 
     function moveMap(pos) {
-
+        pos = new google.maps.LatLng(pos.lat,pos.lng);
         window.marker.setPosition( pos );
         window.map.panTo( pos );
-        alert("pepe was here");
 
     };
     </script>
