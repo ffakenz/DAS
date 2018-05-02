@@ -115,7 +115,7 @@
 
 
 <script type="text/html" id="carousel-template">
-    <div id={%=source_id.substr(1) %} class="carousel slide carousel-fade" data-ride="carousel">
+    <div id={%=source_id.substr(1) %} class="carousel slide carousel-fade" data-ride="carousel" data-interval="false">
         <ol class="carousel-indicators">
 
 
