@@ -202,7 +202,7 @@
     // render the template using the data
     $(target).append(carousel(parameters));
 
-    $(target).bind('slide.bs.carousel', function (e) {
+    $(target).bind('slid.bs.carousel', function (e) {
 
         let currentItemIndex = $(this).find('.active').index();
         let currentItem = data[currentItemIndex];
