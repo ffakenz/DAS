@@ -6,7 +6,7 @@
 %>
 
 
-  <div id="map" style="width:500px; height:300px"></div>
+  <div id="map"></div>
     <script>
 
       function initMap() {

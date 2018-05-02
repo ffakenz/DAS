@@ -7,10 +7,8 @@
 
 
 
-<div class="ParallaxBackground one">
-</div>
-
 <div id="portion1" class="info">
+    <br/><br/>
   <h3>Heading for Portion 1</h3>
 
 
@@ -25,21 +23,8 @@
         function searchCallback(result){
             console.log(JSON.stringify(result));
             if (result.length > 0)
-                $('#carousel_template_here').carousel(result[0].index);
+                $('#consesionarias_composite').carousel(result[0].index);
         };
-
-        /*
-        TODO ADD THIS BIND SO THAT CAROUSEL STOPS MOVING WHEN SEARCHING
-        $('#searchBoxConcesionarias').keyup(function() {
-            let searchFor = $(this).val();
-           if (searchFor === "")  {
-              $('#carousel_template_here').carousel('cycle');alert("resume");
-          }
-          else {
-              $('#carousel_template_here').carousel('pause');alert("pause");
-          }
-        });
-        */
         </script>
 
         <jsp:include page="../reusable/searchBox.jsp" >
@@ -54,7 +39,7 @@
 
   <div class="row">
     <div class="col-sm-6">
-        <div id="carousel_template_here"></div>
+        <div id="consesionarias_composite" class="pepeee"></div>
     </div>
     <div class="col-sm-6"">
         <%@include file="./components/googleMap.jsp" %>
@@ -74,14 +59,18 @@ function moveMapByItem(item){
 };
 </script>
 
-<jsp:include page="../reusable/carousel.jsp" >
-   <jsp:param name="JQuery_ID_target" value="'#carousel_template_here'" />
+<jsp:include page="../reusable/cardGrid.jsp" >
+   <jsp:param name="JQuery_ID_target" value="'#consesionarias_composite'" />
    <jsp:param name="callback" value="moveMapByItem" />
    <jsp:param name="data" value="<%= ConcesionariasStringifiedJSON %>"   />
 </jsp:include>
-
 </div>
 
+
+<script>
+$( "consesionarias_composite:nth-child(2)" ).append( "<br><span> - 2nd!</span><br>" );
+alert("done so");
+</script>
 
 <div class="ParallaxBackground two">
 

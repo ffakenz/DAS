@@ -1,3 +1,17 @@
+<%--
+INVOCATION EXAMPLE
+
+<jsp:include page="../reusable/carousel.jsp" >
+        <jsp:param name="JQuery_ID_target" value="'#carousel_template_here'" />
+        <jsp:param name="callback" value="moveMapByItem" />
+        <jsp:param name="data" value="<%= ConcesionariasStringifiedJSON %>"   />
+     </jsp:include>
+--%>
+
+
+
+
+
 <%@ page
     language="java"
     contentType="text/html; charset=utf-8"
