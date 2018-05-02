@@ -9,11 +9,8 @@
     <!-- ########################################### -->
     <!-- Main drop change-sets                       -->
     <!-- ########################################### -->
-<<<<<<< HEAD
-    <include file="/src/main/resources/clientes/drops/drop_tables.xml" />
-=======
     <include file="/src/main/resources/estado_cuentas/drops/drop_tables.xml" />
->>>>>>> 867be21bfbe259da42cc6cdbd9c96688422a2d37
+    <include file="/src/main/resources/clientes/drops/drop_tables.xml" />
     <include file="/src/main/resources/concesionarias/drops/drop_tables.xml" />
     <include file="/src/main/resources/login/drops/drop_tables.xml" />
 
@@ -24,11 +21,8 @@
 
     <include file="/src/main/resources/login/tables/create_tables.xml" />
     <include file="/src/main/resources/concesionarias/tables/create_tables.xml" />
-<<<<<<< HEAD
     <include file="/src/main/resources/clientes/tables/create_tables.xml" />
-=======
     <include file="/src/main/resources/estado_cuentas/tables/create_tables.xml" />
->>>>>>> 867be21bfbe259da42cc6cdbd9c96688422a2d37
 
     <!-- ########################################### -->
     <!-- Procedures change-sets                -->
@@ -44,9 +38,6 @@
 
     <include file="/src/main/resources/login/populate/populate_tables.xml" />
     <include file="/src/main/resources/concesionarias/populate/populate_tables.xml" />
-<<<<<<< HEAD
     <include file="/src/main/resources/clientes/populate/populate_tables.xml" />
-=======
     <include file="/src/main/resources/estado_cuentas/populate/populate_tables.xml" />
->>>>>>> 867be21bfbe259da42cc6cdbd9c96688422a2d37
 </databaseChangeLog>
