@@ -20,10 +20,22 @@
         <div id="searchBox_template_here"></div>
 
         <script>
+        function setSelected(element){
+            currentValue = element.css("background-color");
+            element.css("background-color","yellow");
+            if (window.old !== undefined){
+                window.old.css("background-color",currentValue);
+            }
+            window.old = element;
+            element.css("background-color","yellow");
+        }
+
         function searchCallback(result){
             console.log(JSON.stringify(result));
             if (result.length > 0)
-                $('#consesionarias_composite').carousel(result[0].index);
+            {
+                setSelected($('#TODO_ThisIsNotAUniqueGlobalIndexInsteadUseTargetID_'+result[0].index));
+            }
         };
         </script>
 
@@ -39,9 +51,9 @@
 
   <div class="row">
     <div class="col-sm-6">
-        <div id="consesionarias_composite" class="pepeee"></div>
+        <div id="consesionarias_composite"></div>
     </div>
-    <div class="col-sm-6"">
+    <div class="col-sm-6">
         <%@include file="./components/googleMap.jsp" %>
     </div>
   </div>
@@ -66,11 +78,6 @@ function moveMapByItem(item){
 </jsp:include>
 </div>
 
-
-<script>
-$( "consesionarias_composite:nth-child(2)" ).append( "<br><span> - 2nd!</span><br>" );
-alert("done so");
-</script>
 
 <div class="ParallaxBackground two">
 

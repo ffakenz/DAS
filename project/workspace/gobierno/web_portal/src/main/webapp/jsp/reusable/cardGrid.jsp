@@ -16,10 +16,10 @@
 
 <script type="text/html" id="card-template">
     <div class="col-md-4">
-        <div class="card">
+        <div class="card" style="margin: 10px; 0 0 0">
         <img class="img-fluid"  src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%2813%29.jpg" alt="Card image cap">
 
-          <div class="card-block">
+          <div class="card-block" id='TODO_ThisIsNotAUniqueGlobalIndexInsteadUseTargetID_{%- item.index %}'>
             <h4 class="card-title">{%- item.title %}</h4>
             <h6 class="card-subtitle text-muted">{%- item.title %} (subtitle)</h6>
             <p class="card-text p-y-1">{%- item.text %}</p>
@@ -56,7 +56,7 @@
 
 
 {%=
-                        cardTemplate({"item":item, "callback": callback})
+                        cardTemplate({"item":item, "index":index, "callback": callback})
 %}
 
 

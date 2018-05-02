@@ -62,29 +62,34 @@
            , 3)
        ,
        new CarouselItem(
-           "rio segundo 2"," All hail Jackson!  It is better than GSON!"
+           "cercano","Es un lugar muy conocido. Fant'astico hospedaje."
            , new Double(-31.650785),new Double(-63.90584530000001)
            , 4)
        ,
        new CarouselItem(
-           "rio tercero 2","It is better than GSON! Why? It supports local classes! Yay! :D"
+           "mediano","A veces es visitado"
            , new Double(-32.1766541),new Double(-64.2059244)
            , 5)
        ,
         new CarouselItem(
-           "rio primero 3","This JSON was made in JAVA using Jackson for object serialization."
+           "lejano","Es un lugar olvidado"
            , new Double(-31.3317205),new Double(-63.622070199999996)
            , 6)
        ,
        new CarouselItem(
-           "rio segundo 3"," All hail Jackson!  It is better than GSON!"
+           "La Pampa.", "eaeaea"
            , new Double(-31.650785),new Double(-63.90584530000001)
            , 7)
        ,
        new CarouselItem(
-           "rio tercero 3","It is better than GSON! Why? It supports local classes! Yay! :D"
+           "Mercado Libre FTW", "Google knows best"
            , new Double(-32.1766541),new Double(-64.2059244)
            , 8)
+        ,
+       new CarouselItem(
+           "Globant > ML", "competicion competicion competicion"
+           , new Double(-32.1766541),new Double(-64.2059244)
+           , 9)
     );
 
     String ConcesionariasStringifiedJSON = mapper.writeValueAsString(list);

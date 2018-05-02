@@ -9,11 +9,6 @@ html, body, #map {
 
 }
 
-.container.nth-child(odd) {
-    background: red;
-    height: 30px;
-}
-
 
 body {
   margin: 0;
