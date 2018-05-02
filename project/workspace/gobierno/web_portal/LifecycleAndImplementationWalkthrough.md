@@ -1,7 +1,4 @@
-
-
-
-# Life cycle: 
+# Life cycle:
 ## ( jsp -> js -> action -> jsp )
 
 

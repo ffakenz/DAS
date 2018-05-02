@@ -4,7 +4,7 @@
 Supongamos que tenemos un botón HTML en un archivo JSP.
 Al hacer click dispara un método javascript almacenado en un objeto javascript, en un archivo externo alojado en el directorio WebContent/js/
 
-Éste método realiza una llamada ayax al backend, y `Action` va a representar a la lógica del backend que queremos ejecutar.
+Éste método realiza una llamada ajax al backend, y `Action` va a representar a la lógica del backend que queremos ejecutar.
 
 ###### Ejemplo
 Supongamos que queremos setear el idioma.

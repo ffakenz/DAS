@@ -1,6 +1,5 @@
+# Project structure:
 
-
-# Proyect structure:
 ###### In this document a service called web_portal is going to be used as example
 ![img](http://i.imgur.com/J4pTLvW.png)
 

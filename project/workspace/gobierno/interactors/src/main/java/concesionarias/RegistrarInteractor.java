@@ -3,9 +3,9 @@ package concesionarias;
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.Dao;
 import concesionarias.boundaries.Utils;
+import core.UtilsCore;
 import concesionarias.boundaries.Registrar;
 import concesionarias.forms.ConcesionariaForm;
-import core.Interactor;
 import core.InteractorResponse;
 import core.ResponseForward;
 
@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-public class RegistrarInteractor implements Registrar, Utils {
+public class RegistrarInteractor implements Registrar, UtilsCore, Utils {
 
     @Override
     public Function<Dao, Optional<Long>> registrarConcesionaria(ConcesionariaForm form) {
@@ -28,7 +28,11 @@ public class RegistrarInteractor implements Registrar, Utils {
                     e.printStackTrace();
                     return Optional.empty();
                 }
-                return getIdOf(form).apply(dao);
+                return getIdOf( d -> {
+                    ConcesionariaForm cf = (ConcesionariaForm)d;
+                    cf.setItem("id", cf.getId().toString());
+                    return cf.getCuit().equals(form.getCuit());
+                }).apply(dao);
             } else {
                 return Optional.empty();
             }

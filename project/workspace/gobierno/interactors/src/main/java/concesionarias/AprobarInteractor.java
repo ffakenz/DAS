@@ -3,9 +3,9 @@ package concesionarias;
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.Dao;
 import concesionarias.boundaries.Aprobar;
+import core.UtilsCore;
 import concesionarias.boundaries.Utils;
 import concesionarias.forms.ConcesionariaForm;
-import core.Interactor;
 import core.InteractorResponse;
 import core.ResponseForward;
 
@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-public class AprobarInteractor implements Aprobar, Utils {
+public class AprobarInteractor implements Aprobar, UtilsCore, Utils {
 
 
     private String generarCodigo(ConcesionariaForm form) {
