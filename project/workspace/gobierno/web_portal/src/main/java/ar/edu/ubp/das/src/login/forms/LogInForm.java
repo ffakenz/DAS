@@ -5,10 +5,10 @@ import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import java.sql.Date;
 
 public class LogInForm extends DynaActionForm {
-    Long id;
-    String username;
-    Date loginTime;
-    Date logoutTime;
+    private Long id;
+    private String username;
+    private Date loginTime;
+    private Date logoutTime;
 
     public Long getId() { return id; }
 

@@ -6,7 +6,7 @@ import java.util.List;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
-import ar.edu.ubp.das.src.login.forms.UsuarioForm;
+import login.forms.UsuarioForm;
 
 public class MSUsuariosDao extends DaoImpl {
 

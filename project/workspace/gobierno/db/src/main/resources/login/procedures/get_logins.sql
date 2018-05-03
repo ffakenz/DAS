@@ -1,0 +1,3 @@
+CREATE PROCEDURE get_logins  AS
+SELECT *
+FROM login;

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!-- ******************************** -->
+    <!--   TABLE POPULATION CHANGE-SETS   -->
+    <!-- ******************************** -->
+    <changeSet id="Populate table config_tecnologica" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="config_tecnologica" />
+        </preConditions>
+        <sqlFile path="/src/main/resources/concesionarias/populate/config_tecnologica.sql" />
+    </changeSet>
+
+    <changeSet id="Populate table concesionaria" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="concesionaria" />
+        </preConditions>
+        <sqlFile path="/src/main/resources/concesionarias/populate/concesionaria.sql" />
+    </changeSet>
+
+    <changeSet id="Populate table config_param" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="config_param" />
+        </preConditions>
+        <sqlFile path="/src/main/resources/concesionarias/populate/config_param.sql" />
+    </changeSet>
+
+    <changeSet id="Populate table concesionaria_config_params" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="concesionaria_config_params" />
+        </preConditions>
+        <sqlFile path="/src/main/resources/concesionarias/populate/concesionaria_config_params.sql" />
+    </changeSet>
+
+</databaseChangeLog>

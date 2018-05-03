@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+
+    <!-- ***************************** -->
+    <!--   TABLE CREATION CHANGE-SETS  -->
+    <!-- ***************************** -->
+    <changeSet id="Create table config_tecnologica" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="config_tecnologica" />
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/concesionarias/tables/config_tecnologica.sql" />
+    </changeSet>
+
+    <changeSet id="Create table concesionaria" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="concesionaria" />
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/concesionarias/tables/concesionaria.sql" />
+    </changeSet>
+
+    <changeSet id="Create table config_param" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="config_param" />
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/concesionarias/tables/config_param.sql" />
+    </changeSet>
+
+    <changeSet id="Create table concesionaria_config_params" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="concesionaria_config_params" />
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/concesionarias/tables/concesionaria_config_params.sql" />
+    </changeSet>
+
+</databaseChangeLog>

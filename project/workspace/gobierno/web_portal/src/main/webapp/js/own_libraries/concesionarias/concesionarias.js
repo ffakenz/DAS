@@ -81,5 +81,9 @@ var concesionariasAPI = {
                                                            });
             return  enrichedWithText;
 
+          },
+
+          validarForm : function () {
+            console.log("entro");
           }
 };

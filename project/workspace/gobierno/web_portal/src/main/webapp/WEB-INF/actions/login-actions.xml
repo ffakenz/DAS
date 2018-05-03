@@ -4,7 +4,7 @@
     <form-beans>
     </form-beans>
     <action-mappings>
-        <action type="ValidarUsuarioAction" path="/ValidarUsuario.do">
+        <action type="LoginAction" path="/Login.do">
             <forward name="success" path="/util/success.jsp" />
             <forward name="failure" path="/util/failure.jsp" />
             <forward name="warning" path="/util/warning.jsp" />

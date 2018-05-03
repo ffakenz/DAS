@@ -3,7 +3,7 @@ var login = {
 
         jUtils.executing( "mensaje" );
         $.ajax({
-            url: "/web_portal/login/ValidarUsuario.do",
+            url: "/web_portal/login/Login.do",
             type: "post",
             data: $( "#formulario" ).serialize(),
             dataType: "html",

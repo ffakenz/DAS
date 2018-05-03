@@ -1,7 +1,4 @@
-
-
-
-# Life cycle: 
+# Life cycle:
 ## ( jsp -> js -> action -> jsp )
 
 
@@ -14,16 +11,16 @@ Notes
 		
 - BACKEND
   - create a new module folder: `src\${module}` with above folder structure defien
-  - define boundaries `${module}Req`, `${module}Resp` and `${module}` interface containing required behavior under `${module}\boundaries`
+  - define login.boundaries `${module}Req`, `${module}Resp` and `${module}` interface containing required behavior under `${module}\login.boundaries`
   - define `${someform}Form` under `${module}\forms` if some new entity is required
-  - define an interactor `${module}Impl.java` implementing the `${module}` interface under `${module}\boundaries`.
+  - define an interactor `${module}Impl.java` implementing the `${module}` interface under `${module}\login.boundaries`.
 if the interactor needs some DB connection, a Dao should be injected at creation time (throught constructor DI)
   - create a test for the interactor mockin the dao if needed and verify it behaves as expected
 (this dao should contain mocks for each needed function)
 
 - DB
   - define a `MS${someform}Dao` under `${module}\daos` to manage the form mapping and DB related calls
-  - create SQL procedures needed under `project\db\gobierno\${module}\procedures.sql`
+  - create SQL login.procedures needed under `project\db\gobierno\${module}\login.procedures.sql`
 
 - FMW MAPPING (framework mapping)
   - add the module alias-mappings to `\WEB-INFconfig.xml: <alias name="${module}" />`

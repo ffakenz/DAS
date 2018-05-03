@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!-- ***************************** -->
+    <!--   TABLE CREATION CHANGE-SETS  -->
+    <!-- ***************************** -->
+    <changeSet id="Create table estado_cuentas" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="estado_cuentas" />
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/estado_cuentas/tables/estado_cuentas.sql" />
+    </changeSet>
+
+
+    <changeSet id="Create table cuotas" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="cuotas" />
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/estado_cuentas/tables/cuotas.sql" />
+    </changeSet>
+
+</databaseChangeLog>
