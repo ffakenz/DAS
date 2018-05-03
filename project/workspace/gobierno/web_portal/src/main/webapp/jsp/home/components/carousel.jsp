@@ -21,7 +21,7 @@
         <!--First slide-->
         <div class="carousel-item active"> <!--Mask color-->
             <div class="view">
-              <img src="/web_portal/img/concesionarias/1.jpg" class="img-fluid " alt="First slide">
+              <img src="/web_portal/img/concesionarias/1.jpg" class="img-fluid ">
               <!-- maybe add a filter? <div class="mask rgba-black-light"></div> -->
             </div>
             <div class="carousel-caption">
@@ -34,7 +34,7 @@
         <!--/First slide-->
         <!--Second slide-->
         <div class="carousel-item">
-            <img class="d-block w-100" src="/web_portal/img/concesionarias/2.jpg" alt="Second slide">
+            <img class="d-block w-100" src="/web_portal/img/concesionarias/2.jpg">
             <div class="carousel-caption">
                 <h3 class="h3-responsive">Sorteo Lorem Ipsum</h3>
                 <div class="mask rgba-black-strong">
@@ -45,7 +45,7 @@
         <!--/Second slide-->
         <!--Third slide-->
         <div class="carousel-item">
-            <img class="d-block w-100" src="/web_portal/img/concesionarias/3.png" alt="Third slide">
+            <img class="d-block w-100" src="/web_portal/img/concesionarias/3.png">
             <div class="carousel-caption">
                 <h3 class="h3-responsive">Sorteo Lorem Ipsum</h3>
                 <div class="mask rgba-black-strong">

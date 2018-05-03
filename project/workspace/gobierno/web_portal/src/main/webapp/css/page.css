@@ -1,11 +1,13 @@
 @CHARSET "ISO-8859-1";
 
-html, body {
+html, body, #map {
     font-family: Verdana, Arial, sans-serif;
     font-size: 10pt;
     color: #000;
-}
+    width: 100%;
+    height: 100%;
 
+}
 
 
 body {
@@ -137,7 +139,6 @@ nav span {
 .down {
   top: -60px;
 }
-
 
 
 /*TODO
