@@ -1,0 +1,195 @@
+package dao;
+
+import annotations.MyResultSet;
+import beans.DynaActionForm;
+import dbaccess.config.DatasourceConfig;
+
+import java.sql.*;
+import java.util.List;
+
+public abstract class DaoImpl<T extends DynaActionForm> implements Dao<T> {
+
+    private DatasourceConfig datasource;
+    private Connection connection;
+    private CallableStatement statement;
+
+
+    public DaoImpl(DatasourceConfig datasource) {
+        this.datasource = datasource;
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        try {
+            if(this.statement != null && !this.statement.isClosed()) {
+                this.statement.close();
+            }
+        }
+        catch(SQLException ex) {
+            throw new Throwable(ex.getMessage());
+        }
+        finally {
+            try {
+                if(this.connection != null && !this.connection.isClosed()) {
+                    this.connection.close();
+                }
+            }
+            catch(SQLException ex) { 
+                throw new Throwable(ex.getMessage());
+            }
+            finally {
+                super.finalize();
+            }
+        }
+    }
+
+    public void connect() throws SQLException {
+        try {
+            Class.forName(this.datasource.getDriver()).newInstance();
+            this.connection = DriverManager.getConnection(this.datasource.getUrl(), this.datasource.getUsername(), this.datasource.getPassword());
+            this.connection.setAutoCommit(true);
+        }
+        catch(InstantiationException | IllegalAccessException | ClassNotFoundException ex) {
+            throw new SQLException(ex.getMessage());
+        }
+        catch(SQLException ex) {
+            throw new SQLException("TEXT.LOGINDATA_NULO");
+        }
+    }
+    
+    public void disconnect() throws SQLException {
+        this.statement.close();
+        this.connection.close();
+    }
+
+    public int executeUpdate() throws SQLException {
+    	int rows = 0;
+        try {
+            this.connection.setAutoCommit(false);
+            rows = this.statement.executeUpdate();
+            this.connection.commit();
+        }
+        catch(SQLException ex) {
+            this.connection.rollback();
+            throw new SQLException(ex.getMessage());
+        }
+        finally {
+            this.connection.setAutoCommit(true);
+        }
+        return rows;
+    }
+
+    public <T> List<T> executeQuery(Class<T> clazz) throws SQLException {
+        ResultSet result = this.statement.executeQuery();
+        return new MyResultSet(result, clazz).mapToObjectList();
+    }
+
+    public void setProcedure(String procedure) throws SQLException {
+        this.statement = this.connection.prepareCall("{ CALL " + procedure + " }");
+    }
+    
+    public void setProcedure(String procedure, int resultSetType, int resultSetConcurrency) throws SQLException {
+        this.statement = this.connection.prepareCall("{ CALL " + procedure + " }", resultSetType, resultSetConcurrency);
+    }     
+    
+    public void setNull(int paramIndex, int sqlType) throws SQLException {
+    	this.statement.setNull(paramIndex, sqlType);
+    }
+
+    public void setParameter(int paramIndex, long paramValue) throws SQLException {
+    	this.statement.setLong(paramIndex, paramValue);
+    }
+
+    public void setParameter(int paramIndex, int paramValue) throws SQLException {
+    	this.statement.setInt(paramIndex, paramValue);
+    }
+    
+    public void setParameter(int paramIndex, short paramValue) throws SQLException {
+    	this.statement.setShort(paramIndex, paramValue);
+    }
+
+    public void setParameter(int paramIndex, double paramValue) throws SQLException {
+    	this.statement.setDouble(paramIndex, paramValue);
+    }
+    
+    public void setParameter(int paramIndex, float paramValue) throws SQLException {
+    	this.statement.setFloat(paramIndex, paramValue);
+    }
+
+    public void setParameter(int paramIndex, String paramValue) throws SQLException {
+    	this.statement.setString(paramIndex, paramValue);
+    }
+
+    public void setParameter(int paramIndex, Date paramValue) throws SQLException {
+    	this.statement.setDate(paramIndex, paramValue);
+    }
+
+    public void setParameter(int paramIndex, Timestamp paramValue) throws SQLException {
+        this.statement.setTimestamp(paramIndex, paramValue);
+    }
+
+    public void setOutParameter(int paramIndex, int sqlType) throws SQLException {
+    	this.statement.registerOutParameter(paramIndex, sqlType);
+    }
+    
+    public CallableStatement getStatement() {
+    	return this.statement;
+    }
+    
+    public long getLongParam(String paramName) throws SQLException {
+    	return this.statement.getLong(paramName);
+    }
+    
+    public int getIntParam(String paramName) throws SQLException {
+    	return this.statement.getInt(paramName);
+    }
+    
+    public short getShortParam(String paramName) throws SQLException {
+    	return this.statement.getShort(paramName);
+    }
+    
+    public double getDoubleParam(String paramName) throws SQLException {
+    	return this.statement.getDouble(paramName);
+    }
+    
+    public double getFloatParam(String paramName) throws SQLException {
+    	return this.statement.getFloat(paramName);
+    }
+
+    public String getStringParam(String paramName) throws SQLException {
+    	return this.statement.getString(paramName);
+    }
+    
+    public Date getDateParam(String paramName) throws SQLException {
+    	return this.statement.getDate(paramName);
+    }
+    
+    public long getLongParam(int paramIndex) throws SQLException {
+    	return this.statement.getLong(paramIndex);
+    }
+    
+    public int getIntParam(int paramIndex) throws SQLException {
+    	return this.statement.getInt(paramIndex);
+    }
+    
+    public short getShortParam(int paramIndex) throws SQLException {
+    	return this.statement.getShort(paramIndex);
+    }
+    
+    public double getDoubleParam(int paramIndex) throws SQLException {
+    	return this.statement.getDouble(paramIndex);
+    }
+    
+    public double getFloatParam(int paramIndex) throws SQLException {
+    	return this.statement.getFloat(paramIndex);
+    }
+
+    public String getStringParam(int paramIndex) throws SQLException {
+    	return this.statement.getString(paramIndex);
+    }
+    
+    public Date getDateParam(int paramIndex) throws SQLException {
+    	return this.statement.getDate(paramIndex);
+    }
+    
+}

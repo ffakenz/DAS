@@ -2,22 +2,21 @@ package beans;
 
 import annotations.Column;
 import annotations.Entity;
-import ar.edu.ubp.das.mvc.action.DynaActionForm;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 @Entity
-public class ConcesionariaForm extends DynaActionForm {
+public class ConcesionariaForm implements DynaActionForm {
     @Column(name="id")
     private Long id;
     @Column(name="nombre")
     private String nombre;
     @Column(name="config")
     private String config;
-    @Column(name="fechaRegistracion")
-    private Date fechaRegistracion;
-    @Column(name="fechaAlta")
-    private Date fechaAlta;
+    @Column(name="fecha_registracion")
+    private Timestamp fechaRegistracion;
+    @Column(name="fecha_alta")
+    private Timestamp fechaAlta;
     @Column(name="codigo")
     private String codigo;
     @Column(name="direccion")
@@ -69,19 +68,19 @@ public class ConcesionariaForm extends DynaActionForm {
         this.config = config;
     }
 
-    public Date getFechaRegistracion() {
+    public Timestamp getFechaRegistracion() {
         return fechaRegistracion;
     }
 
-    public void setFechaRegistracion(Date fechaRegistracion) {
+    public void setFechaRegistracion(Timestamp fechaRegistracion) {
         this.fechaRegistracion = fechaRegistracion;
     }
 
-    public Date getFechaAlta() {
+    public Timestamp getFechaAlta() {
         return fechaAlta;
     }
 
-    public void setFechaAlta(Date fechaAlta) {
+    public void setFechaAlta(Timestamp fechaAlta) {
         this.fechaAlta = fechaAlta;
     }
 

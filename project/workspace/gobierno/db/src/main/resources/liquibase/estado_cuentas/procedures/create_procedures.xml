@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!-- ***************************** -->
+    <!--  DROP PROCEDURES CHANGE-SETS  -->
+    <!-- ***************************** -->
+
+    <changeSet id="Drop procedure get_estado_cuentas" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_estado_cuentas'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_estado_cuentas"/>
+    </changeSet>
+
+
+    <!-- ******************************* -->
+    <!--  CREATE PROCEDURES CHANGE-SETS  -->
+    <!-- ******************************* -->
+    <changeSet id="Create procedure get_estado_cuentas" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_estado_cuentas'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/estado_cuentas/procedures/get_estado_cuentas.sql" />
+    </changeSet>
+
+</databaseChangeLog>

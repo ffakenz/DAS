@@ -25,17 +25,20 @@ public final class ModuleConfigImpl {
 	private Map<String, DatasourceConfig> datasources;
 	
 	private ModuleConfigImpl() {
-		this.datasources = new HashMap<String, DatasourceConfig>();
+		this.datasources = new HashMap<>();
 	}
 
-	public static void load(ClassLoader classLoader) throws RuntimeException {
+	public static DatasourceConfig getDatasourceById(String id) {
 		if(ModuleConfigImpl.instance == null) {
 			ModuleConfigImpl.instance = new ModuleConfigImpl();
-			ModuleConfigImpl.instance.loadDatasources(classLoader);
+			ModuleConfigImpl.instance.loadDatasources();
 		}
+		return ModuleConfigImpl.instance.getDatasource(id);
 	}
+
 	
-	private void loadDatasources(ClassLoader classLoader) throws RuntimeException {
+	private void loadDatasources() throws RuntimeException {
+		ClassLoader classLoader = instance.getClass().getClassLoader();
 		try {
 			String schemaFileName = "./dao/schema/datasources.xsd";
 			InputStream schemaInputStream = classLoader.getResourceAsStream(schemaFileName);
@@ -65,7 +68,7 @@ public final class ModuleConfigImpl {
 			                     datasourceConfig.setUrl(String.valueOf(xPath.compile("@url").evaluate(datasources.item(i), XPathConstants.STRING)));
 			                     datasourceConfig.setUsername(String.valueOf(xPath.compile("@username").evaluate(datasources.item(i), XPathConstants.STRING)));
 			                     datasourceConfig.setPassword(String.valueOf(xPath.compile("@password").evaluate(datasources.item(i), XPathConstants.STRING)));
-                this.datasources.put(datasourceConfig.getId(), datasourceConfig);		
+                this.datasources.put(datasourceConfig.getId(), datasourceConfig);
 			}
 		} 
 		catch (ParserConfigurationException | SAXException | IOException | XPathExpressionException | IllegalArgumentException ex) {
@@ -79,10 +82,6 @@ public final class ModuleConfigImpl {
 			return this.datasources.get(id);
 		}
 		return null;
-	}
-
-	public static DatasourceConfig getDatasourceById(String id) {
-		return ModuleConfigImpl.instance.getDatasource(id);
 	}
 
 }

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!-- ***************************** -->
+    <!--   TABLE CREATION CHANGE-SETS  -->
+    <!-- ***************************** -->
+    <changeSet id="Create table tipo_usuario" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="tipo_usuario" />
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/login/tables/tipo_usuario.sql" />
+    </changeSet>
+
+    <changeSet id="Create table usuario" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="usuario" />
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/login/tables/usuario.sql" />
+    </changeSet>
+
+    <changeSet id="Create table detalle_usuario" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="detalle_usuario" />
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/login/tables/detalle_usuario.sql" />
+    </changeSet>
+
+    <changeSet id="Create table login" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="login" />
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/login/tables/login.sql" />
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,69 +1,41 @@
-import annotations.MyResultSet;
-import ar.edu.ubp.das.mvc.action.DynaActionForm;
+import beans.ClienteForm;
 import beans.ConcesionariaForm;
-import beans.PlanBean;
+import beans.EstadoCuentaForm;
 import dao.Dao;
-import dao.PlanDAO;
-import dbaccess.DAOAbstractFactory;
-import dbaccess.DAOFactory;
-import dbaccess.config.DatasourceEnum;
+import dbaccess.core.DAOAbstractFactory;
+import dbaccess.core.DAOFactory;
+import dbaccess.config.DatasourceType;
+import dbaccess.implementations.daos.DaoType;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.function.Function;
 
 public class Client {
     public static void main(String[] args) {
 
         // create mssql factory
-        DAOAbstractFactory mssqlFactory =
-                DAOAbstractFactory.getDAOFactory(DAOFactory.MSSQL, DatasourceEnum.DEFAULT, Client.class.getClassLoader());
-        // get dao for plans
-        Dao concesionariaDao = mssqlFactory.getDao("Concesionaria");
+        DAOAbstractFactory mssqlFactory = DAOAbstractFactory.getDAOFactory(DAOFactory.MSSQL, DatasourceType.DEFAULT);
 
+        // get dao for concesionarias
+        Dao concesionariasDao = mssqlFactory.getDao(DaoType.CONCESIONARIAS);
+        Dao clientesDao = mssqlFactory.getDao(DaoType.CLIENTES);
+        Dao estadoCuentasDao = mssqlFactory.getDao(DaoType.ESTADO_CUENTAS);
 
-        List<ConcesionariaForm> concesionarias =
-                mssqlFactory.withConnection(concesionariaDao.select());
+        try {
+            System.out.println("CONCESIONARIAS");
+            List<ConcesionariaForm> concesionarias = concesionariasDao.select(null);
+            concesionarias.forEach(System.out::println);
 
+            System.out.println("CLIENTES");
+            List<ClienteForm> clientes = clientesDao.select(null);
+            clientes.forEach(System.out::println);
 
+            System.out.println("ESTADO DE CUENTAS");
+            List<EstadoCuentaForm> estadoDeCuentas = estadoCuentasDao.select(null);
+            estadoDeCuentas.forEach(System.out::println);
 
-        /*
-        // use api 1
-        Function<Connection, List<PlanBean>> all = planDAO.consultarPlanes();
-        List<PlanBean> planes =  mssqlFactory.withConnection(planDAO.consultarPlanes());
-        planes.forEach(System.out::print);
-
-
-        // use api 2
-        Optional<PlanBean> plan = mssqlFactory.withConnection(planDAO.consultarPlan(1L)::apply);
-        String result = plan.map(p -> p.toString()).get();
-        System.out.println(result);
-
-        // use api 3
-        mssqlFactory.withConnection(planDAO.cancelarPlan(plan.get().getId().longValue())::apply);
-
-        // use api 2
-        Optional<PlanBean> planCancelado = mssqlFactory.withConnection(planDAO.consultarPlan(1L)::apply);
-        String resultCancelado = planCancelado.map(p -> p.toString()).get();
-        System.out.println(resultCancelado);
-        */
-
-        /*mssqlFactory.withConnection((Connection c) -> {
-            try(Statement stm = c.createStatement()){
-                ResultSet rs = stm.executeQuery("SELECT * FROM compradores");
-                List<PlanBean> planes2 =
-                        new MyResultSet(rs, PlanBean.class).mapToObjectList();
-                return planes2;
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-                e.printStackTrace();
-            }
-            return new ArrayList<>();
-        });*/
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
