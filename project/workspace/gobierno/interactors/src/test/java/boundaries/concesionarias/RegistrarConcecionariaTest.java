@@ -1,8 +1,8 @@
 package boundaries.concesionarias;
 
+import beans.ConcesionariaForm;
 import concesionarias.RegistrarInteractor;
 import concesionarias.boundaries.Registrar;
-import concesionarias.forms.ConcesionariaForm;
 import mocks.MSConcesionariasDaoMock;
 import org.junit.Test;
 
@@ -14,8 +14,8 @@ public class RegistrarConcecionariaTest {
 
     @Test
     public void testMockDBIsEmpty() {
-        MSConcesionariasDaoMock dao = new MSConcesionariasDaoMock();
-        ConcesionariaForm concecionaria = new ConcesionariaForm();
+        final MSConcesionariasDaoMock dao = new MSConcesionariasDaoMock();
+        final ConcesionariaForm concecionaria = new ConcesionariaForm();
         concecionaria.setNombre("C10");
         concecionaria.setConfig("AXIS");
 
@@ -24,8 +24,8 @@ public class RegistrarConcecionariaTest {
 
     @Test
     public void testRegistrarConcecionarias() {
-        MSConcesionariasDaoMock dao = new MSConcesionariasDaoMock();
-        ConcesionariaForm concecionaria = new ConcesionariaForm();
+        final MSConcesionariasDaoMock dao = new MSConcesionariasDaoMock();
+        final ConcesionariaForm concecionaria = new ConcesionariaForm();
         concecionaria.setNombre("C10");
         concecionaria.setConfig("AXIS");
         concecionaria.setCuit("CUIT10");
@@ -33,25 +33,25 @@ public class RegistrarConcecionariaTest {
         concecionaria.setItem("tel", "whatever");
         concecionaria.setItem("email", "whatever");
 
-        Registrar concImpl = new RegistrarInteractor();
+        final Registrar concImpl = new RegistrarInteractor();
 
-        Optional<Long> logInId = concImpl.registrarConcesionaria(concecionaria).apply(dao);
+        final Optional<Long> logInId = concImpl.registrarConcesionaria(concecionaria).apply(dao);
 
         assertEquals(true, dao.concesionarias.contains(concecionaria));
         assertEquals(logInId, Optional.of(new Long(4)));
     }
 
     @Test
-    public void testRegistrarTwice(){
-        MSConcesionariasDaoMock dao = new MSConcesionariasDaoMock();
-        ConcesionariaForm concecionaria = new ConcesionariaForm();
+    public void testRegistrarTwice() {
+        final MSConcesionariasDaoMock dao = new MSConcesionariasDaoMock();
+        final ConcesionariaForm concecionaria = new ConcesionariaForm();
         concecionaria.setNombre("C10");
         concecionaria.setConfig("AXIS");
         concecionaria.setCuit("CUIT10");
 
-        Registrar concImpl = new RegistrarInteractor();
-        Optional<Long> logInId = concImpl.registrarConcesionaria(concecionaria).apply(dao);
-        Optional<Long> logInId2 = concImpl.registrarConcesionaria(concecionaria).apply(dao);
+        final Registrar concImpl = new RegistrarInteractor();
+        final Optional<Long> logInId = concImpl.registrarConcesionaria(concecionaria).apply(dao);
+        final Optional<Long> logInId2 = concImpl.registrarConcesionaria(concecionaria).apply(dao);
 
         assertEquals(logInId, Optional.of(new Long(4)));
         assertEquals(logInId2, Optional.empty());

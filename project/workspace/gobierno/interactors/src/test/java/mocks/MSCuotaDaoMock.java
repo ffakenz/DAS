@@ -2,9 +2,8 @@ package mocks;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.Dao;
-import estado_cuentas.forms.CuotaForm;
+import beans.CuotaForm;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -21,19 +20,19 @@ public class MSCuotaDaoMock implements Dao {
     }
 
     @Override
-    public DynaActionForm make(ResultSet result) throws SQLException {
+    public DynaActionForm make(final ResultSet result) throws SQLException {
         return null;
     }
 
     @Override
-    public void insert(DynaActionForm form) throws SQLException {
+    public void insert(final DynaActionForm form) throws SQLException {
         // cast form
-        CuotaForm cuota = (CuotaForm) form;
-        Long ecId = cuota.getEstadoCuentaId();
+        final CuotaForm cuota = (CuotaForm) form;
+        final Long ecId = cuota.getEstadoCuentaId();
         // get max id from dbMock
-        Optional<Long> max =
+        final Optional<Long> max =
                 cuotas.stream()
-                        .filter( c -> c.getEstadoCuentaId() == ecId)
+                        .filter(c -> c.getEstadoCuentaId() == ecId)
                         .map(c -> c.getId())
                         .max(Long::compareTo);
 
@@ -43,22 +42,22 @@ public class MSCuotaDaoMock implements Dao {
     }
 
     @Override
-    public void update(DynaActionForm form) throws SQLException {
+    public void update(final DynaActionForm form) throws SQLException {
 
     }
 
     @Override
-    public void delete(DynaActionForm form) throws SQLException {
+    public void delete(final DynaActionForm form) throws SQLException {
 
     }
 
     @Override
-    public List<DynaActionForm> select(DynaActionForm form) throws SQLException {
+    public List<DynaActionForm> select(final DynaActionForm form) throws SQLException {
         return cuotas.stream().collect(Collectors.toList());
     }
 
     @Override
-    public boolean valid(DynaActionForm form) throws SQLException {
+    public boolean valid(final DynaActionForm form) throws SQLException {
         return false;
     }
 }

@@ -1,4 +1,4 @@
-package ar.edu.ubp.das.src.concesionarias.forms;
+package beans;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 
@@ -13,7 +13,7 @@ public class ConfigParamForm extends DynaActionForm {
         return concesionariaId;
     }
 
-    public void setConcesionariaId(Long concesionariaId) {
+    public void setConcesionariaId(final Long concesionariaId) {
         this.concesionariaId = concesionariaId;
     }
 
@@ -21,7 +21,7 @@ public class ConfigParamForm extends DynaActionForm {
         return configTecno;
     }
 
-    public void setConfigTecno(String configTecno) {
+    public void setConfigTecno(final String configTecno) {
         this.configTecno = configTecno;
     }
 
@@ -29,7 +29,7 @@ public class ConfigParamForm extends DynaActionForm {
         return configParam;
     }
 
-    public void setConfigParam(String configParam) {
+    public void setConfigParam(final String configParam) {
         this.configParam = configParam;
     }
 
@@ -37,7 +37,7 @@ public class ConfigParamForm extends DynaActionForm {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(final String value) {
         this.value = value;
     }
 

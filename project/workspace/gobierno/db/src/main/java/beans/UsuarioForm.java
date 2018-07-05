@@ -1,4 +1,4 @@
-package ar.edu.ubp.das.src.login.forms;
+package beans;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 
@@ -7,13 +7,14 @@ public class UsuarioForm extends DynaActionForm {
     private String password;
     private String rol;
 
-    public UsuarioForm() {}
+    public UsuarioForm() {
+    }
 
     public String getRol() {
         return rol;
     }
 
-    public void setRol(String rol) {
+    public void setRol(final String rol) {
         this.rol = rol;
     }
 
@@ -21,7 +22,7 @@ public class UsuarioForm extends DynaActionForm {
         return username;
     }
 
-    public void setUsername(String username) {
+    public void setUsername(final String username) {
         this.username = username;
     }
 
@@ -29,7 +30,7 @@ public class UsuarioForm extends DynaActionForm {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(final String password) {
         this.password = password;
     }
 

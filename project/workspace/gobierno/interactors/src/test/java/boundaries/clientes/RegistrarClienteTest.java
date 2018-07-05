@@ -1,14 +1,14 @@
 package boundaries.clientes;
 
+import beans.ClienteForm;
 import clientes.RegistrarClienteInteractor;
 import clientes.boundaries.RegistrarCliente;
-import clientes.forms.ClienteForm;
 import mocks.MSClienteDaoMock;
-import mocks.MSConcesionariasDaoMock;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import java.sql.Date;
+
 import java.util.Optional;
+
+import static org.junit.Assert.assertEquals;
 
 public class RegistrarClienteTest {
 
@@ -18,17 +18,17 @@ public class RegistrarClienteTest {
     public void validarRegistroClienteOK() {
         msClienteDaoMock = new MSClienteDaoMock();
 
-        RegistrarCliente registrador = new RegistrarClienteInteractor();
+        final RegistrarCliente registrador = new RegistrarClienteInteractor();
 
-        ClienteForm clienteForm = new ClienteForm();
+        final ClienteForm clienteForm = new ClienteForm();
         clienteForm.setDocumento(37575567L);
         clienteForm.setNombre("Diego");
         clienteForm.setApellido("Maradona");
-        clienteForm.setNro_telefono("351-121233423");
+        clienteForm.setNroTelefono("351-121233423");
         clienteForm.setEmail("diegote@mail.com");
-        clienteForm.setConcesionaria(1L);
+        clienteForm.setConcesionariaId(1L);
 
-        Optional<Long> response = registrador.registrarCliente(clienteForm).apply(msClienteDaoMock);
+        final Optional<Long> response = registrador.registrarCliente(clienteForm).apply(msClienteDaoMock);
 
         assertEquals(new Long(4), response.get());
     }
@@ -37,13 +37,13 @@ public class RegistrarClienteTest {
     public void validarRegistroClienteThatExist() {
         msClienteDaoMock = new MSClienteDaoMock();
 
-        RegistrarCliente registrador = new RegistrarClienteInteractor();
+        final RegistrarCliente registrador = new RegistrarClienteInteractor();
 
-        ClienteForm clienteForm = new ClienteForm();
+        final ClienteForm clienteForm = new ClienteForm();
         clienteForm.setDocumento(1L);
-        clienteForm.setConcesionaria(1L);
+        clienteForm.setConcesionariaId(1L);
 
-        Optional<Long> response = registrador.registrarCliente(clienteForm).apply(msClienteDaoMock);
+        final Optional<Long> response = registrador.registrarCliente(clienteForm).apply(msClienteDaoMock);
 
         assertEquals(Optional.empty(), response);
     }

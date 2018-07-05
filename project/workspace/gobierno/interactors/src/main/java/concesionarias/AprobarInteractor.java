@@ -2,15 +2,16 @@ package concesionarias;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.Dao;
+import beans.ConcesionariaForm;
 import concesionarias.boundaries.Aprobar;
-import core.UtilsCore;
 import concesionarias.boundaries.Utils;
-import concesionarias.forms.ConcesionariaForm;
 import core.InteractorResponse;
 import core.ResponseForward;
+import core.UtilsCore;
 
-import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -18,41 +19,41 @@ import java.util.function.Function;
 public class AprobarInteractor implements Aprobar, UtilsCore, Utils {
 
 
-    private String generarCodigo(ConcesionariaForm form) {
+    private String generarCodigo(final ConcesionariaForm form) {
         return "SUPER_CODIGO_SECRETO: " + form.getNombre() + " " + form.getConfig();
     }
 
 
     @Override
-    public Function<Dao, Optional<String>> aprobarConcesionaria(ConcesionariaForm form) {
+    public Function<Dao, Optional<String>> aprobarConcesionaria(final ConcesionariaForm form) {
         return dao -> {
             try {
 
-                Optional<ConcesionariaForm> concesionariaConCodigo =
-                    dao.select(null)
-                        .stream()
-                        .map(c -> (ConcesionariaForm) c)
-                        .filter( c -> {
-                            return
-                                testConcesionariaRegistrada(form).apply(dao) &&
-                                c.getId() == form.getId() &&
-                                c.getFechaAlta() == null &&
-                                c.getCodigo() == null;
-                        })
-                        .findFirst()
-                        .map( c -> {
-                            String codigo = generarCodigo(c);
-                            c.setCodigo(codigo);
-                            c.setFechaAlta(new Date(System.currentTimeMillis()));
-                            return c;
-                        });
+                final Optional<ConcesionariaForm> concesionariaConCodigo =
+                        dao.select(null)
+                                .stream()
+                                .map(c -> (ConcesionariaForm) c)
+                                .filter(c -> {
+                                    return
+                                            testConcesionariaRegistrada(form).apply(dao) &&
+                                                    c.getId() == form.getId() &&
+                                                    c.getFechaAlta() == null &&
+                                                    c.getCodigo() == null;
+                                })
+                                .findFirst()
+                                .map(c -> {
+                                    final String codigo = generarCodigo(c);
+                                    c.setCodigo(codigo);
+                                    c.setFechaAlta(Timestamp.from(Instant.now()));
+                                    return c;
+                                });
 
-                if(concesionariaConCodigo.isPresent()) {
+                if (concesionariaConCodigo.isPresent()) {
                     dao.update(concesionariaConCodigo.get());
                 }
 
-                return concesionariaConCodigo.map( c -> c.getCodigo());
-            } catch (SQLException e) {
+                return concesionariaConCodigo.map(c -> c.getCodigo());
+            } catch (final SQLException e) {
                 e.printStackTrace();
                 return Optional.empty();
             }
@@ -60,49 +61,46 @@ public class AprobarInteractor implements Aprobar, UtilsCore, Utils {
     }
 
 
+    private Optional<ConcesionariaForm> makeFrom(final DynaActionForm form) {
+        final Optional<String> idForm = form.getItem("id");
 
-
-    private Optional<ConcesionariaForm> makeFrom(DynaActionForm form) {
-        Optional<String> idForm = form.getItem("id");
-
-        return idForm.map( idRqst -> {
-                                ConcesionariaForm concesionaria = new ConcesionariaForm();
-                                concesionaria.setId(Long.valueOf(idRqst));
-                                return concesionaria;
+        return idForm.map(idRqst -> {
+            final ConcesionariaForm concesionaria = new ConcesionariaForm();
+            concesionaria.setId(Long.valueOf(idRqst));
+            return concesionaria;
         });
     }
 
 
     @Override
-    public Function<BiFunction<String, String, Dao>, InteractorResponse> execute(DynaActionForm form) {
+    public Function<BiFunction<String, String, Dao>, InteractorResponse> execute(final DynaActionForm form) {
         return daoFactory -> {
-            Dao dao = daoFactory.apply("Concesionarias", "concesionarias");
+            final Dao dao = daoFactory.apply("Concesionarias", "concesionarias");
 
-            Optional<ConcesionariaForm> concesionariaRqst = makeFrom(form);
+            final Optional<ConcesionariaForm> concesionariaRqst = makeFrom(form);
 
-            Optional<InteractorResponse> respuesta =
-                concesionariaRqst.map( concesionaria -> {
-                    Optional<String> codigo = aprobarConcesionaria(concesionaria).apply(dao);
+            final Optional<InteractorResponse> respuesta =
+                    concesionariaRqst.map(concesionaria -> {
+                        final Optional<String> codigo = aprobarConcesionaria(concesionaria).apply(dao);
 
-                    InteractorResponse response = new InteractorResponse();
-                    response.setResult(codigo);
+                        final InteractorResponse response = new InteractorResponse();
+                        response.setResult(codigo);
 
-                    if(codigo.isPresent()) {
-                        response.setResponse(ResponseForward.SUCCESS);
-                    } else {
-                        response.setResponse(ResponseForward.FAILURE);
-                    }
+                        if (codigo.isPresent()) {
+                            response.setResponse(ResponseForward.SUCCESS);
+                        } else {
+                            response.setResponse(ResponseForward.FAILURE);
+                        }
 
-                    return response;
-                });
+                        return response;
+                    });
 
 
-            InteractorResponse response = new InteractorResponse();
+            final InteractorResponse response = new InteractorResponse();
             response.setResponse(ResponseForward.WARNING);
             response.setResult(Optional.empty());
 
             return respuesta.orElse(response); // Some error occur with the parameters
-
 
 
         };

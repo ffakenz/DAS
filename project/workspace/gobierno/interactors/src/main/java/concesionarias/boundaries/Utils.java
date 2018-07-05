@@ -1,38 +1,36 @@
 package concesionarias.boundaries;
 
-import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.Dao;
-import concesionarias.forms.ConcesionariaForm;
+import beans.ConcesionariaForm;
 
 import java.sql.SQLException;
-import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
 public interface Utils {
 
-    default Function<Dao, Boolean> testConcesionariaRegistrada(ConcesionariaForm form) {
+    default Function<Dao, Boolean> testConcesionariaRegistrada(final ConcesionariaForm form) {
         return dao -> {
             return exists(conc -> {
                 return
                         // from registrar
                         (conc.getCuit().equals(form.getCuit()) &&
-                        conc.getFechaRegistracion() != null ) ||
-                        // from aprobar
-                        conc.getId() == form.getId();
+                                conc.getFechaRegistracion() != null) ||
+                                // from aprobar
+                                conc.getId() == form.getId();
             }).apply(dao);
         };
     }
 
 
-    default Function<Dao, Boolean> exists(Predicate<ConcesionariaForm> predicate) {
+    default Function<Dao, Boolean> exists(final Predicate<ConcesionariaForm> predicate) {
         return dao -> {
             try {
-                return dao.select(null).stream().anyMatch( c -> {
-                    ConcesionariaForm conc = (ConcesionariaForm) c;
+                return dao.select(null).stream().anyMatch(c -> {
+                    final ConcesionariaForm conc = (ConcesionariaForm) c;
                     return predicate.test(conc);
                 });
-            } catch(SQLException e) {
+            } catch (final SQLException e) {
                 e.printStackTrace();
                 return false;
             }

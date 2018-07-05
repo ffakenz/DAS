@@ -2,12 +2,10 @@ package concesionarias;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.Dao;
-import concesionarias.boundaries.Aprobar;
+import beans.ConcesionariaForm;
+import beans.ConfigParamForm;
 import concesionarias.boundaries.Configurar;
 import concesionarias.boundaries.ConsultarAprobadas;
-import concesionarias.forms.ConcesionariaForm;
-import concesionarias.forms.ConfigParamForm;
-import core.Interactor;
 import core.InteractorResponse;
 import core.ResponseForward;
 
@@ -19,22 +17,22 @@ import java.util.function.Function;
 public class ConfigurarInteractor implements Configurar {
 
     @Override
-    public Function<BiFunction<String, String, Dao>, Boolean> configurarConcesionaria(ConfigParamForm configParam) {
+    public Function<BiFunction<String, String, Dao>, Boolean> configurarConcesionaria(final ConfigParamForm configParam) {
         return daoFactory -> {
-            Dao daoConfigurar = daoFactory.apply("ConfigurarConcesionaria", "concesionarias");
-            Dao daoConcesionarias = daoFactory.apply("Concesionarias", "concesionarias");
+            final Dao daoConfigurar = daoFactory.apply("ConfigurarConcesionaria", "concesionarias");
+            final Dao daoConcesionarias = daoFactory.apply("Concesionarias", "concesionarias");
 
-            ConsultarAprobadas consultor = new ConsultarAprobadasInteractor();
-            List<ConcesionariaForm> aprobadas = consultor.consultarAprobadas().apply(daoConcesionarias);
+            final ConsultarAprobadas consultor = new ConsultarAprobadasInteractor();
+            final List<ConcesionariaForm> aprobadas = consultor.consultarAprobadas().apply(daoConcesionarias);
 
             try {
-                if(aprobadas.stream().anyMatch( c -> c.getId() == configParam.getConcesionariaId())) {
+                if (aprobadas.stream().anyMatch(c -> c.getId() == configParam.getConcesionariaId())) {
                     daoConfigurar.insert(configParam);
                     return true;
                 } else {
                     return false;
                 }
-            }catch (SQLException e) {
+            } catch (final SQLException e) {
                 e.printStackTrace();
                 return false;
             }
@@ -42,14 +40,14 @@ public class ConfigurarInteractor implements Configurar {
     }
 
     @Override
-    public Function<BiFunction<String, String, Dao>, InteractorResponse> execute(DynaActionForm form) {
+    public Function<BiFunction<String, String, Dao>, InteractorResponse> execute(final DynaActionForm form) {
         return daoFactory -> {
 
-            Boolean result = configurarConcesionaria((ConfigParamForm) form).apply(daoFactory);
+            final Boolean result = configurarConcesionaria((ConfigParamForm) form).apply(daoFactory);
 
-            InteractorResponse response = new InteractorResponse();
+            final InteractorResponse response = new InteractorResponse();
             response.setResult(result);
-            if(result){
+            if (result) {
                 response.setResponse(ResponseForward.SUCCESS);
             } else {
                 response.setResponse(ResponseForward.FAILURE);

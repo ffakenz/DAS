@@ -1,4 +1,4 @@
-package login.forms;
+package beans;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 
@@ -10,15 +10,19 @@ public class LogInForm extends DynaActionForm {
     private Date loginTime;
     private Date logoutTime;
 
-    public Long getId() { return id; }
+    public Long getId() {
+        return id;
+    }
 
-    public void setId(Long id) { this.id = id; }
+    public void setId(final Long id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
+    public void setUsername(final String username) {
         this.username = username;
     }
 
@@ -26,7 +30,7 @@ public class LogInForm extends DynaActionForm {
         return loginTime;
     }
 
-    public void setLoginTime(Date loginTime) {
+    public void setLoginTime(final Date loginTime) {
         this.loginTime = loginTime;
     }
 
@@ -34,7 +38,7 @@ public class LogInForm extends DynaActionForm {
         return logoutTime;
     }
 
-    public void setLogoutTime(Date logoutTime) {
+    public void setLogoutTime(final Date logoutTime) {
         this.logoutTime = logoutTime;
     }
 

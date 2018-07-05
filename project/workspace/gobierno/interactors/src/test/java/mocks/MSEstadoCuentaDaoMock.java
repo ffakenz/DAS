@@ -2,10 +2,8 @@ package mocks;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.Dao;
-import concesionarias.forms.ConcesionariaForm;
-import estado_cuentas.forms.EstadoCuentaForm;
+import beans.EstadoCuentaForm;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -24,19 +22,19 @@ public class MSEstadoCuentaDaoMock implements Dao {
     }
 
     @Override
-    public DynaActionForm make(ResultSet result) throws SQLException {
+    public DynaActionForm make(final ResultSet result) throws SQLException {
         return null;
     }
 
     @Override
-    public void insert(DynaActionForm form) throws SQLException {
+    public void insert(final DynaActionForm form) throws SQLException {
         // get max id from dbMock
-        Optional<Long> max =
+        final Optional<Long> max =
                 estadoCuentas.stream()
-                        .map( c -> c.getId())
+                        .map(c -> c.getId())
                         .max(Long::compareTo);
         // cast form
-        EstadoCuentaForm estadoCuenta = (EstadoCuentaForm) form;
+        final EstadoCuentaForm estadoCuenta = (EstadoCuentaForm) form;
         // set id to next and default table values
         estadoCuenta.setId(max.orElse(Long.valueOf(0)) + 1);
         estadoCuenta.setFechaAltaSistema(Timestamp.from(Instant.now()));
@@ -45,30 +43,30 @@ public class MSEstadoCuentaDaoMock implements Dao {
     }
 
     @Override
-    public void update(DynaActionForm form) throws SQLException {
-        estadoCuentas.stream().filter( c -> {
+    public void update(final DynaActionForm form) throws SQLException {
+        estadoCuentas.stream().filter(c -> {
             EstadoCuentaForm formConc = (EstadoCuentaForm) form;
             return
                     c.getConcesionariaId() == formConc.getConcesionariaId() &&
-                    c.getNroPlanConcesionaria() == formConc.getNroPlanConcesionaria();
-        }).findFirst().ifPresent( c -> {
+                            c.getNroPlanConcesionaria() == formConc.getNroPlanConcesionaria();
+        }).findFirst().ifPresent(c -> {
             estadoCuentas.remove(c);
             estadoCuentas.add((EstadoCuentaForm) form);
         });
     }
 
     @Override
-    public void delete(DynaActionForm form) throws SQLException {
+    public void delete(final DynaActionForm form) throws SQLException {
 
     }
 
     @Override
-    public List<DynaActionForm> select(DynaActionForm form) throws SQLException {
+    public List<DynaActionForm> select(final DynaActionForm form) throws SQLException {
         return estadoCuentas.stream().collect(Collectors.toList());
     }
 
     @Override
-    public boolean valid(DynaActionForm form) throws SQLException {
+    public boolean valid(final DynaActionForm form) throws SQLException {
         return false;
     }
 }

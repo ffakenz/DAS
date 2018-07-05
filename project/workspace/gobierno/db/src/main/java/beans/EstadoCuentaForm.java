@@ -2,26 +2,27 @@ package beans;
 
 import annotations.Column;
 import annotations.Entity;
+import ar.edu.ubp.das.mvc.action.DynaActionForm;
 
 import java.sql.Timestamp;
 
 @Entity
-public class EstadoCuentaForm implements DynaActionForm {
-    @Column(name="id")
+public class EstadoCuentaForm extends DynaActionForm {
+    @Column(name = "id")
     private Long id;
-    @Column(name="concesionaria")
+    @Column(name = "concesionaria")
     private Long concesionariaId;
-    @Column(name="nro_plan_concesionaria")
+    @Column(name = "nro_plan_concesionaria")
     private Long nroPlanConcesionaria;
-    @Column(name="documento_cliente")
+    @Column(name = "documento_cliente")
     private Long documentoCliente;
-    @Column(name="vehiculo")
+    @Column(name = "vehiculo")
     private Long vehiculo;
-    @Column(name="fecha_alta_concesionaria")
+    @Column(name = "fecha_alta_concesionaria")
     private Timestamp fechaAltaConcesionaria;
-    @Column(name="fecha_alta_sistema")
+    @Column(name = "fecha_alta_sistema")
     private Timestamp fechaAltaSistema;
-    @Column(name="fecha_ultima_actualizacion")
+    @Column(name = "fecha_ultima_actualizacion")
     private Timestamp fechaUltimaActualizacion;
 
     @Override
@@ -42,7 +43,7 @@ public class EstadoCuentaForm implements DynaActionForm {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -50,7 +51,7 @@ public class EstadoCuentaForm implements DynaActionForm {
         return concesionariaId;
     }
 
-    public void setConcesionariaId(Long concesionariaId) {
+    public void setConcesionariaId(final Long concesionariaId) {
         this.concesionariaId = concesionariaId;
     }
 
@@ -58,7 +59,7 @@ public class EstadoCuentaForm implements DynaActionForm {
         return nroPlanConcesionaria;
     }
 
-    public void setNroPlanConcesionaria(Long nroPlanConcesionaria) {
+    public void setNroPlanConcesionaria(final Long nroPlanConcesionaria) {
         this.nroPlanConcesionaria = nroPlanConcesionaria;
     }
 
@@ -66,7 +67,7 @@ public class EstadoCuentaForm implements DynaActionForm {
         return documentoCliente;
     }
 
-    public void setDocumentoCliente(Long documentoCliente) {
+    public void setDocumentoCliente(final Long documentoCliente) {
         this.documentoCliente = documentoCliente;
     }
 
@@ -74,7 +75,7 @@ public class EstadoCuentaForm implements DynaActionForm {
         return vehiculo;
     }
 
-    public void setVehiculo(Long vehiculo) {
+    public void setVehiculo(final Long vehiculo) {
         this.vehiculo = vehiculo;
     }
 
@@ -82,7 +83,7 @@ public class EstadoCuentaForm implements DynaActionForm {
         return fechaAltaConcesionaria;
     }
 
-    public void setFechaAltaConcesionaria(Timestamp fechaAltaConcesionaria) {
+    public void setFechaAltaConcesionaria(final Timestamp fechaAltaConcesionaria) {
         this.fechaAltaConcesionaria = fechaAltaConcesionaria;
     }
 
@@ -90,7 +91,7 @@ public class EstadoCuentaForm implements DynaActionForm {
         return fechaAltaSistema;
     }
 
-    public void setFechaAltaSistema(Timestamp fechaAltaSistema) {
+    public void setFechaAltaSistema(final Timestamp fechaAltaSistema) {
         this.fechaAltaSistema = fechaAltaSistema;
     }
 
@@ -98,7 +99,7 @@ public class EstadoCuentaForm implements DynaActionForm {
         return fechaUltimaActualizacion;
     }
 
-    public void setFechaUltimaActualizacion(Timestamp fechaUltimaActualizacion) {
+    public void setFechaUltimaActualizacion(final Timestamp fechaUltimaActualizacion) {
         this.fechaUltimaActualizacion = fechaUltimaActualizacion;
     }
 }

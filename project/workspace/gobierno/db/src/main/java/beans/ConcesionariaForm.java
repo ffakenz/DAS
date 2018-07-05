@@ -2,30 +2,31 @@ package beans;
 
 import annotations.Column;
 import annotations.Entity;
+import ar.edu.ubp.das.mvc.action.DynaActionForm;
 
 import java.sql.Timestamp;
 
 @Entity
-public class ConcesionariaForm implements DynaActionForm {
-    @Column(name="id")
+public class ConcesionariaForm extends DynaActionForm {
+    @Column(name = "id")
     private Long id;
-    @Column(name="nombre")
+    @Column(name = "nombre")
     private String nombre;
-    @Column(name="config")
+    @Column(name = "config")
     private String config;
-    @Column(name="fecha_registracion")
+    @Column(name = "fecha_registracion")
     private Timestamp fechaRegistracion;
-    @Column(name="fecha_alta")
+    @Column(name = "fecha_alta")
     private Timestamp fechaAlta;
-    @Column(name="codigo")
+    @Column(name = "codigo")
     private String codigo;
-    @Column(name="direccion")
+    @Column(name = "direccion")
     private String direccion;
-    @Column(name="cuit")
+    @Column(name = "cuit")
     private String cuit;
-    @Column(name="tel")
+    @Column(name = "tel")
     private String tel;
-    @Column(name="email")
+    @Column(name = "email")
     private String email;
 
     @Override
@@ -48,7 +49,7 @@ public class ConcesionariaForm implements DynaActionForm {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -56,7 +57,7 @@ public class ConcesionariaForm implements DynaActionForm {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
+    public void setNombre(final String nombre) {
         this.nombre = nombre;
     }
 
@@ -64,7 +65,7 @@ public class ConcesionariaForm implements DynaActionForm {
         return config;
     }
 
-    public void setConfig(String config) {
+    public void setConfig(final String config) {
         this.config = config;
     }
 
@@ -72,7 +73,7 @@ public class ConcesionariaForm implements DynaActionForm {
         return fechaRegistracion;
     }
 
-    public void setFechaRegistracion(Timestamp fechaRegistracion) {
+    public void setFechaRegistracion(final Timestamp fechaRegistracion) {
         this.fechaRegistracion = fechaRegistracion;
     }
 
@@ -80,7 +81,7 @@ public class ConcesionariaForm implements DynaActionForm {
         return fechaAlta;
     }
 
-    public void setFechaAlta(Timestamp fechaAlta) {
+    public void setFechaAlta(final Timestamp fechaAlta) {
         this.fechaAlta = fechaAlta;
     }
 
@@ -88,7 +89,7 @@ public class ConcesionariaForm implements DynaActionForm {
         return codigo;
     }
 
-    public void setCodigo(String codigo) {
+    public void setCodigo(final String codigo) {
         this.codigo = codigo;
     }
 
@@ -96,7 +97,7 @@ public class ConcesionariaForm implements DynaActionForm {
         return direccion;
     }
 
-    public void setDireccion(String direccion) {
+    public void setDireccion(final String direccion) {
         this.direccion = direccion;
     }
 
@@ -104,7 +105,7 @@ public class ConcesionariaForm implements DynaActionForm {
         return cuit;
     }
 
-    public void setCuit(String cuit) {
+    public void setCuit(final String cuit) {
         this.cuit = cuit;
     }
 
@@ -112,7 +113,7 @@ public class ConcesionariaForm implements DynaActionForm {
         return tel;
     }
 
-    public void setTel(String tel) {
+    public void setTel(final String tel) {
         this.tel = tel;
     }
 
@@ -120,7 +121,7 @@ public class ConcesionariaForm implements DynaActionForm {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(final String email) {
         this.email = email;
     }
 }

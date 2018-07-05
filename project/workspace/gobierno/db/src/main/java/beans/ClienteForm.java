@@ -2,26 +2,27 @@ package beans;
 
 import annotations.Column;
 import annotations.Entity;
+import ar.edu.ubp.das.mvc.action.DynaActionForm;
 
 import java.sql.Timestamp;
 
 @Entity
-public class ClienteForm implements beans.DynaActionForm {
-    @Column(name="id")
+public class ClienteForm extends DynaActionForm {
+    @Column(name = "id")
     private Long id;
-    @Column(name="documento")
+    @Column(name = "documento")
     private Long documento;
-    @Column(name="nombre")
+    @Column(name = "nombre")
     private String nombre;
-    @Column(name="apellido")
+    @Column(name = "apellido")
     private String apellido;
-    @Column(name="nro_telefono")
+    @Column(name = "nro_telefono")
     private String nroTelefono;
-    @Column(name="email")
+    @Column(name = "email")
     private String email;
-    @Column(name="fecha_de_alta")
+    @Column(name = "fecha_de_alta")
     private Timestamp fechaAlta;
-    @Column(name="concesionaria")
+    @Column(name = "concesionaria")
     private Long concesionariaId;
 
     @Override
@@ -42,7 +43,7 @@ public class ClienteForm implements beans.DynaActionForm {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -50,7 +51,7 @@ public class ClienteForm implements beans.DynaActionForm {
         return documento;
     }
 
-    public void setDocumento(Long documento) {
+    public void setDocumento(final Long documento) {
         this.documento = documento;
     }
 
@@ -58,7 +59,7 @@ public class ClienteForm implements beans.DynaActionForm {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
+    public void setNombre(final String nombre) {
         this.nombre = nombre;
     }
 
@@ -66,7 +67,7 @@ public class ClienteForm implements beans.DynaActionForm {
         return apellido;
     }
 
-    public void setApellido(String apellido) {
+    public void setApellido(final String apellido) {
         this.apellido = apellido;
     }
 
@@ -74,7 +75,7 @@ public class ClienteForm implements beans.DynaActionForm {
         return nroTelefono;
     }
 
-    public void setNroTelefono(String nroTelefono) {
+    public void setNroTelefono(final String nroTelefono) {
         this.nroTelefono = nroTelefono;
     }
 
@@ -82,7 +83,7 @@ public class ClienteForm implements beans.DynaActionForm {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(final String email) {
         this.email = email;
     }
 
@@ -90,7 +91,7 @@ public class ClienteForm implements beans.DynaActionForm {
         return fechaAlta;
     }
 
-    public void setFechaAlta(Timestamp fechaAlta) {
+    public void setFechaAlta(final Timestamp fechaAlta) {
         this.fechaAlta = fechaAlta;
     }
 
@@ -98,7 +99,7 @@ public class ClienteForm implements beans.DynaActionForm {
         return concesionariaId;
     }
 
-    public void setConcesionariaId(Long concesionariaId) {
+    public void setConcesionariaId(final Long concesionariaId) {
         this.concesionariaId = concesionariaId;
     }
 }

@@ -1,4 +1,4 @@
-package estado_cuentas.forms;
+package beans;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 
@@ -15,7 +15,7 @@ public class CuotaForm extends DynaActionForm {
         return estadoCuentaId;
     }
 
-    public void setEstadoCuentaId(Long estadoCuentaId) {
+    public void setEstadoCuentaId(final Long estadoCuentaId) {
         this.estadoCuentaId = estadoCuentaId;
     }
 
@@ -23,7 +23,7 @@ public class CuotaForm extends DynaActionForm {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -31,7 +31,7 @@ public class CuotaForm extends DynaActionForm {
         return fechaVencimiento;
     }
 
-    public void setFechaVencimiento(Timestamp fechaVencimiento) {
+    public void setFechaVencimiento(final Timestamp fechaVencimiento) {
         this.fechaVencimiento = fechaVencimiento;
     }
 
@@ -39,7 +39,7 @@ public class CuotaForm extends DynaActionForm {
         return monto;
     }
 
-    public void setMonto(Integer monto) {
+    public void setMonto(final Integer monto) {
         this.monto = monto;
     }
 
@@ -47,7 +47,7 @@ public class CuotaForm extends DynaActionForm {
         return fechaPago;
     }
 
-    public void setFechaPago(Timestamp fechaPago) {
+    public void setFechaPago(final Timestamp fechaPago) {
         this.fechaPago = fechaPago;
     }
 

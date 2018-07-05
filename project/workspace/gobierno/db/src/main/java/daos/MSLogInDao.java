@@ -1,8 +1,8 @@
-package ar.edu.ubp.das.src.login.daos;
+package daos;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
-import login.forms.LogInForm;
+import beans.LogInForm;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,8 +10,8 @@ import java.util.List;
 
 public class MSLogInDao extends DaoImpl {
     @Override
-    public DynaActionForm make(ResultSet result) throws SQLException {
-        LogInForm logInForm = new LogInForm();
+    public DynaActionForm make(final ResultSet result) throws SQLException {
+        final LogInForm logInForm = new LogInForm();
         logInForm.setId(result.getLong("id"));
         logInForm.setUsername(result.getString("username"));
         logInForm.setLoginTime(result.getDate("log_in_time"));
@@ -20,39 +20,39 @@ public class MSLogInDao extends DaoImpl {
     }
 
     @Override
-    public void insert(DynaActionForm form) throws SQLException {
+    public void insert(final DynaActionForm form) throws SQLException {
         this.connect();
-        this.setProcedure( "dbo.log_login(?)" );
-        this.setParameter( 1, ((LogInForm) form).getUsername());
+        this.setProcedure("dbo.log_login(?)");
+        this.setParameter(1, ((LogInForm) form).getUsername());
         this.executeUpdate();
         this.disconnect();
     }
 
     @Override
-    public void update(DynaActionForm form) throws SQLException {
+    public void update(final DynaActionForm form) throws SQLException {
         this.connect();
-        this.setProcedure( "dbo.log_out(?, ?)" );
-        this.setParameter( 1, ((LogInForm) form).getId());
-        this.setParameter( 2, ((LogInForm) form).getLogoutTime());
+        this.setProcedure("dbo.log_out(?, ?)");
+        this.setParameter(1, ((LogInForm) form).getId());
+        this.setParameter(2, ((LogInForm) form).getLogoutTime());
         this.executeUpdate();
         this.disconnect();
     }
 
     @Override
-    public void delete(DynaActionForm form) throws SQLException {
+    public void delete(final DynaActionForm form) throws SQLException {
     }
 
     @Override
-    public List<DynaActionForm> select(DynaActionForm form) throws SQLException {
+    public List<DynaActionForm> select(final DynaActionForm form) throws SQLException {
         this.connect();
         this.setProcedure("dbo.get_logins", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        List<DynaActionForm> logins  = this.executeQuery();
+        final List<DynaActionForm> logins = this.executeQuery();
         this.disconnect();
         return logins;
     }
 
     @Override
-    public boolean valid(DynaActionForm form) throws SQLException {
+    public boolean valid(final DynaActionForm form) throws SQLException {
         return false;
     }
 }

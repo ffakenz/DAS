@@ -1,8 +1,7 @@
 package concesionarias.boundaries;
 
 import ar.edu.ubp.das.mvc.db.Dao;
-import concesionarias.forms.ConcesionariaForm;
-import concesionarias.forms.ConfigParamForm;
+import beans.ConfigParamForm;
 import core.Interactor;
 
 import java.util.function.BiFunction;
