@@ -1,45 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <databaseChangeLog
-        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-
+    <include file="/src/main/resources/liquibase/createdb.xml"/>
     <!-- ########################################### -->
     <!-- Main drop change-sets                       -->
     <!-- ########################################### -->
-    <include file="/src/main/resources/liquibase/estado_cuentas/drops/drop_tables.xml" />
-    <include file="/src/main/resources/liquibase/clientes/drops/drop_tables.xml" />
-    <include file="/src/main/resources/liquibase/concesionarias/drops/drop_tables.xml" />
-    <include file="/src/main/resources/liquibase/login/drops/drop_tables.xml" />
+    <include file="/src/main/resources/liquibase/estado_cuentas/drops/drop_tables.xml"/>
+    <include file="/src/main/resources/liquibase/clientes/drops/drop_tables.xml"/>
+    <include file="/src/main/resources/liquibase/concesionarias/drops/drop_tables.xml"/>
+    <include file="/src/main/resources/liquibase/login/drops/drop_tables.xml"/>
 
 
     <!-- ########################################### -->
     <!-- Main change-sets                           -->
     <!-- ########################################### -->
 
-    <include file="/src/main/resources/liquibase/login/tables/create_tables.xml" />
-    <include file="/src/main/resources/liquibase/concesionarias/tables/create_tables.xml" />
-    <include file="/src/main/resources/liquibase/clientes/tables/create_tables.xml" />
-    <include file="/src/main/resources/liquibase/estado_cuentas/tables/create_tables.xml" />
+    <include file="/src/main/resources/liquibase/login/tables/create_tables.xml"/>
+    <include file="/src/main/resources/liquibase/concesionarias/tables/create_tables.xml"/>
+    <include file="/src/main/resources/liquibase/clientes/tables/create_tables.xml"/>
+    <include file="/src/main/resources/liquibase/estado_cuentas/tables/create_tables.xml"/>
 
     <!-- ########################################### -->
     <!-- Procedures change-sets                -->
     <!-- ########################################### -->
 
 
-    <include file="/src/main/resources/liquibase/login/procedures/create_procedures.xml" />
-    <include file="/src/main/resources/liquibase/concesionarias/procedures/create_procedures.xml" />
-    <include file="/src/main/resources/liquibase/clientes/procedures/create_procedures.xml" />
-    <include file="/src/main/resources/liquibase/estado_cuentas/procedures/create_procedures.xml" />
+    <include file="/src/main/resources/liquibase/login/procedures/create_procedures.xml"/>
+    <include file="/src/main/resources/liquibase/concesionarias/procedures/create_procedures.xml"/>
+    <include file="/src/main/resources/liquibase/clientes/procedures/create_procedures.xml"/>
+    <include file="/src/main/resources/liquibase/estado_cuentas/procedures/create_procedures.xml"/>
 
     <!-- ########################################### -->
     <!-- Populate change-sets                -->
     <!-- ########################################### -->
 
-    <include file="/src/main/resources/liquibase/login/populate/populate_tables.xml" />
-    <include file="/src/main/resources/liquibase/concesionarias/populate/populate_tables.xml" />
-    <include file="/src/main/resources/liquibase/clientes/populate/populate_tables.xml" />
-    <include file="/src/main/resources/liquibase/estado_cuentas/populate/populate_tables.xml" />
+    <include file="/src/main/resources/liquibase/login/populate/populate_tables.xml"/>
+    <include file="/src/main/resources/liquibase/concesionarias/populate/populate_tables.xml"/>
+    <include file="/src/main/resources/liquibase/clientes/populate/populate_tables.xml"/>
+    <include file="/src/main/resources/liquibase/estado_cuentas/populate/populate_tables.xml"/>
 </databaseChangeLog>
