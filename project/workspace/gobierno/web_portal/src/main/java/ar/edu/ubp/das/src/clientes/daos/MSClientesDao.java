@@ -43,7 +43,14 @@ public class MSClientesDao extends DaoImpl {
 
     @Override
     public void update(final DynaActionForm form) throws SQLException {
-
+        this.connect();
+        this.setProcedure("dbo.update_cliente(?, ?, ?)");
+        final ClienteForm f = (ClienteForm) form;
+        this.setParameter(1, f.getId());
+        this.setParameter(2, f.getEmail());
+        this.setParameter(3, f.getNroTelefono());
+        this.executeUpdate();
+        this.disconnect();
     }
 
     @Override

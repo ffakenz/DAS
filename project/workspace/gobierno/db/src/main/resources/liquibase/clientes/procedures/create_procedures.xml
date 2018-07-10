@@ -35,6 +35,19 @@
         <dropProcedure procedureName="log_cliente"/>
     </changeSet>
 
+    <changeSet id="Drop procedure update_cliente" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'update_cliente'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="update_cliente"/>
+    </changeSet>
+
 
     <!-- ******************************* -->
     <!--  CREATE PROCEDURES CHANGE-SETS  -->
@@ -63,6 +76,19 @@
             </sqlCheck>
         </preConditions>
         <sqlFile path="/src/main/resources/liquibase/clientes/procedures/log_cliente.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure update_cliente" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'update_cliente'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/clientes/procedures/update_cliente.sql"/>
     </changeSet>
 
 </databaseChangeLog>
