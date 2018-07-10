@@ -85,7 +85,7 @@ public class ActionController extends HttpServlet {
                     final FormBeanConfig actionForm = alias.getFormBeanByName(formConfig);
                     if (actionForm != null) {
                         try {
-                            form = DynaActionForm.class.cast(Class.forName(ModuleConfigImpl.getDtoPackage() + alias.getName() + ".forms." + actionForm.getType()).newInstance());
+                            form = DynaActionForm.class.cast(Class.forName(ModuleConfigImpl.getSrcPackage() + alias.getName() + ".forms." + actionForm.getType()).newInstance());
                         } catch (final ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
                             this.setMessage(ex.getMessage(), request, response);
                             forward = ModuleConfigImpl.getForwardByName("failure");

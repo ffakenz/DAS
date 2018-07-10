@@ -48,12 +48,8 @@ public class DaoFactory {
                 DaoFactory.loadProp = true;
             }
 
-            try {
-                return ModuleConfigImpl.getDaoPackage() + daoPackage + ".daos." + DaoFactory.propFile.getProperty("CurrentDaoFactory") + daoName + "Dao";
-            } catch (final NullPointerException e) {
-                e.printStackTrace();
-                return ModuleConfigImpl.getDaoPackage() + daoPackage + ".daos." + DaoFactory.propFile.getProperty("CurrentDaoFactory") + daoName + "Dao";
-            }
+            return ModuleConfigImpl.getSrcPackage() + daoPackage + ".daos." + DaoFactory.propFile.getProperty("CurrentDaoFactory") + daoName + "Dao";
+
         } catch (final IOException ex) {
             throw new SQLException(ex.getMessage());
         }

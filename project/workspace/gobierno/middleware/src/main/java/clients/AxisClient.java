@@ -1,6 +1,6 @@
 package clients;
 
-import com.google.gson.*;
+import com.google.gson.JsonObject;
 import org.apache.axiom.om.OMAbstractFactory;
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.OMFactory;
@@ -9,6 +9,7 @@ import org.apache.axis2.AxisFault;
 import org.apache.axis2.addressing.EndpointReference;
 import org.apache.axis2.client.Options;
 import org.apache.axis2.client.ServiceClient;
+
 import java.util.Iterator;
 
 public class AxisClient implements ConcesionariaServiceContract {

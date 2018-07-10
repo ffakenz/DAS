@@ -1,8 +1,8 @@
 package dbaccess.implementations;
 
 import dao.Dao;
-import dbaccess.core.DAOAbstractFactory;
 import dbaccess.config.DatasourceConfig;
+import dbaccess.core.DAOAbstractFactory;
 import dbaccess.implementations.daos.DaoType;
 
 public class MSSQLDAOFactory extends DAOAbstractFactory {

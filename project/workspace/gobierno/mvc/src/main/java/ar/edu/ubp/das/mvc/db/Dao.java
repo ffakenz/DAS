@@ -1,10 +1,10 @@
 package ar.edu.ubp.das.mvc.db;
 
+import ar.edu.ubp.das.mvc.action.DynaActionForm;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-
-import ar.edu.ubp.das.mvc.action.DynaActionForm;
 
 public interface Dao {
 

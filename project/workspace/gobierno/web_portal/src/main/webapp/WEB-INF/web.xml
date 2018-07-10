@@ -23,14 +23,6 @@
         <param-name>action.default.path</param-name>
         <param-value>/home/Home.do</param-value>
     </context-param>
-    <context-param>
-        <param-name>dto.path</param-name>
-        <param-value>../../../../db/src/main/java/beans</param-value>
-    </context-param>
-    <context-param>
-        <param-name>dao.path</param-name>
-        <param-value>../../../../db/src/main/java/daos</param-value>
-    </context-param>
     <filter>
         <filter-name>UrlRewriteFilter</filter-name>
         <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>

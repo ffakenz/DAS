@@ -61,14 +61,6 @@ public final class ModuleConfigImpl {
         return ModuleConfigImpl.instance.context.getInitParameter("templates.path");
     }
 
-    public static String getDtoPackage() {
-        return ModuleConfigImpl.instance.context.getInitParameter("dto.path");
-    }
-
-    public static String getDaoPackage() {
-        return ModuleConfigImpl.instance.context.getInitParameter("dao.path");
-    }
-
     public static AliasConfig getAliasByName(final String name) throws RuntimeException {
         return ModuleConfigImpl.instance.getAlias(name);
     }

@@ -1,14 +1,10 @@
 package ar.edu.ubp.das.mvc.action;
 
-import java.sql.SQLException;
-import java.util.function.BiFunction;
-import java.util.function.Function;
+import ar.edu.ubp.das.mvc.config.ForwardConfig;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import ar.edu.ubp.das.mvc.config.ForwardConfig;
-import ar.edu.ubp.das.mvc.db.Dao;
+import java.sql.SQLException;
 
 public interface Action {
 

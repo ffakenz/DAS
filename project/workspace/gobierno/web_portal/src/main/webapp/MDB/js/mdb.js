@@ -1954,7 +1954,7 @@ require(56)(Chart);
 require(57)(Chart);
 
 // Controllers must be loaded after elements
-// See Chart.core.datasetController.dataElementType
+// See Chart.ar.edu.ubp.das.src.core.datasetController.dataElementType
 require(15)(Chart);
 require(16)(Chart);
 require(17)(Chart);

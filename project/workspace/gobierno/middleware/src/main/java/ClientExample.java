@@ -1,16 +1,13 @@
-import clients.AxisClient;
 import beans.PlanBean;
-
-
+import clients.AxisClient;
 import clients.CXFClient;
 import clients.ConcesionariaServiceContract;
 import clients.RestClient;
-import com.google.gson.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 public class ClientExample {
 

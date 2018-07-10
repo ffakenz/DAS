@@ -18,7 +18,7 @@
         <cxf.version>3.2.2</cxf.version>
         <axis.version>1.6.2</axis.version>
         <xmlbeans.version>2.6.0</xmlbeans.version>
-        <httpcomponents.core.version>4.4.9</httpcomponents.core.version>
+        <httpcomponents.ar.edu.ubp.das.src.core.version>4.4.9</httpcomponents.ar.edu.ubp.das.src.core.version>
         <httpcomponents.client.version>4.5.5</httpcomponents.client.version>
     </properties>
 
@@ -66,7 +66,7 @@
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpcore</artifactId>
-            <version>${httpcomponents.core.version}</version>
+            <version>${httpcomponents.ar.edu.ubp.das.src.core.version}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
         <dependency>

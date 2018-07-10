@@ -14,7 +14,7 @@
         -->
 
        <!-- Font Awesome -->
-        <!-- Bootstrap core CSS -->
+        <!-- Bootstar.edu.ubp.das.src.corecore CSS -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
         <!-- Material Design Bootstrap -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/css/mdb.min.css" rel="stylesheet">

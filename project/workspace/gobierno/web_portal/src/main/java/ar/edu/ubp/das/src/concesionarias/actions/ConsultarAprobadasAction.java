@@ -5,10 +5,10 @@ import ar.edu.ubp.das.mvc.action.ActionMapping;
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.config.ForwardConfig;
 import ar.edu.ubp.das.mvc.db.DaoFactory;
-import beans.ConcesionariaForm;
-import concesionarias.ConsultarAprobadasInteractor;
-import core.Interactor;
-import core.InteractorResponse;
+import ar.edu.ubp.das.src.concesionarias.ConsultarAprobadasInteractor;
+import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
+import ar.edu.ubp.das.src.core.Interactor;
+import ar.edu.ubp.das.src.core.InteractorResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

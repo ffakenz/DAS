@@ -1,10 +1,10 @@
 package ar.edu.ubp.das.mvc.action;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import ar.edu.ubp.das.mvc.config.ForwardConfig;
 import ar.edu.ubp.das.mvc.config.ParameterConfig;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public final class ActionMapping {
 

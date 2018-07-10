@@ -5,14 +5,13 @@ import ar.edu.ubp.das.mvc.action.ActionMapping;
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.config.ForwardConfig;
 import ar.edu.ubp.das.mvc.db.DaoFactory;
-import concesionarias.ConfigurarInteractor;
-import core.Interactor;
-import core.InteractorResponse;
+import ar.edu.ubp.das.src.concesionarias.ConfigurarInteractor;
+import ar.edu.ubp.das.src.core.Interactor;
+import ar.edu.ubp.das.src.core.InteractorResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
-import java.util.Optional;
 
 public class ConfigurarAction implements Action {
     @Override

@@ -7,6 +7,7 @@
         <groupId>gobierno</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>web_portal</artifactId>
@@ -34,11 +35,6 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>gobierno</groupId>
-            <artifactId>interactors</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>3.0.1</version>
@@ -62,7 +58,7 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- the core, which includes Streaming API, shared low-level abstractions (but NOT data-binding)
+        <!-- ar.edu.ubp.das.src.corecore, which includes Streaming API, shared low-level abstractions (but NOT data-binding)
         (https://github.com/FasterXML/jackson-docs/wiki/Using-Jackson2-with-Maven)
         -->
         <dependency>
@@ -78,7 +74,13 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.9.5</version>
         </dependency>
-
+        <!-- https://mvnrepository.com/artifact/junit/junit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>

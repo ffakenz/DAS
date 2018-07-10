@@ -4,26 +4,14 @@ import dao.DaoImpl;
 import dbaccess.config.DatasourceConfig;
 
 public enum DaoType {
-    CONCESIONARIAS("CONCESIONARIAS") {
+    INSTANCE("INSTANCE") {
         @Override
         public DaoImpl getDao(DatasourceConfig datasource) {
-            return new MSSQLConcesionariasDAO(datasource);
-        }
-    },
-    CLIENTES("CLIENTES") {
-        @Override
-        public DaoImpl getDao(DatasourceConfig datasource) {
-            return new MSSQLClientesDAO(datasource);
-        }
-    },
-    ESTADO_CUENTAS("ESTADO_CUENTAS") {
-        @Override
-        public DaoImpl getDao(DatasourceConfig datasource) {
-            return new MSSQLEstadoCuentasDAO(datasource);
+            return null;
         }
     };
 
-
+    // this defines above
     private final String text;
     DaoType(final String text) { this.text = text; }
     @Override

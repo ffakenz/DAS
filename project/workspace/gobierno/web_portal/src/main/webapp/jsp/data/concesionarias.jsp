@@ -11,7 +11,6 @@
 <%@page import="org.codehaus.jackson.map.ObjectMapper"%>
 <%@page import="java.util.Arrays"%>
 <%@page import="java.util.List"%>
-<%@page import="java.util.Collections"%>
 
 
 <%
