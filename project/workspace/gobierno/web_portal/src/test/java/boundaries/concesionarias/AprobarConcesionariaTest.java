@@ -6,8 +6,8 @@ import ar.edu.ubp.das.src.concesionarias.RegistrarInteractor;
 import ar.edu.ubp.das.src.concesionarias.boundaries.Aprobar;
 import ar.edu.ubp.das.src.concesionarias.boundaries.ConsultarAprobadas;
 import ar.edu.ubp.das.src.concesionarias.boundaries.Registrar;
+import ar.edu.ubp.das.src.concesionarias.daos.MSConcesionariasDao;
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
-import mocks.MSConcesionariasDaoMock;
 import org.junit.Test;
 
 import java.sql.SQLException;
@@ -19,7 +19,7 @@ public class AprobarConcesionariaTest {
 
     @Test
     public void testAprobadasIsNotEmpty() {
-        final MSConcesionariasDaoMock dao = new MSConcesionariasDaoMock();
+        final MSConcesionariasDao dao = new MSConcesionariasDao();
         final ConsultarAprobadas concecionaria = new ConsultarAprobadasInteractor();
 
         assertEquals(2, concecionaria.consultarAprobadas().apply(dao).size());
@@ -27,7 +27,7 @@ public class AprobarConcesionariaTest {
 
     @Test
     public void testAprobarConcecionaria() throws SQLException {
-        final MSConcesionariasDaoMock dao = new MSConcesionariasDaoMock();
+        final MSConcesionariasDao dao = new MSConcesionariasDao();
         final Aprobar aprobador = new AprobarInteractor();
         final ConsultarAprobadas consultor = new ConsultarAprobadasInteractor();
 

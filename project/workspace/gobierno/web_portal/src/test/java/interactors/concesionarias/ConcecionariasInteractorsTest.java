@@ -5,11 +5,11 @@ import ar.edu.ubp.das.mvc.db.Dao;
 import ar.edu.ubp.das.src.concesionarias.AprobarInteractor;
 import ar.edu.ubp.das.src.concesionarias.ConsultarAprobadasInteractor;
 import ar.edu.ubp.das.src.concesionarias.RegistrarInteractor;
+import ar.edu.ubp.das.src.concesionarias.daos.MSConcesionariasDao;
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
 import ar.edu.ubp.das.src.core.Interactor;
 import ar.edu.ubp.das.src.core.InteractorResponse;
 import ar.edu.ubp.das.src.core.ResponseForward;
-import mocks.MSConcesionariasDaoMock;
 import org.junit.Test;
 
 import java.util.List;
@@ -20,7 +20,7 @@ import static org.junit.Assert.assertEquals;
 
 public class ConcecionariasInteractorsTest {
 
-    Dao daoLogin = new MSConcesionariasDaoMock();
+    Dao daoLogin = new MSConcesionariasDao();
     BiFunction<String, String, Dao> daoFactoryMock = (daoName, daoPackage) -> {
         if (daoName.equals("Concesionarias") && daoPackage.equals("concesionarias")) {
             return daoLogin;

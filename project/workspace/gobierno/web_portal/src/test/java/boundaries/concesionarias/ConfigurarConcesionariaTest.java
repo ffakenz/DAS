@@ -3,9 +3,9 @@ package boundaries.concesionarias;
 import ar.edu.ubp.das.mvc.db.Dao;
 import ar.edu.ubp.das.src.concesionarias.ConfigurarInteractor;
 import ar.edu.ubp.das.src.concesionarias.boundaries.Configurar;
+import ar.edu.ubp.das.src.concesionarias.daos.MSConcesionariasDao;
+import ar.edu.ubp.das.src.concesionarias.daos.MSConfigurarConcesionariaDao;
 import ar.edu.ubp.das.src.concesionarias.forms.ConfigParamForm;
-import mocks.MSConcesionariasDaoMock;
-import mocks.MSConfigurarConcesionariaDaoMock;
 import org.junit.Test;
 
 import java.sql.SQLException;
@@ -13,8 +13,8 @@ import java.util.function.BiFunction;
 
 public class ConfigurarConcesionariaTest {
 
-    Dao confDao = new MSConfigurarConcesionariaDaoMock();
-    Dao concDao = new MSConcesionariasDaoMock();
+    Dao confDao = new MSConfigurarConcesionariaDao();
+    Dao concDao = new MSConcesionariasDao();
     BiFunction<String, String, Dao> daoFactoryMock = (daoName, daoPackage) -> {
         if (daoName.equals("Concesionarias") && daoPackage.equals("concesionarias")) {
             return concDao;
