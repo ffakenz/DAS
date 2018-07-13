@@ -6,13 +6,16 @@ import ar.edu.ubp.das.src.concesionarias.boundaries.Registrar;
 import ar.edu.ubp.das.src.concesionarias.daos.MSConcesionariasDao;
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import java.sql.SQLException;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RegistrarConcecionariaTest {
 
     MSConcesionariasDao dao;
@@ -24,7 +27,7 @@ public class RegistrarConcecionariaTest {
         dataSourceConfig.setDriver("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         dataSourceConfig.setUrl("jdbc:sqlserver://localhost;databaseName=db_gobierno;");
         dataSourceConfig.setUsername("SA");
-        dataSourceConfig.setPassword("0304Euge");
+        dataSourceConfig.setPassword("Das12345");
 
         dao = new MSConcesionariasDao();
         dao.setDatasource(dataSourceConfig);
@@ -32,7 +35,7 @@ public class RegistrarConcecionariaTest {
 
 
     @Test
-    public void testMockDBIsEmpty() throws SQLException {
+    public void test01MockDBIsEmpty() throws SQLException {
 
         final ConcesionariaForm concecionaria = new ConcesionariaForm();
         concecionaria.setNombre("C10");
@@ -42,7 +45,7 @@ public class RegistrarConcecionariaTest {
     }
 
     @Test
-    public void testRegistrarConcecionarias() throws SQLException {
+    public void test02RegistrarConcecionarias() throws SQLException {
 
         final ConcesionariaForm concecionaria = new ConcesionariaForm();
         concecionaria.setNombre("C10");
@@ -65,7 +68,7 @@ public class RegistrarConcecionariaTest {
     }
 
     @Test
-    public void testRegistrarTwice() {
+    public void test03RegistrarTwice() {
 
         final ConcesionariaForm concecionaria = new ConcesionariaForm();
         concecionaria.setNombre("C11");

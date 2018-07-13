@@ -33,13 +33,11 @@ public class AprobarInteractor implements Aprobar, UtilsCore, Utils {
                         dao.select(null)
                                 .stream()
                                 .map(c -> (ConcesionariaForm) c)
-                                .filter(c -> {
-                                    return
-                                            testConcesionariaRegistrada(form).apply(dao) &&
+                                .filter(c -> testConcesionariaRegistrada(form).apply(dao) &&
                                                     c.getId() == form.getId() &&
                                                     c.getFechaAlta() == null &&
-                                                    c.getCodigo() == null;
-                                })
+                                                    c.getCodigo() == null
+                                )
                                 .findFirst()
                                 .map(c -> {
                                     final String codigo = generarCodigo(c);

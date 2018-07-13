@@ -5,5 +5,5 @@
                 driver="com.microsoft.sqlserver.jdbc.SQLServerDriver"
                 url="jdbc:sqlserver://localhost;databaseName=db_gobierno;"
                 username="SA"
-                password="0304Euge" />
+                password="Das12345" />
 </datasources>
