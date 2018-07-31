@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <databaseChangeLog
-        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
@@ -22,6 +22,31 @@
         <dropProcedure procedureName="get_estado_cuentas"/>
     </changeSet>
 
+    <changeSet id="Drop procedure log_cuota" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_cuota'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="log_cuota"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure get_cuota" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_cuota'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_cuota"/>
+    </changeSet>
 
     <!-- ******************************* -->
     <!--  CREATE PROCEDURES CHANGE-SETS  -->
@@ -36,7 +61,33 @@
                 AND ROUTINE_NAME = 'get_estado_cuentas'
             </sqlCheck>
         </preConditions>
-        <sqlFile path="/src/main/resources/liquibase/estado_cuentas/procedures/get_estado_cuentas.sql" />
+        <sqlFile path="/src/main/resources/liquibase/estado_cuentas/procedures/get_estado_cuentas.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure log_cuota" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_cuota'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/estado_cuentas/procedures/log_cuota.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure get_cuota" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_cuota'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/estado_cuentas/procedures/get_cuota.sql"/>
     </changeSet>
 
 </databaseChangeLog>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <databaseChangeLog
-        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
@@ -10,16 +10,23 @@
     <!-- ***************************** -->
     <changeSet id="Drop table cuotas" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
-            <tableExists tableName="cuotas" />
+            <tableExists tableName="cuotas"/>
         </preConditions>
         <dropTable tableName="cuotas"/>
     </changeSet>
 
     <changeSet id="Drop table estado_cuentas" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
-            <tableExists tableName="estado_cuentas" />
+            <tableExists tableName="estado_cuentas"/>
         </preConditions>
         <dropTable tableName="estado_cuentas"/>
+    </changeSet>
+
+    <changeSet id="Drop table tipo_estado_cuentas" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="tipo_estado_cuentas"/>
+        </preConditions>
+        <dropTable tableName="tipo_estado_cuentas"/>
     </changeSet>
 
 </databaseChangeLog>

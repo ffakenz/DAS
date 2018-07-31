@@ -2,18 +2,21 @@ package boundaries.login;
 
 import ar.edu.ubp.das.src.login.LoginInteractor;
 import ar.edu.ubp.das.src.login.boundaries.LogIn;
+import ar.edu.ubp.das.src.login.daos.MSLogInDao;
 import ar.edu.ubp.das.src.login.forms.LogInForm;
-import mocks.MSLogInDaoMock;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import java.util.Optional;
 
-
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class LogOutTest {
+
+    MSLogInDao loginDao = new MSLogInDao();
 
     @Test
     public void testLoginSuccessfully() {
-        final MSLogInDaoMock loginDao = new MSLogInDaoMock();
         final LogIn logueador = new LoginInteractor();
         // create a login request
         final LogInForm logRqst = new LogInForm();

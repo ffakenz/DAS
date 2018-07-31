@@ -2,10 +2,11 @@ package boundaries.estado_cuentas;
 
 import ar.edu.ubp.das.src.estado_cuentas.EstadoCuentaInteractor;
 import ar.edu.ubp.das.src.estado_cuentas.boundaries.RegistrarEstadoCuenta;
+import ar.edu.ubp.das.src.estado_cuentas.daos.MSEstadoCuentaDao;
 import ar.edu.ubp.das.src.estado_cuentas.forms.EstadoCuentaForm;
-import mocks.MSEstadoCuentaDaoMock;
 import org.junit.Test;
 
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Optional;
 
@@ -13,10 +14,11 @@ import static org.junit.Assert.assertEquals;
 
 public class RegistrarEstadoCuentaTest {
 
+    final MSEstadoCuentaDao estadoCuentaDao = new MSEstadoCuentaDao();
+
     @Test
-    public void validarRegistrarSuccessfully() {
+    public void validarRegistrarSuccessfully() throws SQLException {
         final RegistrarEstadoCuenta registador = new EstadoCuentaInteractor();
-        final MSEstadoCuentaDaoMock estadoCuentaDao = new MSEstadoCuentaDaoMock();
 
         final EstadoCuentaForm estadoCuenta = new EstadoCuentaForm();
         estadoCuenta.setConcesionariaId(Long.valueOf(1));
@@ -29,6 +31,6 @@ public class RegistrarEstadoCuentaTest {
 
         assertEquals(Optional.of(Long.valueOf(1)), estadoCuentaId);
 
-        assertEquals(true, estadoCuentaDao.estadoCuentas.contains(estadoCuenta));
+        assertEquals(true, estadoCuentaDao.select(null).contains(estadoCuenta));
     }
 }

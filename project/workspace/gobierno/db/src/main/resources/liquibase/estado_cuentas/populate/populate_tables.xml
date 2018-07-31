@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <databaseChangeLog
-        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
@@ -9,18 +9,25 @@
     <!--   TABLE POPULATION CHANGE-SETS   -->
     <!-- ******************************** -->
 
+    <changeSet id="Populate table tipos_estado_cuentas" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="tipos_estado_cuentas"/>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/estado_cuentas/populate/tipos_estado_cuentas.sql"/>
+    </changeSet>
+
     <changeSet id="Populate table estado_cuentas" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
-            <tableExists tableName="estado_cuentas" />
+            <tableExists tableName="estado_cuentas"/>
         </preConditions>
-        <sqlFile path="/src/main/resources/liquibase/estado_cuentas/populate/estado_cuentas.sql" />
+        <sqlFile path="/src/main/resources/liquibase/estado_cuentas/populate/estado_cuentas.sql"/>
     </changeSet>
 
     <changeSet id="Populate table cuotas" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
-            <tableExists tableName="cuotas" />
+            <tableExists tableName="cuotas"/>
         </preConditions>
-        <sqlFile path="/src/main/resources/liquibase/estado_cuentas/populate/cuotas.sql" />
+        <sqlFile path="/src/main/resources/liquibase/estado_cuentas/populate/cuotas.sql"/>
     </changeSet>
 
 </databaseChangeLog>

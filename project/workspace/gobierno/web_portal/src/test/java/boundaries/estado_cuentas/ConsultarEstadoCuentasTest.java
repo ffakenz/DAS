@@ -1,11 +1,10 @@
 package boundaries.estado_cuentas;
 
-import ar.edu.ubp.das.mvc.db.Dao;
 import ar.edu.ubp.das.src.estado_cuentas.EstadoCuentaInteractor;
 import ar.edu.ubp.das.src.estado_cuentas.boundaries.ConsultarEstadoCuentas;
 import ar.edu.ubp.das.src.estado_cuentas.boundaries.RegistrarEstadoCuenta;
+import ar.edu.ubp.das.src.estado_cuentas.daos.MSEstadoCuentaDao;
 import ar.edu.ubp.das.src.estado_cuentas.forms.EstadoCuentaForm;
-import mocks.MSEstadoCuentaDaoMock;
 import org.junit.Test;
 
 import java.sql.Timestamp;
@@ -16,9 +15,10 @@ import static org.junit.Assert.assertEquals;
 
 public class ConsultarEstadoCuentasTest {
 
+    MSEstadoCuentaDao estadoCuentaDao = new MSEstadoCuentaDao();
+
     @Test
     public void testConsultarEstadoCuentasSuccessfully() {
-        final Dao estadoCuentaDao = new MSEstadoCuentaDaoMock();
 
         final ConsultarEstadoCuentas consultor = new EstadoCuentaInteractor();
         final List<EstadoCuentaForm> estadosDeCuenta =

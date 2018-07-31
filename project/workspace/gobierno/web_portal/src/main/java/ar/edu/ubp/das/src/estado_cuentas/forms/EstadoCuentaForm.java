@@ -13,6 +13,7 @@ public class EstadoCuentaForm extends DynaActionForm {
     private Timestamp fechaAltaConcesionaria;
     private Timestamp fechaAltaSistema;
     private Timestamp fechaUltimaActualizacion;
+    private String estado;
 
     @Override
     public String toString() {
@@ -90,5 +91,13 @@ public class EstadoCuentaForm extends DynaActionForm {
 
     public void setFechaUltimaActualizacion(final Timestamp fechaUltimaActualizacion) {
         this.fechaUltimaActualizacion = fechaUltimaActualizacion;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(final String estado) {
+        this.estado = estado;
     }
 }

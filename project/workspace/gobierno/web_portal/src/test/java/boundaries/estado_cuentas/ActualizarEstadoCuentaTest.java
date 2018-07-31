@@ -5,8 +5,8 @@ import ar.edu.ubp.das.src.estado_cuentas.EstadoCuentaInteractor;
 import ar.edu.ubp.das.src.estado_cuentas.boundaries.ActualizarEstadoCuenta;
 import ar.edu.ubp.das.src.estado_cuentas.boundaries.ConsultarEstadoCuentas;
 import ar.edu.ubp.das.src.estado_cuentas.boundaries.RegistrarEstadoCuenta;
+import ar.edu.ubp.das.src.estado_cuentas.daos.MSEstadoCuentaDao;
 import ar.edu.ubp.das.src.estado_cuentas.forms.EstadoCuentaForm;
-import mocks.MSEstadoCuentaDaoMock;
 import org.junit.Test;
 
 import java.sql.Timestamp;
@@ -17,10 +17,11 @@ import java.util.function.Function;
 public class ActualizarEstadoCuentaTest {
 
 
+    Dao estadoCuentaDao = new MSEstadoCuentaDao();
+
     @Test
     public void validateActualizarEstadoCuentaSuccessfully() {
 
-        final Dao estadoCuentaDao = new MSEstadoCuentaDaoMock();
         final RegistrarEstadoCuenta registrador = new EstadoCuentaInteractor();
         final ConsultarEstadoCuentas consultor = (ConsultarEstadoCuentas) registrador;
         final ActualizarEstadoCuenta actualizador = (ActualizarEstadoCuenta) registrador;
