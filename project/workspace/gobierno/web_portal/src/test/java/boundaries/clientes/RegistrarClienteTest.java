@@ -1,24 +1,24 @@
 package boundaries.clientes;
 
-
-
 import ar.edu.ubp.das.src.clientes.RegistrarClienteInteractor;
 import ar.edu.ubp.das.src.clientes.boundaries.RegistrarCliente;
+import ar.edu.ubp.das.src.clientes.daos.MSClientesDao;
 import ar.edu.ubp.das.src.clientes.forms.ClienteForm;
-import mocks.MSClienteDaoMock;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RegistrarClienteTest {
 
-    public MSClienteDaoMock msClienteDaoMock;
+    MSClientesDao msClientesDao = new MSClientesDao();
 
     @Test
-    public void validarRegistroClienteOK() {
-        msClienteDaoMock = new MSClienteDaoMock();
+    public void test01validarRegistroClienteOK() {
 
         final RegistrarCliente registrador = new RegistrarClienteInteractor();
 
@@ -30,14 +30,13 @@ public class RegistrarClienteTest {
         clienteForm.setEmail("diegote@mail.com");
         clienteForm.setConcesionariaId(1L);
 
-        final Optional<Long> response = registrador.registrarCliente(clienteForm).apply(msClienteDaoMock);
+        final Optional<Long> response = registrador.registrarCliente(clienteForm).apply(msClientesDao);
 
         assertEquals(new Long(4), response.get());
     }
 
     @Test
     public void validarRegistroClienteThatExist() {
-        msClienteDaoMock = new MSClienteDaoMock();
 
         final RegistrarCliente registrador = new RegistrarClienteInteractor();
 
@@ -45,7 +44,7 @@ public class RegistrarClienteTest {
         clienteForm.setDocumento(1L);
         clienteForm.setConcesionariaId(1L);
 
-        final Optional<Long> response = registrador.registrarCliente(clienteForm).apply(msClienteDaoMock);
+        final Optional<Long> response = registrador.registrarCliente(clienteForm).apply(msClientesDao);
 
         assertEquals(Optional.empty(), response);
     }

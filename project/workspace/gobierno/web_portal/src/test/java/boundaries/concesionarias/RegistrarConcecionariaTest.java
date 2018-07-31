@@ -33,19 +33,8 @@ public class RegistrarConcecionariaTest {
         dao.setDatasource(dataSourceConfig);
     }
 
-
     @Test
-    public void test01MockDBIsEmpty() throws SQLException {
-
-        final ConcesionariaForm concecionaria = new ConcesionariaForm();
-        concecionaria.setNombre("C10");
-        concecionaria.setConfig("AXIS");
-
-        assertEquals(false, dao.select(null).contains(concecionaria));
-    }
-
-    @Test
-    public void test02RegistrarConcecionarias() throws SQLException {
+    public void test01RegistrarConcecionarias() throws SQLException {
 
         final ConcesionariaForm concecionaria = new ConcesionariaForm();
         concecionaria.setNombre("C10");
@@ -59,16 +48,16 @@ public class RegistrarConcecionariaTest {
 
         final Optional<Long> concesionariaId = concImpl.registrarConcesionaria(concecionaria).apply(dao);
 
-        final Long expectedConcesionariaId = 7L;
+        final Long expectedConcesionariaId = 6L;
 
         assertEquals(true, dao.select(null).stream().anyMatch(d -> {
             return ((ConcesionariaForm) d).getNombre().equals("C10");
         }));
-        assertEquals(concesionariaId, Optional.of(expectedConcesionariaId));
+        assertEquals(Optional.of(expectedConcesionariaId), concesionariaId);
     }
 
     @Test
-    public void test03RegistrarTwice() {
+    public void test02RegistrarTwice() {
 
         final ConcesionariaForm concecionaria = new ConcesionariaForm();
         concecionaria.setNombre("C11");
@@ -82,8 +71,8 @@ public class RegistrarConcecionariaTest {
         final Optional<Long> logInId = concImpl.registrarConcesionaria(concecionaria).apply(dao);
         final Optional<Long> logInId2 = concImpl.registrarConcesionaria(concecionaria).apply(dao);
 
-        assertEquals(logInId, Optional.of(new Long(6)));
-        assertEquals(logInId2, Optional.empty());
+        assertEquals(Optional.of(new Long(7)), logInId);
+        assertEquals(Optional.empty(), logInId2);
     }
 }
 
