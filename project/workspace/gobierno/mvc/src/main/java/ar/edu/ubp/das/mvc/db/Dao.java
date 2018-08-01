@@ -9,10 +9,15 @@ import java.util.List;
 public interface Dao {
 
     public DynaActionForm make(ResultSet result) throws SQLException;
+
     public void insert(DynaActionForm form) throws SQLException;
+
     public void update(DynaActionForm form) throws SQLException;
+
     public void delete(DynaActionForm form) throws SQLException;
+
     public List<DynaActionForm> select(DynaActionForm form) throws SQLException;
+
     public boolean valid(DynaActionForm form) throws SQLException;
 
 }

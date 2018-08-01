@@ -1,46 +1,50 @@
 package boundaries.estado_cuentas;
 
-import ar.edu.ubp.das.src.estado_cuentas.EstadoCuentaInteractor;
-import ar.edu.ubp.das.src.estado_cuentas.boundaries.ConsultarEstadoCuentas;
-import ar.edu.ubp.das.src.estado_cuentas.boundaries.RegistrarEstadoCuenta;
+import ar.edu.ubp.das.mvc.action.DynaActionForm;
+import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.src.estado_cuentas.daos.MSEstadoCuentaDao;
 import ar.edu.ubp.das.src.estado_cuentas.forms.EstadoCuentaForm;
+import org.junit.Before;
 import org.junit.Test;
 
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 
 public class ConsultarEstadoCuentasTest {
 
-    MSEstadoCuentaDao estadoCuentaDao = new MSEstadoCuentaDao();
+    MSEstadoCuentaDao estadoCuentaDao;
+    DatasourceConfig dataSourceConfig;
+
+    @Before
+    public void setup() {
+        dataSourceConfig = new DatasourceConfig();
+        dataSourceConfig.setDriver("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        dataSourceConfig.setUrl("jdbc:sqlserver://localhost;databaseName=db_gobierno;");
+        dataSourceConfig.setUsername("SA");
+        dataSourceConfig.setPassword("Das12345");
+
+        estadoCuentaDao = new MSEstadoCuentaDao();
+        estadoCuentaDao.setDatasource(dataSourceConfig);
+    }
+
 
     @Test
-    public void testConsultarEstadoCuentasSuccessfully() {
+    public void testConsultarEstadoCuentasSuccessfully() throws SQLException {
 
-        final ConsultarEstadoCuentas consultor = new EstadoCuentaInteractor();
-        final List<EstadoCuentaForm> estadosDeCuenta =
-                consultor.consultarEstadoCuentas().apply(estadoCuentaDao);
-
-        assertEquals(true, estadosDeCuenta.isEmpty());
-
-        final RegistrarEstadoCuenta registrador = (RegistrarEstadoCuenta) consultor;
         final EstadoCuentaForm estadoCuentaMock = new EstadoCuentaForm();
-        estadoCuentaMock.setConcesionariaId(Long.valueOf(1));
+        estadoCuentaMock.setConcesionariaId(Long.valueOf(6));
         estadoCuentaMock.setNroPlanConcesionaria(Long.valueOf(1));
         estadoCuentaMock.setDocumentoCliente(Long.valueOf(93337511));
         estadoCuentaMock.setVehiculo(Long.valueOf(1));
         estadoCuentaMock.setFechaAltaConcesionaria(Timestamp.valueOf("2018-01-01 21:58:01"));
+        estadoCuentaMock.setEstado("inicial");
 
-        final Optional<Long> estadoCuentaId =
-                registrador.registrarEstadoCuenta(estadoCuentaMock).apply(estadoCuentaDao);
+        estadoCuentaDao.insert(estadoCuentaMock);
 
-        assertEquals(Optional.of(Long.valueOf(1)), estadoCuentaId);
-
-        final List<EstadoCuentaForm> estadosDeCuenta2 =
-                consultor.consultarEstadoCuentas().apply(estadoCuentaDao);
-        assertEquals(true, estadosDeCuenta2.contains(estadoCuentaMock));
+        final List<DynaActionForm> ecs = estadoCuentaDao.select(estadoCuentaMock);
+        assertEquals(true, ecs.contains(estadoCuentaMock));
     }
 }

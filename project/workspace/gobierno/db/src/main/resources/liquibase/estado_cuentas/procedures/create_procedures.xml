@@ -48,6 +48,32 @@
         <dropProcedure procedureName="get_cuota"/>
     </changeSet>
 
+    <changeSet id="Drop procedure update_estado_cuentas" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'update_estado_cuentas'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="update_estado_cuentas"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure log_estado_cuentas" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_estado_cuentas'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="log_estado_cuentas"/>
+    </changeSet>
+
     <!-- ******************************* -->
     <!--  CREATE PROCEDURES CHANGE-SETS  -->
     <!-- ******************************* -->
@@ -88,6 +114,32 @@
             </sqlCheck>
         </preConditions>
         <sqlFile path="/src/main/resources/liquibase/estado_cuentas/procedures/get_cuota.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure update_estado_cuentas" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'update_estado_cuentas'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/estado_cuentas/procedures/update_estado_cuentas.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure log_estado_cuentas" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_estado_cuentas'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/estado_cuentas/procedures/log_estado_cuentas.sql"/>
     </changeSet>
 
 </databaseChangeLog>

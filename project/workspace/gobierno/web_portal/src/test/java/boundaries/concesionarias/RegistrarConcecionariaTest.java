@@ -22,7 +22,7 @@ public class RegistrarConcecionariaTest {
     DatasourceConfig dataSourceConfig;
 
     @Before
-    public void setup() throws SQLException {
+    public void setup() {
         dataSourceConfig = new DatasourceConfig();
         dataSourceConfig.setDriver("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         dataSourceConfig.setUrl("jdbc:sqlserver://localhost;databaseName=db_gobierno;");

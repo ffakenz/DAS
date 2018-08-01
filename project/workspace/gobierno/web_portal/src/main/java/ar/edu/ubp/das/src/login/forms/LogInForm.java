@@ -10,6 +10,13 @@ public class LogInForm extends DynaActionForm {
     private Date loginTime;
     private Date logoutTime;
 
+    public LogInForm() {
+    }
+
+    public LogInForm(final String username) {
+        this.username = username;
+    }
+
     public Long getId() {
         return id;
     }

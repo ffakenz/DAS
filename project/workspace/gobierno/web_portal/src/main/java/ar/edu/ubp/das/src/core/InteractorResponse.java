@@ -1,15 +1,26 @@
 package ar.edu.ubp.das.src.core;
 
-public class  InteractorResponse {
-    protected ResponseForward response;
-    protected Object result;
+import java.util.Optional;
 
+public class InteractorResponse {
+    private ResponseForward response;
+    private Object result;
+
+    public InteractorResponse(final ResponseForward response) {
+        this.response = response;
+        this.result = Optional.empty();
+    }
+
+    public InteractorResponse(final ResponseForward response, final Object result) {
+        this.response = response;
+        this.result = result;
+    }
 
     public ResponseForward getResponse() {
         return response;
     }
 
-    public void setResponse(ResponseForward response) {
+    public void setResponse(final ResponseForward response) {
         this.response = response;
     }
 
@@ -17,7 +28,7 @@ public class  InteractorResponse {
         return result;
     }
 
-    public void setResult(Object result) {
+    public void setResult(final Object result) {
         this.result = result;
     }
 }

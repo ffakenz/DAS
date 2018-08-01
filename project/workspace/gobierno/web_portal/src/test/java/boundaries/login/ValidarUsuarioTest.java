@@ -13,25 +13,17 @@ public class ValidarUsuarioTest {
 
     @Test
     public void testValidateSuccessfully() {
+        final UsuarioForm userMock = new UsuarioForm("pepe", "123", "gobierno");
 
-        final UsuarioForm userMock = new UsuarioForm();
-        userMock.setUsername("pepe");
-        userMock.setPassword("123");
-        userMock.setRol("gobierno");
-
-        final Boolean isUsuarioValido = new LoginInteractor().validarUsuario(userMock).apply(dao);
+        final Boolean isUsuarioValido = new LoginInteractor().validarUsuario(userMock);
         assertEquals(true, isUsuarioValido);
     }
 
     @Test
     public void testValidateFailed() {
 
-        final UsuarioForm userMock = new UsuarioForm();
-        userMock.setUsername("lol");
-        userMock.setPassword("123");
-        userMock.setRol("gobierno");
-
-        final Boolean isUsuarioValido = new LoginInteractor().validarUsuario(userMock).apply(dao);
+        final UsuarioForm userMock = new UsuarioForm("lol", "123", "gobierno");
+        final Boolean isUsuarioValido = new LoginInteractor().validarUsuario(userMock);
         assertEquals(false, isUsuarioValido);
     }
 }

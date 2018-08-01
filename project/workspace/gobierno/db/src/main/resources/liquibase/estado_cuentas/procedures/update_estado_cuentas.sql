@@ -1,11 +1,9 @@
 CREATE PROCEDURE update_estado_cuentas(@id BIGINT
-                                           , @concesionaria BIGINT
-                                           , @nro_plan_concesionaria BIGINT
-                                           , @documento_cliente BIGINT
-                                           , @vehiculo BIGINT
-                                           , @fecha_alta_concesionaria DATETIME
-                                           , @fecha_alta_sistema DATETIME
-                                           , @fecha_ultima_actualizacion DATETIME) AS
+                                           , @estado VARCHAR(30)) AS
 UPDATE estado_cuentas
-SET  = @
+SET  fecha_ultima_actualizacion  = GETDATE()
+     , estado = @estado
 WHERE id = @id;
+
+
+

@@ -2,132 +2,108 @@ package ar.edu.ubp.das.src.login;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.Dao;
+import ar.edu.ubp.das.mvc.db.DaoFactory;
 import ar.edu.ubp.das.src.core.InteractorResponse;
 import ar.edu.ubp.das.src.core.ResponseForward;
-import ar.edu.ubp.das.src.login.boundaries.LogIn;
 import ar.edu.ubp.das.src.login.forms.LogInForm;
 import ar.edu.ubp.das.src.login.forms.UsuarioForm;
 
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Optional;
-import java.util.function.BiFunction;
-import java.util.function.Consumer;
-import java.util.function.Function;
 
-public class LoginInteractor implements LogIn {
+public class LoginInteractor {
 
-    public Function<Dao, Optional<Long>> isLoggedIn(final LogInForm form) {
-        return loginDao -> {
-            try {
-                return
-                        loginDao.select(null).stream().filter(l -> {
-                            LogInForm login = (LogInForm) l;
-                            return
-                                    login.getUsername().equals(form.getUsername()) &&
-                                            login.getLogoutTime() == null;
-                        }).findFirst().map(l -> {
-                            final LogInForm lf = (LogInForm) l;
-                            return lf.getId();
-                        });
-            } catch (final SQLException ex) {
-                ex.printStackTrace();
-                return Optional.empty();
-            }
-        };
+    private final Dao msUsuariosDao = DaoFactory.getDao("Usuarios", "login");
+    private final Dao loginDao = DaoFactory.getDao("LogIn", "login");
+
+
+    public Optional<Long> isLoggedIn(final LogInForm form) {
+        try {
+            return
+                    loginDao.select(null).stream().filter(l -> {
+                        LogInForm login = (LogInForm) l;
+                        return
+                                login.getUsername().equals(form.getUsername()) &&
+                                        login.getLogoutTime() == null;
+                    }).findFirst().map(l -> {
+                        final LogInForm lf = (LogInForm) l;
+                        return lf.getId();
+                    });
+        } catch (final SQLException ex) {
+            ex.printStackTrace();
+            return Optional.empty();
+        }
     }
 
-    @Override
-    public Consumer<Dao> logout(final LogInForm req) {
-        return loginDao -> {
-            try {
-                loginDao.update(req);
-            } catch (final SQLException ex) {
-                ex.printStackTrace();
-            }
-        };
+    public void logout(final LogInForm req) {
+        try {
+            loginDao.update(req);
+        } catch (final SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
-    @Override
-    public Function<Dao, Optional<Long>> login(final LogInForm form) {
-        return loginDao -> {
-            try {
-                loginDao.insert(form);
-                final Optional<Long> max =
-                        loginDao.select(null).stream()
-                                .filter(l -> ((LogInForm) l).getUsername().equals(form.getUsername()))
-                                .map(l -> ((LogInForm) l).getId())
-                                .max(Comparable::compareTo);
-                return max;
-            } catch (final SQLException e) {
-                e.printStackTrace();
-                return Optional.empty();
-            }
-        };
+    public Optional<Long> login(final LogInForm form) {
+        try {
+            loginDao.insert(form);
+            final Optional<Long> max =
+                    loginDao.select(null).stream()
+                            .filter(l -> ((LogInForm) l).getUsername().equals(form.getUsername()))
+                            .map(l -> ((LogInForm) l).getId())
+                            .max(Comparable::compareTo);
+            return max;
+        } catch (final SQLException e) {
+            e.printStackTrace();
+            return Optional.empty();
+        }
     }
 
-    // is there any usuario in the repository suchthat is equals to the one sent by parameter ?
-    @Override
-    public Function<Dao, Boolean> validarUsuario(final UsuarioForm user) {
-        return msUsuariosDao -> {
-            try {
-                return msUsuariosDao.select(null).stream().anyMatch(usr -> {
-                    final UsuarioForm dbUser = ((UsuarioForm) usr);
-                    return dbUser.getUsername().equals(user.getUsername()) &&
-                            dbUser.getPassword().equals(user.getPassword());
-                });
-            } catch (final SQLException e) {
-                e.printStackTrace();
-                return false;
-            }
-        };
+    // is there any usuario in the repository such that is equals to the one sent by parameter ?
+    public Boolean validarUsuario(final UsuarioForm user) {
+        try {
+            return msUsuariosDao.select(null).stream().anyMatch(usr -> {
+                final UsuarioForm dbUser = ((UsuarioForm) usr);
+                return dbUser.getUsername().equals(user.getUsername()) &&
+                        dbUser.getPassword().equals(user.getPassword());
+            });
+        } catch (final SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
-    @Override
-    public Function<BiFunction<String, String, Dao>, InteractorResponse> execute(final DynaActionForm form) {
-        return (daoFactory) -> {
-            final Dao dao = daoFactory.apply("Usuarios", "login");
-            final Dao logInDao = daoFactory.apply("LogIn", "login");
+    public InteractorResponse execute(final DynaActionForm form) {
 
-            final Optional<InteractorResponse> respuesta =
-                    form.getItem("username").flatMap(u -> {
-                        return form.getItem("password").map(p -> {
-                            final UsuarioForm usr = new UsuarioForm();
-                            usr.setUsername(u);
-                            usr.setPassword(p);
-                            final LoginInteractor auth = new LoginInteractor();
+        final Optional<UsuarioForm> usr =
+                form.getItem("username").flatMap(u ->
+                        form.getItem("password").map(p ->
+                                new UsuarioForm(u, p)
+                        )
+                );
 
+        final Optional<InteractorResponse> response =
+                usr.map(u -> {
+                    final LoginInteractor auth = new LoginInteractor();
+                    // is user valid ?
+                    if (!auth.validarUsuario(u)) {
+                        return new InteractorResponse(ResponseForward.FAILURE);
+                    }
 
-                            final InteractorResponse response = new InteractorResponse();
-                            // is user valid ?
-                            if (auth.validarUsuario(usr).apply(dao)) {
-                                final LogInForm logInForm = new LogInForm();
-                                logInForm.setUsername(u);
-                                // is user logged in ?
-                                auth.isLoggedIn(logInForm).apply(logInDao).ifPresent(loginId -> {
-                                    logInForm.setId(loginId);
-                                    logInForm.setLogoutTime(new Date(System.currentTimeMillis()));
-                                    auth.logout(logInForm).accept(logInDao);
-                                });
-
-                                final Optional<Long> LogInId = auth.login(logInForm).apply(logInDao);
-                                response.setResult(LogInId);
-
-                                if (LogInId.isPresent()) response.setResponse(ResponseForward.SUCCESS);
-                                else response.setResponse(ResponseForward.FAILURE);
-                            } else {
-                                response.setResponse(ResponseForward.FAILURE);
-                                response.setResult(Optional.empty());
-                            }
-                            return response;
-                        });
+                    final LogInForm logInForm = new LogInForm(u.getUsername());
+                    // is user logged in ?
+                    auth.isLoggedIn(logInForm).ifPresent(loginId -> {
+                        logInForm.setId(loginId);
+                        logInForm.setLogoutTime(new Date(System.currentTimeMillis()));
+                        auth.logout(logInForm);
                     });
 
-            final InteractorResponse response = new InteractorResponse();
-            response.setResponse(ResponseForward.WARNING);
-            response.setResult(Optional.empty());
+                    return auth.login(logInForm)
+                            .map(LogInId -> new InteractorResponse(ResponseForward.SUCCESS, LogInId))
+                            .orElse(new InteractorResponse(ResponseForward.FAILURE));
+                });
 
-            return respuesta.orElse(response); // Some error occur with username / password
-        };
+
+        return response.orElse(new InteractorResponse(ResponseForward.WARNING)); // Some error occur with username / password
     }
 }

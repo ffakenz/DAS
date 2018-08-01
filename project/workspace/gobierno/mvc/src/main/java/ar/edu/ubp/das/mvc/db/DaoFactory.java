@@ -15,6 +15,7 @@ public class DaoFactory {
     private DaoFactory() {
     }
 
+    // THE MAGIC
     public static Dao getDao(final String daoName, final String daoPackage) {
         try {
             return DaoFactory.getDao(daoName, daoPackage, "default");

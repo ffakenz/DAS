@@ -22,11 +22,11 @@
         <dropTable tableName="estado_cuentas"/>
     </changeSet>
 
-    <changeSet id="Drop table tipo_estado_cuentas" author="DAS-Team" runAlways="true" runOnChange="true">
+    <changeSet id="Drop table tipos_estado_cuentas" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
-            <tableExists tableName="tipo_estado_cuentas"/>
+            <tableExists tableName="tipos_estado_cuentas"/>
         </preConditions>
-        <dropTable tableName="tipo_estado_cuentas"/>
+        <dropTable tableName="tipos_estado_cuentas"/>
     </changeSet>
 
 </databaseChangeLog>

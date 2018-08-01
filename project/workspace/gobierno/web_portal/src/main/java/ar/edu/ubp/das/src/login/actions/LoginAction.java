@@ -4,8 +4,6 @@ import ar.edu.ubp.das.mvc.action.Action;
 import ar.edu.ubp.das.mvc.action.ActionMapping;
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.config.ForwardConfig;
-import ar.edu.ubp.das.mvc.db.DaoFactory;
-import ar.edu.ubp.das.src.core.Interactor;
 import ar.edu.ubp.das.src.core.InteractorResponse;
 import ar.edu.ubp.das.src.login.LoginInteractor;
 
@@ -17,19 +15,19 @@ import java.util.Optional;
 
 public class LoginAction implements Action {
 
-	@Override
-	public ForwardConfig execute(ActionMapping mapping, DynaActionForm form, HttpServletRequest request,
-																			HttpServletResponse response) throws SQLException, RuntimeException {
+    @Override
+    public ForwardConfig execute(final ActionMapping mapping, final DynaActionForm form, final HttpServletRequest request,
+                                 final HttpServletResponse response) throws SQLException, RuntimeException {
 
-		Interactor action = new LoginInteractor();
-		InteractorResponse result = action.execute(form).apply(DaoFactory::getDao);
+        final LoginInteractor action = new LoginInteractor();
+        final InteractorResponse result = action.execute(form);
 
-		Long logInId = ((Optional<Long>)result.getResult()).orElse(Long.MIN_VALUE);
+        final Long logInId = ((Optional<Long>) result.getResult()).orElse(Long.MIN_VALUE);
 
-		HttpSession session = request.getSession();
-		session.setAttribute("LogInId", logInId);
+        final HttpSession session = request.getSession();
+        session.setAttribute("LogInId", logInId);
 
-		return mapping.getForwardByName(result.getResponse().getForward());
-	}
+        return mapping.getForwardByName(result.getResponse().getForward());
+    }
 
 }

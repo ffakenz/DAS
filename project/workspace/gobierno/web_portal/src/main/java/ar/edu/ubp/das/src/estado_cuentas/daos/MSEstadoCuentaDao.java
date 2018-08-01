@@ -29,16 +29,14 @@ public class MSEstadoCuentaDao extends DaoImpl {
     @Override
     public void insert(final DynaActionForm form) throws SQLException {
         this.connect();
-        this.setProcedure("dbo.log_estado_cuentas(?, ?, ?, ?, ?, ?, ?)");
+        this.setProcedure("dbo.log_estado_cuentas(?, ?, ?, ?, ?, ?)");
         final EstadoCuentaForm f = (EstadoCuentaForm) form;
         this.setParameter(1, f.getConcesionariaId());
         this.setParameter(2, f.getNroPlanConcesionaria());
         this.setParameter(3, f.getDocumentoCliente());
         this.setParameter(4, f.getVehiculo());
         this.setParameter(5, f.getFechaAltaConcesionaria());
-        this.setParameter(6, f.getFechaAltaSistema());
-        this.setParameter(7, f.getFechaUltimaActualizacion());
-        this.setParameter(8, f.getEstado());
+        this.setParameter(6, f.getEstado());
 
         this.executeUpdate();
         this.disconnect();
@@ -49,16 +47,10 @@ public class MSEstadoCuentaDao extends DaoImpl {
 
 
         this.connect();
-        this.setProcedure("dbo.log_estado_cuentas(?, ?, ?, ?, ?, ?, ?, ?)");
+        this.setProcedure("dbo.update_estado_cuentas(?, ?)");
         final EstadoCuentaForm f = (EstadoCuentaForm) form;
-        this.setParameter(1, f.getConcesionariaId());
-        this.setParameter(2, f.getNroPlanConcesionaria());
-        this.setParameter(3, f.getDocumentoCliente());
-        this.setParameter(4, f.getVehiculo());
-        this.setParameter(5, f.getFechaAltaConcesionaria());
-        this.setParameter(6, f.getFechaAltaSistema());
-        this.setParameter(7, f.getFechaUltimaActualizacion());
-        this.setParameter(8, f.getEstado());
+        this.setParameter(1, f.getId());
+        this.setParameter(2, f.getEstado());
         this.executeUpdate();
         this.disconnect();
     }
@@ -70,7 +62,7 @@ public class MSEstadoCuentaDao extends DaoImpl {
     @Override
     public List<DynaActionForm> select(final DynaActionForm form) throws SQLException {
         this.connect();
-        this.setProcedure("dbo.get_estado_cuenta", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        this.setProcedure("dbo.get_estado_cuentas", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
         final List<DynaActionForm> estadoCuentas = this.executeQuery();
         this.disconnect();
         return estadoCuentas;
@@ -80,4 +72,6 @@ public class MSEstadoCuentaDao extends DaoImpl {
     public boolean valid(final DynaActionForm form) throws SQLException {
         return false;
     }
+
+
 }
