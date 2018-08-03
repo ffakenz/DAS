@@ -10,20 +10,11 @@ import ar.edu.ubp.das.src.login.daos.MSUsuariosDao;
 import org.junit.Test;
 
 import java.util.Optional;
-import java.util.function.BiFunction;
 
 public class LoginInteractorTest {
 
     Dao daoUsuarios = new MSUsuariosDao();
     Dao daoLogin = new MSLogInDao();
-
-    BiFunction<String, String, Dao> daoFactoryMock = (daoName, daoPackage) -> {
-        if (daoName.equals("Usuarios") && daoPackage.equals("login")) {
-            return daoUsuarios;
-        } else if (daoName.equals("LogIn") && daoPackage.equals("login")) {
-            return daoLogin;
-        } else return null;
-    };
 
 
     @Test

@@ -39,7 +39,7 @@ public class ConfigurarConcesionariaTest {
 
         final ConfigurarInteractor configurador = new ConfigurarInteractor();
 
-        final Boolean result = configurador.configurarConcesionaria(configParam).apply(daoFactoryMock);
+        final Boolean result = configurador.configurarConcesionaria(configParam);
 
         assert (result);
 

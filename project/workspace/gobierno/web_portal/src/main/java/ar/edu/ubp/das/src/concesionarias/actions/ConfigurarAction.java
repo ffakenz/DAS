@@ -4,7 +4,6 @@ import ar.edu.ubp.das.mvc.action.Action;
 import ar.edu.ubp.das.mvc.action.ActionMapping;
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.config.ForwardConfig;
-import ar.edu.ubp.das.mvc.db.DaoFactory;
 import ar.edu.ubp.das.src.concesionarias.ConfigurarInteractor;
 import ar.edu.ubp.das.src.core.Interactor;
 import ar.edu.ubp.das.src.core.InteractorResponse;
@@ -17,7 +16,7 @@ public class ConfigurarAction implements Action {
     @Override
     public ForwardConfig execute(ActionMapping mapping, DynaActionForm form, HttpServletRequest request, HttpServletResponse response) throws SQLException, RuntimeException {
         Interactor action = new ConfigurarInteractor();
-        InteractorResponse result = action.execute(form).apply(DaoFactory::getDao);
+        InteractorResponse result = action.execute(form);
 
         Boolean configurationSucceeded = (Boolean)result.getResult();
 

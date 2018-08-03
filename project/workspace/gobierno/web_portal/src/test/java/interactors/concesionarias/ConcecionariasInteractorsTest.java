@@ -14,19 +14,12 @@ import org.junit.Test;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.function.BiFunction;
 
 import static org.junit.Assert.assertEquals;
 
 public class ConcecionariasInteractorsTest {
 
     Dao daoLogin = new MSConcesionariasDao();
-    BiFunction<String, String, Dao> daoFactoryMock = (daoName, daoPackage) -> {
-        if (daoName.equals("Concesionarias") && daoPackage.equals("concesionarias")) {
-            return daoLogin;
-        } else return null;
-    };
-
 
     @Test
     public void testAprobarConcecionaria() {

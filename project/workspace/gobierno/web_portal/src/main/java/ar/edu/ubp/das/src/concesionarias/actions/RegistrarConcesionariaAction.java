@@ -4,7 +4,6 @@ import ar.edu.ubp.das.mvc.action.Action;
 import ar.edu.ubp.das.mvc.action.ActionMapping;
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.config.ForwardConfig;
-import ar.edu.ubp.das.mvc.db.DaoFactory;
 import ar.edu.ubp.das.src.concesionarias.RegistrarInteractor;
 import ar.edu.ubp.das.src.core.Interactor;
 import ar.edu.ubp.das.src.core.InteractorResponse;
@@ -18,7 +17,7 @@ public class RegistrarConcesionariaAction implements Action {
     @Override
     public ForwardConfig execute(final ActionMapping mapping, final DynaActionForm form, final HttpServletRequest request, final HttpServletResponse response) throws SQLException, RuntimeException {
         final Interactor action = new RegistrarInteractor();
-        final InteractorResponse result = action.execute(form).apply(DaoFactory::getDao);
+        final InteractorResponse result = action.execute(form);
 
         final Optional<Long> concesionariaId = ((Optional<Long>) result.getResult());
 

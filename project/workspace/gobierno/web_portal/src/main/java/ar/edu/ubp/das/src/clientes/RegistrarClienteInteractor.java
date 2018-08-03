@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 public class RegistrarClienteInteractor implements RegistrarCliente, UtilsCore, Utils {
 
-    private final Dao clienteDao = DaoFactory.getDao("Clientes", "clientes");
+    private final Dao clienteDao = DaoFactory.getDao("Clientes", "clientes", );
 
     @Override
     public void registrarCliente(final ClienteForm form) {
