@@ -6,6 +6,10 @@ public class InteractorResponse {
     private ResponseForward response;
     private Object result;
 
+
+    public InteractorResponse() {
+    }
+
     public InteractorResponse(final ResponseForward response) {
         this.response = response;
         this.result = Optional.empty();

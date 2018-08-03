@@ -4,6 +4,7 @@ import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.Dao;
 import ar.edu.ubp.das.src.concesionarias.boundaries.Registrar;
 import ar.edu.ubp.das.src.concesionarias.boundaries.Utils;
+import ar.edu.ubp.das.src.concesionarias.daos.MSConcesionariasDao;
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
 import ar.edu.ubp.das.src.core.InteractorResponse;
 import ar.edu.ubp.das.src.core.ResponseForward;
@@ -12,7 +13,6 @@ import ar.edu.ubp.das.src.core.UtilsCore;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Optional;
-import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class RegistrarInteractor implements Registrar, UtilsCore, Utils {
@@ -71,38 +71,34 @@ public class RegistrarInteractor implements Registrar, UtilsCore, Utils {
     }
 
     @Override
-    public Function<BiFunction<String, String, Dao>, InteractorResponse> execute(final DynaActionForm form) {
-        return daoFactory -> {
-            final Dao dao = daoFactory.apply("Concesionarias", "concesionarias");
+    public InteractorResponse execute(final DynaActionForm form) {
+
+        Dao dao = new MSConcesionariasDao();
+
+        final Optional<ConcesionariaForm> concesinariaRqst = makeFrom(form);
+
+        final Optional<InteractorResponse> respuesta =
+                concesinariaRqst.map(concesionaria -> {
+
+                    final Optional<Long> concesionariaID = registrarConcesionaria(concesionaria).apply(dao);
+
+                    final InteractorResponse response = new InteractorResponse();
+                    response.setResult(concesionariaID);
+
+                    if (concesionariaID.isPresent()) {
+                        response.setResponse(ResponseForward.SUCCESS);
+                    } else {
+                        response.setResponse(ResponseForward.FAILURE);
+                    }
+
+                    return response;
+                });
 
 
-            final Optional<ConcesionariaForm> concesinariaRqst = makeFrom(form);
+        final InteractorResponse response = new InteractorResponse();
+        response.setResponse(ResponseForward.WARNING);
+        response.setResult(Optional.empty());
 
-
-            final Optional<InteractorResponse> respuesta =
-                    concesinariaRqst.map(concesionaria -> {
-
-                        final Optional<Long> concesionariaID = registrarConcesionaria(concesionaria).apply(dao);
-                        final InteractorResponse response = new InteractorResponse();
-                        response.setResult(concesionariaID);
-
-                        if (concesionariaID.isPresent()) {
-                            response.setResponse(ResponseForward.SUCCESS);
-                        } else {
-                            response.setResponse(ResponseForward.FAILURE);
-                        }
-
-                        return response;
-                    });
-
-
-            final InteractorResponse response = new InteractorResponse();
-            response.setResponse(ResponseForward.WARNING);
-            response.setResult(Optional.empty());
-
-            return respuesta.orElse(response); // Some error occur with the parameters
-
-
-        };
+        return respuesta.orElse(response); // Some error occur with the parameters
     }
 }

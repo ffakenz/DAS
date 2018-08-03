@@ -33,7 +33,7 @@ public class ConcecionariasInteractorsTest {
         final Interactor a1 = new ConsultarAprobadasInteractor();
 
         // consultar aprobadas
-        final InteractorResponse r1 = a1.execute(null).apply(daoFactoryMock);
+        final InteractorResponse r1 = a1.execute(null);
         // no hay aprobadas
         assertEquals(ResponseForward.SUCCESS, r1.getResponse());
         assertEquals(false, ((List<ConcesionariaForm>) r1.getResult()).isEmpty());
@@ -50,27 +50,27 @@ public class ConcecionariasInteractorsTest {
 
         // aprobar concesionaria
         final Interactor a2 = new AprobarInteractor();
-        final InteractorResponse r2 = a2.execute(form).apply(daoFactoryMock);
+        final InteractorResponse r2 = a2.execute(form);
         // concesionaria no aprobada ya que no existe
         assertEquals(ResponseForward.WARNING, r2.getResponse());
         assertEquals(false, ((Optional<String>) r2.getResult()).isPresent());
 
         // registramos concesionaria
         final Interactor a3 = new RegistrarInteractor();
-        final InteractorResponse r3 = a3.execute(form).apply(daoFactoryMock);
+        final InteractorResponse r3 = a3.execute(form);
         // concesionaria registrada
         assertEquals(ResponseForward.SUCCESS, r3.getResponse());
         assertEquals(true, ((Optional<Long>) r3.getResult()).isPresent());
 
         // aprobamos concesionaria
         form.setItem("id", ((Optional<Long>) r3.getResult()).get().toString());
-        final InteractorResponse r4 = a2.execute(form).apply(daoFactoryMock);
+        final InteractorResponse r4 = a2.execute(form);
         // concesionaria aprobada
         assertEquals(ResponseForward.SUCCESS, r4.getResponse());
         assertEquals(true, ((Optional<String>) r4.getResult()).isPresent());
 
         // consultamos aprobadas
-        final InteractorResponse r5 = a1.execute(null).apply(daoFactoryMock);
+        final InteractorResponse r5 = a1.execute(null);
         // concesionaria aprobada
         assertEquals(ResponseForward.SUCCESS, r5.getResponse());
         assertEquals(false, ((List<ConcesionariaForm>) r5.getResult()).isEmpty());
@@ -86,7 +86,7 @@ public class ConcecionariasInteractorsTest {
 
         // aprobar concesionaria
         final Interactor a2 = new AprobarInteractor();
-        final InteractorResponse r2 = a2.execute(form).apply(daoFactoryMock);
+        final InteractorResponse r2 = a2.execute(form);
 
         assertEquals(ResponseForward.SUCCESS, r2.getResponse());
 
@@ -101,7 +101,7 @@ public class ConcecionariasInteractorsTest {
 
         // aprobar concesionaria
         final Interactor a2 = new AprobarInteractor();
-        final InteractorResponse r2 = a2.execute(form).apply(daoFactoryMock);
+        final InteractorResponse r2 = a2.execute(form);
 
         assertEquals(ResponseForward.FAILURE, r2.getResponse());
     }
@@ -121,7 +121,7 @@ public class ConcecionariasInteractorsTest {
 
         // aprobar concesionaria
         final Interactor a2 = new RegistrarInteractor();
-        final InteractorResponse r2 = a2.execute(form).apply(daoFactoryMock);
+        final InteractorResponse r2 = a2.execute(form);
 
         assertEquals(ResponseForward.FAILURE, r2.getResponse());
     }

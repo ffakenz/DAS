@@ -4,6 +4,7 @@ import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.Dao;
 import ar.edu.ubp.das.src.concesionarias.boundaries.Aprobar;
 import ar.edu.ubp.das.src.concesionarias.boundaries.Utils;
+import ar.edu.ubp.das.src.concesionarias.daos.MSConcesionariasDao;
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
 import ar.edu.ubp.das.src.core.InteractorResponse;
 import ar.edu.ubp.das.src.core.ResponseForward;
@@ -13,7 +14,6 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.Optional;
-import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class AprobarInteractor implements Aprobar, UtilsCore, Utils {
@@ -71,36 +71,33 @@ public class AprobarInteractor implements Aprobar, UtilsCore, Utils {
 
 
     @Override
-    public Function<BiFunction<String, String, Dao>, InteractorResponse> execute(final DynaActionForm form) {
-        return daoFactory -> {
-            final Dao dao = daoFactory.apply("Concesionarias", "concesionarias");
+    public InteractorResponse execute(final DynaActionForm form) {
 
-            final Optional<ConcesionariaForm> concesionariaRqst = makeFrom(form);
+        final Dao dao = new MSConcesionariasDao();
 
-            final Optional<InteractorResponse> respuesta =
-                    concesionariaRqst.map(concesionaria -> {
-                        final Optional<String> codigo = aprobarConcesionaria(concesionaria).apply(dao);
+        final Optional<ConcesionariaForm> concesionariaRqst = makeFrom(form);
 
-                        final InteractorResponse response = new InteractorResponse();
-                        response.setResult(codigo);
+        final Optional<InteractorResponse> respuesta =
+                concesionariaRqst.map(concesionaria -> {
+                    final Optional<String> codigo = aprobarConcesionaria(concesionaria).apply(dao);
 
-                        if (codigo.isPresent()) {
-                            response.setResponse(ResponseForward.SUCCESS);
-                        } else {
-                            response.setResponse(ResponseForward.FAILURE);
-                        }
+                    final InteractorResponse response = new InteractorResponse();
+                    response.setResult(codigo);
 
-                        return response;
-                    });
+                    if (codigo.isPresent()) {
+                        response.setResponse(ResponseForward.SUCCESS);
+                    } else {
+                        response.setResponse(ResponseForward.FAILURE);
+                    }
 
-
-            final InteractorResponse response = new InteractorResponse();
-            response.setResponse(ResponseForward.WARNING);
-            response.setResult(Optional.empty());
-
-            return respuesta.orElse(response); // Some error occur with the parameters
+                    return response;
+                });
 
 
-        };
+        final InteractorResponse response = new InteractorResponse();
+        response.setResponse(ResponseForward.WARNING);
+        response.setResult(Optional.empty());
+
+        return respuesta.orElse(response); // Some error occur with the parameters
     }
 }
