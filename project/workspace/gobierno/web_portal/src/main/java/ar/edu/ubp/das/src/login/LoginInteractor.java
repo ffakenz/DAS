@@ -2,7 +2,6 @@ package ar.edu.ubp.das.src.login;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.Dao;
-import ar.edu.ubp.das.mvc.db.DaoFactory;
 import ar.edu.ubp.das.src.core.InteractorResponse;
 import ar.edu.ubp.das.src.core.ResponseForward;
 import ar.edu.ubp.das.src.login.forms.LogInForm;
@@ -14,8 +13,13 @@ import java.util.Optional;
 
 public class LoginInteractor {
 
-    private final Dao msUsuariosDao = DaoFactory.getDao("Usuarios", "login");
-    private final Dao loginDao = DaoFactory.getDao("LogIn", "login");
+    private final Dao msUsuariosDao;
+    private final Dao loginDao;
+
+    public LoginInteractor(final Dao loginDao, final Dao msUsuariosDao) {
+        this.loginDao = loginDao;
+        this.msUsuariosDao = msUsuariosDao;
+    }
 
     public Optional<Long> isLoggedIn(final LogInForm form) {
         try {
@@ -83,21 +87,20 @@ public class LoginInteractor {
 
         final Optional<InteractorResponse> response =
                 usr.map(u -> {
-                    final LoginInteractor auth = new LoginInteractor();
                     // is user valid ?
-                    if (!auth.validarUsuario(u)) {
+                    if (!validarUsuario(u)) {
                         return new InteractorResponse(ResponseForward.FAILURE);
                     }
 
                     final LogInForm logInForm = new LogInForm(u.getUsername());
                     // is user logged in ?
-                    auth.isLoggedIn(logInForm).ifPresent(loginId -> {
+                    isLoggedIn(logInForm).ifPresent(loginId -> {
                         logInForm.setId(loginId);
                         logInForm.setLogoutTime(new Date(System.currentTimeMillis()));
-                        auth.logout(logInForm);
+                        logout(logInForm);
                     });
 
-                    return auth.login(logInForm)
+                    return login(logInForm)
                             .map(LogInId -> new InteractorResponse(ResponseForward.SUCCESS, LogInId))
                             .orElse(new InteractorResponse(ResponseForward.FAILURE));
                 });

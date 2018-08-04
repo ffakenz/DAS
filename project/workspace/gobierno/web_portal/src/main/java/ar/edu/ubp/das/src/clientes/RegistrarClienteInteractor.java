@@ -1,7 +1,6 @@
 package ar.edu.ubp.das.src.clientes;
 
 import ar.edu.ubp.das.mvc.db.Dao;
-import ar.edu.ubp.das.mvc.db.DaoFactory;
 import ar.edu.ubp.das.src.clientes.boundaries.RegistrarCliente;
 import ar.edu.ubp.das.src.clientes.boundaries.Utils;
 import ar.edu.ubp.das.src.clientes.forms.ClienteForm;
@@ -11,8 +10,11 @@ import java.sql.SQLException;
 
 public class RegistrarClienteInteractor implements RegistrarCliente, UtilsCore, Utils {
 
-    private final Dao clienteDao = DaoFactory.getDao("Clientes", "clientes");
+    private Dao clienteDao;
 
+    public RegistrarClienteInteractor(final Dao clienteDao) {
+        this.clienteDao = clienteDao;
+    }
 
     @Override
     public void registrarCliente(final ClienteForm form) {

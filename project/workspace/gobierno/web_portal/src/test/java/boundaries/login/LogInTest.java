@@ -1,8 +1,11 @@
 package boundaries.login;
 
+import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.src.login.LoginInteractor;
 import ar.edu.ubp.das.src.login.daos.MSLogInDao;
+import ar.edu.ubp.das.src.login.daos.MSUsuariosDao;
 import ar.edu.ubp.das.src.login.forms.LogInForm;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.SQLException;
@@ -12,7 +15,23 @@ import static org.junit.Assert.assertEquals;
 
 public class LogInTest {
 
-    final MSLogInDao loginDao = new MSLogInDao();
+    MSLogInDao loginDao;
+    MSUsuariosDao msUsuariosDao;
+
+    @Before
+    public void setup() {
+        final DatasourceConfig dataSourceConfig = new DatasourceConfig();
+        dataSourceConfig.setDriver("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        dataSourceConfig.setUrl("jdbc:sqlserver://localhost;databaseName=db_gobierno;");
+        dataSourceConfig.setUsername("SA");
+        dataSourceConfig.setPassword("Das12345");
+
+        loginDao = new MSLogInDao();
+        loginDao.setDatasource(dataSourceConfig);
+
+        msUsuariosDao = new MSUsuariosDao();
+        msUsuariosDao.setDatasource(dataSourceConfig);
+    }
 
     @Test
     public void testMockDBIsEmpty() throws SQLException {
@@ -27,7 +46,7 @@ public class LogInTest {
 
         final LogInForm loginRqst = new LogInForm("pepe");
 
-        final LoginInteractor logueador = new LoginInteractor();
+        final LoginInteractor logueador = new LoginInteractor(loginDao, msUsuariosDao);
         final Optional<Long> logInId = logueador.login(loginRqst);
 
         assertEquals(true, loginDao.select(null).contains(loginRqst));
