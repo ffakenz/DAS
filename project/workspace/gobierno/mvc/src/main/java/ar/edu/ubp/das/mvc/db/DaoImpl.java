@@ -1,13 +1,12 @@
 package ar.edu.ubp.das.mvc.db;
 
-import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 
-public abstract class DaoImpl implements Dao {
+public abstract class DaoImpl<T> extends Dao<T> {
 
     private DatasourceConfig datasource;
     private Connection connection;
@@ -66,8 +65,8 @@ public abstract class DaoImpl implements Dao {
         return rows;
     }
 
-    public List<DynaActionForm> executeQuery() throws SQLException {
-        final List<DynaActionForm> list = new LinkedList<>();
+    public List<T> executeQuery() throws SQLException {
+        final List<T> list = new LinkedList<>();
         final ResultSet result = this.statement.executeQuery();
         while (result.next()) {
             list.add(this.make(result));

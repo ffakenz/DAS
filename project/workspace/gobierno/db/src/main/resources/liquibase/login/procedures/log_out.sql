@@ -1,4 +1,4 @@
-CREATE PROCEDURE log_out(@id BIGINT, @log_out_time DATETIME) AS
+CREATE PROCEDURE log_out(@id BIGINT) AS
 UPDATE login
-SET log_out_time = @log_out_time
+SET log_out_time = GETDATE()
 WHERE id = @id;

@@ -1,23 +1,21 @@
 package ar.edu.ubp.das.mvc.db;
 
-import ar.edu.ubp.das.mvc.action.DynaActionForm;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface Dao {
+public abstract class Dao<T> {
 
-    public DynaActionForm make(ResultSet result) throws SQLException;
+    public abstract T make(ResultSet result) throws SQLException;
 
-    public void insert(DynaActionForm form) throws SQLException;
+    public abstract void insert(T form) throws SQLException;
 
-    public void update(DynaActionForm form) throws SQLException;
+    public abstract void update(T form) throws SQLException;
 
-    public void delete(DynaActionForm form) throws SQLException;
+    public abstract void delete(T form) throws SQLException;
 
-    public List<DynaActionForm> select(DynaActionForm form) throws SQLException;
+    public abstract List<T> select(T form) throws SQLException;
 
-    public boolean valid(DynaActionForm form) throws SQLException;
+    public abstract boolean valid(T form) throws SQLException;
 
 }

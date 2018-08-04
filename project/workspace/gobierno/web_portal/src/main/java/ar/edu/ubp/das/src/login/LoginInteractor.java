@@ -4,38 +4,31 @@ import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.Dao;
 import ar.edu.ubp.das.src.core.InteractorResponse;
 import ar.edu.ubp.das.src.core.ResponseForward;
+import ar.edu.ubp.das.src.login.daos.decorators.MSLoginDaoDec;
+import ar.edu.ubp.das.src.login.daos.decorators.MSUsuariosDaoDec;
 import ar.edu.ubp.das.src.login.forms.LogInForm;
 import ar.edu.ubp.das.src.login.forms.UsuarioForm;
 
-import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.Optional;
 
 public class LoginInteractor {
 
-    private final Dao msUsuariosDao;
-    private final Dao loginDao;
+    private final MSUsuariosDaoDec msUsuariosDao;
+    private final MSLoginDaoDec loginDao;
 
     public LoginInteractor(final Dao loginDao, final Dao msUsuariosDao) {
-        this.loginDao = loginDao;
-        this.msUsuariosDao = msUsuariosDao;
+        this.loginDao = new MSLoginDaoDec(loginDao);
+        this.msUsuariosDao = new MSUsuariosDaoDec(msUsuariosDao);
     }
 
-    public Optional<Long> isLoggedIn(final LogInForm form) {
+    public Boolean isLoggedIn(final LogInForm form) {
         try {
-            return
-                    loginDao.select(null).stream().filter(l -> {
-                        LogInForm login = (LogInForm) l;
-                        return
-                                login.getUsername().equals(form.getUsername()) &&
-                                        login.getLogoutTime() == null;
-                    }).findFirst().map(l -> {
-                        final LogInForm lf = (LogInForm) l;
-                        return lf.getId();
-                    });
+            return !loginDao.select(form).isEmpty();
         } catch (final SQLException ex) {
             ex.printStackTrace();
-            return Optional.empty();
+            return false;
         }
     }
 
@@ -47,29 +40,18 @@ public class LoginInteractor {
         }
     }
 
-    public Optional<Long> login(final LogInForm form) {
+    public void login(final LogInForm form) {
         try {
             loginDao.insert(form);
-            final Optional<Long> max =
-                    loginDao.select(null).stream()
-                            .filter(l -> ((LogInForm) l).getUsername().equals(form.getUsername()))
-                            .map(l -> ((LogInForm) l).getId())
-                            .max(Comparable::compareTo);
-            return max;
         } catch (final SQLException e) {
             e.printStackTrace();
-            return Optional.empty();
         }
     }
 
     // is there any usuario in the repository such that is equals to the one sent by parameter ?
-    public Boolean validarUsuario(final UsuarioForm user) {
+    public Boolean isValidUsuario(final UsuarioForm user) {
         try {
-            return msUsuariosDao.select(null).stream().anyMatch(usr -> {
-                final UsuarioForm dbUser = ((UsuarioForm) usr);
-                return dbUser.getUsername().equals(user.getUsername()) &&
-                        dbUser.getPassword().equals(user.getPassword());
-            });
+            return !msUsuariosDao.selectByUserNameAndPassword(user).isEmpty();
         } catch (final SQLException e) {
             e.printStackTrace();
             return false;
@@ -88,7 +70,7 @@ public class LoginInteractor {
         final Optional<InteractorResponse> response =
                 usr.map(u -> {
                     // is user valid ?
-                    if (!validarUsuario(u)) {
+                    if (!isValidUsuario(u)) {
                         return new InteractorResponse(ResponseForward.FAILURE);
                     }
 
@@ -96,7 +78,7 @@ public class LoginInteractor {
                     // is user logged in ?
                     isLoggedIn(logInForm).ifPresent(loginId -> {
                         logInForm.setId(loginId);
-                        logInForm.setLogoutTime(new Date(System.currentTimeMillis()));
+                        logInForm.setLogoutTime(new Timestamp(System.currentTimeMillis()));
                         logout(logInForm);
                     });
 

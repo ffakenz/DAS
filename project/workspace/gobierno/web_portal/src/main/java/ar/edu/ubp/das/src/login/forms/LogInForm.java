@@ -2,13 +2,13 @@ package ar.edu.ubp.das.src.login.forms;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class LogInForm extends DynaActionForm {
-    private Long id;
+    private Long id; // TODO: change id to UUID
     private String username;
-    private Date loginTime;
-    private Date logoutTime;
+    private Timestamp loginTime;
+    private Timestamp logoutTime;
 
     public LogInForm() {
     }
@@ -33,19 +33,19 @@ public class LogInForm extends DynaActionForm {
         this.username = username;
     }
 
-    public Date getLoginTime() {
+    public Timestamp getLoginTime() {
         return loginTime;
     }
 
-    public void setLoginTime(final Date loginTime) {
+    public void setLoginTime(final Timestamp loginTime) {
         this.loginTime = loginTime;
     }
 
-    public Date getLogoutTime() {
+    public Timestamp getLogoutTime() {
         return logoutTime;
     }
 
-    public void setLogoutTime(final Date logoutTime) {
+    public void setLogoutTime(final Timestamp logoutTime) {
         this.logoutTime = logoutTime;
     }
 
