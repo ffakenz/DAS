@@ -17,7 +17,6 @@ public class LoginInteractor {
     private final Dao msUsuariosDao = DaoFactory.getDao("Usuarios", "login");
     private final Dao loginDao = DaoFactory.getDao("LogIn", "login");
 
-
     public Optional<Long> isLoggedIn(final LogInForm form) {
         try {
             return

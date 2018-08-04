@@ -1,6 +1,7 @@
 package boundaries.concesionarias;
 
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
+import ar.edu.ubp.das.mvc.config.ModuleConfigImpl;
 import ar.edu.ubp.das.src.concesionarias.RegistrarInteractor;
 import ar.edu.ubp.das.src.concesionarias.boundaries.Registrar;
 import ar.edu.ubp.das.src.concesionarias.daos.MSConcesionariasDao;
@@ -8,13 +9,20 @@ import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
+import org.mockito.Mockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.sql.SQLException;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.anyString;
 
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({ModuleConfigImpl.class})
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RegistrarConcecionariaTest {
 
@@ -23,6 +31,7 @@ public class RegistrarConcecionariaTest {
 
     @Before
     public void setup() {
+
         dataSourceConfig = new DatasourceConfig();
         dataSourceConfig.setDriver("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         dataSourceConfig.setUrl("jdbc:sqlserver://localhost;databaseName=db_gobierno;");
@@ -31,6 +40,9 @@ public class RegistrarConcecionariaTest {
 
         dao = new MSConcesionariasDao();
         dao.setDatasource(dataSourceConfig);
+
+        //mockStatic(ModuleConfigImpl.class);
+        Mockito.when(ModuleConfigImpl.getDatasourceById(anyString())).thenReturn(dataSourceConfig);
     }
 
     @Test
