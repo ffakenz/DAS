@@ -84,6 +84,7 @@ public class LoginInteractorTest {
     @Test
     public void test06VerifyLogoutALoginUser() throws SQLException {
         final LogInForm loginRqst = new LogInForm("ffakenz");
+        loginRqst.setId(2L);
 
         // VERIFY THE USER IS LOGGED IN
         final Optional<Long> loggedIn = interactor.isLoggedIn(loginRqst);
@@ -100,6 +101,7 @@ public class LoginInteractorTest {
     @Test
     public void test07VerifyLogoutAnAlreadyLoggedOutUserShouldNotTakeEffect() throws SQLException {
         final LogInForm loginRqst = new LogInForm("ffakenz");
+        loginRqst.setId(2L);
 
         // VERIFY THE USER IS LOGGED OUT
         final Optional<Long> loggedOut = interactor.isLoggedIn(loginRqst);
@@ -115,13 +117,12 @@ public class LoginInteractorTest {
         final List<LogInForm> logoutDate2 = new MSLoginDaoEx(loginDao).selectLastUserLogin(loginRqst);
 
         // VERIFY THE DATE DID NOT CHANGED
-        assertEquals(logoutDate, logoutDate2);
+        assertEquals(logoutDate.toString(), logoutDate2.toString());
     }
 
 
     @Test
     public void test08LoginSuccessfully2() throws SQLException {
-        final LoginInteractor interactor = new LoginInteractor(loginDao, msUsuariosDao);
 
         final LogInForm loginRqst = new LogInForm("pepe");
         final Optional<Long> logInId = interactor.login(loginRqst);

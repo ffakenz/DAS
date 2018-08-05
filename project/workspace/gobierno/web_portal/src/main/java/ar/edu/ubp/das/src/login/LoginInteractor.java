@@ -26,8 +26,8 @@ public class LoginInteractor {
         return loginDao.selectUserLoggIn(form).stream().findFirst().map(l -> l.getId());
     }
 
-    public void logout(final LogInForm req) throws SQLException {
-        loginDao.update(req);
+    public void logout(final LogInForm form) throws SQLException {
+        loginDao.update(form);
     }
 
     public Optional<Long> login(final LogInForm form) throws SQLException {

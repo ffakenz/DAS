@@ -4,5 +4,4 @@ CREATE TABLE usuario (
 	, rol VARCHAR(100) NOT NULL
 	, PRIMARY KEY(username)
 	, FOREIGN KEY(rol) REFERENCES tipo_usuario(nombre)
-	, CHECK(rol IN ('comprador', 'gobierno'))
 );
