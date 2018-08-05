@@ -1,6 +1,5 @@
 package ar.edu.ubp.das.src.estado_cuentas.daos;
 
-import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.estado_cuentas.forms.EstadoCuentaForm;
 
@@ -8,10 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class MSEstadoCuentaDao extends DaoImpl {
+public class MSEstadoCuentaDao extends DaoImpl<EstadoCuentaForm> {
 
     @Override
-    public DynaActionForm make(final ResultSet result) throws SQLException {
+    public EstadoCuentaForm make(final ResultSet result) throws SQLException {
         final EstadoCuentaForm estadoCuentaForm = new EstadoCuentaForm();
         estadoCuentaForm.setId(result.getLong("id"));
         estadoCuentaForm.setConcesionariaId(result.getLong("concesionaria"));
@@ -27,7 +26,7 @@ public class MSEstadoCuentaDao extends DaoImpl {
     }
 
     @Override
-    public void insert(final DynaActionForm form) throws SQLException {
+    public void insert(final EstadoCuentaForm form) throws SQLException {
         this.connect();
         this.setProcedure("dbo.log_estado_cuentas(?, ?, ?, ?, ?, ?)");
         final EstadoCuentaForm f = new EstadoCuentaForm();
@@ -43,7 +42,7 @@ public class MSEstadoCuentaDao extends DaoImpl {
     }
 
     @Override
-    public void update(final DynaActionForm form) throws SQLException {
+    public void update(final EstadoCuentaForm form) throws SQLException {
         this.connect();
         this.setProcedure("dbo.update_estado_cuentas(?, ?)");
         final EstadoCuentaForm f = new EstadoCuentaForm();
@@ -54,20 +53,20 @@ public class MSEstadoCuentaDao extends DaoImpl {
     }
 
     @Override
-    public void delete(final DynaActionForm form) throws SQLException {
+    public void delete(final EstadoCuentaForm form) throws SQLException {
     }
 
     @Override
-    public List<DynaActionForm> select(final DynaActionForm form) throws SQLException {
+    public List<EstadoCuentaForm> select(final EstadoCuentaForm form) throws SQLException {
         this.connect();
         this.setProcedure("dbo.get_estado_cuentas", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        final List<DynaActionForm> estadoCuentas = this.executeQuery();
+        final List<EstadoCuentaForm> estadoCuentas = this.executeQuery();
         this.disconnect();
         return estadoCuentas;
     }
 
     @Override
-    public boolean valid(final DynaActionForm form) throws SQLException {
+    public boolean valid(final EstadoCuentaForm form) throws SQLException {
         return false;
     }
 

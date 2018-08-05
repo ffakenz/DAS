@@ -1,6 +1,5 @@
 package ar.edu.ubp.das.src.core;
 
-import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.Dao;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 
@@ -8,43 +7,43 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class DaoExtender extends DaoImpl {
-    protected Dao dao;
+public class DaoExtender<T> extends DaoImpl<T> {
+    protected Dao<T> dao;
 
-    public DaoExtender(final Dao dao) {
+    public DaoExtender(final Dao<T> dao) {
         this.dao = dao;
     }
 
     @Override
-    public DynaActionForm make(final ResultSet result) throws SQLException {
+    public T make(final ResultSet result) throws SQLException {
         return dao.make(result);
     }
 
     @Override
-    public void insert(final DynaActionForm form) throws SQLException {
+    public void insert(final T form) throws SQLException {
         dao.insert(form);
 
     }
 
     @Override
-    public void update(final DynaActionForm form) throws SQLException {
+    public void update(final T form) throws SQLException {
         dao.update(form);
 
     }
 
     @Override
-    public void delete(final DynaActionForm form) throws SQLException {
+    public void delete(final T form) throws SQLException {
         dao.delete(form);
 
     }
 
     @Override
-    public List select(final DynaActionForm form) throws SQLException {
+    public List select(final T form) throws SQLException {
         return dao.select(form);
     }
 
     @Override
-    public boolean valid(final DynaActionForm form) throws SQLException {
+    public boolean valid(final T form) throws SQLException {
         return dao.valid(form);
     }
 }

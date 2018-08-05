@@ -1,6 +1,5 @@
 package ar.edu.ubp.das.src.clientes.daos;
 
-import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.clientes.forms.ClienteForm;
 
@@ -8,10 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class MSClientesDao extends DaoImpl {
+public class MSClientesDao extends DaoImpl<ClienteForm> {
 
     @Override
-    public DynaActionForm make(final ResultSet result) throws SQLException {
+    public ClienteForm make(final ResultSet result) throws SQLException {
         final ClienteForm clienteForm = new ClienteForm();
 
         clienteForm.setId(result.getLong("id"));
@@ -27,7 +26,7 @@ public class MSClientesDao extends DaoImpl {
     }
 
     @Override
-    public void insert(final DynaActionForm form) throws SQLException {
+    public void insert(final ClienteForm form) throws SQLException {
         this.connect();
         this.setProcedure("dbo.log_cliente(?, ?, ?, ?, ?, ?)");
         final ClienteForm f = (ClienteForm) form;
@@ -42,7 +41,7 @@ public class MSClientesDao extends DaoImpl {
     }
 
     @Override
-    public void update(final DynaActionForm form) throws SQLException {
+    public void update(final ClienteForm form) throws SQLException {
         this.connect();
         this.setProcedure("dbo.update_cliente(?, ?, ?)");
         final ClienteForm f = (ClienteForm) form;
@@ -54,21 +53,21 @@ public class MSClientesDao extends DaoImpl {
     }
 
     @Override
-    public void delete(final DynaActionForm form) throws SQLException {
+    public void delete(final ClienteForm form) throws SQLException {
 
     }
 
     @Override
-    public List<DynaActionForm> select(final DynaActionForm form) throws SQLException {
+    public List<ClienteForm> select(final ClienteForm form) throws SQLException {
         this.connect();
         this.setProcedure("dbo.get_clientes", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        final List<DynaActionForm> clientes = this.executeQuery();
+        final List<ClienteForm> clientes = this.executeQuery();
         this.disconnect();
         return clientes;
     }
 
     @Override
-    public boolean valid(final DynaActionForm form) throws SQLException {
+    public boolean valid(final ClienteForm form) throws SQLException {
         return false;
     }
 }

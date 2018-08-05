@@ -1,6 +1,5 @@
 package ar.edu.ubp.das.src.concesionarias.daos;
 
-import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
 
@@ -8,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class MSConcesionariasDao extends DaoImpl {
+public class MSConcesionariasDao extends DaoImpl<ConcesionariaForm> {
 
     @Override
     public ConcesionariaForm make(final ResultSet result) throws SQLException {
@@ -28,7 +27,7 @@ public class MSConcesionariasDao extends DaoImpl {
     }
 
     @Override
-    public void insert(final DynaActionForm form) throws SQLException {
+    public void insert(final ConcesionariaForm form) throws SQLException {
         this.connect();
         this.setProcedure("dbo.log_concesionaria(?, ?, ?, ?, ?, ?)");
         final ConcesionariaForm f = (ConcesionariaForm) form;
@@ -43,7 +42,7 @@ public class MSConcesionariasDao extends DaoImpl {
     }
 
     @Override
-    public void update(final DynaActionForm form) throws SQLException {
+    public void update(final ConcesionariaForm form) throws SQLException {
         this.connect();
         this.setProcedure("dbo.aprove_concesionaria(?, ?, ?)");
         final ConcesionariaForm f = (ConcesionariaForm) form;
@@ -55,21 +54,21 @@ public class MSConcesionariasDao extends DaoImpl {
     }
 
     @Override
-    public void delete(final DynaActionForm form) throws SQLException {
+    public void delete(final ConcesionariaForm form) throws SQLException {
 
     }
 
     @Override
-    public List<DynaActionForm> select(final DynaActionForm form) throws SQLException {
+    public List<ConcesionariaForm> select(final ConcesionariaForm form) throws SQLException {
         this.connect();
         this.setProcedure("dbo.get_concesionarias", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        final List<DynaActionForm> concesionarias = this.executeQuery();
+        final List<ConcesionariaForm> concesionarias = this.executeQuery();
         this.disconnect();
         return concesionarias;
     }
 
     @Override
-    public boolean valid(final DynaActionForm form) throws SQLException {
+    public boolean valid(final ConcesionariaForm form) throws SQLException {
         return false;
     }
 }
