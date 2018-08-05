@@ -1,6 +1,5 @@
 package boundaries.estado_cuentas;
 
-import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.src.estado_cuentas.daos.MSEstadoCuentaDao;
 import ar.edu.ubp.das.src.estado_cuentas.forms.EstadoCuentaForm;
@@ -44,7 +43,7 @@ public class ActualizarEstadoCuentaTest {
 
         estadoCuentaDao.insert(estadoCuenta);
 
-        List<DynaActionForm> ecs = estadoCuentaDao.select(estadoCuenta);
+        List<EstadoCuentaForm> ecs = estadoCuentaDao.select(estadoCuenta);
 
         final Timestamp tiempo1 = ((EstadoCuentaForm) ecs.get(0)).getFechaUltimaActualizacion();
 

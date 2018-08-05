@@ -1,6 +1,5 @@
 package boundaries.estado_cuentas;
 
-import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.src.estado_cuentas.daos.MSEstadoCuentaDao;
 import ar.edu.ubp.das.src.estado_cuentas.forms.EstadoCuentaForm;
@@ -44,7 +43,7 @@ public class ConsultarEstadoCuentasTest {
 
         estadoCuentaDao.insert(estadoCuentaMock);
 
-        final List<DynaActionForm> ecs = estadoCuentaDao.select(estadoCuentaMock);
+        final List<EstadoCuentaForm> ecs = estadoCuentaDao.select(estadoCuentaMock);
         assertEquals(true, ecs.contains(estadoCuentaMock));
     }
 }
