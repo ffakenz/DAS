@@ -8,15 +8,12 @@ import ar.edu.ubp.das.src.concesionarias.daos.MSConcesionariasDao;
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
 import ar.edu.ubp.das.src.core.InteractorResponse;
 import ar.edu.ubp.das.src.core.ResponseForward;
-import ar.edu.ubp.das.src.core.UtilsCore;
 
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.Optional;
 import java.util.function.Function;
 
-public class AprobarInteractor implements Aprobar, UtilsCore, Utils {
+public class AprobarInteractor implements Aprobar, Utils {
 
 
     private String generarCodigo(final ConcesionariaForm form) {
@@ -29,10 +26,12 @@ public class AprobarInteractor implements Aprobar, UtilsCore, Utils {
         return dao -> {
             try {
 
-                final Optional<ConcesionariaForm> concesionariaConCodigo =
+                final Optional<ConcesionariaForm> concesionariaConCodigo = Optional.empty();
+                        /*
                         dao.select(null)
                                 .stream()
-                                .map(c -> (ConcesionariaForm) c)
+                                .map(c -> (ConcesionariaForm) c);
+
                                 .filter(c -> testConcesionariaRegistrada(form).apply(dao) &&
                                                     c.getId() == form.getId() &&
                                                     c.getFechaAlta() == null &&
@@ -45,6 +44,7 @@ public class AprobarInteractor implements Aprobar, UtilsCore, Utils {
                                     c.setFechaAlta(Timestamp.from(Instant.now()));
                                     return c;
                                 });
+                        */
 
                 if (concesionariaConCodigo.isPresent()) {
                     dao.update(concesionariaConCodigo.get());

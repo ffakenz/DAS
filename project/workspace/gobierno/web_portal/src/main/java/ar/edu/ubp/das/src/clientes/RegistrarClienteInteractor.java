@@ -4,11 +4,10 @@ import ar.edu.ubp.das.mvc.db.Dao;
 import ar.edu.ubp.das.src.clientes.boundaries.RegistrarCliente;
 import ar.edu.ubp.das.src.clientes.boundaries.Utils;
 import ar.edu.ubp.das.src.clientes.forms.ClienteForm;
-import ar.edu.ubp.das.src.core.UtilsCore;
 
 import java.sql.SQLException;
 
-public class RegistrarClienteInteractor implements RegistrarCliente, UtilsCore, Utils {
+public class RegistrarClienteInteractor implements RegistrarCliente, Utils {
 
     private Dao clienteDao;
 

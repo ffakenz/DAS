@@ -1,12 +1,13 @@
 package ar.edu.ubp.das.mvc.db;
 
+import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 
-public abstract class DaoImpl<T> extends Dao<T> {
+public abstract class DaoImpl<T extends DynaActionForm> implements Dao<T> {
 
     private DatasourceConfig datasource;
     private Connection connection;

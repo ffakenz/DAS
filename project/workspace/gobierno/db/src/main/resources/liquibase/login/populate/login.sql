@@ -1,4 +1,4 @@
-INSERT INTO login(username)
+INSERT INTO login(username, log_out_time)
 VALUES
-	('irocca')
-	, ('ffakenz');
+	('irocca', GETDATE())
+	, ('ffakenz', default);

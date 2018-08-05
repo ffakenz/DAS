@@ -4,47 +4,48 @@ import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.Dao;
 import ar.edu.ubp.das.src.core.InteractorResponse;
 import ar.edu.ubp.das.src.core.ResponseForward;
-import ar.edu.ubp.das.src.login.daos.decorators.MSLoginDaoDec;
-import ar.edu.ubp.das.src.login.daos.decorators.MSUsuariosDaoDec;
+import ar.edu.ubp.das.src.login.daos.extenders.MSLoginDaoEx;
+import ar.edu.ubp.das.src.login.daos.extenders.MSUsuariosDaoEx;
 import ar.edu.ubp.das.src.login.forms.LogInForm;
 import ar.edu.ubp.das.src.login.forms.UsuarioForm;
 
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.Optional;
 
 public class LoginInteractor {
 
-    private final MSUsuariosDaoDec msUsuariosDao;
-    private final MSLoginDaoDec loginDao;
+    private final MSUsuariosDaoEx msUsuariosDao;
+    private final MSLoginDaoEx loginDao;
 
     public LoginInteractor(final Dao loginDao, final Dao msUsuariosDao) {
-        this.loginDao = new MSLoginDaoDec(loginDao);
-        this.msUsuariosDao = new MSUsuariosDaoDec(msUsuariosDao);
+        this.loginDao = new MSLoginDaoEx(loginDao);
+        this.msUsuariosDao = new MSUsuariosDaoEx(msUsuariosDao);
     }
 
-    public Boolean isLoggedIn(final LogInForm form) {
+    public Optional<Long> isLoggedIn(final LogInForm form) {
         try {
-            return !loginDao.select(form).isEmpty();
-        } catch (final SQLException ex) {
-            ex.printStackTrace();
-            return false;
+            return loginDao.selectUserLoggIn(form).stream().findFirst().map(l -> l.getId());
+        } catch (final SQLException e) {
+            e.printStackTrace();
+            return Optional.empty();
         }
     }
 
     public void logout(final LogInForm req) {
         try {
             loginDao.update(req);
-        } catch (final SQLException ex) {
-            ex.printStackTrace();
+        } catch (final SQLException e) {
+            e.printStackTrace();
         }
     }
 
-    public void login(final LogInForm form) {
+    public Optional<Long> login(final LogInForm form) {
         try {
             loginDao.insert(form);
+            return isLoggedIn(form);
         } catch (final SQLException e) {
             e.printStackTrace();
+            return Optional.empty();
         }
     }
 
@@ -59,7 +60,6 @@ public class LoginInteractor {
     }
 
     public InteractorResponse execute(final DynaActionForm form) {
-
         final Optional<UsuarioForm> usr =
                 form.getItem("username").flatMap(u ->
                         form.getItem("password").map(p ->
@@ -75,10 +75,9 @@ public class LoginInteractor {
                     }
 
                     final LogInForm logInForm = new LogInForm(u.getUsername());
-                    // is user logged in ?
+
                     isLoggedIn(logInForm).ifPresent(loginId -> {
                         logInForm.setId(loginId);
-                        logInForm.setLogoutTime(new Timestamp(System.currentTimeMillis()));
                         logout(logInForm);
                     });
 
@@ -86,7 +85,6 @@ public class LoginInteractor {
                             .map(LogInId -> new InteractorResponse(ResponseForward.SUCCESS, LogInId))
                             .orElse(new InteractorResponse(ResponseForward.FAILURE));
                 });
-
 
         return response.orElse(new InteractorResponse(ResponseForward.WARNING)); // Some error occur with username / password
     }
