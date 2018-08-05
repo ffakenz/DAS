@@ -7,6 +7,7 @@ import ar.edu.ubp.das.src.login.forms.LogInForm;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MSLoginDaoEx extends DaoExtender {
     public MSLoginDaoEx(final Dao dao) {
@@ -17,7 +18,7 @@ public class MSLoginDaoEx extends DaoExtender {
         this.connect();
         this.setProcedure("dbo.get_login_by_username(?)", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
         this.setParameter(1, form.getUsername());
-        final List<LogInForm> logins = this.executeQuery();
+        final List<LogInForm> logins = this.executeQuery().stream().map(x -> (LogInForm) x).collect(Collectors.toList());
         this.disconnect();
         return logins;
     }
@@ -27,7 +28,7 @@ public class MSLoginDaoEx extends DaoExtender {
         this.connect();
         this.setProcedure("dbo.get_last_login_by_username(?)", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
         this.setParameter(1, form.getUsername());
-        final List<LogInForm> logins = this.executeQuery();
+        final List<LogInForm> logins = this.executeQuery().stream().map(x -> (LogInForm) x).collect(Collectors.toList());
         this.disconnect();
         return logins;
     }

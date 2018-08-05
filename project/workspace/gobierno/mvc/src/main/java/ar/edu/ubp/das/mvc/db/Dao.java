@@ -6,18 +6,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface Dao<T extends DynaActionForm> {
+public interface Dao {
 
-    T make(ResultSet result) throws SQLException;
+    DynaActionForm make(ResultSet result) throws SQLException;
 
-    void insert(T form) throws SQLException;
+    void insert(DynaActionForm form) throws SQLException;
 
-    void update(T form) throws SQLException;
+    void update(DynaActionForm form) throws SQLException;
 
-    void delete(T form) throws SQLException;
+    void delete(DynaActionForm form) throws SQLException;
 
-    List<T> select(T form) throws SQLException;
+    List<DynaActionForm> select(DynaActionForm form) throws SQLException;
 
-    boolean valid(T form) throws SQLException;
+    boolean valid(DynaActionForm form) throws SQLException;
 
 }

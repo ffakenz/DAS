@@ -77,7 +77,7 @@ public class RegistrarInteractor implements Registrar, Utils {
     @Override
     public InteractorResponse execute(final DynaActionForm form) {
 
-        final Dao<ConcesionariaForm> dao = new MSConcesionariasDao();
+        final Dao dao = new MSConcesionariasDao();
 
         final Optional<ConcesionariaForm> concesinariaRqst = makeFrom(form);
 

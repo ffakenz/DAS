@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 
-public abstract class DaoImpl<T extends DynaActionForm> implements Dao<T> {
+public abstract class DaoImpl implements Dao {
 
     private DatasourceConfig datasource;
     private Connection connection;
@@ -66,8 +66,8 @@ public abstract class DaoImpl<T extends DynaActionForm> implements Dao<T> {
         return rows;
     }
 
-    public List<T> executeQuery() throws SQLException {
-        final List<T> list = new LinkedList<>();
+    public List<DynaActionForm> executeQuery() throws SQLException {
+        final List<DynaActionForm> list = new LinkedList<>();
         final ResultSet result = this.statement.executeQuery();
         while (result.next()) {
             list.add(this.make(result));

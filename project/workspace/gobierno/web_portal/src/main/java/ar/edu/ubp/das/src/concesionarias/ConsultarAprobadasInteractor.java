@@ -12,13 +12,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class ConsultarAprobadasInteractor implements ConsultarAprobadas {
     @Override
     public Function<Dao, List<ConcesionariaForm>> consultarAprobadas() {
         return dao -> {
             try {
-                return dao.select(null);
+                return dao.select(null).stream().map(l -> (ConcesionariaForm) l).collect(Collectors.toList());
                         /*
                         dao.select(null).stream().filter(c -> {
                             ConcesionariaForm conc = (ConcesionariaForm) c;
