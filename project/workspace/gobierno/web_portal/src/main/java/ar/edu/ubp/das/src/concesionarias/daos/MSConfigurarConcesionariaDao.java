@@ -19,10 +19,9 @@ public class MSConfigurarConcesionariaDao extends DaoImpl<ConfigParamForm> {
     }
 
     @Override
-    public void insert(final ConfigParamForm form) throws SQLException {
+    public void insert(final ConfigParamForm f) throws SQLException {
         this.connect();
         this.setProcedure("dbo.log_concesionaria_config_params(?, ?, ?, ?)");
-        final ConfigParamForm f = (ConfigParamForm) form;
         this.setParameter(1, f.getConcesionariaId());
         this.setParameter(2, f.getConfigTecno());
         this.setParameter(3, f.getConfigParam());

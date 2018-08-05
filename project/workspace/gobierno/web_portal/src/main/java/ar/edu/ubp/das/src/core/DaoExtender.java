@@ -1,6 +1,5 @@
 package ar.edu.ubp.das.src.core;
 
-import ar.edu.ubp.das.mvc.db.Dao;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 
 import java.sql.ResultSet;
@@ -8,9 +7,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class DaoExtender<T> extends DaoImpl<T> {
-    protected Dao<T> dao;
+    protected DaoImpl<T> dao;
 
-    public DaoExtender(final Dao<T> dao) {
+    public DaoExtender(final DaoImpl dao) {
         this.dao = dao;
     }
 
@@ -22,7 +21,6 @@ public class DaoExtender<T> extends DaoImpl<T> {
     @Override
     public void insert(final T form) throws SQLException {
         dao.insert(form);
-
     }
 
     @Override

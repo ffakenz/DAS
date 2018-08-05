@@ -25,7 +25,7 @@ import static org.junit.Assert.*;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class LoginInteractorTest {
 
-    MSLoginDaoEx loginDao;
+    MSLogInDao loginDao;
     MSUsuariosDao msUsuariosDao;
     LoginInteractor interactor;
 
@@ -37,7 +37,7 @@ public class LoginInteractorTest {
         dataSourceConfig.setUsername("SA");
         dataSourceConfig.setPassword("Das12345");
 
-        loginDao = new MSLoginDaoEx(new MSLogInDao());
+        loginDao = new MSLogInDao();
         loginDao.setDatasource(dataSourceConfig);
 
         msUsuariosDao = new MSUsuariosDao();
@@ -47,42 +47,42 @@ public class LoginInteractorTest {
     }
 
     @Test
-    public void test01VerifyUserFailedWithWrongUsername() {
+    public void test01VerifyUserFailedWithWrongUsername() throws SQLException {
         final UsuarioForm userMock = new UsuarioForm("WrongUsername", "123", "gobierno");
         final Boolean isUsuarioValido = interactor.isValidUsuario(userMock);
         assertFalse(isUsuarioValido);
     }
 
     @Test
-    public void test02VerifyUserFailedWithWrongPassword() {
+    public void test02VerifyUserFailedWithWrongPassword() throws SQLException {
         final UsuarioForm userMock = new UsuarioForm("ffakenz", "WrongPassword", "gobierno");
         final Boolean isUsuarioValido = interactor.isValidUsuario(userMock);
         assertFalse(isUsuarioValido);
     }
 
     @Test
-    public void test03VerifyUserSuccessfully() {
+    public void test03VerifyUserSuccessfully() throws SQLException {
         final UsuarioForm userMock = new UsuarioForm("ffakenz", "123", "gobierno");
         final Boolean isUsuarioValido = interactor.isValidUsuario(userMock);
         assertTrue(isUsuarioValido);
     }
 
     @Test
-    public void test04VerifyIsUserLoggedInFalse() {
+    public void test04VerifyIsUserLoggedInFalse() throws SQLException {
         final LogInForm loginRqst = new LogInForm("irocca");
         final Optional<Long> loginId = interactor.isLoggedIn(loginRqst);
         assertEquals(Optional.empty(), loginId);
     }
 
     @Test
-    public void test05VerifyIsUserLoggedInTrue() {
+    public void test05VerifyIsUserLoggedInTrue() throws SQLException {
         final LogInForm loginRqst = new LogInForm("ffakenz");
         final Optional<Long> loginId = interactor.isLoggedIn(loginRqst);
         assertEquals(Optional.of(2L), loginId);
     }
 
     @Test
-    public void test06VerifyLogoutALoginUser() {
+    public void test06VerifyLogoutALoginUser() throws SQLException {
         final LogInForm loginRqst = new LogInForm("ffakenz");
 
         // VERIFY THE USER IS LOGGED IN
@@ -106,13 +106,13 @@ public class LoginInteractorTest {
         assertEquals(Optional.empty(), loggedOut);
 
         // GET THE LAST LOGOUT TIME FOR THE USER
-        final List<LogInForm> logoutDate = loginDao.selectLastUserLogin(loginRqst);
+        final List<LogInForm> logoutDate = new MSLoginDaoEx(loginDao).selectLastUserLogin(loginRqst);
 
         // LOGOUT THE USER
         interactor.logout(loginRqst);
 
         // GET THE LAST LOGOUT TIME FOR THE USER
-        final List<LogInForm> logoutDate2 = loginDao.selectLastUserLogin(loginRqst);
+        final List<LogInForm> logoutDate2 = new MSLoginDaoEx(loginDao).selectLastUserLogin(loginRqst);
 
         // VERIFY THE DATE DID NOT CHANGED
         assertEquals(logoutDate, logoutDate2);
@@ -120,7 +120,7 @@ public class LoginInteractorTest {
 
 
     @Test
-    public void test08LoginSuccessfully2() {
+    public void test08LoginSuccessfully2() throws SQLException {
         final LoginInteractor interactor = new LoginInteractor(loginDao, msUsuariosDao);
 
         final LogInForm loginRqst = new LogInForm("pepe");
@@ -131,7 +131,7 @@ public class LoginInteractorTest {
 
 
     @Ignore
-    public void test01LoginSuccessfully() {
+    public void test01LoginSuccessfully() throws SQLException {
         final LoginInteractor interactor = new LoginInteractor(loginDao, msUsuariosDao);
         // create a login request
         final LogInForm logRqst = new LogInForm("pepe");

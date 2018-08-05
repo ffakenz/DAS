@@ -19,20 +19,18 @@ public class MSLogInDao extends DaoImpl<LogInForm> {
     }
 
     @Override
-    public void insert(final LogInForm form) throws SQLException {
+    public void insert(final LogInForm f) throws SQLException {
         this.connect();
         this.setProcedure("dbo.log_login(?)");
-        final LogInForm f = (LogInForm) form;
         this.setParameter(1, f.getUsername());
         this.executeUpdate();
         this.disconnect();
     }
 
     @Override
-    public void update(final LogInForm form) throws SQLException {
+    public void update(final LogInForm f) throws SQLException {
         this.connect();
         this.setProcedure("dbo.log_out(?)");
-        final LogInForm f = (LogInForm) form;
         this.setParameter(1, f.getId());
         this.executeUpdate();
         this.disconnect();
@@ -43,10 +41,9 @@ public class MSLogInDao extends DaoImpl<LogInForm> {
     }
 
     @Override
-    public List<LogInForm> select(final LogInForm form) throws SQLException {
+    public List<LogInForm> select(final LogInForm f) throws SQLException {
         this.connect();
         this.setProcedure("dbo.get_logins(?)", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        final LogInForm f = (LogInForm) form;
         this.setParameter(1, f.getUsername());
         final List<LogInForm> logins = this.executeQuery();
         this.disconnect();

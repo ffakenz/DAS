@@ -22,10 +22,9 @@ public class MSCuotaDao extends DaoImpl<CuotaForm> {
     }
 
     @Override
-    public void insert(final CuotaForm form) throws SQLException {
+    public void insert(final CuotaForm f) throws SQLException {
         this.connect();
         this.setProcedure("dbo.log_cuota(?, ?, ?, ?)");
-        final CuotaForm f = new CuotaForm();
         this.setParameter(1, f.getEstadoCuentaId());
         this.setParameter(2, f.getFechaVencimiento());
         this.setParameter(3, f.getMonto());

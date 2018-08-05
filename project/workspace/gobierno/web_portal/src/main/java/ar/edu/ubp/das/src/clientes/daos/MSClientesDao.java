@@ -26,10 +26,9 @@ public class MSClientesDao extends DaoImpl<ClienteForm> {
     }
 
     @Override
-    public void insert(final ClienteForm form) throws SQLException {
+    public void insert(final ClienteForm f) throws SQLException {
         this.connect();
         this.setProcedure("dbo.log_cliente(?, ?, ?, ?, ?, ?)");
-        final ClienteForm f = (ClienteForm) form;
         this.setParameter(1, f.getDocumento());
         this.setParameter(2, f.getNombre());
         this.setParameter(3, f.getApellido());
@@ -41,10 +40,9 @@ public class MSClientesDao extends DaoImpl<ClienteForm> {
     }
 
     @Override
-    public void update(final ClienteForm form) throws SQLException {
+    public void update(final ClienteForm f) throws SQLException {
         this.connect();
         this.setProcedure("dbo.update_cliente(?, ?, ?)");
-        final ClienteForm f = (ClienteForm) form;
         this.setParameter(1, f.getId());
         this.setParameter(2, f.getEmail());
         this.setParameter(3, f.getNroTelefono());

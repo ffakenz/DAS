@@ -26,10 +26,9 @@ public class MSEstadoCuentaDao extends DaoImpl<EstadoCuentaForm> {
     }
 
     @Override
-    public void insert(final EstadoCuentaForm form) throws SQLException {
+    public void insert(final EstadoCuentaForm f) throws SQLException {
         this.connect();
         this.setProcedure("dbo.log_estado_cuentas(?, ?, ?, ?, ?, ?)");
-        final EstadoCuentaForm f = new EstadoCuentaForm();
         this.setParameter(1, f.getConcesionariaId());
         this.setParameter(2, f.getNroPlanConcesionaria());
         this.setParameter(3, f.getDocumentoCliente());
@@ -42,10 +41,9 @@ public class MSEstadoCuentaDao extends DaoImpl<EstadoCuentaForm> {
     }
 
     @Override
-    public void update(final EstadoCuentaForm form) throws SQLException {
+    public void update(final EstadoCuentaForm f) throws SQLException {
         this.connect();
         this.setProcedure("dbo.update_estado_cuentas(?, ?)");
-        final EstadoCuentaForm f = new EstadoCuentaForm();
         this.setParameter(1, f.getId());
         this.setParameter(2, f.getEstado());
         this.executeUpdate();

@@ -16,7 +16,7 @@ public class DaoFactory {
     }
 
     // THE MAGIC
-    public static Dao getDao(final String daoName, final String daoPackage) {
+    public static DaoImpl getDao(final String daoName, final String daoPackage) {
         try {
             return DaoFactory.getDao(daoName, daoPackage, "default");
         } catch (final SQLException ex) { // PROBLEMAS CON EL DAO FACTORY
@@ -25,27 +25,8 @@ public class DaoFactory {
         }
     }
 
-//    public static Dao getDao(final String daoName, final String daoPackage, final DatasourceConfig config) {
-//        try {
-//            return DaoFactory.getDao(daoName, daoPackage, "default", config);
-//        } catch (final SQLException ex) { // PROBLEMAS CON EL DAO FACTORY
-//            ex.printStackTrace();
-//            return null;
-//        }
-//    }
-//
-//    public static Dao getDao(final String daoName, final String daoPackage, final String datasourceId, final DatasourceConfig config) throws SQLException {
-//        try {
-//            final String daoClassName = DaoFactory.getDaoClassName(daoName, daoPackage);
-//            final DaoImpl dao = DaoImpl.class.cast(Class.forName(daoClassName).newInstance());
-//            dao.setDatasource(config);
-//            return dao;
-//        } catch (final InstantiationException | IllegalAccessException | ClassNotFoundException | IllegalArgumentException | SecurityException ex) {
-//            throw new SQLException(ex.getMessage());
-//        }
-//    }
 
-    public static Dao getDao(final String daoName, final String daoPackage, final String datasourceId) throws SQLException {
+    public static DaoImpl getDao(final String daoName, final String daoPackage, final String datasourceId) throws SQLException {
         try {
             final String daoClassName = DaoFactory.getDaoClassName(daoName, daoPackage);
             final DaoImpl dao = DaoImpl.class.cast(Class.forName(daoClassName).newInstance());

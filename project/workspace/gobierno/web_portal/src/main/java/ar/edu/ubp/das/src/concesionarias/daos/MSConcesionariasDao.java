@@ -27,10 +27,9 @@ public class MSConcesionariasDao extends DaoImpl<ConcesionariaForm> {
     }
 
     @Override
-    public void insert(final ConcesionariaForm form) throws SQLException {
+    public void insert(final ConcesionariaForm f) throws SQLException {
         this.connect();
         this.setProcedure("dbo.log_concesionaria(?, ?, ?, ?, ?, ?)");
-        final ConcesionariaForm f = (ConcesionariaForm) form;
         this.setParameter(1, f.getNombre());
         this.setParameter(2, f.getConfig());
         this.setParameter(3, f.getDireccion());
@@ -42,10 +41,9 @@ public class MSConcesionariasDao extends DaoImpl<ConcesionariaForm> {
     }
 
     @Override
-    public void update(final ConcesionariaForm form) throws SQLException {
+    public void update(final ConcesionariaForm f) throws SQLException {
         this.connect();
         this.setProcedure("dbo.aprove_concesionaria(?, ?, ?)");
-        final ConcesionariaForm f = (ConcesionariaForm) form;
         this.setParameter(1, f.getId());
         this.setParameter(2, f.getFechaAlta());
         this.setParameter(3, f.getCodigo());

@@ -4,8 +4,8 @@ import ar.edu.ubp.das.mvc.action.Action;
 import ar.edu.ubp.das.mvc.action.ActionMapping;
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.config.ForwardConfig;
-import ar.edu.ubp.das.mvc.db.Dao;
 import ar.edu.ubp.das.mvc.db.DaoFactory;
+import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.core.InteractorResponse;
 import ar.edu.ubp.das.src.login.LoginInteractor;
 
@@ -22,8 +22,8 @@ public class LoginAction implements Action {
                                  final HttpServletResponse response) throws SQLException, RuntimeException {
 
 
-        final Dao msUsuariosDao = DaoFactory.getDao("Usuarios", "login");
-        final Dao loginDao = DaoFactory.getDao("LogIn", "login");
+        final DaoImpl msUsuariosDao = DaoFactory.getDao("Usuarios", "login");
+        final DaoImpl loginDao = DaoFactory.getDao("LogIn", "login");
 
         final LoginInteractor action = new LoginInteractor(loginDao, msUsuariosDao);
         final InteractorResponse result = action.execute(form);
