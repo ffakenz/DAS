@@ -6,14 +6,17 @@ import ar.edu.ubp.das.src.login.daos.MSUsuariosDao;
 import ar.edu.ubp.das.src.login.model.usuario.UsuarioManager;
 import ar.edu.ubp.das.src.login.model.usuario.UsuarioRol;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import java.sql.SQLException;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class UsuarioManagmentTest {
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class UsuarioManagerTest {
     DaoImpl msUsuariosDao;
     UsuarioManager usuarioManager;
 
@@ -32,42 +35,37 @@ public class UsuarioManagmentTest {
     }
 
     @Test
-    public void test08() throws SQLException {
-        // Verify the username does not exists
+    public void test08_Verify_the_username_does_not_exists() throws SQLException {
         final Boolean isUsuarioValido = usuarioManager.verifyUsername("WrongUsername");
         assertFalse(isUsuarioValido);
     }
 
     @Test
-    public void test09() throws SQLException {
-        // Verify the username exists
+    public void test09_Verify_the_username_exists() throws SQLException {
         final Boolean isUsuarioValido = usuarioManager.verifyUsername("ffakenz");
         assertTrue(isUsuarioValido);
     }
 
     @Test
-    public void test10() throws SQLException {
-        // Verify User Failed With Wrong Username
+    public void test10_Verify_User_Failed_With_Wrong_Username() throws SQLException {
         final Boolean isUsuarioValido = usuarioManager.verifyUsernameAndPassword("WrongUsername", "123");
         assertFalse(isUsuarioValido);
     }
 
     @Test
-    public void test11() throws SQLException {
-        // Verify User Failed With Wrong Password
+    public void test11_Verify_User_Failed_With_Wrong_Password() throws SQLException {
         final Boolean isUsuarioValido = usuarioManager.verifyUsernameAndPassword("ffakenz", "WrongPassword");
         assertFalse(isUsuarioValido);
     }
 
     @Test
-    public void test12() throws SQLException {
-        // Verify User Successfully
+    public void test12_Verify_User_Successfully() throws SQLException {
         final Boolean isUsuarioValido = usuarioManager.verifyUsernameAndPassword("ffakenz", "123");
         assertTrue(isUsuarioValido);
     }
 
     @Test
-    public void test13() throws SQLException {
+    public void test13_New_User_Exists() throws SQLException {
         // Create a new user
         final String username = "newusername";
         final String password = "newpassword";
@@ -80,8 +78,7 @@ public class UsuarioManagmentTest {
     }
 
     @Test
-    public void test14() throws SQLException {
-        // Create a new user
+    public void test14_Verify_The_User_Is_Successfully_Deleted() throws SQLException {
         final String username = "newusername";
 
         // Delete the user
@@ -93,7 +90,7 @@ public class UsuarioManagmentTest {
     }
 
     @Test
-    public void test15() throws SQLException {
+    public void test15_Verify_The_User_Update_His_Password_Successfully() throws SQLException {
         final String username = "ffakenz";
         final String password = "123";
 

@@ -2,4 +2,5 @@ INSERT INTO usuario(username, password, rol)
 VALUES
 	('irocca', 'lam', 'gobierno')
 	, ('ffakenz', '123', 'gobierno')
-    , ('pepe', 'asd', 'consumer');
+    , ('pepe', 'asd', 'consumer')
+    , ('pepe2', 'asd', 'consumer');

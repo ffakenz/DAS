@@ -5,7 +5,7 @@ import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.core.InteractorResponse;
 import ar.edu.ubp.das.src.core.ResponseForward;
 import ar.edu.ubp.das.src.login.forms.LogInForm;
-import ar.edu.ubp.das.src.login.model.login.MSLoginDaoEx;
+import ar.edu.ubp.das.src.login.model.login.LoginManager;
 import ar.edu.ubp.das.src.login.model.usuario.UsuarioManager;
 
 import java.sql.SQLException;
@@ -14,25 +14,12 @@ import java.util.Optional;
 
 public class LoginInteractor {
 
-    private MSLoginDaoEx loginDao;
+    private LoginManager loginManager;
     private UsuarioManager usuarioManager;
 
     public LoginInteractor(final DaoImpl loginDao, final DaoImpl msUsuariosDao) {
-        this.loginDao = new MSLoginDaoEx(loginDao);
+        this.loginManager = new LoginManager(loginDao);
         this.usuarioManager = new UsuarioManager(msUsuariosDao);
-    }
-
-    public Optional<Long> isLoggedIn(final LogInForm form) throws SQLException {
-        return loginDao.selectUserLoggIn(form).stream().findFirst().map(l -> l.getId());
-    }
-
-    public void logout(final LogInForm form) throws SQLException {
-        loginDao.update(form);
-    }
-
-    public Optional<Long> login(final LogInForm form) throws SQLException {
-        loginDao.insert(form);
-        return isLoggedIn(form);
     }
 
     public InteractorResponse execute(final DynaActionForm form) {
@@ -47,13 +34,13 @@ public class LoginInteractor {
 
                                 final LogInForm logInForm = new LogInForm(u);
 
-                                if (isLoggedIn(logInForm).isPresent()) {
-                                    final Long loginId = isLoggedIn(logInForm).get();
+                                if (loginManager.isLoggedIn(logInForm).isPresent()) {
+                                    final Long loginId = loginManager.isLoggedIn(logInForm).get();
                                     logInForm.setId(loginId);
-                                    logout(logInForm);
+                                    loginManager.logout(logInForm);
                                 }
 
-                                return login(logInForm)
+                                return loginManager.login(logInForm)
                                         .map(LogInId -> new InteractorResponse(ResponseForward.SUCCESS, LogInId))
                                         .orElse(new InteractorResponse(ResponseForward.FAILURE));
 

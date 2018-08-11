@@ -7,17 +7,14 @@ import ar.edu.ubp.das.src.core.ResponseForward;
 import ar.edu.ubp.das.src.login.LoginInteractor;
 import ar.edu.ubp.das.src.login.daos.MSLogInDao;
 import ar.edu.ubp.das.src.login.daos.MSUsuariosDao;
-import ar.edu.ubp.das.src.login.forms.LogInForm;
-import ar.edu.ubp.das.src.login.model.login.MSLoginDaoEx;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import java.sql.SQLException;
-import java.util.List;
 import java.util.Optional;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -44,122 +41,24 @@ public class LoginInteractorTest {
         interactor = new LoginInteractor(loginDao, msUsuariosDao);
     }
 
-
     @Test
-    public void test04VerifyIsUserLoggedInFalse() throws SQLException {
-        final LogInForm loginRqst = new LogInForm("irocca");
-        final Optional<Long> loginId = interactor.isLoggedIn(loginRqst);
-        assertEquals(Optional.empty(), loginId);
-    }
-
-    @Test
-    public void test05VerifyIsUserLoggedInTrue() throws SQLException {
-        final LogInForm loginRqst = new LogInForm("ffakenz");
-        final Optional<Long> loginId = interactor.isLoggedIn(loginRqst);
-        assertEquals(Optional.of(2L), loginId);
-    }
-
-    @Test
-    public void test06VerifyLogoutALoginUser() throws SQLException {
-        final LogInForm loginRqst = new LogInForm("ffakenz");
-        loginRqst.setId(2L);
-
-        // VERIFY THE USER IS LOGGED IN
-        final Optional<Long> loggedIn = interactor.isLoggedIn(loginRqst);
-        assertEquals(Optional.of(2L), loggedIn);
-
-        // LOGOUT THE USER
-        interactor.logout(loginRqst);
-
-        // VERIFY THE USER IS LOGGED OUT
-        final Optional<Long> loggedOut = interactor.isLoggedIn(loginRqst);
-        assertEquals(Optional.empty(), loggedOut);
-    }
-
-    @Test
-    public void test07VerifyLogoutAnAlreadyLoggedOutUserShouldNotTakeEffect() throws SQLException {
-        final LogInForm loginRqst = new LogInForm("ffakenz");
-        loginRqst.setId(2L);
-
-        // VERIFY THE USER IS LOGGED OUT
-        final Optional<Long> loggedOut = interactor.isLoggedIn(loginRqst);
-        assertEquals(Optional.empty(), loggedOut);
-
-        // GET THE LAST LOGOUT TIME FOR THE USER
-        final List<LogInForm> logoutDate = new MSLoginDaoEx(loginDao).selectLastUserLogin(loginRqst);
-
-        // LOGOUT THE USER
-        interactor.logout(loginRqst);
-
-        // GET THE LAST LOGOUT TIME FOR THE USER
-        final List<LogInForm> logoutDate2 = new MSLoginDaoEx(loginDao).selectLastUserLogin(loginRqst);
-
-        // VERIFY THE DATE DID NOT CHANGED
-        assertEquals(logoutDate.toString(), logoutDate2.toString());
-    }
-
-
-    @Test
-    public void test08LoginSuccessfully2() throws SQLException {
-
-        final LogInForm loginRqst = new LogInForm("pepe");
-        final Optional<Long> logInId = interactor.login(loginRqst);
-
-        assertEquals(Optional.of(3L), logInId);
-    }
-
-
-    @Test
-    public void test09LoginSuccessfully() throws SQLException {
-        // create a login request
-        final LogInForm logRqst = new LogInForm("pepe");
-        // verify the user is not logged in
-        assertEquals(Optional.of(3L), interactor.isLoggedIn(logRqst));
-        // log out using same request ?
-        logRqst.setId(3L);
-        interactor.logout(logRqst);
-        // verify the user is not logged in
-        assertEquals(Optional.empty(), interactor.isLoggedIn(logRqst));
-    }
-
-
-    // EXECUTE
-    @Test
-    public void test10LoginInteractor() {
+    public void test08_Login_Failure() {
 
         final DynaActionForm userForm = new DynaActionForm();
-        userForm.setItem("username", "pepe");
-        userForm.setItem("password", "asd");
+        userForm.setItem("username", "no exists");
+        userForm.setItem("password", "no password");
 
         final InteractorResponse response = interactor.execute(userForm);
 
-        assertEquals(ResponseForward.SUCCESS, response.getResponse());
-        assertEquals(4L, response.getResult());
+        assertEquals(ResponseForward.FAILURE, response.getResponse());
+        assertEquals(Optional.empty(), response.getResult());
     }
 
     @Test
-    public void test11LoginTwice() {
+    public void test09_Missing_Credentials() {
 
         final DynaActionForm userForm = new DynaActionForm();
-        userForm.setItem("username", "pepe");
-        userForm.setItem("password", "asd");
-
-        final InteractorResponse response = interactor.execute(userForm);
-
-        assertEquals(ResponseForward.SUCCESS, response.getResponse());
-        assertEquals(5L, response.getResult());
-
-
-        final InteractorResponse response2 = interactor.execute(userForm);
-        assertEquals(ResponseForward.SUCCESS, response2.getResponse());
-        assertEquals(6L, response2.getResult());
-    }
-
-    @Test
-    public void test12MissingCredentials() {
-
-        final DynaActionForm userForm = new DynaActionForm();
-        userForm.setItem("username", "pepe");
+        userForm.setItem("username", "pepe2");
 
         final InteractorResponse response = interactor.execute(userForm);
 
@@ -168,15 +67,35 @@ public class LoginInteractorTest {
     }
 
     @Test
-    public void test13LoginFailure() {
+    public void test10_Login_Interactor() {
 
         final DynaActionForm userForm = new DynaActionForm();
-        userForm.setItem("username", "no exists");
-        userForm.setItem("password", "no password");
+        userForm.setItem("username", "pepe2");
+        userForm.setItem("password", "asd");
 
         final InteractorResponse response = interactor.execute(userForm);
 
-        assert (response.getResponse() == ResponseForward.FAILURE);
-        assert (((Optional<Long>) response.getResult()).equals(Optional.empty()));
+        assertEquals(ResponseForward.SUCCESS, response.getResponse());
+        assertTrue((Long) response.getResult() > 0);
     }
+
+    @Test
+    public void test11_Login_Twice() {
+
+        final DynaActionForm userForm = new DynaActionForm();
+        userForm.setItem("username", "pepe2");
+        userForm.setItem("password", "asd");
+
+        final InteractorResponse response = interactor.execute(userForm);
+
+        assertEquals(ResponseForward.SUCCESS, response.getResponse());
+        assertTrue((Long) response.getResult() > 0);
+
+
+        final InteractorResponse response2 = interactor.execute(userForm);
+        assertEquals(ResponseForward.SUCCESS, response2.getResponse());
+        assertTrue((Long) response2.getResult() > (Long) response.getResult());
+    }
+
+
 }
