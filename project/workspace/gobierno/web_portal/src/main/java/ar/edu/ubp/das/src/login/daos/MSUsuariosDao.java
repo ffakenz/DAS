@@ -21,17 +21,32 @@ public class MSUsuariosDao extends DaoImpl<UsuarioForm> {
 
     @Override
     public void insert(final UsuarioForm form) throws SQLException {
-        // TODO Auto-generated method stub
+        this.connect();
+        this.setProcedure("dbo.insert_usuario(?, ?, ?)");
+        this.setParameter(1, form.getUsername());
+        this.setParameter(2, form.getPassword());
+        this.setParameter(3, form.getRol().toString());
+        this.executeUpdate();
+        this.disconnect();
     }
 
     @Override
     public void update(final UsuarioForm form) throws SQLException {
-        // TODO Auto-generated method stub
+        this.connect();
+        this.setProcedure("dbo.update_usuario_password(?, ?)");
+        this.setParameter(1, form.getUsername());
+        this.setParameter(2, form.getPassword());
+        this.executeUpdate();
+        this.disconnect();
     }
 
     @Override
     public void delete(final UsuarioForm form) throws SQLException {
-        // TODO Auto-generated method stub
+        this.connect();
+        this.setProcedure("dbo.delete_usuario(?)");
+        this.setParameter(1, form.getUsername());
+        this.executeUpdate();
+        this.disconnect();
     }
 
     @Override

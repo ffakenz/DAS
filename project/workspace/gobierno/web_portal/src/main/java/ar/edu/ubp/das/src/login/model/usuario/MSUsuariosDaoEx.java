@@ -26,4 +26,17 @@ public class MSUsuariosDaoEx extends DaoExtender<UsuarioForm> {
         dao.disconnect();
         return usuarios;
     }
+
+    public List<UsuarioForm> selectByUserName(final String username) throws SQLException {
+        dao.connect();
+        dao.setProcedure(
+                "dbo.get_usuarios_by_username(?)",
+                ResultSet.TYPE_SCROLL_SENSITIVE,
+                ResultSet.CONCUR_READ_ONLY
+        );
+        dao.setParameter(1, username);
+        final List<UsuarioForm> usuarios = dao.executeQuery();
+        dao.disconnect();
+        return usuarios;
+    }
 }

@@ -8,6 +8,10 @@ public class UsuarioForm extends DynaActionForm {
     private String password;
     private UsuarioRol rol;
 
+    public UsuarioForm() {
+
+    }
+
     public UsuarioForm(final String username, final String password, final UsuarioRol rol) {
         this.username = username;
         this.password = password;

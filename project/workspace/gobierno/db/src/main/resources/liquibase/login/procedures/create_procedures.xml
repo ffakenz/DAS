@@ -21,6 +21,45 @@
         <dropProcedure procedureName="get_usuarios"/>
     </changeSet>
 
+    <changeSet id="Drop procedure insert_usuario" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'insert_usuario'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="insert_usuario"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure delete_usuario" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'delete_usuario'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="delete_usuario"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure update_usuario_password" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'update_usuario_password'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="update_usuario_password"/>
+    </changeSet>
+
     <changeSet id="Drop procedure get_logins" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="1">
@@ -86,6 +125,20 @@
         <dropProcedure procedureName="log_out"/>
     </changeSet>
 
+    <changeSet id="Drop procedure get_usuarios_by_username" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_usuarios_by_username'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_usuarios_by_username"/>
+    </changeSet>
+
     <changeSet id="Drop procedure get_usuarios_by_username_password" author="DAS-Team" runAlways="true"
                runOnChange="true">
         <preConditions onFail="MARK_RAN">
@@ -114,6 +167,45 @@
             </sqlCheck>
         </preConditions>
         <sqlFile path="/src/main/resources/liquibase/login/procedures/get_usuarios.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure insert_usuario" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'insert_usuario'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/login/procedures/insert_usuario.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure delete_usuario" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'delete_usuario'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/login/procedures/delete_usuario.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure update_usuario_password" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'update_usuario_password'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/login/procedures/update_usuario_password.sql"/>
     </changeSet>
 
     <changeSet id="Create procedure get_logins" author="DAS-Team" runAlways="true" runOnChange="true">
@@ -179,6 +271,20 @@
             </sqlCheck>
         </preConditions>
         <sqlFile path="/src/main/resources/liquibase/login/procedures/log_out.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure get_usuarios_by_username" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_usuarios_by_username'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/login/procedures/get_usuarios_by_username.sql"/>
     </changeSet>
 
     <changeSet id="Create procedure get_usuarios_by_username_password" author="DAS-Team" runAlways="true"
