@@ -2,6 +2,7 @@ package ar.edu.ubp.das.src.login.daos;
 
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.login.forms.UsuarioForm;
+import ar.edu.ubp.das.src.login.model.usuario.UsuarioRol;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,9 +12,11 @@ public class MSUsuariosDao extends DaoImpl<UsuarioForm> {
 
     @Override
     public UsuarioForm make(final ResultSet result) throws SQLException {
+        final UsuarioRol rol = UsuarioRol.getRol(result.getString("rol"));
         return new UsuarioForm(result.getString("username"),
                 result.getString("password"),
-                result.getString("rol"));
+                rol
+        );
     }
 
     @Override

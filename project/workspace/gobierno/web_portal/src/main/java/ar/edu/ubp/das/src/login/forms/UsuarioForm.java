@@ -1,28 +1,29 @@
 package ar.edu.ubp.das.src.login.forms;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
+import ar.edu.ubp.das.src.login.model.usuario.UsuarioRol;
 
 public class UsuarioForm extends DynaActionForm {
     private String username;
     private String password;
-    private String rol;
+    private UsuarioRol rol;
 
     public UsuarioForm(final String username, final String password) {
         this.username = username;
         this.password = password;
     }
 
-    public UsuarioForm(final String username, final String password, final String rol) {
+    public UsuarioForm(final String username, final String password, final UsuarioRol rol) {
         this.username = username;
         this.password = password;
         this.rol = rol;
     }
 
-    public String getRol() {
+    public UsuarioRol getRol() {
         return rol;
     }
 
-    public void setRol(final String rol) {
+    public void setRol(final UsuarioRol rol) {
         this.rol = rol;
     }
 
