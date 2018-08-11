@@ -7,8 +7,8 @@ import ar.edu.ubp.das.src.core.ResponseForward;
 import ar.edu.ubp.das.src.login.LoginInteractor;
 import ar.edu.ubp.das.src.login.daos.MSLogInDao;
 import ar.edu.ubp.das.src.login.daos.MSUsuariosDao;
-import ar.edu.ubp.das.src.login.daos.extenders.MSLoginDaoEx;
 import ar.edu.ubp.das.src.login.forms.LogInForm;
+import ar.edu.ubp.das.src.login.model.login.MSLoginDaoEx;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -18,7 +18,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class LoginInteractorTest {
@@ -44,23 +44,6 @@ public class LoginInteractorTest {
         interactor = new LoginInteractor(loginDao, msUsuariosDao);
     }
 
-    @Test
-    public void test01VerifyUserFailedWithWrongUsername() throws SQLException {
-        final Boolean isUsuarioValido = interactor.isValidUsuario("WrongUsername", "123");
-        assertFalse(isUsuarioValido);
-    }
-
-    @Test
-    public void test02VerifyUserFailedWithWrongPassword() throws SQLException {
-        final Boolean isUsuarioValido = interactor.isValidUsuario("ffakenz", "WrongPassword");
-        assertFalse(isUsuarioValido);
-    }
-
-    @Test
-    public void test03VerifyUserSuccessfully() throws SQLException {
-        final Boolean isUsuarioValido = interactor.isValidUsuario("ffakenz", "123");
-        assertTrue(isUsuarioValido);
-    }
 
     @Test
     public void test04VerifyIsUserLoggedInFalse() throws SQLException {

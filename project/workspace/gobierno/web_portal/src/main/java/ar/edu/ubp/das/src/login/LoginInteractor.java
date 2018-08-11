@@ -4,9 +4,9 @@ import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.core.InteractorResponse;
 import ar.edu.ubp.das.src.core.ResponseForward;
-import ar.edu.ubp.das.src.login.daos.extenders.MSLoginDaoEx;
-import ar.edu.ubp.das.src.login.daos.extenders.MSUsuariosDaoEx;
 import ar.edu.ubp.das.src.login.forms.LogInForm;
+import ar.edu.ubp.das.src.login.model.login.MSLoginDaoEx;
+import ar.edu.ubp.das.src.login.model.usuario.UsuarioManager;
 
 import java.sql.SQLException;
 import java.util.Optional;
@@ -15,11 +15,11 @@ import java.util.Optional;
 public class LoginInteractor {
 
     private MSLoginDaoEx loginDao;
-    private MSUsuariosDaoEx msUsuariosDao;
+    private UsuarioManager usuarioManager;
 
     public LoginInteractor(final DaoImpl loginDao, final DaoImpl msUsuariosDao) {
         this.loginDao = new MSLoginDaoEx(loginDao);
-        this.msUsuariosDao = new MSUsuariosDaoEx(msUsuariosDao);
+        this.usuarioManager = new UsuarioManager(msUsuariosDao);
     }
 
     public Optional<Long> isLoggedIn(final LogInForm form) throws SQLException {
@@ -35,18 +35,13 @@ public class LoginInteractor {
         return isLoggedIn(form);
     }
 
-    // is there any usuario in the repository such that is equals to the one sent by parameter ?
-    public Boolean isValidUsuario(final String username, final String password) throws SQLException {
-        return !msUsuariosDao.selectByUserNameAndPassword(username, password).isEmpty();
-    }
-
     public InteractorResponse execute(final DynaActionForm form) {
         final Optional<InteractorResponse> response =
                 form.getItem("username").flatMap(u ->
                         form.getItem("password").map(p -> {
                             // is user valid ?
                             try {
-                                if (!isValidUsuario(u, p)) {
+                                if (!usuarioManager.verifyUsernameAndPassword(u, p)) {
                                     return new InteractorResponse(ResponseForward.FAILURE);
                                 }
 

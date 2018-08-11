@@ -1,4 +1,4 @@
-package ar.edu.ubp.das.src.login.daos.extenders;
+package ar.edu.ubp.das.src.login.model.login;
 
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.core.DaoExtender;
