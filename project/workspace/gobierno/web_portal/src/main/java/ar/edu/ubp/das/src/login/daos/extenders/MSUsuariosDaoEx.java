@@ -13,15 +13,15 @@ public class MSUsuariosDaoEx extends DaoExtender<UsuarioForm> {
         super(dao);
     }
 
-    public List<UsuarioForm> selectByUserNameAndPassword(final UsuarioForm form) throws SQLException {
+    public List<UsuarioForm> selectByUserNameAndPassword(final String username, final String password) throws SQLException {
         dao.connect();
         dao.setProcedure(
                 "dbo.get_usuarios_by_username_password(?, ?)",
                 ResultSet.TYPE_SCROLL_SENSITIVE,
                 ResultSet.CONCUR_READ_ONLY
         );
-        dao.setParameter(1, form.getUsername());
-        dao.setParameter(2, form.getPassword());
+        dao.setParameter(1, username);
+        dao.setParameter(2, password);
         final List<UsuarioForm> usuarios = dao.executeQuery();
         dao.disconnect();
         return usuarios;

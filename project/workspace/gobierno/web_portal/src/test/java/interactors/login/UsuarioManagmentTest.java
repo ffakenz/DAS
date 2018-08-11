@@ -2,7 +2,6 @@ package interactors.login;
 
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.src.login.daos.MSUsuariosDao;
-import ar.edu.ubp.das.src.login.forms.UsuarioForm;
 import ar.edu.ubp.das.src.login.model.usuario.UsuarioManager;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,7 +30,6 @@ public class UsuarioManagmentTest {
     public void test01() throws SQLException {
         // Verify we can retrieve a valid user from db
 
-        final UsuarioForm usuarioForm = new UsuarioForm("pepe", "123");
 //        usuarioManager
     }
 

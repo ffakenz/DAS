@@ -7,7 +7,6 @@ import ar.edu.ubp.das.src.core.ResponseForward;
 import ar.edu.ubp.das.src.login.daos.extenders.MSLoginDaoEx;
 import ar.edu.ubp.das.src.login.daos.extenders.MSUsuariosDaoEx;
 import ar.edu.ubp.das.src.login.forms.LogInForm;
-import ar.edu.ubp.das.src.login.forms.UsuarioForm;
 
 import java.sql.SQLException;
 import java.util.Optional;
@@ -37,43 +36,38 @@ public class LoginInteractor {
     }
 
     // is there any usuario in the repository such that is equals to the one sent by parameter ?
-    public Boolean isValidUsuario(final UsuarioForm user) throws SQLException {
-        return !msUsuariosDao.selectByUserNameAndPassword(user).isEmpty();
+    public Boolean isValidUsuario(final String username, final String password) throws SQLException {
+        return !msUsuariosDao.selectByUserNameAndPassword(username, password).isEmpty();
     }
 
     public InteractorResponse execute(final DynaActionForm form) {
-        final Optional<UsuarioForm> usr =
-                form.getItem("username").flatMap(u ->
-                        form.getItem("password").map(p ->
-                                new UsuarioForm(u, p)
-                        )
-                );
-
         final Optional<InteractorResponse> response =
-                usr.map(u -> {
-                    // is user valid ?
-                    try {
-                        if (!isValidUsuario(u)) {
-                            return new InteractorResponse(ResponseForward.FAILURE);
-                        }
+                form.getItem("username").flatMap(u ->
+                        form.getItem("password").map(p -> {
+                            // is user valid ?
+                            try {
+                                if (!isValidUsuario(u, p)) {
+                                    return new InteractorResponse(ResponseForward.FAILURE);
+                                }
 
-                        final LogInForm logInForm = new LogInForm(u.getUsername());
+                                final LogInForm logInForm = new LogInForm(u);
 
-                        if (isLoggedIn(logInForm).isPresent()) {
-                            final Long loginId = isLoggedIn(logInForm).get();
-                            logInForm.setId(loginId);
-                            logout(logInForm);
-                        }
+                                if (isLoggedIn(logInForm).isPresent()) {
+                                    final Long loginId = isLoggedIn(logInForm).get();
+                                    logInForm.setId(loginId);
+                                    logout(logInForm);
+                                }
 
-                        return login(logInForm)
-                                .map(LogInId -> new InteractorResponse(ResponseForward.SUCCESS, LogInId))
-                                .orElse(new InteractorResponse(ResponseForward.FAILURE));
+                                return login(logInForm)
+                                        .map(LogInId -> new InteractorResponse(ResponseForward.SUCCESS, LogInId))
+                                        .orElse(new InteractorResponse(ResponseForward.FAILURE));
 
-                    } catch (final SQLException e) {
-                        e.printStackTrace();
-                        return new InteractorResponse(ResponseForward.FAILURE);
-                    }
-                });
+                            } catch (final SQLException e) {
+                                e.printStackTrace();
+                                return new InteractorResponse(ResponseForward.FAILURE);
+                            }
+                        })
+                );
 
         return response.orElse(new InteractorResponse(ResponseForward.WARNING)); // Some error occur with username / password
     }

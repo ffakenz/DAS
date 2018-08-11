@@ -9,8 +9,6 @@ import ar.edu.ubp.das.src.login.daos.MSLogInDao;
 import ar.edu.ubp.das.src.login.daos.MSUsuariosDao;
 import ar.edu.ubp.das.src.login.daos.extenders.MSLoginDaoEx;
 import ar.edu.ubp.das.src.login.forms.LogInForm;
-import ar.edu.ubp.das.src.login.forms.UsuarioForm;
-import ar.edu.ubp.das.src.login.model.usuario.UsuarioRol;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -48,22 +46,19 @@ public class LoginInteractorTest {
 
     @Test
     public void test01VerifyUserFailedWithWrongUsername() throws SQLException {
-        final UsuarioForm userMock = new UsuarioForm("WrongUsername", "123", UsuarioRol.GOBIERNO);
-        final Boolean isUsuarioValido = interactor.isValidUsuario(userMock);
+        final Boolean isUsuarioValido = interactor.isValidUsuario("WrongUsername", "123");
         assertFalse(isUsuarioValido);
     }
 
     @Test
     public void test02VerifyUserFailedWithWrongPassword() throws SQLException {
-        final UsuarioForm userMock = new UsuarioForm("ffakenz", "WrongPassword", UsuarioRol.GOBIERNO);
-        final Boolean isUsuarioValido = interactor.isValidUsuario(userMock);
+        final Boolean isUsuarioValido = interactor.isValidUsuario("ffakenz", "WrongPassword");
         assertFalse(isUsuarioValido);
     }
 
     @Test
     public void test03VerifyUserSuccessfully() throws SQLException {
-        final UsuarioForm userMock = new UsuarioForm("ffakenz", "123", UsuarioRol.GOBIERNO);
-        final Boolean isUsuarioValido = interactor.isValidUsuario(userMock);
+        final Boolean isUsuarioValido = interactor.isValidUsuario("ffakenz", "123");
         assertTrue(isUsuarioValido);
     }
 
