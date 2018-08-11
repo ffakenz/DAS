@@ -76,7 +76,7 @@ public class LoginInteractorTest {
         final InteractorResponse response = interactor.execute(userForm);
 
         assertEquals(ResponseForward.SUCCESS, response.getResponse());
-        assertTrue((Long) response.getResult() > 0);
+        assertTrue(response.getResult().isPresent());
     }
 
     @Test
@@ -86,15 +86,15 @@ public class LoginInteractorTest {
         userForm.setItem("username", "pepe2");
         userForm.setItem("password", "asd");
 
-        final InteractorResponse response = interactor.execute(userForm);
+        final InteractorResponse<Long> response = interactor.execute(userForm);
 
         assertEquals(ResponseForward.SUCCESS, response.getResponse());
-        assertTrue((Long) response.getResult() > 0);
+        assertTrue(response.getResult().isPresent());
 
 
-        final InteractorResponse response2 = interactor.execute(userForm);
+        final InteractorResponse<Long> response2 = interactor.execute(userForm);
         assertEquals(ResponseForward.SUCCESS, response2.getResponse());
-        assertTrue((Long) response2.getResult() > (Long) response.getResult());
+        assertTrue(response2.getResult().get() > response.getResult().get());
     }
 
 

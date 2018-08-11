@@ -41,7 +41,7 @@ public class LoginInteractor {
                                 }
 
                                 return loginManager.login(logInForm)
-                                        .map(LogInId -> new InteractorResponse(ResponseForward.SUCCESS, LogInId))
+                                        .map(LogInId -> new InteractorResponse(ResponseForward.SUCCESS, Optional.of(LogInId)))
                                         .orElse(new InteractorResponse(ResponseForward.FAILURE));
 
                             } catch (final SQLException e) {

@@ -14,6 +14,10 @@ import org.junit.Test;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
+
+import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 public class ConfigurarInteractorTest {
 
@@ -32,17 +36,17 @@ public class ConfigurarInteractorTest {
         configParam.setValue("http://localhost:8002/concesionarias_rest_one/concesionariaRestOne");
 
         // valid que los parametros correspondan a una concesionaria aprobada
-        final List<ConcesionariaForm> aprobadas =
-                (List<ConcesionariaForm>) consultor.execute(null).getResult();
+        final Optional<List<ConcesionariaForm>> aprobadas =
+                consultor.execute(null).getResult();
         // la consecionaria esta aprobada
-        assert (aprobadas.stream().anyMatch(c -> c.getId() == configParam.getConcesionariaId()));
+        assertTrue(aprobadas.get().stream().anyMatch(c -> c.getId() == configParam.getConcesionariaId()));
 
         // Ejecuto el configurador
-        final InteractorResponse response = configurador.execute(configParam);
+        final InteractorResponse<Boolean> response = configurador.execute(configParam);
 
         // Valido que la concesionaria se haya configurado exitosamente
-        assert (response.getResponse() == ResponseForward.SUCCESS);
-        assert (((Boolean) response.getResult()));
+        assertEquals(ResponseForward.SUCCESS, response.getResponse());
+        assertTrue(response.getResult().get());
 
         // Valido que se haya insertado exitosamente
         try {

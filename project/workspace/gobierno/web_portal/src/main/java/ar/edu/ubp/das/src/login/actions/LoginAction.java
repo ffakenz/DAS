@@ -28,7 +28,7 @@ public class LoginAction implements Action {
         final LoginInteractor action = new LoginInteractor(loginDao, msUsuariosDao);
         final InteractorResponse result = action.execute(form);
 
-        final Long logInId = ((Optional<Long>) result.getResult()).orElse(Long.MIN_VALUE);
+        final Optional<Long> logInId = result.getResult();
 
         final HttpSession session = request.getSession();
         session.setAttribute("LogInId", logInId);

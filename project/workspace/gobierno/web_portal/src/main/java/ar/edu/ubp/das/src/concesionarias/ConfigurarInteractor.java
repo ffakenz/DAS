@@ -13,6 +13,7 @@ import ar.edu.ubp.das.src.core.ResponseForward;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class ConfigurarInteractor implements Configurar {
 
@@ -44,7 +45,7 @@ public class ConfigurarInteractor implements Configurar {
         final Boolean result = configurarConcesionaria((ConfigParamForm) form);
 
         final InteractorResponse response = new InteractorResponse();
-        response.setResult(result);
+        response.setResult(Optional.of(result));
         if (result) {
             response.setResponse(ResponseForward.SUCCESS);
         } else {

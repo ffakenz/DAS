@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class ConcecionariasInteractorsTest {
 
@@ -26,11 +27,10 @@ public class ConcecionariasInteractorsTest {
         final Interactor a1 = new ConsultarAprobadasInteractor();
 
         // consultar aprobadas
-        final InteractorResponse r1 = a1.execute(null);
+        final InteractorResponse<List<ConcesionariaForm>> r1 = a1.execute(null);
         // no hay aprobadas
         assertEquals(ResponseForward.SUCCESS, r1.getResponse());
-        assertEquals(false, ((List<ConcesionariaForm>) r1.getResult()).isEmpty());
-        assertEquals(2, ((List<ConcesionariaForm>) r1.getResult()).size());
+        assertFalse(r1.getResult().get().isEmpty());
 
         // creamos concecionaria a aprobar
         final DynaActionForm form = new DynaActionForm();
@@ -66,7 +66,7 @@ public class ConcecionariasInteractorsTest {
         final InteractorResponse r5 = a1.execute(null);
         // concesionaria aprobada
         assertEquals(ResponseForward.SUCCESS, r5.getResponse());
-        assertEquals(false, ((List<ConcesionariaForm>) r5.getResult()).isEmpty());
+        assertFalse(r1.getResult().get().isEmpty());
     }
 
 

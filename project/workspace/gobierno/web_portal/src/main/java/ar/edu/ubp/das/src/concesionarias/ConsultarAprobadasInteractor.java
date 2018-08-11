@@ -11,6 +11,7 @@ import ar.edu.ubp.das.src.core.ResponseForward;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 
 public class ConsultarAprobadasInteractor implements ConsultarAprobadas {
@@ -40,7 +41,7 @@ public class ConsultarAprobadasInteractor implements ConsultarAprobadas {
         final Dao dao = new MSConcesionariasDao();
         final List<ConcesionariaForm> aprobadas = consultarAprobadas().apply(dao);
         final InteractorResponse response = new InteractorResponse();
-        response.setResult(aprobadas);
+        response.setResult(Optional.of(aprobadas));
         if (aprobadas.isEmpty()) {
             response.setResponse(ResponseForward.FAILURE);
         } else {

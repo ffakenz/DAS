@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class ConsultarAprobadasAction implements Action {
     @Override
@@ -20,7 +21,7 @@ public class ConsultarAprobadasAction implements Action {
         final Interactor action = new ConsultarAprobadasInteractor();
         final InteractorResponse result = action.execute(form);
 
-        final List<ConcesionariaForm> aprobadas = ((List<ConcesionariaForm>) result.getResult());
+        final Optional<List<ConcesionariaForm>> aprobadas = result.getResult();
 
 
         request.setAttribute("aprobadas", aprobadas);

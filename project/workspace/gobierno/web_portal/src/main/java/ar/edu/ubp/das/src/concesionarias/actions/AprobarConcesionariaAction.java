@@ -15,11 +15,11 @@ import java.util.Optional;
 
 public class AprobarConcesionariaAction implements Action {
     @Override
-    public ForwardConfig execute(ActionMapping mapping, DynaActionForm form, HttpServletRequest request, HttpServletResponse response) throws SQLException, RuntimeException {
-        Interactor action = new AprobarInteractor();
-        InteractorResponse result = action.execute(form);
+    public ForwardConfig execute(final ActionMapping mapping, final DynaActionForm form, final HttpServletRequest request, final HttpServletResponse response) throws SQLException, RuntimeException {
+        final Interactor action = new AprobarInteractor();
+        final InteractorResponse result = action.execute(form);
 
-        Optional<String> codigo = ((Optional<String>)result.getResult());
+        final Optional<String> codigo = result.getResult();
 
 
         request.setAttribute("codigo", codigo);
