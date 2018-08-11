@@ -13,8 +13,8 @@ import ar.edu.ubp.das.src.core.ResponseForward;
 import org.junit.Test;
 
 import java.util.List;
-import java.util.Optional;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
@@ -24,7 +24,7 @@ public class ConcecionariasInteractorsTest {
 
     @Test
     public void testAprobarConcecionaria() {
-        final Interactor a1 = new ConsultarAprobadasInteractor();
+        final Interactor<List<ConcesionariaForm>> a1 = new ConsultarAprobadasInteractor();
 
         // consultar aprobadas
         final InteractorResponse<List<ConcesionariaForm>> r1 = a1.execute(null);
@@ -42,31 +42,31 @@ public class ConcecionariasInteractorsTest {
         form.setItem("email", "c9@gmail.com");
 
         // aprobar concesionaria
-        final Interactor a2 = new AprobarInteractor();
-        final InteractorResponse r2 = a2.execute(form);
+        final Interactor<Long> a2 = new AprobarInteractor();
+        final InteractorResponse<Long> r2 = a2.execute(form);
         // concesionaria no aprobada ya que no existe
         assertEquals(ResponseForward.WARNING, r2.getResponse());
-        assertEquals(false, ((Optional<String>) r2.getResult()).isPresent());
+        assertFalse(r2.getResult().isPresent());
 
         // registramos concesionaria
-        final Interactor a3 = new RegistrarInteractor();
-        final InteractorResponse r3 = a3.execute(form);
+        final Interactor<Long> a3 = new RegistrarInteractor();
+        final InteractorResponse<Long> r3 = a3.execute(form);
         // concesionaria registrada
         assertEquals(ResponseForward.SUCCESS, r3.getResponse());
-        assertEquals(true, ((Optional<Long>) r3.getResult()).isPresent());
+        assertTrue(r3.getResult().isPresent());
 
         // aprobamos concesionaria
-        form.setItem("id", ((Optional<Long>) r3.getResult()).get().toString());
-        final InteractorResponse r4 = a2.execute(form);
+        form.setItem("id", r3.getResult().get().toString());
+        final InteractorResponse<Long> r4 = a2.execute(form);
         // concesionaria aprobada
         assertEquals(ResponseForward.SUCCESS, r4.getResponse());
-        assertEquals(true, ((Optional<String>) r4.getResult()).isPresent());
+        assertTrue(r4.getResult().isPresent());
 
         // consultamos aprobadas
-        final InteractorResponse r5 = a1.execute(null);
+        final InteractorResponse<List<ConcesionariaForm>> r5 = a1.execute(null);
         // concesionaria aprobada
         assertEquals(ResponseForward.SUCCESS, r5.getResponse());
-        assertFalse(r1.getResult().get().isEmpty());
+        assertFalse(r5.getResult().get().isEmpty());
     }
 
 

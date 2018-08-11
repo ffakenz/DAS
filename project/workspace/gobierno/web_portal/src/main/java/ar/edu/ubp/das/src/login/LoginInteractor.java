@@ -2,6 +2,7 @@ package ar.edu.ubp.das.src.login;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
+import ar.edu.ubp.das.src.core.Interactor;
 import ar.edu.ubp.das.src.core.InteractorResponse;
 import ar.edu.ubp.das.src.core.ResponseForward;
 import ar.edu.ubp.das.src.login.forms.LogInForm;
@@ -12,7 +13,7 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 
-public class LoginInteractor {
+public class LoginInteractor implements Interactor<Long> {
 
     private LoginManager loginManager;
     private UsuarioManager usuarioManager;
@@ -22,7 +23,8 @@ public class LoginInteractor {
         this.usuarioManager = new UsuarioManager(msUsuariosDao);
     }
 
-    public InteractorResponse execute(final DynaActionForm form) {
+    @Override
+    public InteractorResponse<Long> execute(final DynaActionForm form) {
         final Optional<InteractorResponse> response =
                 form.getItem("username").flatMap(u ->
                         form.getItem("password").map(p -> {

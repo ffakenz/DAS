@@ -26,7 +26,7 @@ public class LoginAction implements Action {
         final DaoImpl loginDao = DaoFactory.getDao("LogIn", "login");
 
         final LoginInteractor action = new LoginInteractor(loginDao, msUsuariosDao);
-        final InteractorResponse result = action.execute(form);
+        final InteractorResponse<Long> result = action.execute(form);
 
         final Optional<Long> logInId = result.getResult();
 

@@ -16,8 +16,8 @@ import java.util.Optional;
 public class ConfigurarAction implements Action {
     @Override
     public ForwardConfig execute(final ActionMapping mapping, final DynaActionForm form, final HttpServletRequest request, final HttpServletResponse response) throws SQLException, RuntimeException {
-        final Interactor action = new ConfigurarInteractor();
-        final InteractorResponse result = action.execute(form);
+        final Interactor<Boolean> action = new ConfigurarInteractor();
+        final InteractorResponse<Boolean> result = action.execute(form);
 
         final Optional<Boolean> configurationSucceeded = result.getResult();
 

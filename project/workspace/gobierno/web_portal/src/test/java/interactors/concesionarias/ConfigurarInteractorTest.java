@@ -25,12 +25,12 @@ public class ConfigurarInteractorTest {
 
     @Test
     public void validarConfiguracionConcecionaria() {
-        final Interactor consultor = new ConsultarAprobadasInteractor();
-        final Interactor configurador = new ConfigurarInteractor();
+        final Interactor<List<ConcesionariaForm>> consultor = new ConsultarAprobadasInteractor();
+        final Interactor<Boolean> configurador = new ConfigurarInteractor();
 
         // Dado un configParamas
         final ConfigParamForm configParam = new ConfigParamForm();
-        configParam.setConcesionariaId(Long.valueOf(1));
+        configParam.setConcesionariaId(1L);
         configParam.setConfigTecno("REST");
         configParam.setConfigParam("url");
         configParam.setValue("http://localhost:8002/concesionarias_rest_one/concesionariaRestOne");
