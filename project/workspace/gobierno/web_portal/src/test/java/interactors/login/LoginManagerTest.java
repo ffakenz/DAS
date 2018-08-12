@@ -10,7 +10,6 @@ import ar.edu.ubp.das.src.login.model.login.MSLoginDaoEx;
 import ar.edu.ubp.das.src.login.model.usuario.UsuarioManager;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
@@ -87,9 +86,8 @@ public class LoginManagerTest {
         assertFalse(loginId2.isPresent());
     }
 
-    @Ignore
-    public void test07() throws SQLException {
-        // Verify Logout An Already Logged Out User Should Not Take Effect
+    @Test
+    public void test07_Verify_Logout_An_Already_Logged_Out_User_Should_Not_Take_Effect() throws SQLException {
 
         // VERIFY THE USER IS LOGGED OUT
         final Optional<Long> loginId = loginManager.isLoggedIn(logInForm);
@@ -99,7 +97,10 @@ public class LoginManagerTest {
         final Optional<Timestamp> logoutDate =
                 new MSLoginDaoEx(msloginDao)
                         .selectLastUserLogin(logInForm)
-                        .map(l -> l.getLogoutTime());
+                        .map(l -> {
+                            logInForm.setId(l.getId()); // set id for log out
+                            return l.getLogoutTime();
+                        });
 
         // LOGOUT THE USER
         loginManager.logout(logInForm);

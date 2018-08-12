@@ -30,8 +30,9 @@ public class MSLogInDao extends DaoImpl<LogInForm> {
     @Override
     public void update(final LogInForm f) throws SQLException {
         this.connect();
-        this.setProcedure("dbo.log_out(?)");
+        this.setProcedure("dbo.log_out(?, ?)");
         this.setParameter(1, f.getId());
+        this.setParameter(2, f.getUsername());
         this.executeUpdate();
         this.disconnect();
     }
