@@ -24,7 +24,7 @@ public class LogoutInteractor implements Interactor<Long> {
     }
 
     @Override
-    public InteractorResponse<Long> execute(final DynaActionForm form) {
+    public InteractorResponse execute(final DynaActionForm form) {
         final Optional<InteractorResponse> response =
                 form.getItem("username").flatMap(u ->
                         form.getItem("id").map(id -> {
@@ -34,8 +34,8 @@ public class LogoutInteractor implements Interactor<Long> {
                                 logInForm.setId(Long.parseLong(id));
 
                                 loginManager.logout(logInForm);
-
-                                return new InteractorResponse(ResponseForward.SUCCESS, Optional.of(id));
+                                // if we are here it means the logout was successfully or the user was already logged out
+                                return new InteractorResponse(ResponseForward.SUCCESS);
 
                             } catch (final SQLException e) {
                                 e.printStackTrace();
