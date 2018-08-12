@@ -16,21 +16,12 @@ public class MSLogInDao extends DaoImpl<LogInForm> {
 
     @Override
     public void insert(final LogInForm f) throws SQLException {
-        this.connect();
-        this.setProcedure("dbo.log_login(?)");
-        this.setParameter(1, f.getUsername());
-        this.executeUpdate();
-        this.disconnect();
+        executeProcedure("dbo.log_login(?)", f, "username");
     }
 
     @Override
     public void update(final LogInForm f) throws SQLException {
-        this.connect();
-        this.setProcedure("dbo.log_out(?, ?)");
-        this.setParameter(1, f.getId());
-        this.setParameter(2, f.getUsername());
-        this.executeUpdate();
-        this.disconnect();
+        executeProcedure("dbo.log_out(?, ?)", f, "id", "username");
     }
 
     @Override

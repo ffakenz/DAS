@@ -90,6 +90,26 @@ public abstract class DaoImpl<T> implements Dao<T> {
         return bean;
     }
 
+    public void executeProcedure(final String procedureName, final T bean, final String... columnNames) throws SQLException {
+        this.connect();
+        this.setProcedure(procedureName);
+
+        int inputParameter = 1;
+        for (final String columnName : columnNames) {
+            try {
+                final Field field = bean.getClass().getDeclaredField(columnName);
+                field.setAccessible(true); // in case the field is private
+                this.setParameter(inputParameter, field.get(bean));
+            } catch (final NoSuchFieldException | IllegalAccessException e) {
+                e.printStackTrace();
+            }
+            inputParameter++;
+        }
+
+        this.executeUpdate();
+        this.disconnect();
+    }
+
     public void connect() throws SQLException {
         try {
             Class.forName(this.datasource.getDriver()).newInstance();
@@ -145,6 +165,26 @@ public abstract class DaoImpl<T> implements Dao<T> {
 
     public void setNull(final int paramIndex, final int sqlType) throws SQLException {
         this.statement.setNull(paramIndex, sqlType);
+    }
+
+    public void setParameter(final int paramIndex, final Object object) throws SQLException {
+        if (object instanceof Float) {
+            this.statement.setFloat(paramIndex, (Float) object);
+        } else if (object instanceof Double) {
+            this.statement.setDouble(paramIndex, (Double) object);
+        } else if (object instanceof Short) {
+            this.statement.setShort(paramIndex, (Short) object);
+        } else if (object instanceof Integer) {
+            this.statement.setInt(paramIndex, (Integer) object);
+        } else if (object instanceof Long) {
+            this.statement.setLong(paramIndex, (Long) object);
+        } else if (object instanceof String) {
+            this.statement.setString(paramIndex, (String) object);
+        } else if (object instanceof Date) {
+            this.statement.setDate(paramIndex, (Date) object);
+        } else if (object instanceof Timestamp) {
+            this.statement.setTimestamp(paramIndex, (Timestamp) object);
+        }
     }
 
     public void setParameter(final int paramIndex, final long paramValue) throws SQLException {
