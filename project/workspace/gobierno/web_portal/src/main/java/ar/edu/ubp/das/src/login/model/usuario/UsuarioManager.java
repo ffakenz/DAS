@@ -6,6 +6,7 @@ import ar.edu.ubp.das.src.login.forms.UsuarioForm;
 import java.sql.SQLException;
 
 public class UsuarioManager {
+
     private MSUsuariosDaoEx msUsuariosDao;
 
     public UsuarioManager(final DaoImpl msUsuariosDao) {
