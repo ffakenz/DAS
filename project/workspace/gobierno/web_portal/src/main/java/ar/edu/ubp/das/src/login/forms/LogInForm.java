@@ -1,13 +1,20 @@
 package ar.edu.ubp.das.src.login.forms;
 
+import annotations.Column;
+import annotations.Entity;
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 
 import java.sql.Timestamp;
 
+@Entity
 public class LogInForm extends DynaActionForm {
+    @Column(name = "id")
     private Long id; // TODO: change id to UUID
+    @Column(name = "username")
     private String username;
+    @Column(name = "log_in_time")
     private Timestamp loginTime;
+    @Column(name = "log_out_time")
     private Timestamp logoutTime;
 
     public LogInForm() {

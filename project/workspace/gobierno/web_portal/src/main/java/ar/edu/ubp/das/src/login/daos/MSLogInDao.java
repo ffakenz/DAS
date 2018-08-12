@@ -1,5 +1,6 @@
 package ar.edu.ubp.das.src.login.daos;
 
+import annotations.MyResultSet;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.login.forms.LogInForm;
 
@@ -8,14 +9,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class MSLogInDao extends DaoImpl<LogInForm> {
+
     @Override
-    public LogInForm make(final ResultSet result) throws SQLException {
-        final LogInForm logInForm = new LogInForm();
-        logInForm.setId(result.getLong("id"));
-        logInForm.setUsername(result.getString("username"));
-        logInForm.setLoginTime(result.getTimestamp("log_in_time"));
-        logInForm.setLogoutTime(result.getTimestamp("log_out_time"));
-        return logInForm;
+    public LogInForm make(final ResultSet result) {
+        return (LogInForm) new MyResultSet(result, LogInForm.class).mapToObject();
     }
 
     @Override
