@@ -1,6 +1,6 @@
 package ar.edu.ubp.das.src.login.daos;
 
-import annotations.MyResultSet;
+
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.login.forms.LogInForm;
 
@@ -10,9 +10,8 @@ import java.util.List;
 
 public class MSLogInDao extends DaoImpl<LogInForm> {
 
-    @Override
-    public LogInForm make(final ResultSet result) {
-        return (LogInForm) new MyResultSet(result, LogInForm.class).mapToObject();
+    public MSLogInDao() {
+        super(LogInForm.class);
     }
 
     @Override

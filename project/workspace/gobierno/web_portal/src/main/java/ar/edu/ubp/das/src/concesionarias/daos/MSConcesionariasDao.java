@@ -9,7 +9,10 @@ import java.util.List;
 
 public class MSConcesionariasDao extends DaoImpl<ConcesionariaForm> {
 
-    @Override
+    public MSConcesionariasDao() {
+        super(ConcesionariaForm.class);
+    }
+
     public ConcesionariaForm make(final ResultSet result) throws SQLException {
         final ConcesionariaForm concesionariaForm = new ConcesionariaForm();
         concesionariaForm.setId(result.getLong("id"));

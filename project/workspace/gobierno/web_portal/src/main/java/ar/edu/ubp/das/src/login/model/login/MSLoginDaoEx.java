@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public class MSLoginDaoEx extends DaoExtender<LogInForm> {
     public MSLoginDaoEx(final DaoImpl dao) {
-        super(dao);
+        super(dao, LogInForm.class);
     }
 
     public List<LogInForm> selectUserLoggIn(final LogInForm form) throws SQLException {

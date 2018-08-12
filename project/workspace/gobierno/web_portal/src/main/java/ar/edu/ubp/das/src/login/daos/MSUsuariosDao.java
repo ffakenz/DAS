@@ -1,6 +1,5 @@
 package ar.edu.ubp.das.src.login.daos;
 
-import annotations.MyResultSet;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.login.forms.UsuarioForm;
 
@@ -10,9 +9,8 @@ import java.util.List;
 
 public class MSUsuariosDao extends DaoImpl<UsuarioForm> {
 
-    @Override
-    public UsuarioForm make(final ResultSet result) {
-        return (UsuarioForm) new MyResultSet(result, UsuarioForm.class).mapToObject();
+    public MSUsuariosDao() {
+        super(UsuarioForm.class);
     }
 
     @Override

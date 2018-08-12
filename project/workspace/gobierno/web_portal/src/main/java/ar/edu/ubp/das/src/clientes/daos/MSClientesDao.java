@@ -9,7 +9,10 @@ import java.util.List;
 
 public class MSClientesDao extends DaoImpl<ClienteForm> {
 
-    @Override
+    public MSClientesDao() {
+        super(ClienteForm.class);
+    }
+
     public ClienteForm make(final ResultSet result) throws SQLException {
         final ClienteForm clienteForm = new ClienteForm();
 

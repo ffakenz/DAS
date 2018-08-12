@@ -1,16 +1,25 @@
 package ar.edu.ubp.das.mvc.db;
 
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
+import ar.edu.ubp.das.mvc.db.annotations.Column;
+import ar.edu.ubp.das.mvc.db.annotations.Entity;
+import ar.edu.ubp.das.mvc.db.annotations.NoEntityException;
 
+import java.lang.reflect.Field;
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 
 public abstract class DaoImpl<T> implements Dao<T> {
 
+    private Class<T> clazz;
     private DatasourceConfig datasource;
     private Connection connection;
     private CallableStatement statement;
+
+    public DaoImpl(final Class<T> clazz) {
+        this.clazz = clazz;
+    }
 
     @Override
     protected void finalize() throws Throwable {
@@ -31,6 +40,54 @@ public abstract class DaoImpl<T> implements Dao<T> {
                 super.finalize();
             }
         }
+    }
+
+    // This could return Optional<T>
+    private T mapToObject(final ResultSet rs) {
+        assert rs != null;
+        T bean = null;
+        try {
+            if (!this.clazz.isAnnotationPresent(Entity.class)) {
+                throw new NoEntityException();
+            } else {
+                final ResultSetMetaData rsmd = rs.getMetaData(); // get the resultset metadata
+                final Field[] attributes = this.clazz.getDeclaredFields(); // get all the attributes of Class clazz
+
+                bean = this.clazz.newInstance();
+
+                for (int _iterator = 0; _iterator < rsmd.getColumnCount(); _iterator++) {
+
+                    final String columnName = rsmd.getColumnName(_iterator + 1); // get the SQL column name
+                    final Object columnValue = rs.getObject(_iterator + 1); // get the SQL column value
+
+                    /*
+					System.out.println("ColumnName: " + columnName
+							+ "\tColumnType: " + rsmd.getColumnTypeName(_iterator + 1)
+					+ "\tColumnValue: " + rs.getObject(_iterator + 1));
+					*/
+
+                    // iterating over clazz attributes to check
+                    for (final Field attribute : attributes) {
+                        // if any attribute has 'Column' annotation with matching 'name' value
+                        if (attribute.isAnnotationPresent(Column.class)) {
+                            final Column column = attribute.getAnnotation(Column.class); // get @Column for field
+                            if (column.name().equalsIgnoreCase(columnName)) { // missing check: columnValue != null
+                                final String fieldName = attribute.getName();
+                                // get field from class for given filedName
+                                final Field field = bean.getClass().getDeclaredField(fieldName);
+                                field.setAccessible(true); // in case the field is private
+                                field.set(bean, columnValue); // bean.field = columnValue
+                                break;
+                            }
+                        }
+                    } // EndOf for(Field field : fields)
+                } // EndOf for(_iterator...)
+            }
+        } catch (final IllegalAccessException | SQLException | InstantiationException | NoEntityException
+                | NoSuchFieldException e) {
+            e.printStackTrace();
+        }
+        return bean;
     }
 
     public void connect() throws SQLException {
@@ -69,7 +126,7 @@ public abstract class DaoImpl<T> implements Dao<T> {
         final List<T> list = new LinkedList<>();
         final ResultSet result = this.statement.executeQuery();
         while (result.next()) {
-            list.add(this.make(result));
+            list.add(this.mapToObject(result));
         }
         return list;
     }

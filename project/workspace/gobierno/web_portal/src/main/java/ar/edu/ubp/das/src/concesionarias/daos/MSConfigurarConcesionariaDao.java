@@ -8,7 +8,11 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class MSConfigurarConcesionariaDao extends DaoImpl<ConfigParamForm> {
-    @Override
+
+    public MSConfigurarConcesionariaDao() {
+        super(ConfigParamForm.class);
+    }
+
     public ConfigParamForm make(final ResultSet result) throws SQLException {
         final ConfigParamForm configParam = new ConfigParamForm();
         configParam.setConcesionariaId(result.getLong("concesionaria_id"));

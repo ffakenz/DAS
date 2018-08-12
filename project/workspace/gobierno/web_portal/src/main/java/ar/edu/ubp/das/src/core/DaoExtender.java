@@ -2,20 +2,15 @@ package ar.edu.ubp.das.src.core;
 
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 public class DaoExtender<T> extends DaoImpl<T> {
     protected DaoImpl<T> dao;
 
-    public DaoExtender(final DaoImpl dao) {
+    public DaoExtender(final DaoImpl dao, final Class<T> clazz) {
+        super(clazz);
         this.dao = dao;
-    }
-
-    @Override
-    public T make(final ResultSet result) throws SQLException {
-        return dao.make(result);
     }
 
     @Override

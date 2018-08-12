@@ -10,7 +10,7 @@ import java.util.List;
 
 public class MSUsuariosDaoEx extends DaoExtender<UsuarioForm> {
     public MSUsuariosDaoEx(final DaoImpl dao) {
-        super(dao);
+        super(dao, UsuarioForm.class);
     }
 
     public List<UsuarioForm> selectByUserNameAndPassword(final String username, final String password) throws SQLException {

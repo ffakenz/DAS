@@ -9,7 +9,11 @@ import java.util.List;
 
 public class MSEstadoCuentaDao extends DaoImpl<EstadoCuentaForm> {
 
-    @Override
+
+    public MSEstadoCuentaDao() {
+        super(EstadoCuentaForm.class);
+    }
+
     public EstadoCuentaForm make(final ResultSet result) throws SQLException {
         final EstadoCuentaForm estadoCuentaForm = new EstadoCuentaForm();
         estadoCuentaForm.setId(result.getLong("id"));

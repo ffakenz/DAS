@@ -9,7 +9,11 @@ import java.util.List;
 
 public class MSCuotaDao extends DaoImpl<CuotaForm> {
 
-    @Override
+
+    public MSCuotaDao() {
+        super(CuotaForm.class);
+    }
+
     public CuotaForm make(final ResultSet result) throws SQLException {
         final CuotaForm cuotaForm = new CuotaForm();
         cuotaForm.setEstadoCuentaId(result.getLong("estado_cuenta_id"));

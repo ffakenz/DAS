@@ -1,8 +1,9 @@
 package ar.edu.ubp.das.src.login.forms;
 
-import annotations.Column;
-import annotations.Entity;
+
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
+import ar.edu.ubp.das.mvc.db.annotations.Column;
+import ar.edu.ubp.das.mvc.db.annotations.Entity;
 import ar.edu.ubp.das.src.login.model.usuario.UsuarioRol;
 
 @Entity
