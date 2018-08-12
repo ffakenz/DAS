@@ -4,7 +4,6 @@ package ar.edu.ubp.das.src.login.daos;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.login.forms.LogInForm;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -29,13 +28,8 @@ public class MSLogInDao extends DaoImpl<LogInForm> {
     }
 
     @Override
-    public List<LogInForm> select(final LogInForm f) throws SQLException {
-        this.connect();
-        this.setProcedure("dbo.get_logins(?)", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        this.setParameter(1, f.getUsername());
-        final List<LogInForm> logins = this.executeQuery();
-        this.disconnect();
-        return logins;
+    public List<LogInForm> select(final LogInForm form) throws SQLException {
+        return executeQueryProcedure("dbo.get_logins(?)", form, "username");
     }
 
     @Override

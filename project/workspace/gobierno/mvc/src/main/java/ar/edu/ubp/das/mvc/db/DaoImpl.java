@@ -90,10 +90,7 @@ public abstract class DaoImpl<T> implements Dao<T> {
         return bean;
     }
 
-    public void executeProcedure(final String procedureName, final T bean, final String... columnNames) throws SQLException {
-        this.connect();
-        this.setProcedure(procedureName);
-
+    private void setParameters(final T bean, final String... columnNames) throws SQLException {
         int inputParameter = 1;
         for (final String columnName : columnNames) {
             try {
@@ -105,9 +102,23 @@ public abstract class DaoImpl<T> implements Dao<T> {
             }
             inputParameter++;
         }
+    }
 
+    public void executeProcedure(final String procedureName, final T bean, final String... columnNames) throws SQLException {
+        this.connect();
+        this.setProcedure(procedureName);
+        setParameters(bean, columnNames);
         this.executeUpdate();
         this.disconnect();
+    }
+
+    public List<T> executeQueryProcedure(final String procedureName, final T bean, final String... columnNames) throws SQLException {
+        this.connect();
+        this.setProcedure(procedureName, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        setParameters(bean, columnNames);
+        final List<T> forms = this.executeQuery();
+        this.disconnect();
+        return forms;
     }
 
     public void connect() throws SQLException {
