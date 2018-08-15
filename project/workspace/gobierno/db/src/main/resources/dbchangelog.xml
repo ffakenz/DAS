@@ -9,7 +9,7 @@
     <!-- Main drop change-sets                       -->
     <!-- ########################################### -->
     <include file="/src/main/resources/liquibase/estado_cuentas/drops/drop_tables.xml"/>
-    <include file="/src/main/resources/liquibase/clientes/drops/drop_tables.xml"/>
+    <include file="/src/main/resources/liquibase/consumers/drops/drop_tables.xml"/>
     <include file="/src/main/resources/liquibase/concesionarias/drops/drop_tables.xml"/>
     <include file="/src/main/resources/liquibase/login/drops/drop_tables.xml"/>
 
@@ -20,7 +20,7 @@
 
     <include file="/src/main/resources/liquibase/login/tables/create_tables.xml"/>
     <include file="/src/main/resources/liquibase/concesionarias/tables/create_tables.xml"/>
-    <include file="/src/main/resources/liquibase/clientes/tables/create_tables.xml"/>
+    <include file="/src/main/resources/liquibase/consumers/tables/create_tables.xml"/>
     <include file="/src/main/resources/liquibase/estado_cuentas/tables/create_tables.xml"/>
 
     <!-- ########################################### -->
@@ -30,7 +30,7 @@
 
     <include file="/src/main/resources/liquibase/login/procedures/create_procedures.xml"/>
     <include file="/src/main/resources/liquibase/concesionarias/procedures/create_procedures.xml"/>
-    <include file="/src/main/resources/liquibase/clientes/procedures/create_procedures.xml"/>
+    <include file="/src/main/resources/liquibase/consumers/procedures/create_procedures.xml"/>
     <include file="/src/main/resources/liquibase/estado_cuentas/procedures/create_procedures.xml"/>
 
     <!-- ########################################### -->
@@ -39,6 +39,6 @@
 
     <include file="/src/main/resources/liquibase/login/populate/populate_tables.xml"/>
     <include file="/src/main/resources/liquibase/concesionarias/populate/populate_tables.xml"/>
-    <include file="/src/main/resources/liquibase/clientes/populate/populate_tables.xml"/>
+    <include file="/src/main/resources/liquibase/consumers/populate/populate_tables.xml"/>
     <include file="/src/main/resources/liquibase/estado_cuentas/populate/populate_tables.xml"/>
 </databaseChangeLog>

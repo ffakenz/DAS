@@ -1,9 +1,9 @@
-CREATE PROCEDURE update_cliente (
+CREATE PROCEDURE update_consumers (
     @id BIGINT
     , @nro_telefono VARCHAR(20)
     , @email VARCHAR(50)
 ) AS
-UPDATE clientes
+UPDATE consumers
 SET nro_telefono = @nro_telefono
     , email = @email
 WHERE id = @id

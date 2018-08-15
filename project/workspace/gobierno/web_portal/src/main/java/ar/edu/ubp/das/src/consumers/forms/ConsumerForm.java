@@ -1,22 +1,32 @@
-package ar.edu.ubp.das.src.clientes.forms;
+package ar.edu.ubp.das.src.consumers.forms;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
+import ar.edu.ubp.das.mvc.db.annotations.Column;
 
 import java.sql.Timestamp;
 
-public class ClienteForm extends DynaActionForm {
+public class ConsumerForm extends DynaActionForm {
+    @Column( name = "id")
     private Long id;
+    @Column( name = "documento")
     private Long documento;
+    @Column( name = "nombre")
     private String nombre;
+    @Column( name = "apellido")
     private String apellido;
+    @Column( name = "nro_telefono")
     private String nroTelefono;
+    @Column( name = "email")
     private String email;
+    @Column( name = "fecha_de_alta")
     private Timestamp fechaAlta;
-    private Long concesionariaId;
+    @Column( name = "concesionaria")
+    private Long concesionaria;
+
 
     @Override
     public String toString() {
-        return "ClienteForm{" +
+        return "ConsumerForm{" +
                 "id=" + id +
                 ", documento=" + documento +
                 ", nombre='" + nombre + '\'' +
@@ -24,7 +34,7 @@ public class ClienteForm extends DynaActionForm {
                 ", nroTelefono='" + nroTelefono + '\'' +
                 ", email='" + email + '\'' +
                 ", fechaAlta=" + fechaAlta +
-                ", concesionariaId=" + concesionariaId +
+                ", concesionaria=" + concesionaria +
                 '}';
     }
 
@@ -84,11 +94,11 @@ public class ClienteForm extends DynaActionForm {
         this.fechaAlta = fechaAlta;
     }
 
-    public Long getConcesionariaId() {
-        return concesionariaId;
+    public Long getConcesionaria() {
+        return concesionaria;
     }
 
-    public void setConcesionariaId(final Long concesionariaId) {
-        this.concesionariaId = concesionariaId;
+    public void setConcesionaria(Long concesionaria) {
+        this.concesionaria = concesionaria;
     }
 }

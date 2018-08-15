@@ -1,4 +1,4 @@
-CREATE TABLE clientes (
+CREATE TABLE consumers (
 	id BIGINT IDENTITY NOT NULL
 	, documento BIGINT NOT NULL
 	, nombre VARCHAR(100) NOT NULL

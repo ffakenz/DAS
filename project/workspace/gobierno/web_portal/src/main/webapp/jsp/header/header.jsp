@@ -39,7 +39,7 @@
         <!-- utils-->
         <script src="/web_portal/util/Javascript.do/load=own_libraries/util/utils,own_libraries/util/other"></script>
 
-        <!-- login-->
+        <!-- consumer-->
         <script src="/web_portal/util/Javascript.do/load=own_libraries/login/login"></script>
 
         <!-- presentation-->

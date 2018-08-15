@@ -1,4 +1,4 @@
-INSERT INTO clientes
+INSERT INTO consumers
     (documento, nombre, apellido, nro_telefono, email, fecha_de_alta, concesionaria)
 VALUES
     (111, 'Carlos', 'Perez', '35156345678', 'carliperezozo@mail.com', '2018-04-01 00:48:48.133', '1')

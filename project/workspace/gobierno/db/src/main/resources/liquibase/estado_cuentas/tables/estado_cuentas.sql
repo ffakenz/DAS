@@ -11,7 +11,7 @@ CREATE TABLE estado_cuentas (
     , PRIMARY KEY(id)
     , FOREIGN KEY(concesionaria) REFERENCES concesionaria(id)
     , FOREIGN KEY(estado) REFERENCES tipos_estado_cuentas(tipo)
-    -- , FOREIGN KEY(cliente, concesionaria) REFERENCES clientes(correlativo, id_concesionaria)
+    -- , FOREIGN KEY(cliente, concesionaria) REFERENCES consumers(correlativo, id_concesionaria)
     -- , FOREIGN KEY(tipo_vehiculo, nombre_vehiculo, marca_vehiculo, modelo_vehiculo, color_vehiculo, precio_vehiculo) REFERENCES vehiculos(tipo, nombre, marca, modelo, color, precio)
     , UNIQUE(concesionaria, nro_plan_concesionaria)
 );

@@ -49,7 +49,7 @@
   </nav>
 </header>
 
-<!-- this is important. Do not delete. Doing so breaks login modal. -->
+<!-- this is important. Do not delete. Doing so breaks consumer modal. -->
 <%@include file="./login_modal.jsp" %>
 
 <!-- this is important. Do not delete. Doing so breaks translation. -->

@@ -22,8 +22,8 @@ public class LoginAction implements Action {
                                  final HttpServletResponse response) throws SQLException, RuntimeException {
 
 
-        final DaoImpl msUsuariosDao = DaoFactory.getDao("Usuarios", "login");
-        final DaoImpl loginDao = DaoFactory.getDao("LogIn", "login");
+        final DaoImpl msUsuariosDao = DaoFactory.getDao("Usuarios", "consumer");
+        final DaoImpl loginDao = DaoFactory.getDao("LogIn", "consumer");
 
         final LoginInteractor action = new LoginInteractor(loginDao, msUsuariosDao);
         final InteractorResponse<Long> result = action.execute(form);
