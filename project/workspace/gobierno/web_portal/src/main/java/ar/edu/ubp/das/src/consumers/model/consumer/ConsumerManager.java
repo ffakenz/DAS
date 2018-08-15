@@ -26,4 +26,8 @@ public class ConsumerManager {
     public void insert(ConsumerForm consumerForm) throws SQLException {
         msConsumerDaoEx.insert(consumerForm);
     }
+
+    public void update(ConsumerForm consumerForm) throws SQLException {
+        msConsumerDaoEx.update(consumerForm);
+    }
 }

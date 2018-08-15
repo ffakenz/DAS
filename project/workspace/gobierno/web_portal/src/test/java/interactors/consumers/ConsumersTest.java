@@ -15,13 +15,13 @@ import java.util.List;
 import java.util.Optional;
 
 import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ConsumersTest {
 
     MSConsumerDao msConsumerDao;
-    ConsumerInteractor consumerInteractor;
     ConsumerManager consumerManager;
 
     @Before
@@ -36,8 +36,6 @@ public class ConsumersTest {
         msConsumerDao.setDatasource(dataSourceConfig);
 
         consumerManager = new ConsumerManager(msConsumerDao);
-
-        consumerInteractor = new ConsumerInteractor(consumerManager);
     }
 
     @Test
@@ -68,6 +66,43 @@ public class ConsumersTest {
         Optional<ConsumerForm> consumer = consumerManager.selectConsumerByDniAndConcesionaria(consumerForm);
 
         assertTrue(consumer.isPresent());
+    }
+
+    @Test
+    public void test_12_Update_consumer_personal_data_successfully() throws SQLException {
+
+        ConsumerForm consumerForm = new ConsumerForm();
+        consumerForm.setDocumento(777L);
+        consumerForm.setConcesionaria(1L);
+
+        //actualizo telefono y seteo email en null
+        consumerForm.setNroTelefono("Tel_Test_Actualizado");
+        consumerManager.update(consumerForm);
+
+        //valido que el telefono este actualizado y el email sea el que tenia previamente
+        Optional<ConsumerForm> consumer = consumerManager.selectConsumerByDniAndConcesionaria(consumerForm);
+        assertEquals("Tel_Test_Actualizado", consumer.get().getNroTelefono());
+        assertEquals(null, consumer.get().getEmail());
+
+        //actualizo el email
+        consumerForm.setEmail("test@actualizado.com");
+        consumerForm.setNroTelefono(null);
+        consumerManager.update(consumerForm);
+
+        //valido que el email este actualizado y el telefono sea el que tenia luego de la primer actualizacion
+        consumer = consumerManager.selectConsumerByDniAndConcesionaria(consumerForm);
+        assertEquals(null, consumer.get().getNroTelefono());
+        assertEquals("test@actualizado.com", consumer.get().getEmail());
+
+        //actualizo el email y el telefono
+        consumerForm.setNroTelefono("Tel_Actualizado_2");
+        consumerForm.setEmail("test@actualizado2.com");
+        consumerManager.update(consumerForm);
+
+        //valido que el telefono y el email este actualizado
+        consumer = consumerManager.selectConsumerByDniAndConcesionaria(consumerForm);
+        assertEquals("Tel_Actualizado_2", consumer.get().getNroTelefono());
+        assertEquals("test@actualizado2.com", consumer.get().getEmail());
     }
 
 }

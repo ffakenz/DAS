@@ -6,6 +6,7 @@ import ar.edu.ubp.das.src.core.DaoExtender;
 import ar.edu.ubp.das.src.login.forms.LogInForm;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,7 +17,8 @@ public class MSConsumerDaoEx extends DaoExtender<ConsumerForm> {
     }
 
     public Optional<ConsumerForm> selectConsumerByDniAndConcesionaria(final ConsumerForm form) throws SQLException {
-        return dao.executeQueryProcedure("dbo.get_consumer_by_documento_and_concesionaria(?, ?)", form, "documento", "concesionaria")
+        return dao.executeQueryProcedure("dbo.get_consumer_by_documento_and_concesionaria(?, ?)",
+                form, "documento", "concesionaria")
                 .stream()
                 .findFirst();
     }

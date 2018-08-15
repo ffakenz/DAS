@@ -179,7 +179,9 @@ public abstract class DaoImpl<T> implements Dao<T> {
     }
 
     public void setParameter(final int paramIndex, final Object object) throws SQLException {
-        if (object instanceof Float) {
+        if (object == null) {
+            this.statement.setNull(paramIndex, getSqlType(object));
+        } else if (object instanceof Float) {
             this.statement.setFloat(paramIndex, (Float) object);
         } else if (object instanceof Double) {
             this.statement.setDouble(paramIndex, (Double) object);
@@ -195,6 +197,33 @@ public abstract class DaoImpl<T> implements Dao<T> {
             this.statement.setDate(paramIndex, (Date) object);
         } else if (object instanceof Timestamp) {
             this.statement.setTimestamp(paramIndex, (Timestamp) object);
+        }  else if (object instanceof Boolean) {
+            this.statement.setBoolean(paramIndex, (Boolean) object);
+        }
+    }
+
+    private int getSqlType(Object object) {
+
+        if (object instanceof Float) {
+            return Types.REAL;
+        } else if (object instanceof Double) {
+            return Types.FLOAT;
+        } else if (object instanceof Short) {
+            return Types.SMALLINT;
+        } else if (object instanceof Integer) {
+            return Types.INTEGER;
+        } else if (object instanceof Long) {
+            return Types.BIGINT;
+        } else if (object instanceof String) {
+            return Types.VARCHAR;
+        } else if (object instanceof Date) {
+            return Types.DATE;
+        } else if (object instanceof Timestamp) {
+            return Types.TIMESTAMP;
+        } else if (object instanceof Boolean) {
+            return Types.BIT;
+        } else {
+            return Types.NULL;
         }
     }
 

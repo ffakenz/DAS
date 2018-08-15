@@ -2,10 +2,13 @@ package ar.edu.ubp.das.src.consumers.forms;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.annotations.Column;
+import ar.edu.ubp.das.mvc.db.annotations.Entity;
 
 import java.sql.Timestamp;
 
+@Entity
 public class ConsumerForm extends DynaActionForm {
+
     @Column( name = "id")
     private Long id;
     @Column( name = "documento")

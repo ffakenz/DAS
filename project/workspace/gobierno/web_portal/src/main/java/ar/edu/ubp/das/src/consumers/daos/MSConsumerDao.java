@@ -21,14 +21,9 @@ public class MSConsumerDao extends DaoImpl<ConsumerForm> {
     }
 
     @Override
-    public void update(final ConsumerForm f) throws SQLException {
-        this.connect();
-        this.setProcedure("dbo.update_cliente(?, ?, ?)");
-        this.setParameter(1, f.getId());
-        this.setParameter(2, f.getEmail());
-        this.setParameter(3, f.getNroTelefono());
-        this.executeUpdate();
-        this.disconnect();
+    public void update(final ConsumerForm bean) throws SQLException {
+        this.executeProcedure("dbo.update_consumers(?, ?, ?, ?)", bean,
+                "documento", "concesionaria", "nroTelefono", "email");
     }
 
     @Override
