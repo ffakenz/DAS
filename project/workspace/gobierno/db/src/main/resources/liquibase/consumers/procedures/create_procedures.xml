@@ -23,6 +23,48 @@
         <dropProcedure procedureName="get_consumer_by_documento_and_concesionaria"/>
     </changeSet>
 
+    <changeSet id="Drop procedure get_consumers" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_consumers'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_consumers"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure insert_consumers" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'insert_consumers'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="insert_consumers"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure insert_consumers" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'insert_consumers'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="insert_consumers"/>
+    </changeSet>
+
     <!-- ******************************* -->
     <!--  CREATE PROCEDURES CHANGE-SETS  -->
     <!-- ******************************* -->
@@ -39,6 +81,48 @@
         </preConditions>
         <sqlFile
                 path="/src/main/resources/liquibase/consumers/procedures/get_consumer_by_documento_and_concesionaria.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure get_consumers" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_consumers'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/consumers/procedures/get_consumers.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure insert_consumers" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'insert_consumers'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/consumers/procedures/insert_consumers.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure update_consumers" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'update_consumers'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/consumers/procedures/update_consumers.sql"/>
     </changeSet>
 
 
