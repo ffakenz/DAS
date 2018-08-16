@@ -23,9 +23,8 @@ public class UsuarioManager {
         return !msUsuariosDao.selectByUserNameAndPassword(username, password).isEmpty();
     }
 
-    public void createUser(final String username, final String password, final UsuarioRol rol) throws SQLException {
-        final UsuarioForm form = new UsuarioForm(username, password, rol);
-        this.msUsuariosDao.insert(form);
+    public void createUser(UsuarioForm usuarioForm) throws SQLException {
+        this.msUsuariosDao.insert(usuarioForm);
     }
 
     public void deleteUser(final String username) throws SQLException {

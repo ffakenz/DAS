@@ -1,7 +1,7 @@
 INSERT INTO estado_cuentas (
     concesionaria
     , nro_plan_concesionaria
-    , documento_cliente
+    , documento_consumer
     , vehiculo
     , fecha_alta_concesionaria
     , estado

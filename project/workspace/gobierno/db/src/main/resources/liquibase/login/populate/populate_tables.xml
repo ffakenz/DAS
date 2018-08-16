@@ -22,13 +22,6 @@
         <sqlFile path="/src/main/resources/liquibase/login/populate/usuario.sql" />
     </changeSet>
 
-    <changeSet id="Populate table detalle_usuario" author="DAS-Team" runAlways="true" runOnChange="true">
-        <preConditions onFail="MARK_RAN">
-            <tableExists tableName="detalle_usuario" />
-        </preConditions>
-        <sqlFile path="/src/main/resources/liquibase/login/populate/detalle_usuario.sql" />
-    </changeSet>
-
     <changeSet id="Populate table login" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <tableExists tableName="login" />

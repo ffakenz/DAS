@@ -8,7 +8,7 @@ public class EstadoCuentaForm extends DynaActionForm {
     private Long id;
     private Long concesionariaId;
     private Long nroPlanConcesionaria;
-    private Long documentoCliente;
+    private Long documentoConsumer;
     private Long vehiculo;
     private Timestamp fechaAltaConcesionaria;
     private Timestamp fechaAltaSistema;
@@ -21,7 +21,7 @@ public class EstadoCuentaForm extends DynaActionForm {
                 "id=" + id +
                 ", concesionariaId=" + concesionariaId +
                 ", nroPlanConcesionaria=" + nroPlanConcesionaria +
-                ", documentoCliente=" + documentoCliente +
+                ", documentoConsumer=" + documentoConsumer +
                 ", vehiculo=" + vehiculo +
                 ", fechaAltaConcesionaria=" + fechaAltaConcesionaria +
                 ", fechaAltaSistema=" + fechaAltaSistema +
@@ -54,11 +54,11 @@ public class EstadoCuentaForm extends DynaActionForm {
     }
 
     public Long getDocumentoCliente() {
-        return documentoCliente;
+        return documentoConsumer;
     }
 
-    public void setDocumentoCliente(final Long documentoCliente) {
-        this.documentoCliente = documentoCliente;
+    public void setDocumentoCliente(final Long documentoConsumer) {
+        this.documentoConsumer = documentoConsumer;
     }
 
     public Long getVehiculo() {

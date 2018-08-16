@@ -15,13 +15,6 @@
         <dropTable tableName="login"/>
     </changeSet>
 
-    <changeSet id="Drop table detalle_usuario" author="DAS-Team" runAlways="true" runOnChange="true">
-        <preConditions onFail="MARK_RAN">
-            <tableExists tableName="detalle_usuario" />
-        </preConditions>
-        <dropTable tableName="detalle_usuario"/>
-    </changeSet>
-
     <changeSet id="Drop table usuario" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <tableExists tableName="usuario" />

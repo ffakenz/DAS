@@ -19,7 +19,7 @@ public class MSEstadoCuentaDao extends DaoImpl<EstadoCuentaForm> {
         estadoCuentaForm.setId(result.getLong("id"));
         estadoCuentaForm.setConcesionariaId(result.getLong("concesionaria"));
         estadoCuentaForm.setNroPlanConcesionaria(result.getLong("nro_plan_concesionaria"));
-        estadoCuentaForm.setDocumentoCliente(result.getLong("documento_cliente"));
+        estadoCuentaForm.setDocumentoCliente(result.getLong("documento_consumer"));
         estadoCuentaForm.setVehiculo(result.getLong("vehiculo"));
         estadoCuentaForm.setFechaAltaConcesionaria(result.getTimestamp("fecha_alta_concesionaria"));
         estadoCuentaForm.setFechaAltaSistema(result.getTimestamp("fecha_alta_sistema"));

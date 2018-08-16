@@ -3,6 +3,7 @@ package interactors.login;
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.login.daos.MSUsuariosDao;
+import ar.edu.ubp.das.src.login.forms.UsuarioForm;
 import ar.edu.ubp.das.src.login.model.usuario.UsuarioManager;
 import ar.edu.ubp.das.src.login.model.usuario.UsuarioRol;
 import org.junit.Before;
@@ -17,6 +18,7 @@ import static org.junit.Assert.assertTrue;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UsuarioManagerTest {
+
     DaoImpl msUsuariosDao;
     UsuarioManager usuarioManager;
 
@@ -65,14 +67,19 @@ public class UsuarioManagerTest {
     }
 
     @Test
-    public void test13_New_User_Exists() throws SQLException {
+    public void test13_New_User_Successfully() throws SQLException {
         // Create a new user
         final String username = "newusername";
         final String password = "newpassword";
-        final UsuarioRol rol = UsuarioRol.GOBIERNO;
-        usuarioManager.createUser(username, password, rol);
 
-        // Verify theu user exists
+        UsuarioForm usuarioForm = new UsuarioForm();
+        usuarioForm.setUsername(username);
+        usuarioForm.setPassword(password);
+        usuarioForm.setRol(UsuarioRol.GOBIERNO.toString());
+
+        usuarioManager.createUser(usuarioForm);
+
+        // Verify the user exists
         final Boolean isUsuarioValido = usuarioManager.verifyUsernameAndPassword(username, password);
         assertTrue(isUsuarioValido);
     }
