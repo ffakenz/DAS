@@ -1,4 +1,4 @@
-CREATE PROCEDURE get_consumer_by_documento (
+CREATE PROCEDURE get_gobierno_users_by_documento (
       @documento BIGINT
 ) AS
 SELECT *

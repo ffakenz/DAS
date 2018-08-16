@@ -4,5 +4,6 @@ CREATE TABLE usuario (
 	, password VARCHAR(100)
 	, rol VARCHAR(100) NOT NULL
 	, PRIMARY KEY (documento)
+	, UNIQUE(username)
 	, FOREIGN KEY (rol) REFERENCES tipo_usuario(nombre)
 );

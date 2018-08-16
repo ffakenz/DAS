@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!-- ******************************** -->
+    <!--   TABLE POPULATION CHANGE-SETS   -->
+    <!-- ******************************** -->
+
+    <changeSet id="Populate table gobierno_users" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="gobierno_users"/>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/gobierno_users/populate/gobierno_users.sql"/>
+    </changeSet>
+
+</databaseChangeLog>

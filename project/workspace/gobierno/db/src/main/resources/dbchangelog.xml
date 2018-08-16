@@ -6,7 +6,7 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <!-- ########################################### -->
-    <!-- Main drop change-sets                       -->
+    <!-- Main drops change-sets                       -->
     <!-- ########################################### -->
     <include file="/src/main/resources/liquibase/estado_cuentas/drops/drop_tables.xml"/>
     <include file="/src/main/resources/liquibase/gobierno_users/drops/drop_tables.xml"/>
