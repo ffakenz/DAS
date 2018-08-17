@@ -1,7 +1,6 @@
 package interactors.consumers;
 
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
-import ar.edu.ubp.das.src.consumers.ConsumerInteractor;
 import ar.edu.ubp.das.src.consumers.daos.MSConsumerDao;
 import ar.edu.ubp.das.src.consumers.forms.ConsumerForm;
 import ar.edu.ubp.das.src.consumers.model.consumer.ConsumerManager;
@@ -9,9 +8,9 @@ import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+import util.TestDB;
 
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Optional;
 
 import static junit.framework.TestCase.assertTrue;
@@ -25,7 +24,7 @@ public class ConsumersTest {
     ConsumerManager consumerManager;
 
     @Before
-    public void setup() {
+    public void setup() throws SQLException {
         final DatasourceConfig dataSourceConfig = new DatasourceConfig();
         dataSourceConfig.setDriver("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         dataSourceConfig.setUrl("jdbc:sqlserver://localhost;databaseName=db_gobierno;");
@@ -36,16 +35,18 @@ public class ConsumersTest {
         msConsumerDao.setDatasource(dataSourceConfig);
 
         consumerManager = new ConsumerManager(msConsumerDao);
+
+//        TestDB.getInstance().cleanDB();
     }
 
     @Test
     public void test_10_Validate_consumer_doesnt_exist() throws SQLException {
 
-        ConsumerForm consumerForm = new ConsumerForm();
+        final ConsumerForm consumerForm = new ConsumerForm();
         consumerForm.setDocumento(777L);
         consumerForm.setConcesionaria(1L);
 
-        Optional<ConsumerForm> consumers = consumerManager.selectConsumerByDniAndConcesionaria(consumerForm);
+        final Optional<ConsumerForm> consumers = consumerManager.selectConsumerByDniAndConcesionaria(consumerForm);
 
         assertFalse(consumers.isPresent());
     }
@@ -53,7 +54,7 @@ public class ConsumersTest {
     @Test
     public void test_11_Create_consumer_successfully() throws SQLException {
 
-        ConsumerForm consumerForm = new ConsumerForm();
+        final ConsumerForm consumerForm = new ConsumerForm();
         consumerForm.setDocumento(777L);
         consumerForm.setConcesionaria(1L);
         consumerForm.setNombre("Nombre_Test_1");
@@ -63,7 +64,7 @@ public class ConsumersTest {
 
         consumerManager.insert(consumerForm);
 
-        Optional<ConsumerForm> consumer = consumerManager.selectConsumerByDniAndConcesionaria(consumerForm);
+        final Optional<ConsumerForm> consumer = consumerManager.selectConsumerByDniAndConcesionaria(consumerForm);
 
         assertTrue(consumer.isPresent());
     }
@@ -71,7 +72,7 @@ public class ConsumersTest {
     @Test
     public void test_12_Update_consumer_personal_data_successfully() throws SQLException {
 
-        ConsumerForm consumerForm = new ConsumerForm();
+        final ConsumerForm consumerForm = new ConsumerForm();
         consumerForm.setDocumento(777L);
         consumerForm.setConcesionaria(1L);
 

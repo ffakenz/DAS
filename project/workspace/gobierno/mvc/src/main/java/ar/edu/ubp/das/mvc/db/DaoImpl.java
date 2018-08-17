@@ -104,6 +104,13 @@ public abstract class DaoImpl<T> implements Dao<T> {
         }
     }
 
+    public void executeProcedure(final String procedureName, final String... columnNames) throws SQLException {
+        this.connect();
+        this.setProcedure(procedureName);
+        this.executeUpdate();
+        this.disconnect();
+    }
+
     public void executeProcedure(final String procedureName, final T bean, final String... columnNames) throws SQLException {
         this.connect();
         this.setProcedure(procedureName);
@@ -197,12 +204,12 @@ public abstract class DaoImpl<T> implements Dao<T> {
             this.statement.setDate(paramIndex, (Date) object);
         } else if (object instanceof Timestamp) {
             this.statement.setTimestamp(paramIndex, (Timestamp) object);
-        }  else if (object instanceof Boolean) {
+        } else if (object instanceof Boolean) {
             this.statement.setBoolean(paramIndex, (Boolean) object);
         }
     }
 
-    private int getSqlType(Object object) {
+    private int getSqlType(final Object object) {
 
         if (object instanceof Float) {
             return Types.REAL;
