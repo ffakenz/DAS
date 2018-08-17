@@ -38,3 +38,20 @@ public class MSUsuariosDao extends DaoImpl<UsuarioForm> {
         return true;
     }
 }
+
+
+/*
+    TODO: Registrar Usuario Consumer
+    dni = parameter.get('dni')
+    Option<consumer> = getConsumerByDNI(dni)
+
+    if(!consumer.isPresent){
+        throw Exception("No consumer exists for with dni ${dni}")
+    } else if (consumer.get.username.isPresent) {
+        throw Exception("The consumer already have a user")
+    } else {
+        username = parameter.get('username')
+        username = parameter.get('password')
+        createUsuario(username, 'consumer')
+    }
+*/
