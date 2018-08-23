@@ -37,8 +37,5 @@
     <!-- Populate change-sets                -->
     <!-- ########################################### -->
 
-    <include file="/src/main/resources/liquibase/login/populate/populate_tables.xml"/>
-    <include file="/src/main/resources/liquibase/concesionarias/populate/populate_tables.xml"/>
-    <include file="/src/main/resources/liquibase/consumers/populate/populate_tables.xml"/>
-    <include file="/src/main/resources/liquibase/estado_cuentas/populate/populate_tables.xml"/>
+    <include file="/src/main/resources/liquibase/populate/populate_tables.xml"/>
 </databaseChangeLog>
