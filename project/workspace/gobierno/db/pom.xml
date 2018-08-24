@@ -14,9 +14,42 @@
     <packaging>jar</packaging>
 
     <properties>
-        <db.property.file.path>src/main/resources/db.properties</db.property.file.path>
+        <!--<db.property.file.path>src/main/resources/db.properties</db.property.file.path>-->
         <liquibase.version>3.6.1</liquibase.version>
     </properties>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <property>
+                    <name>env</name>
+                    <value>dev</value>
+                </property>
+            </activation>
+            <properties>
+                <driverDB>com.microsoft.sqlserver.jdbc.SQLServerDriver</driverDB>
+                <urlDB>jdbc:sqlserver://localhost;databaseName=db_gobierno;</urlDB>
+                <usernameDB>SA</usernameDB>
+                <passwordDB>Das12345</passwordDB>
+            </properties>
+        </profile>
+        <profile>
+            <id>test</id>
+            <activation>
+                <property>
+                    <name>env</name>
+                    <value>test</value>
+                </property>
+            </activation>
+            <properties>
+                <driverDB>com.microsoft.sqlserver.jdbc.SQLServerDriver</driverDB>
+                <urlDB>jdbc:sqlserver://localhost;databaseName=db_gobierno;</urlDB>
+                <usernameDB>SA</usernameDB>
+                <passwordDB>Das12345</passwordDB>
+            </properties>
+        </profile>
+    </profiles>
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
@@ -46,7 +79,12 @@
                 <artifactId>liquibase-maven-plugin</artifactId>
                 <version>${liquibase.version}</version>
                 <configuration>
-                    <propertyFile>${db.property.file.path}</propertyFile>
+                    <changeLogFile>dbchangelog.xml</changeLogFile>
+                    <driver>${driverDB}</driver>
+                    <url>${urlDB}</url>
+                    <username>${usernameDB}</username>
+                    <password>${passwordDB}</password>
+                    <!--<propertyFile>${db.property.file.path}</propertyFile>-->
                 </configuration>
                 <executions>
                     <execution>

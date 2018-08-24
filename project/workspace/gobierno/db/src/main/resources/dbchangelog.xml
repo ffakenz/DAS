@@ -6,7 +6,7 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <!-- ########################################### -->
-    <!-- Main drops change-sets                       -->
+    <!-- Main drops change-sets                      -->
     <!-- ########################################### -->
     <include file="/src/main/resources/liquibase/estado_cuentas/drops/drop_tables.xml"/>
     <include file="/src/main/resources/liquibase/consumers/drops/drop_tables.xml"/>
@@ -15,7 +15,7 @@
 
 
     <!-- ########################################### -->
-    <!-- Main change-sets                           -->
+    <!-- Main change-sets                            -->
     <!-- ########################################### -->
 
     <include file="/src/main/resources/liquibase/login/tables/create_tables.xml"/>
@@ -24,7 +24,7 @@
     <include file="/src/main/resources/liquibase/estado_cuentas/tables/create_tables.xml"/>
 
     <!-- ########################################### -->
-    <!-- Procedures change-sets                -->
+    <!-- Procedures change-sets                      -->
     <!-- ########################################### -->
 
 
@@ -34,8 +34,8 @@
     <include file="/src/main/resources/liquibase/estado_cuentas/procedures/create_procedures.xml"/>
 
     <!-- ########################################### -->
-    <!-- Populate change-sets                -->
+    <!-- Populate change-sets                        -->
     <!-- ########################################### -->
-
     <include file="/src/main/resources/liquibase/populate/populate_tables.xml"/>
+
 </databaseChangeLog>

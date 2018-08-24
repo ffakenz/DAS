@@ -8,77 +8,80 @@
     <!-- ******************************** -->
     <!--   TABLE POPULATION CHANGE-SETS   -->
     <!-- ******************************** -->
-    <changeSet id="Populate table config_tecnologica" author="DAS-Team" runAlways="true" runOnChange="true">
+    <changeSet id="Populate table config_tecnologica" author="DAS-Team" runAlways="true" runOnChange="true"
+               context="dev">
         <preConditions onFail="MARK_RAN">
             <tableExists tableName="config_tecnologica"/>
         </preConditions>
         <sqlFile path="/src/main/resources/liquibase/populate/config_tecnologica.sql"/>
     </changeSet>
 
-    <changeSet id="Populate table concesionaria" author="DAS-Team" runAlways="true" runOnChange="true">
+    <changeSet id="Populate table concesionaria" author="DAS-Team" runAlways="true" runOnChange="true" context="dev">
         <preConditions onFail="MARK_RAN">
             <tableExists tableName="concesionaria"/>
         </preConditions>
         <sqlFile path="/src/main/resources/liquibase/populate/concesionaria.sql"/>
     </changeSet>
 
-    <changeSet id="Populate table config_param" author="DAS-Team" runAlways="true" runOnChange="true">
+    <changeSet id="Populate table config_param" author="DAS-Team" runAlways="true" runOnChange="true" context="dev">
         <preConditions onFail="MARK_RAN">
             <tableExists tableName="config_param"/>
         </preConditions>
         <sqlFile path="/src/main/resources/liquibase/populate/config_param.sql"/>
     </changeSet>
 
-    <changeSet id="Populate table concesionaria_config_params" author="DAS-Team" runAlways="true" runOnChange="true">
+    <changeSet id="Populate table concesionaria_config_params" author="DAS-Team" runAlways="true" runOnChange="true"
+               context="dev">
         <preConditions onFail="MARK_RAN">
             <tableExists tableName="concesionaria_config_params"/>
         </preConditions>
         <sqlFile path="/src/main/resources/liquibase/populate/concesionaria_config_params.sql"/>
     </changeSet>
 
-    <changeSet id="Populate table consumers" author="DAS-Team" runAlways="true" runOnChange="true">
+    <changeSet id="Populate table consumers" author="DAS-Team" runAlways="true" runOnChange="true" context="dev">
         <preConditions onFail="MARK_RAN">
             <tableExists tableName="consumers"/>
         </preConditions>
         <sqlFile path="/src/main/resources/liquibase/populate/consumers.sql"/>
     </changeSet>
 
-    <changeSet id="Populate table tipo_usuario" author="DAS-Team" runAlways="true" runOnChange="true">
+    <changeSet id="Populate table tipo_usuario" author="DAS-Team" runAlways="true" runOnChange="true" context="dev">
         <preConditions onFail="MARK_RAN">
             <tableExists tableName="tipo_usuario"/>
         </preConditions>
         <sqlFile path="/src/main/resources/liquibase/populate/tipo_usuario.sql"/>
     </changeSet>
 
-    <changeSet id="Populate table usuario" author="DAS-Team" runAlways="true" runOnChange="true">
+    <changeSet id="Populate table usuario" author="DAS-Team" runAlways="true" runOnChange="true" context="dev">
         <preConditions onFail="MARK_RAN">
             <tableExists tableName="usuario"/>
         </preConditions>
         <sqlFile path="/src/main/resources/liquibase/populate/usuario.sql"/>
     </changeSet>
 
-    <changeSet id="Populate table tipos_estado_cuentas" author="DAS-Team" runAlways="true" runOnChange="true">
+    <changeSet id="Populate table tipos_estado_cuentas" author="DAS-Team" runAlways="true" runOnChange="true"
+               context="dev">
         <preConditions onFail="MARK_RAN">
             <tableExists tableName="tipos_estado_cuentas"/>
         </preConditions>
         <sqlFile path="/src/main/resources/liquibase/populate/tipos_estado_cuentas.sql"/>
     </changeSet>
 
-    <changeSet id="Populate table login" author="DAS-Team" runAlways="true" runOnChange="true">
+    <changeSet id="Populate table login" author="DAS-Team" runAlways="true" runOnChange="true" context="dev">
         <preConditions onFail="MARK_RAN">
             <tableExists tableName="login"/>
         </preConditions>
         <sqlFile path="/src/main/resources/liquibase/populate/login.sql"/>
     </changeSet>
 
-    <changeSet id="Populate table estado_cuentas" author="DAS-Team" runAlways="true" runOnChange="true">
+    <changeSet id="Populate table estado_cuentas" author="DAS-Team" runAlways="true" runOnChange="true" context="dev">
         <preConditions onFail="MARK_RAN">
             <tableExists tableName="estado_cuentas"/>
         </preConditions>
         <sqlFile path="/src/main/resources/liquibase/populate/estado_cuentas.sql"/>
     </changeSet>
 
-    <changeSet id="Populate table cuotas" author="DAS-Team" runAlways="true" runOnChange="true">
+    <changeSet id="Populate table cuotas" author="DAS-Team" runAlways="true" runOnChange="true" context="dev">
         <preConditions onFail="MARK_RAN">
             <tableExists tableName="cuotas"/>
         </preConditions>
