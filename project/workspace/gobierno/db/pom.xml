@@ -32,6 +32,7 @@
                 <urlDB>jdbc:sqlserver://localhost;databaseName=db_gobierno;</urlDB>
                 <usernameDB>SA</usernameDB>
                 <passwordDB>Das12345</passwordDB>
+                <contextDB>dev</contextDB>
             </properties>
         </profile>
         <profile>
@@ -47,6 +48,7 @@
                 <urlDB>jdbc:sqlserver://localhost;databaseName=db_gobierno;</urlDB>
                 <usernameDB>SA</usernameDB>
                 <passwordDB>Das12345</passwordDB>
+                <contextDB>test</contextDB>
             </properties>
         </profile>
     </profiles>
@@ -84,6 +86,7 @@
                     <url>${urlDB}</url>
                     <username>${usernameDB}</username>
                     <password>${passwordDB}</password>
+                    <contexts>${contextDB}</contexts>
                     <!--<propertyFile>${db.property.file.path}</propertyFile>-->
                 </configuration>
                 <executions>
