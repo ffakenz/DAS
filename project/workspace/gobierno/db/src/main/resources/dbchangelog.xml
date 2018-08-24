@@ -38,4 +38,9 @@
     <!-- ########################################### -->
     <include file="/src/main/resources/liquibase/populate/populate_tables.xml"/>
 
+    <!-- ########################################### -->
+    <!-- Test change-sets                            -->
+    <!-- ########################################### -->
+    <include file="/src/main/resources/liquibase/test/test_procedures.xml"/>
+
 </databaseChangeLog>
