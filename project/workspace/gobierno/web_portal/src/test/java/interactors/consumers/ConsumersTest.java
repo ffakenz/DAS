@@ -25,18 +25,20 @@ public class ConsumersTest {
 
     @Before
     public void setup() throws SQLException {
-        final DatasourceConfig dataSourceConfig = new DatasourceConfig();
-        dataSourceConfig.setDriver("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        dataSourceConfig.setUrl("jdbc:sqlserver://localhost;databaseName=db_gobierno;");
-        dataSourceConfig.setUsername("SA");
-        dataSourceConfig.setPassword("Das12345");
+
+        TestDB.getInstance().cleanDB();
+        TestDB.getInstance().setUpDB();
+        
+        final DatasourceConfig dataSourceConfig = TestDB.getInstance().getDataSourceConfig();
 
         msConsumerDao = new MSConsumerDao();
         msConsumerDao.setDatasource(dataSourceConfig);
 
         consumerManager = new ConsumerManager(msConsumerDao);
 
-//        TestDB.getInstance().cleanDB();
+        TestDB.getInstance().cleanDB();
+        TestDB.getInstance().setUpDB();
+
     }
 
     @Test

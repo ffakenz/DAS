@@ -9,10 +9,11 @@ import java.util.List;
 public class TestDB extends DaoImpl<Boolean> {
 
     private static TestDB instance;
+    private DatasourceConfig dataSourceConfig;
 
     private TestDB() {
         super(Boolean.class);
-        final DatasourceConfig dataSourceConfig = new DatasourceConfig();
+        dataSourceConfig = new DatasourceConfig();
         dataSourceConfig.setDriver("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         dataSourceConfig.setUrl("jdbc:sqlserver://localhost;databaseName=db_gobierno;");
         dataSourceConfig.setUsername("SA");
@@ -28,9 +29,16 @@ public class TestDB extends DaoImpl<Boolean> {
     }
 
     public void cleanDB() throws SQLException {
-        this.executeProcedure("dbo.cleanDB");
+        this.executeSimpleProcedure("dbo.cleanDB");
     }
 
+    public void setUpDB() throws SQLException {
+        this.executeSimpleProcedure("dbo.setUpDB");
+    }
+
+    public DatasourceConfig getDataSourceConfig() {
+        return dataSourceConfig;
+    }
 
     @Override
     public void insert(final Boolean form) throws SQLException {

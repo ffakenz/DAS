@@ -104,7 +104,7 @@ public abstract class DaoImpl<T> implements Dao<T> {
         }
     }
 
-    public void executeProcedure(final String procedureName, final String... columnNames) throws SQLException {
+    public void executeSimpleProcedure(final String procedureName) throws SQLException {
         this.connect();
         this.setProcedure(procedureName);
         this.executeUpdate();

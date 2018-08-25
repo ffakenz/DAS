@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+import util.TestDB;
 
 import java.sql.SQLException;
 
@@ -23,12 +24,11 @@ public class UsuarioManagerTest {
     UsuarioManager usuarioManager;
 
     @Before
-    public void setup() {
-        final DatasourceConfig dataSourceConfig = new DatasourceConfig();
-        dataSourceConfig.setDriver("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        dataSourceConfig.setUrl("jdbc:sqlserver://localhost;databaseName=db_gobierno;");
-        dataSourceConfig.setUsername("SA");
-        dataSourceConfig.setPassword("Das12345");
+    public void setup() throws SQLException {
+        TestDB.getInstance().cleanDB();
+        TestDB.getInstance().setUpDB();
+
+        final DatasourceConfig dataSourceConfig = TestDB.getInstance().getDataSourceConfig();
 
         msUsuariosDao = new MSUsuariosDao();
         msUsuariosDao.setDatasource(dataSourceConfig);
@@ -72,7 +72,7 @@ public class UsuarioManagerTest {
         final String username = "newusername";
         final String password = "newpassword";
 
-        UsuarioForm usuarioForm = new UsuarioForm();
+        final UsuarioForm usuarioForm = new UsuarioForm();
         usuarioForm.setUsername(username);
         usuarioForm.setPassword(password);
         usuarioForm.setRol(UsuarioRol.GOBIERNO.toString());
