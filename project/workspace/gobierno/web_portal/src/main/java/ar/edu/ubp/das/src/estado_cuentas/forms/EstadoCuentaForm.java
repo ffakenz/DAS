@@ -1,18 +1,30 @@
 package ar.edu.ubp.das.src.estado_cuentas.forms;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
+import ar.edu.ubp.das.mvc.db.annotations.Column;
+import ar.edu.ubp.das.mvc.db.annotations.Entity;
 
 import java.sql.Timestamp;
 
+@Entity
 public class EstadoCuentaForm extends DynaActionForm {
+    @Column(name = "id")
     private Long id;
+    @Column(name = "concesionaria")
     private Long concesionariaId;
+    @Column(name = "nro_plan_concesionaria")
     private Long nroPlanConcesionaria;
+    @Column(name = "dni_consumer")
     private Long documentoConsumer;
+    @Column(name = "vehiculo")
     private Long vehiculo;
+    @Column(name = "fecha_alta_concesionaria")
     private Timestamp fechaAltaConcesionaria;
+    @Column(name = "fecha_alta_sistema")
     private Timestamp fechaAltaSistema;
+    @Column(name = "fecha_ultima_actualizacion")
     private Timestamp fechaUltimaActualizacion;
+    @Column(name = "estado")
     private String estado;
 
     @Override
