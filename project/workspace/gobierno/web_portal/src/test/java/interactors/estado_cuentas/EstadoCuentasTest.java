@@ -14,8 +14,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Optional;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class EstadoCuentasTest {
@@ -80,27 +79,21 @@ public class EstadoCuentasTest {
     @Test
     public void test_12_Validate_actualizar_estado_cuenta_successfully() throws SQLException {
 
-        final EstadoCuentasForm estadoCuenta = new EstadoCuentasForm();
-        estadoCuenta.setConcesionariaId(Long.valueOf(1));
-        estadoCuenta.setNroPlanConcesionaria(Long.valueOf(3));
-        estadoCuenta.setDocumentoCliente(Long.valueOf(93337511));
-        estadoCuenta.setVehiculo(Long.valueOf(1));
-        estadoCuenta.setFechaAltaConcesionaria(Timestamp.valueOf("2018-01-01 21:58:01"));
-        estadoCuenta.setEstado("inicial");
+        final EstadoCuentasForm estadoCuentaForm = new EstadoCuentasForm();
+        estadoCuentaForm.setConcesionariaId(1L);
+        estadoCuentaForm.setNroPlanConcesionaria(1001L);
 
-        estadoCuentasManager.insert(estadoCuenta);
+        // Verify the plan exists
+        final Optional<EstadoCuentasForm> ecs = estadoCuentasManager.selectByNroPlanAndConcesionaria(estadoCuentaForm);
+        assertTrue(ecs.isPresent());
 
-        Optional<EstadoCuentasForm> ecs = estadoCuentasManager.selectByNroPlanAndConcesionaria(estadoCuenta);
+        // Update estado plan
+        estadoCuentaForm.setEstado("en_proceso");
+        estadoCuentasManager.update(estadoCuentaForm);
 
-        final Timestamp tiempo1 = ecs.get().getFechaUltimaActualizacion();
-
-        estadoCuentasManager.update(ecs.get());
-
-        ecs = estadoCuentasManager.selectByNroPlanAndConcesionaria(estadoCuenta);
-
-        final Timestamp tiempo2 = ecs.get().getFechaUltimaActualizacion();
-
-        assert (tiempo1.before(tiempo2));
+        // Verify the plan got successfully updated
+        final Optional<EstadoCuentasForm> ecsUpdated = estadoCuentasManager.selectByNroPlanAndConcesionaria(estadoCuentaForm);
+        assertEquals("en_proceso", ecsUpdated.get().getEstado());
 
     }
 }

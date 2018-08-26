@@ -22,7 +22,7 @@ public class MSEstadoCuentasDao extends DaoImpl<EstadoCuentasForm> {
 
     @Override
     public void update(final EstadoCuentasForm bean) throws SQLException {
-        this.executeProcedure("dbo.update_estado_cuentas(?, ?)", bean,
+        this.executeProcedure("dbo.update_estado_cuentas(?, ?, ?)", bean,
                 "concesionariaId", "nroPlanConcesionaria", "estado");
     }
 
