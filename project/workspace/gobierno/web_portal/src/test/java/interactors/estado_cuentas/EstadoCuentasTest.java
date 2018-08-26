@@ -1,8 +1,9 @@
 package interactors.estado_cuentas;
 
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
-import ar.edu.ubp.das.src.estado_cuentas.daos.MSEstadoCuentaDao;
-import ar.edu.ubp.das.src.estado_cuentas.forms.EstadoCuentaForm;
+import ar.edu.ubp.das.src.estado_cuentas.daos.MSEstadoCuentasDao;
+import ar.edu.ubp.das.src.estado_cuentas.forms.EstadoCuentasForm;
+import ar.edu.ubp.das.src.estado_cuentas.model.EstadoCuentasManager;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -11,31 +12,46 @@ import util.TestDB;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.List;
+import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class EstadoCuentasTest {
 
-    MSEstadoCuentaDao estadoCuentaDao;
+    MSEstadoCuentasDao estadoCuentaDao;
+    EstadoCuentasManager estadoCuentasManager;
 
     @Before
     public void setup() throws SQLException {
+
         TestDB.getInstance().cleanDB();
         TestDB.getInstance().setUpDB();
 
         final DatasourceConfig dataSourceConfig = TestDB.getInstance().getDataSourceConfig();
 
-        estadoCuentaDao = new MSEstadoCuentaDao();
+        estadoCuentaDao = new MSEstadoCuentasDao();
         estadoCuentaDao.setDatasource(dataSourceConfig);
+
+        estadoCuentasManager = new EstadoCuentasManager(estadoCuentaDao);
     }
 
     @Test
-    public void test_10_Validate_actualizar_estado_cuenta_successfully() throws SQLException {
+    public void test_10_Consultar_estado_cuentas_successfully() throws SQLException {
 
+        final EstadoCuentasForm estadoCuentaForm = new EstadoCuentasForm();
+        estadoCuentaForm.setConcesionariaId(1L);
+        estadoCuentaForm.setNroPlanConcesionaria(1001L);
 
-        final EstadoCuentaForm estadoCuenta = new EstadoCuentaForm();
+        final Optional<EstadoCuentasForm> ecs = estadoCuentasManager.selectByNroPlanAndConcesionaria(estadoCuentaForm);
+        assertTrue(ecs.isPresent());
+    }
+
+    @Test
+    public void test_11_Validate_actualizar_estado_cuenta_successfully() throws SQLException {
+
+        final EstadoCuentasForm estadoCuenta = new EstadoCuentasForm();
         estadoCuenta.setConcesionariaId(Long.valueOf(1));
         estadoCuenta.setNroPlanConcesionaria(Long.valueOf(3));
         estadoCuenta.setDocumentoCliente(Long.valueOf(93337511));
@@ -43,52 +59,34 @@ public class EstadoCuentasTest {
         estadoCuenta.setFechaAltaConcesionaria(Timestamp.valueOf("2018-01-01 21:58:01"));
         estadoCuenta.setEstado("inicial");
 
-        estadoCuentaDao.insert(estadoCuenta);
+        estadoCuentasManager.insert(estadoCuenta);
 
-        List<EstadoCuentaForm> ecs = estadoCuentaDao.select(estadoCuenta);
+        Optional<EstadoCuentasForm> ecs = estadoCuentasManager.selectByNroPlanAndConcesionaria(estadoCuenta);
 
-        final Timestamp tiempo1 = ecs.get(0).getFechaUltimaActualizacion();
+        final Timestamp tiempo1 = ecs.get().getFechaUltimaActualizacion();
 
-        estadoCuentaDao.update(ecs.get(0));
+        estadoCuentasManager.update(ecs.get());
 
-        ecs = estadoCuentaDao.select(estadoCuenta);
+        ecs = estadoCuentasManager.selectByNroPlanAndConcesionaria(estadoCuenta);
 
-        final Timestamp tiempo2 = ecs.get(0).getFechaUltimaActualizacion();
+        final Timestamp tiempo2 = ecs.get().getFechaUltimaActualizacion();
 
         assert (tiempo1.before(tiempo2));
 
     }
 
-
-    @Test
-    public void test_Consultar_estado_cuentas_successfully() throws SQLException {
-
-        final EstadoCuentaForm estadoCuentaMock = new EstadoCuentaForm();
-        estadoCuentaMock.setConcesionariaId(Long.valueOf(6));
-        estadoCuentaMock.setNroPlanConcesionaria(Long.valueOf(1));
-        estadoCuentaMock.setDocumentoCliente(Long.valueOf(93337511));
-        estadoCuentaMock.setVehiculo(Long.valueOf(1));
-        estadoCuentaMock.setFechaAltaConcesionaria(Timestamp.valueOf("2018-01-01 21:58:01"));
-        estadoCuentaMock.setEstado("inicial");
-
-        estadoCuentaDao.insert(estadoCuentaMock);
-
-        final List<EstadoCuentaForm> ecs = estadoCuentaDao.select(estadoCuentaMock);
-        assertEquals(true, ecs.contains(estadoCuentaMock));
-    }
-
     @Test
     public void test_Validar_registrar_successfully() throws SQLException {
 
-        final EstadoCuentaForm estadoCuenta = new EstadoCuentaForm();
+        final EstadoCuentasForm estadoCuenta = new EstadoCuentasForm();
         estadoCuenta.setConcesionariaId(Long.valueOf(1));
         estadoCuenta.setNroPlanConcesionaria(Long.valueOf(1));
         estadoCuenta.setDocumentoCliente(Long.valueOf(93337511));
         estadoCuenta.setVehiculo(Long.valueOf(1));
         estadoCuenta.setFechaAltaConcesionaria(Timestamp.valueOf("2018-01-01 21:58:01"));
 
-        estadoCuentaDao.insert(estadoCuenta);
+        estadoCuentasManager.insert(estadoCuenta);
 
-        assertEquals(true, estadoCuentaDao.select(null).contains(estadoCuenta));
+        assertNotNull(estadoCuentasManager.selectByNroPlanAndConcesionaria(estadoCuenta).get());
     }
 }

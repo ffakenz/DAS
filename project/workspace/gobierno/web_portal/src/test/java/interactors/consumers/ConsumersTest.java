@@ -35,10 +35,6 @@ public class ConsumersTest {
         msConsumerDao.setDatasource(dataSourceConfig);
 
         consumerManager = new ConsumerManager(msConsumerDao);
-
-        TestDB.getInstance().cleanDB();
-        TestDB.getInstance().setUpDB();
-
     }
 
     @Test

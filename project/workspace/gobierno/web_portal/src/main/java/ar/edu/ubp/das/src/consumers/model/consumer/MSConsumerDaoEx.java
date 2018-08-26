@@ -3,11 +3,8 @@ package ar.edu.ubp.das.src.consumers.model.consumer;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.consumers.forms.ConsumerForm;
 import ar.edu.ubp.das.src.core.DaoExtender;
-import ar.edu.ubp.das.src.login.forms.LogInForm;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 public class MSConsumerDaoEx extends DaoExtender<ConsumerForm> {

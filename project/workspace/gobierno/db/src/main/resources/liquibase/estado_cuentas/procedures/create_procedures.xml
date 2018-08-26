@@ -9,6 +9,20 @@
     <!--  DROP PROCEDURES CHANGE-SETS  -->
     <!-- ***************************** -->
 
+    <changeSet id="Drop procedure get_estado_cuentas_by_nro_plan_and_concesionaria" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_estado_cuentas_by_nro_plan_and_concesionaria'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_estado_cuentas_by_nro_plan_and_concesionaria"/>
+    </changeSet>
+
     <changeSet id="Drop procedure get_estado_cuentas" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="1">
@@ -77,6 +91,22 @@
     <!-- ******************************* -->
     <!--  CREATE PROCEDURES CHANGE-SETS  -->
     <!-- ******************************* -->
+
+    <changeSet id="Create procedure get_estado_cuentas_by_nro_plan_and_concesionaria" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_estado_cuentas_by_nro_plan_and_concesionaria'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/estado_cuentas/procedures/get_estado_cuentas_by_nro_plan_and_concesionaria.sql"/>
+    </changeSet>
+
     <changeSet id="Create procedure get_estado_cuentas" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">

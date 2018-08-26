@@ -7,7 +7,7 @@ import ar.edu.ubp.das.mvc.db.annotations.Entity;
 import java.sql.Timestamp;
 
 @Entity
-public class EstadoCuentaForm extends DynaActionForm {
+public class EstadoCuentasForm extends DynaActionForm {
     @Column(name = "id")
     private Long id;
     @Column(name = "concesionaria")
@@ -29,7 +29,7 @@ public class EstadoCuentaForm extends DynaActionForm {
 
     @Override
     public String toString() {
-        return "EstadoCuentaForm{" +
+        return "EstadoCuentasForm{" +
                 "id=" + id +
                 ", concesionariaId=" + concesionariaId +
                 ", nroPlanConcesionaria=" + nroPlanConcesionaria +
