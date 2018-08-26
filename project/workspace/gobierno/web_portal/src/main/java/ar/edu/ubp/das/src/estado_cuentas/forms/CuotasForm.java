@@ -9,10 +9,12 @@ import java.sql.Timestamp;
 @Entity
 public class CuotasForm extends DynaActionForm {
 
-    @Column(name = "estado_cuenta_id")
-    private Long estadoCuentaId;
     @Column(name = "id")
     private Long id;
+    @Column(name = "nro_cuota")
+    private Long nroCuota;
+    @Column(name = "estado_cuenta_id")
+    private Long estadoCuentaId;
     @Column(name = "fecha_vencimiento")
     private Timestamp fechaVencimiento;
     @Column(name = "monto")
@@ -63,11 +65,20 @@ public class CuotasForm extends DynaActionForm {
     @Override
     public String toString() {
         return "CuotasForm{" +
-                "estadoCuentaId=" + estadoCuentaId +
-                ", id=" + id +
+                "id=" + id +
+                ", nroCuota=" + nroCuota +
+                ", estadoCuentaId=" + estadoCuentaId +
                 ", fechaVencimiento=" + fechaVencimiento +
                 ", monto=" + monto +
                 ", fechaPago=" + fechaPago +
                 '}';
+    }
+
+    public Long getNroCuota() {
+        return nroCuota;
+    }
+
+    public void setNroCuota(final Long nroCuota) {
+        this.nroCuota = nroCuota;
     }
 }

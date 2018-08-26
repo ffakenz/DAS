@@ -71,7 +71,7 @@ public class CuotaTest {
         final CuotasForm cuotaForm = new CuotasForm();
         cuotaForm.setEstadoCuentaId(1L);
 
-        List<CuotasForm> cuotas = cuotasManager.selectByEstadoCuenta(cuotaForm);
+        final List<CuotasForm> cuotas = cuotasManager.selectByEstadoCuenta(cuotaForm);
 
         assertEquals(3, cuotas.size());
 
@@ -81,11 +81,12 @@ public class CuotaTest {
 
         cuotasManager.insert(cuotaForm);
 
-        cuotas = cuotasManager.selectByEstadoCuenta(cuotaForm);
+        final List<CuotasForm> cuotas2 = cuotasManager.selectByEstadoCuenta(cuotaForm);
         // hay una cuota mas
-        assertEquals(4, cuotas.size());
+        assertEquals(4, cuotas2.size());
 
         cuotaForm.setId(13L);
-        assertTrue(cuotas.contains(cuotaForm));
+        cuotaForm.setNroCuota(4L);
+        assertTrue(cuotas2.contains(cuotaForm));
     }
 }
