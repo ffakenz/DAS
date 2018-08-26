@@ -31,7 +31,7 @@ public class DaoExtender<T> extends DaoImpl<T> {
     }
 
     @Override
-    public List select(final T form) throws SQLException {
+    public List<T> select(final T form) throws SQLException {
         return dao.select(form);
     }
 

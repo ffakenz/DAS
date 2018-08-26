@@ -1,14 +1,23 @@
 package ar.edu.ubp.das.src.estado_cuentas.forms;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
+import ar.edu.ubp.das.mvc.db.annotations.Column;
+import ar.edu.ubp.das.mvc.db.annotations.Entity;
 
 import java.sql.Timestamp;
 
-public class CuotaForm extends DynaActionForm {
+@Entity
+public class CuotasForm extends DynaActionForm {
+
+    @Column(name = "estado_cuenta_id")
     private Long estadoCuentaId;
+    @Column(name = "id")
     private Long id;
+    @Column(name = "fecha_vencimiento")
     private Timestamp fechaVencimiento;
+    @Column(name = "monto")
     private Integer monto;
+    @Column(name = "fecha_pago")
     private Timestamp fechaPago;
 
     public Long getEstadoCuentaId() {
@@ -53,7 +62,7 @@ public class CuotaForm extends DynaActionForm {
 
     @Override
     public String toString() {
-        return "CuotaForm{" +
+        return "CuotasForm{" +
                 "estadoCuentaId=" + estadoCuentaId +
                 ", id=" + id +
                 ", fechaVencimiento=" + fechaVencimiento +

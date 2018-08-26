@@ -4,7 +4,6 @@ import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.estado_cuentas.forms.EstadoCuentasForm;
 
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Optional;
 
 public class EstadoCuentasManager {
@@ -13,10 +12,6 @@ public class EstadoCuentasManager {
 
     public EstadoCuentasManager(final DaoImpl msEstadoCuentasDaoEx) {
         this.msEstadoCuentasDaoEx = new MSEstadoCuentasDaoEx(msEstadoCuentasDaoEx);
-    }
-
-    public List<EstadoCuentasForm> selectAll() throws SQLException {
-        return msEstadoCuentasDaoEx.select(null);
     }
 
     public Optional<EstadoCuentasForm> selectByNroPlanAndConcesionaria(final EstadoCuentasForm form) throws SQLException {
