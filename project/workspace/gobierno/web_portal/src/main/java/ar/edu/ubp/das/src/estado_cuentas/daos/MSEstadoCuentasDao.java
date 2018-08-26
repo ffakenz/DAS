@@ -17,7 +17,7 @@ public class MSEstadoCuentasDao extends DaoImpl<EstadoCuentasForm> {
     public void insert(final EstadoCuentasForm bean) throws SQLException {
         this.executeProcedure("dbo.log_estado_cuentas(?, ?, ?, ?, ?, ?)", bean,
                 "concesionariaId", "nroPlanConcesionaria", "documentoConsumer",
-                "vehiculo", "fechaUltimaActualizacion", "estado");
+                "vehiculo", "fechaAltaConcesionaria", "estado");
     }
 
     @Override
