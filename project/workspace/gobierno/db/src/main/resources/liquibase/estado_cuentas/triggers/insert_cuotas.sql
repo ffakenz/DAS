@@ -1,11 +1,10 @@
--- TODO fix an issue in which bulking several rows with same estado_cuenta_id the one with bigger identity gets the lowest nro_cta
 CREATE TRIGGER insert_cuotas ON cuotas
 FOR INSERT
 AS
 BEGIN
     WITH fst_q AS (
         SELECT *,
-            ROW_NUMBER() OVER (PARTITION BY estado_cuenta_id ORDER BY estado_cuenta_id DESC) AS incr
+            ROW_NUMBER() OVER (PARTITION BY estado_cuenta_id ORDER BY id ASC) AS incr
         FROM inserted
     ), snd_q AS (
         -- el maximo por cada estado_cuenta_id
