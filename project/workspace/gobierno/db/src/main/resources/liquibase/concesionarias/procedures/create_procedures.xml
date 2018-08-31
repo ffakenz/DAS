@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <databaseChangeLog
-        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <!-- ***************************** -->
     <!--  DROP PROCEDURES CHANGE-SETS  -->
     <!-- ***************************** -->
-    <changeSet id="Drop procedure aprove_concesionaria" author="DAS-Team" runAlways="true" runOnChange="true">
+    <changeSet id="Drop procedure approve_concesionaria" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="1">
                 SELECT COUNT(*)
                 FROM information_schema.routines
                 WHERE ROUTINE_TYPE = 'PROCEDURE'
                 AND SPECIFIC_CATALOG = 'db_gobierno'
-                AND ROUTINE_NAME = 'aprove_concesionaria'
+                AND ROUTINE_NAME = 'approve_concesionaria'
             </sqlCheck>
         </preConditions>
-        <dropProcedure procedureName="aprove_concesionaria"/>
+        <dropProcedure procedureName="approve_concesionaria"/>
     </changeSet>
 
     <changeSet id="Drop procedure get_concesionarias" author="DAS-Team" runAlways="true" runOnChange="true">
@@ -47,7 +47,8 @@
         <dropProcedure procedureName="log_concesionaria"/>
     </changeSet>
 
-    <changeSet id="Drop procedure log_concesionaria_config_params" author="DAS-Team" runAlways="true" runOnChange="true">
+    <changeSet id="Drop procedure log_concesionaria_config_params" author="DAS-Team" runAlways="true"
+               runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="1">
                 SELECT COUNT(*)
@@ -60,7 +61,8 @@
         <dropProcedure procedureName="log_concesionaria_config_params"/>
     </changeSet>
 
-    <changeSet id="Drop procedure get_concesionaria_config_params" author="DAS-Team" runAlways="true" runOnChange="true">
+    <changeSet id="Drop procedure get_concesionaria_config_params" author="DAS-Team" runAlways="true"
+               runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="1">
                 SELECT COUNT(*)
@@ -76,17 +78,17 @@
     <!-- ******************************* -->
     <!--  CREATE PROCEDURES CHANGE-SETS  -->
     <!-- ******************************* -->
-    <changeSet id="Create procedure aprove_concesionaria" author="DAS-Team" runAlways="true" runOnChange="true">
+    <changeSet id="Create procedure approve_concesionaria" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                 SELECT COUNT(*)
                 FROM information_schema.routines
                 WHERE ROUTINE_TYPE = 'PROCEDURE'
                 AND SPECIFIC_CATALOG = 'db_gobierno'
-                AND ROUTINE_NAME = 'aprove_concesionaria'
+                AND ROUTINE_NAME = 'approve_concesionaria'
             </sqlCheck>
         </preConditions>
-        <sqlFile path="/src/main/resources/liquibase/concesionarias/procedures/aprove_concesionaria.sql" />
+        <sqlFile path="/src/main/resources/liquibase/concesionarias/procedures/approve_concesionaria.sql"/>
     </changeSet>
 
     <changeSet id="Create procedure get_concesionarias" author="DAS-Team" runAlways="true" runOnChange="true">
@@ -99,7 +101,7 @@
                 AND ROUTINE_NAME = 'get_concesionarias'
             </sqlCheck>
         </preConditions>
-        <sqlFile path="/src/main/resources/liquibase/concesionarias/procedures/get_concesionarias.sql" />
+        <sqlFile path="/src/main/resources/liquibase/concesionarias/procedures/get_concesionarias.sql"/>
     </changeSet>
 
     <changeSet id="Create procedure log_concesionaria" author="DAS-Team" runAlways="true" runOnChange="true">
@@ -112,10 +114,11 @@
                 AND ROUTINE_NAME = 'log_concesionaria'
             </sqlCheck>
         </preConditions>
-        <sqlFile path="/src/main/resources/liquibase/concesionarias/procedures/log_concesionaria.sql" />
+        <sqlFile path="/src/main/resources/liquibase/concesionarias/procedures/log_concesionaria.sql"/>
     </changeSet>
 
-    <changeSet id="Create procedure log_concesionaria_config_params" author="DAS-Team" runAlways="true" runOnChange="true">
+    <changeSet id="Create procedure log_concesionaria_config_params" author="DAS-Team" runAlways="true"
+               runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                 SELECT COUNT(*)
@@ -125,10 +128,11 @@
                 AND ROUTINE_NAME = 'log_concesionaria_config_params'
             </sqlCheck>
         </preConditions>
-        <sqlFile path="/src/main/resources/liquibase/concesionarias/procedures/log_concesionaria_config_params.sql" />
+        <sqlFile path="/src/main/resources/liquibase/concesionarias/procedures/log_concesionaria_config_params.sql"/>
     </changeSet>
 
-    <changeSet id="Create procedure get_concesionaria_config_params" author="DAS-Team" runAlways="true" runOnChange="true">
+    <changeSet id="Create procedure get_concesionaria_config_params" author="DAS-Team" runAlways="true"
+               runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                 SELECT COUNT(*)
@@ -138,7 +142,7 @@
                 AND ROUTINE_NAME = 'get_concesionaria_config_params'
             </sqlCheck>
         </preConditions>
-        <sqlFile path="/src/main/resources/liquibase/concesionarias/procedures/get_concesionaria_config_params.sql" />
+        <sqlFile path="/src/main/resources/liquibase/concesionarias/procedures/get_concesionaria_config_params.sql"/>
     </changeSet>
 
 </databaseChangeLog>

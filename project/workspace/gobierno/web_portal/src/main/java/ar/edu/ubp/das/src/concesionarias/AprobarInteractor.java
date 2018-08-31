@@ -2,8 +2,6 @@ package ar.edu.ubp.das.src.concesionarias;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.Dao;
-import ar.edu.ubp.das.src.concesionarias.boundaries.Aprobar;
-import ar.edu.ubp.das.src.concesionarias.boundaries.Utils;
 import ar.edu.ubp.das.src.concesionarias.daos.MSConcesionariasDao;
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
 import ar.edu.ubp.das.src.core.InteractorResponse;
@@ -13,7 +11,7 @@ import java.sql.SQLException;
 import java.util.Optional;
 import java.util.function.Function;
 
-public class AprobarInteractor implements Aprobar, Utils {
+public class AprobarInteractor {
 
 
     private String generarCodigo(final ConcesionariaForm form) {
@@ -21,7 +19,6 @@ public class AprobarInteractor implements Aprobar, Utils {
     }
 
 
-    @Override
     public Function<Dao, Optional<String>> aprobarConcesionaria(final ConcesionariaForm form) {
         return dao -> {
             try {
@@ -69,8 +66,6 @@ public class AprobarInteractor implements Aprobar, Utils {
         });
     }
 
-
-    @Override
     public InteractorResponse execute(final DynaActionForm form) {
 
         final Dao dao = new MSConcesionariasDao();

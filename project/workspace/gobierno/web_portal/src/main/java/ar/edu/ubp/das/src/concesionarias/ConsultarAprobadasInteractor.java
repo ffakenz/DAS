@@ -2,7 +2,6 @@ package ar.edu.ubp.das.src.concesionarias;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.Dao;
-import ar.edu.ubp.das.src.concesionarias.boundaries.ConsultarAprobadas;
 import ar.edu.ubp.das.src.concesionarias.daos.MSConcesionariasDao;
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
 import ar.edu.ubp.das.src.core.InteractorResponse;
@@ -14,8 +13,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
-public class ConsultarAprobadasInteractor implements ConsultarAprobadas {
-    @Override
+public class ConsultarAprobadasInteractor {
+
     public Function<Dao, List<ConcesionariaForm>> consultarAprobadas() {
         return dao -> {
             try {
@@ -35,7 +34,7 @@ public class ConsultarAprobadasInteractor implements ConsultarAprobadas {
         };
     }
 
-    @Override
+
     public InteractorResponse execute(final DynaActionForm form) {
 
         final Dao dao = new MSConcesionariasDao();

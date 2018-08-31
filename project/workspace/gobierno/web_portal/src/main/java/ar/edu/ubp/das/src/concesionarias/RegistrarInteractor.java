@@ -2,8 +2,6 @@ package ar.edu.ubp.das.src.concesionarias;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.Dao;
-import ar.edu.ubp.das.src.concesionarias.boundaries.Registrar;
-import ar.edu.ubp.das.src.concesionarias.boundaries.Utils;
 import ar.edu.ubp.das.src.concesionarias.daos.MSConcesionariasDao;
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
 import ar.edu.ubp.das.src.core.InteractorResponse;
@@ -14,9 +12,9 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.function.Function;
 
-public class RegistrarInteractor implements Registrar, Utils {
+public class RegistrarInteractor {
 
-    @Override
+
     public Function<Dao, Optional<Long>> registrarConcesionaria(final ConcesionariaForm form) {
         return dao -> {
             final Boolean flag = Arrays.asList("REST", "CXF", "AXIS").contains(form.getConfig());
@@ -42,6 +40,11 @@ public class RegistrarInteractor implements Registrar, Utils {
             }
         };
     }
+
+    private Function<Dao, Boolean> testConcesionariaRegistrada(final ConcesionariaForm form) {
+        return null;
+    }
+
 
     private Optional<ConcesionariaForm> makeFrom(final DynaActionForm form) {
         final Optional<String> nombreForm = form.getItem("nombre");
@@ -74,7 +77,7 @@ public class RegistrarInteractor implements Registrar, Utils {
                 });
     }
 
-    @Override
+
     public InteractorResponse execute(final DynaActionForm form) {
 
         final Dao dao = new MSConcesionariasDao();

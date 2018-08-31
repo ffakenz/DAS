@@ -2,8 +2,6 @@ package ar.edu.ubp.das.src.concesionarias;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.Dao;
-import ar.edu.ubp.das.src.concesionarias.boundaries.Configurar;
-import ar.edu.ubp.das.src.concesionarias.boundaries.ConsultarAprobadas;
 import ar.edu.ubp.das.src.concesionarias.daos.MSConcesionariasDao;
 import ar.edu.ubp.das.src.concesionarias.daos.MSConfigurarConcesionariaDao;
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
@@ -15,15 +13,14 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
-public class ConfigurarInteractor implements Configurar {
+public class ConfigurarInteractor {
 
-    @Override
     public Boolean configurarConcesionaria(final ConfigParamForm configParam) {
 
         final Dao daoConfigurar = new MSConfigurarConcesionariaDao();
         final Dao daoConcesionarias = new MSConcesionariasDao();
 
-        final ConsultarAprobadas consultor = new ConsultarAprobadasInteractor();
+        final ConsultarAprobadasInteractor consultor = new ConsultarAprobadasInteractor();
         final List<ConcesionariaForm> aprobadas = consultor.consultarAprobadas().apply(daoConcesionarias);
 
         try {
@@ -39,7 +36,6 @@ public class ConfigurarInteractor implements Configurar {
         }
     }
 
-    @Override
     public InteractorResponse execute(final DynaActionForm form) {
 
         final Boolean result = configurarConcesionaria((ConfigParamForm) form);
