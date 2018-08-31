@@ -81,4 +81,16 @@ public class CuotasForm extends DynaActionForm {
     public void setNroCuota(final Long nroCuota) {
         this.nroCuota = nroCuota;
     }
+    
+    @Override
+    public boolean equals(final Object aThat) {
+        if (this == aThat) return true;
+        if (!(aThat instanceof CuotasForm)) return false;
+        final CuotasForm that = (CuotasForm) aThat;
+        return that.id.equals(this.id) &&
+                that.nroCuota.equals(this.nroCuota) &&
+                that.estadoCuentaId.equals(this.estadoCuentaId) &&
+                that.getFechaPago().equals(this.getFechaPago()) &&
+                that.getFechaVencimiento().equals(this.getFechaVencimiento());
+    }
 }
