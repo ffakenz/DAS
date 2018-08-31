@@ -3,7 +3,6 @@ package interactors.estado_cuentas;
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.src.estado_cuentas.daos.MSEstadoCuentasDao;
 import ar.edu.ubp.das.src.estado_cuentas.forms.EstadoCuentasForm;
-import ar.edu.ubp.das.src.estado_cuentas.model.EstadoCuentasManager;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -20,7 +19,6 @@ import static org.junit.Assert.*;
 public class EstadoCuentasTest {
 
     MSEstadoCuentasDao estadoCuentaDao;
-    EstadoCuentasManager estadoCuentasManager;
 
     @Before
     public void setup() throws SQLException {
@@ -32,8 +30,6 @@ public class EstadoCuentasTest {
 
         estadoCuentaDao = new MSEstadoCuentasDao();
         estadoCuentaDao.setDatasource(dataSourceConfig);
-
-        estadoCuentasManager = new EstadoCuentasManager(estadoCuentaDao);
     }
 
     @Test
@@ -43,7 +39,7 @@ public class EstadoCuentasTest {
         estadoCuentaForm.setConcesionariaId(1L);
         estadoCuentaForm.setNroPlanConcesionaria(1L);
 
-        final Optional<EstadoCuentasForm> ecs = estadoCuentasManager.selectByNroPlanAndConcesionaria(estadoCuentaForm);
+        final Optional<EstadoCuentasForm> ecs = estadoCuentaDao.selectByNroPlanAndConcesionaria(estadoCuentaForm);
         assertFalse(ecs.isPresent());
     }
 
@@ -54,7 +50,7 @@ public class EstadoCuentasTest {
         estadoCuentaForm.setConcesionariaId(1L);
         estadoCuentaForm.setNroPlanConcesionaria(1001L);
 
-        final Optional<EstadoCuentasForm> ecs = estadoCuentasManager.selectByNroPlanAndConcesionaria(estadoCuentaForm);
+        final Optional<EstadoCuentasForm> ecs = estadoCuentaDao.selectByNroPlanAndConcesionaria(estadoCuentaForm);
         assertTrue(ecs.isPresent());
     }
 
@@ -70,9 +66,9 @@ public class EstadoCuentasTest {
         estadoCuentaForm.setFechaAltaConcesionaria(Timestamp.valueOf("2018-01-01 21:58:01"));
         estadoCuentaForm.setEstado("inicial");
 
-        estadoCuentasManager.insert(estadoCuentaForm);
+        estadoCuentaDao.insert(estadoCuentaForm);
 
-        final Optional<EstadoCuentasForm> ecs = estadoCuentasManager.selectByNroPlanAndConcesionaria(estadoCuentaForm);
+        final Optional<EstadoCuentasForm> ecs = estadoCuentaDao.selectByNroPlanAndConcesionaria(estadoCuentaForm);
         assertTrue(ecs.isPresent());
     }
 
@@ -84,15 +80,15 @@ public class EstadoCuentasTest {
         estadoCuentaForm.setNroPlanConcesionaria(1001L);
 
         // Verify the plan exists
-        final Optional<EstadoCuentasForm> ecs = estadoCuentasManager.selectByNroPlanAndConcesionaria(estadoCuentaForm);
+        final Optional<EstadoCuentasForm> ecs = estadoCuentaDao.selectByNroPlanAndConcesionaria(estadoCuentaForm);
         assertTrue(ecs.isPresent());
 
         // Update estado plan
         estadoCuentaForm.setEstado("en_proceso");
-        estadoCuentasManager.update(estadoCuentaForm);
+        estadoCuentaDao.update(estadoCuentaForm);
 
         // Verify the plan got successfully updated
-        final Optional<EstadoCuentasForm> ecsUpdated = estadoCuentasManager.selectByNroPlanAndConcesionaria(estadoCuentaForm);
+        final Optional<EstadoCuentasForm> ecsUpdated = estadoCuentaDao.selectByNroPlanAndConcesionaria(estadoCuentaForm);
         assertEquals("en_proceso", ecsUpdated.get().getEstado());
 
     }

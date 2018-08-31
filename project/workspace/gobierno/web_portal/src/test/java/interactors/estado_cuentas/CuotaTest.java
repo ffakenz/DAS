@@ -3,7 +3,6 @@ package interactors.estado_cuentas;
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.src.estado_cuentas.daos.MSCuotasDao;
 import ar.edu.ubp.das.src.estado_cuentas.forms.CuotasForm;
-import ar.edu.ubp.das.src.estado_cuentas.model.CuotasManager;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -20,7 +19,6 @@ import static org.junit.Assert.*;
 public class CuotaTest {
 
     MSCuotasDao cuotasDao;
-    CuotasManager cuotasManager;
 
     @Before
     public void setup() throws SQLException {
@@ -32,14 +30,12 @@ public class CuotaTest {
 
         cuotasDao = new MSCuotasDao();
         cuotasDao.setDatasource(dataSourceConfig);
-
-        cuotasManager = new CuotasManager(cuotasDao);
     }
 
     @Test
     public void test_08_Consultar_all_cuotas_successfully() throws SQLException {
 
-        final List<CuotasForm> cuotas = cuotasManager.selectAll();
+        final List<CuotasForm> cuotas = cuotasDao.select(null);
         assertEquals(12, cuotas.size());
     }
 
@@ -49,7 +45,7 @@ public class CuotaTest {
         final CuotasForm cuotaForm = new CuotasForm();
         cuotaForm.setEstadoCuentaId(5L);
 
-        final List<CuotasForm> cuotas = cuotasManager.selectByEstadoCuenta(cuotaForm);
+        final List<CuotasForm> cuotas = cuotasDao.selectByEstadoCuenta(cuotaForm);
         assertTrue(cuotas.isEmpty());
     }
 
@@ -59,7 +55,7 @@ public class CuotaTest {
         final CuotasForm cuotaForm = new CuotasForm();
         cuotaForm.setEstadoCuentaId(4L);
 
-        final List<CuotasForm> cuotas = cuotasManager.selectByEstadoCuenta(cuotaForm);
+        final List<CuotasForm> cuotas = cuotasDao.selectByEstadoCuenta(cuotaForm);
 
         assertFalse(cuotas.isEmpty());
         assertEquals(3, cuotas.size());
@@ -71,7 +67,7 @@ public class CuotaTest {
         final CuotasForm cuotaForm = new CuotasForm();
         cuotaForm.setEstadoCuentaId(1L);
 
-        final List<CuotasForm> cuotas = cuotasManager.selectByEstadoCuenta(cuotaForm);
+        final List<CuotasForm> cuotas = cuotasDao.selectByEstadoCuenta(cuotaForm);
 
         assertEquals(3, cuotas.size());
 
@@ -79,9 +75,9 @@ public class CuotaTest {
         cuotaForm.setMonto(10000);
         cuotaForm.setFechaPago(Timestamp.valueOf("2018-06-30 21:58:01"));
 
-        cuotasManager.insert(cuotaForm);
+        cuotasDao.insert(cuotaForm);
 
-        final List<CuotasForm> cuotas2 = cuotasManager.selectByEstadoCuenta(cuotaForm);
+        final List<CuotasForm> cuotas2 = cuotasDao.selectByEstadoCuenta(cuotaForm);
         // hay una cuota mas
         assertEquals(4, cuotas2.size());
 

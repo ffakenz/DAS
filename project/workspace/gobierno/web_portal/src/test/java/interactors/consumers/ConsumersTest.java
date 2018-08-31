@@ -3,7 +3,6 @@ package interactors.consumers;
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.src.consumers.daos.MSConsumerDao;
 import ar.edu.ubp.das.src.consumers.forms.ConsumerForm;
-import ar.edu.ubp.das.src.consumers.model.consumer.ConsumerManager;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -21,7 +20,6 @@ import static org.junit.Assert.assertFalse;
 public class ConsumersTest {
 
     MSConsumerDao msConsumerDao;
-    ConsumerManager consumerManager;
 
     @Before
     public void setup() throws SQLException {
@@ -33,8 +31,6 @@ public class ConsumersTest {
 
         msConsumerDao = new MSConsumerDao();
         msConsumerDao.setDatasource(dataSourceConfig);
-
-        consumerManager = new ConsumerManager(msConsumerDao);
     }
 
     @Test
@@ -44,7 +40,7 @@ public class ConsumersTest {
         consumerForm.setDocumento(777L);
         consumerForm.setConcesionaria(1L);
 
-        final Optional<ConsumerForm> consumers = consumerManager.selectConsumerByDniAndConcesionaria(consumerForm);
+        final Optional<ConsumerForm> consumers = msConsumerDao.selectConsumerByDniAndConcesionaria(consumerForm);
 
         assertFalse(consumers.isPresent());
     }
@@ -60,9 +56,9 @@ public class ConsumersTest {
         consumerForm.setNroTelefono("Tel_Test_01");
         consumerForm.setEmail("test@test.com");
 
-        consumerManager.insert(consumerForm);
+        msConsumerDao.insert(consumerForm);
 
-        final Optional<ConsumerForm> consumer = consumerManager.selectConsumerByDniAndConcesionaria(consumerForm);
+        final Optional<ConsumerForm> consumer = msConsumerDao.selectConsumerByDniAndConcesionaria(consumerForm);
 
         assertTrue(consumer.isPresent());
     }
@@ -74,34 +70,34 @@ public class ConsumersTest {
         consumerForm.setDocumento(111L);
         consumerForm.setConcesionaria(1L);
 
-        final Optional<ConsumerForm> consumer = consumerManager.selectConsumerByDniAndConcesionaria(consumerForm);
+        final Optional<ConsumerForm> consumer = msConsumerDao.selectConsumerByDniAndConcesionaria(consumerForm);
 
         //actualizo telefono y seteo email en null
         consumerForm.setNroTelefono("Tel_Test_Actualizado");
-        consumerManager.update(consumerForm);
+        msConsumerDao.update(consumerForm);
 
         //valido que el telefono este actualizado y el email sea el que tenia previamente
-        final Optional<ConsumerForm> consumerUpdate1 = consumerManager.selectConsumerByDniAndConcesionaria(consumerForm);
+        final Optional<ConsumerForm> consumerUpdate1 = msConsumerDao.selectConsumerByDniAndConcesionaria(consumerForm);
         assertEquals("Tel_Test_Actualizado", consumerUpdate1.get().getNroTelefono());
         assertEquals(null, consumerUpdate1.get().getEmail());
 
         //actualizo el email
         consumerForm.setEmail("test@actualizado.com");
         consumerForm.setNroTelefono(null);
-        consumerManager.update(consumerForm);
+        msConsumerDao.update(consumerForm);
 
         //valido que el email este actualizado y el telefono sea el que tenia luego de la primer actualizacion
-        final Optional<ConsumerForm> consumerUpdate2 = consumerManager.selectConsumerByDniAndConcesionaria(consumerForm);
+        final Optional<ConsumerForm> consumerUpdate2 = msConsumerDao.selectConsumerByDniAndConcesionaria(consumerForm);
         assertEquals(null, consumerUpdate2.get().getNroTelefono());
         assertEquals("test@actualizado.com", consumerUpdate2.get().getEmail());
 
         //actualizo el email y el telefono
         consumerForm.setNroTelefono("Tel_Actualizado_2");
         consumerForm.setEmail("test@actualizado2.com");
-        consumerManager.update(consumerForm);
+        msConsumerDao.update(consumerForm);
 
         //valido que el telefono y el email este actualizado
-        final Optional<ConsumerForm> consumerUpdate3 = consumerManager.selectConsumerByDniAndConcesionaria(consumerForm);
+        final Optional<ConsumerForm> consumerUpdate3 = msConsumerDao.selectConsumerByDniAndConcesionaria(consumerForm);
         assertEquals("Tel_Actualizado_2", consumerUpdate3.get().getNroTelefono());
         assertEquals("test@actualizado2.com", consumerUpdate3.get().getEmail());
     }
