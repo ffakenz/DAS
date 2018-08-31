@@ -1,6 +1,7 @@
 package ar.edu.ubp.das.src.estado_cuentas.model;
 
 import ar.edu.ubp.das.mvc.db.DaoImpl;
+import ar.edu.ubp.das.src.estado_cuentas.daos.MSEstadoCuentasDao;
 import ar.edu.ubp.das.src.estado_cuentas.forms.EstadoCuentasForm;
 
 import java.sql.SQLException;
@@ -8,21 +9,21 @@ import java.util.Optional;
 
 public class EstadoCuentasManager {
 
-    MSEstadoCuentasDaoEx msEstadoCuentasDaoEx;
+    MSEstadoCuentasDao msEstadoCuentasDao;
 
-    public EstadoCuentasManager(final DaoImpl msEstadoCuentasDaoEx) {
-        this.msEstadoCuentasDaoEx = new MSEstadoCuentasDaoEx(msEstadoCuentasDaoEx);
+    public EstadoCuentasManager(final DaoImpl msEstadoCuentasDao) {
+        this.msEstadoCuentasDao = (MSEstadoCuentasDao) msEstadoCuentasDao;
     }
 
     public Optional<EstadoCuentasForm> selectByNroPlanAndConcesionaria(final EstadoCuentasForm form) throws SQLException {
-        return msEstadoCuentasDaoEx.selectByNroPlanAndConcesionaria(form);
+        return msEstadoCuentasDao.selectByNroPlanAndConcesionaria(form);
     }
 
     public void insert(final EstadoCuentasForm estadoCuentasFrom) throws SQLException {
-        msEstadoCuentasDaoEx.insert(estadoCuentasFrom);
+        msEstadoCuentasDao.insert(estadoCuentasFrom);
     }
 
     public void update(final EstadoCuentasForm estadoCuentasFrom) throws SQLException {
-        msEstadoCuentasDaoEx.update(estadoCuentasFrom);
+        msEstadoCuentasDao.update(estadoCuentasFrom);
     }
 }

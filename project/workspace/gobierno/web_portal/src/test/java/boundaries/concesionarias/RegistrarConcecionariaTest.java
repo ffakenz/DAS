@@ -3,7 +3,6 @@ package boundaries.concesionarias;
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.mvc.config.ModuleConfigImpl;
 import ar.edu.ubp.das.src.concesionarias.RegistrarInteractor;
-import ar.edu.ubp.das.src.concesionarias.boundaries.Registrar;
 import ar.edu.ubp.das.src.concesionarias.daos.MSConcesionariasDao;
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
 import org.junit.Before;
@@ -56,7 +55,7 @@ public class RegistrarConcecionariaTest {
         concecionaria.setTel("123123");
         concecionaria.setEmail("email@123.com");
 
-        final Registrar concImpl = new RegistrarInteractor();
+        final RegistrarInteractor concImpl = new RegistrarInteractor();
 
         final Optional<Long> concesionariaId = concImpl.registrarConcesionaria(concecionaria).apply(dao);
 
@@ -79,7 +78,7 @@ public class RegistrarConcecionariaTest {
         concecionaria.setTel("123123");
         concecionaria.setEmail("email@123.com");
 
-        final Registrar concImpl = new RegistrarInteractor();
+        final RegistrarInteractor concImpl = new RegistrarInteractor();
         final Optional<Long> logInId = concImpl.registrarConcesionaria(concecionaria).apply(dao);
         final Optional<Long> logInId2 = concImpl.registrarConcesionaria(concecionaria).apply(dao);
 

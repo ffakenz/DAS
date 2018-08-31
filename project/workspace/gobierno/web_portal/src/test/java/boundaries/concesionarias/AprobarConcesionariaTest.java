@@ -3,7 +3,6 @@ package boundaries.concesionarias;
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.src.concesionarias.AprobarInteractor;
 import ar.edu.ubp.das.src.concesionarias.ConsultarAprobadasInteractor;
-import ar.edu.ubp.das.src.concesionarias.boundaries.ConsultarAprobadas;
 import ar.edu.ubp.das.src.concesionarias.daos.MSConcesionariasDao;
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
 import org.junit.Before;
@@ -21,7 +20,7 @@ public class AprobarConcesionariaTest {
 
     MSConcesionariasDao dao;
     DatasourceConfig dataSourceConfig;
-    ConsultarAprobadas concesionariaInteractor;
+    ConsultarAprobadasInteractor concesionariaInteractor;
 
     @Before
     public void setup() throws SQLException {

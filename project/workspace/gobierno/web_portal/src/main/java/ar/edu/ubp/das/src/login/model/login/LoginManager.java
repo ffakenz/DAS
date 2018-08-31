@@ -1,6 +1,7 @@
 package ar.edu.ubp.das.src.login.model.login;
 
 import ar.edu.ubp.das.mvc.db.DaoImpl;
+import ar.edu.ubp.das.src.login.daos.MSLogInDao;
 import ar.edu.ubp.das.src.login.forms.LogInForm;
 
 import java.sql.SQLException;
@@ -8,10 +9,10 @@ import java.util.Optional;
 
 public class LoginManager {
 
-    MSLoginDaoEx msloginDao;
+    MSLogInDao msloginDao;
 
     public LoginManager(final DaoImpl msloginDao) {
-        this.msloginDao = new MSLoginDaoEx(msloginDao);
+        this.msloginDao = (MSLogInDao) msloginDao;
     }
 
     public Optional<Long> isLoggedIn(final LogInForm form) throws SQLException {

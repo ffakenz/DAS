@@ -7,11 +7,9 @@ import ar.edu.ubp.das.src.concesionarias.ConsultarAprobadasInteractor;
 import ar.edu.ubp.das.src.concesionarias.daos.MSConfigurarConcesionariaDao;
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
 import ar.edu.ubp.das.src.concesionarias.forms.ConfigParamForm;
-import ar.edu.ubp.das.src.core.Interactor;
 import ar.edu.ubp.das.src.core.InteractorResponse;
 import ar.edu.ubp.das.src.core.ResponseForward;
 import org.junit.Ignore;
-import org.junit.Test;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -26,8 +24,8 @@ public class ConfigurarInteractorTest {
 
     @Ignore
     public void validarConfiguracionConcecionaria() {
-        final Interactor<List<ConcesionariaForm>> consultor = new ConsultarAprobadasInteractor();
-        final Interactor<Boolean> configurador = new ConfigurarInteractor();
+        final ConsultarAprobadasInteractor consultor = new ConsultarAprobadasInteractor();
+        final ConfigurarInteractor configurador = new ConfigurarInteractor();
 
         // Dado un configParamas
         final ConfigParamForm configParam = new ConfigParamForm();

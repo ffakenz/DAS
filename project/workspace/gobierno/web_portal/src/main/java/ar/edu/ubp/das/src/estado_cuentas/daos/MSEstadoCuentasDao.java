@@ -5,6 +5,7 @@ import ar.edu.ubp.das.src.estado_cuentas.forms.EstadoCuentasForm;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class MSEstadoCuentasDao extends DaoImpl<EstadoCuentasForm> {
 
@@ -38,6 +39,13 @@ public class MSEstadoCuentasDao extends DaoImpl<EstadoCuentasForm> {
     @Override
     public boolean valid(final EstadoCuentasForm form) throws SQLException {
         return false;
+    }
+
+    public Optional<EstadoCuentasForm> selectByNroPlanAndConcesionaria(final EstadoCuentasForm form) throws SQLException {
+        return this.executeQueryProcedure("dbo.get_estado_cuentas_by_nro_plan_and_concesionaria(?, ?)",
+                form, "concesionariaId", "nroPlanConcesionaria")
+                .stream()
+                .findFirst();
     }
 
 

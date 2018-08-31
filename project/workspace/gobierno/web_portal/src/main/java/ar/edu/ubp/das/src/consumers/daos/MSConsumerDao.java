@@ -3,9 +3,9 @@ package ar.edu.ubp.das.src.consumers.daos;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.consumers.forms.ConsumerForm;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class MSConsumerDao extends DaoImpl<ConsumerForm> {
 
@@ -39,5 +39,12 @@ public class MSConsumerDao extends DaoImpl<ConsumerForm> {
     @Override
     public boolean valid(final ConsumerForm form) throws SQLException {
         return false;
+    }
+
+    public Optional<ConsumerForm> selectConsumerByDniAndConcesionaria(final ConsumerForm form) throws SQLException {
+        return this.executeQueryProcedure("dbo.get_consumer_by_documento_and_concesionaria(?, ?)",
+                form, "documento", "concesionaria")
+                .stream()
+                .findFirst();
     }
 }

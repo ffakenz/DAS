@@ -37,4 +37,9 @@ public class MSCuotasDao extends DaoImpl<CuotasForm> {
     public boolean valid(final CuotasForm form) throws SQLException {
         return false;
     }
+
+    public List<CuotasForm> selectByEstadoCuenta(final CuotasForm form) throws SQLException {
+        return this.executeQueryProcedure("dbo.get_cuotas_by_estado_cuenta_id(?)",
+                form, "estadoCuentaId");
+    }
 }

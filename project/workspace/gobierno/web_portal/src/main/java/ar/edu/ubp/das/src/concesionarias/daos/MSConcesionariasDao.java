@@ -72,4 +72,10 @@ public class MSConcesionariasDao extends DaoImpl<ConcesionariaForm> {
     public boolean valid(final ConcesionariaForm form) throws SQLException {
         return false;
     }
+
+
+    public List<ConcesionariaForm> selectBy(final ConcesionariaForm form) throws SQLException {
+        return this.executeQueryProcedure("dbo.",
+                form, "");
+    }
 }

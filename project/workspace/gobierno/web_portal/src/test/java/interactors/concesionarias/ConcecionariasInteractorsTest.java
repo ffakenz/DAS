@@ -7,7 +7,6 @@ import ar.edu.ubp.das.src.concesionarias.ConsultarAprobadasInteractor;
 import ar.edu.ubp.das.src.concesionarias.RegistrarInteractor;
 import ar.edu.ubp.das.src.concesionarias.daos.MSConcesionariasDao;
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
-import ar.edu.ubp.das.src.core.Interactor;
 import ar.edu.ubp.das.src.core.InteractorResponse;
 import ar.edu.ubp.das.src.core.ResponseForward;
 import org.junit.Ignore;
@@ -24,7 +23,7 @@ public class ConcecionariasInteractorsTest {
 
     @Ignore
     public void testAprobarConcecionaria() {
-        final Interactor<List<ConcesionariaForm>> a1 = new ConsultarAprobadasInteractor();
+        final ConsultarAprobadasInteractor a1 = new ConsultarAprobadasInteractor();
 
         // consultar aprobadas
         final InteractorResponse<List<ConcesionariaForm>> r1 = a1.execute(null);
@@ -42,14 +41,14 @@ public class ConcecionariasInteractorsTest {
         form.setItem("email", "c9@gmail.com");
 
         // aprobar concesionaria
-        final Interactor<Long> a2 = new AprobarInteractor();
+        final AprobarInteractor a2 = new AprobarInteractor();
         final InteractorResponse<Long> r2 = a2.execute(form);
         // concesionaria no aprobada ya que no existe
         assertEquals(ResponseForward.WARNING, r2.getResponse());
         assertFalse(r2.getResult().isPresent());
 
         // registramos concesionaria
-        final Interactor<Long> a3 = new RegistrarInteractor();
+        final RegistrarInteractor a3 = new RegistrarInteractor();
         final InteractorResponse<Long> r3 = a3.execute(form);
         // concesionaria registrada
         assertEquals(ResponseForward.SUCCESS, r3.getResponse());
@@ -78,7 +77,7 @@ public class ConcecionariasInteractorsTest {
         form.setItem("id", "3");
 
         // aprobar concesionaria
-        final Interactor a2 = new AprobarInteractor();
+        final AprobarInteractor a2 = new AprobarInteractor();
         final InteractorResponse r2 = a2.execute(form);
 
         assertEquals(ResponseForward.SUCCESS, r2.getResponse());
@@ -93,7 +92,7 @@ public class ConcecionariasInteractorsTest {
         form.setItem("id", "5");
 
         // aprobar concesionaria
-        final Interactor a2 = new AprobarInteractor();
+        final AprobarInteractor a2 = new AprobarInteractor();
         final InteractorResponse r2 = a2.execute(form);
 
         assertEquals(ResponseForward.FAILURE, r2.getResponse());
@@ -113,7 +112,7 @@ public class ConcecionariasInteractorsTest {
         form.setItem("email", "whatever");
 
         // aprobar concesionaria
-        final Interactor a2 = new RegistrarInteractor();
+        final RegistrarInteractor a2 = new RegistrarInteractor();
         final InteractorResponse r2 = a2.execute(form);
 
         assertEquals(ResponseForward.FAILURE, r2.getResponse());

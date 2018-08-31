@@ -37,6 +37,23 @@ public class MSUsuariosDao extends DaoImpl<UsuarioForm> {
         // TODO Auto-generated method stub
         return true;
     }
+
+    public List<UsuarioForm> selectByUserNameAndPassword(final String username, final String password) throws SQLException {
+        final UsuarioForm usuarioForm = new UsuarioForm();
+        usuarioForm.setUsername(username);
+        usuarioForm.setPassword(password);
+
+        return this.executeQueryProcedure("dbo.get_usuarios_by_username_password(?, ?)", usuarioForm, "username", "password");
+    }
+
+    public List<UsuarioForm> selectByUserName(final String username) throws SQLException {
+
+        final UsuarioForm usuarioForm = new UsuarioForm();
+        usuarioForm.setUsername(username);
+
+        return this.executeQueryProcedure("dbo.get_usuarios_by_username(?)", usuarioForm, "username");
+    }
+
 }
 
 

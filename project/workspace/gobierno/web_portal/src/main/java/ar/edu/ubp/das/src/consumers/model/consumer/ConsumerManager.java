@@ -1,6 +1,7 @@
 package ar.edu.ubp.das.src.consumers.model.consumer;
 
 import ar.edu.ubp.das.mvc.db.DaoImpl;
+import ar.edu.ubp.das.src.consumers.daos.MSConsumerDao;
 import ar.edu.ubp.das.src.consumers.forms.ConsumerForm;
 
 import java.sql.SQLException;
@@ -9,25 +10,25 @@ import java.util.Optional;
 
 public class ConsumerManager {
 
-    MSConsumerDaoEx msConsumerDaoEx;
+    MSConsumerDao msConsumerDao;
 
-    public ConsumerManager(final DaoImpl msConsumerDaoEx) {
-        this.msConsumerDaoEx = new MSConsumerDaoEx(msConsumerDaoEx);
+    public ConsumerManager(final DaoImpl msConsumerDao) {
+        this.msConsumerDao = (MSConsumerDao) msConsumerDao;
     }
 
-    public List<ConsumerForm> selectAll() throws SQLException{
-        return msConsumerDaoEx.select( null);
+    public List<ConsumerForm> selectAll() throws SQLException {
+        return msConsumerDao.select(null);
     }
 
-    public Optional<ConsumerForm> selectConsumerByDniAndConcesionaria(ConsumerForm form) throws SQLException {
-        return msConsumerDaoEx.selectConsumerByDniAndConcesionaria(form);
+    public Optional<ConsumerForm> selectConsumerByDniAndConcesionaria(final ConsumerForm form) throws SQLException {
+        return msConsumerDao.selectConsumerByDniAndConcesionaria(form);
     }
 
-    public void insert(ConsumerForm consumerForm) throws SQLException {
-        msConsumerDaoEx.insert(consumerForm);
+    public void insert(final ConsumerForm consumerForm) throws SQLException {
+        msConsumerDao.insert(consumerForm);
     }
 
-    public void update(ConsumerForm consumerForm) throws SQLException {
-        msConsumerDaoEx.update(consumerForm);
+    public void update(final ConsumerForm consumerForm) throws SQLException {
+        msConsumerDao.update(consumerForm);
     }
 }

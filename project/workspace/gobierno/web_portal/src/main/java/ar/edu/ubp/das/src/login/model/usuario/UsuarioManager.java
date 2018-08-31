@@ -1,16 +1,17 @@
 package ar.edu.ubp.das.src.login.model.usuario;
 
 import ar.edu.ubp.das.mvc.db.DaoImpl;
+import ar.edu.ubp.das.src.login.daos.MSUsuariosDao;
 import ar.edu.ubp.das.src.login.forms.UsuarioForm;
 
 import java.sql.SQLException;
 
 public class UsuarioManager {
 
-    private MSUsuariosDaoEx msUsuariosDao;
+    private MSUsuariosDao msUsuariosDao;
 
     public UsuarioManager(final DaoImpl msUsuariosDao) {
-        this.msUsuariosDao = new MSUsuariosDaoEx(msUsuariosDao);
+        this.msUsuariosDao = (MSUsuariosDao) msUsuariosDao;
     }
 
     // is there any usuario in the repository such that is equals to the one sent by parameter ?
@@ -23,7 +24,7 @@ public class UsuarioManager {
         return !msUsuariosDao.selectByUserNameAndPassword(username, password).isEmpty();
     }
 
-    public void createUser(UsuarioForm usuarioForm) throws SQLException {
+    public void createUser(final UsuarioForm usuarioForm) throws SQLException {
         this.msUsuariosDao.insert(usuarioForm);
     }
 
