@@ -1,50 +1,66 @@
-package boundaries.concesionarias;
+package interactors.concesionarias;
 
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
-import ar.edu.ubp.das.mvc.config.ModuleConfigImpl;
 import ar.edu.ubp.das.src.concesionarias.RegistrarInteractor;
 import ar.edu.ubp.das.src.concesionarias.daos.MSConcesionariasDao;
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
-import org.mockito.Mockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
+import util.TestDB;
 
 import java.sql.SQLException;
 import java.util.Optional;
 
+import static junit.framework.TestCase.assertNotNull;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.anyString;
+import static org.junit.Assert.assertFalse;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({ModuleConfigImpl.class})
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class RegistrarConcecionariaTest {
+public class ConcesionariaTest {
 
     MSConcesionariasDao dao;
-    DatasourceConfig dataSourceConfig;
 
     @Before
-    public void setup() {
+    public void setup() throws SQLException {
 
-        dataSourceConfig = new DatasourceConfig();
-        dataSourceConfig.setDriver("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        dataSourceConfig.setUrl("jdbc:sqlserver://localhost;databaseName=db_gobierno;");
-        dataSourceConfig.setUsername("SA");
-        dataSourceConfig.setPassword("Das12345");
+        TestDB.getInstance().cleanDB();
+        TestDB.getInstance().setUpDB();
+
+        final DatasourceConfig dataSourceConfig = TestDB.getInstance().getDataSourceConfig();
 
         dao = new MSConcesionariasDao();
         dao.setDatasource(dataSourceConfig);
+    }
 
-        //mockStatic(ModuleConfigImpl.class);
-        Mockito.when(ModuleConfigImpl.getDatasourceById(anyString())).thenReturn(dataSourceConfig);
+
+    @Test
+    public void test01AprobadasIsEmpty() throws SQLException {
+        assertEquals(0, dao.selectAprobadas().size());
     }
 
     @Test
+    public void test02AprobarConcecionaria() throws SQLException {
+
+        final ConcesionariaForm concesionariaForm = new ConcesionariaForm();
+        concesionariaForm.setCodigo("codigo");
+        concesionariaForm.setId(1L);
+
+        final Optional<ConcesionariaForm> concesionariaForm1 = dao.selectByCodigo(concesionariaForm);
+        assertFalse(concesionariaForm1.isPresent());
+
+        dao.approveConcesionaria(concesionariaForm);
+
+        final Optional<ConcesionariaForm> concesionariaForm2 = dao.selectByCodigo(concesionariaForm);
+
+        assertEquals(concesionariaForm.getId(), concesionariaForm2.get().getId());
+        assertNotNull(concesionariaForm2.get().getFechaAlta());
+        assertEquals(1, dao.selectAprobadas().size());
+    }
+
+    @Ignore
     public void test01RegistrarConcecionarias() throws SQLException {
 
         final ConcesionariaForm concecionaria = new ConcesionariaForm();
@@ -67,7 +83,7 @@ public class RegistrarConcecionariaTest {
         assertEquals(Optional.of(expectedConcesionariaId), concesionariaId);
     }
 
-    @Test
+    @Ignore
     public void test02RegistrarTwice() {
 
         final ConcesionariaForm concecionaria = new ConcesionariaForm();
@@ -86,4 +102,3 @@ public class RegistrarConcecionariaTest {
         assertEquals(Optional.empty(), logInId2);
     }
 }
-

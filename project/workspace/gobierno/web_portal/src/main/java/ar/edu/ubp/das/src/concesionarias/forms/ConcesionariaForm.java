@@ -1,19 +1,32 @@
 package ar.edu.ubp.das.src.concesionarias.forms;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
+import ar.edu.ubp.das.mvc.db.annotations.Column;
+import ar.edu.ubp.das.mvc.db.annotations.Entity;
 
 import java.sql.Timestamp;
 
+@Entity
 public class ConcesionariaForm extends DynaActionForm {
+    @Column(name = "id")
     private Long id;
+    @Column(name = "nombre")
     private String nombre;
+    @Column(name = "config")
     private String config;
+    @Column(name = "fecha_registracion")
     private Timestamp fechaRegistracion;
+    @Column(name = "fecha_alta")
     private Timestamp fechaAlta;
+    @Column(name = "codigo")
     private String codigo;
+    @Column(name = "direccion")
     private String direccion;
+    @Column(name = "cuit")
     private String cuit;
+    @Column(name = "tel")
     private String tel;
+    @Column(name = "email")
     private String email;
 
     @Override

@@ -8,6 +8,32 @@
     <!-- ***************************** -->
     <!--  DROP PROCEDURES CHANGE-SETS  -->
     <!-- ***************************** -->
+    <changeSet id="Drop procedure get_concesionaria_by_codigo" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_concesionaria_by_codigo'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_concesionaria_by_codigo"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure get_aprobadas" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_aprobadas'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_aprobadas"/>
+    </changeSet>
+
     <changeSet id="Drop procedure approve_concesionaria" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="1">
@@ -78,6 +104,31 @@
     <!-- ******************************* -->
     <!--  CREATE PROCEDURES CHANGE-SETS  -->
     <!-- ******************************* -->
+    <changeSet id="Create procedure get_concesionaria_by_codigo" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_concesionaria_by_codigo'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/concesionarias/procedures/get_concesionaria_by_codigo.sql"/>
+    </changeSet>
+    <changeSet id="Create procedure get_aprobadas" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_aprobadas'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/concesionarias/procedures/get_aprobadas.sql"/>
+    </changeSet>
+
     <changeSet id="Create procedure approve_concesionaria" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">

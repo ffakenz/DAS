@@ -119,6 +119,14 @@ public abstract class DaoImpl<T> implements Dao<T> {
         this.disconnect();
     }
 
+    public List<T> executeQueryProcedure(final String procedureName) throws SQLException {
+        this.connect();
+        this.setProcedure(procedureName, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        final List<T> forms = this.executeQuery();
+        this.disconnect();
+        return forms;
+    }
+
     public List<T> executeQueryProcedure(final String procedureName, final T bean, final String... columnNames) throws SQLException {
         this.connect();
         this.setProcedure(procedureName, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
