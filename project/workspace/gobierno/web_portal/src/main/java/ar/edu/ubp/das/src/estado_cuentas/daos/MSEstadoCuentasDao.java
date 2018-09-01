@@ -32,8 +32,12 @@ public class MSEstadoCuentasDao extends DaoImpl<EstadoCuentasForm> {
     }
 
     @Override
-    public List<EstadoCuentasForm> select(final EstadoCuentasForm form) throws SQLException {
-        return this.executeQueryProcedure("dbo.get_estado_cuentas", form);
+    public List<EstadoCuentasForm> select(EstadoCuentasForm form) throws SQLException {
+        return this.executeQueryProcedure("dbo.get_estado_cuentas");
+    }
+
+    public List<EstadoCuentasForm> select() throws SQLException {
+        return this.executeQueryProcedure("dbo.get_estado_cuentas");
     }
 
     @Override

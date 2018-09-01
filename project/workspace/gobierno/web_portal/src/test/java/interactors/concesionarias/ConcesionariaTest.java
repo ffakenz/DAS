@@ -1,12 +1,10 @@
 package interactors.concesionarias;
 
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
-import ar.edu.ubp.das.src.concesionarias.RegistrarInteractor;
 import ar.edu.ubp.das.src.concesionarias.daos.MSConcesionariasDao;
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import util.TestDB;
@@ -17,11 +15,13 @@ import java.util.Optional;
 import static junit.framework.TestCase.assertNotNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ConcesionariaTest {
 
     MSConcesionariasDao dao;
+    ConcesionariaForm concesionariaForm;
 
     @Before
     public void setup() throws SQLException {
@@ -33,18 +33,19 @@ public class ConcesionariaTest {
 
         dao = new MSConcesionariasDao();
         dao.setDatasource(dataSourceConfig);
+
+        concesionariaForm = new ConcesionariaForm();
     }
 
 
     @Test
-    public void test01AprobadasIsEmpty() throws SQLException {
+    public void test_01_Aprobadas_is_empty() throws SQLException {
         assertEquals(0, dao.selectAprobadas().size());
     }
 
     @Test
-    public void test02AprobarConcecionaria() throws SQLException {
+    public void test_02_Aprobar_concesionaria() throws SQLException {
 
-        final ConcesionariaForm concesionariaForm = new ConcesionariaForm();
         concesionariaForm.setCodigo("codigo");
         concesionariaForm.setId(1L);
 
@@ -60,45 +61,88 @@ public class ConcesionariaTest {
         assertEquals(1, dao.selectAprobadas().size());
     }
 
-    @Ignore
-    public void test01RegistrarConcecionarias() throws SQLException {
+    @Test(expected = SQLException.class)
+    public void test_03_Aprobar_concesionaria_fail() throws SQLException {
 
-        final ConcesionariaForm concecionaria = new ConcesionariaForm();
-        concecionaria.setNombre("C10");
-        concecionaria.setConfig("AXIS");
-        concecionaria.setCuit("CUIT10");
-        concecionaria.setDireccion("dire123");
-        concecionaria.setTel("123123");
-        concecionaria.setEmail("email@123.com");
+        Optional<ConcesionariaForm> concesionaria = dao.select().stream().findFirst();
 
-        final RegistrarInteractor concImpl = new RegistrarInteractor();
+        assertNull(concesionaria.get().getFechaAlta());
+        assertNull(concesionaria.get().getCodigo());
+        assertNotNull(concesionaria.get().getId());
 
-        final Optional<Long> concesionariaId = concImpl.registrarConcesionaria(concecionaria).apply(dao);
-
-        final Long expectedConcesionariaId = 6L;
-
-        assertEquals(true, dao.select(null).stream().anyMatch(d -> {
-            return ((ConcesionariaForm) d).getNombre().equals("C10");
-        }));
-        assertEquals(Optional.of(expectedConcesionariaId), concesionariaId);
+        // try to approve concesionaria without code
+        try {
+            dao.approveConcesionaria(concesionaria.get());
+        } catch (SQLException e) {
+            assertEquals("The parameter @codigo is null", e.getMessage());
+            throw e;
+        }
     }
 
-    @Ignore
-    public void test02RegistrarTwice() {
+    @Test
+    public void test_04_Registrar_concesionaria_ok() throws SQLException {
 
-        final ConcesionariaForm concecionaria = new ConcesionariaForm();
-        concecionaria.setNombre("C11");
-        concecionaria.setConfig("AXIS");
-        concecionaria.setCuit("CUIT11");
-        concecionaria.setDireccion("dire123");
-        concecionaria.setTel("123123");
-        concecionaria.setEmail("email@123.com");
+        concesionariaForm.setNombre("nombre");
+        concesionariaForm.setConfig("REST");
+        concesionariaForm.setDireccion("direccion");
+        concesionariaForm.setCuit("cuit");
+        concesionariaForm.setTel("tel");
+        concesionariaForm.setEmail("email");
 
-        final RegistrarInteractor concImpl = new RegistrarInteractor();
-        final Optional<Long> logInId = concImpl.registrarConcesionaria(concecionaria).apply(dao);
-        final Optional<Long> logInId2 = concImpl.registrarConcesionaria(concecionaria).apply(dao);
+        Integer cantConcesionarias = dao.select().size();
 
-        assertEquals(Optional.of(new Long(7)), logInId);
-        assertEquals(Optional.empty(), logInId2);
+        dao.insert(concesionariaForm);
+
+        assertEquals(cantConcesionarias + 1, dao.select().size());
+    }
+
+    @Test(expected = SQLException.class)
+    public void test_05_Registrar_concesionaria_fail() throws SQLException {
+
+        concesionariaForm.setNombre("nombre");
+        concesionariaForm.setDireccion("direccion");
+        concesionariaForm.setCuit("cuit");
+        concesionariaForm.setTel("tel");
+        concesionariaForm.setEmail("email");
+
+        // try insert concesionaria without config
+        dao.insert(concesionariaForm);
+    }
+
+    @Test(expected = SQLException.class)
+    public void test_06_Registrar_twice() throws SQLException {
+
+        concesionariaForm.setNombre("C11");
+        concesionariaForm.setConfig("AXIS");
+        concesionariaForm.setCuit("CUIT11");
+        concesionariaForm.setDireccion("dire123");
+        concesionariaForm.setTel("123123");
+        concesionariaForm.setEmail("email@123.com");
+
+        Integer cantConcesionarias = dao.select().size();
+
+        dao.insert(concesionariaForm);
+
+        assertEquals(cantConcesionarias + 1, dao.select().size());
+
+        // should be fail because try to insert the same concesionaria
+        dao.insert(concesionariaForm);
+    }
+
+    @Test
+    public void test_07_Disapprove_concesionaria() throws SQLException {
+        concesionariaForm.setCodigo("codigo");
+        concesionariaForm.setId(1L);
+
+        int cantAprobadas = dao.selectAprobadas().size();
+
+        dao.approveConcesionaria(concesionariaForm);
+
+        assertEquals(cantAprobadas + 1, dao.selectAprobadas().size());
+
+        dao.disapproveConcesionaria(concesionariaForm);
+
+
+        assertEquals(cantAprobadas, dao.selectAprobadas().size());
     }
 }

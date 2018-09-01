@@ -31,8 +31,11 @@ public class MSConcesionariasDao extends DaoImpl<ConcesionariaForm> {
     }
 
     @Override
-    public List<ConcesionariaForm> select(final ConcesionariaForm form) throws SQLException {
+    public List<ConcesionariaForm> select(ConcesionariaForm form) throws SQLException {
+        return this.executeQueryProcedure("dbo.get_concesionarias");
+    }
 
+    public List<ConcesionariaForm> select() throws SQLException {
         return this.executeQueryProcedure("dbo.get_concesionarias");
     }
 
@@ -42,7 +45,8 @@ public class MSConcesionariasDao extends DaoImpl<ConcesionariaForm> {
     }
 
     public Optional<ConcesionariaForm> selectByCodigo(final ConcesionariaForm form) throws SQLException {
-        return this.executeQueryProcedure("dbo.get_concesionaria_by_codigo(?)", form, "codigo")
+        return this.executeQueryProcedure("dbo.get_concesionaria_by_codigo(?)", form,
+                "codigo")
                 .stream()
                 .findFirst();
     }
@@ -51,8 +55,14 @@ public class MSConcesionariasDao extends DaoImpl<ConcesionariaForm> {
         return this.executeQueryProcedure("dbo.get_aprobadas");
     }
 
-    public void approveConcesionaria(final ConcesionariaForm f) throws SQLException {
-        this.executeProcedure("dbo.approve_concesionaria(?, ?)", f, "id", "codigo");
+    public void approveConcesionaria(final ConcesionariaForm form) throws SQLException {
+        this.executeProcedure("dbo.approve_concesionaria(?, ?)", form,
+                "id", "codigo");
+    }
+
+    public void disapproveConcesionaria(final ConcesionariaForm form) throws SQLException {
+        this.executeProcedure("dbo.disapprove_concesionaria(?)", form,
+                "id");
     }
 
 

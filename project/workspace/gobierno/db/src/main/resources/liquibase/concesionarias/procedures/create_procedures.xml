@@ -34,6 +34,19 @@
         <dropProcedure procedureName="get_aprobadas"/>
     </changeSet>
 
+    <changeSet id="Drop procedure disapprove_concesionaria" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'disapprove_concesionaria'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="disapprove_concesionaria"/>
+    </changeSet>
+
     <changeSet id="Drop procedure approve_concesionaria" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="1">
@@ -127,6 +140,19 @@
             </sqlCheck>
         </preConditions>
         <sqlFile path="/src/main/resources/liquibase/concesionarias/procedures/get_aprobadas.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure disapprove_concesionaria" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'disapprove_concesionaria'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/concesionarias/procedures/disapprove_concesionaria.sql"/>
     </changeSet>
 
     <changeSet id="Create procedure approve_concesionaria" author="DAS-Team" runAlways="true" runOnChange="true">

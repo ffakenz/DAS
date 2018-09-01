@@ -29,8 +29,12 @@ public class MSCuotasDao extends DaoImpl<CuotasForm> {
     }
 
     @Override
-    public List<CuotasForm> select(final CuotasForm bean) throws SQLException {
-        return this.executeQueryProcedure("dbo.get_cuotas", bean);
+    public List<CuotasForm> select(CuotasForm form) throws SQLException {
+        return this.executeQueryProcedure("dbo.get_cuotas");
+    }
+
+    public List<CuotasForm> select() throws SQLException {
+        return this.executeQueryProcedure("dbo.get_cuotas");
     }
 
     @Override
