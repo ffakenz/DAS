@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <databaseChangeLog
-        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
@@ -12,37 +12,46 @@
     <changeSet id="Create table config_tecnologica" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists tableName="config_tecnologica" />
+                <tableExists tableName="config_tecnologica"/>
             </not>
         </preConditions>
-        <sqlFile path="/src/main/resources/liquibase/concesionarias/tables/config_tecnologica.sql" />
+        <sqlFile path="/src/main/resources/liquibase/concesionarias/tables/config_tecnologica.sql"/>
     </changeSet>
 
     <changeSet id="Create table concesionaria" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists tableName="concesionaria" />
+                <tableExists tableName="concesionaria"/>
             </not>
         </preConditions>
-        <sqlFile path="/src/main/resources/liquibase/concesionarias/tables/concesionaria.sql" />
+        <sqlFile path="/src/main/resources/liquibase/concesionarias/tables/concesionaria.sql"/>
+    </changeSet>
+
+    <changeSet id="Create table concesionaria_x_config_tecnologica" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="concesionaria_x_config_tecnologica"/>
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/concesionarias/tables/concesionaria_x_config_tecnologica.sql"/>
     </changeSet>
 
     <changeSet id="Create table config_param" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists tableName="config_param" />
+                <tableExists tableName="config_param"/>
             </not>
         </preConditions>
-        <sqlFile path="/src/main/resources/liquibase/concesionarias/tables/config_param.sql" />
+        <sqlFile path="/src/main/resources/liquibase/concesionarias/tables/config_param.sql"/>
     </changeSet>
 
     <changeSet id="Create table concesionaria_config_params" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists tableName="concesionaria_config_params" />
+                <tableExists tableName="concesionaria_config_params"/>
             </not>
         </preConditions>
-        <sqlFile path="/src/main/resources/liquibase/concesionarias/tables/concesionaria_config_params.sql" />
+        <sqlFile path="/src/main/resources/liquibase/concesionarias/tables/concesionaria_config_params.sql"/>
     </changeSet>
-
 </databaseChangeLog>

@@ -6,20 +6,29 @@ BEGIN
         , ('CXF')
         , ('AXIS')
 
-    INSERT INTO concesionaria(nombre, config, direccion, cuit, tel, email)
-    VALUES
-        ('C1', 'REST', 'La Tablada 5739', '21-93337511-1', '+5493513059161', 'c1@gmail.com')
-        , ('C2', 'CXF', 'La Tablada2 5739', '22-93337511-2', '+5493513059162', 'c2@gmail.com')
-        , ('C3', 'AXIS', 'La Tablada3 5739', '22-93337511-3', '+5493513059163', 'c3@gmail.com')
-        , ('C4', 'REST', 'La Tablada4 5739', '23-93337511-4', '+5493513059164', 'c4@gmail.com')
-        , ('C5', 'CXF', 'La Tablada5 5739', '24-93337511-5', '+5493513059165', 'c5@gmail.com')
-
     INSERT INTO config_param (config_tecnologica, nombre)
+        VALUES
+            ('AXIS', 'endpointUrl')
+            , ('AXIS', 'targetNameSpace')
+            , ('CXF', 'wsdlUrl')
+            , ('REST', 'url')
+
+    INSERT INTO concesionaria(nombre, direccion, cuit, tel, email)
     VALUES
-        ('AXIS', 'endpointUrl')
-        , ('AXIS', 'targetNameSpace')
-        , ('CXF', 'wsdlUrl')
-        , ('REST', 'url')
+        ('C1', 'La Tablada 5739', '21-93337511-1', '+5493513059161', 'c1@gmail.com')
+        , ('C2', 'La Tablada2 5739', '22-93337511-2', '+5493513059162', 'c2@gmail.com')
+        , ('C3', 'La Tablada3 5739', '22-93337511-3', '+5493513059163', 'c3@gmail.com')
+        , ('C4', 'La Tablada4 5739', '23-93337511-4', '+5493513059164', 'c4@gmail.com')
+        , ('C5', 'La Tablada5 5739', '24-93337511-5', '+5493513059165', 'c5@gmail.com')
+
+
+    INSERT INTO concesionaria_x_config_tecnologica(concesionaria_id, config_tecnologica)
+    VALUES
+        (1, 'REST')
+        , (2, 'CXF')
+        , (3, 'AXIS')
+        , (4, 'REST')
+        , (5, 'CXF')
 
     INSERT INTO concesionaria_config_params (concesionaria_id, config_tecno, config_param, value)
     VALUES
@@ -27,6 +36,7 @@ BEGIN
         , (2, 'CXF', 'wsdlUrl', 'http://192.168.1.6:8000/concesionaria_cxf_one/services/concesionaria_cxf_one?wsdl')
         , (3, 'AXIS', 'endpointUrl', 'http://192.168.1.6:8001/concesionaria_axis_one/services/ConcesionariaAxisOne.ConcesionariaAxisOneHttpEndpoint/')
         , (3, 'AXIS', 'targetNameSpace', 'http://ws.ConcesionariaAxisOne/')
+        , (4, 'REST', 'url', 'http://localhost:8004/concesionarias_rest_four/concesionariaRestFour')
         , (5, 'CXF', 'wsdlUrl', 'http://192.168.1.6:8000/concesionaria_cxf_one/services/concesionaria_cxf_one?wsdl')
 
     INSERT INTO consumers

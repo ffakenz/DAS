@@ -15,7 +15,7 @@ public class AprobarInteractor {
 
 
     private String generarCodigo(final ConcesionariaForm form) {
-        return "SUPER_CODIGO_SECRETO: " + form.getNombre() + " " + form.getConfig();
+        return "SUPER_CODIGO_SECRETO: " + form.getNombre();
     }
 
 

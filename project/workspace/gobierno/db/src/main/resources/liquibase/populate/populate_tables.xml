@@ -23,6 +23,14 @@
         <sqlFile path="/src/main/resources/liquibase/populate/concesionaria.sql"/>
     </changeSet>
 
+    <changeSet id="Populate table concesionaria_x_config_tecnologica" author="DAS-Team" runAlways="true"
+               runOnChange="true" context="dev">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="concesionaria_x_config_tecnologica"/>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/populate/concesionaria_x_config_tecnologica.sql"/>
+    </changeSet>
+
     <changeSet id="Populate table config_param" author="DAS-Team" runAlways="true" runOnChange="true" context="dev">
         <preConditions onFail="MARK_RAN">
             <tableExists tableName="config_param"/>

@@ -65,7 +65,6 @@ public class ConcesionariaTest {
         final Optional<ConcesionariaForm> concesionaria = dao.select().stream().findFirst();
 
         assertNull(concesionaria.get().getFechaAlta());
-        assertNull(concesionaria.get().getCodigo());
         assertNotNull(concesionaria.get().getId());
 
         // try to approve concesionaria without code
@@ -81,7 +80,6 @@ public class ConcesionariaTest {
     public void test_04_Registrar_concesionaria_ok() throws SQLException {
 
         concesionariaForm.setNombre("nombre");
-        concesionariaForm.setConfig("REST");
         concesionariaForm.setDireccion("direccion");
         concesionariaForm.setCuit("cuit");
         concesionariaForm.setTel("tel");
@@ -95,23 +93,9 @@ public class ConcesionariaTest {
     }
 
     @Test(expected = SQLException.class)
-    public void test_05_Registrar_concesionaria_fail() throws SQLException {
-
-        concesionariaForm.setNombre("nombre");
-        concesionariaForm.setDireccion("direccion");
-        concesionariaForm.setCuit("cuit");
-        concesionariaForm.setTel("tel");
-        concesionariaForm.setEmail("email");
-
-        // try insert concesionaria without config
-        dao.insert(concesionariaForm);
-    }
-
-    @Test(expected = SQLException.class)
     public void test_06_Registrar_twice() throws SQLException {
 
         concesionariaForm.setNombre("C11");
-        concesionariaForm.setConfig("AXIS");
         concesionariaForm.setCuit("CUIT11");
         concesionariaForm.setDireccion("dire123");
         concesionariaForm.setTel("123123");

@@ -17,7 +17,7 @@ public class RegistrarInteractor {
 
     public Function<Dao, Optional<Long>> registrarConcesionaria(final ConcesionariaForm form) {
         return dao -> {
-            final Boolean flag = Arrays.asList("REST", "CXF", "AXIS").contains(form.getConfig());
+            final Boolean flag = Arrays.asList("REST", "CXF", "AXIS").contains(null);
             if (!testConcesionariaRegistrada(form).apply(dao) && flag) {
                 try {
                     dao.insert(form);
@@ -63,7 +63,6 @@ public class RegistrarInteractor {
                                     return emailForm.map(emailRqst -> {
                                         final ConcesionariaForm concesionaria = new ConcesionariaForm();
                                         concesionaria.setNombre(nombreRqst);
-                                        concesionaria.setConfig(configTecnoRqst);
                                         concesionaria.setDireccion(direccionRqst);
                                         concesionaria.setCuit(cuitRqst);
                                         concesionaria.setTel(telRqst);

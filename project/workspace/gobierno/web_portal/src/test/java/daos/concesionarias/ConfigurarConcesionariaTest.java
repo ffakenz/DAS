@@ -37,7 +37,7 @@ public class ConfigurarConcesionariaTest {
     @Test
     public void test_01_Get_all_configs() throws SQLException {
         final int cantConfiguraciones = dao.select().size();
-        assertEquals(5, cantConfiguraciones);
+        assertEquals(6, cantConfiguraciones);
     }
 
     @Test

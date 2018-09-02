@@ -16,8 +16,8 @@ public class MSConcesionariasDao extends DaoImpl<ConcesionariaForm> {
     @Override
     public void insert(final ConcesionariaForm f) throws SQLException {
 
-        this.executeProcedure("dbo.log_concesionaria(?, ?, ?, ?, ?, ?)", f,
-                "nombre", "config", "direccion", "cuit", "tel", "email");
+        this.executeProcedure("dbo.log_concesionaria(?, ?, ?, ?, ?)", f,
+                "nombre", "direccion", "cuit", "tel", "email");
     }
 
     @Override

@@ -12,8 +12,6 @@ public class ConcesionariaForm extends DynaActionForm {
     private Long id;
     @Column(name = "nombre")
     private String nombre;
-    @Column(name = "config")
-    private String config;
     @Column(name = "fecha_registracion")
     private Timestamp fechaRegistracion;
     @Column(name = "fecha_alta")
@@ -34,7 +32,6 @@ public class ConcesionariaForm extends DynaActionForm {
         return "ConcesionariaForm{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
-                ", config='" + config + '\'' +
                 ", fechaRegistracion=" + fechaRegistracion +
                 ", fechaAlta=" + fechaAlta +
                 ", codigo='" + codigo + '\'' +
@@ -59,14 +56,6 @@ public class ConcesionariaForm extends DynaActionForm {
 
     public void setNombre(final String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getConfig() {
-        return config;
-    }
-
-    public void setConfig(final String config) {
-        this.config = config;
     }
 
     public Timestamp getFechaRegistracion() {
