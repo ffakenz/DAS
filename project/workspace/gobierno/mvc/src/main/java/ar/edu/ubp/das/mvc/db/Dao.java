@@ -13,6 +13,10 @@ public interface Dao<T> {
 
     List<T> select(T form) throws SQLException;
 
+    default List<T> select() throws SQLException {
+        return select(null);
+    }
+
     boolean valid(T form) throws SQLException;
 
 }

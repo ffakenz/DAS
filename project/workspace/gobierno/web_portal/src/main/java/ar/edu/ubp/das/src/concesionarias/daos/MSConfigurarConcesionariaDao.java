@@ -36,11 +36,6 @@ public class MSConfigurarConcesionariaDao extends DaoImpl<ConfigurarConcesionari
         return this.executeQueryProcedure("dbo.get_concesionaria_config_params");
     }
 
-    public List<ConfigurarConcesionariaForm> select() throws SQLException {
-
-        return this.executeQueryProcedure("dbo.get_concesionaria_config_params");
-    }
-
     @Override
     public boolean valid(final ConfigurarConcesionariaForm form) throws SQLException {
         return false;

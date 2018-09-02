@@ -31,11 +31,7 @@ public class MSConcesionariasDao extends DaoImpl<ConcesionariaForm> {
     }
 
     @Override
-    public List<ConcesionariaForm> select(ConcesionariaForm form) throws SQLException {
-        return this.executeQueryProcedure("dbo.get_concesionarias");
-    }
-
-    public List<ConcesionariaForm> select() throws SQLException {
+    public List<ConcesionariaForm> select(final ConcesionariaForm form) throws SQLException {
         return this.executeQueryProcedure("dbo.get_concesionarias");
     }
 
