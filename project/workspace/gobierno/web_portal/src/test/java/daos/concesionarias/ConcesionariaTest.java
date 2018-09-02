@@ -1,4 +1,4 @@
-package interactors.concesionarias;
+package daos.concesionarias;
 
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.src.concesionarias.daos.MSConcesionariasDao;
@@ -13,9 +13,7 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 import static junit.framework.TestCase.assertNotNull;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ConcesionariaTest {
@@ -64,7 +62,7 @@ public class ConcesionariaTest {
     @Test(expected = SQLException.class)
     public void test_03_Aprobar_concesionaria_fail() throws SQLException {
 
-        Optional<ConcesionariaForm> concesionaria = dao.select().stream().findFirst();
+        final Optional<ConcesionariaForm> concesionaria = dao.select().stream().findFirst();
 
         assertNull(concesionaria.get().getFechaAlta());
         assertNull(concesionaria.get().getCodigo());
@@ -73,7 +71,7 @@ public class ConcesionariaTest {
         // try to approve concesionaria without code
         try {
             dao.approveConcesionaria(concesionaria.get());
-        } catch (SQLException e) {
+        } catch (final SQLException e) {
             assertEquals("The parameter @codigo is null", e.getMessage());
             throw e;
         }
@@ -89,7 +87,7 @@ public class ConcesionariaTest {
         concesionariaForm.setTel("tel");
         concesionariaForm.setEmail("email");
 
-        Integer cantConcesionarias = dao.select().size();
+        final Integer cantConcesionarias = dao.select().size();
 
         dao.insert(concesionariaForm);
 
@@ -119,7 +117,7 @@ public class ConcesionariaTest {
         concesionariaForm.setTel("123123");
         concesionariaForm.setEmail("email@123.com");
 
-        Integer cantConcesionarias = dao.select().size();
+        final Integer cantConcesionarias = dao.select().size();
 
         dao.insert(concesionariaForm);
 
@@ -134,7 +132,7 @@ public class ConcesionariaTest {
         concesionariaForm.setCodigo("codigo");
         concesionariaForm.setId(1L);
 
-        int cantAprobadas = dao.selectAprobadas().size();
+        final int cantAprobadas = dao.selectAprobadas().size();
 
         dao.approveConcesionaria(concesionariaForm);
 

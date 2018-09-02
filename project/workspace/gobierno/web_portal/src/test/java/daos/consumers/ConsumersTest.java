@@ -1,4 +1,4 @@
-package interactors.consumers;
+package daos.consumers;
 
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.src.consumers.daos.MSConsumerDao;

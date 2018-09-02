@@ -1,4 +1,4 @@
-package interactors.estado_cuentas;
+package daos.estado_cuentas;
 
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.src.estado_cuentas.daos.MSCuotasDao;

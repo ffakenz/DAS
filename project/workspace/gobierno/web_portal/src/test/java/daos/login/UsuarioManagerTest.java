@@ -1,4 +1,4 @@
-package interactors.login;
+package daos.login;
 
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.mvc.db.DaoImpl;

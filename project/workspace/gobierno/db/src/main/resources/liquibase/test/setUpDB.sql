@@ -27,7 +27,6 @@ BEGIN
         , (2, 'CXF', 'wsdlUrl', 'http://192.168.1.6:8000/concesionaria_cxf_one/services/concesionaria_cxf_one?wsdl')
         , (3, 'AXIS', 'endpointUrl', 'http://192.168.1.6:8001/concesionaria_axis_one/services/ConcesionariaAxisOne.ConcesionariaAxisOneHttpEndpoint/')
         , (3, 'AXIS', 'targetNameSpace', 'http://ws.ConcesionariaAxisOne/')
-        , (4, 'REST', 'url', 'http://localhost:8002/concesionarias_rest_one/concesionariaRestOne')
         , (5, 'CXF', 'wsdlUrl', 'http://192.168.1.6:8000/concesionaria_cxf_one/services/concesionaria_cxf_one?wsdl')
 
     INSERT INTO consumers
