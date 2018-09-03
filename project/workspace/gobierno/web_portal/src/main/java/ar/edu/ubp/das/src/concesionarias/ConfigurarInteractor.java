@@ -5,7 +5,7 @@ import ar.edu.ubp.das.mvc.db.Dao;
 import ar.edu.ubp.das.src.concesionarias.daos.MSConcesionariasDao;
 import ar.edu.ubp.das.src.concesionarias.daos.MSConfigurarConcesionariaDao;
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
-import ar.edu.ubp.das.src.concesionarias.forms.ConfigParamForm;
+import ar.edu.ubp.das.src.concesionarias.forms.ConfigurarConcesionariaForm;
 import ar.edu.ubp.das.src.core.InteractorResponse;
 import ar.edu.ubp.das.src.core.ResponseForward;
 
@@ -15,7 +15,7 @@ import java.util.Optional;
 
 public class ConfigurarInteractor {
 
-    public Boolean configurarConcesionaria(final ConfigParamForm configParam) {
+    public Boolean configurarConcesionaria(final ConfigurarConcesionariaForm configParam) {
 
         final Dao daoConfigurar = new MSConfigurarConcesionariaDao();
         final Dao daoConcesionarias = new MSConcesionariasDao();
@@ -38,7 +38,7 @@ public class ConfigurarInteractor {
 
     public InteractorResponse execute(final DynaActionForm form) {
 
-        final Boolean result = configurarConcesionaria((ConfigParamForm) form);
+        final Boolean result = configurarConcesionaria((ConfigurarConcesionariaForm) form);
 
         final InteractorResponse response = new InteractorResponse();
         response.setResult(Optional.of(result));

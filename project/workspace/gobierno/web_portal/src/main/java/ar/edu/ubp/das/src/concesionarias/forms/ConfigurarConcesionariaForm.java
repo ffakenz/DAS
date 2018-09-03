@@ -1,10 +1,11 @@
 package ar.edu.ubp.das.src.concesionarias.forms;
 
+import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.annotations.Column;
 import ar.edu.ubp.das.mvc.db.annotations.Entity;
 
 @Entity
-public class ConfigurarConcesionariaForm {
+public class ConfigurarConcesionariaForm extends DynaActionForm {
 
     @Column(name = "concesionaria_id")
     Long concesionariaId;
