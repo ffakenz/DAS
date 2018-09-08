@@ -14,10 +14,10 @@ import org.junit.runners.MethodSorters;
 import util.TestDB;
 
 import java.sql.SQLException;
-import java.util.Optional;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class LoginInteractorTest {
@@ -33,7 +33,6 @@ public class LoginInteractorTest {
 
         final DatasourceConfig dataSourceConfig = TestDB.getInstance().getDataSourceConfig();
 
-
         loginDao = new MSLogInDao();
         loginDao.setDatasource(dataSourceConfig);
 
@@ -44,7 +43,7 @@ public class LoginInteractorTest {
     }
 
     @Test
-    public void test08_Login_Failure() {
+    public void test08_Login_Failure() throws SQLException {
 
         final DynaActionForm userForm = new DynaActionForm();
         userForm.setItem("username", "no exists");
@@ -53,11 +52,11 @@ public class LoginInteractorTest {
         final InteractorResponse response = interactor.execute(userForm);
 
         assertEquals(ResponseForward.FAILURE, response.getResponse());
-        assertEquals(Optional.empty(), response.getResult());
+        assertNull(response.getResult());
     }
 
     @Test
-    public void test09_Missing_Credentials() {
+    public void test09_Missing_Credentials() throws SQLException {
 
         final DynaActionForm userForm = new DynaActionForm();
         userForm.setItem("username", "pepe2");
@@ -65,24 +64,11 @@ public class LoginInteractorTest {
         final InteractorResponse response = interactor.execute(userForm);
 
         assertEquals(ResponseForward.WARNING, response.getResponse());
-        assertEquals(Optional.empty(), response.getResult());
+        assertNull(response.getResult());
     }
 
     @Test
-    public void test10_Login_Interactor() {
-
-        final DynaActionForm userForm = new DynaActionForm();
-        userForm.setItem("username", "pepe2");
-        userForm.setItem("password", "asd");
-
-        final InteractorResponse response = interactor.execute(userForm);
-
-        assertEquals(ResponseForward.SUCCESS, response.getResponse());
-        assertTrue(response.getResult().isPresent());
-    }
-
-    @Test
-    public void test11_Login_Twice() {
+    public void test10_Login_Interactor() throws SQLException {
 
         final DynaActionForm userForm = new DynaActionForm();
         userForm.setItem("username", "pepe2");
@@ -91,13 +77,24 @@ public class LoginInteractorTest {
         final InteractorResponse<Long> response = interactor.execute(userForm);
 
         assertEquals(ResponseForward.SUCCESS, response.getResponse());
-        assertTrue(response.getResult().isPresent());
+        assertTrue(response.getResult() > 0);
+    }
+
+    @Test
+    public void test11_Login_Twice() throws SQLException {
+
+        final DynaActionForm userForm = new DynaActionForm();
+        userForm.setItem("username", "pepe2");
+        userForm.setItem("password", "asd");
+
+        final InteractorResponse<Long> response = interactor.execute(userForm);
+
+        assertEquals(ResponseForward.SUCCESS, response.getResponse());
+        assertTrue(response.getResult() > 0);
 
 
         final InteractorResponse<Long> response2 = interactor.execute(userForm);
         assertEquals(ResponseForward.SUCCESS, response2.getResponse());
-        assertTrue(response2.getResult().get() > response.getResult().get());
+        assertTrue(response2.getResult() > response.getResult());
     }
-
-
 }

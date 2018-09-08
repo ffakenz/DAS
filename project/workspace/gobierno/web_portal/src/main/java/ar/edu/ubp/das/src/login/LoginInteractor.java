@@ -24,36 +24,26 @@ public class LoginInteractor implements Interactor<Long> {
     }
 
     @Override
-    public InteractorResponse<Long> execute(final DynaActionForm form) {
-        final Optional<InteractorResponse> response =
-                form.getItem("username").flatMap(u ->
-                        form.getItem("password").map(p -> {
-                            // is user valid ?
-                            try {
-                                if (!usuarioManager.verifyUsernameAndPassword(u, p)) {
-                                    return new InteractorResponse(ResponseForward.FAILURE);
-                                }
+    public InteractorResponse<Long> execute(final DynaActionForm form) throws SQLException {
+        final String NOT_FOUND = "NOT_FOUND";
+        final String password = form.getItem("password").orElse(NOT_FOUND);
+        final String username = form.getItem("username").orElse(NOT_FOUND);
 
-                                final LogInForm logInForm = new LogInForm(u);
+        if (username.equals(NOT_FOUND) || password.equals(NOT_FOUND))
+            return new InteractorResponse<>(ResponseForward.WARNING); // Some error occur with username / password
 
-                                if (loginManager.isLoggedIn(logInForm).isPresent()) {
-                                    final Long loginId = loginManager.isLoggedIn(logInForm).get();
-                                    logInForm.setId(loginId);
-                                    loginManager.logout(logInForm);
-                                }
+        if (!usuarioManager.verifyUsernameAndPassword(username, password))
+            return new InteractorResponse<>(ResponseForward.FAILURE);
 
-                                return loginManager.login(logInForm)
-                                        .map(LogInId -> new InteractorResponse(ResponseForward.SUCCESS, Optional.of(LogInId)))
-                                        .orElse(new InteractorResponse(ResponseForward.FAILURE));
+        final LogInForm logInForm = new LogInForm(username);
+        final Optional<Long> loginId = loginManager.isLoggedIn(logInForm);
+        if (loginId.isPresent()) {
+            logInForm.setId(loginId.get());
+            loginManager.logout(logInForm);
+        }
 
-                            } catch (final SQLException e) {
-                                e.printStackTrace();
-                                return new InteractorResponse(ResponseForward.FAILURE);
-                            }
-                        })
-                );
-
-        return response.orElse(new InteractorResponse(ResponseForward.WARNING)); // Some error occur with username / password
+        return loginManager.login(logInForm)
+                .map(LogInId -> new InteractorResponse<>(ResponseForward.SUCCESS, LogInId))
+                .orElse(new InteractorResponse<>(ResponseForward.FAILURE));
     }
-
 }

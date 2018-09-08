@@ -10,15 +10,14 @@ import ar.edu.ubp.das.src.core.InteractorResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
-import java.util.Optional;
 
 public class AprobarConcesionariaAction implements Action {
     @Override
     public ForwardConfig execute(final ActionMapping mapping, final DynaActionForm form, final HttpServletRequest request, final HttpServletResponse response) throws SQLException, RuntimeException {
         final AprobarInteractor action = new AprobarInteractor();
-        final InteractorResponse result = action.execute(form);
+        final InteractorResponse<String> result = action.execute(form);
 
-        final Optional<String> codigo = result.getResult();
+        final String codigo = result.getResult();
 
 
         request.setAttribute("codigo", codigo);

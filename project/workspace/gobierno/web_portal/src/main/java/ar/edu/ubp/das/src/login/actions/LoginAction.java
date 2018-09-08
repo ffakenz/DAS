@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
-import java.util.Optional;
 
 public class LoginAction implements Action {
 
@@ -28,7 +27,7 @@ public class LoginAction implements Action {
         final LoginInteractor action = new LoginInteractor(loginDao, msUsuariosDao);
         final InteractorResponse<Long> result = action.execute(form);
 
-        final Optional<Long> logInId = result.getResult();
+        final Long logInId = result.getResult();
 
         final HttpSession session = request.getSession();
         session.setAttribute("LogInId", logInId);

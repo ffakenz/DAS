@@ -10,7 +10,6 @@ import ar.edu.ubp.das.src.core.InteractorResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
-import java.util.Optional;
 
 public class ConfigurarAction implements Action {
 
@@ -20,9 +19,9 @@ public class ConfigurarAction implements Action {
         final ConfigurarInteractor action = new ConfigurarInteractor();
         final InteractorResponse<Boolean> result = action.execute(form);
 
-        final Optional<Boolean> configurationSucceeded = result.getResult();
+        final Boolean configurationSucceeded = result.getResult();
 
-        request.setAttribute("configurationSucceeded", configurationSucceeded.orElse(false));
+        request.setAttribute("configurationSucceeded", configurationSucceeded);
 
         return mapping.getForwardByName(result.getResponse().getForward());
     }

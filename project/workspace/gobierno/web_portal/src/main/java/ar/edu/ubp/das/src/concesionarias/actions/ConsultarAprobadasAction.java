@@ -12,15 +12,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 public class ConsultarAprobadasAction implements Action {
     @Override
     public ForwardConfig execute(final ActionMapping mapping, final DynaActionForm form, final HttpServletRequest request, final HttpServletResponse response) throws SQLException, RuntimeException {
         final ConsultarAprobadasInteractor action = new ConsultarAprobadasInteractor();
-        final InteractorResponse result = action.execute(form);
+        final InteractorResponse<List<ConcesionariaForm>> result = action.execute(form);
 
-        final Optional<List<ConcesionariaForm>> aprobadas = result.getResult();
+        final List<ConcesionariaForm> aprobadas = result.getResult();
 
 
         request.setAttribute("aprobadas", aprobadas);

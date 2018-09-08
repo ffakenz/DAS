@@ -1,10 +1,8 @@
 package ar.edu.ubp.das.src.core;
 
-import java.util.Optional;
-
 public class InteractorResponse<T> {
     private ResponseForward response;
-    private Optional<T> result;
+    private T result;
 
 
     public InteractorResponse() {
@@ -12,10 +10,9 @@ public class InteractorResponse<T> {
 
     public InteractorResponse(final ResponseForward response) {
         this.response = response;
-        this.result = Optional.empty();
     }
 
-    public InteractorResponse(final ResponseForward response, final Optional<T> result) {
+    public InteractorResponse(final ResponseForward response, final T result) {
         this.response = response;
         this.result = result;
     }
@@ -28,11 +25,11 @@ public class InteractorResponse<T> {
         this.response = response;
     }
 
-    public Optional<T> getResult() {
+    public T getResult() {
         return result;
     }
 
-    public void setResult(final Optional<T> result) {
+    public void setResult(final T result) {
         this.result = result;
     }
 }
