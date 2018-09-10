@@ -12,15 +12,18 @@
     <include file="/src/main/resources/liquibase/consumers/drops/drop_tables.xml"/>
     <include file="/src/main/resources/liquibase/concesionarias/drops/drop_tables.xml"/>
     <include file="/src/main/resources/liquibase/login/drops/drop_tables.xml"/>
+    <include file="/src/main/resources/liquibase/usuarios/drops/drop_tables.xml"/>
 
 
     <!-- ########################################### -->
     <!-- Main create table change-sets               -->
     <!-- ########################################### -->
+    <include file="/src/main/resources/liquibase/usuarios/tables/create_tables.xml"/>
     <include file="/src/main/resources/liquibase/login/tables/create_tables.xml"/>
     <include file="/src/main/resources/liquibase/concesionarias/tables/create_tables.xml"/>
     <include file="/src/main/resources/liquibase/consumers/tables/create_tables.xml"/>
     <include file="/src/main/resources/liquibase/estado_cuentas/tables/create_tables.xml"/>
+
 
     <!-- ########################################### -->
     <!-- Main triggers change-sets               -->
@@ -31,6 +34,7 @@
     <!-- ########################################### -->
     <!-- Main procedures change-sets                 -->
     <!-- ########################################### -->
+    <include file="/src/main/resources/liquibase/usuarios/procedures/create_procedures.xml"/>
     <include file="/src/main/resources/liquibase/login/procedures/create_procedures.xml"/>
     <include file="/src/main/resources/liquibase/concesionarias/procedures/create_procedures.xml"/>
     <include file="/src/main/resources/liquibase/consumers/procedures/create_procedures.xml"/>

@@ -1,4 +1,4 @@
-package ar.edu.ubp.das.src.login.model.usuario;
+package ar.edu.ubp.das.src.usuarios.model;
 
 public enum UsuarioRol {
     GOBIERNO("gobierno"), CONSUMER("consumer");

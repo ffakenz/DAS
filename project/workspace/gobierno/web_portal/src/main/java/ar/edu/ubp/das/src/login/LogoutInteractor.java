@@ -6,45 +6,34 @@ import ar.edu.ubp.das.src.core.Interactor;
 import ar.edu.ubp.das.src.core.InteractorResponse;
 import ar.edu.ubp.das.src.core.ResponseForward;
 import ar.edu.ubp.das.src.login.forms.LogInForm;
-import ar.edu.ubp.das.src.login.model.login.LoginManager;
-import ar.edu.ubp.das.src.login.model.usuario.UsuarioManager;
+import ar.edu.ubp.das.src.login.model.LoginManager;
 
 import java.sql.SQLException;
-import java.util.Optional;
 
 
 public class LogoutInteractor implements Interactor<Long> {
 
     private LoginManager loginManager;
-    private UsuarioManager usuarioManager;
 
-    public LogoutInteractor(final DaoImpl loginDao, final DaoImpl msUsuariosDao) {
+    public LogoutInteractor(final DaoImpl loginDao) {
         this.loginManager = new LoginManager(loginDao);
-        this.usuarioManager = new UsuarioManager(msUsuariosDao);
     }
 
     @Override
-    public InteractorResponse execute(final DynaActionForm form) {
-        final Optional<InteractorResponse> response =
-                form.getItem("username").flatMap(u ->
-                        form.getItem("id").map(id -> {
+    public InteractorResponse execute(final DynaActionForm form) throws SQLException {
 
-                            try {
-                                final LogInForm logInForm = new LogInForm(u);
-                                logInForm.setId(Long.parseLong(id));
+        final String NOT_FOUND = "NOT_FOUND";
+        final String username = form.getItem("username").orElse(NOT_FOUND);
 
-                                loginManager.logout(logInForm);
-                                // if we are here it means the logout was successfully or the user was already logged out
-                                return new InteractorResponse(ResponseForward.SUCCESS);
+        if (username.equals(NOT_FOUND))
+            return new InteractorResponse<>(ResponseForward.WARNING); // Some error occur with username
 
-                            } catch (final SQLException e) {
-                                e.printStackTrace();
-                                return new InteractorResponse(ResponseForward.FAILURE);
-                            }
-                        })
-                );
+        final LogInForm logInForm = new LogInForm(username);
 
-        return response.orElse(new InteractorResponse(ResponseForward.WARNING));
+        loginManager.logout(logInForm);
+
+        // if we are here it means the logout was successfully or the user was already logged out
+        return new InteractorResponse(ResponseForward.SUCCESS);
     }
 
 }

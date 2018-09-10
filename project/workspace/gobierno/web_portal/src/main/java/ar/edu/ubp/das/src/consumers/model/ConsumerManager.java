@@ -1,4 +1,4 @@
-package ar.edu.ubp.das.src.consumers.model.consumer;
+package ar.edu.ubp.das.src.consumers.model;
 
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.consumers.daos.MSConsumerDao;

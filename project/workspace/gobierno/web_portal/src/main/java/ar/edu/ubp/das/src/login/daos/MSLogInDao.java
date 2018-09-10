@@ -21,7 +21,7 @@ public class MSLogInDao extends DaoImpl<LogInForm> {
 
     @Override
     public void update(final LogInForm f) throws SQLException {
-        executeProcedure("dbo.log_out(?, ?)", f, "id", "username");
+        executeProcedure("dbo.log_out(?)", f, "username");
     }
 
     @Override

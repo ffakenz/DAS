@@ -8,13 +8,22 @@
     <!-- ***************************** -->
     <!--   TABLE CREATION CHANGE-SETS  -->
     <!-- ***************************** -->
-    <changeSet id="Create table login" author="DAS-Team" runAlways="true" runOnChange="true">
+    <changeSet id="Create table tipo_usuario" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists tableName="login"/>
+                <tableExists tableName="tipo_usuario"/>
             </not>
         </preConditions>
-        <sqlFile path="/src/main/resources/liquibase/login/tables/login.sql"/>
+        <sqlFile path="/src/main/resources/liquibase/usuarios/tables/tipo_usuario.sql"/>
+    </changeSet>
+
+    <changeSet id="Create table usuario" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="usuario"/>
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/usuarios/tables/usuario.sql"/>
     </changeSet>
 
 </databaseChangeLog>

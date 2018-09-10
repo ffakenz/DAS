@@ -1,4 +1,4 @@
-package ar.edu.ubp.das.src.login.model.login;
+package ar.edu.ubp.das.src.login.model;
 
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.core.Manager;
@@ -23,6 +23,7 @@ public class LoginManager extends Manager<MSLogInDao> {
     }
 
     public Optional<Long> login(final LogInForm form) throws SQLException {
+        logout(form);
         dao.insert(form);
         return isLoggedIn(form);
     }

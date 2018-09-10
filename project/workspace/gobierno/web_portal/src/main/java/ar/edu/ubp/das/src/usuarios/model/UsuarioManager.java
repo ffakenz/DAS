@@ -1,9 +1,9 @@
-package ar.edu.ubp.das.src.login.model.usuario;
+package ar.edu.ubp.das.src.usuarios.model;
 
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.core.Manager;
-import ar.edu.ubp.das.src.login.daos.MSUsuariosDao;
-import ar.edu.ubp.das.src.login.forms.UsuarioForm;
+import ar.edu.ubp.das.src.usuarios.daos.MSUsuariosDao;
+import ar.edu.ubp.das.src.usuarios.forms.UsuarioForm;
 
 import java.sql.SQLException;
 

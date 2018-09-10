@@ -9,22 +9,24 @@ import java.sql.Timestamp;
 @Entity
 public class ConsumerForm extends DynaActionForm {
 
-    @Column( name = "id")
+    @Column(name = "id")
     private Long id;
-    @Column( name = "documento")
+    @Column(name = "documento")
     private Long documento;
-    @Column( name = "nombre")
+    @Column(name = "nombre")
     private String nombre;
-    @Column( name = "apellido")
+    @Column(name = "apellido")
     private String apellido;
-    @Column( name = "nro_telefono")
+    @Column(name = "nro_telefono")
     private String nroTelefono;
-    @Column( name = "email")
+    @Column(name = "email")
     private String email;
-    @Column( name = "fecha_de_alta")
+    @Column(name = "fecha_de_alta")
     private Timestamp fechaAlta;
-    @Column( name = "concesionaria")
+    @Column(name = "concesionaria")
     private Long concesionaria;
+    @Column(name = "username")
+    private String username;
 
 
     @Override
@@ -36,9 +38,18 @@ public class ConsumerForm extends DynaActionForm {
                 ", apellido='" + apellido + '\'' +
                 ", nroTelefono='" + nroTelefono + '\'' +
                 ", email='" + email + '\'' +
-                ", fechaAlta=" + fechaAlta +
-                ", concesionaria=" + concesionaria +
+                ", fechaAlta=" + fechaAlta + '\'' +
+                ", concesionaria=" + concesionaria + '\'' +
+                ", username=" + username + '\'' +
                 '}';
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(final String username) {
+        this.username = username;
     }
 
     public Long getId() {
@@ -101,7 +112,7 @@ public class ConsumerForm extends DynaActionForm {
         return concesionaria;
     }
 
-    public void setConcesionaria(Long concesionaria) {
+    public void setConcesionaria(final Long concesionaria) {
         this.concesionaria = concesionaria;
     }
 }

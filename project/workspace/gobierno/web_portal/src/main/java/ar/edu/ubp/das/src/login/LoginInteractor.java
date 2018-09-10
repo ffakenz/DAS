@@ -6,11 +6,10 @@ import ar.edu.ubp.das.src.core.Interactor;
 import ar.edu.ubp.das.src.core.InteractorResponse;
 import ar.edu.ubp.das.src.core.ResponseForward;
 import ar.edu.ubp.das.src.login.forms.LogInForm;
-import ar.edu.ubp.das.src.login.model.login.LoginManager;
-import ar.edu.ubp.das.src.login.model.usuario.UsuarioManager;
+import ar.edu.ubp.das.src.login.model.LoginManager;
+import ar.edu.ubp.das.src.usuarios.model.UsuarioManager;
 
 import java.sql.SQLException;
-import java.util.Optional;
 
 
 public class LoginInteractor implements Interactor<Long> {
@@ -36,11 +35,6 @@ public class LoginInteractor implements Interactor<Long> {
             return new InteractorResponse<>(ResponseForward.FAILURE);
 
         final LogInForm logInForm = new LogInForm(username);
-        final Optional<Long> loginId = loginManager.isLoggedIn(logInForm);
-        if (loginId.isPresent()) {
-            logInForm.setId(loginId.get());
-            loginManager.logout(logInForm);
-        }
 
         return loginManager.login(logInForm)
                 .map(LogInId -> new InteractorResponse<>(ResponseForward.SUCCESS, LogInId))

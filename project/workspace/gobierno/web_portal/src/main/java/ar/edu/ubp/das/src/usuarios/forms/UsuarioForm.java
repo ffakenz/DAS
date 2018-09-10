@@ -1,10 +1,10 @@
-package ar.edu.ubp.das.src.login.forms;
+package ar.edu.ubp.das.src.usuarios.forms;
 
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.annotations.Column;
 import ar.edu.ubp.das.mvc.db.annotations.Entity;
-import ar.edu.ubp.das.src.login.model.usuario.UsuarioRol;
+import ar.edu.ubp.das.src.usuarios.model.UsuarioRol;
 
 @Entity
 public class UsuarioForm extends DynaActionForm {

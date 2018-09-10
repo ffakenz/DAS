@@ -20,11 +20,9 @@ public class LogoutAction implements Action {
     public ForwardConfig execute(final ActionMapping mapping, final DynaActionForm form, final HttpServletRequest request,
                                  final HttpServletResponse response) throws SQLException, RuntimeException {
 
+        final DaoImpl loginDao = DaoFactory.getDao("LogIn", "login");
 
-        final DaoImpl msUsuariosDao = DaoFactory.getDao("Usuarios", "consumer");
-        final DaoImpl loginDao = DaoFactory.getDao("LogIn", "consumer");
-
-        final LogoutInteractor action = new LogoutInteractor(loginDao, msUsuariosDao);
+        final LogoutInteractor action = new LogoutInteractor(loginDao);
         final InteractorResponse<Long> result = action.execute(form);
 
         final Long logInId = result.getResult();

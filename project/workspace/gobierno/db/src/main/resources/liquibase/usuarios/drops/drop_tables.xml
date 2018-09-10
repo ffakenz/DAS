@@ -8,11 +8,18 @@
     <!-- ***************************** -->
     <!--   TABLE DROP CHANGE-SETS      -->
     <!-- ***************************** -->
-    <changeSet id="Drop table login" author="DAS-Team" runAlways="true" runOnChange="true">
+    <changeSet id="Drop table usuario" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
-            <tableExists tableName="login"/>
+            <tableExists tableName="usuario"/>
         </preConditions>
-        <dropTable tableName="login"/>
+        <dropTable tableName="usuario"/>
+    </changeSet>
+
+    <changeSet id="Drop table tipo_usuario" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="tipo_usuario"/>
+        </preConditions>
+        <dropTable tableName="tipo_usuario"/>
     </changeSet>
 
 </databaseChangeLog>

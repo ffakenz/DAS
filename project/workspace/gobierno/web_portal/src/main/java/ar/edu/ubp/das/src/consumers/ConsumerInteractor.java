@@ -1,7 +1,7 @@
 package ar.edu.ubp.das.src.consumers;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
-import ar.edu.ubp.das.src.consumers.model.consumer.ConsumerManager;
+import ar.edu.ubp.das.src.consumers.model.ConsumerManager;
 import ar.edu.ubp.das.src.core.Interactor;
 import ar.edu.ubp.das.src.core.InteractorResponse;
 

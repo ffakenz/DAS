@@ -47,4 +47,16 @@ public class MSConsumerDao extends DaoImpl<ConsumerForm> {
                 .stream()
                 .findFirst();
     }
+
+    public Boolean selectConsumerByDni(final ConsumerForm form) throws SQLException {
+        return this.executeQueryProcedure("dbo.get_consumer_by_documento(?)",
+                form, "documento")
+                .stream()
+                .findFirst()
+                .isPresent();
+    }
+
+    public void addUsername(final ConsumerForm bean) throws SQLException {
+        this.executeProcedure("dbo.add_username_consumers(?, ?)", bean, "documento", "username");
+    }
 }
