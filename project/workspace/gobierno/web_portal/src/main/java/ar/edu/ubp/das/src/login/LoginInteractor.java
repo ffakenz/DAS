@@ -8,6 +8,7 @@ import ar.edu.ubp.das.src.core.ResponseForward;
 import ar.edu.ubp.das.src.login.forms.LogInForm;
 import ar.edu.ubp.das.src.login.model.LoginManager;
 import ar.edu.ubp.das.src.usuarios.model.UsuarioManager;
+import com.sun.tools.javac.util.Pair;
 
 import java.sql.SQLException;
 
@@ -24,17 +25,16 @@ public class LoginInteractor implements Interactor<Long> {
 
     @Override
     public InteractorResponse<Long> execute(final DynaActionForm form) throws SQLException {
-        final String NOT_FOUND = "NOT_FOUND";
-        final String password = form.getItem("password").orElse(NOT_FOUND);
-        final String username = form.getItem("username").orElse(NOT_FOUND);
+        final Pair<String, Boolean> password = isItemValid("password", form);
+        final Pair<String, Boolean> username = isItemValid("username", form);
 
-        if (username.equals(NOT_FOUND) || password.equals(NOT_FOUND))
+        if (!username.snd || !password.snd)
             return new InteractorResponse<>(ResponseForward.WARNING); // Some error occur with username / password
 
-        if (!usuarioManager.verifyUsernameAndPassword(username, password))
+        if (!usuarioManager.verifyUsernameAndPassword(username.fst, password.fst))
             return new InteractorResponse<>(ResponseForward.FAILURE);
 
-        final LogInForm logInForm = new LogInForm(username);
+        final LogInForm logInForm = new LogInForm(username.fst);
 
         return loginManager.login(logInForm)
                 .map(LogInId -> new InteractorResponse<>(ResponseForward.SUCCESS, LogInId))

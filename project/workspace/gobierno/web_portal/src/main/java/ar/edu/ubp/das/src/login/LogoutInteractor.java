@@ -7,6 +7,7 @@ import ar.edu.ubp.das.src.core.InteractorResponse;
 import ar.edu.ubp.das.src.core.ResponseForward;
 import ar.edu.ubp.das.src.login.forms.LogInForm;
 import ar.edu.ubp.das.src.login.model.LoginManager;
+import com.sun.tools.javac.util.Pair;
 
 import java.sql.SQLException;
 
@@ -21,14 +22,12 @@ public class LogoutInteractor implements Interactor<Long> {
 
     @Override
     public InteractorResponse execute(final DynaActionForm form) throws SQLException {
+        final Pair<String, Boolean> username = isItemValid("username", form);
 
-        final String NOT_FOUND = "NOT_FOUND";
-        final String username = form.getItem("username").orElse(NOT_FOUND);
-
-        if (username.equals(NOT_FOUND))
+        if (!username.snd)
             return new InteractorResponse<>(ResponseForward.WARNING); // Some error occur with username
 
-        final LogInForm logInForm = new LogInForm(username);
+        final LogInForm logInForm = new LogInForm(username.fst);
 
         loginManager.logout(logInForm);
 

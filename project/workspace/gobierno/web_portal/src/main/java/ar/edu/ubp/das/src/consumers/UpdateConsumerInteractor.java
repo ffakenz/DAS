@@ -7,10 +7,9 @@ import ar.edu.ubp.das.src.consumers.model.ConsumerManager;
 import ar.edu.ubp.das.src.core.Interactor;
 import ar.edu.ubp.das.src.core.InteractorResponse;
 import ar.edu.ubp.das.src.core.ResponseForward;
+import com.sun.tools.javac.util.Pair;
 
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.List;
 
 public class UpdateConsumerInteractor implements Interactor<Boolean> {
 
@@ -21,27 +20,28 @@ public class UpdateConsumerInteractor implements Interactor<Boolean> {
     }
 
     @Override
-    public InteractorResponse<Boolean> execute(DynaActionForm form) throws SQLException {
-        final String NOT_FOUND = "NOT_FOUND";
-        final String documento = form.getItem("documento").orElse(NOT_FOUND);
-        final String concesionaria = form.getItem("concesionaria").orElse(NOT_FOUND);
-        final String nro_telefono= form.getItem("nro_telefono").orElse(NOT_FOUND);
-        final String email = form.getItem("email").orElse(NOT_FOUND);
+    public InteractorResponse<Boolean> execute(final DynaActionForm form) throws SQLException {
+        final Pair<String, Boolean> documento = isItemValid("documento", form);
+        final Pair<String, Boolean> concesionaria = isItemValid("concesionaria", form);
+        final Pair<String, Boolean> nro_telefono = isItemValid("nro_telefono", form);
+        final Pair<String, Boolean> email = isItemValid("email", form);
 
-        Boolean requeridosIsInvalid = documento.equals(NOT_FOUND) || concesionaria.equals(NOT_FOUND);
-        Boolean optionalsIsInvalid = email.equals(NOT_FOUND) && nro_telefono.equals(NOT_FOUND);
+        final Boolean requeridosIsInvalid = !documento.snd || !concesionaria.snd; // no puede faltar ni el documento ni la concesionaria
+        final Boolean optionalsIsInvalid = !email.snd && !nro_telefono.snd; // no pueden faltar email y telefono al mismo tiempo
 
         // Some error occur with the input values
         if (requeridosIsInvalid || optionalsIsInvalid)
             return new InteractorResponse<>(ResponseForward.WARNING, false);
 
         final ConsumerForm consumerForm = new ConsumerForm();
-        consumerForm.setDocumento(Long.valueOf(documento));
-        consumerForm.setConcesionaria(Long.valueOf(concesionaria));
-        consumerForm.setNroTelefono(nro_telefono);
-        consumerForm.setEmail(email);
+        consumerForm.setDocumento(Long.valueOf(documento.fst));
+        consumerForm.setConcesionaria(Long.valueOf(concesionaria.fst));
+        consumerForm.setNroTelefono(nro_telefono.fst);
+        consumerForm.setEmail(email.fst);
 
         consumerManager.getDao().update(consumerForm);
         return new InteractorResponse<>(ResponseForward.SUCCESS, true);
     }
 }
+
+
