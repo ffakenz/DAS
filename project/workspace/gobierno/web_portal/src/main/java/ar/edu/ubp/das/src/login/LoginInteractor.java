@@ -34,9 +34,7 @@ public class LoginInteractor implements Interactor<Long> {
         if (!usuarioManager.verifyUsernameAndPassword(username.fst, password.fst))
             return new InteractorResponse<>(ResponseForward.FAILURE);
 
-        final LogInForm logInForm = new LogInForm(username.fst);
-
-        return loginManager.login(logInForm)
+        return loginManager.login(form.convertTo(LogInForm.class))
                 .map(LogInId -> new InteractorResponse<>(ResponseForward.SUCCESS, LogInId))
                 .orElse(new InteractorResponse<>(ResponseForward.FAILURE));
     }

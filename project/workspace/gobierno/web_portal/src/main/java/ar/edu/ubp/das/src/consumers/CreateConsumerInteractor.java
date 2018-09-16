@@ -36,15 +36,7 @@ public class CreateConsumerInteractor implements Interactor<Boolean> {
         if (someIsMissing)
             return new InteractorResponse<>(ResponseForward.WARNING, false);
 
-        final ConsumerForm consumerForm = new ConsumerForm();
-        consumerForm.setDocumento(Long.valueOf(documento.fst));
-        consumerForm.setConcesionaria(Long.valueOf(concesionaria.fst));
-        consumerForm.setNombre(nombre.fst);
-        consumerForm.setApellido(apellido.fst);
-        consumerForm.setNroTelefono(nro_telefono.fst);
-        consumerForm.setEmail(email.fst);
-
-        consumerManager.getDao().insert(consumerForm);
+        consumerManager.getDao().insert(form.convertTo(ConsumerForm.class));
         return new InteractorResponse<>(ResponseForward.SUCCESS, true);
     }
 

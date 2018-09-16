@@ -27,9 +27,7 @@ public class LogoutInteractor implements Interactor<Long> {
         if (!username.snd)
             return new InteractorResponse<>(ResponseForward.WARNING); // Some error occur with username
 
-        final LogInForm logInForm = new LogInForm(username.fst);
-
-        loginManager.logout(logInForm);
+        loginManager.logout(form.convertTo(LogInForm.class));
 
         // if we are here it means the logout was successfully or the user was already logged out
         return new InteractorResponse(ResponseForward.SUCCESS);

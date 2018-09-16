@@ -35,15 +35,12 @@ public class UsuarioCreateInteractor implements Interactor<Boolean> {
         if (!documento.snd || !username.snd || !password.snd)
             return new InteractorResponse<>(ResponseForward.WARNING, false);
 
-        final ConsumerForm consumerForm = new ConsumerForm();
-        consumerForm.setDocumento(Long.valueOf(documento.fst));
+        final ConsumerForm consumerForm = form.convertTo(ConsumerForm.class);
 
         if (!consumerManager.getDao().selectConsumerByDni(consumerForm))
             return new InteractorResponse<>(ResponseForward.FAILURE, false);
 
-        final UsuarioForm usuarioForm = new UsuarioForm();
-        usuarioForm.setUsername(username.fst);
-        usuarioForm.setPassword(password.fst);
+        final UsuarioForm usuarioForm = form.convertTo(UsuarioForm.class);
         usuarioForm.setRol(rol.toString());
 
         usuarioManager.createUser(usuarioForm);

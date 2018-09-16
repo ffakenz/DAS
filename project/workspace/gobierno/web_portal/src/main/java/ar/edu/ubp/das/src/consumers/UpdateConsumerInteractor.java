@@ -33,13 +33,7 @@ public class UpdateConsumerInteractor implements Interactor<Boolean> {
         if (requeridosIsInvalid || optionalsIsInvalid)
             return new InteractorResponse<>(ResponseForward.WARNING, false);
 
-        final ConsumerForm consumerForm = new ConsumerForm();
-        consumerForm.setDocumento(Long.valueOf(documento.fst));
-        consumerForm.setConcesionaria(Long.valueOf(concesionaria.fst));
-        consumerForm.setNroTelefono(nro_telefono.fst);
-        consumerForm.setEmail(email.fst);
-
-        consumerManager.getDao().update(consumerForm);
+        consumerManager.getDao().update(form.convertTo(ConsumerForm.class));
         return new InteractorResponse<>(ResponseForward.SUCCESS, true);
     }
 }
