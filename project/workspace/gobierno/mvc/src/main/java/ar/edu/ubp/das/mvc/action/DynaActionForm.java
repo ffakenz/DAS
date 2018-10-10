@@ -2,15 +2,14 @@ package ar.edu.ubp.das.mvc.action;
 
 import ar.edu.ubp.das.mvc.db.annotations.Entity;
 import ar.edu.ubp.das.mvc.db.annotations.NoEntityException;
+import ar.edu.ubp.das.mvc.util.Pair;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Field;
 import java.sql.Date;
 import java.sql.Timestamp;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class DynaActionForm {
 
@@ -135,6 +134,20 @@ public class DynaActionForm {
             form.append("\n");
         }
         return form.toString();
+    }
+
+
+    //TODO: refactor this method
+    public List<Pair<String, Boolean>> getValidations() {
+        return this.items.keySet().stream()
+                .map(this::isItemValid)
+                .collect(Collectors.toList());
+    }
+
+    public Pair<String, Boolean> isItemValid(final String arg) {
+        final String NOT_FOUND = "NOT_FOUND";
+        final String itemValue = this.getItem(arg).orElse(NOT_FOUND);
+        return Pair.of(itemValue, !itemValue.equals(NOT_FOUND));
     }
 
 }

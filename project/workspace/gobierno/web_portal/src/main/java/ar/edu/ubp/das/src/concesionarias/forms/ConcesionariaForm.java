@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 
 @Entity
 public class ConcesionariaForm extends DynaActionForm {
+
     @Column(name = "id")
     private Long id;
     @Column(name = "nombre")

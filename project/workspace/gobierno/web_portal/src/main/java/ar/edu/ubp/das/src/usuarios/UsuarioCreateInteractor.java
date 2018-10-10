@@ -10,7 +10,7 @@ import ar.edu.ubp.das.src.core.ResponseForward;
 import ar.edu.ubp.das.src.usuarios.forms.UsuarioForm;
 import ar.edu.ubp.das.src.usuarios.model.UsuarioManager;
 import ar.edu.ubp.das.src.usuarios.model.UsuarioRol;
-import com.sun.tools.javac.util.Pair;
+import ar.edu.ubp.das.mvc.util.Pair;
 
 import java.sql.SQLException;
 
@@ -26,13 +26,12 @@ public class UsuarioCreateInteractor implements Interactor<Boolean> {
 
     @Override
     public InteractorResponse<Boolean> execute(final DynaActionForm form) throws SQLException, NumberFormatException {
-        final Pair<String, Boolean> documento = isItemValid("documento", form);
-        final Pair<String, Boolean> username = isItemValid("username", form);
-        final Pair<String, Boolean> password = isItemValid("password", form);
+        final Pair<String, Boolean> username = form.isItemValid("username");
+        final Pair<String, Boolean> password = form.isItemValid("password");
         final UsuarioRol rol = UsuarioRol.CONSUMER;
 
         // Some error occur with documento /username / password
-        if (!documento.snd || !username.snd || !password.snd)
+        if (!username.snd || !password.snd)
             return new InteractorResponse<>(ResponseForward.WARNING, false);
 
         final ConsumerForm consumerForm = form.convertTo(ConsumerForm.class);
