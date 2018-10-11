@@ -40,6 +40,13 @@ public class MSConcesionariasDao extends DaoImpl<ConcesionariaForm> {
         return false;
     }
 
+    public Optional<ConcesionariaForm> selectById(final ConcesionariaForm form) throws SQLException {
+        return this.executeQueryProcedure("dbo.get_concesionaria_by_id(?)", form,
+                "id")
+                .stream()
+                .findFirst();
+    }
+
     public Optional<ConcesionariaForm> selectByCodigo(final ConcesionariaForm form) throws SQLException {
         return this.executeQueryProcedure("dbo.get_concesionaria_by_codigo(?)", form,
                 "codigo")

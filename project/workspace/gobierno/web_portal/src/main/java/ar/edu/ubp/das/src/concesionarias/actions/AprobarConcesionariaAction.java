@@ -14,7 +14,12 @@ import java.sql.SQLException;
 
 public class AprobarConcesionariaAction implements Action {
     @Override
-    public ForwardConfig execute(final ActionMapping mapping, final DynaActionForm form, final HttpServletRequest request, final HttpServletResponse response) throws SQLException, RuntimeException {
+    public ForwardConfig execute(final ActionMapping mapping,
+                                 final DynaActionForm form,
+                                 final HttpServletRequest request,
+                                 final HttpServletResponse response)
+
+            throws SQLException, RuntimeException {
 
         MSConcesionariasDao msConcesionariasDao = new MSConcesionariasDao();
 
