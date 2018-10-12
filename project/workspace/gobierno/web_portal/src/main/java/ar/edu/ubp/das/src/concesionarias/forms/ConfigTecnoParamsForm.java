@@ -1,9 +1,11 @@
 package ar.edu.ubp.das.src.concesionarias.forms;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
+import ar.edu.ubp.das.mvc.db.annotations.Entity;
 
 import java.util.StringJoiner;
 
+@Entity
 public class ConfigTecnoParamsForm extends DynaActionForm {
 
     String configTecno;

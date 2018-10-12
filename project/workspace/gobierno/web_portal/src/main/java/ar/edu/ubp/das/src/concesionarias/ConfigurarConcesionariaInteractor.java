@@ -44,6 +44,7 @@ public class ConfigurarConcesionariaInteractor implements Interactor<Boolean> {
         if(someIsMissing)
             return new InteractorResponse<>(ResponseForward.WARNING, false);
 
+        //TODO: converTo deep
         GeneralConfigConcesionariaForm genConfigConcForm = form.convertTo(GeneralConfigConcesionariaForm.class);
 
         List<ConcesionariaForm> concesionariaForms = concesionariasManager.getDao().selectAprobadas();
@@ -54,17 +55,18 @@ public class ConfigurarConcesionariaInteractor implements Interactor<Boolean> {
         if(!isApproved)
             return new InteractorResponse<>(ResponseForward.WARNING, false);
 
-        ConfigurarConcesionariaForm configurarConcesionariaForm = new ConfigurarConcesionariaForm();
-        configurarConcesionariaForm.setConcesionariaId(genConfigConcForm.getConcesionariaId());
 
         for(ConfigTecnoParamsForm c : genConfigConcForm.getParams()) {
+
+            final ConfigurarConcesionariaForm configurarConcesionariaForm = new ConfigurarConcesionariaForm();
+            configurarConcesionariaForm.setConcesionariaId(genConfigConcForm.getConcesionariaId());
 
             configurarConcesionariaForm.setConfigParam(c.getConfigParam());
             configurarConcesionariaForm.setConfigTecno(c.getConfigTecno());
             configurarConcesionariaForm.setValue(c.getValue());
 
+            // TODO: invalidate old params 
             configurarConcesionariaManager.getDao().insert(configurarConcesionariaForm);
-
         }
 
         return new InteractorResponse<>(ResponseForward.SUCCESS, true);

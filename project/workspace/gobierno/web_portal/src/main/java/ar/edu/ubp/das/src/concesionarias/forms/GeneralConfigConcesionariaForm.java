@@ -1,10 +1,12 @@
 package ar.edu.ubp.das.src.concesionarias.forms;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
+import ar.edu.ubp.das.mvc.db.annotations.Entity;
 
 import java.util.List;
 import java.util.StringJoiner;
 
+@Entity
 public class GeneralConfigConcesionariaForm extends DynaActionForm {
 
     Long concesionariaId;
