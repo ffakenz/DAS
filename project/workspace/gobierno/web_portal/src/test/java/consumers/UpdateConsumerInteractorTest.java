@@ -2,13 +2,12 @@ package consumers;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
-import ar.edu.ubp.das.src.consumers.daos.MSConsumerDao;
 import ar.edu.ubp.das.src.consumers.UpdateConsumerInteractor;
+import ar.edu.ubp.das.src.consumers.daos.MSConsumerDao;
 import ar.edu.ubp.das.src.core.InteractorResponse;
 import ar.edu.ubp.das.src.core.ResponseForward;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import util.TestDB;

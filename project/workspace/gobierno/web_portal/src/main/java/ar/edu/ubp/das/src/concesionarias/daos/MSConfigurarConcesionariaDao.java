@@ -21,9 +21,9 @@ public class MSConfigurarConcesionariaDao extends DaoImpl<ConfigurarConcesionari
     }
 
     @Override
-    public void update(final ConfigurarConcesionariaForm form) throws SQLException {
-
+    public void update(ConfigurarConcesionariaForm form) throws SQLException {
     }
+
 
     @Override
     public void delete(final ConfigurarConcesionariaForm form) throws SQLException {

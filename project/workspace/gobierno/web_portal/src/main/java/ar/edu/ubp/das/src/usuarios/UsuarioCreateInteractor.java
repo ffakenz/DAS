@@ -2,6 +2,7 @@ package ar.edu.ubp.das.src.usuarios;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
+import ar.edu.ubp.das.mvc.util.Pair;
 import ar.edu.ubp.das.src.consumers.forms.ConsumerForm;
 import ar.edu.ubp.das.src.consumers.model.ConsumerManager;
 import ar.edu.ubp.das.src.core.Interactor;
@@ -10,7 +11,6 @@ import ar.edu.ubp.das.src.core.ResponseForward;
 import ar.edu.ubp.das.src.usuarios.forms.UsuarioForm;
 import ar.edu.ubp.das.src.usuarios.model.UsuarioManager;
 import ar.edu.ubp.das.src.usuarios.model.UsuarioRol;
-import ar.edu.ubp.das.mvc.util.Pair;
 
 import java.sql.SQLException;
 

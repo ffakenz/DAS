@@ -16,6 +16,7 @@ public class ConfigurarConcesionariaForm extends DynaActionForm {
     @Column(name = "value")
     String value;
 
+
     @Override
     public String toString() {
         return "ConfigurarConcesionariaForm{" +

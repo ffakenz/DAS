@@ -4,7 +4,6 @@ import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.src.consumers.CreateConsumerInteractor;
 import ar.edu.ubp.das.src.consumers.daos.MSConsumerDao;
-import ar.edu.ubp.das.src.consumers.forms.ConsumerForm;
 import ar.edu.ubp.das.src.core.InteractorResponse;
 import ar.edu.ubp.das.src.core.ResponseForward;
 import org.junit.Before;
@@ -14,7 +13,6 @@ import org.junit.runners.MethodSorters;
 import util.TestDB;
 
 import java.sql.SQLException;
-import java.util.Optional;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
