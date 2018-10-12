@@ -1,0 +1,13 @@
+TODO DAS
+
+GET_REQUESTS: [
+    {
+        "route": /aprobadas,
+        "query": "SELECT * FROM concesionarias;
+    },
+    {
+        "route": /aprobadas,
+        "query": "SELECT * FROM concesionarias;
+    }
+]
+

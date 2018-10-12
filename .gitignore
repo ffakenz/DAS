@@ -43,3 +43,6 @@ project/lib/
 target/
 
 project/workspace/gobierno/db/src/main/resources/db.properties
+project/\.DS_Store
+
+\.DS_Store

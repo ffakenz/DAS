@@ -38,7 +38,6 @@ public class AprobarInteractor implements Interactor<Boolean> {
         if (id.snd == false)
             return new InteractorResponse<>(ResponseForward.WARNING, false);
 
-
         ConcesionariaForm concesionariaForm = form.convertTo(ConcesionariaForm.class);
 
         Optional<ConcesionariaForm> concesionariaToApprove = concesionariasManager.getDao().selectById(concesionariaForm);
