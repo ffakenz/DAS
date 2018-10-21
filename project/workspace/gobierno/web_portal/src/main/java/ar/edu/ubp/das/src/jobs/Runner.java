@@ -3,12 +3,17 @@ package ar.edu.ubp.das.src.jobs;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 
-public class Runner {
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+
+
+public class Runner implements ServletContextListener {
 
     private static Scheduler schedulerSorteo;
     private static Scheduler schedulerConsumer;
-
-    public static void main(String[] args) {
+    
+    @Override
+    public void contextInitialized(ServletContextEvent servletContextEvent) {
         Runner.run();
     }
 
@@ -50,5 +55,9 @@ public class Runner {
                 .build();
 
         return new JobObj(job, trigger);
+    }
+
+    @Override
+    public void contextDestroyed(ServletContextEvent servletContextEvent) {
     }
 }

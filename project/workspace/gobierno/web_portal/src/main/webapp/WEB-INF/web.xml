@@ -23,6 +23,14 @@
         <param-name>action.default.path</param-name>
         <param-value>/home/Home.do</param-value>
     </context-param>
+
+
+    <listener>
+        <listener-class>
+            ar.edu.ubp.das.src.jobs.Runner
+        </listener-class>
+    </listener>
+
     <filter>
         <filter-name>UrlRewriteFilter</filter-name>
         <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
