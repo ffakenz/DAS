@@ -11,7 +11,7 @@ public class Runner implements ServletContextListener {
 
     private static Scheduler schedulerSorteo;
     private static Scheduler schedulerConsumer;
-    
+
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         Runner.run();
@@ -59,5 +59,11 @@ public class Runner implements ServletContextListener {
 
     @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
+        try {
+            schedulerSorteo.shutdown();
+            schedulerConsumer.shutdown();
+        } catch (SchedulerException e) {
+            e.printStackTrace();
+        }
     }
 }
