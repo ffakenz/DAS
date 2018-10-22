@@ -28,22 +28,13 @@
         <sqlFile path="/src/main/resources/liquibase/jobs/tables/sorteos.sql"/>
     </changeSet>
 
-    <changeSet id="Create table estado_ganador" author="DAS-Team" runAlways="true" runOnChange="true">
+    <changeSet id="Create table estado_participante" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists tableName="estado_ganador"/>
+                <tableExists tableName="estado_participante"/>
             </not>
         </preConditions>
-        <sqlFile path="/src/main/resources/liquibase/jobs/tables/estado_ganador.sql"/>
-    </changeSet>
-
-    <changeSet id="Create table ganadores" author="DAS-Team" runAlways="true" runOnChange="true">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="ganadores"/>
-            </not>
-        </preConditions>
-        <sqlFile path="/src/main/resources/liquibase/jobs/tables/ganadores.sql"/>
+        <sqlFile path="/src/main/resources/liquibase/jobs/tables/estado_participante.sql"/>
     </changeSet>
 
     <changeSet id="Create table participantes" author="DAS-Team" runAlways="true" runOnChange="true">

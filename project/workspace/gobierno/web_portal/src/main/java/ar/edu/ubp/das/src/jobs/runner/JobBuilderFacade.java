@@ -1,4 +1,4 @@
-package ar.edu.ubp.das.src.jobs;
+package ar.edu.ubp.das.src.jobs.runner;
 
 import org.quartz.CronScheduleBuilder;
 import org.quartz.JobDetail;

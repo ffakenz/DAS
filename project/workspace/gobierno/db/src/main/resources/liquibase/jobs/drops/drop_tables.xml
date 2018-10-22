@@ -9,13 +9,6 @@
     <!--   TABLE DROP CHANGE-SETS      -->
     <!-- ***************************** -->
 
-    <changeSet id="Drop table ganadores" author="DAS-Team" runAlways="true" runOnChange="true">
-        <preConditions onFail="MARK_RAN">
-            <tableExists tableName="ganadores"/>
-        </preConditions>
-        <dropTable tableName="ganadores"/>
-    </changeSet>
-
     <changeSet id="Drop table participantes" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <tableExists tableName="participantes"/>
@@ -23,11 +16,11 @@
         <dropTable tableName="participantes"/>
     </changeSet>
 
-    <changeSet id="Drop table estado_ganador" author="DAS-Team" runAlways="true" runOnChange="true">
+    <changeSet id="Drop table estado_participante" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
-            <tableExists tableName="estado_ganador"/>
+            <tableExists tableName="estado_participante"/>
         </preConditions>
-        <dropTable tableName="estado_ganador"/>
+        <dropTable tableName="estado_participante"/>
     </changeSet>
 
     <changeSet id="Drop table sorteos" author="DAS-Team" runAlways="true" runOnChange="true">

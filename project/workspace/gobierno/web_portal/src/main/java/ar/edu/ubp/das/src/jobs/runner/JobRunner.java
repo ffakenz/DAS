@@ -1,13 +1,15 @@
-package ar.edu.ubp.das.src.jobs;
+package ar.edu.ubp.das.src.jobs.runner;
 
+import ar.edu.ubp.das.src.jobs.ConsumerJob;
+import ar.edu.ubp.das.src.jobs.SorteoJob;
+import ar.edu.ubp.das.src.jobs.runner.JobBuilderFacade;
+import ar.edu.ubp.das.src.jobs.runner.JobObj;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
-import org.quartz.impl.matchers.GroupMatcher;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import java.util.*;
-import java.util.stream.Collectors;
 
 
 public class JobRunner implements ServletContextListener {

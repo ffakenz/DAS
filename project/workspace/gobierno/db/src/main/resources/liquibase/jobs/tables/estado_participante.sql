@@ -1,3 +1,3 @@
-CREATE TABLE estado_ganador (
+CREATE TABLE estado_participante (
 	nombre VARCHAR(100) PRIMARY KEY
 );

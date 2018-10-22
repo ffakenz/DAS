@@ -1,6 +1,5 @@
 package ar.edu.ubp.das.src.jobs;
 
-import ar.edu.ubp.das.mvc.db.DaoFactory;
 import ar.edu.ubp.das.src.concesionarias.daos.MSConcesionariasDao;
 import ar.edu.ubp.das.src.concesionarias.daos.MSConfigurarConcesionariaDao;
 import ar.edu.ubp.das.src.concesionarias.model.ConcesionariasManager;
@@ -11,7 +10,6 @@ import ar.edu.ubp.das.src.estado_cuentas.daos.MSCuotasDao;
 import ar.edu.ubp.das.src.estado_cuentas.daos.MSEstadoCuentasDao;
 import ar.edu.ubp.das.src.estado_cuentas.model.CuotasManager;
 import ar.edu.ubp.das.src.estado_cuentas.model.EstadoCuentasManager;
-import ar.edu.ubp.das.src.jobs.daos.MSGanadorDao;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;

@@ -9,7 +9,7 @@
     <!--  DROP PROCEDURES CHANGE-SETS  -->
     <!-- ***************************** -->
 
-    <!-- changeSet id="Drop procedure get_ultimo_ganador" author="DAS-Team" runAlways="true"
+    <changeSet id="Drop procedure get_ultimo_ganador" author="DAS-Team" runAlways="true"
                runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="1">
@@ -21,13 +21,42 @@
             </sqlCheck>
         </preConditions>
         <dropProcedure procedureName="get_ultimo_ganador"/>
-    </changeSet-->
+    </changeSet>
+
+    <changeSet id="Drop procedure insert_participante" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'insert_participante'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="insert_participante"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure update_participante" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'update_participante'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="update_participante"/>
+    </changeSet>
+
 
     <!-- ******************************* -->
     <!--  CREATE PROCEDURES CHANGE-SETS  -->
     <!-- ******************************* -->
 
-    <!-- changeSet id="Create procedure get_ultimo_ganador" author="DAS-Team" runAlways="true"
+    <changeSet id="Create procedure get_ultimo_ganador" author="DAS-Team" runAlways="true"
                runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
@@ -40,5 +69,34 @@
         </preConditions>
         <sqlFile
                 path="/src/main/resources/liquibase/jobs/procedures/get_ultimo_ganador.sql"/>
-    </changeSet-->
+    </changeSet>
+    <changeSet id="Create procedure insert_participante" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'insert_participante'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/insert_participante.sql"/>
+    </changeSet>
+    <changeSet id="Create procedure update_participante" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'update_participante'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/update_participante.sql"/>
+    </changeSet>
+
 </databaseChangeLog>

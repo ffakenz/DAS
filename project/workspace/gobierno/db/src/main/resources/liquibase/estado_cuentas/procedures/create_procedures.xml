@@ -133,19 +133,6 @@
         <sqlFile path="/src/main/resources/liquibase/estado_cuentas/procedures/get_estado_cuentas.sql"/>
     </changeSet>
 
-    <changeSet id="Create procedure log_cuota" author="DAS-Team" runAlways="true" runOnChange="true">
-        <preConditions onFail="MARK_RAN">
-            <sqlCheck expectedResult="0">
-                SELECT COUNT(*)
-                FROM information_schema.routines
-                WHERE ROUTINE_TYPE = 'PROCEDURE'
-                AND SPECIFIC_CATALOG = 'db_gobierno'
-                AND ROUTINE_NAME = 'log_cuota'
-            </sqlCheck>
-        </preConditions>
-        <sqlFile path="/src/main/resources/liquibase/estado_cuentas/procedures/log_cuota.sql"/>
-    </changeSet>
-
     <changeSet id="Create procedure get_cuotas" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
