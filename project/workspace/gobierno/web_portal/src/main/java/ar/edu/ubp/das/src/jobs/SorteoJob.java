@@ -10,6 +10,8 @@ import ar.edu.ubp.das.src.estado_cuentas.daos.MSCuotasDao;
 import ar.edu.ubp.das.src.estado_cuentas.daos.MSEstadoCuentasDao;
 import ar.edu.ubp.das.src.estado_cuentas.model.CuotasManager;
 import ar.edu.ubp.das.src.estado_cuentas.model.EstadoCuentasManager;
+import ar.edu.ubp.das.src.jobs.daos.MSParticipanteDao;
+import ar.edu.ubp.das.src.jobs.daos.MSSorteoDao;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -24,7 +26,8 @@ public class SorteoJob implements Job {
     private EstadoCuentasManager estadoCuentasManager;
 
     // inners
-    private MSGanadorDao msGanadorDao;
+    private MSParticipanteDao msParticipanteDao;
+    private MSSorteoDao msSorteoDao;
 
     public SorteoJob() {
         this.concesionariasManager = new ConcesionariasManager(new MSConcesionariasDao());
@@ -32,6 +35,9 @@ public class SorteoJob implements Job {
         this.consumerManager = new ConsumerManager(new MSConsumerDao());
         this.cuotasManager = new CuotasManager(new MSCuotasDao());
         this.estadoCuentasManager = new EstadoCuentasManager(new MSEstadoCuentasDao());
+
+        this.msParticipanteDao = new MSParticipanteDao();
+        this.msSorteoDao = new MSSorteoDao();
     }
 
     @Override
