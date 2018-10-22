@@ -5,7 +5,6 @@ import org.quartz.JobDetail;
 import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.quartz.*;
-import org.quartz.impl.StdSchedulerFactory;
 
 public class JobBuilderFacade {
 

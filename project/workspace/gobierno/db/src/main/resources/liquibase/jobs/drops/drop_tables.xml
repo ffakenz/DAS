@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!-- ***************************** -->
+    <!--   TABLE DROP CHANGE-SETS      -->
+    <!-- ***************************** -->
+
+    <changeSet id="Drop table ganadores" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="ganadores"/>
+        </preConditions>
+        <dropTable tableName="ganadores"/>
+    </changeSet>
+
+    <changeSet id="Drop table participantes" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="participantes"/>
+        </preConditions>
+        <dropTable tableName="participantes"/>
+    </changeSet>
+
+    <changeSet id="Drop table estado_ganador" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="estado_ganador"/>
+        </preConditions>
+        <dropTable tableName="estado_ganador"/>
+    </changeSet>
+
+    <changeSet id="Drop table sorteos" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="sorteos"/>
+        </preConditions>
+        <dropTable tableName="sorteos"/>
+    </changeSet>
+
+    <changeSet id="Drop table estado_sorteo" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="estado_sorteo"/>
+        </preConditions>
+        <dropTable tableName="estado_sorteo"/>
+    </changeSet>
+
+</databaseChangeLog>

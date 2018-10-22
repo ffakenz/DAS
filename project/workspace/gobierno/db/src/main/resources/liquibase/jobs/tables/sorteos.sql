@@ -1,0 +1,7 @@
+CREATE TABLE sorteos (
+	id BIGINT IDENTITY PRIMARY KEY
+	, mes_sorteo INT DEFAULT DATEPART(MONTH, GETDATE())
+	, estado VARCHAR(100) NOT NULL FOREIGN KEY REFERENCES estado_sorteo(nombre) DEFAULT 'nuevo'
+	, fecha DATE NULL
+	, UNIQUE(fecha)
+);

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!-- ***************************** -->
+    <!--   TABLE CREATION CHANGE-SETS  -->
+    <!-- ***************************** -->
+
+
+    <changeSet id="Create table estado_sorteo" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="estado_sorteo"/>
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/jobs/tables/estado_sorteo.sql"/>
+    </changeSet>
+
+    <changeSet id="Create table sorteos" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="sorteos"/>
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/jobs/tables/sorteos.sql"/>
+    </changeSet>
+
+    <changeSet id="Create table estado_ganador" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="estado_ganador"/>
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/jobs/tables/estado_ganador.sql"/>
+    </changeSet>
+
+    <changeSet id="Create table ganadores" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="ganadores"/>
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/jobs/tables/ganadores.sql"/>
+    </changeSet>
+
+    <changeSet id="Create table participantes" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="participantes"/>
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/jobs/tables/participantes.sql"/>
+    </changeSet>
+
+</databaseChangeLog>
