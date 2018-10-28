@@ -92,4 +92,22 @@ public class EstadoCuentasTest {
         assertEquals("en_proceso", ecsUpdated.get().getEstado());
 
     }
+
+    @Test
+    public void test_13_Validate_select_estado_cuenta_by_id_fail() throws SQLException {
+        Long idPlan = 10L;
+        Optional<EstadoCuentasForm> estadoCuentasForm = estadoCuentaDao.selectEstadoCuentasById(idPlan);
+        assertFalse(estadoCuentasForm.isPresent());
+    }
+
+
+    @Test
+    public void test_14_Validate_select_estado_cuenta_by_id_successfully() throws SQLException {
+        Long idPlan = 4L;
+        Optional<EstadoCuentasForm> estadoCuentasForm = estadoCuentaDao.selectEstadoCuentasById(idPlan);
+        assertTrue(estadoCuentasForm.isPresent());
+
+        assertEquals(new Long(3), estadoCuentasForm.get().getConcesionariaId());
+        assertEquals(new Long(1004), estadoCuentasForm.get().getNroPlanConcesionaria());
+    }
 }

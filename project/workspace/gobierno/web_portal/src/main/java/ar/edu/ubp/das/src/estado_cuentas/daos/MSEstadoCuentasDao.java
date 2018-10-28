@@ -3,6 +3,7 @@ package ar.edu.ubp.das.src.estado_cuentas.daos;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.estado_cuentas.forms.EstadoCuentasForm;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -32,11 +33,7 @@ public class MSEstadoCuentasDao extends DaoImpl<EstadoCuentasForm> {
     }
 
     @Override
-    public List<EstadoCuentasForm> select(EstadoCuentasForm form) throws SQLException {
-        return this.executeQueryProcedure("dbo.get_estado_cuentas");
-    }
-
-    public List<EstadoCuentasForm> select() throws SQLException {
+    public List<EstadoCuentasForm> select(final EstadoCuentasForm form) throws SQLException {
         return this.executeQueryProcedure("dbo.get_estado_cuentas");
     }
 
@@ -52,5 +49,14 @@ public class MSEstadoCuentasDao extends DaoImpl<EstadoCuentasForm> {
                 .findFirst();
     }
 
-
+    public Optional<EstadoCuentasForm> selectEstadoCuentasById(final Long id) throws SQLException {
+        this.connect();
+        this.setProcedure("dbo.get_estado_cuentas_by_id(?)", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        this.setParameter(1, id);
+        final List<EstadoCuentasForm> result = this.executeQuery();
+        this.disconnect();
+        return result
+                .stream()
+                .findFirst();
+    }
 }
