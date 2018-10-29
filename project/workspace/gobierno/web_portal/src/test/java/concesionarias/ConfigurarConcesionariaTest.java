@@ -10,8 +10,10 @@ import org.junit.runners.MethodSorters;
 import util.TestDB;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ConfigurarConcesionariaTest {
@@ -65,4 +67,18 @@ public class ConfigurarConcesionariaTest {
 
         dao.insert(configurarConcesionariaForm);
     }
+
+    @Test
+    public void test_04_Select_by_concesionaria_id_fail() throws SQLException {
+        final List<ConfigurarConcesionariaForm> configurarConcesionariaForms = dao.selectParamsByConcesionariaId(6L);
+        assertTrue(configurarConcesionariaForms.isEmpty());
+    }
+
+    @Test
+    public void test_04_Select_by_concesionaria_id_successfully() throws SQLException {
+        final List<ConfigurarConcesionariaForm> configurarConcesionariaForms = dao.selectParamsByConcesionariaId(3L);
+        assertEquals(2, configurarConcesionariaForms.size());
+    }
 }
+
+

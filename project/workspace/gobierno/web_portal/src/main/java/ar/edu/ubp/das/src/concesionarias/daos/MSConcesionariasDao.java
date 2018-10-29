@@ -3,6 +3,7 @@ package ar.edu.ubp.das.src.concesionarias.daos;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -43,6 +44,17 @@ public class MSConcesionariasDao extends DaoImpl<ConcesionariaForm> {
     public Optional<ConcesionariaForm> selectById(final ConcesionariaForm form) throws SQLException {
         return this.executeQueryProcedure("dbo.get_concesionaria_by_id(?)", form,
                 "id")
+                .stream()
+                .findFirst();
+    }
+
+    public Optional<ConcesionariaForm> selectById(final Long id) throws SQLException {
+        this.connect();
+        this.setProcedure("dbo.get_concesionaria_by_id(?)", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        this.setParameter(1, id);
+        final List<ConcesionariaForm> result = this.executeQuery();
+        this.disconnect();
+        return result
                 .stream()
                 .findFirst();
     }

@@ -2,6 +2,7 @@ package ar.edu.ubp.das.src.jobs;
 
 import ar.edu.ubp.das.src.concesionarias.daos.MSConcesionariasDao;
 import ar.edu.ubp.das.src.concesionarias.daos.MSConfigurarConcesionariaDao;
+import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
 import ar.edu.ubp.das.src.concesionarias.model.ConcesionariasManager;
 import ar.edu.ubp.das.src.concesionarias.model.ConfigurarConcesionariaManager;
 import ar.edu.ubp.das.src.consumers.daos.MSConsumerDao;
@@ -53,7 +54,14 @@ public class SorteoJob implements Job {
             }
 
             final ParticipanteForm ganador = ultimoGanador.get();
-            final Optional<EstadoCuentasForm> estadoCuentaGanador = estadoCuentasManager.getDao().selectEstadoCuentasById(ganador.getIdPlan());
+            final Optional<EstadoCuentasForm> estadoCuentaGanador =
+                    estadoCuentasManager.getDao().selectEstadoCuentasById(ganador.getIdPlan());
+
+            final Optional<ConcesionariaForm> concesionariaGanador =
+                    concesionariasManager.getDao().selectById(estadoCuentaGanador.get().getId());
+
+            configurarConcesionariaManager.getDao().selectParamsByConcesionariaId(concesionariaGanador.get().getId());
+
 
             // final EstadoPlanCuenta estadoPlanGanador = ConcesionariaClient.getEstadoCuenta(ultimoGanador.get());
             return Optional.empty();
