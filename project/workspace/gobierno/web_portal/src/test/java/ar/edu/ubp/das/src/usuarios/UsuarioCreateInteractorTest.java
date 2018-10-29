@@ -1,11 +1,10 @@
-package usuarios;
+package ar.edu.ubp.das.src.usuarios;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.src.consumers.daos.MSConsumerDao;
 import ar.edu.ubp.das.src.core.InteractorResponse;
 import ar.edu.ubp.das.src.core.ResponseForward;
-import ar.edu.ubp.das.src.usuarios.UsuarioCreateInteractor;
 import ar.edu.ubp.das.src.usuarios.daos.MSUsuariosDao;
 import org.junit.Before;
 import org.junit.FixMethodOrder;

@@ -1,5 +1,5 @@
 CREATE TABLE cuotas (
-    id BIGINT IDENTITY NOT NULL
+    id BIGINT IDENTITY
     , nro_cuota BIGINT NULL
     , estado_cuenta_id BIGINT NOT NULL
     , fecha_vencimiento DATETIME NOT NULL

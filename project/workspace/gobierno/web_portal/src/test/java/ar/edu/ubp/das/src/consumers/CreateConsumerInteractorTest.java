@@ -1,8 +1,7 @@
-package consumers;
+package ar.edu.ubp.das.src.consumers;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
-import ar.edu.ubp.das.src.consumers.CreateConsumerInteractor;
 import ar.edu.ubp.das.src.consumers.daos.MSConsumerDao;
 import ar.edu.ubp.das.src.core.InteractorResponse;
 import ar.edu.ubp.das.src.core.ResponseForward;
@@ -38,7 +37,7 @@ public class CreateConsumerInteractorTest {
 
     @Test
     public void test11_Create_consumer_missing_input_value() throws SQLException {
-        DynaActionForm consumerForm = new DynaActionForm();
+        final DynaActionForm consumerForm = new DynaActionForm();
         consumerForm.setItem("documento", "777");
         consumerForm.setItem("concesionaria", "1");
         consumerForm.setItem("nombre", "Nombre_Test_1");
@@ -47,14 +46,14 @@ public class CreateConsumerInteractorTest {
         // consumerForm.setItem("email", "test@test.com");
 
         // Insert the consumer
-        InteractorResponse<Boolean> result = createConsumerInteractor.execute(consumerForm);
+        final InteractorResponse<Boolean> result = createConsumerInteractor.execute(consumerForm);
         assertEquals(ResponseForward.WARNING, result.getResponse());
         assertFalse(result.getResult());
     }
 
     @Test
     public void test11_Create_consumer_successfully() throws SQLException {
-        DynaActionForm consumerForm = new DynaActionForm();
+        final DynaActionForm consumerForm = new DynaActionForm();
         consumerForm.setItem("documento", "777");
         consumerForm.setItem("concesionaria", "1");
         consumerForm.setItem("nombre", "Nombre_Test_1");
@@ -63,7 +62,7 @@ public class CreateConsumerInteractorTest {
         consumerForm.setItem("email", "test@test.com");
 
         // Insert the consumer
-        InteractorResponse<Boolean> result = createConsumerInteractor.execute(consumerForm);
+        final InteractorResponse<Boolean> result = createConsumerInteractor.execute(consumerForm);
         assertEquals(ResponseForward.SUCCESS, result.getResponse());
         assertTrue(result.getResult());
     }

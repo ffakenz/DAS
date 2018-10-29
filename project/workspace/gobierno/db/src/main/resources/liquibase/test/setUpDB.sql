@@ -21,7 +21,6 @@ BEGIN
         , ('C4', 'La Tablada4 5739', '23-93337511-4', '+5493513059164', 'c4@gmail.com')
         , ('C5', 'La Tablada5 5739', '24-93337511-5', '+5493513059165', 'c5@gmail.com')
 
-
     INSERT INTO concesionaria_x_config_tecnologica(concesionaria_id, config_tecnologica)
     VALUES
         (1, 'REST')
@@ -112,5 +111,16 @@ BEGIN
        , (4, '2018-05-01 21:58:01', 10000, '2018-04-11 21:58:01')
        , (4, '2018-06-01 21:58:01', 10000, '2018-05-30 21:58:01')
 
+    INSERT INTO estado_sorteo(nombre)
+    VALUES('nuevo'),('pendiente'),('completado')
+
+    INSERT INTO sorteos (mes_sorteo, estado, fecha_ejecucion)
+    VALUES(10, 'completado', GETDATE())
+
+    INSERT INTO estado_participante(nombre)
+    VALUES('participante'),('ganador'),('cancelado')
+
+    INSERT INTO participantes(id_sorteo, id_plan, estado)
+    VALUES (1, 4, 'ganador')
 END
 GO

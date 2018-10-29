@@ -1,10 +1,9 @@
-package login;
+package ar.edu.ubp.das.src.login;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.src.core.InteractorResponse;
 import ar.edu.ubp.das.src.core.ResponseForward;
-import ar.edu.ubp.das.src.login.LoginInteractor;
 import ar.edu.ubp.das.src.login.daos.MSLogInDao;
 import ar.edu.ubp.das.src.usuarios.daos.MSUsuariosDao;
 import org.junit.Before;

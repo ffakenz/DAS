@@ -1,8 +1,10 @@
 package ar.edu.ubp.das.src.jobs;
 
+import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.src.concesionarias.daos.MSConcesionariasDao;
 import ar.edu.ubp.das.src.concesionarias.daos.MSConfigurarConcesionariaDao;
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
+import ar.edu.ubp.das.src.concesionarias.forms.ConfigurarConcesionariaForm;
 import ar.edu.ubp.das.src.concesionarias.model.ConcesionariasManager;
 import ar.edu.ubp.das.src.concesionarias.model.ConfigurarConcesionariaManager;
 import ar.edu.ubp.das.src.consumers.daos.MSConsumerDao;
@@ -15,12 +17,17 @@ import ar.edu.ubp.das.src.estado_cuentas.model.EstadoCuentasManager;
 import ar.edu.ubp.das.src.jobs.daos.MSParticipanteDao;
 import ar.edu.ubp.das.src.jobs.daos.MSSorteoDao;
 import ar.edu.ubp.das.src.jobs.forms.ParticipanteForm;
+import clients.ClientFactory;
+import clients.ConcesionariaServiceContract;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class SorteoJob implements Job {
 
@@ -35,18 +42,36 @@ public class SorteoJob implements Job {
     private MSParticipanteDao msParticipanteDao;
     private MSSorteoDao msSorteoDao;
 
-    public SorteoJob() {
-        this.concesionariasManager = new ConcesionariasManager(new MSConcesionariasDao());
-        this.configurarConcesionariaManager = new ConfigurarConcesionariaManager(new MSConfigurarConcesionariaDao());
-        this.consumerManager = new ConsumerManager(new MSConsumerDao());
-        this.cuotasManager = new CuotasManager(new MSCuotasDao());
-        this.estadoCuentasManager = new EstadoCuentasManager(new MSEstadoCuentasDao());
+    public SorteoJob(final DatasourceConfig datasourceConfig) {
+
+        final MSConcesionariasDao msConcesionariasDao = new MSConcesionariasDao();
+        msConcesionariasDao.setDatasource(datasourceConfig);
+        this.concesionariasManager = new ConcesionariasManager(msConcesionariasDao);
+
+        final MSConfigurarConcesionariaDao msConfigurarConcesionariaDao = new MSConfigurarConcesionariaDao();
+        msConfigurarConcesionariaDao.setDatasource(datasourceConfig);
+        this.configurarConcesionariaManager = new ConfigurarConcesionariaManager(msConfigurarConcesionariaDao);
+
+        final MSConsumerDao msConsumerDao = new MSConsumerDao();
+        msConsumerDao.setDatasource(datasourceConfig);
+        this.consumerManager = new ConsumerManager(msConsumerDao);
+
+        final MSCuotasDao msCuotasDao = new MSCuotasDao();
+        msCuotasDao.setDatasource(datasourceConfig);
+        this.cuotasManager = new CuotasManager(msCuotasDao);
+
+        final MSEstadoCuentasDao msEstadoCuentasDao = new MSEstadoCuentasDao();
+        msEstadoCuentasDao.setDatasource(datasourceConfig);
+        this.estadoCuentasManager = new EstadoCuentasManager(msEstadoCuentasDao);
 
         this.msParticipanteDao = new MSParticipanteDao();
+        this.msParticipanteDao.setDatasource(datasourceConfig);
+
         this.msSorteoDao = new MSSorteoDao();
+        this.msSorteoDao.setDatasource(datasourceConfig);
     }
 
-    private Optional<ParticipanteForm> verificarCancelacionCuenta() throws JobExecutionException {
+    protected Optional<ParticipanteForm> verificarCancelacionCuenta() throws JobExecutionException {
         try {
             final Optional<ParticipanteForm> ultimoGanador = msParticipanteDao.getUltimoGanador();
             if (!ultimoGanador.isPresent()) {
@@ -54,16 +79,32 @@ public class SorteoJob implements Job {
             }
 
             final ParticipanteForm ganador = ultimoGanador.get();
-            final Optional<EstadoCuentasForm> estadoCuentaGanador =
-                    estadoCuentasManager.getDao().selectEstadoCuentasById(ganador.getIdPlan());
 
-            final Optional<ConcesionariaForm> concesionariaGanador =
-                    concesionariasManager.getDao().selectById(estadoCuentaGanador.get().getId());
+            // selectEstadoCuentasById cannot fail if there is a winner
+            final EstadoCuentasForm estadoCuentaGanador =
+                    estadoCuentasManager.getDao().selectEstadoCuentasById(ganador.getIdPlan()).get();
 
-            configurarConcesionariaManager.getDao().selectParamsByConcesionariaId(concesionariaGanador.get().getId());
+            // concesionaria selectById cannot fail if there is a winner
+            final ConcesionariaForm concesionariaGanador =
+                    concesionariasManager.getDao().selectById(estadoCuentaGanador.getId()).get();
+
+            // selectParamsByConcesionariaId cannot fail if there is a winner, so list cannot be empty
+            final List<ConfigurarConcesionariaForm> paramsConfigTecnoGanador = configurarConcesionariaManager.getDao()
+                    .selectParamsByConcesionariaId(concesionariaGanador.getId());
+
+            // start get client based on config tecno
+            final String configTecno = paramsConfigTecnoGanador.get(0).getConfigTecno();
+            final Map<String, String> clientCall =
+                    paramsConfigTecnoGanador.stream().collect(
+                            Collectors.toMap(ConfigurarConcesionariaForm::getConfigParam, ConfigurarConcesionariaForm::getValue)
+                    );
+
+            final Optional<ConcesionariaServiceContract> client = ClientFactory.getInstance().getClientFor(configTecno, clientCall);
+            // end get client based on config tecno
 
 
             // final EstadoPlanCuenta estadoPlanGanador = ConcesionariaClient.getEstadoCuenta(ultimoGanador.get());
+
             return Optional.empty();
 
         } catch (final SQLException ex) {

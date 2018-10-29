@@ -1,15 +1,11 @@
 CREATE PROCEDURE cleanDB AS
 BEGIN
-   -- disable all constraints
-   EXEC sp_msforeachtable "ALTER TABLE ? NOCHECK CONSTRAINT all"
 
-   -- delete data in all tables
-   EXEC sp_MSForEachTable "DELETE FROM ?"
-
-   -- enable all constraints
-   EXEC sp_msforeachtable "ALTER TABLE ? WITH CHECK CHECK CONSTRAINT all"
-
-   --some of the tables have identity columns we may want to reseed them
-   EXEC sp_MSforeachtable "DBCC CHECKIDENT ( '?', RESEED, 0)"
+    EXEC sp_MSforeachtable 'ALTER TABLE ? NOCHECK CONSTRAINT ALL'
+    EXEC sp_MSforeachtable 'ALTER TABLE ? DISABLE TRIGGER ALL'
+    EXEC sp_MSforeachtable 'DELETE FROM ?'
+    EXEC sp_MSforeachtable 'ALTER TABLE ? CHECK CONSTRAINT ALL'
+    EXEC sp_MSforeachtable 'ALTER TABLE ? ENABLE TRIGGER ALL'
+    EXEC sp_MSforeachtable 'IF NOT EXISTS ( SELECT * FROM SYS.IDENTITY_COLUMNS JOIN SYS.TABLES ON SYS.IDENTITY_COLUMNS.Object_ID = SYS.TABLES.Object_ID WHERE SYS.TABLES.Object_ID = OBJECT_ID(''?'') AND SYS.IDENTITY_COLUMNS.Last_Value IS NULL ) AND OBJECTPROPERTY( OBJECT_ID(''?''), ''TableHasIdentity'' ) = 1 DBCC CHECKIDENT (''?'', RESEED, 0) WITH NO_INFOMSGS'
 END
 GO

@@ -3,7 +3,8 @@ package beans;
 import java.sql.Timestamp;
 
 public class PlanBean {
-	// member variables
+
+    // member variables
     Integer id;
     Integer cuotasPagadas;
     String vehiculo;
@@ -14,9 +15,10 @@ public class PlanBean {
     Timestamp fechaAlta;
     Timestamp fechaUltimoUpdate;
 
-    public PlanBean(){}
+    public PlanBean() {
+    }
 
-    public PlanBean(Integer id, Integer cuotasPagadas, String vehiculo, String concesionaria, Integer concesionariaId, Long documento, String clientId, Timestamp fechaAlta, Timestamp fechaUltimoUpdate) {
+    public PlanBean(final Integer id, final Integer cuotasPagadas, final String vehiculo, final String concesionaria, final Integer concesionariaId, final Long documento, final String clientId, final Timestamp fechaAlta, final Timestamp fechaUltimoUpdate) {
         this.id = id;
         this.cuotasPagadas = cuotasPagadas;
         this.vehiculo = vehiculo;
@@ -32,7 +34,7 @@ public class PlanBean {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(final Integer id) {
         this.id = id;
     }
 
@@ -40,7 +42,7 @@ public class PlanBean {
         return cuotasPagadas;
     }
 
-    public void setCuotasPagadas(Integer cuotasPagadas) {
+    public void setCuotasPagadas(final Integer cuotasPagadas) {
         this.cuotasPagadas = cuotasPagadas;
     }
 
@@ -48,7 +50,7 @@ public class PlanBean {
         return vehiculo;
     }
 
-    public void setVehiculo(String vehiculo) {
+    public void setVehiculo(final String vehiculo) {
         this.vehiculo = vehiculo;
     }
 
@@ -56,7 +58,7 @@ public class PlanBean {
         return concesionaria;
     }
 
-    public void setConcesionaria(String concesionaria) {
+    public void setConcesionaria(final String concesionaria) {
         this.concesionaria = concesionaria;
     }
 
@@ -64,7 +66,7 @@ public class PlanBean {
         return concesionariaId;
     }
 
-    public void setConcesionariaId(Integer concesionariaId) {
+    public void setConcesionariaId(final Integer concesionariaId) {
         this.concesionariaId = concesionariaId;
     }
 
@@ -72,7 +74,7 @@ public class PlanBean {
         return documento;
     }
 
-    public void setDocumento(Long documento) {
+    public void setDocumento(final Long documento) {
         this.documento = documento;
     }
 
@@ -80,7 +82,7 @@ public class PlanBean {
         return clientId;
     }
 
-    public void setClientId(String clientId) {
+    public void setClientId(final String clientId) {
         this.clientId = clientId;
     }
 
@@ -88,7 +90,7 @@ public class PlanBean {
         return fechaAlta;
     }
 
-    public void setFechaAlta(Timestamp fechaAlta) {
+    public void setFechaAlta(final Timestamp fechaAlta) {
         this.fechaAlta = fechaAlta;
     }
 
@@ -96,14 +98,14 @@ public class PlanBean {
         return fechaUltimoUpdate;
     }
 
-    public void setFechaUltimoUpdate(Timestamp fechaUltimoUpdate) {
+    public void setFechaUltimoUpdate(final Timestamp fechaUltimoUpdate) {
         this.fechaUltimoUpdate = fechaUltimoUpdate;
     }
 
-	@Override
-	public String toString() {
-		return "PlanBean [id=" + id + ", cuotasPagadas=" + cuotasPagadas + ", vehiculo=" + vehiculo + ", concesionaria="
-				+ concesionaria + ", concesionariaId=" + concesionariaId + ", documento=" + documento + ", clientId="
-				+ clientId + ", fechaAlta=" + fechaAlta + ", fechaUltimoUpdate=" + fechaUltimoUpdate + "]";
-	}
+    @Override
+    public String toString() {
+        return "PlanBean [id=" + id + ", cuotasPagadas=" + cuotasPagadas + ", vehiculo=" + vehiculo + ", concesionaria="
+                + concesionaria + ", concesionariaId=" + concesionariaId + ", documento=" + documento + ", clientId="
+                + clientId + ", fechaAlta=" + fechaAlta + ", fechaUltimoUpdate=" + fechaUltimoUpdate + "]";
+    }
 }

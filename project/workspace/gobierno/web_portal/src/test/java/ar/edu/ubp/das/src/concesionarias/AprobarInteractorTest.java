@@ -1,8 +1,7 @@
-package concesionarias;
+package ar.edu.ubp.das.src.concesionarias;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
-import ar.edu.ubp.das.src.concesionarias.AprobarInteractor;
 import ar.edu.ubp.das.src.concesionarias.daos.MSConcesionariasDao;
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
 import ar.edu.ubp.das.src.core.InteractorResponse;
@@ -41,25 +40,25 @@ public class AprobarInteractorTest {
     @Test
     public void test_12_Approve_concesionaria_ok() throws SQLException {
 
-        DynaActionForm concesionariaForm = new DynaActionForm();
+        final DynaActionForm concesionariaForm = new DynaActionForm();
         concesionariaForm.setItem("id", "1");
 
-        InteractorResponse<Boolean> result = aprobarInteractor.execute(concesionariaForm);
+        final InteractorResponse<Boolean> result = aprobarInteractor.execute(concesionariaForm);
         assertEquals(ResponseForward.SUCCESS, result.getResponse());
         assertTrue(result.getResult());
 
         // validate if the concesionaria was really updated
-        List<ConcesionariaForm> concesionariaFormsApproved = msConcesionariasDao.selectAprobadas();
-        assertTrue(concesionariaFormsApproved.stream().anyMatch( c -> c.getId().equals(1L)));
+        final List<ConcesionariaForm> concesionariaFormsApproved = msConcesionariasDao.selectAprobadas();
+        assertTrue(concesionariaFormsApproved.stream().anyMatch(c -> c.getId().equals(1L)));
     }
 
     @Test()
     public void test_13_Approve_unexistent_concesionaria_fail() throws SQLException {
 
-        DynaActionForm concesionariaForm = new DynaActionForm();
+        final DynaActionForm concesionariaForm = new DynaActionForm();
         concesionariaForm.setItem("id", "10");
 
-        InteractorResponse<Boolean> result = aprobarInteractor.execute(concesionariaForm);
+        final InteractorResponse<Boolean> result = aprobarInteractor.execute(concesionariaForm);
         assertEquals(ResponseForward.FAILURE, result.getResponse());
         assertFalse(result.getResult());
     }
@@ -67,9 +66,9 @@ public class AprobarInteractorTest {
     @Test()
     public void test_14_Approve_concesionaria_without_id_fail() throws SQLException {
 
-        DynaActionForm concesionariaForm = new DynaActionForm();
+        final DynaActionForm concesionariaForm = new DynaActionForm();
 
-        InteractorResponse<Boolean> result = aprobarInteractor.execute(concesionariaForm);
+        final InteractorResponse<Boolean> result = aprobarInteractor.execute(concesionariaForm);
         assertEquals(ResponseForward.WARNING, result.getResponse());
         assertFalse(result.getResult());
     }
@@ -77,7 +76,7 @@ public class AprobarInteractorTest {
     @Test()
     public void test_15_Approve_concesionaria_twice_ok() throws SQLException {
 
-        DynaActionForm concesionariaForm = new DynaActionForm();
+        final DynaActionForm concesionariaForm = new DynaActionForm();
         concesionariaForm.setItem("id", "1");
 
         InteractorResponse<Boolean> result = aprobarInteractor.execute(concesionariaForm);
@@ -86,9 +85,9 @@ public class AprobarInteractorTest {
 
         // validate if the concesionaria was really updated
         List<ConcesionariaForm> concesionariaFormsApproved = msConcesionariasDao.selectAprobadas();
-        assertTrue(concesionariaFormsApproved.stream().anyMatch( c -> c.getId().equals(1L)));
+        assertTrue(concesionariaFormsApproved.stream().anyMatch(c -> c.getId().equals(1L)));
 
-        Timestamp dateFirstUpdate = concesionariaFormsApproved
+        final Timestamp dateFirstUpdate = concesionariaFormsApproved
                 .stream()
                 .filter(c -> c.getId().equals(1L))
                 .findFirst()
@@ -103,7 +102,7 @@ public class AprobarInteractorTest {
 
         concesionariaFormsApproved = msConcesionariasDao.selectAprobadas();
 
-        Timestamp dateSecondUpdate = concesionariaFormsApproved
+        final Timestamp dateSecondUpdate = concesionariaFormsApproved
                 .stream()
                 .filter(c -> c.getId().equals(1L))
                 .findFirst()

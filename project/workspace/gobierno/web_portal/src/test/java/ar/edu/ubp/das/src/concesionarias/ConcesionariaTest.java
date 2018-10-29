@@ -1,4 +1,4 @@
-package concesionarias;
+package ar.edu.ubp.das.src.concesionarias;
 
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.src.concesionarias.daos.MSConcesionariasDao;

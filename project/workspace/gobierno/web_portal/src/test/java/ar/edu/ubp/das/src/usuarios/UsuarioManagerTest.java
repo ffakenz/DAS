@@ -1,4 +1,4 @@
-package usuarios;
+package ar.edu.ubp.das.src.usuarios;
 
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.mvc.db.DaoImpl;

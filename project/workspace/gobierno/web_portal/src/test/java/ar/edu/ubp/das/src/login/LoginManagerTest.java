@@ -1,4 +1,4 @@
-package login;
+package ar.edu.ubp.das.src.login;
 
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.mvc.db.DaoImpl;

@@ -1,5 +1,5 @@
 CREATE TABLE consumers (
-	id              BIGINT        NOT NULL  IDENTITY
+	id              BIGINT        IDENTITY
 	, documento     BIGINT        NOT NULL
 	, nombre        VARCHAR(100)  NOT NULL
 	, apellido      VARCHAR(100)  NOT NULL
