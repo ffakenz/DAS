@@ -3,7 +3,7 @@ package clients;
 import java.util.Map;
 import java.util.Optional;
 
-public class ClientFactory {
+public class ClientFactory implements IClientFactory {
 
     private static ClientFactory instance = new ClientFactory();
 
@@ -14,6 +14,7 @@ public class ClientFactory {
         return instance;
     }
 
+    @Override
     public Optional<ConcesionariaServiceContract> getClientFor(final String configTecno, final Map<String, String> params) {
         if (params.isEmpty())
             return Optional.empty();

@@ -17,8 +17,8 @@ import ar.edu.ubp.das.src.estado_cuentas.model.EstadoCuentasManager;
 import ar.edu.ubp.das.src.jobs.daos.MSParticipanteDao;
 import ar.edu.ubp.das.src.jobs.daos.MSSorteoDao;
 import ar.edu.ubp.das.src.jobs.forms.ParticipanteForm;
-import clients.ClientFactory;
 import clients.ConcesionariaServiceContract;
+import clients.IClientFactory;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -42,7 +42,9 @@ public class SorteoJob implements Job {
     private MSParticipanteDao msParticipanteDao;
     private MSSorteoDao msSorteoDao;
 
-    public SorteoJob(final DatasourceConfig datasourceConfig) {
+    private IClientFactory clientFactory;
+
+    public SorteoJob(final DatasourceConfig datasourceConfig, final IClientFactory clientFactory) {
 
         final MSConcesionariasDao msConcesionariasDao = new MSConcesionariasDao();
         msConcesionariasDao.setDatasource(datasourceConfig);
@@ -69,6 +71,8 @@ public class SorteoJob implements Job {
 
         this.msSorteoDao = new MSSorteoDao();
         this.msSorteoDao.setDatasource(datasourceConfig);
+
+        this.clientFactory = clientFactory;
     }
 
     protected Optional<ParticipanteForm> verificarCancelacionCuenta() throws JobExecutionException {
@@ -99,10 +103,9 @@ public class SorteoJob implements Job {
                             Collectors.toMap(ConfigurarConcesionariaForm::getConfigParam, ConfigurarConcesionariaForm::getValue)
                     );
 
-            final Optional<ConcesionariaServiceContract> client = ClientFactory.getInstance().getClientFor(configTecno, clientCall);
+            final Optional<ConcesionariaServiceContract> client = clientFactory.getClientFor(configTecno, clientCall);
             // end get client based on config tecno
-
-
+            
             // final EstadoPlanCuenta estadoPlanGanador = ConcesionariaClient.getEstadoCuenta(ultimoGanador.get());
 
             return Optional.empty();
