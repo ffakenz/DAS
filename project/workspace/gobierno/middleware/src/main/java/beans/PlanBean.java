@@ -14,6 +14,7 @@ public class PlanBean {
     String clientId;
     Timestamp fechaAlta;
     Timestamp fechaUltimoUpdate;
+    // TODO: List<CuotasBean>
 
     public PlanBean() {
     }

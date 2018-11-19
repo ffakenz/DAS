@@ -2,6 +2,7 @@ package ar.edu.ubp.das.src.jobs;
 
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.src.jobs.runner.JobRunner;
+import beans.PlanBean;
 import clients.ConcesionariaServiceContract;
 import clients.IClientFactory;
 import org.junit.Before;
@@ -10,6 +11,7 @@ import org.quartz.JobExecutionException;
 import util.TestDB;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -47,12 +49,12 @@ public class JobsSpec {
         public Optional<ConcesionariaServiceContract> getClientFor(final String configTecno, final Map<String, String> params) {
             return Optional.of(new ConcesionariaServiceContract() {
                 @Override
-                public String consultarPlanes() {
+                public List<PlanBean> consultarPlanes() {
                     return null;
                 }
 
                 @Override
-                public String consultarPlan(final Long planId) {
+                public PlanBean consultarPlan(final Long planId) {
                     return null;
                 }
 

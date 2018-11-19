@@ -1,5 +1,6 @@
 package clients;
 
+import beans.PlanBean;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -12,6 +13,7 @@ import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 
@@ -19,15 +21,6 @@ public class RestClient implements ConcesionariaServiceContract {
 
     private final String url;
     private final HttpClient client;
-
-    public RestClient(String url) {
-        this.url = url;
-        this.client = HttpClientBuilder.create().build();
-    }
-
-    private String getUrl() { return this.url; }
-    private HttpClient getCliente() { return this.client; }
-
     private BiFunction<String, String, HttpUriRequest> HTTPFactory = (method, callTo) -> {
         URI uri = URI.create(getUrl() + callTo);
         switch (method) {
@@ -43,10 +36,10 @@ public class RestClient implements ConcesionariaServiceContract {
                 HttpPut putReq = new HttpPut();
                 putReq.setURI(uri);
                 return putReq;
-            default: throw new IllegalArgumentException("Invalid method: " + method);
+            default:
+                throw new IllegalArgumentException("Invalid method: " + method);
         }
     };
-
     private BiFunction<String, String, String> call = (method, callTo) -> {
         try {
             HttpResponse resp = getCliente().execute(HTTPFactory.apply(method, callTo));
@@ -57,7 +50,6 @@ public class RestClient implements ConcesionariaServiceContract {
         }
         return "No respuesta";
     };
-
     private BiConsumer<String, String> fireAndForget = (method, callTo) -> {
         try {
             getCliente().execute(HTTPFactory.apply(method, callTo));
@@ -66,18 +58,34 @@ public class RestClient implements ConcesionariaServiceContract {
         }
     };
 
-    @Override
-    public String consultarPlanes() {
-        return call.apply("GET", "/consultarPlanes");
+    public RestClient(final String url) {
+        this.url = url;
+        this.client = HttpClientBuilder.create().build();
+    }
+
+    private String getUrl() {
+        return this.url;
+    }
+
+    private HttpClient getCliente() {
+        return this.client;
     }
 
     @Override
-    public String consultarPlan(Long planId) {
-        return call.apply("GET", "/consultarPlan?planId=" + planId.toString());
+    public List<PlanBean> consultarPlanes() {
+//        return call.apply("GET", "/consultarPlanes");
+        return null;
     }
-	// TODO: Create method that will parse multiple parameters
+
     @Override
-    public void cancelarPlan(Long planId) {
+    public PlanBean consultarPlan(final Long planId) {
+//        return call.apply("GET", "/consultarPlan?planId=" + planId.toString());
+        return null;
+    }
+
+    // TODO: Create method that will parse multiple parameters
+    @Override
+    public void cancelarPlan(final Long planId) {
         fireAndForget.accept("PUT", "/cancelarPlan?planId=" + planId.toString());
     }
 }

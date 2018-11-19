@@ -1,5 +1,6 @@
 package clients;
 
+import beans.PlanBean;
 import com.google.gson.JsonObject;
 import org.apache.axiom.om.OMAbstractFactory;
 import org.apache.axiom.om.OMElement;
@@ -11,6 +12,7 @@ import org.apache.axis2.client.Options;
 import org.apache.axis2.client.ServiceClient;
 
 import java.util.Iterator;
+import java.util.List;
 
 public class AxisClient implements ConcesionariaServiceContract {
 
@@ -18,8 +20,8 @@ public class AxisClient implements ConcesionariaServiceContract {
     private final OMFactory fac;
     private final OMNamespace omNs;
 
-    public AxisClient(String endpointUrl // "http://localhost:8001/concesionarias_axis_one_war/services/ConcesionariaAxisOne.ConcesionariaAxisOneHttpEndpoint/"
-                      , String targetNameSpace // "http://ws.ConcesionariaAxisOne/"
+    public AxisClient(final String endpointUrl // "http://localhost:8001/concesionarias_axis_one_war/services/ConcesionariaAxisOne.ConcesionariaAxisOneHttpEndpoint/"
+            , final String targetNameSpace // "http://ws.ConcesionariaAxisOne/"
     ) {
         this.endpointUrl = endpointUrl;
         this.fac = OMAbstractFactory.getOMFactory();
@@ -27,54 +29,56 @@ public class AxisClient implements ConcesionariaServiceContract {
     }
 
     // TODO: apply DRY on call because is similar to executeMethod.
-    private final void call(OMElement method) {
+    private void call(final OMElement method) {
         try {
-            ServiceClient serviceClient = new ServiceClient();
+            final ServiceClient serviceClient = new ServiceClient();
             // create option object
-            Options opts = new Options();
+            final Options opts = new Options();
             opts.setTo(new EndpointReference(endpointUrl));
             serviceClient.setOptions(opts);
             serviceClient.fireAndForget(method); // TODO: Note: this is the only line differet
-        } catch (AxisFault axisFault) {
+        } catch (final AxisFault axisFault) {
             axisFault.printStackTrace();
             System.out.println(axisFault.getMessage());
         }
     }
 
-    private final OMElement executeMethod(OMElement method) {
+    private OMElement executeMethod(final OMElement method) {
         try {
-            ServiceClient serviceClient = new ServiceClient();
+            final ServiceClient serviceClient = new ServiceClient();
             // create option object
-            Options opts = new Options();
+            final Options opts = new Options();
             opts.setTo(new EndpointReference(endpointUrl));
 
             serviceClient.setOptions(opts);
 
-            OMElement res = serviceClient.sendReceive(method);
+            final OMElement res = serviceClient.sendReceive(method);
 
             return res;
-        } catch (AxisFault axisFault) {
+        } catch (final AxisFault axisFault) {
             axisFault.printStackTrace();
             System.out.println(axisFault.getMessage());
         }
         return null; // non reacheable statemet
     }
-    private final OMElement createMethod(String methodName) {
+
+    private OMElement createMethod(final String methodName) {
         return fac.createOMElement(methodName, omNs);
     }
-    private final <A> OMElement createParam(String paramName, A paramValue) {
-        OMElement param = fac.createOMElement(paramName, omNs);
+
+    private <A> OMElement createParam(final String paramName, final A paramValue) {
+        final OMElement param = fac.createOMElement(paramName, omNs);
         param.setText(paramValue.toString());
         return param;
     }
 
     // TODO: Move this method to an GSON Utils in order to remove above import com.google.gson.*
-    private final JsonObject deserializeXML(Iterator it, JsonObject bag) {
-        if(it.hasNext()) {
-            OMElement child = (OMElement) it.next();
-            String elementName = child.getLocalName();
+    private JsonObject deserializeXML(final Iterator it, final JsonObject bag) {
+        if (it.hasNext()) {
+            final OMElement child = (OMElement) it.next();
+            final String elementName = child.getLocalName();
 
-            if(!child.getChildElements().hasNext())
+            if (!child.getChildElements().hasNext())
                 bag.addProperty(elementName, child.getText());
             else
                 bag.add(elementName, deserializeXML(child.getChildElements(), new JsonObject()));
@@ -85,29 +89,31 @@ public class AxisClient implements ConcesionariaServiceContract {
     }
 
     @Override
-    public String consultarPlanes() {
-        OMElement method = createMethod("consultarPlanes");
-        OMElement res = executeMethod(method);
+    public List<PlanBean> consultarPlanes() {
+        final OMElement method = createMethod("consultarPlanes");
+        final OMElement res = executeMethod(method);
 
-        OMElement returnValue = res.getFirstElement();
-        return returnValue.getText();
+        final OMElement returnValue = res.getFirstElement();
+//        return returnValue.getText();
+        return null;
     }
 
     @Override
-    public String consultarPlan(Long planId) {
-        OMElement method = createMethod("consultarPlan");
-        OMElement param = createParam("planId", planId);
+    public PlanBean consultarPlan(final Long planId) {
+        final OMElement method = createMethod("consultarPlan");
+        final OMElement param = createParam("planId", planId);
         method.addChild(param);
-        OMElement res = executeMethod(method); // response
+        final OMElement res = executeMethod(method); // response
 
-        OMElement returnValue = res.getFirstElement();
-        return returnValue.getText();
+        final OMElement returnValue = res.getFirstElement();
+//        return returnValue.getText();
+        return null;
     }
 
     @Override
-    public void cancelarPlan(Long planId) {
-        OMElement method = createMethod("cancelarPlan");
-        OMElement param = createParam("planId", planId);
+    public void cancelarPlan(final Long planId) {
+        final OMElement method = createMethod("cancelarPlan");
+        final OMElement param = createParam("planId", planId);
         method.addChild(param);
         call(method);
     }

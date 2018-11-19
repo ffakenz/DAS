@@ -17,6 +17,7 @@ import ar.edu.ubp.das.src.estado_cuentas.model.EstadoCuentasManager;
 import ar.edu.ubp.das.src.jobs.daos.MSParticipanteDao;
 import ar.edu.ubp.das.src.jobs.daos.MSSorteoDao;
 import ar.edu.ubp.das.src.jobs.forms.ParticipanteForm;
+import beans.PlanBean;
 import clients.ConcesionariaServiceContract;
 import clients.IClientFactory;
 import org.quartz.Job;
@@ -75,11 +76,11 @@ public class SorteoJob implements Job {
         this.clientFactory = clientFactory;
     }
 
-    protected Optional<ParticipanteForm> verificarCancelacionCuenta() throws JobExecutionException {
+    protected Boolean verificarCancelacionCuenta() throws JobExecutionException {
         try {
             final Optional<ParticipanteForm> ultimoGanador = msParticipanteDao.getUltimoGanador();
             if (!ultimoGanador.isPresent()) {
-                return ultimoGanador;
+                return false;
             }
 
             final ParticipanteForm ganador = ultimoGanador.get();
@@ -92,48 +93,54 @@ public class SorteoJob implements Job {
             final ConcesionariaForm concesionariaGanador =
                     concesionariasManager.getDao().selectById(estadoCuentaGanador.getId()).get();
 
-            // selectParamsByConcesionariaId cannot fail if there is a winner, so list cannot be empty
-            final List<ConfigurarConcesionariaForm> paramsConfigTecnoGanador = configurarConcesionariaManager.getDao()
-                    .selectParamsByConcesionariaId(concesionariaGanador.getId());
+            // getClientFromConcesionaria cannot fail if there is a winner
+            final ConcesionariaServiceContract client =
+                    getClientFromConcesionaria(concesionariaGanador.getId()).get();
 
-            // start get client based on config tecno
-            final String configTecno = paramsConfigTecnoGanador.get(0).getConfigTecno();
-            final Map<String, String> clientCall =
-                    paramsConfigTecnoGanador.stream().collect(
-                            Collectors.toMap(ConfigurarConcesionariaForm::getConfigParam, ConfigurarConcesionariaForm::getValue)
-                    );
+            final PlanBean planBeanResponse = client.consultarPlan(ultimoGanador.get().getIdPlan());
 
-            final Optional<ConcesionariaServiceContract> client = clientFactory.getClientFor(configTecno, clientCall);
-            // end get client based on config tecno
-            
-            // final EstadoPlanCuenta estadoPlanGanador = ConcesionariaClient.getEstadoCuenta(ultimoGanador.get());
+            if (isPlanCancelado(planBeanResponse)) {
+                ganador.setEstado("ganador");
+                msParticipanteDao.update(ganador);
+            }
 
-            return Optional.empty();
+            return true;
 
         } catch (final SQLException ex) {
             throw new JobExecutionException(ex);
         }
     }
 
+    // TODO: Add List<Cuotas> to PlanBean in order to verify this invariant
+    private Boolean isPlanCancelado(final PlanBean planBeanResponse) {
+        return true;
+    }
+
+    private Optional<ConcesionariaServiceContract> getClientFromConcesionaria(final Long concesionariaId) throws SQLException {
+        final List<ConfigurarConcesionariaForm> paramsConfigTecnoGanador =
+                configurarConcesionariaManager.getDao().selectParamsByConcesionariaId(concesionariaId);
+
+        if (paramsConfigTecnoGanador.isEmpty()) {
+            return Optional.empty();
+        }
+
+        // start get client based on config tecno
+        final String configTecno = paramsConfigTecnoGanador.get(0).getConfigTecno();
+        final Map<String, String> clientCall =
+                paramsConfigTecnoGanador.stream().collect(
+                        Collectors.toMap(ConfigurarConcesionariaForm::getConfigParam, ConfigurarConcesionariaForm::getValue)
+                );
+        return clientFactory.getClientFor(configTecno, clientCall);
+    }
+
     @Override
 
     public void execute(final JobExecutionContext jobExecutionContext) throws JobExecutionException {
 
-        final Optional<ParticipanteForm> ganador = verificarCancelacionCuenta();
-        /*
-        // Verificar Cancelacion de Cuenta
-        Optional<Ganador> ganador = Db.getUltimoGanador();
-        if(ganador.isPresente) {
-            EstadoPlanCuenta estadoPlanGanador = ConcesionariaClient.getEstadoCuenta(ganador);
-            if(!esCancelado(estadoPlanGanador)) {
-                return error;
-            }
+        if (!verificarCancelacionCuenta()) {
 
-            return true;
-            Db.actualizarEstadoGanador(estadoPlanGanador);
         }
-         */
-
+        
         System.out.println("SORTEO");
     }
 }
