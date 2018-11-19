@@ -1,4 +1,4 @@
-package ar.edu.ubp.das.src.jobs;
+package ar.edu.ubp.das.src.jobs.sorteo;
 
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.src.concesionarias.daos.MSConcesionariasDao;
@@ -44,8 +44,9 @@ public class SorteoJob implements Job {
     private MSSorteoDao msSorteoDao;
 
     private IClientFactory clientFactory;
+    private ISorteoInvariantsHolder sorteoInvariantsHolder;
 
-    public SorteoJob(final DatasourceConfig datasourceConfig, final IClientFactory clientFactory) {
+    public SorteoJob(final DatasourceConfig datasourceConfig, final IClientFactory clientFactory, final ISorteoInvariantsHolder sorteoInvariantsHolder) {
 
         final MSConcesionariasDao msConcesionariasDao = new MSConcesionariasDao();
         msConcesionariasDao.setDatasource(datasourceConfig);
@@ -74,9 +75,10 @@ public class SorteoJob implements Job {
         this.msSorteoDao.setDatasource(datasourceConfig);
 
         this.clientFactory = clientFactory;
+        this.sorteoInvariantsHolder = sorteoInvariantsHolder;
     }
 
-    protected Boolean verificarCancelacionCuenta() throws JobExecutionException {
+    public Boolean verificarCancelacionCuenta() throws JobExecutionException {
         try {
             final Optional<ParticipanteForm> ultimoGanador = msParticipanteDao.getUltimoGanador();
             if (!ultimoGanador.isPresent()) {
@@ -99,7 +101,7 @@ public class SorteoJob implements Job {
 
             final PlanBean planBeanResponse = client.consultarPlan(ultimoGanador.get().getIdPlan());
 
-            if (isPlanCancelado(planBeanResponse)) {
+            if (sorteoInvariantsHolder.isPlanCancelado(planBeanResponse)) {
                 ganador.setEstado("ganador");
                 msParticipanteDao.update(ganador);
             }
@@ -109,11 +111,6 @@ public class SorteoJob implements Job {
         } catch (final SQLException ex) {
             throw new JobExecutionException(ex);
         }
-    }
-
-    // TODO: Add List<Cuotas> to PlanBean in order to verify this invariant
-    private Boolean isPlanCancelado(final PlanBean planBeanResponse) {
-        return true;
     }
 
     private Optional<ConcesionariaServiceContract> getClientFromConcesionaria(final Long concesionariaId) throws SQLException {
@@ -140,7 +137,7 @@ public class SorteoJob implements Job {
         if (!verificarCancelacionCuenta()) {
 
         }
-        
+
         System.out.println("SORTEO");
     }
 }

@@ -2,6 +2,8 @@ package ar.edu.ubp.das.src.jobs;
 
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.src.jobs.runner.JobRunner;
+import ar.edu.ubp.das.src.jobs.sorteo.ISorteoInvariantsHolder;
+import ar.edu.ubp.das.src.jobs.sorteo.SorteoJob;
 import beans.PlanBean;
 import clients.ConcesionariaServiceContract;
 import clients.IClientFactory;
@@ -39,8 +41,15 @@ public class JobsSpec {
     @Test
     public void test_sorteo_base() throws JobExecutionException {
 
-        final SorteoJob sorteoJob = new SorteoJob(dataSourceConfig, new ClientFactoryMock());
+        final SorteoJob sorteoJob = new SorteoJob(dataSourceConfig, new ClientFactoryMock(), new SorteoInvariantsHolderMock());
         sorteoJob.verificarCancelacionCuenta();
+    }
+
+    private class SorteoInvariantsHolderMock implements ISorteoInvariantsHolder {
+        @Override
+        public Boolean isPlanCancelado(final PlanBean planBeanResponse) {
+            return true;
+        }
     }
 
     private class ClientFactoryMock implements IClientFactory {
