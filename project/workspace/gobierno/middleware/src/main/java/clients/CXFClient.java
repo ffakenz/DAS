@@ -35,15 +35,15 @@ public class CXFClient implements ConcesionariaServiceContract {
     @Override
     public List<PlanBean> consultarPlanes() {
         final Object res = executeMethod("consultarPlanes");
-//        return res.toString();
-        return null;
+        final String jsonPlanBeans = res.toString();
+        return fromJsonArray(jsonPlanBeans);
     }
 
     @Override
     public PlanBean consultarPlan(final Long planId) {
         final Object res = executeMethod("consultarPlan", planId);
-//        return res.toString();
-        return null;
+        final String jsonPlanBean = res.toString();
+        return fromJson(jsonPlanBean);
     }
 
     @Override

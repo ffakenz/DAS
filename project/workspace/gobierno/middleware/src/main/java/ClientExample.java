@@ -6,7 +6,6 @@ import clients.RestClient;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.util.Arrays;
 import java.util.function.Consumer;
 
 public class ClientExample {
@@ -26,35 +25,30 @@ public class ClientExample {
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd hh:mm:ss.SSS").create();
 
         System.out.println("consultarPlanes");
-        String planesJSON = client.consultarPlanes(); // use gson
-        System.out.println("planes " + planesJSON);
-        PlanBean[] planBeans = gson.fromJson(planesJSON, PlanBean[].class);
-        Arrays.asList(planBeans).forEach(plan -> logPlan.accept(plan));
+        client.consultarPlanes().forEach(plan -> logPlan.accept(plan));
 
         System.out.println("cancelarPlan");
         client.cancelarPlan(3L);
 
         System.out.println("consultarPlan");
-        String planJSON = client.consultarPlan(3L); // use gson
-        System.out.println("plan " + planJSON);
-        PlanBean plan = gson.fromJson(planJSON, PlanBean.class);
+        PlanBean plan = client.consultarPlan(3L);
         logPlan.accept(plan);
     };
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         // TODO: quitar/services
-        AxisClient axis =
-            new AxisClient(
-                "http://192.168.1.6:8001/concesionaria_axis_one/services/ConcesionariaAxisOne.ConcesionariaAxisOneHttpEndpoint/"
-                , "http://ws.ConcesionariaAxisOne/"
-            );
+        final AxisClient axis =
+                new AxisClient(
+                        "http://192.168.1.6:8001/concesionaria_axis_one/services/ConcesionariaAxisOne.ConcesionariaAxisOneHttpEndpoint/"
+                        , "http://ws.ConcesionariaAxisOne/"
+                );
 
         // TODO: quitar/services
-        CXFClient cxf =
+        final CXFClient cxf =
                 new CXFClient("http://192.168.1.6:8000/concesionaria_cxf_one/services/concesionaria_cxf_one?wsdl");
 
         // TODO: change concesionarias_rest_one to concesionaria_rest_one
-        RestClient rest =
+        final RestClient rest =
                 new RestClient("http://localhost:8002/concesionarias_rest_one/concesionariaRestOne");
 
 

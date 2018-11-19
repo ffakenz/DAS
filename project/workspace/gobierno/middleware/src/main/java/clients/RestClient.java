@@ -73,14 +73,14 @@ public class RestClient implements ConcesionariaServiceContract {
 
     @Override
     public List<PlanBean> consultarPlanes() {
-//        return call.apply("GET", "/consultarPlanes");
-        return null;
+        final String jsonPlanBeans = call.apply("GET", "/consultarPlanes");
+        return fromJsonArray(jsonPlanBeans);
     }
 
     @Override
     public PlanBean consultarPlan(final Long planId) {
-//        return call.apply("GET", "/consultarPlan?planId=" + planId.toString());
-        return null;
+        final String jsonPlanBean = call.apply("GET", "/consultarPlan?planId=" + planId.toString());
+        return fromJson(jsonPlanBean);
     }
 
     // TODO: Create method that will parse multiple parameters

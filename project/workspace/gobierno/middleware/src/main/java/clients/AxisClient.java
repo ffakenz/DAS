@@ -94,8 +94,8 @@ public class AxisClient implements ConcesionariaServiceContract {
         final OMElement res = executeMethod(method);
 
         final OMElement returnValue = res.getFirstElement();
-//        return returnValue.getText();
-        return null;
+        final String jsonPlanBeans = returnValue.getText();
+        return fromJsonArray(jsonPlanBeans);
     }
 
     @Override
@@ -106,8 +106,8 @@ public class AxisClient implements ConcesionariaServiceContract {
         final OMElement res = executeMethod(method); // response
 
         final OMElement returnValue = res.getFirstElement();
-//        return returnValue.getText();
-        return null;
+        final String jsonPlanBean = returnValue.getText();
+        return fromJson(jsonPlanBean);
     }
 
     @Override
