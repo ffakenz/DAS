@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!-- ***************************** -->
+    <!--   TABLE CREATION CHANGE-SETS  -->
+    <!-- ***************************** -->
+    <changeSet id="Create table cuotas" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="cuotas"/>
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/tables/cuotas.sql"/>
+    </changeSet>
+    <changeSet id="Create table planes" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="planes"/>
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/tables/planes.sql"/>
+    </changeSet>
+    <changeSet id="Create table tipos_de_planes" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="tipos_de_planes"/>
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/tables/tipos_de_planes.sql"/>
+    </changeSet>
+    <changeSet id="Create table clientes" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="clientes"/>
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/tables/clientes.sql"/>
+    </changeSet>
+    <changeSet id="Create table vehiculos" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="vehiculos"/>
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/tables/vehiculos.sql"/>
+    </changeSet>
+    <changeSet id="Create table tipos_vehiculo" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="tipos_vehiculo"/>
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/tables/tipos_vehiculo.sql"/>
+    </changeSet>
+
+    cuotas
+    planes
+    tipos_de_planes
+    clientes
+    vehiculos
+    tipos_vehiculo
+</databaseChangeLog>

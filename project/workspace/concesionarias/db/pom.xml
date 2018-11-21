@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>concesionarias</groupId>
+        <artifactId>concesionarias</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>concesionarias</groupId>
+    <artifactId>db</artifactId>
+    <packaging>jar</packaging>
+
+    <properties>
+        <!--<db.property.file.path>src/main/resources/db.properties</db.property.file.path>-->
+        <liquibase.version>3.6.1</liquibase.version>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>axis_one</id>
+            <activation>
+                <property>
+                    <name>env</name>
+                    <value>axis_one</value>
+                </property>
+            </activation>
+            <properties>
+                <driverDB>com.microsoft.sqlserver.jdbc.SQLServerDriver</driverDB>
+                <urlDB>jdbc:sqlserver://localhost:1434;databaseName=db_concesionarias;</urlDB>
+                <usernameDB>SA</usernameDB>
+                <passwordDB>Das12345</passwordDB>
+                <contextDB>concesionaria_axis_one</contextDB>
+                <schemaDB>axis_one</schemaDB>
+            </properties>
+        </profile>
+        <profile>
+            <id>rest_one</id>
+            <activation>
+                <property>
+                    <name>env</name>
+                    <value>rest_one</value>
+                </property>
+            </activation>
+            <properties>
+                <driverDB>com.microsoft.sqlserver.jdbc.SQLServerDriver</driverDB>
+                <urlDB>jdbc:sqlserver://localhost:1434;databaseName=db_concesionarias;</urlDB>
+                <usernameDB>SA</usernameDB>
+                <passwordDB>Das12345</passwordDB>
+                <contextDB>concesionaria_rest_one</contextDB>
+                <schemaDB>rest_one</schemaDB>
+            </properties>
+        </profile>
+        <profile>
+            <id>cxf_one</id>
+            <activation>
+                <property>
+                    <name>env</name>
+                    <value>cxf_one</value>
+                </property>
+            </activation>
+            <properties>
+                <driverDB>com.microsoft.sqlserver.jdbc.SQLServerDriver</driverDB>
+                <urlDB>jdbc:sqlserver://localhost:1434;databaseName=db_concesionarias;</urlDB>
+                <usernameDB>SA</usernameDB>
+                <passwordDB>Das12345</passwordDB>
+                <contextDB>concesionaria_cxf_one</contextDB>
+                <schemaDB>cxf_one</schemaDB>
+            </properties>
+        </profile>
+    </profiles>
+
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+            <version>6.1.0.jre8</version>
+            <scope>runtime</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.liquibase/liquibase-maven-plugin -->
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-maven-plugin</artifactId>
+            <version>${liquibase.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>${liquibase.version}</version>
+                <configuration>
+                    <changeLogFile>dbchangelog.xml</changeLogFile>
+                    <driver>${driverDB}</driver>
+                    <url>${urlDB}</url>
+                    <username>${usernameDB}</username>
+                    <password>${passwordDB}</password>
+                    <contexts>${contextDB}</contexts>
+                    <changelogSchemaName>${schemaDB}</changelogSchemaName>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>update</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

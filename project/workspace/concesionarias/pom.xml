@@ -15,6 +15,7 @@
         <module>concesionarias_cxf</module>
         <module>concesionarias_axis</module>
         <module>concesionarias_rest</module>
+        <module>db</module>
     </modules>
 
     <prerequisites>

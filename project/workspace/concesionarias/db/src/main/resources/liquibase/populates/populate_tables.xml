@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!-- ******************************** -->
+    <!--   TABLE POPULATION CHANGE-SETS   -->
+    <!-- ******************************** -->
+    <changeSet id="Populate table tipos_vehiculo" author="DAS-Team" runAlways="true" runOnChange="true"
+               context="dev">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="tipos_vehiculo"/>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/populates/tipos_vehiculo.sql"/>
+    </changeSet>
+    <changeSet id="Populate table vehiculos" author="DAS-Team" runAlways="true" runOnChange="true"
+               context="dev">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="vehiculos"/>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/populates/vehiculos.sql"/>
+    </changeSet>
+    <changeSet id="Populate table clientes" author="DAS-Team" runAlways="true" runOnChange="true"
+               context="dev">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="clientes"/>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/populates/clientes.sql"/>
+    </changeSet>
+    <changeSet id="Populate table tipos_de_planes" author="DAS-Team" runAlways="true" runOnChange="true"
+               context="dev">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="tipos_de_planes"/>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/populates/tipos_de_planes.sql"/>
+    </changeSet>
+    <changeSet id="Populate table planes" author="DAS-Team" runAlways="true" runOnChange="true"
+               context="dev">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="planes"/>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/populates/planes.sql"/>
+    </changeSet>
+    <changeSet id="Populate table cuotas" author="DAS-Team" runAlways="true" runOnChange="true"
+               context="dev">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="cuotas"/>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/populates/cuotas.sql"/>
+    </changeSet>
+</databaseChangeLog>

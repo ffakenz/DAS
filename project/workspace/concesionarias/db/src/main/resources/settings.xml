@@ -1,0 +1,22 @@
+<settings>
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</driver>
+                <url>jdbc:sqlserver://localhost;databaseName=db_gobierno;</url>
+                <username>SA</username>
+                <password>Das12345</password>
+            </properties>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</driver>
+                <url>jdbc:sqlserver://localhost;databaseName=db_gobierno;</url>
+                <username>SA</username>
+                <password>Das12345</password>
+            </properties>
+        </profile>
+    </profiles>
+</settings>
