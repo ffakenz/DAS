@@ -1,9 +1,11 @@
-INSERT INTO vehiculos(tipo, nombre, precio, marca, modelo, color)
-VALUES ('taxi', 'Corsa', 10000, 'chevrolet', 'v1','c1' )
-	, ('particular', 'Gol', 10000, 'volkswagen', 'v3','c2' )
-	,('particular', 'Clio', 10000, 'renault', 'v1','c1' )
-	, ('comercial', '208', 10000, 'peugeot', 'v1','c4' )
-	, ('comercial', 'Focus', 10000, 'ford', 'v5','c3' )
-	, ('utilitario', 'Fiorino', 10000, 'fiat', 'v1','c1' )
-	, ('utilitario', 'Saveiro', 10000, 'volkswagen', 'v2','c1' )
-;
+CREATE TABLE vehiculos (
+	id INT IDENTITY PRIMARY KEY
+	, tipo VARCHAR(100) NOT NULL FOREIGN KEY REFERENCES tipos_vehiculo(nombre)
+	, nombre VARCHAR(100) NOT NULL
+	, marca VARCHAR(100) NOT NULL
+	, fecha_de_alta DATETIME NOT NULL DEFAULT GETDATE()
+	, precio BIGINT NOT NULL
+	, color VARCHAR(100) NOT NULL
+	, modelo VARCHAR(100) NOT NULL
+	, UNIQUE(tipo, nombre)
+);

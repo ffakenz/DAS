@@ -28,7 +28,7 @@
 
 
     <!-- ########################################### -->
-    <!-- Main triggers change-sets               -->
+    <!-- Main triggers change-sets                   -->
     <!-- ########################################### -->
     <include file="/src/main/resources/liquibase/estado_cuentas/triggers/triggers.xml"/>
 
