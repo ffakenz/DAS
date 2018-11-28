@@ -8,30 +8,6 @@
     <!-- ***************************** -->
     <!--   TABLE CREATION CHANGE-SETS  -->
     <!-- ***************************** -->
-    <changeSet id="Create table cuotas" author="DAS-Team" runAlways="true" runOnChange="true">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="cuotas"/>
-            </not>
-        </preConditions>
-        <sqlFile path="/src/main/resources/liquibase/tables/cuotas.sql"/>
-    </changeSet>
-    <changeSet id="Create table planes" author="DAS-Team" runAlways="true" runOnChange="true">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="planes"/>
-            </not>
-        </preConditions>
-        <sqlFile path="/src/main/resources/liquibase/tables/planes.sql"/>
-    </changeSet>
-    <changeSet id="Create table tipos_de_planes" author="DAS-Team" runAlways="true" runOnChange="true">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="tipos_de_planes"/>
-            </not>
-        </preConditions>
-        <sqlFile path="/src/main/resources/liquibase/tables/tipos_de_planes.sql"/>
-    </changeSet>
     <changeSet id="Create table clientes" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <not>
@@ -39,14 +15,6 @@
             </not>
         </preConditions>
         <sqlFile path="/src/main/resources/liquibase/tables/clientes.sql"/>
-    </changeSet>
-    <changeSet id="Create table vehiculos" author="DAS-Team" runAlways="true" runOnChange="true">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="vehiculos"/>
-            </not>
-        </preConditions>
-        <sqlFile path="/src/main/resources/liquibase/tables/vehiculos.sql"/>
     </changeSet>
     <changeSet id="Create table tipos_vehiculo" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
@@ -56,11 +24,36 @@
         </preConditions>
         <sqlFile path="/src/main/resources/liquibase/tables/tipos_vehiculo.sql"/>
     </changeSet>
-
-    cuotas
-    planes
-    tipos_de_planes
-    clientes
-    vehiculos
-    tipos_vehiculo
+    <changeSet id="Create table vehiculos" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="vehiculos"/>
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/tables/vehiculos.sql"/>
+    </changeSet>
+    <changeSet id="Create table tipos_de_planes" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="tipos_de_planes"/>
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/tables/tipos_de_planes.sql"/>
+    </changeSet>
+    <changeSet id="Create table planes" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="planes"/>
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/tables/planes.sql"/>
+    </changeSet>
+    <changeSet id="Create table cuotas" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="cuotas"/>
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/tables/cuotas.sql"/>
+    </changeSet>
 </databaseChangeLog>

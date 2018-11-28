@@ -20,12 +20,12 @@
     <!-- ########################################### -->
     <!-- Main triggers change-sets               -->
     <!-- ########################################### -->
-    <include file="/src/main/resources/liquibase/triggers/triggers.xml"/>
+    <!--<include file="/src/main/resources/liquibase/triggers/triggers.xml"/>-->
 
     <!-- ########################################### -->
     <!-- Main procedures change-sets                 -->
     <!-- ########################################### -->
-    <include file="/src/main/resources/liquibase/procedures/create_procedures.xml"/>
+    <!--<include file="/src/main/resources/liquibase/procedures/create_procedures.xml"/>-->
 
     <!-- ########################################### -->
     <!-- Main populate change-sets                   -->
@@ -35,6 +35,6 @@
     <!-- ########################################### -->
     <!-- Test procedures change-sets                 -->
     <!-- ########################################### -->
-    <include file="/src/main/resources/liquibase/test/test_procedures.xml"/>
+    <!--<include file="/src/main/resources/liquibase/test/test_procedures.xml"/>-->
 
 </databaseChangeLog>
