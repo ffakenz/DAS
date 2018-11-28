@@ -1,12 +1,9 @@
 #!/usr/bin/env bash
 
-echo $pwd
-
 function dbstart () {
     SCHEMA=$1
     echo "Run liquibase ${SCHEMA}"
-    #mvn -f ../../../.. clean -Denv=$SCHEMA
-    mvn -f ../../../.. liquibase:update -Denv=$SCHEMA -X
+    mvn -f ../../../.. clean install -Denv=$SCHEMA
     echo "Finish liquibase ${SCHEMA}"
 }
 
