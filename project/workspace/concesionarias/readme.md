@@ -32,7 +32,11 @@
     - /cancelarPlan?planId=1
     
 
-- REST : http://localhost:8001/concesionaria_rest_one/concesionariaRestOne/consultarPlanes
+- REST : http://localhost:8001/concesionaria_rest_one/concesionariaRestOne
+    - /consultarPlanes
+    - /consultarPlan?planId=1
+    - /cancelarPlan?planId=1
+         
 
 - CXF  : http://localhost:8002/concesionaria_cxf_one/services/concesionaria_cxf_one/consultarPlanes
 
