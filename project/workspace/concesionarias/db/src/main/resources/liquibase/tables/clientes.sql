@@ -1,5 +1,5 @@
 CREATE TABLE clientes (
-	id_cliente INT IDENTITY NOT NULL
+	id_cliente BIGINT IDENTITY NOT NULL
 	, documento BIGINT NOT NULL
 	, nombre VARCHAR(100) NOT NULL
 	, apellido VARCHAR(100) NOT NULL

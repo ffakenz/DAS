@@ -26,7 +26,11 @@
 
 # URLs para consumir los servicios:
 
-- AXIS : http://localhost:8000/concesionaria_axis_one/services/ConcesionariaAxisOne?wsdl
+- AXIS : http://localhost:8000/concesionaria_axis_one/services/ConcesionariaAxisOne.ConcesionariaAxisOneHttpEndpoint
+    - /consultarPlanes
+    - /consultarPlan?planId=1
+    - /cancelarPlan?planId=1
+    
 
 - REST : http://localhost:8001/concesionaria_rest_one/concesionariaRestOne/consultarPlanes
 
@@ -36,7 +40,7 @@
 # Cosas a tener en cuenta
 
 - Si un servicio no logra conectarse a la db, es posible que tengas una sesion abierta (ejemplo terminal) 
-
+- Si un servicio no actualiza su comportamiento, luego de un start_up_xxxx.sh, seguramente falta de builder concesionarias_core  
 
 # Como deberia quedar el entorno configurado ?
 

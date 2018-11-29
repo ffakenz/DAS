@@ -3,6 +3,7 @@ package dbaccess.implementations;
 import annotations.MyResultSet;
 import beans.PlanBean;
 import dao.PlanDAO;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,15 +14,15 @@ public class MSSQLPlanDAO implements PlanDAO {
     @Override
     public Function<Connection, List<PlanBean>> consultarPlanes() {
 
-        String consultarPlanesQuery = "SELECT * FROM compradores;";
+        final String consultarPlanesQuery = "SELECT * FROM planes";
 
         return (Connection c) -> {
-            try(Statement stm = c.createStatement()){
-                ResultSet rs = stm.executeQuery(consultarPlanesQuery);
-                List<PlanBean> planes =
-                        new MyResultSet<PlanBean>(rs, PlanBean.class).mapToObjectList();
+            try (final Statement stm = c.createStatement()) {
+                final ResultSet rs = stm.executeQuery(consultarPlanesQuery);
+                final List<PlanBean> planes =
+                        new MyResultSet<>(rs, PlanBean.class).mapToObjectList();
                 return planes;
-            } catch (SQLException e) {
+            } catch (final SQLException e) {
                 System.out.println(e.getMessage());
                 e.printStackTrace();
             }
@@ -30,17 +31,17 @@ public class MSSQLPlanDAO implements PlanDAO {
     }
 
     @Override
-    public Function<Connection, Optional<PlanBean>> consultarPlan(Long id) {
-        String consultarPlanQuery = "SELECT * FROM compradores WHERE planId = ?;";
+    public Function<Connection, Optional<PlanBean>> consultarPlan(final Long id) {
+        final String consultarPlanQuery = "SELECT * FROM planes WHERE id = ?;";
 
         return (Connection c) -> {
-            try(PreparedStatement ps = c.prepareStatement(consultarPlanQuery)){
+            try (final PreparedStatement ps = c.prepareStatement(consultarPlanQuery)) {
                 ps.setLong(1, id);
-                ResultSet rs = ps.executeQuery();
-                PlanBean plan =
-                        new MyResultSet<PlanBean>(rs, PlanBean.class).mapToSingleObject();
+                final ResultSet rs = ps.executeQuery();
+                final PlanBean plan =
+                        new MyResultSet<>(rs, PlanBean.class).mapToSingleObject();
                 return Optional.ofNullable(plan);
-            } catch (SQLException e) {
+            } catch (final SQLException e) {
                 System.out.println(e.getMessage());
                 e.printStackTrace();
             }
@@ -49,11 +50,11 @@ public class MSSQLPlanDAO implements PlanDAO {
     }
 
     @Override
-    public Function<Connection, Void> cancelarPlan(Long id) {
-        String cancelarPlanQuery = "{ CALL cancelarPlan(?) };";
+    public Function<Connection, Void> cancelarPlan(final Long id) {
+        final String cancelarPlanQuery = "{ CALL cancelarPlan(?) };";
 
         return (Connection c) -> {
-            try(CallableStatement cs = c.prepareCall(cancelarPlanQuery)) {
+            try (final CallableStatement cs = c.prepareCall(cancelarPlanQuery)) {
                 c.setAutoCommit(false);
 
                 cs.setLong(1, id);
@@ -62,7 +63,7 @@ public class MSSQLPlanDAO implements PlanDAO {
                 c.commit();
                 c.setAutoCommit(true);
 
-            } catch (SQLException e) {
+            } catch (final SQLException e) {
                 System.out.println(e.getMessage());
                 e.printStackTrace();
             }

@@ -1,7 +1,7 @@
 CREATE TABLE planes (
-	id INT IDENTITY
-	, cliente INT NOT NULL
-	, vehiculo INT FOREIGN KEY REFERENCES vehiculos(id)
+	id BIGINT IDENTITY
+	, cliente BIGINT NOT NULL
+	, vehiculo BIGINT FOREIGN KEY REFERENCES vehiculos(id)
 	, tipo_de_plan VARCHAR(100) NOT NULL DEFAULT 'NORMAL'
 	, cant_cuotas_pagas INT NOT NULL DEFAULT 0 -- se actualiza por cada actualizacion
 	, nombre VARCHAR(100) NOT NULL

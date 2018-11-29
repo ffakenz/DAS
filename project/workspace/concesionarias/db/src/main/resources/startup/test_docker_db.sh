@@ -8,3 +8,4 @@ function test_db(){
 
 # Example of usages
 # test_db 1434
+# use db_concesionarias
