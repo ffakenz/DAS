@@ -7,6 +7,6 @@ function dbstart () {
 }
 
 echo "Refreshing Dbs"
-dbstart "cxf_one"
-dbstart "axis_one"
-dbstart "rest_one"
+dbstart "axis_one" # 1434
+dbstart "rest_one" # 1435
+dbstart "cxf_one"  # 1436
