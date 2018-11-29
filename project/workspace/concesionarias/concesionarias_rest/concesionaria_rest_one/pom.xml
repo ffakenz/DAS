@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -11,10 +11,10 @@
     </parent>
 
     <groupId>concesionarias_rest</groupId>
-    <artifactId>concesionarias_rest_one</artifactId>
+    <artifactId>concesionaria_rest_one</artifactId>
     <packaging>war</packaging>
-	
-	<!-- Dependency properties -->
+
+    <!-- Dependency properties -->
     <properties>
         <maven-war-plugin.version>2.6</maven-war-plugin.version>
         <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
@@ -31,10 +31,10 @@
         <jersey2.version>2.19</jersey2.version>
         <jaxrs.version>2.0.1</jaxrs.version>
     </properties>
-	
-	<build>
+
+    <build>
         <!--Name of the generated WAR file -->
-        <finalName>concesionarias_rest_one</finalName>
+        <finalName>concesionaria_rest_one</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>

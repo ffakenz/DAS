@@ -46,3 +46,5 @@ project/workspace/gobierno/db/src/main/resources/db.properties
 project/\.DS_Store
 
 \.DS_Store
+
+project/workspace/concesionarias/concesionarias_cxf/concesionaria_cxf_one/ws/
