@@ -26,7 +26,7 @@
         <tomcat.server>myTomcat</tomcat.server>
         <tomcat.url>http://localhost:8080/manager/text</tomcat.url>
         <tomcat.path>/${project.build.finalName}</tomcat.path>
-        <tomcat.port>8002</tomcat.port>
+        <tomcat.port>8001</tomcat.port>
 
         <jersey2.version>2.19</jersey2.version>
         <jaxrs.version>2.0.1</jaxrs.version>

@@ -7,7 +7,7 @@ import org.quartz.JobExecutionException;
 public class ConsumerJob implements Job {
 
     @Override
-    public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+    public void execute(JobExecutionContext jobExecutionContext) {
         System.out.println("CONSUMER");
     }
 }

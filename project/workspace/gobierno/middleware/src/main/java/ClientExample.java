@@ -22,7 +22,6 @@ public class ClientExample {
     };
 
     static Consumer<ConcesionariaServiceContract> logClient = client -> {
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd hh:mm:ss.SSS").create();
 
         System.out.println("consultarPlanes");
         client.consultarPlanes().forEach(plan -> logPlan.accept(plan));
@@ -39,25 +38,25 @@ public class ClientExample {
         // TODO: quitar/services
         final AxisClient axis =
                 new AxisClient(
-                        "http://192.168.1.6:8001/concesionaria_axis_one/services/ConcesionariaAxisOne.ConcesionariaAxisOneHttpEndpoint/"
+                        "http://localhost:8001/concesionaria_axis_one/services/ConcesionariaAxisOne.ConcesionariaAxisOneHttpEndpoint/"
                         , "http://ws.ConcesionariaAxisOne/"
                 );
 
         // TODO: quitar/services
-        final CXFClient cxf =
-                new CXFClient("http://192.168.1.6:8000/concesionaria_cxf_one/services/concesionaria_cxf_one?wsdl");
+//        final CXFClient cxf =
+//                new CXFClient("http://192.168.1.6:8000/concesionaria_cxf_one/services/concesionaria_cxf_one?wsdl");
 
         // TODO: change concesionarias_rest_one to concesionaria_rest_one
-        final RestClient rest =
-                new RestClient("http://localhost:8002/concesionarias_rest_one/concesionariaRestOne");
+//        final RestClient rest =
+//                new RestClient("http://localhost:8002/concesionaria_rest_one/concesionariaRestOne");
 
 
-        // System.out.println("AXIS");
-        // logClient.accept(axis);
+        System.out.println("AXIS");
+        logClient.accept(axis);
         // System.out.println("CXF");
         // logClient.accept(cxf);
-        System.out.println("REST");
-        logClient.accept(rest);
+        // System.out.println("REST");
+        // logClient.accept(rest);
         // TODO : Create a logClient Unit Test Mockin up the Service Response
     }
 }

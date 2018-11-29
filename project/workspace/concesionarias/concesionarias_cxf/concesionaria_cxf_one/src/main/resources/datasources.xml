@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <datasources xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	         xsi:noNamespaceSchemaLocation="schema/datasources.xsd">
+             xsi:noNamespaceSchemaLocation="schema/datasources.xsd">
     <datasource id="default"
                 driver="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-                url="jdbc:sqlserver://localhost;databaseName=db_cxf_one;integratedSecurity=true;"
-                username="ftestagrossa"
-                password="123" />
+                url="jdbc:sqlserver://localhost:1436;databaseName=db_concesionarias;"
+                username="SA"
+                password="Das12345" />
 </datasources>

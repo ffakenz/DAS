@@ -27,7 +27,7 @@
         <tomcat.server>myTomcat</tomcat.server>
         <tomcat.url>http://localhost:8080/manager/text</tomcat.url>
         <tomcat.path>/${project.build.finalName}</tomcat.path>
-        <tomcat.port>8000</tomcat.port>
+        <tomcat.port>8002</tomcat.port>
     </properties>
 
     <!-- Plugin configuration -->
