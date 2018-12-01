@@ -4,7 +4,6 @@ import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.src.jobs.runner.JobRunner;
 import ar.edu.ubp.das.src.jobs.sorteo.ISorteoInvariantsHolder;
 import ar.edu.ubp.das.src.jobs.sorteo.SorteoInvariantsHolder;
-import ar.edu.ubp.das.src.jobs.sorteo.SorteoJob;
 import beans.PlanBean;
 import clients.ConcesionariaServiceContract;
 import clients.IClientFactory;
@@ -33,10 +32,11 @@ public class JobsSpec {
     }
 
     @Test
-    public void test_job_creation() {
+    public void test_job_creation() throws InterruptedException {
         final JobRunner runner = new JobRunner();
         runner.contextInitialized(null);
         System.out.println("----------------------");
+//        Thread.sleep(10000L);
         runner.contextDestroyed(null);
     }
 
@@ -78,7 +78,7 @@ public class JobsSpec {
             }
         }
 
-        final SorteoJob sorteoJob = new SorteoJob(dataSourceConfig, new ClientFactoryMock(), new SorteoInvariantsHolderMock());
-        sorteoJob.verificarCancelacionCuenta();
+//        final SorteoJob sorteoJob = new SorteoJob(dataSourceConfig, new ClientFactoryMock(), new SorteoInvariantsHolderMock());
+//        sorteoJob.verificarCancelacionCuenta();
     }
 }

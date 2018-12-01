@@ -8,8 +8,13 @@ import org.quartz.impl.StdSchedulerFactory;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import java.sql.Driver;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
 
 
 public class JobRunner implements ServletContextListener {
@@ -19,11 +24,15 @@ public class JobRunner implements ServletContextListener {
 
     @Override
     public void contextInitialized(final ServletContextEvent servletContextEvent) {
+
         final JobBuilderFacade jobBuilder = new JobBuilderFacade();
+
         final JobObj jobSorteo = jobBuilder.createJob("sorteo", "0/3 * * * * ?", SorteoJob.class);
         jobs.add(jobSorteo);
+
         final JobObj jobConsumer = jobBuilder.createJob("consumer", "0/1 * * * * ?", ConsumerJob.class);
         jobs.add(jobConsumer);
+
         run(jobs);
     }
 
@@ -35,7 +44,9 @@ public class JobRunner implements ServletContextListener {
                 jobScheduler.scheduleJob(job.getJob(), job.getTrigger());
                 System.out.println(("Job " + job.getJob().getKey() + " launched"));
             }
+
             jobScheduler.start();
+
             System.out.println(("Job Scheduler started"));
 
         } catch (final SchedulerException e) {

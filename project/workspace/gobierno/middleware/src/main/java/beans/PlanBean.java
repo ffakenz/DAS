@@ -1,25 +1,37 @@
 package beans;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.sql.Timestamp;
 
 public class PlanBean {
 
     // member variables
-    Integer id;
+    @SerializedName("id")
+    Long id;
+    @SerializedName("cliente")
+    Long clientId;
+    @SerializedName("vehiculo")
+    Long vehiculo;
+    @SerializedName("cant_cuotas_pagas")
     Integer cuotasPagadas;
-    String vehiculo;
     String concesionaria;
     Integer concesionariaId;
     Long documento;
-    String clientId;
+    @SerializedName("fecha_alta")
     Timestamp fechaAlta;
+    @SerializedName("fecha_ultima_actualizacion")
     Timestamp fechaUltimoUpdate;
+
+
+
     // TODO: List<CuotasBean>
+
 
     public PlanBean() {
     }
 
-    public PlanBean(final Integer id, final Integer cuotasPagadas, final String vehiculo, final String concesionaria, final Integer concesionariaId, final Long documento, final String clientId, final Timestamp fechaAlta, final Timestamp fechaUltimoUpdate) {
+    public PlanBean(final Long id, final Integer cuotasPagadas, final Long vehiculo, final String concesionaria, final Integer concesionariaId, final Long documento, final Long clientId, final Timestamp fechaAlta, final Timestamp fechaUltimoUpdate) {
         this.id = id;
         this.cuotasPagadas = cuotasPagadas;
         this.vehiculo = vehiculo;
@@ -31,11 +43,11 @@ public class PlanBean {
         this.fechaUltimoUpdate = fechaUltimoUpdate;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(final Integer id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -47,11 +59,11 @@ public class PlanBean {
         this.cuotasPagadas = cuotasPagadas;
     }
 
-    public String getVehiculo() {
+    public Long getVehiculo() {
         return vehiculo;
     }
 
-    public void setVehiculo(final String vehiculo) {
+    public void setVehiculo(final Long vehiculo) {
         this.vehiculo = vehiculo;
     }
 
@@ -79,11 +91,11 @@ public class PlanBean {
         this.documento = documento;
     }
 
-    public String getClientId() {
+    public Long getClientId() {
         return clientId;
     }
 
-    public void setClientId(final String clientId) {
+    public void setClientId(final Long clientId) {
         this.clientId = clientId;
     }
 
