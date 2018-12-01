@@ -44,13 +44,13 @@
          <soapenv:Body><pm:consultarPlanes></pm:consultarPlanes></soapenv:Body>
         </soapenv:Envelope>
     
-    - /consultarPlan?planId=1
+    - /consultarPlan
         <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:pm="http://ws.das.edu.ubp.ar/">
          <soapenv:Header></soapenv:Header>
          <soapenv:Body><pm:consultarPlan><planId>1</planId></pm:consultarPlan></soapenv:Body>
         </soapenv:Envelope>
     
-    - /cancelarPlan?planId=1
+    - /cancelarPlan
         <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:pm="http://ws.das.edu.ubp.ar/">
          <soapenv:Header></soapenv:Header>
          <soapenv:Body><pm:cancelarPlan><planId>1</planId></pm:cancelarPlan></soapenv:Body>
@@ -68,3 +68,8 @@
 |axis_one        |1434      |mssql_concesionarias_1434 |8000     |8080        |
 |rest_one        |1435      |mssql_concesionarias_1435 |8001     |8081        |
 |cxf_one         |1436      |mssql_concesionarias_1436 |8002     |8082        |
+
+
+# Be careful with the ports
+sudo lsof -i TCP:8002
+kill -9 {{PID}}

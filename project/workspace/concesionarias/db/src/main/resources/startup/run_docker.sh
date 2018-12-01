@@ -13,11 +13,11 @@ function db_install() {
 
 echo "Running Docker containers"
 run_docker 1434
-#run_docker 1435
-#run_docker 1436
+run_docker 1435
+run_docker 1436
 echo "Awaiting"
 sleep 15
 echo "Installing DBs"
 db_install 1434
-#db_install 1435
-#db_install 1436
+db_install 1435
+db_install 1436

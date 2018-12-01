@@ -27,6 +27,7 @@ public class ConcesionariaAxisOne extends MSSQLConsecionaria implements Concesio
 
     @Override
     public void cancelarPlan(Long planId) {
+        System.out.println("Axis cancelar plan id -> " + planId);
         abstractFactory.withConnection(planDAO.cancelarPlan(planId));
     }
 }

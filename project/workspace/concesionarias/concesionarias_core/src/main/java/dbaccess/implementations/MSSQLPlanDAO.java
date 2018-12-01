@@ -51,7 +51,7 @@ public class MSSQLPlanDAO implements PlanDAO {
 
     @Override
     public Function<Connection, Void> cancelarPlan(final Long id) {
-        final String cancelarPlanQuery = "{ CALL cancelarPlan(?) };";
+        final String cancelarPlanQuery = "{ CALL cancelar_plan(?) };";
 
         return (Connection c) -> {
             try (final CallableStatement cs = c.prepareCall(cancelarPlanQuery)) {

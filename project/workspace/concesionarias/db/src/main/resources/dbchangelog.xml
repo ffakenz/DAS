@@ -25,7 +25,7 @@
     <!-- ########################################### -->
     <!-- Main procedures change-sets                 -->
     <!-- ########################################### -->
-    <!--<include file="/src/main/resources/liquibase/procedures/create_procedures.xml"/>-->
+    <include file="/src/main/resources/liquibase/procedures/create_procedures.xml"/>
 
     <!-- ########################################### -->
     <!-- Main populate change-sets                   -->
