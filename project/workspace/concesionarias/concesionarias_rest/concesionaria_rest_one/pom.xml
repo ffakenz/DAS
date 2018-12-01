@@ -24,7 +24,7 @@
 
         <tomcat7-maven-plugin.version>2.2</tomcat7-maven-plugin.version>
         <tomcat.server>myTomcat</tomcat.server>
-        <tomcat.url>http://localhost:8080/manager/text</tomcat.url>
+        <tomcat.url>http://localhost:8081/manager/text</tomcat.url>
         <tomcat.path>/${project.build.finalName}</tomcat.path>
         <tomcat.port>8001</tomcat.port>
 

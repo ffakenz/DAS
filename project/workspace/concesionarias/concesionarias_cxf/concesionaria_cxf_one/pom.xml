@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>concesionarias_cxf</artifactId>
@@ -25,7 +25,7 @@
 
         <tomcat7-maven-plugin.version>2.2</tomcat7-maven-plugin.version>
         <tomcat.server>myTomcat</tomcat.server>
-        <tomcat.url>http://localhost:8080/manager/text</tomcat.url>
+        <tomcat.url>http://localhost:8082/manager/text</tomcat.url>
         <tomcat.path>/${project.build.finalName}</tomcat.path>
         <tomcat.port>8002</tomcat.port>
     </properties>
