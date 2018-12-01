@@ -39,16 +39,16 @@
     * Body = raw (text/xml)
     
     - /consultarPlanes
-    <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:pm="http://ws.das.edu.ubp.ar/">
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:pm="http://ws.das.edu.ubp.ar/">
          <soapenv:Header></soapenv:Header>
          <soapenv:Body><pm:consultarPlanes></pm:consultarPlanes></soapenv:Body>
         </soapenv:Envelope>
     
     - /consultarPlan?planId=1
-    <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:pm="http://ws.das.edu.ubp.ar/">
-     <soapenv:Header></soapenv:Header>
-     <soapenv:Body><pm:consultarPlan><planId>1</planId></pm:consultarPlan></soapenv:Body>
-    </soapenv:Envelope>
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:pm="http://ws.das.edu.ubp.ar/">
+         <soapenv:Header></soapenv:Header>
+         <soapenv:Body><pm:consultarPlan><planId>1</planId></pm:consultarPlan></soapenv:Body>
+        </soapenv:Envelope>
     
     - /cancelarPlan?planId=1
         <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:pm="http://ws.das.edu.ubp.ar/">
