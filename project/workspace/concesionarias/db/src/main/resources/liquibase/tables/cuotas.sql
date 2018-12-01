@@ -4,6 +4,6 @@ CREATE TABLE cuotas (
 	, fecha_vencimiento DATETIME    NOT NULL
 	, monto             INT         NULL
 	, fecha_pago        DATETIME    NULL
-	, PRIMARY KEY (id, id_plan)
+	, PRIMARY KEY (id_plan, nro_cuota)
 	, FOREIGN KEY (id_plan) REFERENCES planes(id)
 );
