@@ -36,15 +36,12 @@ project/workspace/concesionarias/concesionarias_cxf/concesionarias_cxf_one/src/m
 project/workspace/concesionarias/concesionarias_axis/concesionarias_axis_one/src/main/resources/*
 project/workspace/concesionarias/concesionarias_core/src/main/resources/*
 project/workspace/concesionarias/concesionarias_cxf/concesionaria_cxf_one/ws/jaxws/*
+project/workspace/concesionarias/concesionarias_cxf/concesionaria_cxf_one/ws/
 
-project/workspace/gobierno/web_portal/src/main/webapp/WEB-INF/datasources.xml
 # lib
 project/lib/
 target/
 
-project/workspace/gobierno/db/src/main/resources/db.properties
 project/\.DS_Store
 
 \.DS_Store
-
-project/workspace/concesionarias/concesionarias_cxf/concesionaria_cxf_one/ws/
