@@ -2,7 +2,7 @@ CREATE PROCEDURE cancelar_plan (
     @plan_id BIGINT
 ) AS
 UPDATE planes
-SET cant_cuotas_pagas = 60
+SET estado = 'cancelado'
 WHERE id = @plan_id;
 
 
