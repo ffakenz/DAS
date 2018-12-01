@@ -3,6 +3,7 @@ package ar.edu.ubp.das.src.concesionarias.forms;
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.annotations.Column;
 import ar.edu.ubp.das.mvc.db.annotations.Entity;
+import utils.JsonUtils;
 
 import java.sql.Timestamp;
 
@@ -30,17 +31,7 @@ public class ConcesionariaForm extends DynaActionForm {
 
     @Override
     public String toString() {
-        return "ConcesionariaForm{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", fechaRegistracion=" + fechaRegistracion +
-                ", fechaAlta=" + fechaAlta +
-                ", codigo='" + codigo + '\'' +
-                ", direccion='" + direccion + '\'' +
-                ", cuit='" + cuit + '\'' +
-                ", tel='" + tel + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+        return JsonUtils.toJsonString(this);
     }
 
     public Long getId() {

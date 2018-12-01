@@ -10,6 +10,7 @@ import org.apache.axis2.AxisFault;
 import org.apache.axis2.addressing.EndpointReference;
 import org.apache.axis2.client.Options;
 import org.apache.axis2.client.ServiceClient;
+import utils.JsonUtils;
 
 import java.util.Iterator;
 import java.util.List;
@@ -95,7 +96,7 @@ public class AxisClient implements ConcesionariaServiceContract {
 
         final OMElement returnValue = res.getFirstElement();
         final String jsonPlanBeans = returnValue.getText();
-        return fromJsonArray(jsonPlanBeans);
+        return JsonUtils.toObjectArray(jsonPlanBeans, PlanBean.class);
     }
 
     @Override
@@ -107,7 +108,8 @@ public class AxisClient implements ConcesionariaServiceContract {
 
         final OMElement returnValue = res.getFirstElement();
         final String jsonPlanBean = returnValue.getText();
-        return fromJson(jsonPlanBean);
+
+        return JsonUtils.toObject(jsonPlanBean, PlanBean.class);
     }
 
     @Override
