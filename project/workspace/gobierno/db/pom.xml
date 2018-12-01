@@ -45,7 +45,7 @@
             </activation>
             <properties>
                 <driverDB>com.microsoft.sqlserver.jdbc.SQLServerDriver</driverDB>
-                <urlDB>jdbc:sqlserver://localhost;databaseName=db_gobierno;</urlDB>
+                <urlDB>jdbc:sqlserver://localhost:1433;databaseName=db_gobierno;</urlDB>
                 <usernameDB>SA</usernameDB>
                 <passwordDB>Das12345</passwordDB>
                 <contextDB>test</contextDB>
