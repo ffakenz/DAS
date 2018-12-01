@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!-- ***************************** -->
+    <!--   TABLE DROP CHANGE-SETS      -->
+    <!-- ***************************** -->
+    <changeSet id="Drop view" author="DAS-Team" runAlways="true" runOnChange="true">
+        <dropView schemaName="dbo"
+                  viewName="planes_x_cuotas"/>
+    </changeSet>
+    <changeSet id="Create view planes_x_cuotas" author="DAS-Team" runAlways="true" runOnChange="true">
+        <createView replaceIfExists="true"
+                    schemaName="dbo"
+                    viewName="planes_x_cuotas">
+            SELECT *
+            FROM planes p
+            INNER JOIN cuotas c
+            ON p.id = c.id_plan
+        </createView>
+    </changeSet>
+</databaseChangeLog>

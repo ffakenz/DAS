@@ -16,6 +16,10 @@
     <!-- ########################################### -->
     <include file="/src/main/resources/liquibase/tables/create_tables.xml"/>
 
+    <!-- ########################################### -->
+    <!-- Main create and drop views change-sets               -->
+    <!-- ########################################### -->
+    <include file="/src/main/resources/liquibase/views/views.xml"/>
 
     <!-- ########################################### -->
     <!-- Main triggers change-sets               -->
