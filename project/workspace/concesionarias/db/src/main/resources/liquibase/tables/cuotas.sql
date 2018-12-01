@@ -1,7 +1,9 @@
 CREATE TABLE cuotas (
-	id_plan BIGINT FOREIGN KEY REFERENCES planes(id)
-	, id_cuota BIGINT NOT NULL
-	, fecha_pago DATETIME NULL
-	, fecha_vencimiento DATETIME NOT NULL
-	, PRIMARY KEY (id_plan, id_cuota)
+	id_plan             BIGINT      NOT NULL
+	, nro_cuota         BIGINT      NOT NULL
+	, fecha_vencimiento DATETIME    NOT NULL
+	, monto             INT         NULL
+	, fecha_pago        DATETIME    NULL
+	, PRIMARY KEY (id, id_plan)
+	, FOREIGN KEY (id_plan) REFERENCES planes(id)
 );

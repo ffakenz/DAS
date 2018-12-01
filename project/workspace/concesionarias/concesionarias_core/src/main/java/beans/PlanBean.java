@@ -22,32 +22,18 @@ public class PlanBean {
     @Column(name = "tipo_de_plan")
     @SerializedName("tipo_de_plan")
     String tipoDePlan;
-    @Column(name = "cant_cuotas_pagas")
-    @SerializedName("cant_cuotas_pagas")
-    Integer cantCuotasPagas;
     @Column(name = "nombre")
     @SerializedName("nombre")
     String nombre;
+    @Column(name = "estado")
+    @SerializedName("estado")
+    String estado;
     @Column(name = "fecha_alta")
     @SerializedName("fecha_alta")
     Timestamp fechaAlta;
     @Column(name = "fecha_ultima_actualizacion")
     @SerializedName("fecha_ultima_actualizacion")
     Timestamp fechaUltimaActualizacion;
-
-    @Override
-    public String toString() {
-        return "PlanBean{" +
-                "id=" + id +
-                ", clienteId=" + clienteId +
-                ", vehiculoId=" + vehiculoId +
-                ", tipoDePlan='" + tipoDePlan + '\'' +
-                ", cantCuotasPagas=" + cantCuotasPagas +
-                ", nombre='" + nombre + '\'' +
-                ", fechaAlta=" + fechaAlta +
-                ", fechaUltimaActualizacion=" + fechaUltimaActualizacion +
-                '}';
-    }
 
     public Long getId() {
         return id;
@@ -81,20 +67,20 @@ public class PlanBean {
         this.tipoDePlan = tipoDePlan;
     }
 
-    public Integer getCantCuotasPagas() {
-        return cantCuotasPagas;
-    }
-
-    public void setCantCuotasPagas(final Integer cantCuotasPagas) {
-        this.cantCuotasPagas = cantCuotasPagas;
-    }
-
     public String getNombre() {
         return nombre;
     }
 
     public void setNombre(final String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(final String estado) {
+        this.estado = estado;
     }
 
     public Timestamp getFechaAlta() {
@@ -111,5 +97,19 @@ public class PlanBean {
 
     public void setFechaUltimaActualizacion(final Timestamp fechaUltimaActualizacion) {
         this.fechaUltimaActualizacion = fechaUltimaActualizacion;
+    }
+
+    @Override
+    public String toString() {
+        return "PlanBean{" +
+                "id=" + id +
+                ", clienteId=" + clienteId +
+                ", vehiculoId=" + vehiculoId +
+                ", tipoDePlan='" + tipoDePlan + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", estado='" + estado + '\'' +
+                ", fechaAlta=" + fechaAlta +
+                ", fechaUltimaActualizacion=" + fechaUltimaActualizacion +
+                '}';
     }
 }
