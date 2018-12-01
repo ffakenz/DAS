@@ -131,13 +131,7 @@ public class SorteoJob implements Job {
     }
 
     @Override
-
-    public void execute(final JobExecutionContext jobExecutionContext) throws JobExecutionException {
-
-        if (!verificarCancelacionCuenta()) {
-
-        }
-
+    public void execute(final JobExecutionContext jobExecutionContext) {
         System.out.println("SORTEO");
     }
 }

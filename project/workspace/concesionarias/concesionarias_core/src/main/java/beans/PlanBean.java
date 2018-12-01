@@ -2,27 +2,37 @@ package beans;
 
 import annotations.Column;
 import annotations.Entity;
+import com.google.gson.annotations.SerializedName;
 
 import java.sql.Timestamp;
 
 @Entity
 public class PlanBean {
     // member variables
+
     @Column(name = "id")
+    @SerializedName("id")
     Long id;
     @Column(name = "cliente")
+    @SerializedName("cliente")
     Long clienteId;
     @Column(name = "vehiculo")
+    @SerializedName("vehiculo")
     Long vehiculoId;
     @Column(name = "tipo_de_plan")
+    @SerializedName("tipo_de_plan")
     String tipoDePlan;
     @Column(name = "cant_cuotas_pagas")
+    @SerializedName("cant_cuotas_pagas")
     Integer cantCuotasPagas;
     @Column(name = "nombre")
+    @SerializedName("nombre")
     String nombre;
     @Column(name = "fecha_alta")
+    @SerializedName("fecha_alta")
     Timestamp fechaAlta;
     @Column(name = "fecha_ultima_actualizacion")
+    @SerializedName("fecha_ultima_actualizacion")
     Timestamp fechaUltimaActualizacion;
 
     @Override

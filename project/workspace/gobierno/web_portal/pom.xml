@@ -23,9 +23,9 @@
 
         <tomcat7-maven-plugin.version>2.2</tomcat7-maven-plugin.version>
         <tomcat.server>myTomcat</tomcat.server>
-        <tomcat.url>http://localhost:8080/manager/text</tomcat.url>
+        <tomcat.url>http://localhost:9000/manager/text</tomcat.url>
         <tomcat.path>/${project.build.finalName}</tomcat.path>
-        <tomcat.port>8000</tomcat.port>
+        <tomcat.port>9000</tomcat.port>
 
         <mockito.version>1.7.0</mockito.version>
     </properties>
@@ -52,6 +52,7 @@
             <artifactId>urlrewritefilter</artifactId>
             <version>4.0.4</version>
         </dependency>
+
         <!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>

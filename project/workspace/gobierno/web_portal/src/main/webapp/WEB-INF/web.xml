@@ -27,7 +27,7 @@
 
     <listener>
         <listener-class>
-            ar.edu.ubp.das.src.jobs.Runner
+            ar.edu.ubp.das.src.jobs.runner.JobRunner
         </listener-class>
     </listener>
 
