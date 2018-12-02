@@ -14,6 +14,8 @@ import utils.JsonUtils;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class AxisClient implements ConcesionariaServiceContract {
 
@@ -96,7 +98,8 @@ public class AxisClient implements ConcesionariaServiceContract {
 
         final OMElement returnValue = res.getFirstElement();
         final String jsonPlanBeans = returnValue.getText();
-        return JsonUtils.toObjectArray(jsonPlanBeans, NotificationUpdate.class);
+        final NotificationUpdate[] notificationUpdates = JsonUtils.toObject(jsonPlanBeans, NotificationUpdate[].class);
+        return Stream.of(notificationUpdates).collect(Collectors.toList());
     }
 
     @Override

@@ -17,13 +17,25 @@ import java.net.URI;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class RestClient implements ConcesionariaServiceContract {
 
     private final String url;
     private final HttpClient client;
     private BiFunction<String, String, HttpUriRequest> HTTPFactory = (method, callTo) -> {
+//        String encodedUrl = "/";
+//        try {
+//            encodedUrl = URLEncoder.encode(getUrl() + callTo, "UTF-8");
+//            System.out.println("Encoded Url: [ " + encodedUrl + " ]");
+//        } catch (UnsupportedEncodingException ex) {
+//            ex.printStackTrace();
+//        }
+        System.out.println(getUrl() + callTo);
         URI uri = URI.create(getUrl() + callTo);
+        System.out.println(uri.toString());
+
         switch (method) {
             case "POST":
                 HttpPost postReq = new HttpPost();
@@ -74,8 +86,9 @@ public class RestClient implements ConcesionariaServiceContract {
 
     @Override
     public List<NotificationUpdate> consultarPlanes(final String offset) {
-        final String jsonPlanBeans = call.apply("GET", "/consultarPlanes");
-        return JsonUtils.toObjectArray(jsonPlanBeans, NotificationUpdate.class);
+        final String jsonPlanBeans = call.apply("GET", "/consultarPlanes?offset=" + offset);
+        final NotificationUpdate[] notificationUpdates = JsonUtils.toObject(jsonPlanBeans, NotificationUpdate[].class);
+        return Stream.of(notificationUpdates).collect(Collectors.toList());
     }
 
     @Override

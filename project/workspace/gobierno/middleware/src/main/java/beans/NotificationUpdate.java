@@ -1,50 +1,51 @@
 package beans;
 
 import com.google.gson.annotations.SerializedName;
+import utils.JsonUtils;
 
 import java.sql.Timestamp;
 
 public class NotificationUpdate {
     // member variables
-    @SerializedName("planId")
+    @SerializedName("plan_id")
     Long planId;
-    @SerializedName("planEstado")
+    @SerializedName("plan_estado")
     String planEstado;
-    @SerializedName("planFechaAlta")
+    @SerializedName("plan_fecha_alta")
     Timestamp planFechaAlta;
-    @SerializedName("cuotaNroCuota")
+    @SerializedName("cuota_nro_cuota")
     Long cuotaNroCuota;
-    @SerializedName("cuotaFechaVencimiento")
+    @SerializedName("cuota_fecha_vencimiento")
     Timestamp cuotaFechaVencimiento;
-    @SerializedName("cuotaMonto")
+    @SerializedName("cuota_monto")
     Integer cuotaMonto;
-    @SerializedName("cuotaFechaPago")
+    @SerializedName("cuota_fecha_pago")
     Timestamp cuotaFechaPago;
-    @SerializedName("cuotaFechaAlta")
+    @SerializedName("cuota_fecha_alta")
     Timestamp cuotaFechaAlta;
-    @SerializedName("clienteDocumento")
+    @SerializedName("cliente_documento")
     Long clienteDocumento;
-    @SerializedName("clienteNombre")
+    @SerializedName("cliente_nombre")
     String clienteNombre;
-    @SerializedName("clienteApellido")
+    @SerializedName("cliente_apellido")
     String clienteApellido;
-    @SerializedName("clienteNroTelefono")
+    @SerializedName("cliente_nro_telefono")
     String clienteNroTelefono;
-    @SerializedName("clienteEmail")
+    @SerializedName("cliente_email")
     String clienteEmail;
-    @SerializedName("vehiculoId")
+    @SerializedName("vehiculo_id")
     Long vehiculoId;
-    @SerializedName("vehiculoTipo")
+    @SerializedName("vehiculo_tipo")
     String vehiculoTipo;
-    @SerializedName("vehiculoNombre")
+    @SerializedName("vehiculo_nombre")
     String vehiculoNombre;
-    @SerializedName("vehiculoPrecio")
+    @SerializedName("vehiculo_precio")
     Long vehiculoPrecio;
-    @SerializedName("vehiculoMarca")
+    @SerializedName("vehiculo_marca")
     String vehiculoMarca;
-    @SerializedName("vehiculoModelo")
+    @SerializedName("vehiculo_modelo")
     String vehiculoModelo;
-    @SerializedName("vehiculoColor")
+    @SerializedName("vehiculo_color")
     String vehiculoColor;
 
     public Long getPlanId() {
@@ -209,27 +210,6 @@ public class NotificationUpdate {
 
     @Override
     public String toString() {
-        return "NotificationUpdate{" +
-                "planId=" + planId +
-                ", planEstado='" + planEstado + '\'' +
-                ", planFechaAlta=" + planFechaAlta +
-                ", cuotaNroCuota=" + cuotaNroCuota +
-                ", cuotaFechaVencimiento=" + cuotaFechaVencimiento +
-                ", cuotaMonto=" + cuotaMonto +
-                ", cuotaFechaPago=" + cuotaFechaPago +
-                ", cuotaFechaAlta=" + cuotaFechaAlta +
-                ", clienteDocumento=" + clienteDocumento +
-                ", clienteNombre='" + clienteNombre + '\'' +
-                ", clienteApellido='" + clienteApellido + '\'' +
-                ", clienteNroTelefono='" + clienteNroTelefono + '\'' +
-                ", clienteEmail='" + clienteEmail + '\'' +
-                ", vehiculoId=" + vehiculoId +
-                ", vehiculoTipo='" + vehiculoTipo + '\'' +
-                ", vehiculoNombre='" + vehiculoNombre + '\'' +
-                ", vehiculoPrecio=" + vehiculoPrecio +
-                ", vehiculoMarca='" + vehiculoMarca + '\'' +
-                ", vehiculoModelo='" + vehiculoModelo + '\'' +
-                ", vehiculoColor='" + vehiculoColor + '\'' +
-                '}';
+        return JsonUtils.toJsonString(this);
     }
 }

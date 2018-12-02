@@ -11,64 +11,64 @@ public class NotificationUpdate {
     // member variables
 
     @Column(name = "plan_id")
-    @SerializedName("planId")
+    @SerializedName("plan_id")
     Long planId;
     @Column(name = "plan_estado")
-    @SerializedName("planEstado")
+    @SerializedName("plan_estado")
     String planEstado;
     @Column(name = "plan_fecha_alta")
-    @SerializedName("planFechaAlta")
+    @SerializedName("plan_fecha_alta")
     Timestamp planFechaAlta;
     @Column(name = "cuota_nro_cuota")
-    @SerializedName("cuotaNroCuota")
+    @SerializedName("cuota_nro_cuota")
     Long cuotaNroCuota;
     @Column(name = "cuota_fecha_vencimiento")
-    @SerializedName("cuotaFechaVencimiento")
+    @SerializedName("cuota_fecha_vencimiento")
     Timestamp cuotaFechaVencimiento;
     @Column(name = "cuota_monto")
-    @SerializedName("cuotaMonto")
+    @SerializedName("cuota_monto")
     Integer cuotaMonto;
     @Column(name = "cuota_fecha_pago")
-    @SerializedName("cuotaFechaPago")
+    @SerializedName("cuota_fecha_pago")
     Timestamp cuotaFechaPago;
     @Column(name = "cuota_fecha_alta")
-    @SerializedName("cuotaFechaAlta")
+    @SerializedName("cuota_fecha_alta")
     Timestamp cuotaFechaAlta;
     @Column(name = "cliente_documento")
-    @SerializedName("clienteDocumento")
+    @SerializedName("cliente_documento")
     Long clienteDocumento;
     @Column(name = "cliente_nombre")
-    @SerializedName("clienteNombre")
+    @SerializedName("cliente_nombre")
     String clienteNombre;
     @Column(name = "cliente_apellido")
-    @SerializedName("clienteApellido")
+    @SerializedName("cliente_apellido")
     String clienteApellido;
     @Column(name = "cliente_nro_telefono")
-    @SerializedName("clienteNroTelefono")
+    @SerializedName("cliente_nro_telefono")
     String clienteNroTelefono;
     @Column(name = "cliente_email")
-    @SerializedName("clienteEmail")
+    @SerializedName("cliente_email")
     String clienteEmail;
     @Column(name = "vehiculo_id")
-    @SerializedName("vehiculoId")
+    @SerializedName("vehiculo_id")
     Long vehiculoId;
     @Column(name = "vehiculo_tipo")
-    @SerializedName("vehiculoTipo")
+    @SerializedName("vehiculo_tipo")
     String vehiculoTipo;
     @Column(name = "vehiculo_nombre")
-    @SerializedName("vehiculoNombre")
+    @SerializedName("vehiculo_nombre")
     String vehiculoNombre;
     @Column(name = "vehiculo_precio")
-    @SerializedName("vehiculoPrecio")
+    @SerializedName("vehiculo_precio")
     Long vehiculoPrecio;
     @Column(name = "vehiculo_marca")
-    @SerializedName("vehiculoMarca")
+    @SerializedName("vehiculo_marca")
     String vehiculoMarca;
     @Column(name = "vehiculo_modelo")
-    @SerializedName("vehiculoModelo")
+    @SerializedName("vehiculo_modelo")
     String vehiculoModelo;
     @Column(name = "vehiculo_color")
-    @SerializedName("vehiculoColor")
+    @SerializedName("vehiculo_color")
     String vehiculoColor;
 
     public Long getPlanId() {
@@ -233,27 +233,6 @@ public class NotificationUpdate {
 
     @Override
     public String toString() {
-        return "NotificationUpdate{" +
-                "planId=" + planId +
-                ", planEstado='" + planEstado + '\'' +
-                ", planFechaAlta=" + planFechaAlta +
-                ", cuotaNroCuota=" + cuotaNroCuota +
-                ", cuotaFechaVencimiento=" + cuotaFechaVencimiento +
-                ", cuotaMonto=" + cuotaMonto +
-                ", cuotaFechaPago=" + cuotaFechaPago +
-                ", cuotaFechaAlta=" + cuotaFechaAlta +
-                ", clienteDocumento=" + clienteDocumento +
-                ", clienteNombre='" + clienteNombre + '\'' +
-                ", clienteApellido='" + clienteApellido + '\'' +
-                ", clienteNroTelefono='" + clienteNroTelefono + '\'' +
-                ", clienteEmail='" + clienteEmail + '\'' +
-                ", vehiculoId=" + vehiculoId +
-                ", vehiculoTipo='" + vehiculoTipo + '\'' +
-                ", vehiculoNombre='" + vehiculoNombre + '\'' +
-                ", vehiculoPrecio=" + vehiculoPrecio +
-                ", vehiculoMarca='" + vehiculoMarca + '\'' +
-                ", vehiculoModelo='" + vehiculoModelo + '\'' +
-                ", vehiculoColor='" + vehiculoColor + '\'' +
-                '}';
+        return JsonUtils.toJsonString(this);
     }
 }

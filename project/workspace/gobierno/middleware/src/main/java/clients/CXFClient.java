@@ -6,6 +6,8 @@ import org.apache.cxf.jaxws.endpoint.dynamic.JaxWsDynamicClientFactory;
 import utils.JsonUtils;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class CXFClient implements ConcesionariaServiceContract {
 
@@ -37,7 +39,8 @@ public class CXFClient implements ConcesionariaServiceContract {
     public List<NotificationUpdate> consultarPlanes(final String offset) {
         final Object res = executeMethod("consultarPlanes");
         final String jsonPlanBeans = res.toString();
-        return JsonUtils.toObjectArray(jsonPlanBeans, NotificationUpdate.class);
+        final NotificationUpdate[] notificationUpdates = JsonUtils.toObject(jsonPlanBeans, NotificationUpdate[].class);
+        return Stream.of(notificationUpdates).collect(Collectors.toList());
     }
 
     @Override
