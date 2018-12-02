@@ -1,7 +1,7 @@
 package ar.edu.ubp.das.src.jobs;
 
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
-import beans.PlanBean;
+import beans.NotificationUpdate;
 import clients.ConcesionariaServiceContract;
 import clients.IClientFactory;
 import org.junit.Before;
@@ -36,12 +36,12 @@ public class ConsumerJobSpec {
         public Optional<ConcesionariaServiceContract> getClientFor(final String configTecno, final Map<String, String> params) {
             return Optional.of(new ConcesionariaServiceContract() {
                 @Override
-                public List<PlanBean> consultarPlanes() {
+                public List<NotificationUpdate> consultarPlanes(final String offset) {
                     return null;
                 }
 
                 @Override
-                public PlanBean consultarPlan(final Long planId) {
+                public NotificationUpdate consultarPlan(final Long planId) {
                     return null;
                 }
 

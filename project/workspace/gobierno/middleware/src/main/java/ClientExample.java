@@ -1,4 +1,4 @@
-import beans.PlanBean;
+import beans.NotificationUpdate;
 import clients.AxisClient;
 import clients.CXFClient;
 import clients.ConcesionariaServiceContract;
@@ -6,16 +6,16 @@ import clients.RestClient;
 
 public class ClientExample {
 
-    static void consumeService(ConcesionariaServiceContract client) {
+    static void consumeService(final ConcesionariaServiceContract client) {
 
         System.out.println("consultarPlanes");
-        client.consultarPlanes().forEach(plan -> System.out.println(plan.toString()));
+        client.consultarPlanes("2018-01-08 20:58:00").forEach(plan -> System.out.println(plan.toString()));
 
         System.out.println("cancelarPlan");
         client.cancelarPlan(1L);
 
         System.out.println("consultarPlan");
-        PlanBean plan = client.consultarPlan(1L);
+        final NotificationUpdate plan = client.consultarPlan(1L);
         System.out.println(plan.toString());
     }
 

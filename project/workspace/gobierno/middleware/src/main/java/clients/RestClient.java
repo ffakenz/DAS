@@ -1,6 +1,6 @@
 package clients;
 
-import beans.PlanBean;
+import beans.NotificationUpdate;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -73,15 +73,15 @@ public class RestClient implements ConcesionariaServiceContract {
     }
 
     @Override
-    public List<PlanBean> consultarPlanes() {
+    public List<NotificationUpdate> consultarPlanes(final String offset) {
         final String jsonPlanBeans = call.apply("GET", "/consultarPlanes");
-        return JsonUtils.toObjectArray(jsonPlanBeans, PlanBean.class);
+        return JsonUtils.toObjectArray(jsonPlanBeans, NotificationUpdate.class);
     }
 
     @Override
-    public PlanBean consultarPlan(final Long planId) {
+    public NotificationUpdate consultarPlan(final Long planId) {
         final String jsonPlanBean = call.apply("GET", "/consultarPlan?planId=" + planId.toString());
-        return JsonUtils.toObject(jsonPlanBean, PlanBean.class);
+        return JsonUtils.toObject(jsonPlanBean, NotificationUpdate.class);
     }
 
     // TODO: Create method that will parse multiple parameters

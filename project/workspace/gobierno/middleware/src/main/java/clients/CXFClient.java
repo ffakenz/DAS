@@ -1,6 +1,6 @@
 package clients;
 
-import beans.PlanBean;
+import beans.NotificationUpdate;
 import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.jaxws.endpoint.dynamic.JaxWsDynamicClientFactory;
 import utils.JsonUtils;
@@ -34,17 +34,17 @@ public class CXFClient implements ConcesionariaServiceContract {
     }
 
     @Override
-    public List<PlanBean> consultarPlanes() {
+    public List<NotificationUpdate> consultarPlanes(final String offset) {
         final Object res = executeMethod("consultarPlanes");
         final String jsonPlanBeans = res.toString();
-        return JsonUtils.toObjectArray(jsonPlanBeans, PlanBean.class);
+        return JsonUtils.toObjectArray(jsonPlanBeans, NotificationUpdate.class);
     }
 
     @Override
-    public PlanBean consultarPlan(final Long planId) {
+    public NotificationUpdate consultarPlan(final Long planId) {
         final Object res = executeMethod("consultarPlan", planId);
         final String jsonPlanBean = res.toString();
-        return JsonUtils.toObject(jsonPlanBean, PlanBean.class);
+        return JsonUtils.toObject(jsonPlanBean, NotificationUpdate.class);
     }
 
     @Override

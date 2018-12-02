@@ -1,73 +1,49 @@
 package beans;
 
-import annotations.Column;
-import annotations.Entity;
 import com.google.gson.annotations.SerializedName;
 
 import java.sql.Timestamp;
 
-@Entity
 public class NotificationUpdate {
     // member variables
-
-    @Column(name = "plan_id")
     @SerializedName("planId")
     Long planId;
-    @Column(name = "plan_estado")
     @SerializedName("planEstado")
     String planEstado;
-    @Column(name = "plan_fecha_alta")
     @SerializedName("planFechaAlta")
     Timestamp planFechaAlta;
-    @Column(name = "cuota_nro_cuota")
     @SerializedName("cuotaNroCuota")
     Long cuotaNroCuota;
-    @Column(name = "cuota_fecha_vencimiento")
     @SerializedName("cuotaFechaVencimiento")
     Timestamp cuotaFechaVencimiento;
-    @Column(name = "cuota_monto")
     @SerializedName("cuotaMonto")
     Integer cuotaMonto;
-    @Column(name = "cuota_fecha_pago")
     @SerializedName("cuotaFechaPago")
     Timestamp cuotaFechaPago;
-    @Column(name = "cuota_fecha_alta")
     @SerializedName("cuotaFechaAlta")
     Timestamp cuotaFechaAlta;
-    @Column(name = "cliente_documento")
     @SerializedName("clienteDocumento")
     Long clienteDocumento;
-    @Column(name = "cliente_nombre")
     @SerializedName("clienteNombre")
     String clienteNombre;
-    @Column(name = "cliente_apellido")
     @SerializedName("clienteApellido")
     String clienteApellido;
-    @Column(name = "cliente_nro_telefono")
     @SerializedName("clienteNroTelefono")
     String clienteNroTelefono;
-    @Column(name = "cliente_email")
     @SerializedName("clienteEmail")
     String clienteEmail;
-    @Column(name = "vehiculo_id")
     @SerializedName("vehiculoId")
     Long vehiculoId;
-    @Column(name = "vehiculo_tipo")
     @SerializedName("vehiculoTipo")
     String vehiculoTipo;
-    @Column(name = "vehiculo_nombre")
     @SerializedName("vehiculoNombre")
     String vehiculoNombre;
-    @Column(name = "vehiculo_precio")
     @SerializedName("vehiculoPrecio")
     Long vehiculoPrecio;
-    @Column(name = "vehiculo_marca")
     @SerializedName("vehiculoMarca")
     String vehiculoMarca;
-    @Column(name = "vehiculo_modelo")
     @SerializedName("vehiculoModelo")
     String vehiculoModelo;
-    @Column(name = "vehiculo_color")
     @SerializedName("vehiculoColor")
     String vehiculoColor;
 
