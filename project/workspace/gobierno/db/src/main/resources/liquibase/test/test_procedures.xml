@@ -34,6 +34,19 @@
         <dropProcedure procedureName="setUpDB"/>
     </changeSet>
 
+    <changeSet id="Drop procedure setUpEmptyDB" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'setUpEmptyDB'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="setUpEmptyDB"/>
+    </changeSet>
+
     <!-- ******************************* -->
     <!--  CREATE PROCEDURES CHANGE-SETS  -->
     <!-- ******************************* -->
@@ -61,6 +74,19 @@
             </sqlCheck>
         </preConditions>
         <sqlFile path="/src/main/resources/liquibase/test/setUpDB.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure setUpEmptyDB" author="DAS-Team" runAlways="true" runOnChange="true" context="test">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'setUpEmptyDB'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/test/setUpEmptyDB.sql"/>
     </changeSet>
 
 </databaseChangeLog>
