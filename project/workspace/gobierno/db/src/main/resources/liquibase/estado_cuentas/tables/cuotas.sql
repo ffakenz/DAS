@@ -7,5 +7,5 @@ CREATE TABLE cuotas (
     , fecha_pago        DATETIME    NULL
     , PRIMARY KEY(estado_cuenta_id, id)
     , FOREIGN KEY(estado_cuenta_id) REFERENCES estado_cuentas(id)
-    , UNIQUE (estado_cuenta_id, nro_cuota)
+    -- , UNIQUE (estado_cuenta_id, nro_cuota)
 );
