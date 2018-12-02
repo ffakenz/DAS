@@ -23,6 +23,20 @@
         <dropProcedure procedureName="cancelar_plan"/>
     </changeSet>
 
+    <changeSet id="Drop procedure consultar_updates" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'consultar_updates'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="consultar_updates"/>
+    </changeSet>
+
 
 
     <!-- ******************************* -->
@@ -42,6 +56,21 @@
         </preConditions>
         <sqlFile
                 path="/src/main/resources/liquibase/procedures/cancelar_plan.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure consultar_updates" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_concesionarias'
+                AND ROUTINE_NAME = 'consultar_updates'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/procedures/consultar_updates.sql"/>
     </changeSet>
 
 </databaseChangeLog>

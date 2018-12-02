@@ -1,32 +1,27 @@
-import annotations.MyResultSet;
-import beans.PlanBean;
-import dao.PlanDAO;
+import beans.NotificationUpdate;
+import dao.NotificationUpdateDAO;
 import dbaccess.DAOAbstractFactory;
 import dbaccess.DAOFactory;
 import dbaccess.config.DatasourceEnum;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
+import java.sql.Timestamp;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Function;
 
 public class Client {
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
 
         // create mssql factory
-        DAOAbstractFactory mssqlFactory =
+        final DAOAbstractFactory mssqlFactory =
                 DAOAbstractFactory.getDAOFactory(DAOFactory.MSSQL, DatasourceEnum.DEFAULT, Client.class.getClassLoader());
         // get dao for plans
-        PlanDAO planDAO = mssqlFactory.getPlanDAO();
+        final NotificationUpdateDAO notificationUpdate = mssqlFactory.getNotificationUpdateDAO();
 
 
         // use api 1
-        Function<Connection, List<PlanBean>> all = planDAO.consultarPlanes();
-        List<PlanBean> planes =  mssqlFactory.withConnection(planDAO.consultarPlanes());
+        final Function<Connection, List<NotificationUpdate>> all = notificationUpdate .consultarPlanes(Timestamp.valueOf("2018-01-08 20:58:00"));
+        final List<NotificationUpdate> planes =  mssqlFactory.withConnection(notificationUpdate .consultarPlanes(Timestamp.valueOf("2018-01-08 20:58:00")));
         planes.forEach(System.out::print);
 
         /*
