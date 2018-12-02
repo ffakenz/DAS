@@ -19,18 +19,18 @@ public class NotificationUpdate {
     @Column(name = "plan_fecha_alta")
     @SerializedName("planFechaAlta")
     Timestamp planFechaAlta;
-    @Column(name = "couta_nro_cuota")
-    @SerializedName("coutaNroCuota")
-    Long coutaNroCuota;
-    @Column(name = "couta_fecha_vencimiento")
-    @SerializedName("coutaFechaVencimiento")
-    Timestamp coutaFechaVencimiento;
-    @Column(name = "couta_monto")
-    @SerializedName("coutaMonto")
-    Integer coutaMonto;
-    @Column(name = "couta_fecha_pago")
-    @SerializedName("coutaFechaPago")
-    Timestamp coutaFechaPago;
+    @Column(name = "cuota_nro_cuota")
+    @SerializedName("cuotaNroCuota")
+    Long cuotaNroCuota;
+    @Column(name = "cuota_fecha_vencimiento")
+    @SerializedName("cuotaFechaVencimiento")
+    Timestamp cuotaFechaVencimiento;
+    @Column(name = "cuota_monto")
+    @SerializedName("cuotaMonto")
+    Integer cuotaMonto;
+    @Column(name = "cuota_fecha_pago")
+    @SerializedName("cuotaFechaPago")
+    Timestamp cuotaFechaPago;
     @Column(name = "cuota_fecha_alta")
     @SerializedName("cuotaFechaAlta")
     Timestamp cuotaFechaAlta;
@@ -96,35 +96,35 @@ public class NotificationUpdate {
     }
 
     public Long getCoutaNroCuota() {
-        return coutaNroCuota;
+        return cuotaNroCuota;
     }
 
-    public void setCoutaNroCuota(final Long coutaNroCuota) {
-        this.coutaNroCuota = coutaNroCuota;
+    public void setCoutaNroCuota(final Long cuotaNroCuota) {
+        this.cuotaNroCuota = cuotaNroCuota;
     }
 
     public Timestamp getCoutaFechaVencimiento() {
-        return coutaFechaVencimiento;
+        return cuotaFechaVencimiento;
     }
 
-    public void setCoutaFechaVencimiento(final Timestamp coutaFechaVencimiento) {
-        this.coutaFechaVencimiento = coutaFechaVencimiento;
+    public void setCoutaFechaVencimiento(final Timestamp cuotaFechaVencimiento) {
+        this.cuotaFechaVencimiento = cuotaFechaVencimiento;
     }
 
     public Integer getCoutaMonto() {
-        return coutaMonto;
+        return cuotaMonto;
     }
 
-    public void setCoutaMonto(final Integer coutaMonto) {
-        this.coutaMonto = coutaMonto;
+    public void setCoutaMonto(final Integer cuotaMonto) {
+        this.cuotaMonto = cuotaMonto;
     }
 
     public Timestamp getCoutaFechaPago() {
-        return coutaFechaPago;
+        return cuotaFechaPago;
     }
 
-    public void setCoutaFechaPago(final Timestamp coutaFechaPago) {
-        this.coutaFechaPago = coutaFechaPago;
+    public void setCoutaFechaPago(final Timestamp cuotaFechaPago) {
+        this.cuotaFechaPago = cuotaFechaPago;
     }
 
     public Timestamp getCuotaFechaAlta() {
@@ -237,10 +237,10 @@ public class NotificationUpdate {
                 "planId=" + planId +
                 ", planEstado='" + planEstado + '\'' +
                 ", planFechaAlta=" + planFechaAlta +
-                ", coutaNroCuota=" + coutaNroCuota +
-                ", coutaFechaVencimiento=" + coutaFechaVencimiento +
-                ", coutaMonto=" + coutaMonto +
-                ", coutaFechaPago=" + coutaFechaPago +
+                ", cuotaNroCuota=" + cuotaNroCuota +
+                ", cuotaFechaVencimiento=" + cuotaFechaVencimiento +
+                ", cuotaMonto=" + cuotaMonto +
+                ", cuotaFechaPago=" + cuotaFechaPago +
                 ", cuotaFechaAlta=" + cuotaFechaAlta +
                 ", clienteDocumento=" + clienteDocumento +
                 ", clienteNombre='" + clienteNombre + '\'' +

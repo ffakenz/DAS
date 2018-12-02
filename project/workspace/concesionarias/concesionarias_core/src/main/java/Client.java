@@ -4,10 +4,8 @@ import dbaccess.DAOAbstractFactory;
 import dbaccess.DAOFactory;
 import dbaccess.config.DatasourceEnum;
 
-import java.sql.Connection;
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.function.Function;
 
 public class Client {
     public static void main(final String[] args) {
@@ -20,9 +18,9 @@ public class Client {
 
 
         // use api 1
-        final Function<Connection, List<NotificationUpdate>> all = notificationUpdate .consultarPlanes(Timestamp.valueOf("2018-01-08 20:58:00"));
+        // final Function<Connection, List<NotificationUpdate>> all = notificationUpdate .consultarPlanes(Timestamp.valueOf("2018-01-08 20:58:00"));
         final List<NotificationUpdate> planes =  mssqlFactory.withConnection(notificationUpdate .consultarPlanes(Timestamp.valueOf("2018-01-08 20:58:00")));
-        planes.forEach(System.out::print);
+        planes.forEach(System.out::println);
 
         /*
         // use api 2
