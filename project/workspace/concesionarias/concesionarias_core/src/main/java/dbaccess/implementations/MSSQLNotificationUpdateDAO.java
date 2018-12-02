@@ -1,8 +1,8 @@
 package dbaccess.implementations;
 
 import annotations.MyResultSet;
-import beans.PlanBean;
-import dao.PlanDAO;
+import beans.NotificationUpdate;
+import dao.NotificationUpdateDAO;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,17 +10,18 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
-public class MSSQLPlanDAO implements PlanDAO {
+public class MSSQLNotificationUpdateDAO implements NotificationUpdateDAO {
     @Override
-    public Function<Connection, List<PlanBean>> consultarPlanes() {
+    public Function<Connection, List<NotificationUpdate>> consultarPlanes(final Timestamp offset) {
 
-        final String consultarPlanesQuery = "SELECT * FROM planes";
+        final String consultarPlanesQuery = "{ CALL dbo.consultar_updates(?) };";
 
         return (Connection c) -> {
-            try (final Statement stm = c.createStatement()) {
-                final ResultSet rs = stm.executeQuery(consultarPlanesQuery);
-                final List<PlanBean> planes =
-                        new MyResultSet<>(rs, PlanBean.class).mapToObjectList();
+            try (final CallableStatement cs = c.prepareCall(consultarPlanesQuery, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
+                cs.setTimestamp(1, offset);
+                final ResultSet rs = cs.executeQuery();
+                final List<NotificationUpdate> planes =
+                        new MyResultSet<>(rs, NotificationUpdate.class).mapToObjectList();
                 return planes;
             } catch (final SQLException e) {
                 System.out.println(e.getMessage());
@@ -31,15 +32,15 @@ public class MSSQLPlanDAO implements PlanDAO {
     }
 
     @Override
-    public Function<Connection, Optional<PlanBean>> consultarPlan(final Long id) {
-        final String consultarPlanQuery = "SELECT * FROM planes WHERE id = ?;";
+    public Function<Connection, Optional<NotificationUpdate>> consultarPlan(final Long id) {
+        final String consultarPlanQuery = "SELECT * FROM notification_updates WHERE plan_id = ?;";
 
         return (Connection c) -> {
             try (final PreparedStatement ps = c.prepareStatement(consultarPlanQuery)) {
                 ps.setLong(1, id);
                 final ResultSet rs = ps.executeQuery();
-                final PlanBean plan =
-                        new MyResultSet<>(rs, PlanBean.class).mapToSingleObject();
+                final NotificationUpdate plan =
+                        new MyResultSet<>(rs, NotificationUpdate.class).mapToSingleObject();
                 return Optional.ofNullable(plan);
             } catch (final SQLException e) {
                 System.out.println(e.getMessage());

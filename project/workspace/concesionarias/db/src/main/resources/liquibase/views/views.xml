@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!-- ***************************** -->
+    <!--   TABLE DROP CHANGE-SETS      -->
+    <!-- ***************************** -->
+    <changeSet id="Drop view" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <viewExists viewName="notification_updates"/>
+        </preConditions>
+        <dropView schemaName="dbo"
+                  viewName="notification_updates"/>
+    </changeSet>
+    <changeSet id="Create view notification_updates" author="DAS-Team" runAlways="true" runOnChange="true">
+        <createView replaceIfExists="true"
+                    schemaName="dbo"
+                    viewName="notification_updates">
+            SELECT
+                p.id                    AS 'plan_id'
+                , p.estado              AS 'plan_estado'
+                , p.fecha_alta          AS 'plan_fecha_alta'
+                , co.nro_cuota          AS 'cuota_nro_cuota'
+                , co.fecha_vencimiento  AS 'cuota_fecha_vencimiento'
+                , co.monto              AS 'cuota_monto'
+                , co.fecha_pago         AS 'cuota_fecha_pago'
+                , co.fecha_alta         AS 'cuota_fecha_alta'
+                , c.documento           AS 'cliente_documento'
+                , c.nombre              AS 'cliente_nombre'
+                , c.apellido            AS 'cliente_apellido'
+                , c.nro_telefono        AS 'cliente_nro_telefono'
+                , c.email               AS 'cliente_email'
+                , v.id                  AS 'vehiculo_id'
+                , v.tipo                AS 'vehiculo_tipo'
+                , v.nombre              AS 'vehiculo_nombre'
+                , v.precio              AS 'vehiculo_precio'
+                , v.marca               AS 'vehiculo_marca'
+                , v.modelo              AS 'vehiculo_modelo'
+                , v.color               AS 'vehiculo_color'
+            FROM planes p
+            INNER JOIN clientes c       ON p.cliente    = c.id_cliente
+            INNER JOIN vehiculos v      ON p.vehiculo   = v.id
+            LEFT OUTER JOIN cuotas co   ON p.id         = co.id_plan
+        </createView>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,11 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Body>
+        <ns2:consultarPlanResponse xmlns:ns2="http://ws.das.edu.ubp.ar/">
+            <return>{"planId":1,"planEstado":"en_proceso","planFechaAlta":"2018-01-08
+                08:58:00.000","cuotaNroCuota":1,"cuotaFechaVencimiento":"2018-02-08
+                11:59:59.000","cuotaMonto":100,"cuotaFechaPago":"2018-01-18 08:58:00.000","cuotaFechaAlta":"2018-01-08
+                08:58:00.000","clienteDocumento":100,"clienteNombre":"Pedro","clienteApellido":"Sanchez","clienteNroTelefono":"1111111","clienteEmail":"pedro.sanchez@gmail.com","vehiculoId":1,"vehiculoTipo":"taxi","vehiculoNombre":"Corsa","vehiculoPrecio":10000,"vehiculoMarca":"chevrolet","vehiculoModelo":"v1","vehiculoColor":"c1"}
+            </return>
+        </ns2:consultarPlanResponse>
+    </soap:Body>
+</soap:Envelope>

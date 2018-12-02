@@ -1,6 +1,6 @@
 package contract;
 
-import dao.PlanDAO;
+import dao.NotificationUpdateDAO;
 import dbaccess.DAOAbstractFactory;
 import dbaccess.DAOFactory;
 import dbaccess.config.DatasourceEnum;
@@ -8,15 +8,14 @@ import dbaccess.config.DatasourceEnum;
 public abstract class ConsecionariaService {
     // create mssql factory
 	protected DAOAbstractFactory abstractFactory;
+	// get dao for plans
+	protected NotificationUpdateDAO notificationUpdateDAO;
+    public ConsecionariaService(final DAOFactory type) {
+        abstractFactory = DAOAbstractFactory.getDAOFactory(type, getDatasourceEnum(), getClassLoader());
+        notificationUpdateDAO = abstractFactory.getNotificationUpdateDAO();
+    }
 
 	abstract protected DatasourceEnum getDatasourceEnum();
-    abstract protected ClassLoader getClassLoader();
-
-	// get dao for plans
-	protected PlanDAO planDAO;
 	
-    public ConsecionariaService(DAOFactory type) {
-        abstractFactory = DAOAbstractFactory.getDAOFactory(type, getDatasourceEnum(), getClassLoader());
-        planDAO = abstractFactory.getPlanDAO();
-    }     
+    abstract protected ClassLoader getClassLoader();
 }

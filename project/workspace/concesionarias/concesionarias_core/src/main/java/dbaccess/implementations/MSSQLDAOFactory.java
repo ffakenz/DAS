@@ -1,6 +1,6 @@
 package dbaccess.implementations;
 
-import dao.PlanDAO;
+import dao.NotificationUpdateDAO;
 import dbaccess.DAOAbstractFactory;
 import dbaccess.config.DatasourceConfig;
 
@@ -15,7 +15,7 @@ public class MSSQLDAOFactory extends DAOAbstractFactory {
     private static String USERNAME;
     private static String PASSWORD;
 
-    public MSSQLDAOFactory(DatasourceConfig datasource) {
+    public MSSQLDAOFactory(final DatasourceConfig datasource) {
         //Dependencies injected via ConnectionConfig
         DRIVER = datasource.getDriver();
         URL = datasource.getUrl();
@@ -25,21 +25,21 @@ public class MSSQLDAOFactory extends DAOAbstractFactory {
 
     // functional API
     @Override
-    public <A> A withConnection( Function<Connection, A> fn ) { // functions comes from MSSQLPlanDAO
+    public <A> A withConnection(final Function<Connection, A> fn ) { // functions comes from MSSQLPlanDAO
         try {
             Class.forName(DRIVER).newInstance();
-            try(Connection connection =  DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+            try(final Connection connection =  DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
                 return fn.apply(connection);
             }
-        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
+        } catch (final InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
         return null; // non reacheable statement
     }
 
     @Override
-    public PlanDAO getPlanDAO() {
-        return new MSSQLPlanDAO();
+    public NotificationUpdateDAO getNotificationUpdateDAO() {
+        return new MSSQLNotificationUpdateDAO();
     }
 
 }
