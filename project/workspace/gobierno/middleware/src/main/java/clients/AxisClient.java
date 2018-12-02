@@ -94,6 +94,8 @@ public class AxisClient implements ConcesionariaServiceContract {
     @Override
     public List<NotificationUpdate> consultarPlanes(final String offset) {
         final OMElement method = createMethod("consultarPlanes");
+        final OMElement param = createParam("offset", offset);
+        method.addChild(param);
         final OMElement res = executeMethod(method);
 
         final OMElement returnValue = res.getFirstElement();

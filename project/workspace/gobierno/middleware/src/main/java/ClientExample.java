@@ -32,8 +32,8 @@ public class ClientExample {
 
     public static void main(final String[] args) {
 
-//        runAxis();
-        runRest();
+        runAxis();
+//        runRest();
 //        runCxf();
     }
 

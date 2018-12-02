@@ -41,6 +41,7 @@ public class ConcesionariaRestOne extends MSSQLConsecionaria implements Concesio
     @Path("/cancelarPlan")
     @Override
     public void cancelarPlan(@QueryParam("planId") final Long planId) {
+        System.out.println("Rest cancelar plan id -> " + planId);
         abstractFactory.withConnection(notificationUpdateDAO.cancelarPlan(planId));
     }
 }

@@ -17,7 +17,11 @@ public class ConcesionariaAxisOne extends MSSQLConsecionaria implements Concesio
 
     @Override
     public String consultarPlanes(final String offset) {
-        final List<NotificationUpdate> planes = abstractFactory.withConnection(notificationUpdateDAO.consultarPlanes(Timestamp.valueOf(offset)));
+        // TODO => Change this using some encoding over offset
+        final Timestamp newOffset = Timestamp.valueOf(offset.replace('T', ' '));
+        // System.out.println(newOffset.toString());
+        final List<NotificationUpdate> planes =
+                abstractFactory.withConnection(notificationUpdateDAO.consultarPlanes(newOffset));
         return gson.toJson(planes);
     }
 
