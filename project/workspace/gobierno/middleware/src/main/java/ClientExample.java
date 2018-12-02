@@ -32,8 +32,11 @@ public class ClientExample {
 
     public static void main(final String[] args) {
 
-//        runAxis();
-//        runRest();
+        System.out.println("Running AXIS");
+        runAxis();
+        System.out.println("Running REST");
+        runRest();
+        System.out.println("Running CXF");
         runCxf();
     }
 
