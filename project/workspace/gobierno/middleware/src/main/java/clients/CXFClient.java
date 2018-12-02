@@ -37,7 +37,7 @@ public class CXFClient implements ConcesionariaServiceContract {
 
     @Override
     public List<NotificationUpdate> consultarPlanes(final String offset) {
-        final Object res = executeMethod("consultarPlanes");
+        final Object res = executeMethod("consultarPlanes", offset);
         final String jsonPlanBeans = res.toString();
         final NotificationUpdate[] notificationUpdates = JsonUtils.toObject(jsonPlanBeans, NotificationUpdate[].class);
         return Stream.of(notificationUpdates).collect(Collectors.toList());

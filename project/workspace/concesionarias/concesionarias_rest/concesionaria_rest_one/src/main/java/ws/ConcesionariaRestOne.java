@@ -23,6 +23,7 @@ public class ConcesionariaRestOne extends MSSQLConsecionaria implements Concesio
     @Produces(MediaType.APPLICATION_JSON)
     @Override
     public String consultarPlanes(@QueryParam("offset") final String offset) {
+        System.out.println("Rest consultar planes offset -> " + offset);
         // TODO => Change this using some encoding over offset
         final Timestamp newOffset = Timestamp.valueOf(offset.replace('T', ' '));
         // System.out.println(newOffset.toString());
@@ -34,6 +35,7 @@ public class ConcesionariaRestOne extends MSSQLConsecionaria implements Concesio
     @Produces(MediaType.APPLICATION_JSON)
     @Override
     public String consultarPlan(@QueryParam("planId") final Long planId) {
+        System.out.println("Rest consultar plan id -> " + planId);
         return gson.toJson(abstractFactory.withConnection(notificationUpdateDAO.consultarPlan(planId)).get());
     }
 

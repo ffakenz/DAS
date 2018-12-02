@@ -32,9 +32,9 @@ public class ClientExample {
 
     public static void main(final String[] args) {
 
-        runAxis();
+//        runAxis();
 //        runRest();
-//        runCxf();
+        runCxf();
     }
 
     private static void runAxis() {
