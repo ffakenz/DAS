@@ -1,6 +1,7 @@
 package ar.edu.ubp.das.src.concesionarias;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
+import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.mvc.util.Pair;
 import ar.edu.ubp.das.src.concesionarias.daos.MSConcesionariasDao;
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
@@ -16,7 +17,7 @@ public class RegistrarConcesionariaInteractor implements Interactor<Boolean> {
 
     private ConcesionariasManager concesionariasManager;
 
-    public RegistrarConcesionariaInteractor(final MSConcesionariasDao msConcesionariasDao) {
+    public RegistrarConcesionariaInteractor(final DaoImpl msConcesionariasDao) {
         this.concesionariasManager= new ConcesionariasManager(msConcesionariasDao);
     }
 

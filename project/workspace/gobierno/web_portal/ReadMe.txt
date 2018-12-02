@@ -53,6 +53,6 @@ Implementation Walkthrough:
         
     -- FINAL
         - create a "Servlet" Action: ${module}\actions\${someaction}Action.java    
-        - implement the ${someaction}Ac tion.java
-        - run under \web_portal: mvn clean install tomcat7:run to verify above changes
+        - implement the ${someaction}Action.java
+        - run under \web_portal: mvn clean install tomcat7:run-war to verify above changes
     

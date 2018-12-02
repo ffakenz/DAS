@@ -53,9 +53,6 @@
     <div class="col-sm-6">
         <div id="consesionarias_composite"></div>
     </div>
-    <div class="col-sm-6">
-        <%@include file="./components/googleMap.jsp" %>
-    </div>
   </div>
 </div>
 
