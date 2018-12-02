@@ -3,6 +3,7 @@ package clients;
 import beans.PlanBean;
 import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.jaxws.endpoint.dynamic.JaxWsDynamicClientFactory;
+import utils.JsonUtils;
 
 import java.util.List;
 
@@ -36,14 +37,14 @@ public class CXFClient implements ConcesionariaServiceContract {
     public List<PlanBean> consultarPlanes() {
         final Object res = executeMethod("consultarPlanes");
         final String jsonPlanBeans = res.toString();
-        return fromJsonArray(jsonPlanBeans);
+        return JsonUtils.toObjectArray(jsonPlanBeans, PlanBean.class);
     }
 
     @Override
     public PlanBean consultarPlan(final Long planId) {
         final Object res = executeMethod("consultarPlan", planId);
         final String jsonPlanBean = res.toString();
-        return fromJson(jsonPlanBean);
+        return JsonUtils.toObject(jsonPlanBean, PlanBean.class);
     }
 
     @Override

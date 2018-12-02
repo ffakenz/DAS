@@ -1,6 +1,7 @@
 package beans;
 
 import com.google.gson.annotations.SerializedName;
+import utils.JsonUtils;
 
 import java.sql.Timestamp;
 
@@ -117,8 +118,6 @@ public class PlanBean {
 
     @Override
     public String toString() {
-        return "PlanBean [id=" + id + ", cuotasPagadas=" + cuotasPagadas + ", vehiculo=" + vehiculo + ", concesionaria="
-                + concesionaria + ", concesionariaId=" + concesionariaId + ", documento=" + documento + ", clientId="
-                + clientId + ", fechaAlta=" + fechaAlta + ", fechaUltimoUpdate=" + fechaUltimoUpdate + "]";
+        return JsonUtils.toJsonString(this);
     }
 }

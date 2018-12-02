@@ -10,6 +10,7 @@ import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
+import utils.JsonUtils;
 
 import java.io.IOException;
 import java.net.URI;
@@ -74,13 +75,13 @@ public class RestClient implements ConcesionariaServiceContract {
     @Override
     public List<PlanBean> consultarPlanes() {
         final String jsonPlanBeans = call.apply("GET", "/consultarPlanes");
-        return fromJsonArray(jsonPlanBeans);
+        return JsonUtils.toObjectArray(jsonPlanBeans, PlanBean.class);
     }
 
     @Override
     public PlanBean consultarPlan(final Long planId) {
         final String jsonPlanBean = call.apply("GET", "/consultarPlan?planId=" + planId.toString());
-        return fromJson(jsonPlanBean);
+        return JsonUtils.toObject(jsonPlanBean, PlanBean.class);
     }
 
     // TODO: Create method that will parse multiple parameters
