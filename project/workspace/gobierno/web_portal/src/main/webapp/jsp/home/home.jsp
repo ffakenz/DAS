@@ -12,12 +12,15 @@
 <html>
 
     <head>
+        <%@include file="../header/header.jsp" %>
         <%@include file="./header.jsp" %>
     </head>
 
     <body>
         <button id="registrarConcesionaria" name="registrarConcesionaria" class="btn btn-primary" onclick="javascript:home.showRegistrarConcesionaria();">Registrar Concesionaria</button>
+        <button id="login" name="login" class="btn btn-primary" onclick="javascript:home.showLogin();">Login</button>
     </body>
 
-    <script src="/web_portal/util/Javascript.do/load=own_libraries/home/home"></script>
+    <%@include file="../footer/scripts_import.jsp"%>
+
 </html>

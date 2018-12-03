@@ -19,7 +19,7 @@
 
     <body>
         <div>
-            <form class="form-horizontal" id="formConcesionarias" method="post" action="javascript:concesionarias.validateForm();">
+            <form class="form-horizontal" id="formConcesionarias" method="post" action="javascript:concesionarias.sendForm();">
                 <fieldset>
 
                 <!-- Form Name -->
@@ -27,18 +27,9 @@
 
                 <!-- Text input-->
                 <div class="form-group">
-                  <label class="col-md-4 control-label" for="name">Nombre</label>
+                  <label class="col-md-4 control-label" for="nombre">Nombre</label>
                   <div class="col-md-4">
-                  <input id="name" name="name" type="text" placeholder="" class="form-control input-md" required="">
-
-                  </div>
-                </div>
-
-                <!-- Text input-->
-                <div class="form-group">
-                  <label class="col-md-4 control-label" for="codigo">Codigo</label>
-                  <div class="col-md-4">
-                  <input id="codigo" name="codigo" type="text" placeholder="" class="form-control input-md">
+                  <input id="nombre" name="nombre" type="text" placeholder="" class="form-control input-md" required="">
 
                   </div>
                 </div>
@@ -62,9 +53,9 @@
 
                 <!-- Text input-->
                 <div class="form-group">
-                  <label class="col-md-4 control-label" for="telefono">Telefono</label>
+                  <label class="col-md-4 control-label" for="tel">Telefono</label>
                   <div class="col-md-4">
-                  <input id="telefono" name="telefono" type="text" placeholder="" class="form-control input-md" required="">
+                  <input id="tel" name="tel" type="text" placeholder="" class="form-control input-md" required="">
 
                   </div>
                 </div>
@@ -90,6 +81,8 @@
 
             </form>
 
+            <button id="login" name="login" class="btn btn-primary" onclick="javascript:home.goToHome();">Volver al home</button>
+
             <div id="resultado">
 
                 <div id="mensaje"></div>
@@ -101,6 +94,6 @@
 
     </body>
 
-    <%@include file="../footer/footer.jsp" %>
+    <%@include file="../footer/scripts_import.jsp"%>
 
 </html>
