@@ -1,4 +1,6 @@
-package clients;
+package clients.factory;
+
+import clients.*;
 
 import java.util.Map;
 import java.util.Optional;
@@ -15,11 +17,11 @@ public class ClientFactory implements IClientFactory {
     }
 
     @Override
-    public Optional<ConcesionariaServiceContract> getClientFor(final String configTecno, final Map<String, String> params) {
+    public Optional<ConcesionariaServiceContract> getClientFor(final ClientType configTecno, final Map<String, String> params) {
         if (params.isEmpty())
             return Optional.empty();
 
-        if ("AXIS".equalsIgnoreCase(configTecno)) {
+        if (configTecno.equals(ClientType.AXIS)) {
             final String endpointUrl = params.getOrDefault("endpointUrl", "");
             final String targetNameSpace = params.getOrDefault("targetNameSpace", "");
             if (endpointUrl.isEmpty() || targetNameSpace.isEmpty())
@@ -27,14 +29,14 @@ public class ClientFactory implements IClientFactory {
 
             final AxisClient axisClient = new AxisClient(endpointUrl, targetNameSpace);
             return Optional.of(axisClient);
-        } else if ("REST".equalsIgnoreCase(configTecno)) {
+        } else if (configTecno.equals(ClientType.REST)) {
             final String url = params.getOrDefault("url", "");
             if (url.isEmpty())
                 return Optional.empty();
 
             final RestClient restClient = new RestClient(url);
             return Optional.of(restClient);
-        } else if ("CXF".equalsIgnoreCase(configTecno)) {
+        } else if (configTecno.equals(ClientType.CXF)) {
             final String wsdlUrl = params.getOrDefault("wsdlUrl", "");
             if (wsdlUrl.isEmpty())
                 return Optional.empty();
