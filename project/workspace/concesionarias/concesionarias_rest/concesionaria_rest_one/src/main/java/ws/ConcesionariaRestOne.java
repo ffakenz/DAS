@@ -23,7 +23,11 @@ public class ConcesionariaRestOne extends MSSQLConsecionaria implements Concesio
     @Produces(MediaType.APPLICATION_JSON)
     @Override
     public String consultarPlanes(@QueryParam("offset") final String offset) {
-        return gson.toJson( abstractFactory.withConnection(notificationUpdateDAO.consultarPlanes(Timestamp.valueOf(offset))));
+        System.out.println("Rest consultar planes offset -> " + offset);
+        // TODO => Change this using some encoding over offset
+        final Timestamp newOffset = Timestamp.valueOf(offset.replace('T', ' '));
+        // System.out.println(newOffset.toString());
+        return gson.toJson( abstractFactory.withConnection(notificationUpdateDAO.consultarPlanes(newOffset)));
     }
 
     @GET
@@ -31,13 +35,15 @@ public class ConcesionariaRestOne extends MSSQLConsecionaria implements Concesio
     @Produces(MediaType.APPLICATION_JSON)
     @Override
     public String consultarPlan(@QueryParam("planId") final Long planId) {
-        return gson.toJson(abstractFactory.withConnection(notificationUpdateDAO.consultarPlan(planId)));
+        System.out.println("Rest consultar plan id -> " + planId);
+        return gson.toJson(abstractFactory.withConnection(notificationUpdateDAO.consultarPlan(planId)).get());
     }
 
     @PUT
     @Path("/cancelarPlan")
     @Override
     public void cancelarPlan(@QueryParam("planId") final Long planId) {
+        System.out.println("Rest cancelar plan id -> " + planId);
         abstractFactory.withConnection(notificationUpdateDAO.cancelarPlan(planId));
     }
 }

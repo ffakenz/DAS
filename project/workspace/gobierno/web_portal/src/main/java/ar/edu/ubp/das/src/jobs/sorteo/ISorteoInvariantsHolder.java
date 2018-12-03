@@ -1,7 +1,7 @@
 package ar.edu.ubp.das.src.jobs.sorteo;
 
-import beans.PlanBean;
+import beans.NotificationUpdate;
 
 public interface ISorteoInvariantsHolder {
-    Boolean isPlanCancelado(final PlanBean planBeanResponse);
+    Boolean isPlanCancelado(final NotificationUpdate planBeanResponse);
 }

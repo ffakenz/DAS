@@ -1,16 +1,13 @@
 package clients;
 
-import beans.PlanBean;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import beans.NotificationUpdate;
 
-import java.util.Arrays;
 import java.util.List;
 
 public interface ConcesionariaServiceContract {
-    List<PlanBean> consultarPlanes();
+    List<NotificationUpdate> consultarPlanes(String offset);
 
-    PlanBean consultarPlan(Long planId);
+    NotificationUpdate consultarPlan(Long planId);
 
     void cancelarPlan(Long planId);
 }

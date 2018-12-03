@@ -1,6 +1,6 @@
 package clients;
 
-import beans.PlanBean;
+import beans.NotificationUpdate;
 import com.google.gson.JsonObject;
 import org.apache.axiom.om.OMAbstractFactory;
 import org.apache.axiom.om.OMElement;
@@ -14,6 +14,8 @@ import utils.JsonUtils;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class AxisClient implements ConcesionariaServiceContract {
 
@@ -90,17 +92,20 @@ public class AxisClient implements ConcesionariaServiceContract {
     }
 
     @Override
-    public List<PlanBean> consultarPlanes() {
+    public List<NotificationUpdate> consultarPlanes(final String offset) {
         final OMElement method = createMethod("consultarPlanes");
+        final OMElement param = createParam("offset", offset);
+        method.addChild(param);
         final OMElement res = executeMethod(method);
 
         final OMElement returnValue = res.getFirstElement();
         final String jsonPlanBeans = returnValue.getText();
-        return JsonUtils.toObjectArray(jsonPlanBeans, PlanBean.class);
+        final NotificationUpdate[] notificationUpdates = JsonUtils.toObject(jsonPlanBeans, NotificationUpdate[].class);
+        return Stream.of(notificationUpdates).collect(Collectors.toList());
     }
 
     @Override
-    public PlanBean consultarPlan(final Long planId) {
+    public NotificationUpdate consultarPlan(final Long planId) {
         final OMElement method = createMethod("consultarPlan");
         final OMElement param = createParam("planId", planId);
         method.addChild(param);
@@ -109,7 +114,7 @@ public class AxisClient implements ConcesionariaServiceContract {
         final OMElement returnValue = res.getFirstElement();
         final String jsonPlanBean = returnValue.getText();
 
-        return JsonUtils.toObject(jsonPlanBean, PlanBean.class);
+        return JsonUtils.toObject(jsonPlanBean, NotificationUpdate.class);
     }
 
     @Override

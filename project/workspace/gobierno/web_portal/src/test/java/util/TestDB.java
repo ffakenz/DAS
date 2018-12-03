@@ -36,6 +36,10 @@ public class TestDB extends DaoImpl<Boolean> {
         this.executeSimpleProcedure("dbo.setUpDB");
     }
 
+    public void setUpEmptyDB() throws SQLException {
+        this.executeSimpleProcedure("dbo.setUpEmptyDB");
+    }
+
     public DatasourceConfig getDataSourceConfig() {
         return dataSourceConfig;
     }

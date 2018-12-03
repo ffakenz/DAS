@@ -22,19 +22,26 @@ public class ConcesionariaCXFOne extends MSSQLConsecionaria implements Concesion
     @WebMethod(operationName = "consultarPlanes", action = "urn:ConsultarPlanes")
     @Override
     public String consultarPlanes(@WebParam(name = "offset") final String offset) {
-        final List<NotificationUpdate> planes = abstractFactory.withConnection(notificationUpdateDAO.consultarPlanes(Timestamp.valueOf(offset)));
+        System.out.println("Cxf consultar planes offset -> " + offset);
+        // TODO => Change this using some encoding over offset
+        final Timestamp newOffset = Timestamp.valueOf(offset.replace('T', ' '));
+        // System.out.println(newOffset.toString());
+        final List<NotificationUpdate> planes =
+                abstractFactory.withConnection(notificationUpdateDAO.consultarPlanes(newOffset));
         return gson.toJson(planes);
     }
 
     @WebMethod(operationName = "consultarPlan", action = "urn:ConsultarPlan")
     @Override
     public String consultarPlan(@WebParam(name = "planId") final Long planId) {
+        System.out.println("Cxf consultar plan id -> " + planId);
         return gson.toJson(abstractFactory.withConnection(notificationUpdateDAO.consultarPlan(planId)).get());
     }
 
     @WebMethod(operationName = "cancelarPlan", action = "urn:CancelarPlan")
     @Override
     public void cancelarPlan(@WebParam(name = "planId") final Long planId) {
+        System.out.println("Cxf cancelar plan id -> " + planId);
         abstractFactory.withConnection(notificationUpdateDAO.cancelarPlan(planId));
     }
 }

@@ -4,7 +4,7 @@ import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.src.jobs.runner.JobRunner;
 import ar.edu.ubp.das.src.jobs.sorteo.ISorteoInvariantsHolder;
 import ar.edu.ubp.das.src.jobs.sorteo.SorteoInvariantsHolder;
-import beans.PlanBean;
+import beans.NotificationUpdate;
 import clients.ConcesionariaServiceContract;
 import clients.IClientFactory;
 import org.junit.Before;
@@ -42,8 +42,8 @@ public class JobsSpec {
 
     @Test
     public void verifyPlanIsCanceladoSuccessfully() {
-        SorteoInvariantsHolder holder = new SorteoInvariantsHolder();
-        assertTrue(holder.isPlanCancelado(new PlanBean()));
+        final SorteoInvariantsHolder holder = new SorteoInvariantsHolder();
+        assertTrue(holder.isPlanCancelado(new NotificationUpdate()));
     }
 
     // TESTS SORTEO
@@ -51,7 +51,7 @@ public class JobsSpec {
     public void test_sorteo_base() throws JobExecutionException {
         class SorteoInvariantsHolderMock implements ISorteoInvariantsHolder {
             @Override
-            public Boolean isPlanCancelado(final PlanBean planBeanResponse) {
+            public Boolean isPlanCancelado(final NotificationUpdate planBeanResponse) {
                 return true;
             }
         }
@@ -61,12 +61,12 @@ public class JobsSpec {
             public Optional<ConcesionariaServiceContract> getClientFor(final String configTecno, final Map<String, String> params) {
                 return Optional.of(new ConcesionariaServiceContract() {
                     @Override
-                    public List<PlanBean> consultarPlanes() {
+                    public List<NotificationUpdate> consultarPlanes(final String offset) {
                         return null;
                     }
 
                     @Override
-                    public PlanBean consultarPlan(final Long planId) {
+                    public NotificationUpdate consultarPlan(final Long planId) {
                         return null;
                     }
 
