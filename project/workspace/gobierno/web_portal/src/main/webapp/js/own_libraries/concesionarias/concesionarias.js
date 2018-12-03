@@ -1,8 +1,10 @@
 var concesionarias = {
 
       validateForm : function () {
-        console.log("entro");
-          /*jUtils.executing( "mensaje" );
+
+          console.log("entro");
+
+          jUtils.executing( "mensaje" );
           $.ajax({
               url: "/web_portal/concesionarias/RegistrarConcesionaria.do",
               type: "post",
@@ -16,6 +18,6 @@ var concesionarias = {
                   jUtils.hiding("error");
                   jUtils.showing("mensaje", html);
               }
-          });*/
+          });
       }
 };

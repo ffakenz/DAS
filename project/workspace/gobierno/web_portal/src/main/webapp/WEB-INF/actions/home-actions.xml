@@ -7,5 +7,11 @@
         <action type="HomeAction" path="/Home.do">
             <forward name="success" path="/home/home.jsp" />
         </action>
+        <action type="HomeAction" path="/ShowLogin.do">
+            <forward name="success" path="/login/login.jsp" />
+        </action>
+        <action type="HomeAction" path="/ShowRegistrarConcesionaria.do">
+            <forward name="success" path="/concesionarias/showRegistrarConcesionaria.jsp" />
+        </action>
     </action-mappings>
 </actions>

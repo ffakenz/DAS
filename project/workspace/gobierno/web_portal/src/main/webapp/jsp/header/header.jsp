@@ -1,19 +1,5 @@
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-        <title><fmt:message key="home_titulo" bundle="${etq}" /></title>
-
-        <!-- Latest compiled and minified CSS
-                    ---------------
-                WHY DID I USE A CDN?
-                See this:
-                https://imgur.com/HMzVHjF
-
-
-                And this is why I use CDN too!
-                https://imgur.com/dwO1ffI
-        -->
-
-       <!-- Font Awesome -->
         <!-- Bootstar.edu.ubp.das.src.corecore CSS -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
         <!-- Material Design Bootstrap -->
@@ -23,10 +9,6 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
         <link rel="shortcut icon" href="https://mdbootstrap.com/wp-content/themes/mdbootstrap4/favicon.ico">
-
-
-
-
 
         <!-- SCRIPTS -->
 
@@ -51,15 +33,8 @@
         <!-- concesionarias -->
         <script src="/web_portal/util/Javascript.do/load=own_libraries/concesionarias/concesionarias"></script>
 
+        <!-- home -->
+        <script src="/web_portal/util/Javascript.do/load=own_libraries/home/home"></script>
+
         <!-- search -->
         <script src="/web_portal/util/Javascript.do/load=own_libraries/util/search"></script>
-
-        <!-- Lodash -->
-        <%@include file="../templates/lodash_setup.jsp" %>
-
-        <!-- Data.Concesionarias -->
-        <%@include file="../data/concesionarias.jsp" %>
-
-
-
-

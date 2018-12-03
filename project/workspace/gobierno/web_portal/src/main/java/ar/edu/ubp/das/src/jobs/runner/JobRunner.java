@@ -27,10 +27,12 @@ public class JobRunner implements ServletContextListener {
 
         final JobBuilderFacade jobBuilder = new JobBuilderFacade();
 
-        final JobObj jobSorteo = jobBuilder.createJob("sorteo", "0/45 * * * * ?", SorteoJob.class);
+        // final JobObj jobSorteo = jobBuilder.createJob("sorteo", "0/45 * * * * ?", SorteoJob.class);
+        final JobObj jobSorteo = jobBuilder.createJob("sorteo", "0 */30 * ? * *", SorteoJob.class);
         jobs.add(jobSorteo);
 
-        final JobObj jobConsumer = jobBuilder.createJob("consumer", "0/50 * * * * ?", ConsumerJob.class);
+//        final JobObj jobConsumer = jobBuilder.createJob("consumer", "0/50 * * * * ?", ConsumerJob.class);
+        final JobObj jobConsumer = jobBuilder.createJob("consumer", "0 */35 * ? * *", ConsumerJob.class);
         jobs.add(jobConsumer);
 
         run(jobs);

@@ -9,5 +9,4 @@ import java.sql.SQLException;
 public interface Action {
 
      ForwardConfig execute(ActionMapping mapping, DynaActionForm form, HttpServletRequest request, HttpServletResponse response) throws SQLException, RuntimeException;
-	
 }

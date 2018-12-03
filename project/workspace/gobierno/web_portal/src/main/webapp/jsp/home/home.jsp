@@ -16,9 +16,8 @@
     </head>
 
     <body>
-     <%@include file="./body.jsp" %>
+        <button id="registrarConcesionaria" name="registrarConcesionaria" class="btn btn-primary" onclick="javascript:home.showRegistrarConcesionaria();">Registrar Concesionaria</button>
     </body>
 
-    <%@include file="../footer/footer.jsp" %>
-
+    <script src="/web_portal/util/Javascript.do/load=own_libraries/home/home"></script>
 </html>

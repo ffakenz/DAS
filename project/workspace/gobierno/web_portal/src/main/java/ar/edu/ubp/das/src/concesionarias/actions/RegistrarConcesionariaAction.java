@@ -22,6 +22,7 @@ public class RegistrarConcesionariaAction implements Action {
 
             throws SQLException, RuntimeException {
 
+
         final DaoImpl msConcesionarias = DaoFactory.getDao("Concesionarias", "concesionarias");
 
         final RegistrarConcesionariaInteractor action = new RegistrarConcesionariaInteractor(msConcesionarias);

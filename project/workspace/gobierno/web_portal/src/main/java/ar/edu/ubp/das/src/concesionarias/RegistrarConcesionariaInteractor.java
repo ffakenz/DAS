@@ -24,12 +24,13 @@ public class RegistrarConcesionariaInteractor implements Interactor<Boolean> {
     @Override
     public InteractorResponse<Boolean> execute(final DynaActionForm form) throws SQLException {
 
+        System.out.println("entro al registrar interactor");
+
         final Pair<String, Boolean> nombre = form.isItemValid("nombre");
         final Pair<String, Boolean> direccion = form.isItemValid("direccion");
         final Pair<String, Boolean> cuit = form.isItemValid("cuit");
         final Pair<String, Boolean> tel = form.isItemValid("tel");
         final Pair<String, Boolean> email = form.isItemValid("email");
-
 
 
         final Boolean someIsMissing = Arrays.asList(nombre, direccion, cuit, tel, email)
