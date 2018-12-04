@@ -6,7 +6,7 @@
     <action-mappings>
 
         <action type="RegistrarConcesionariaAction" path="/RegistrarConcesionaria.do">
-            <forward name="success" path="/util/success.jsp" />
+            <!--<forward name="success" path="/util/success.jsp" />-->
             <forward name="failure" path="/util/failure.jsp" />
             <forward name="warning" path="/util/warning.jsp" />
         </action>

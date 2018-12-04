@@ -17,7 +17,6 @@ import ar.edu.ubp.das.src.estado_cuentas.model.EstadoCuentasManager;
 import ar.edu.ubp.das.src.jobs.daos.MSParticipanteDao;
 import ar.edu.ubp.das.src.jobs.daos.MSSorteoDao;
 import ar.edu.ubp.das.src.jobs.forms.ParticipanteForm;
-import beans.PlanBean;
 import clients.ConcesionariaServiceContract;
 import clients.IClientFactory;
 import org.quartz.Job;

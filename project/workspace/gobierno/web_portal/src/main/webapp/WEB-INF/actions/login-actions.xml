@@ -5,9 +5,18 @@
     </form-beans>
     <action-mappings>
         <action type="LoginAction" path="/Login.do">
-            <forward name="success" path="/util/success.jsp" />
-            <forward name="failure" path="/util/failure.jsp" />
-            <forward name="warning" path="/util/warning.jsp" />
+            <forward name="success" path="/login/successLogin.jsp" />
+            <forward name="warning" path="/login/failLogin.jsp" />
+            <forward name="failure" path="/login/failLogin.jsp" />
         </action>
+
+        <action type="SuccessAction" path="/SuccessLogin.do">
+            <forward name="success" path="/login/successLogin.jsp" />
+        </action>
+
+        <action type="SuccessAction" path="/FailLogin.do">
+            <forward name="success" path="/login/failLogin.jsp" />
+        </action>
+
     </action-mappings>
 </actions>

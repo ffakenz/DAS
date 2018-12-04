@@ -12,6 +12,7 @@ var concesionarias = {
                   jUtils.hiding("mensaje");
                   jUtils.showing("error", hr.responseText);
               },
+
               success: function(html) {
                   window.location.href = "/web_portal/concesionarias/SuccessRegistrar.do";
               }

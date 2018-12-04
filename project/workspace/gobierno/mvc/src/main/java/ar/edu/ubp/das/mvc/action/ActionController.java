@@ -151,7 +151,7 @@ public class ActionController extends HttpServlet {
             forward = ModuleConfigImpl.getForwardByName("failure");
         }
 
-        this.doForward(request, response, forward, form, parameters);
+            this.doForward(request, response, forward, form, parameters);
     }
 
     private void doForward(final HttpServletRequest request, final HttpServletResponse response, final ForwardConfig forward, final DynaActionForm form, final Map<String, ParameterConfig> parameters) throws ServletException, IOException {

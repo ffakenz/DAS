@@ -26,11 +26,11 @@
                 <form id="formulario" action="javascript:login.validarUsuario();" method="post">
 
                     <div class="md-form">
-                      <input type="text" name="usuario" id="usuario" required placeholder="<fmt:message key="login_usuario" bundle="${etq}" />">
+                      <input type="text" name="username" id="username" required placeholder="<fmt:message key="login_usuario" bundle="${etq}" />">
                     </div>
 
                     <div class="md-form">
-                         <input type="password" name="clave" id="clave" required placeholder="<fmt:message key="login_clave" bundle="${etq}" />">
+                         <input type="password" name="password" id="password" required placeholder="<fmt:message key="login_clave" bundle="${etq}" />">
                     </div>
 
                      <div class="text-center">

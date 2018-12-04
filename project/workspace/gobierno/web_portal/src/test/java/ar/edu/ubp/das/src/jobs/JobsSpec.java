@@ -7,6 +7,7 @@ import ar.edu.ubp.das.src.jobs.sorteo.SorteoInvariantsHolder;
 import beans.NotificationUpdate;
 import clients.ConcesionariaServiceContract;
 import clients.IClientFactory;
+import clients.factory.ClientType;
 import org.junit.Before;
 import org.junit.Test;
 import org.quartz.JobExecutionException;
@@ -58,7 +59,7 @@ public class JobsSpec {
         class ClientFactoryMock implements IClientFactory {
 
             @Override
-            public Optional<ConcesionariaServiceContract> getClientFor(final String configTecno, final Map<String, String> params) {
+            public Optional<ConcesionariaServiceContract> getClientFor(final ClientType configTecno, final Map<String, String> params) {
                 return Optional.of(new ConcesionariaServiceContract() {
                     @Override
                     public List<NotificationUpdate> consultarPlanes(final String offset) {
