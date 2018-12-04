@@ -6,6 +6,8 @@ import org.apache.cxf.jaxws.endpoint.dynamic.JaxWsDynamicClientFactory;
 import utils.JsonUtils;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -15,6 +17,15 @@ public class CXFClient implements ConcesionariaServiceContract {
 
     public CXFClient(final String wsdlUrl) {
         this.wsdlUrl = wsdlUrl; // "http://localhost:8000/concesionarias_cxf_one_war/services/concesionaria_cxf_one_service?wsdl"
+    }
+
+    public static Optional<ConcesionariaServiceContract> create(final Map<String, String> params) {
+        final String wsdlUrl = params.getOrDefault("wsdlUrl", "");
+        if (wsdlUrl.isEmpty())
+            return Optional.empty();
+
+        final CXFClient cxfClient = new CXFClient(wsdlUrl);
+        return Optional.of(cxfClient);
     }
 
     private <A> Object executeMethod(final String methodName, final A... params) {

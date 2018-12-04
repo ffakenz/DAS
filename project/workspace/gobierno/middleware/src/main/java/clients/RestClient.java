@@ -15,6 +15,8 @@ import utils.JsonUtils;
 import java.io.IOException;
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
@@ -74,6 +76,15 @@ public class RestClient implements ConcesionariaServiceContract {
     public RestClient(final String url) {
         this.url = url;
         this.client = HttpClientBuilder.create().build();
+    }
+
+    public static Optional<ConcesionariaServiceContract> create(final Map<String, String> params) {
+        final String url = params.getOrDefault("url", "");
+        if (url.isEmpty())
+            return Optional.empty();
+
+        final RestClient restClient = new RestClient(url);
+        return Optional.of(restClient);
     }
 
     private String getUrl() {

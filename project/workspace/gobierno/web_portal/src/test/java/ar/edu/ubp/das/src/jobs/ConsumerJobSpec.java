@@ -32,7 +32,6 @@ public class ConsumerJobSpec {
     }
 
     class ClientFactoryMock implements IClientFactory {
-
         @Override
         public Optional<ConcesionariaServiceContract> getClientFor(final ClientType configTecno, final Map<String, String> params) {
             return Optional.of(new ConcesionariaServiceContract() {
