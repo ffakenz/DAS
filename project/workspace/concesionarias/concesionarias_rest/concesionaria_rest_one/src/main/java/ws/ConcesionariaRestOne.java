@@ -1,5 +1,6 @@
 package ws;
 
+import beans.NotificationUpdate;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import contract.ConcesionariaServiceContract;
@@ -8,6 +9,7 @@ import contract.implementors.MSSQLConsecionaria;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.sql.Timestamp;
+import java.util.Optional;
 
 
 @Path("/concesionariaRestOne")
@@ -36,7 +38,13 @@ public class ConcesionariaRestOne extends MSSQLConsecionaria implements Concesio
     @Override
     public String consultarPlan(@QueryParam("planId") final Long planId) {
         System.out.println("Rest consultar plan id -> " + planId);
-        return gson.toJson(abstractFactory.withConnection(notificationUpdateDAO.consultarPlan(planId)).get());
+        final Optional<NotificationUpdate> notificationUpdate =
+                abstractFactory.withConnection(notificationUpdateDAO.consultarPlan(planId));
+        if(notificationUpdate.isPresent()){
+            return gson.toJson(notificationUpdate.get());
+        } else {
+            return gson.toJson(new Object());
+        }
     }
 
     @PUT

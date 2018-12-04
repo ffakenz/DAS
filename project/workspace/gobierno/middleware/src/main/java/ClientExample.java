@@ -18,6 +18,10 @@ public class ClientExample {
         client.cancelarPlan(1L);
 
         System.out.println("consultarPlan");
+        final NotificationUpdate plan0 = client.consultarPlan(999L);
+        System.out.println(plan0.toString());
+
+        System.out.println("consultarPlan");
         final NotificationUpdate plan = client.consultarPlan(1L);
         System.out.println(plan.toString());
 
