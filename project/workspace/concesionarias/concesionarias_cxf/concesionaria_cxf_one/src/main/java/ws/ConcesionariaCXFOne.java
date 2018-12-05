@@ -38,11 +38,8 @@ public class ConcesionariaCXFOne extends MSSQLConsecionaria implements Concesion
         System.out.println("Cxf consultar plan id -> " + planId);
         final Optional<NotificationUpdate> notificationUpdate =
                 abstractFactory.withConnection(notificationUpdateDAO.consultarPlan(planId));
-        if(notificationUpdate.isPresent()){
-            return gson.toJson(notificationUpdate.get());
-        } else {
-            return gson.toJson(new Object());
-        }
+
+        return gson.toJson(notificationUpdate.orElseGet(NotificationUpdate::new));
     }
 
     @WebMethod(operationName = "cancelarPlan", action = "urn:CancelarPlan")

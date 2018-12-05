@@ -19,9 +19,9 @@ Running AXIS
 ===========================================
 AXIS
 consultarPlanes
-Dec 02, 2018 7:08:19 PM org.apache.axiom.util.stax.dialect.StAXDialectDetector detectDialect
+Dec 04, 2018 9:26:01 PM org.apache.axiom.util.stax.dialect.StAXDialectDetector detectDialect
 WARNING: Unable to determine dialect of the StAX implementation at jar:file:/Users/franco/.m2/repository/com/fasterxml/woodstox/woodstox-core/5.0.3/woodstox-core-5.0.3.jar!/
-Dec 02, 2018 7:08:19 PM org.apache.axis2.deployment.ModuleDeployer deploy
+Dec 04, 2018 9:26:03 PM org.apache.axis2.deployment.ModuleDeployer deploy
 INFO: Deploying module: addressing-1.6.2 - file:/Users/franco/.m2/repository/org/apache/axis2/axis2/1.6.2/axis2-1.6.2.jar
 {"plan_id":1,"plan_estado":"en_proceso","plan_fecha_alta":"2018-01-08 08:58:00.000","cuota_nro_cuota":1,"cuota_fecha_vencimiento":"2018-02-08 11:59:59.000","cuota_monto":100,"cuota_fecha_pago":"2018-01-18 08:58:00.000","cuota_fecha_alta":"2018-01-08 08:58:00.000","cliente_documento":100,"cliente_nombre":"Pedro","cliente_apellido":"Sanchez","cliente_nro_telefono":"1111111","cliente_email":"pedro.sanchez@gmail.com","vehiculo_id":1,"vehiculo_tipo":"taxi","vehiculo_nombre":"Corsa","vehiculo_precio":10000,"vehiculo_marca":"chevrolet","vehiculo_modelo":"v1","vehiculo_color":"c1"}
 {"plan_id":1,"plan_estado":"en_proceso","plan_fecha_alta":"2018-01-08 08:58:00.000","cuota_nro_cuota":2,"cuota_fecha_vencimiento":"2018-03-08 11:59:59.000","cuota_monto":100,"cuota_fecha_pago":"2018-02-18 08:58:00.000","cuota_fecha_alta":"2018-02-09 12:00:00.000","cliente_documento":100,"cliente_nombre":"Pedro","cliente_apellido":"Sanchez","cliente_nro_telefono":"1111111","cliente_email":"pedro.sanchez@gmail.com","vehiculo_id":1,"vehiculo_tipo":"taxi","vehiculo_nombre":"Corsa","vehiculo_precio":10000,"vehiculo_marca":"chevrolet","vehiculo_modelo":"v1","vehiculo_color":"c1"}
@@ -31,18 +31,22 @@ INFO: Deploying module: addressing-1.6.2 - file:/Users/franco/.m2/repository/org
 {"plan_id":4,"plan_estado":"en_proceso","plan_fecha_alta":"2018-04-08 08:58:00.000","cuota_nro_cuota":2,"cuota_fecha_vencimiento":"2018-06-08 11:59:59.000","cuota_monto":100,"cuota_fecha_pago":"2018-03-18 08:58:00.000","cuota_fecha_alta":"2018-06-09 12:00:00.000","cliente_documento":300,"cliente_nombre":"Franco","cliente_apellido":"Caca","cliente_nro_telefono":"3333333","cliente_email":"franco.cacaa@gmail.com","vehiculo_id":3,"vehiculo_tipo":"particular","vehiculo_nombre":"Clio","vehiculo_precio":10000,"vehiculo_marca":"renault","vehiculo_modelo":"v1","vehiculo_color":"c1"}
 {"plan_id":5,"plan_estado":"inicial","plan_fecha_alta":"2018-05-08 08:58:00.000","cliente_documento":400,"cliente_nombre":"Nacho","cliente_apellido":"Puto","cliente_nro_telefono":"4444444","cliente_email":"nacho.puto@gmail.com","vehiculo_id":4,"vehiculo_tipo":"comercial","vehiculo_nombre":"208","vehiculo_precio":10000,"vehiculo_marca":"peugeot","vehiculo_modelo":"v1","vehiculo_color":"c4"}
 cancelarPlan
-Dec 02, 2018 7:08:22 PM org.apache.axis2.deployment.ModuleDeployer deploy
+Dec 04, 2018 9:26:05 PM org.apache.axis2.deployment.ModuleDeployer deploy
 INFO: Deploying module: addressing-1.6.2 - file:/Users/franco/.m2/repository/org/apache/axis2/axis2/1.6.2/axis2-1.6.2.jar
 consultarPlan
-Dec 02, 2018 7:08:22 PM org.apache.axis2.deployment.ModuleDeployer deploy
+Dec 04, 2018 9:26:06 PM org.apache.axis2.deployment.ModuleDeployer deploy
+INFO: Deploying module: addressing-1.6.2 - file:/Users/franco/.m2/repository/org/apache/axis2/axis2/1.6.2/axis2-1.6.2.jar
+{}
+consultarPlan
+Dec 04, 2018 9:26:06 PM org.apache.axis2.deployment.ModuleDeployer deploy
 INFO: Deploying module: addressing-1.6.2 - file:/Users/franco/.m2/repository/org/apache/axis2/axis2/1.6.2/axis2-1.6.2.jar
 {"plan_id":1,"plan_estado":"cancelado","plan_fecha_alta":"2018-01-08 08:58:00.000","cuota_nro_cuota":1,"cuota_fecha_vencimiento":"2018-02-08 11:59:59.000","cuota_monto":100,"cuota_fecha_pago":"2018-01-18 08:58:00.000","cuota_fecha_alta":"2018-01-08 08:58:00.000","cliente_documento":100,"cliente_nombre":"Pedro","cliente_apellido":"Sanchez","cliente_nro_telefono":"1111111","cliente_email":"pedro.sanchez@gmail.com","vehiculo_id":1,"vehiculo_tipo":"taxi","vehiculo_nombre":"Corsa","vehiculo_precio":10000,"vehiculo_marca":"chevrolet","vehiculo_modelo":"v1","vehiculo_color":"c1"}
 consultarPlan
-Dec 02, 2018 7:08:23 PM org.apache.axis2.deployment.ModuleDeployer deploy
+Dec 04, 2018 9:26:06 PM org.apache.axis2.deployment.ModuleDeployer deploy
 INFO: Deploying module: addressing-1.6.2 - file:/Users/franco/.m2/repository/org/apache/axis2/axis2/1.6.2/axis2-1.6.2.jar
 {"plan_id":2,"plan_estado":"en_proceso","plan_fecha_alta":"2018-02-08 08:58:00.000","cuota_nro_cuota":1,"cuota_fecha_vencimiento":"2018-03-08 11:59:59.000","cuota_monto":100,"cuota_fecha_pago":"2018-02-18 08:58:00.000","cuota_fecha_alta":"2018-02-08 08:58:00.000","cliente_documento":100,"cliente_nombre":"Pedro","cliente_apellido":"Sanchez","cliente_nro_telefono":"1111111","cliente_email":"pedro.sanchez@gmail.com","vehiculo_id":2,"vehiculo_tipo":"particular","vehiculo_nombre":"Gol","vehiculo_precio":10000,"vehiculo_marca":"volkswagen","vehiculo_modelo":"v3","vehiculo_color":"c2"}
 consultarPlanes
-Dec 02, 2018 7:08:23 PM org.apache.axis2.deployment.ModuleDeployer deploy
+Dec 04, 2018 9:26:07 PM org.apache.axis2.deployment.ModuleDeployer deploy
 INFO: Deploying module: addressing-1.6.2 - file:/Users/franco/.m2/repository/org/apache/axis2/axis2/1.6.2/axis2-1.6.2.jar
 {"plan_id":1,"plan_estado":"cancelado","plan_fecha_alta":"2018-01-08 08:58:00.000","cuota_nro_cuota":1,"cuota_fecha_vencimiento":"2018-02-08 11:59:59.000","cuota_monto":100,"cuota_fecha_pago":"2018-01-18 08:58:00.000","cuota_fecha_alta":"2018-01-08 08:58:00.000","cliente_documento":100,"cliente_nombre":"Pedro","cliente_apellido":"Sanchez","cliente_nro_telefono":"1111111","cliente_email":"pedro.sanchez@gmail.com","vehiculo_id":1,"vehiculo_tipo":"taxi","vehiculo_nombre":"Corsa","vehiculo_precio":10000,"vehiculo_marca":"chevrolet","vehiculo_modelo":"v1","vehiculo_color":"c1"}
 {"plan_id":1,"plan_estado":"cancelado","plan_fecha_alta":"2018-01-08 08:58:00.000","cuota_nro_cuota":2,"cuota_fecha_vencimiento":"2018-03-08 11:59:59.000","cuota_monto":100,"cuota_fecha_pago":"2018-02-18 08:58:00.000","cuota_fecha_alta":"2018-02-09 12:00:00.000","cliente_documento":100,"cliente_nombre":"Pedro","cliente_apellido":"Sanchez","cliente_nro_telefono":"1111111","cliente_email":"pedro.sanchez@gmail.com","vehiculo_id":1,"vehiculo_tipo":"taxi","vehiculo_nombre":"Corsa","vehiculo_precio":10000,"vehiculo_marca":"chevrolet","vehiculo_modelo":"v1","vehiculo_color":"c1"}
@@ -67,6 +71,10 @@ http://localhost:8001/concesionaria_rest_one/concesionariaRestOne/consultarPlane
 cancelarPlan
 http://localhost:8001/concesionaria_rest_one/concesionariaRestOne/cancelarPlan?planId=1
 http://localhost:8001/concesionaria_rest_one/concesionariaRestOne/cancelarPlan?planId=1
+consultarPlan
+http://localhost:8001/concesionaria_rest_one/concesionariaRestOne/consultarPlan?planId=999
+http://localhost:8001/concesionaria_rest_one/concesionariaRestOne/consultarPlan?planId=999
+{}
 consultarPlan
 http://localhost:8001/concesionaria_rest_one/concesionariaRestOne/consultarPlan?planId=1
 http://localhost:8001/concesionaria_rest_one/concesionariaRestOne/consultarPlan?planId=1
@@ -97,6 +105,8 @@ consultarPlanes
 {"plan_id":4,"plan_estado":"en_proceso","plan_fecha_alta":"2018-04-08 08:58:00.000","cuota_nro_cuota":2,"cuota_fecha_vencimiento":"2018-06-08 11:59:59.000","cuota_monto":100,"cuota_fecha_pago":"2018-03-18 08:58:00.000","cuota_fecha_alta":"2018-06-09 12:00:00.000","cliente_documento":300,"cliente_nombre":"Franco","cliente_apellido":"Caca","cliente_nro_telefono":"3333333","cliente_email":"franco.cacaa@gmail.com","vehiculo_id":3,"vehiculo_tipo":"particular","vehiculo_nombre":"Clio","vehiculo_precio":10000,"vehiculo_marca":"renault","vehiculo_modelo":"v1","vehiculo_color":"c1"}
 {"plan_id":5,"plan_estado":"inicial","plan_fecha_alta":"2018-05-08 08:58:00.000","cliente_documento":400,"cliente_nombre":"Nacho","cliente_apellido":"Puto","cliente_nro_telefono":"4444444","cliente_email":"nacho.puto@gmail.com","vehiculo_id":4,"vehiculo_tipo":"comercial","vehiculo_nombre":"208","vehiculo_precio":10000,"vehiculo_marca":"peugeot","vehiculo_modelo":"v1","vehiculo_color":"c4"}
 cancelarPlan
+consultarPlan
+{}
 consultarPlan
 {"plan_id":1,"plan_estado":"cancelado","plan_fecha_alta":"2018-01-08 08:58:00.000","cuota_nro_cuota":1,"cuota_fecha_vencimiento":"2018-02-08 11:59:59.000","cuota_monto":100,"cuota_fecha_pago":"2018-01-18 08:58:00.000","cuota_fecha_alta":"2018-01-08 08:58:00.000","cliente_documento":100,"cliente_nombre":"Pedro","cliente_apellido":"Sanchez","cliente_nro_telefono":"1111111","cliente_email":"pedro.sanchez@gmail.com","vehiculo_id":1,"vehiculo_tipo":"taxi","vehiculo_nombre":"Corsa","vehiculo_precio":10000,"vehiculo_marca":"chevrolet","vehiculo_modelo":"v1","vehiculo_color":"c1"}
 consultarPlan

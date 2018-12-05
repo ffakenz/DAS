@@ -40,11 +40,7 @@ public class ConcesionariaRestOne extends MSSQLConsecionaria implements Concesio
         System.out.println("Rest consultar plan id -> " + planId);
         final Optional<NotificationUpdate> notificationUpdate =
                 abstractFactory.withConnection(notificationUpdateDAO.consultarPlan(planId));
-        if(notificationUpdate.isPresent()){
-            return gson.toJson(notificationUpdate.get());
-        } else {
-            return gson.toJson(new Object());
-        }
+        return gson.toJson(notificationUpdate.orElseGet(NotificationUpdate::new));
     }
 
     @PUT
