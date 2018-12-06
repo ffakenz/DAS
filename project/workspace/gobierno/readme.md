@@ -13,8 +13,3 @@
 4 - gobierno/web_portal/clean_and_run_web_portal.sh or /run_web_portal.sh 
 
 5 - Open a browser in: http://localhost:9000/web_portal/home/Home.do
-
-# Tips
-
-- if you need refresh some page when you are doing changes on the FE and tomcat is running execute:
-    -> war:exploded

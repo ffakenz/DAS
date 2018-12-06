@@ -60,4 +60,5 @@ Implementation Walkthrough:
 
 WORK TIPS:
 
--   Cuando quieras refrescar la pantalla debes hacer war:exploded , de esta forma no necesitas volver a runear la aplicacion
+- if you need refresh some page when you are doing changes on the FE and tomcat is running execute:
+    * war:exploded
