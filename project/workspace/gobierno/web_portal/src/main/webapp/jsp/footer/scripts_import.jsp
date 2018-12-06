@@ -12,3 +12,9 @@
 <!-- JQuery -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+<script src="/web_portal/util/Javascript.do/load=own_libraries/home/home"></script>
+
+<script src="/web_portal/util/Javascript.do/load=own_libraries/concesionarias/concesionarias"></script>
+
+<script src="/web_portal/util/Javascript.do/load=own_libraries/login/login"></script>
+

@@ -1,8 +1,9 @@
-<%@ page
-
-    language="java"
-    contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8" %>
+<%@
+        page
+        language="java"
+        contentType="text/html; charset=utf-8"
+        pageEncoding="utf-8"
+%>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <fmt:setBundle basename="properties.etiquetas" var="etq" scope="session"/>
@@ -11,9 +12,7 @@
 
 <html>
 
-    <head>
-        <%@include file="./header.jsp" %>
-    </head>
+    <%@include file="../header/header.jsp" %>
 
     <body>
         <button id="registrarConcesionaria" name="registrarConcesionaria" class="btn btn-primary" onclick="javascript:home.showRegistrarConcesionaria();">Registrar Concesionaria</button>
@@ -22,6 +21,5 @@
     </body>
 
     <%@include file="../footer/footer.jsp"%>
-    <script src="/web_portal/util/Javascript.do/load=own_libraries/home/home"></script>
 
 </html>
