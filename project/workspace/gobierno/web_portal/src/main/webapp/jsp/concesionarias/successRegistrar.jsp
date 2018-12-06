@@ -22,6 +22,7 @@
         <button id="login" name="login" class="btn btn-primary" onclick="javascript:home.goToHome();">Volver al home</button>
     </body>
 
-    <%@include file="../footer/scripts_import.jsp"%>
+    <%@include file="../footer/footer.jsp"%>
+
 
 </html>

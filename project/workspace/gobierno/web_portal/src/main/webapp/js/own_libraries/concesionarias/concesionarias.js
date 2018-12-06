@@ -1,21 +1,32 @@
 var concesionarias = {
 
-      sendForm : function () {
+    sendForm: function () {
 
-          jUtils.executing( "mensaje" );
-          $.ajax({
-              url: "/web_portal/concesionarias/RegistrarConcesionaria.do",
-              type: "post",
-              data: $( "#formConcesionarias" ).serialize(),
-              dataType: "html",
-              error: function(hr){
-                  jUtils.hiding("mensaje");
-                  jUtils.showing("error", hr.responseText);
-              },
+          var url = '/concesionarias/RegistrarConcesionaria.do';
 
-              success: function(html) {
-                  window.location.href = "/web_portal/concesionarias/SuccessRegistrar.do";
-              }
-          });
+          $('#formConcesionarias')
+              .attr('action', url)
+              .submit();
+
+          console.log("ASDASD")
       }
 };
+
+
+// $.ajax({
+//     url: "/web_portal/concesionarias/RegistrarConcesionaria.do",
+//     type: "post",
+//     data: $( "#formConcesionarias" ).serialize(),
+//     dataType: "html",
+//     error: function(hr){
+//         console.log("entro al error");
+//         console.log(hr);
+//         jUtils.hiding("mensaje");
+//         jUtils.showing("error", hr.responseText);
+//     },
+//     success: function(html) {
+//         console.log("entro al success");
+//         console.log(html);
+//         window.location.href = "/web_portal/concesionarias/SuccessRegistrar.do";
+//     }
+// });

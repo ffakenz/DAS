@@ -17,8 +17,8 @@
 
     <body>
     <H2>USUARIO INCORRECTO</H2>
-    <button id="login" name="login" class="btn btn-primary" onclick="javascript:home.showLogin();">Volver a intentar</button>
-    <button id="login" name="login" class="btn btn-primary" onclick="javascript:home.goToHome();">Volver al home</button>
+    <button name="login" class="btn btn-primary" onclick="javascript:home.showLogin();">Volver a intentar</button>
+    <button name="login" class="btn btn-primary" onclick="javascript:home.goToHome();">Volver al home</button>
     </body>
 
     <%@include file="../footer/scripts_import.jsp"%>

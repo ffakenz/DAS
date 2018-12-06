@@ -50,7 +50,7 @@
         <dependency>
             <groupId>org.tuckey</groupId>
             <artifactId>urlrewritefilter</artifactId>
-            <version>4.0.4</version>
+            <version>4.0.3</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
@@ -129,6 +129,7 @@
                     <url>${tomcat.url}</url>
                     <path>${tomcat.path}</path>
                     <port>${tomcat.port}</port>
+                    <contextReloadable>true</contextReloadable>
                 </configuration>
             </plugin>
             <plugin>

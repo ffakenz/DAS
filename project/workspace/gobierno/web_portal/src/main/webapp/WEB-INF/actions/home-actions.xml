@@ -4,14 +4,18 @@
     <form-beans>
     </form-beans>
     <action-mappings>
-        <action type="HomeAction" path="/Home.do">
+
+        <action type="SuccessAction" path="/Home.do">
             <forward name="success" path="/home/home.jsp" />
         </action>
-        <action type="HomeAction" path="/ShowLogin.do">
+
+        <action type="SuccessAction" path="/ShowLogin.do">
             <forward name="success" path="/login/login.jsp" />
         </action>
-        <action type="HomeAction" path="/ShowRegistrarConcesionaria.do">
+
+        <action type="SuccessAction" path="/ShowRegistrarConcesionaria.do">
             <forward name="success" path="/concesionarias/showRegistrarConcesionaria.jsp" />
         </action>
+
     </action-mappings>
 </actions>

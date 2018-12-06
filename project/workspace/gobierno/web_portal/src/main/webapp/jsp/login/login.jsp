@@ -11,9 +11,7 @@
 <html>
 
     <head>
-
-    <%@include file="../header/header.jsp" %>
-
+        <%@include file="../header/header.jsp" %>
     </head>
 
     <body>
@@ -69,6 +67,7 @@
 
     </body>
 
-    <%@include file="../footer/scripts_import.jsp"%>
+    <%@include file="../footer/footer.jsp"%>
+    <script src="/web_portal/util/Javascript.do/load=own_libraries/login/login"></script>
 
 </html>

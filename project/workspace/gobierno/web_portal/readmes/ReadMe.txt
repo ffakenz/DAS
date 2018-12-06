@@ -55,4 +55,9 @@ Implementation Walkthrough:
         - create a "Servlet" Action: ${module}\actions\${someaction}Action.java    
         - implement the ${someaction}Action.java
         - run under \web_portal: mvn clean install tomcat7:run-war to verify above changes
-    
+
+
+
+WORK TIPS:
+
+-   Cuando quieras refrescar la pantalla debes hacer war:exploded , de esta forma no necesitas volver a runear la aplicacion

@@ -20,6 +20,7 @@ public class JavascriptAction implements Action {
 
 	@Override
 	public ForwardConfig execute(ActionMapping mapping, DynaActionForm form, HttpServletRequest request, HttpServletResponse response) {
+
 		response.setContentType("text/javascript;charset=ISO-8859-1");
 		try {
 			PrintWriter out = response.getWriter();

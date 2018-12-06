@@ -6,23 +6,23 @@
     <action-mappings>
 
         <action type="RegistrarConcesionariaAction" path="/RegistrarConcesionaria.do">
-            <!--<forward name="success" path="/util/success.jsp" />-->
+            <forward name="success" path="/concesionarias/successRegistrar.jsp"/>
             <forward name="failure" path="/util/failure.jsp" />
             <forward name="warning" path="/util/warning.jsp" />
         </action>
-        <action type="SuccessAction" path="/SuccessRegistrar.do">
-            <forward name="success" path="/concesionarias/successRegistrar.jsp" />
-        </action>
+
         <action type="AprobarConcesionariaAction" path="/AprobarConcesionaria.do">
             <forward name="success" path="/util/success.jsp" />
             <forward name="failure" path="/util/failure.jsp" />
             <forward name="warning" path="/util/warning.jsp" />
         </action>
+
         <action type="ConsultarAprobadasAction" path="/ConsultarAprobadas.do">
             <forward name="success" path="/util/success.jsp" />
             <forward name="failure" path="/util/failure.jsp" />
             <forward name="warning" path="/util/warning.jsp" />
         </action>
+
         <action type="ConfigurarAction" path="/Configurar.do">
             <forward name="success" path="/util/success.jsp" />
             <forward name="failure" path="/util/failure.jsp" />

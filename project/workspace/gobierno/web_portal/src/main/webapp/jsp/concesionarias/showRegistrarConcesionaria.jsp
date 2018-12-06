@@ -12,24 +12,22 @@
 <html>
 
     <head>
-
         <%@include file="../header/header.jsp" %>
-
     </head>
 
     <body>
         <div>
-            <form class="form-horizontal" id="formConcesionarias" method="post" action="javascript:concesionarias.sendForm();">
+            <form class="form-horizontal" id="formConcesionarias" method="post">
                 <fieldset>
 
                 <!-- Form Name -->
-                <legend>Registracion concesionarias</legend>
+                <legend>Registracion concesionaria</legend>
 
                 <!-- Text input-->
                 <div class="form-group">
                   <label class="col-md-4 control-label" for="nombre">Nombre</label>
                   <div class="col-md-4">
-                  <input id="nombre" name="nombre" type="text" placeholder="" class="form-control input-md" required="">
+                  <input id="nombre" name="nombre" type="text" placeholder="" value="1" class="form-control input-md" required="">
 
                   </div>
                 </div>
@@ -38,7 +36,7 @@
                 <div class="form-group">
                   <label class="col-md-4 control-label" for="direccion">Direccion</label>
                   <div class="col-md-4">
-                    <input id="direccion" name="direccion" type="text" placeholder="" class="form-control input-md">
+                    <input id="direccion" name="direccion" type="text" value="xxx" placeholder="" class="form-control input-md">
                   </div>
                 </div>
 
@@ -46,7 +44,7 @@
                 <div class="form-group">
                   <label class="col-md-4 control-label" for="cuit">CUIT</label>
                   <div class="col-md-4">
-                  <input id="cuit" name="cuit" type="text" placeholder="" class="form-control input-md" required="">
+                  <input id="cuit" name="cuit" type="text" placeholder="" value="xxx" class="form-control input-md" required="">
 
                   </div>
                 </div>
@@ -55,7 +53,7 @@
                 <div class="form-group">
                   <label class="col-md-4 control-label" for="tel">Telefono</label>
                   <div class="col-md-4">
-                  <input id="tel" name="tel" type="text" placeholder="" class="form-control input-md" required="">
+                  <input id="tel" name="tel" type="text" placeholder="" value="xxx" class="form-control input-md" required="">
 
                   </div>
                 </div>
@@ -64,7 +62,7 @@
                 <div class="form-group">
                   <label class="col-md-4 control-label" for="email">Email</label>
                   <div class="col-md-4">
-                  <input id="email" name="email" type="text" placeholder="" class="form-control input-md" required="">
+                  <input id="email" name="email" type="text" placeholder="" value="xxx" class="form-control input-md" required="">
 
                   </div>
                 </div>
@@ -73,7 +71,7 @@
                 <div class="form-group">
                   <label class="col-md-4 control-label" for="btn_send_form"></label>
                   <div class="col-md-4">
-                    <button id="btn_send_form" name="btn_send_form" class="btn btn-primary">Enviar</button>
+                    <button id="btn_send_form" name="btn_send_form" class="btn btn-primary" onclick="concesionarias.sendForm()">Enviar</button>
                   </div>
                 </div>
 
@@ -95,5 +93,6 @@
     </body>
 
     <%@include file="../footer/scripts_import.jsp"%>
+    <script src="/web_portal/util/Javascript.do/load=own_libraries/concesionarias/concesionarias"></script>
 
 </html>
