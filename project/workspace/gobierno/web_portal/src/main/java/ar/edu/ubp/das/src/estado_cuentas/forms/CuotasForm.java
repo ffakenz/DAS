@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 @Entity
 public class CuotasForm extends DynaActionForm {
 
-    @Column(name = "id")
+    @Column(name = "id") // remove setter
     private Long id;
     @Column(name = "nro_cuota")
     private Long nroCuota;
@@ -81,7 +81,7 @@ public class CuotasForm extends DynaActionForm {
     public void setNroCuota(final Long nroCuota) {
         this.nroCuota = nroCuota;
     }
-    
+
     @Override
     public boolean equals(final Object aThat) {
         if (this == aThat) return true;

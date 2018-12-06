@@ -38,7 +38,11 @@ public class MSConsumerDao extends DaoImpl<ConsumerForm> {
 
     @Override
     public boolean valid(final ConsumerForm form) throws SQLException {
-        return false;
+        return this.executeQueryProcedure("dbo.get_consumer_by_documento(?)",
+                form, "documento")
+                .stream()
+                .findFirst()
+                .isPresent();
     }
 
     public Optional<ConsumerForm> selectConsumerByDniAndConcesionaria(final ConsumerForm form) throws SQLException {
@@ -46,14 +50,6 @@ public class MSConsumerDao extends DaoImpl<ConsumerForm> {
                 form, "documento", "concesionaria")
                 .stream()
                 .findFirst();
-    }
-
-    public Boolean selectConsumerByDni(final ConsumerForm form) throws SQLException {
-        return this.executeQueryProcedure("dbo.get_consumer_by_documento(?)",
-                form, "documento")
-                .stream()
-                .findFirst()
-                .isPresent();
     }
 
     public void addUsername(final ConsumerForm bean) throws SQLException {

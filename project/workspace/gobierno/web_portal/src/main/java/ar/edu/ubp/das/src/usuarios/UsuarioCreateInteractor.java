@@ -36,7 +36,7 @@ public class UsuarioCreateInteractor implements Interactor<Boolean> {
 
         final ConsumerForm consumerForm = form.convertTo(ConsumerForm.class);
 
-        if (!consumerManager.getDao().selectConsumerByDni(consumerForm))
+        if (!consumerManager.getDao().valid(consumerForm))
             return new InteractorResponse<>(ResponseForward.FAILURE, false);
 
         final UsuarioForm usuarioForm = form.convertTo(UsuarioForm.class);

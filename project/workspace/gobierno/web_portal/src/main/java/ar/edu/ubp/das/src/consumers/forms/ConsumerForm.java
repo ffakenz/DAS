@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 public class ConsumerForm extends DynaActionForm {
 
     @Column(name = "id")
-    private Long id;
+    private Long id; // remove getter
     @Column(name = "documento")
     private Long documento;
     @Column(name = "nombre")
@@ -21,7 +21,7 @@ public class ConsumerForm extends DynaActionForm {
     private String nroTelefono;
     @Column(name = "email")
     private String email;
-    @Column(name = "fecha_de_alta")
+    @Column(name = "fecha_de_alta") // remove setter
     private Timestamp fechaAlta;
     @Column(name = "concesionaria")
     private Long concesionaria;
