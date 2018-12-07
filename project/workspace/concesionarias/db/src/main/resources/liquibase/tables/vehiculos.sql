@@ -1,11 +1,13 @@
 CREATE TABLE vehiculos (
-	id BIGINT IDENTITY PRIMARY KEY
-	, tipo VARCHAR(100) NOT NULL FOREIGN KEY REFERENCES tipos_vehiculo(nombre)
-	, nombre VARCHAR(100) NOT NULL
-	, marca VARCHAR(100) NOT NULL
-	, fecha_de_alta DATETIME NOT NULL DEFAULT GETDATE()
-	, precio BIGINT NOT NULL
-	, color VARCHAR(100) NOT NULL
-	, modelo VARCHAR(100) NOT NULL
+	id                  BIGINT                      IDENTITY
+	, tipo              VARCHAR(100)    NOT NULL
+	, nombre            VARCHAR(100)    NOT NULL
+	, marca             VARCHAR(100)    NOT NULL
+	, fecha_de_alta     DATETIME        NOT NULL    DEFAULT GETDATE()
+	, precio            BIGINT          NOT NULL
+	, color             VARCHAR(100)    NOT NULL
+	, modelo            VARCHAR(100)    NOT NULL
+	, PRIMARY KEY(id)
+	, FOREIGN KEY(tipo) REFERENCES tipos_vehiculo(nombre)
 	, UNIQUE(tipo, nombre)
 );

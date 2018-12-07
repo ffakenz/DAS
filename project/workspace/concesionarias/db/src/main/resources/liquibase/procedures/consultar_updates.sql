@@ -6,6 +6,7 @@ FROM notification_updates
 WHERE
     plan_fecha_alta BETWEEN @offset AND GETDATE()
     OR cuota_fecha_alta BETWEEN @offset AND GETDATE()
+    OR cuota_fecha_pago BETWEEN @offset AND GETDATE()
 
 -- EXAMPLES
 -- exec consultar_updates '2018-01-08 20:58:00'; -- 7 { ALL }

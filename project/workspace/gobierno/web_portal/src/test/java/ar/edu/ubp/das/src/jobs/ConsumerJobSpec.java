@@ -1,6 +1,7 @@
 package ar.edu.ubp.das.src.jobs;
 
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
+import ar.edu.ubp.das.src.jobs.consumoo.ConsumerJob;
 import beans.NotificationUpdate;
 import clients.ConcesionariaServiceContract;
 import clients.IClientFactory;

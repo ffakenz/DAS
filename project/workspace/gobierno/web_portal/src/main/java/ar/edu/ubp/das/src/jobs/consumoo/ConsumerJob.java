@@ -1,4 +1,4 @@
-package ar.edu.ubp.das.src.jobs;
+package ar.edu.ubp.das.src.jobs.consumoo;
 
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.src.concesionarias.daos.MSConcesionariasDao;
@@ -16,9 +16,7 @@ import ar.edu.ubp.das.src.estado_cuentas.forms.CuotasForm;
 import ar.edu.ubp.das.src.estado_cuentas.forms.EstadoCuentasForm;
 import ar.edu.ubp.das.src.estado_cuentas.model.CuotasManager;
 import ar.edu.ubp.das.src.estado_cuentas.model.EstadoCuentasManager;
-import ar.edu.ubp.das.src.jobs.daos.MSParticipanteDao;
-import ar.edu.ubp.das.src.jobs.daos.MSSorteoDao;
-import ar.edu.ubp.das.src.jobs.sorteo.ISorteoInvariantsHolder;
+import ar.edu.ubp.das.src.jobs.ClientFactoryAdapter;
 import beans.NotificationUpdate;
 import clients.ConcesionariaServiceContract;
 import clients.IClientFactory;
@@ -40,12 +38,7 @@ public class ConsumerJob implements Job {
     private CuotasManager cuotasManager;
     private EstadoCuentasManager estadoCuentasManager;
 
-    // inners
-    private MSParticipanteDao msParticipanteDao;
-    private MSSorteoDao msSorteoDao;
-
     private ClientFactoryAdapter clientFactory;
-    private ISorteoInvariantsHolder sorteoInvariantsHolder;
 
     public ConsumerJob(final DatasourceConfig datasourceConfig, final IClientFactory clientFactory) {
 
@@ -69,14 +62,7 @@ public class ConsumerJob implements Job {
         msEstadoCuentasDao.setDatasource(datasourceConfig);
         this.estadoCuentasManager = new EstadoCuentasManager(msEstadoCuentasDao);
 
-        this.msParticipanteDao = new MSParticipanteDao();
-        this.msParticipanteDao.setDatasource(datasourceConfig);
-
-        this.msSorteoDao = new MSSorteoDao();
-        this.msSorteoDao.setDatasource(datasourceConfig);
-
         this.clientFactory = new ClientFactoryAdapter(clientFactory);
-        this.sorteoInvariantsHolder = sorteoInvariantsHolder;
     }
 
     @Override
@@ -88,7 +74,6 @@ public class ConsumerJob implements Job {
                 if(!ok) =>
                 else => get last date of consumption
              */
-
 
             // tomamos todas las concesionarias aprobadas
             final List<ConcesionariaForm> concesionarias =
@@ -110,12 +95,18 @@ public class ConsumerJob implements Job {
                 // obtenemos el proximo offset a usar (deberia ser la fecha ??)
                 final String offset = "2018-01-08T20:58:00"; // todo => get offset from DB
                 // usamos el cliente p/ consultar planes // todo => validar fallo de consumo
-                final List<NotificationUpdate> notificationUpdates =
-                        client.consultarPlanes(offset);
-                // por cada notificacion
-                for (final NotificationUpdate update : notificationUpdates) {
-                    // actualizamos la db
-                    updateDb(c, update);
+                try {
+                    final List<NotificationUpdate> notificationUpdates =
+                            client.consultarPlanes(offset);
+
+                    // por cada notificacion
+                    for (final NotificationUpdate update : notificationUpdates) {
+                        // actualizamos la db
+                        updateDb(c, update);
+                    }
+                } catch (final Exception ex) {
+                    ex.printStackTrace();
+                    // todo => finish consumtion with error for this concesionaria
                 }
 
             }
@@ -130,7 +121,7 @@ public class ConsumerJob implements Job {
         // TODO REMOVE ALL UNNECESARY GETTERS AND SETTERS FROM FORMS
         updateConsumerDb(update, concesionaria.getId());
         updateEstadoCuentaDb(update, concesionaria.getId());
-        updateCoutaDb(update);
+        updateCuotaDb(update);
     }
 
     private void updateConsumerDb(final NotificationUpdate update, final Long concesionariaId) throws SQLException {
@@ -152,31 +143,34 @@ public class ConsumerJob implements Job {
     }
 
     private void updateEstadoCuentaDb(final NotificationUpdate update, final Long concesionariaId) throws SQLException {
-        final EstadoCuentasForm estadoCuenta = new EstadoCuentasForm();
-        final Long planId = update.getPlanId();
+        final Long planId = update.getPlanId(); // ???
         final String planEstado = update.getPlanEstado();
-        final Timestamp planFechaAlta = update.getPlanFechaAlta();
+        // final Timestamp planFechaAlta = update.getPlanFechaAlta(); // -> setFechaAltaConcesionaria???
+        final EstadoCuentasForm estadoCuenta = new EstadoCuentasForm();
         estadoCuenta.setId(planId); // ???
         estadoCuenta.setEstado(planEstado);
         estadoCuenta.setConcesionariaId(concesionariaId);
-        estadoCuenta.setFechaAltaSistema(Timestamp.from(Instant.now())); // ???
-        estadoCuenta.setFechaUltimaActualizacion(Timestamp.from(Instant.now()));
         estadoCuenta.setDocumentoCliente(update.getClienteDocumento());
-        // estadoCuenta.setFechaAltaConcesionaria(); // ???
-        // estadoCuenta.setNroPlanConcesionaria(); // ???
+        estadoCuenta.setFechaAltaSistema(Timestamp.from(Instant.now())); // ??? -> this should be from DB
+        estadoCuenta.setFechaUltimaActualizacion(Timestamp.from(Instant.now())); /// ??? -> this should be updated from Procedure
+        // estadoCuenta.setFechaAltaConcesionaria(); // ??? -> falta en el update ???
+        // estadoCuenta.setNroPlanConcesionaria(); // ??? -> falta en el update ???
+        estadoCuentasManager.getDao().upsert(estadoCuenta);
     }
 
-    private void updateCoutaDb(final NotificationUpdate update) throws SQLException {
-        final Long coutaNroCuota = update.getCoutaNroCuota();
-        // final Timestamp cuotaFechaAlta = update.getCuotaFechaAlta(); todo => not needed
+    private void updateCuotaDb(final NotificationUpdate update) throws SQLException {
+        final Long cuotaNroCuota = update.getCoutaNroCuota();
+        // final Timestamp cuotaFechaAlta = update.getCuotaFechaAlta(); // ??? -> this should be from DB
         final Timestamp cuotaFechaPago = update.getCoutaFechaPago();
         final Integer cuotaMonto = update.getCoutaMonto();
         final Timestamp cuotaFechaVencimiento = update.getCoutaFechaVencimiento();
         final CuotasForm cuota = new CuotasForm();
         cuota.setEstadoCuentaId(update.getPlanId());
-        cuota.setNroCuota(coutaNroCuota);
+        cuota.setNroCuota(cuotaNroCuota);
         cuota.setFechaPago(cuotaFechaPago);
         cuota.setMonto(cuotaMonto);
         cuota.setFechaVencimiento(cuotaFechaVencimiento);
+        cuotasManager.getDao().upsert(cuota);
+
     }
 }
