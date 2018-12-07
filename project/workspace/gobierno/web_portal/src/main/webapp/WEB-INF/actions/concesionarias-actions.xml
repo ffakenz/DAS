@@ -7,7 +7,7 @@
 
         <action type="RegistrarConcesionariaAction" path="/RegistrarConcesionaria.do">
             <forward name="success" path="/concesionarias/successRegistrar.jsp"/>
-            <forward name="failure" path="/util/failure.jsp" />
+            <forward name="failure" path="/concesionarias/failureRegistrar.jsp" />
             <forward name="warning" path="/util/warning.jsp" />
         </action>
 

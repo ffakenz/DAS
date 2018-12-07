@@ -13,5 +13,4 @@
         <link rel="shortcut icon" href="https://mdbootstrap.com/wp-content/themes/mdbootstrap4/favicon.ico">
 
         <link type="text/css" rel="stylesheet" href="/web_portal/util/StyleSheet.do/load=page,messages" />
-
 </head>

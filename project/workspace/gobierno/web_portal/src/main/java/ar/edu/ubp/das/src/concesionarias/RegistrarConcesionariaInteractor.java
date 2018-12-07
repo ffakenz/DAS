@@ -22,7 +22,7 @@ public class RegistrarConcesionariaInteractor implements Interactor<Boolean> {
     }
 
     @Override
-    public InteractorResponse<Boolean> execute(final DynaActionForm form) throws SQLException {
+    public InteractorResponse<Boolean> execute(final DynaActionForm form) {
 
         System.out.println("entro al registrar interactor");
 
@@ -40,7 +40,11 @@ public class RegistrarConcesionariaInteractor implements Interactor<Boolean> {
         if (someIsMissing)
             return new InteractorResponse<>(ResponseForward.WARNING, false);
 
-        concesionariasManager.getDao().insert(form.convertTo(ConcesionariaForm.class));
+        try {
+            concesionariasManager.getDao().insert(form.convertTo(ConcesionariaForm.class));
+        } catch (SQLException e) {
+            return new InteractorResponse<>(ResponseForward.FAILURE, false);
+        }
         return new InteractorResponse<>(ResponseForward.SUCCESS, true);
     }
 }

@@ -1,6 +1,7 @@
 var translator = {
 
     setIdioma : function(idioma) {
+
         jUtils.executing( "mensaje" );
         $.ajax({
             url: "/web_portal/other/ChangeLanguage.do",
