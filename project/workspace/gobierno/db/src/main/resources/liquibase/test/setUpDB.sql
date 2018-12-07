@@ -111,6 +111,8 @@ BEGIN
        , (4, '2018-05-01 21:58:01', 10000, '2018-04-11 21:58:01')
        , (4, '2018-06-01 21:58:01', 10000, '2018-05-30 21:58:01')
 
+
+    -- SORTEO
     INSERT INTO estado_sorteo(nombre)
     VALUES('nuevo'),('pendiente'),('completado')
 
@@ -122,5 +124,16 @@ BEGIN
 
     INSERT INTO participantes(id_sorteo, id_plan, estado)
     VALUES (1, 4, 'ganador')
+
+    -- CONSUMO
+    INSERT INTO estado_consumo(estado)
+    VALUES ('success')
+            , ('failure')
+
+    INSERT INTO tipo_consumo_result(tipo)
+    VALUES ('success')
+            , ('failure')
+
+
 END
 GO

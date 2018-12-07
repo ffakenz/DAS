@@ -8,7 +8,8 @@
     <!-- ******************************** -->
     <!--   TABLE POPULATION CHANGE-SETS   -->
     <!-- ******************************** -->
-    <changeSet id="Populate table config_tecnologica" author="DAS-Team" runAlways="true" runOnChange="true" context="dev">
+    <changeSet id="Populate table config_tecnologica" author="DAS-Team" runAlways="true" runOnChange="true"
+               context="dev">
         <preConditions onFail="MARK_RAN">
             <tableExists tableName="config_tecnologica"/>
         </preConditions>
@@ -22,7 +23,8 @@
         <sqlFile path="/src/main/resources/liquibase/populate/concesionaria.sql"/>
     </changeSet>
 
-    <changeSet id="Populate table concesionaria_x_config_tecnologica" author="DAS-Team" runAlways="true" runOnChange="true" context="dev">
+    <changeSet id="Populate table concesionaria_x_config_tecnologica" author="DAS-Team" runAlways="true"
+               runOnChange="true" context="dev">
         <preConditions onFail="MARK_RAN">
             <tableExists tableName="concesionaria_x_config_tecnologica"/>
         </preConditions>
@@ -36,7 +38,8 @@
         <sqlFile path="/src/main/resources/liquibase/populate/config_param.sql"/>
     </changeSet>
 
-    <changeSet id="Populate table concesionaria_config_params" author="DAS-Team" runAlways="true" runOnChange="true" context="dev">
+    <changeSet id="Populate table concesionaria_config_params" author="DAS-Team" runAlways="true" runOnChange="true"
+               context="dev">
         <preConditions onFail="MARK_RAN">
             <tableExists tableName="concesionaria_config_params"/>
         </preConditions>
@@ -64,7 +67,8 @@
         <sqlFile path="/src/main/resources/liquibase/populate/usuario.sql"/>
     </changeSet>
 
-    <changeSet id="Populate table tipos_estado_cuentas" author="DAS-Team" runAlways="true" runOnChange="true" context="dev">
+    <changeSet id="Populate table tipos_estado_cuentas" author="DAS-Team" runAlways="true" runOnChange="true"
+               context="dev">
         <preConditions onFail="MARK_RAN">
             <tableExists tableName="tipos_estado_cuentas"/>
         </preConditions>
@@ -99,11 +103,31 @@
         <sqlFile path="/src/main/resources/liquibase/populate/estado_sorteo.sql"/>
     </changeSet>
 
-    <changeSet id="Populate table estado_participante" author="DAS-Team" runAlways="true" runOnChange="true" context="dev">
+    <changeSet id="Populate table estado_participante" author="DAS-Team" runAlways="true" runOnChange="true"
+               context="dev">
         <preConditions onFail="MARK_RAN">
             <tableExists tableName="estado_participante"/>
         </preConditions>
         <sqlFile path="/src/main/resources/liquibase/populate/estado_participante.sql"/>
+    </changeSet>
+
+    <!-- ***************************** -->
+    <!--   CONSUMO                     -->
+    <!-- ***************************** -->
+
+    <changeSet id="Populate table estado_consumo" author="DAS-Team" runAlways="true" runOnChange="true" context="dev">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="estado_consumo"/>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/populate/consumo/estado_consumo.sql"/>
+    </changeSet>
+
+    <changeSet id="Populate table tipo_consumo_result" author="DAS-Team" runAlways="true" runOnChange="true"
+               context="dev">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="tipo_consumo_result"/>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/populate/consumo/tipo_consumo_result.sql"/>
     </changeSet>
 
 </databaseChangeLog>

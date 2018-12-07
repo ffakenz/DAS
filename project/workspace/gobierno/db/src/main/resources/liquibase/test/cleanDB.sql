@@ -1,6 +1,5 @@
 CREATE PROCEDURE cleanDB AS
 BEGIN
-
     EXEC sp_MSforeachtable 'ALTER TABLE ? NOCHECK CONSTRAINT ALL'
     EXEC sp_MSforeachtable 'ALTER TABLE ? DISABLE TRIGGER ALL'
     EXEC sp_MSforeachtable 'DELETE FROM ?'

@@ -9,6 +9,57 @@
     <!--   TABLE CREATION CHANGE-SETS  -->
     <!-- ***************************** -->
 
+    <!-- ***************************** -->
+    <!--   CONSUMO                     -->
+    <!-- ***************************** -->
+    <changeSet id="Create table job_consumo" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="job_consumo"/>
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/jobs/tables/consumo/job_consumo.sql"/>
+    </changeSet>
+
+    <changeSet id="Create table estado_consumo" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="estado_consumo"/>
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/jobs/tables/consumo/estado_consumo.sql"/>
+    </changeSet>
+
+    <changeSet id="Create table consumo" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="consumo"/>
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/jobs/tables/consumo/consumo.sql"/>
+    </changeSet>
+
+    <changeSet id="Create table tipo_consumo_result" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="tipo_consumo_result"/>
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/jobs/tables/consumo/tipo_consumo_result.sql"/>
+    </changeSet>
+
+    <changeSet id="Create table consumo_result" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="consumo_result"/>
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/jobs/tables/consumo/consumo_result.sql"/>
+    </changeSet>
+
+    <!-- ***************************** -->
+    <!--   SORTEO                      -->
+    <!-- ***************************** -->
 
     <changeSet id="Create table estado_sorteo" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
