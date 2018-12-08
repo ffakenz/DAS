@@ -7,8 +7,12 @@
 
         <action type="LoginAction" path="/Login.do">
             <forward name="success" path="/login/successLogin.jsp" />
-            <forward name="warning" path="/login/failLogin.jsp" />
+            <forward name="warning" path="/login/failParamsLogin.jsp" />
             <forward name="failure" path="/login/failLogin.jsp" />
+        </action>
+
+        <action type="LogoutAction" path="/Logout.do">
+            <forward name="success" path="/home/home.jsp" />
         </action>
 
     </action-mappings>

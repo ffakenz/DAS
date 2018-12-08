@@ -90,10 +90,10 @@ public class LoginManagerTest {
 
     @Test
     public void test14_Verify_logout_an_already_user_loggedin_ok() throws SQLException {
-        final String username = "ffakenz";
+        final Long id = 2L;
 
         final LogInForm logInForm = new LogInForm();
-        logInForm.setUsername(username);
+        logInForm.setId(id);
 
         loginManager.logout(logInForm);
 
@@ -104,10 +104,10 @@ public class LoginManagerTest {
 
     @Test
     public void test15_Verify_logout_an_already_user_loggedout_ok() throws SQLException {
-        final String username = "irocca";
+        final Long id = 1L;
 
         final LogInForm logInForm = new LogInForm();
-        logInForm.setUsername(username);
+        logInForm.setId(id);
 
         loginManager.logout(logInForm);
 

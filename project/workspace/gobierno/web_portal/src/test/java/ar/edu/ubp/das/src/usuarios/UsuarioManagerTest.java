@@ -13,6 +13,7 @@ import org.junit.runners.MethodSorters;
 import util.TestDB;
 
 import java.sql.SQLException;
+import java.util.Optional;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -50,20 +51,20 @@ public class UsuarioManagerTest {
 
     @Test
     public void test10_Verify_User_Failed_With_Wrong_Username() throws SQLException {
-        final Boolean isUsuarioValido = usuarioManager.verifyUsernameAndPassword("WrongUsername", "123");
-        assertFalse(isUsuarioValido);
+        final Optional<UsuarioForm> isUsuarioValido = usuarioManager.verifyUsernameAndPassword("WrongUsername", "123");
+        assertFalse(isUsuarioValido.isPresent());
     }
 
     @Test
     public void test11_Verify_User_Failed_With_Wrong_Password() throws SQLException {
-        final Boolean isUsuarioValido = usuarioManager.verifyUsernameAndPassword("ffakenz", "WrongPassword");
-        assertFalse(isUsuarioValido);
+        final Optional<UsuarioForm> isUsuarioValido = usuarioManager.verifyUsernameAndPassword("ffakenz", "WrongPassword");
+        assertFalse(isUsuarioValido.isPresent());
     }
 
     @Test
     public void test12_Verify_User_Successfully() throws SQLException {
-        final Boolean isUsuarioValido = usuarioManager.verifyUsernameAndPassword("ffakenz", "123");
-        assertTrue(isUsuarioValido);
+        final Optional<UsuarioForm> isUsuarioValido = usuarioManager.verifyUsernameAndPassword("ffakenz", "123");
+        assertTrue(isUsuarioValido.isPresent());
     }
 
     @Test
@@ -80,8 +81,8 @@ public class UsuarioManagerTest {
         usuarioManager.createUser(usuarioForm);
 
         // Verify the user exists
-        final Boolean isUsuarioValido = usuarioManager.verifyUsernameAndPassword(username, password);
-        assertTrue(isUsuarioValido);
+        final Optional<UsuarioForm> isUsuarioValido = usuarioManager.verifyUsernameAndPassword(username, password);
+        assertTrue(isUsuarioValido.isPresent());
     }
 
     @Test
@@ -102,20 +103,20 @@ public class UsuarioManagerTest {
         final String password = "123";
 
         // Verify the username and passwords exists
-        final Boolean isUsuarioValido = usuarioManager.verifyUsernameAndPassword(username, password);
-        assertTrue(isUsuarioValido);
+        final Optional<UsuarioForm> isUsuarioValido = usuarioManager.verifyUsernameAndPassword(username, password);
+        assertTrue(isUsuarioValido.isPresent());
 
         // Update the users password
         final String newPassword = "newPassword";
         usuarioManager.updatePassword(username, newPassword);
 
         // Verify the old password is wrong
-        final Boolean isOldPasswordValid = usuarioManager.verifyUsernameAndPassword(username, password);
-        assertFalse(isOldPasswordValid);
+        final Optional<UsuarioForm> isOldPasswordValid = usuarioManager.verifyUsernameAndPassword(username, password);
+        assertFalse(isOldPasswordValid.isPresent());
 
         // Verify the new password is correct
-        final Boolean isNewPasswordValid = usuarioManager.verifyUsernameAndPassword(username, newPassword);
-        assertTrue(isNewPasswordValid);
+        final Optional<UsuarioForm> isNewPasswordValid = usuarioManager.verifyUsernameAndPassword(username, newPassword);
+        assertTrue(isNewPasswordValid.isPresent());
     }
 
 

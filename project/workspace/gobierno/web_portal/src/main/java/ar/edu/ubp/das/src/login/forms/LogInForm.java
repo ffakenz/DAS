@@ -21,8 +21,8 @@ public class LogInForm extends DynaActionForm {
     public LogInForm() {
     }
 
-    public LogInForm(final String username) {
-        this.username = username;
+    public LogInForm(final Long ssid) {
+        this.id = ssid;
     }
 
     public Long getId() {

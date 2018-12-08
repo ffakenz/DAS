@@ -21,7 +21,7 @@ public class MSLogInDao extends DaoImpl<LogInForm> {
 
     @Override
     public void update(final LogInForm f) throws SQLException {
-        executeProcedure("dbo.log_out(?)", f, "username");
+        executeProcedure("dbo.log_out(?)", f, "id");
     }
 
     @Override
@@ -40,6 +40,11 @@ public class MSLogInDao extends DaoImpl<LogInForm> {
 
     public List<LogInForm> selectUserLoggIn(final LogInForm form) throws SQLException {
         return this.executeQueryProcedure("dbo.get_login_by_username(?)", form, "username");
+    }
+
+
+    public void logoutByUsername(final LogInForm f) throws SQLException {
+        executeProcedure("dbo.log_out_by_username(?)", f, "username");
     }
 
     // Needed For Tests Purpose

@@ -28,6 +28,9 @@
         <tomcat.port>9000</tomcat.port>
 
         <mockito.version>1.7.0</mockito.version>
+
+        <slf4j.api.version>1.7.25</slf4j.api.version>
+        <log4j.slf4j.impl.version>2.11.0</log4j.slf4j.impl.version>
     </properties>
 
     <dependencies>
@@ -109,12 +112,23 @@
             <version>2.2.3</version>
         </dependency>
         <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${log4j.slf4j.impl.version}</version>
+        </dependency>
+        <dependency>
             <groupId>gobierno</groupId>
             <artifactId>middleware</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
+
 
     <build>
         <!-- Name of the generated WAR file -->
@@ -131,6 +145,7 @@
                     <port>${tomcat.port}</port>
                     <contextReloadable>true</contextReloadable>
                 </configuration>
+
             </plugin>
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>

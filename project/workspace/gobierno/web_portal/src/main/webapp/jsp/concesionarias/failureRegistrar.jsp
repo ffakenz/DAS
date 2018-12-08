@@ -11,11 +11,8 @@
 
 <html>
 
-    <head>
+    <%@include file="../header/header.jsp" %>
 
-        <%@include file="../header/header.jsp" %>
-
-    </head>
 
     <body>
         <H2>LOS DATOS QUE HAS INGRESADO NO SON VALIDOS . VUELVE A INTENTARLO O PONTE EN CONTACTO CON NOSOTROS</H2>
@@ -24,6 +21,5 @@
     </body>
 
     <%@include file="../footer/footer.jsp"%>
-
 
 </html>

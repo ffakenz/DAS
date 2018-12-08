@@ -5,6 +5,7 @@ import ar.edu.ubp.das.src.usuarios.forms.UsuarioForm;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class MSUsuariosDao extends DaoImpl<UsuarioForm> {
 
@@ -38,12 +39,14 @@ public class MSUsuariosDao extends DaoImpl<UsuarioForm> {
         return true;
     }
 
-    public List<UsuarioForm> selectByUserNameAndPassword(final String username, final String password) throws SQLException {
+    public Optional<UsuarioForm> selectByUserNameAndPassword(final String username, final String password) throws SQLException {
         final UsuarioForm usuarioForm = new UsuarioForm();
         usuarioForm.setUsername(username);
         usuarioForm.setPassword(password);
 
-        return this.executeQueryProcedure("dbo.get_usuarios_by_username_password(?, ?)", usuarioForm, "username", "password");
+        return this.executeQueryProcedure("dbo.get_usuarios_by_username_password(?, ?)", usuarioForm, "username", "password")
+                .stream()
+                .findFirst();
     }
 
     public List<UsuarioForm> selectByUserName(final String username) throws SQLException {

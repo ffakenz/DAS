@@ -6,6 +6,7 @@ import ar.edu.ubp.das.src.usuarios.daos.MSUsuariosDao;
 import ar.edu.ubp.das.src.usuarios.forms.UsuarioForm;
 
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class UsuarioManager extends Manager<MSUsuariosDao> {
 
@@ -20,8 +21,8 @@ public class UsuarioManager extends Manager<MSUsuariosDao> {
     }
 
     // is there any usuario in the repository such that is equals to the one sent by parameter ?
-    public Boolean verifyUsernameAndPassword(final String username, final String password) throws SQLException {
-        return !dao.selectByUserNameAndPassword(username, password).isEmpty();
+    public Optional<UsuarioForm> verifyUsernameAndPassword(final String username, final String password) throws SQLException {
+        return dao.selectByUserNameAndPassword(username, password);
     }
 
     public void createUser(final UsuarioForm usuarioForm) throws SQLException {

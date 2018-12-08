@@ -13,6 +13,7 @@ import util.TestDB;
 
 import java.sql.SQLException;
 
+import static ar.edu.ubp.das.src.utils.Constants.SSID;
 import static org.junit.Assert.assertEquals;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -38,7 +39,7 @@ public class LogoutInteractorTest {
     public void test10_Verify_logout_ok() throws SQLException {
 
         final DynaActionForm loginForm = new DynaActionForm();
-        loginForm.setItem("username", "ffakenz");
+        loginForm.setItem(SSID, "1");
 
         final InteractorResponse<Long> response = interactor.execute(loginForm);
 
@@ -59,7 +60,8 @@ public class LogoutInteractorTest {
     public void test12_Verify_logout_user_loggedout() throws SQLException {
 
         final DynaActionForm loginForm = new DynaActionForm();
-        loginForm.setItem("username", "irocca");
+        loginForm.setItem(SSID, "1");
+
 
         final InteractorResponse<Long> response = interactor.execute(loginForm);
 
@@ -70,7 +72,7 @@ public class LogoutInteractorTest {
     public void test13_Verify_logout_user_that_not_exists() throws SQLException {
 
         final DynaActionForm loginForm = new DynaActionForm();
-        loginForm.setItem("username", "user_test");
+        loginForm.setItem(SSID, "1");
 
         final InteractorResponse<Long> response = interactor.execute(loginForm);
 

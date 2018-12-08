@@ -73,6 +73,21 @@
         <dropProcedure procedureName="log_out"/>
     </changeSet>
 
+    <changeSet id="Drop procedure log_out_by_username" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_out_by_username'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="log_out_by_username"/>
+    </changeSet>
+
+
+
     <!-- ******************************* -->
     <!--  CREATE PROCEDURES CHANGE-SETS  -->
     <!-- ******************************* -->
@@ -140,5 +155,18 @@
             </sqlCheck>
         </preConditions>
         <sqlFile path="/src/main/resources/liquibase/login/procedures/log_out.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure log_out_by_username" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_out_by_username'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/login/procedures/log_out_by_username.sql"/>
     </changeSet>
 </databaseChangeLog>

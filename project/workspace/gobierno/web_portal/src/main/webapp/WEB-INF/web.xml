@@ -25,11 +25,11 @@
     </context-param>
 
 
-    <listener>
+    <!-- <listener>
         <listener-class>
             ar.edu.ubp.das.src.jobs.runner.JobRunner
         </listener-class>
-    </listener>
+    </listener> -->
 
     <!-- http://127.0.0.1:8080/rewrite-status -->
     <filter>
