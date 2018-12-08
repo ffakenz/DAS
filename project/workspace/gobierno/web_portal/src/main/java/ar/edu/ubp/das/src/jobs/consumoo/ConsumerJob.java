@@ -25,7 +25,6 @@ import org.quartz.JobExecutionContext;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -127,52 +126,55 @@ public class ConsumerJob implements Job {
         updateCuotaDb(update);
     }
 
-    private void updateConsumerDb(final NotificationUpdate update, final Long concesionariaId) throws SQLException {
+    public void updateConsumerDb(final NotificationUpdate update, final Long concesionariaId) throws SQLException {
         final ConsumerForm consumer = new ConsumerForm();
         final Long clienteDocumento = update.getClienteDocumento();
         consumer.setDocumento(clienteDocumento);
         if (!consumerManager.getDao().valid(consumer)) {
-            final String clienteApellido = update.getClienteApellido();
             final String clienteNombre = update.getClienteNombre();
-            final String clienteEmail = update.getClienteEmail();
+            final String clienteApellido = update.getClienteApellido();
             final String clienteNroTelefono = update.getClienteNroTelefono();
-            consumer.setApellido(clienteApellido);
+            final String clienteEmail = update.getClienteEmail();
             consumer.setNombre(clienteNombre);
-            consumer.setEmail(clienteEmail);
+            consumer.setApellido(clienteApellido);
             consumer.setNroTelefono(clienteNroTelefono);
+            consumer.setEmail(clienteEmail);
             consumer.setConcesionaria(concesionariaId);
             consumerManager.getDao().insert(consumer);
         }
     }
 
-    private void updateEstadoCuentaDb(final NotificationUpdate update, final Long concesionariaId) throws SQLException {
-        final Long planId = update.getPlanId(); // ???
+    public void updateEstadoCuentaDb(final NotificationUpdate update, final Long concesionariaId) throws SQLException {
+        final Long planId = update.getPlanId();
+        final Long clienteDocumento = update.getClienteDocumento();
+        final Long vehiculo = update.getVehiculoId();
+        final Timestamp planFechaAlta = update.getPlanFechaAlta();
         final String planEstado = update.getPlanEstado();
-        // final Timestamp planFechaAlta = update.getPlanFechaAlta(); // -> setFechaAltaConcesionaria???
         final EstadoCuentasForm estadoCuenta = new EstadoCuentasForm();
-        estadoCuenta.setId(planId); // ???
+        estadoCuenta.setNroPlanConcesionaria(planId);
+        estadoCuenta.setDocumentoCliente(clienteDocumento);
+        estadoCuenta.setVehiculo(vehiculo);
+        estadoCuenta.setFechaAltaConcesionaria(planFechaAlta);
         estadoCuenta.setEstado(planEstado);
         estadoCuenta.setConcesionariaId(concesionariaId);
-        estadoCuenta.setDocumentoCliente(update.getClienteDocumento());
-        estadoCuenta.setFechaAltaSistema(Timestamp.from(Instant.now())); // ??? -> this should be from DB
-        estadoCuenta.setFechaUltimaActualizacion(Timestamp.from(Instant.now())); /// ??? -> this should be updated from Procedure
-        // estadoCuenta.setFechaAltaConcesionaria(); // ??? -> falta en el update ???
-        // estadoCuenta.setNroPlanConcesionaria(); // ??? -> falta en el update ???
+        // estadoCuenta.setFechaUltimaActualizacion(Timestamp.from(Instant.now())); /// ??? -> this should be updated from Procedure
         estadoCuentasManager.getDao().upsert(estadoCuenta);
     }
 
-    private void updateCuotaDb(final NotificationUpdate update) throws SQLException {
+    public void updateCuotaDb(final NotificationUpdate update) throws SQLException {
+        final Long planId = update.getPlanId();
         final Long cuotaNroCuota = update.getCoutaNroCuota();
-        // final Timestamp cuotaFechaAlta = update.getCuotaFechaAlta(); // ??? -> this should be from DB
-        final Timestamp cuotaFechaPago = update.getCoutaFechaPago();
-        final Integer cuotaMonto = update.getCoutaMonto();
         final Timestamp cuotaFechaVencimiento = update.getCoutaFechaVencimiento();
+        final Integer cuotaMonto = update.getCoutaMonto();
+        final Timestamp cuotaFechaPago = update.getCoutaFechaPago();
+        final Timestamp cuotaFechaAlta = update.getCuotaFechaAlta();
         final CuotasForm cuota = new CuotasForm();
-        cuota.setEstadoCuentaId(update.getPlanId());
+        cuota.setEstadoCuentaId(planId);
         cuota.setNroCuota(cuotaNroCuota);
-        cuota.setFechaPago(cuotaFechaPago);
-        cuota.setMonto(cuotaMonto);
         cuota.setFechaVencimiento(cuotaFechaVencimiento);
+        cuota.setMonto(cuotaMonto);
+        cuota.setFechaPago(cuotaFechaPago);
+        cuota.setFechaAltaConcesionaria(cuotaFechaAlta);
         cuotasManager.getDao().upsert(cuota);
     }
 }

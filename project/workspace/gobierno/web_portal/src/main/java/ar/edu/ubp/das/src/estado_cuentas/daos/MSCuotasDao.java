@@ -5,6 +5,7 @@ import ar.edu.ubp.das.src.estado_cuentas.forms.CuotasForm;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class MSCuotasDao extends DaoImpl<CuotasForm> {
 
@@ -16,12 +17,13 @@ public class MSCuotasDao extends DaoImpl<CuotasForm> {
     @Override
     public void insert(final CuotasForm bean) throws SQLException {
 
-        this.executeProcedure("dbo.log_cuota(?, ?, ?, ?, ?)", bean,
-                "nroCuota", "estadoCuentaId", "fechaVencimiento", "monto", "fechaPago");
+        this.executeProcedure("dbo.log_cuota(?, ?, ?, ?, ?, ?)", bean,
+                "nroCuota", "estadoCuentaId", "fechaAltaConcesionaria", "fechaVencimiento", "monto", "fechaPago");
     }
 
     @Override
     public void update(final CuotasForm form) throws SQLException {
+        this.pagarCuota(form);
     }
 
     @Override
@@ -30,7 +32,7 @@ public class MSCuotasDao extends DaoImpl<CuotasForm> {
 
     @Override
     public List<CuotasForm> select(final CuotasForm form) throws SQLException {
-        return this.executeQueryProcedure("dbo.get_cuotas");
+        return this.select();
     }
 
     public List<CuotasForm> select() throws SQLException {
@@ -39,7 +41,19 @@ public class MSCuotasDao extends DaoImpl<CuotasForm> {
 
     @Override
     public boolean valid(final CuotasForm form) throws SQLException {
-        return false;
+        return selectCuota(form).isPresent();
+    }
+
+    public void pagarCuota(final CuotasForm form) throws SQLException {
+        this.executeProcedure("dbo.pagar_cuota(?, ?, ?, ?)", form,
+                "nroCuota", "estadoCuentaId", "monto", "fechaPago");
+    }
+
+    public Optional<CuotasForm> selectCuota(final CuotasForm form) throws SQLException {
+        return this.executeQueryProcedure("dbo.get_cuota(?, ?)",
+                form, "nroCuota", "estadoCuentaId")
+                .stream()
+                .findFirst();
     }
 
     public List<CuotasForm> selectByEstadoCuenta(final CuotasForm form) throws SQLException {

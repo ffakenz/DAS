@@ -16,3 +16,6 @@
 
 6 - if a test fails due to `The index X is out of range.` is because 
     the procedure in the dao is missing a `?` as a parameter
+    
+6 - if a test fails due to `The value is not set for the parameter number 5.` is because 
+    the procedure in the dao has some extra `?` as a parameter
