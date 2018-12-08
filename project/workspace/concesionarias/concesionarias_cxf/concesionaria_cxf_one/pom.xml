@@ -16,18 +16,6 @@
     <!-- Dependency properties -->
     <properties>
         <serviceLocation>ws.ConcesionariaCXFOne</serviceLocation>
-
-        <maven-war-plugin.version>2.6</maven-war-plugin.version>
-        <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
-        <webResources.resource.directory>/src/main/resources</webResources.resource.directory>
-        <webResources.resource.targetPath>WEB-INF/wsdl</webResources.resource.targetPath>
-        <includePattern>*.wsdl</includePattern>
-
-        <tomcat7-maven-plugin.version>2.2</tomcat7-maven-plugin.version>
-        <tomcat.server>myTomcat</tomcat.server>
-        <tomcat.url>http://localhost:8082/manager/text</tomcat.url>
-        <tomcat.path>/${project.build.finalName}</tomcat.path>
-        <tomcat.port>8002</tomcat.port>
     </properties>
 
     <!-- Plugin configuration -->
@@ -35,34 +23,6 @@
         <!-- Name of the generated WAR file -->
         <finalName>concesionaria_cxf_one</finalName>
         <plugins>
-            <!-- TOMCAT SERVER -->
-            <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>${tomcat7-maven-plugin.version}</version>
-                <configuration>
-                    <server>${tomcat.server}</server>
-                    <url>${tomcat.url}</url>
-                    <path>${tomcat.path}</path>
-                    <port>${tomcat.port}</port>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>${maven-war-plugin.version}</version>
-                <configuration>
-                    <webXml>${webXml}</webXml>
-                    <webResources>
-                        <resource>
-                            <directory>${webResources.resource.directory}</directory>
-                            <targetPath>${webResources.resource.targetPath}</targetPath>
-                            <includes>
-                                <include>${includePattern}</include>
-                            </includes>
-                        </resource>
-                    </webResources>
-                </configuration>
-            </plugin>
             <!-- CXF SERVICE GENERATOR -->
             <plugin>
                 <groupId>org.apache.cxf</groupId>
