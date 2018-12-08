@@ -14,7 +14,7 @@ public class MSJobConsumoDao extends DaoImpl<JobConsumoForm> {
 
     @Override
     public void insert(final JobConsumoForm form) throws SQLException {
-
+        this.executeSimpleProcedure("dbo.job_consumo");
     }
 
     @Override
@@ -35,5 +35,14 @@ public class MSJobConsumoDao extends DaoImpl<JobConsumoForm> {
     @Override
     public boolean valid(final JobConsumoForm form) throws SQLException {
         return false;
+    }
+
+    public Long createJob() throws SQLException {
+        this.executeSimpleProcedure("dbo.job_consumo");
+        return this.getLastJob();
+    }
+
+    public Long getLastJob() throws SQLException {
+        return this.executeQueryProcedure("dbo.get_last_job").stream().findFirst().map(j -> j.getId()).get();
     }
 }

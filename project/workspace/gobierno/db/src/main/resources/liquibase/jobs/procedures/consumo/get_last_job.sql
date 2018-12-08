@@ -1,0 +1,4 @@
+CREATE PROCEDURE get_last_job AS
+SELECT TOP 1 *
+FROM job_consumo
+ORDER BY id DESC;

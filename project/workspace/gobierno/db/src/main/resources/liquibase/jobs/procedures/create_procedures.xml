@@ -9,6 +9,84 @@
     <!--  DROP PROCEDURES CHANGE-SETS  -->
     <!-- ***************************** -->
 
+    <!-- ******************************* -->
+    <!--  DROPS CONSUMO                  -->
+    <!-- ******************************* -->
+
+    <changeSet id="Drop procedure log_job_consumo" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_job_consumo'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="log_job_consumo"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure get_last_job" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_last_job'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_last_job"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure log_consumo" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_consumo'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="log_consumo"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure log_consumo_result" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_consumo_result'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="log_consumo_result"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure get_last_consumo" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_last_consumo'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_last_consumo"/>
+    </changeSet>
+
+    <!-- ******************************* -->
+    <!--  DROPS SORTEO                   -->
+    <!-- ******************************* -->
+
     <changeSet id="Drop procedure get_ultimo_ganador" author="DAS-Team" runAlways="true"
                runOnChange="true">
         <preConditions onFail="MARK_RAN">
@@ -56,6 +134,89 @@
     <!--  CREATE PROCEDURES CHANGE-SETS  -->
     <!-- ******************************* -->
 
+    <!-- ******************************* -->
+    <!--  CREATE CONSUMO                 -->
+    <!-- ******************************* -->
+
+    <changeSet id="Create procedure log_job_consumo" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_job_consumo'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/consumo/log_job_consumo.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure get_last_job" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_last_job'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/consumo/get_last_job.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure log_consumo" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_consumo'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/consumo/log_consumo.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure log_consumo_result" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_consumo_result'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/consumo/log_consumo_result.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure get_last_consumo" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_last_consumo'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/consumo/get_last_consumo.sql"/>
+    </changeSet>
+
+    <!-- ******************************* -->
+    <!--  CREATE SORTEO                  -->
+    <!-- ******************************* -->
+
     <changeSet id="Create procedure get_ultimo_ganador" author="DAS-Team" runAlways="true"
                runOnChange="true">
         <preConditions onFail="MARK_RAN">
@@ -70,6 +231,7 @@
         <sqlFile
                 path="/src/main/resources/liquibase/jobs/procedures/get_ultimo_ganador.sql"/>
     </changeSet>
+
     <changeSet id="Create procedure insert_participante" author="DAS-Team" runAlways="true"
                runOnChange="true">
         <preConditions onFail="MARK_RAN">
@@ -84,6 +246,7 @@
         <sqlFile
                 path="/src/main/resources/liquibase/jobs/procedures/insert_participante.sql"/>
     </changeSet>
+
     <changeSet id="Create procedure update_participante" author="DAS-Team" runAlways="true"
                runOnChange="true">
         <preConditions onFail="MARK_RAN">

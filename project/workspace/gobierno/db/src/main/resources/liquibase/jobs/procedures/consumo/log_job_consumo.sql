@@ -1,0 +1,2 @@
+CREATE PROCEDURE log_job_consumo AS
+INSERT INTO job_consumo DEFAULT VALUES;
