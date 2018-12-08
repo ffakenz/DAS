@@ -13,3 +13,6 @@
 4 - gobierno/web_portal/clean_and_run_web_portal.sh or /run_web_portal.sh 
 
 5 - Open a browser in: http://localhost:9000/web_portal/home/Home.do
+
+6 - if a test fails due to `The index X is out of range.` is because 
+    the procedure in the dao is missing a `?` as a parameter

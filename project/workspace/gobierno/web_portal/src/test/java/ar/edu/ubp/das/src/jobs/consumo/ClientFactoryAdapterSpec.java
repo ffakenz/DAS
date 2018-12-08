@@ -110,8 +110,8 @@ public class ClientFactoryAdapterSpec {
 
         assertTrue(client instanceof CXFClient);
 
-        client.consultarPlanes("2018-01-08T20:58:00").forEach(System.out::println);
         /*
+        client.consultarPlanes("2018-01-08T20:58:00").forEach(System.out::println);
         ConfigurarConcesionariaForm{concesionariaId=2, configTecno='CXF', configParam='wsdlUrl', value='http://localhost:8002/concesionaria_cxf_one/services/concesionaria_cxf_one?wsdl'}
         {"plan_id":1,"plan_estado":"en_proceso","plan_fecha_alta":"2018-01-08 08:58:00.000","cuota_nro_cuota":1,"cuota_fecha_vencimiento":"2018-02-08 11:59:59.000","cuota_monto":100,"cuota_fecha_pago":"2018-01-18 08:58:00.000","cuota_fecha_alta":"2018-01-08 08:58:00.000","cliente_documento":2000,"cliente_nombre":"CXF","cliente_apellido":"Puto","cliente_nro_telefono":"4444444","cliente_email":"cxf.puto@gmail.com","vehiculo_id":1,"vehiculo_tipo":"taxi","vehiculo_nombre":"Corsa","vehiculo_precio":10000,"vehiculo_marca":"chevrolet","vehiculo_modelo":"v1","vehiculo_color":"c1"}
         {"plan_id":1,"plan_estado":"en_proceso","plan_fecha_alta":"2018-01-08 08:58:00.000","cuota_nro_cuota":2,"cuota_fecha_vencimiento":"2018-03-08 11:59:59.000","cuota_monto":100,"cuota_fecha_pago":"2018-02-18 08:58:00.000","cuota_fecha_alta":"2018-02-09 12:00:00.000","cliente_documento":2000,"cliente_nombre":"CXF","cliente_apellido":"Puto","cliente_nro_telefono":"4444444","cliente_email":"cxf.puto@gmail.com","vehiculo_id":1,"vehiculo_tipo":"taxi","vehiculo_nombre":"Corsa","vehiculo_precio":10000,"vehiculo_marca":"chevrolet","vehiculo_modelo":"v1","vehiculo_color":"c1"}

@@ -9,8 +9,6 @@ import java.sql.Timestamp;
 @Entity
 public class CuotasForm extends DynaActionForm {
 
-    @Column(name = "id") // remove setter
-    private Long id;
     @Column(name = "nro_cuota")
     private Long nroCuota;
     @Column(name = "estado_cuenta_id")
@@ -28,14 +26,6 @@ public class CuotasForm extends DynaActionForm {
 
     public void setEstadoCuentaId(final Long estadoCuentaId) {
         this.estadoCuentaId = estadoCuentaId;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(final Long id) {
-        this.id = id;
     }
 
     public Timestamp getFechaVencimiento() {
@@ -65,8 +55,7 @@ public class CuotasForm extends DynaActionForm {
     @Override
     public String toString() {
         return "CuotasForm{" +
-                "id=" + id +
-                ", nroCuota=" + nroCuota +
+                "nroCuota=" + nroCuota +
                 ", estadoCuentaId=" + estadoCuentaId +
                 ", fechaVencimiento=" + fechaVencimiento +
                 ", monto=" + monto +
@@ -87,8 +76,7 @@ public class CuotasForm extends DynaActionForm {
         if (this == aThat) return true;
         if (!(aThat instanceof CuotasForm)) return false;
         final CuotasForm that = (CuotasForm) aThat;
-        return that.id.equals(this.id) &&
-                that.nroCuota.equals(this.nroCuota) &&
+        return that.nroCuota.equals(this.nroCuota) &&
                 that.estadoCuentaId.equals(this.estadoCuentaId) &&
                 that.getFechaPago().equals(this.getFechaPago()) &&
                 that.getFechaVencimiento().equals(this.getFechaVencimiento());

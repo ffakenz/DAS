@@ -16,8 +16,8 @@ public class MSCuotasDao extends DaoImpl<CuotasForm> {
     @Override
     public void insert(final CuotasForm bean) throws SQLException {
 
-        this.executeProcedure("dbo.log_cuota(?, ?, ?, ?)", bean,
-                "estadoCuentaId", "fechaVencimiento", "monto", "fechaPago");
+        this.executeProcedure("dbo.log_cuota(?, ?, ?, ?, ?)", bean,
+                "nroCuota", "estadoCuentaId", "fechaVencimiento", "monto", "fechaPago");
     }
 
     @Override
@@ -29,7 +29,7 @@ public class MSCuotasDao extends DaoImpl<CuotasForm> {
     }
 
     @Override
-    public List<CuotasForm> select(CuotasForm form) throws SQLException {
+    public List<CuotasForm> select(final CuotasForm form) throws SQLException {
         return this.executeQueryProcedure("dbo.get_cuotas");
     }
 

@@ -66,6 +66,7 @@ public class CuotaTest {
 
         final CuotasForm cuotaForm = new CuotasForm();
         cuotaForm.setEstadoCuentaId(1L);
+        cuotaForm.setNroCuota(4L);
 
         final List<CuotasForm> cuotas = cuotasDao.selectByEstadoCuenta(cuotaForm);
 
@@ -80,9 +81,7 @@ public class CuotaTest {
         final List<CuotasForm> cuotas2 = cuotasDao.selectByEstadoCuenta(cuotaForm);
         // hay una cuota mas
         assertEquals(4, cuotas2.size());
-
-        cuotaForm.setId(13L);
-        cuotaForm.setNroCuota(4L);
+        
         assertTrue(cuotas2.contains(cuotaForm));
     }
 }
