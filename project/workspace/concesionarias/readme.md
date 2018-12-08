@@ -3,6 +3,8 @@
 1 - Execute in /db/../startup/build     : build_docker.sh
 2 - Execute in /db/../startup           : run_docker.sh
 3 - Execute in /db/../startup           : db_start.sh 
+    * if db_start fails it means run_docker failed installing dbs. 
+    * Execut db_install.sh in this case
 
 # Startup
  

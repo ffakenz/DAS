@@ -25,7 +25,7 @@
 
         <tomcat7-maven-plugin.version>2.2</tomcat7-maven-plugin.version>
         <tomcat.server>myTomcat</tomcat.server>
-        <tomcat.url>http://localhost:8080/manager/text</tomcat.url>
+        <tomcat.url>http://localhost:8082/manager/text</tomcat.url>
         <tomcat.path>/${project.build.finalName}</tomcat.path>
         <tomcat.port>8002</tomcat.port>
     </properties>
@@ -35,34 +35,6 @@
         <!-- Name of the generated WAR file -->
         <finalName>concesionaria_cxf_one</finalName>
         <plugins>
-            <!-- CXF SERVICE GENERATOR -->
-            <plugin>
-                <groupId>org.apache.cxf</groupId>
-                <artifactId>cxf-java2ws-plugin</artifactId>
-                <version>${cxf.version}</version>
-                <executions>
-                    <execution>
-                        <id>process-classes</id>
-                        <phase>process-classes</phase>
-                        <configuration>
-                            <className>${serviceLocation}</className>
-                            <genWsdl>true</genWsdl>
-                            <verbose>true</verbose>
-                            <genServer>true</genServer>
-                            <genClient>false</genClient>
-                            <genWrapperbean>true</genWrapperbean>
-                            <frontend>jaxws</frontend>
-                            <databinding>jaxb</databinding>
-                            <soap12>true</soap12>
-                            <quiet>false</quiet>
-                            <attachWsdl>true</attachWsdl>
-                        </configuration>
-                        <goals>
-                            <goal>java2ws</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
             <!-- TOMCAT SERVER -->
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
@@ -90,6 +62,34 @@
                         </resource>
                     </webResources>
                 </configuration>
+            </plugin>
+            <!-- CXF SERVICE GENERATOR -->
+            <plugin>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-java2ws-plugin</artifactId>
+                <version>${cxf.version}</version>
+                <executions>
+                    <execution>
+                        <id>process-classes</id>
+                        <phase>process-classes</phase>
+                        <configuration>
+                            <className>${serviceLocation}</className>
+                            <genWsdl>true</genWsdl>
+                            <verbose>true</verbose>
+                            <genServer>true</genServer>
+                            <genClient>false</genClient>
+                            <genWrapperbean>true</genWrapperbean>
+                            <frontend>jaxws</frontend>
+                            <databinding>jaxb</databinding>
+                            <soap12>true</soap12>
+                            <quiet>false</quiet>
+                            <attachWsdl>true</attachWsdl>
+                        </configuration>
+                        <goals>
+                            <goal>java2ws</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
