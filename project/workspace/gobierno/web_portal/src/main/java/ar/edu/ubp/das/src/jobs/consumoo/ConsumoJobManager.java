@@ -5,13 +5,13 @@ import ar.edu.ubp.das.src.jobs.consumoo.daos.MSConsumoDao;
 import ar.edu.ubp.das.src.jobs.consumoo.daos.MSConsumoResultDao;
 import ar.edu.ubp.das.src.jobs.consumoo.daos.MSJobConsumoDao;
 
-public class ConsumerJobManager {
+public class ConsumoJobManager {
 
     private MSConsumoDao msConsumoDao;
     private MSConsumoResultDao msConsumoResultDao;
     private MSJobConsumoDao msJobConsumoDao;
 
-    public ConsumerJobManager(final DatasourceConfig datasourceConfig) {
+    public ConsumoJobManager(final DatasourceConfig datasourceConfig) {
         this.msConsumoDao = new MSConsumoDao();
         this.msConsumoDao.setDatasource(datasourceConfig);
         this.msConsumoResultDao = new MSConsumoResultDao();

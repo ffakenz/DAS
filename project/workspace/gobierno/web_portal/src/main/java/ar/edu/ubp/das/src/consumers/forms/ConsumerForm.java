@@ -122,15 +122,9 @@ public class ConsumerForm extends DynaActionForm {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         final ConsumerForm that = (ConsumerForm) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(documento, that.documento) &&
-                Objects.equals(nombre, that.nombre) &&
-                Objects.equals(apellido, that.apellido) &&
-                Objects.equals(nroTelefono, that.nroTelefono) &&
-                Objects.equals(email, that.email) &&
-                Objects.equals(fechaAlta, that.fechaAlta) &&
-                Objects.equals(concesionaria, that.concesionaria) &&
-                Objects.equals(username, that.username);
+        return Objects.equals(id, that.id) ||
+                (Objects.equals(documento, that.documento) &&
+                        Objects.equals(concesionaria, that.concesionaria));
     }
 
 }

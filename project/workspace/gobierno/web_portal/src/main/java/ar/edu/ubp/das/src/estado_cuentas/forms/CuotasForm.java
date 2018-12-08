@@ -22,6 +22,8 @@ public class CuotasForm extends DynaActionForm {
     private Timestamp fechaPago;
     @Column(name = "fecha_alta_concesionaria")
     private Timestamp fechaAltaConcesionaria;
+    @Column(name = "fecha_ultima_actualizacion")
+    private Timestamp fechaUltimaActualizacion;
 
     @Override
     public String toString() {
@@ -32,6 +34,7 @@ public class CuotasForm extends DynaActionForm {
                 ", monto=" + monto +
                 ", fechaPago=" + fechaPago +
                 ", fechaAltaConcesionaria=" + fechaAltaConcesionaria +
+                ", fechaUltimaActualizacion=" + fechaUltimaActualizacion +
                 '}';
     }
 
@@ -83,16 +86,20 @@ public class CuotasForm extends DynaActionForm {
         this.fechaAltaConcesionaria = fechaAltaConcesionaria;
     }
 
+    public Timestamp getFechaUltimaActualizacion() {
+        return fechaUltimaActualizacion;
+    }
+
+    public void setFechaUltimaActualizacion(final Timestamp fechaUltimaActualizacion) {
+        this.fechaUltimaActualizacion = fechaUltimaActualizacion;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         final CuotasForm that = (CuotasForm) o;
         return Objects.equals(nroCuota, that.nroCuota) &&
-                Objects.equals(estadoCuentaId, that.estadoCuentaId) &&
-                Objects.equals(fechaVencimiento, that.fechaVencimiento) &&
-                Objects.equals(monto, that.monto) &&
-                Objects.equals(fechaPago, that.fechaPago) &&
-                Objects.equals(fechaAltaConcesionaria, that.fechaAltaConcesionaria);
+                Objects.equals(estadoCuentaId, that.estadoCuentaId);
     }
 }

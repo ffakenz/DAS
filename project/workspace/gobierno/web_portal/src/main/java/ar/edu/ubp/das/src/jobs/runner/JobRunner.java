@@ -1,6 +1,6 @@
 package ar.edu.ubp.das.src.jobs.runner;
 
-import ar.edu.ubp.das.src.jobs.consumoo.ConsumerJob;
+import ar.edu.ubp.das.src.jobs.consumoo.ConsumoJob;
 import ar.edu.ubp.das.src.jobs.sorteo.SorteoJob;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
@@ -26,8 +26,8 @@ public class JobRunner implements ServletContextListener {
         final JobObj jobSorteo = jobBuilder.createJob("sorteo", "0 */30 * ? * *", SorteoJob.class);
         jobs.add(jobSorteo);
 
-//        final JobObj jobConsumer = jobBuilder.createJob("consumer", "0/50 * * * * ?", ConsumerJob.class);
-        final JobObj jobConsumer = jobBuilder.createJob("consumer", "0 */35 * ? * *", ConsumerJob.class);
+//        final JobObj jobConsumer = jobBuilder.createJob("consumer", "0/50 * * * * ?", ConsumoJob.class);
+        final JobObj jobConsumer = jobBuilder.createJob("consumer", "0 */35 * ? * *", ConsumoJob.class);
         jobs.add(jobConsumer);
 
         run(jobs);

@@ -28,7 +28,7 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
-public class ConsumerJob implements Job {
+public class ConsumoJob implements Job {
 
     // from web_portal
     private ConcesionariasManager concesionariasManager;
@@ -36,11 +36,11 @@ public class ConsumerJob implements Job {
     private ConsumerManager consumerManager;
     private CuotasManager cuotasManager;
     private EstadoCuentasManager estadoCuentasManager;
-    private ConsumerJobManager consumerJobManager;
+    private ConsumoJobManager consumoJobManager;
 
     private ClientFactoryAdapter clientFactory;
 
-    public ConsumerJob(final DatasourceConfig datasourceConfig, final IClientFactory clientFactory) {
+    public ConsumoJob(final DatasourceConfig datasourceConfig, final IClientFactory clientFactory) {
 
         final MSConcesionariasDao msConcesionariasDao = new MSConcesionariasDao();
         msConcesionariasDao.setDatasource(datasourceConfig);
@@ -64,7 +64,7 @@ public class ConsumerJob implements Job {
 
         this.clientFactory = new ClientFactoryAdapter(clientFactory);
 
-        this.consumerJobManager = new ConsumerJobManager(datasourceConfig);
+        this.consumoJobManager = new ConsumoJobManager(datasourceConfig);
     }
 
     @Override
@@ -120,7 +120,6 @@ public class ConsumerJob implements Job {
     }
 
     private void updateDb(final ConcesionariaForm concesionaria, final NotificationUpdate update) throws SQLException {
-        // TODO REMOVE ALL UNNECESARY GETTERS AND SETTERS FROM FORMS
         updateConsumerDb(update, concesionaria.getId());
         updateEstadoCuentaDb(update, concesionaria.getId());
         updateCuotaDb(update);
@@ -157,7 +156,6 @@ public class ConsumerJob implements Job {
         estadoCuenta.setFechaAltaConcesionaria(planFechaAlta);
         estadoCuenta.setEstado(planEstado);
         estadoCuenta.setConcesionariaId(concesionariaId);
-        // estadoCuenta.setFechaUltimaActualizacion(Timestamp.from(Instant.now())); /// ??? -> this should be updated from Procedure
         estadoCuentasManager.getDao().upsert(estadoCuenta);
     }
 

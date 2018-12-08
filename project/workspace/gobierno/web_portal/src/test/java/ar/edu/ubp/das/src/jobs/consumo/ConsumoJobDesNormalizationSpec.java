@@ -1,4 +1,4 @@
-package ar.edu.ubp.das.src.jobs;
+package ar.edu.ubp.das.src.jobs.consumo;
 
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.src.consumers.daos.MSConsumerDao;
@@ -7,7 +7,7 @@ import ar.edu.ubp.das.src.estado_cuentas.daos.MSCuotasDao;
 import ar.edu.ubp.das.src.estado_cuentas.daos.MSEstadoCuentasDao;
 import ar.edu.ubp.das.src.estado_cuentas.forms.CuotasForm;
 import ar.edu.ubp.das.src.estado_cuentas.forms.EstadoCuentasForm;
-import ar.edu.ubp.das.src.jobs.consumoo.ConsumerJob;
+import ar.edu.ubp.das.src.jobs.consumoo.ConsumoJob;
 import beans.NotificationUpdate;
 import clients.ConcesionariaServiceContract;
 import clients.IClientFactory;
@@ -27,7 +27,7 @@ import java.util.Optional;
 import static org.junit.Assert.*;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class ConsumerJobSpec {
+public class ConsumoJobDesNormalizationSpec {
     // Daos
     private DatasourceConfig dataSourceConfig;
     private MSConsumerDao msConsumerDao;
@@ -135,7 +135,7 @@ public class ConsumerJobSpec {
     // We should insert a Consumer if it does not exists
     @Test
     public void test_10_ConsumerJob_UpdateConsumer_success() throws Exception {
-        final ConsumerJob consumer = new ConsumerJob(dataSourceConfig, new EmptyClientFactoryMock());
+        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new EmptyClientFactoryMock());
         setUpConsumer(nonExistingConsumer,
                 777L,
                 "ChuPamela",
@@ -161,7 +161,7 @@ public class ConsumerJobSpec {
     // We should not insert/update a Consumer if it exists
     @Test
     public void test_11_ConsumerJob_UpdateConsumer_failure_insert() throws Exception {
-        final ConsumerJob consumer = new ConsumerJob(dataSourceConfig, new EmptyClientFactoryMock());
+        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new EmptyClientFactoryMock());
         setUpConsumer(existingConsumer,
                 111L,
                 "Carlos",
@@ -191,7 +191,7 @@ public class ConsumerJobSpec {
     // We should insert a EstadoCuenta if it does not exists
     @Test
     public void test_12_ConsumerJob_NEW_UpdateEstadoCuenta_success() throws Exception {
-        final ConsumerJob consumer = new ConsumerJob(dataSourceConfig, new EmptyClientFactoryMock());
+        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new EmptyClientFactoryMock());
         setUpEstadoCuenta(nonExistingEstadoCuenta,
                 1002L,
                 111L,
@@ -217,7 +217,7 @@ public class ConsumerJobSpec {
     // We should update a EstadoCuenta if it exists
     @Test
     public void test_13_ConsumerJob_OLD_UpdateEstadoCuenta_success() throws Exception {
-        final ConsumerJob consumer = new ConsumerJob(dataSourceConfig, new EmptyClientFactoryMock());
+        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new EmptyClientFactoryMock());
         setUpEstadoCuenta(existingEstadoCuenta,
                 1001L,
                 111L,
@@ -246,7 +246,7 @@ public class ConsumerJobSpec {
     // We should insert a Cuota if it does not exists
     @Test
     public void test_14_ConsumerJob_NEW_Cuota_success() throws Exception {
-        final ConsumerJob consumer = new ConsumerJob(dataSourceConfig, new EmptyClientFactoryMock());
+        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new EmptyClientFactoryMock());
         setUpCuota(nonExistingCuota,
                 3L,
                 1L,
@@ -271,7 +271,7 @@ public class ConsumerJobSpec {
     // We should update a Cuota if it exists
     @Test
     public void test_15_ConsumerJob_OLD_Cuota_success() throws Exception {
-        final ConsumerJob consumer = new ConsumerJob(dataSourceConfig, new EmptyClientFactoryMock());
+        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new EmptyClientFactoryMock());
         setUpCuota(existingCuota,
                 2L,
                 1L,
@@ -291,6 +291,10 @@ public class ConsumerJobSpec {
         // verify it exists in db and it changed
         final Optional<CuotasForm> cuotasForm2 = cuotasDao.selectCuota(form);
         assertTrue(cuotasForm2.isPresent());
-        assertNotEquals(cuotasForm.get(), cuotasForm2.get());
+        assertEquals(cuotasForm.get(), cuotasForm2.get()); // they are the same cuota
+        // but got different monto and fecha pago
+        assertNotEquals(cuotasForm.get().getMonto(), cuotasForm2.get().getMonto());
+        assertNotEquals(cuotasForm.get().getFechaPago(), cuotasForm2.get().getFechaPago());
+        assertNotEquals(cuotasForm.get().getFechaUltimaActualizacion(), cuotasForm2.get().getFechaUltimaActualizacion());
     }
 }
