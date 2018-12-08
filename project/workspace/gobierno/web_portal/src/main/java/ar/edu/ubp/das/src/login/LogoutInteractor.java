@@ -11,6 +11,8 @@ import ar.edu.ubp.das.src.login.model.LoginManager;
 
 import java.sql.SQLException;
 
+import static ar.edu.ubp.das.src.utils.Constants.SSID;
+
 
 public class LogoutInteractor implements Interactor<Long> {
 
@@ -22,14 +24,14 @@ public class LogoutInteractor implements Interactor<Long> {
 
     @Override
     public InteractorResponse execute(final DynaActionForm form) throws SQLException {
-        final Pair<String, Boolean> username = form.isItemValid("username");
 
-        if (!username.snd)
-            return new InteractorResponse<>(ResponseForward.WARNING); // Some error occur with username
+        final Pair<String, Boolean> ssid = form.isItemValid(SSID);
 
-        loginManager.logout(form.convertTo(LogInForm.class));
+        if (!ssid.snd)
+            return new InteractorResponse<>(ResponseForward.WARNING); // Some error occur with ssid
 
-        // if we are here it means the logout was successfully or the user was already logged out
+        loginManager.logout(new LogInForm(Long.parseLong(ssid.fst)));
+
         return new InteractorResponse(ResponseForward.SUCCESS);
     }
 
