@@ -13,7 +13,9 @@ import clients.ConcesionariaServiceContract;
 import clients.IClientFactory;
 import clients.factory.ClientType;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import util.TestDB;
 
 import java.sql.SQLException;
@@ -24,6 +26,7 @@ import java.util.Optional;
 
 import static org.junit.Assert.*;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ConsumerJobSpec {
     // Daos
     private DatasourceConfig dataSourceConfig;
@@ -115,11 +118,13 @@ public class ConsumerJobSpec {
     private void setUpCuota(final NotificationUpdate consumer,
                             final Long nroCuota,
                             final Long estadoCuentaId,
+                            final Timestamp fechaAltaConcesionaria,
                             final Timestamp fechaVencimiento,
                             final Integer monto,
                             final Timestamp fechaPago) {
         consumer.setPlanId(estadoCuentaId);
         consumer.setCoutaNroCuota(nroCuota);
+        consumer.setCuotaFechaAlta(fechaAltaConcesionaria);
         consumer.setCoutaFechaVencimiento(fechaVencimiento);
         consumer.setCoutaMonto(monto);
         consumer.setCoutaFechaPago(fechaPago);
@@ -129,7 +134,7 @@ public class ConsumerJobSpec {
 
     // We should insert a Consumer if it does not exists
     @Test
-    public void test_ConsumerJob_UpdateConsumer_success() throws Exception {
+    public void test_10_ConsumerJob_UpdateConsumer_success() throws Exception {
         final ConsumerJob consumer = new ConsumerJob(dataSourceConfig, new EmptyClientFactoryMock());
         setUpConsumer(nonExistingConsumer,
                 777L,
@@ -141,12 +146,12 @@ public class ConsumerJobSpec {
         // verify it does not exists in db
         final ConsumerForm form = new ConsumerForm();
         form.setDocumento(777L);
-        form.setConcesionaria(7L);
+        form.setConcesionaria(1L);
         final Optional<ConsumerForm> consumerForm =
                 msConsumerDao.selectConsumerByDniAndConcesionaria(form);
         assertFalse(consumerForm.isPresent());
         // updateConsumerDb
-        consumer.updateConsumerDb(nonExistingConsumer, 7L);
+        consumer.updateConsumerDb(nonExistingConsumer, 1L);
         // verify it exists in db
         final Optional<ConsumerForm> consumerForm2 =
                 msConsumerDao.selectConsumerByDniAndConcesionaria(form);
@@ -155,25 +160,25 @@ public class ConsumerJobSpec {
 
     // We should not insert/update a Consumer if it exists
     @Test
-    public void test_ConsumerJob_UpdateConsumer_failure_insert() throws Exception {
+    public void test_11_ConsumerJob_UpdateConsumer_failure_insert() throws Exception {
         final ConsumerJob consumer = new ConsumerJob(dataSourceConfig, new EmptyClientFactoryMock());
         setUpConsumer(existingConsumer,
-                666L,
-                "Pamela",
-                "Anderson",
-                "35156345677",
-                "pamelaanderson@mail.com");
+                111L,
+                "Carlos",
+                "Perez",
+                "35156345678",
+                "carliperezozo@mail.com");
 
 
         // verify it exists in db
         final ConsumerForm form = new ConsumerForm();
-        form.setDocumento(777L);
-        form.setConcesionaria(7L);
+        form.setDocumento(111L);
+        form.setConcesionaria(1L);
         final Optional<ConsumerForm> consumerForm =
                 msConsumerDao.selectConsumerByDniAndConcesionaria(form);
         assertTrue(consumerForm.isPresent());
         // updateConsumerDb
-        consumer.updateConsumerDb(existingConsumer, 5L);
+        consumer.updateConsumerDb(existingConsumer, 1L);
         // verify it exists in db and is the same
         final Optional<ConsumerForm> consumerForm2 =
                 msConsumerDao.selectConsumerByDniAndConcesionaria(form);
@@ -185,24 +190,24 @@ public class ConsumerJobSpec {
 
     // We should insert a EstadoCuenta if it does not exists
     @Test
-    public void test_ConsumerJob_NEW_UpdateEstadoCuenta_success() throws Exception {
+    public void test_12_ConsumerJob_NEW_UpdateEstadoCuenta_success() throws Exception {
         final ConsumerJob consumer = new ConsumerJob(dataSourceConfig, new EmptyClientFactoryMock());
         setUpEstadoCuenta(nonExistingEstadoCuenta,
-                1006L,
-                555L,
+                1002L,
+                111L,
                 2L,
                 Timestamp.valueOf("2018-03-03 23:58:02"),
                 "inicial");
 
         // verify it does not exists in db
         final EstadoCuentasForm form = new EstadoCuentasForm();
-        form.setConcesionariaId(3L);
-        form.setNroPlanConcesionaria(1006L);
+        form.setConcesionariaId(1L);
+        form.setNroPlanConcesionaria(1002L);
         final Optional<EstadoCuentasForm> estadoCuentasForm =
                 estadoCuentaDao.selectByNroPlanAndConcesionaria(form);
         assertFalse(estadoCuentasForm.isPresent());
         // updateEstadoCuentaDb
-        consumer.updateEstadoCuentaDb(nonExistingEstadoCuenta, 3L);
+        consumer.updateEstadoCuentaDb(nonExistingEstadoCuenta, 1L);
         // verify it exists in db
         final Optional<EstadoCuentasForm> estadoCuentasForm2 =
                 estadoCuentaDao.selectByNroPlanAndConcesionaria(form);
@@ -211,7 +216,7 @@ public class ConsumerJobSpec {
 
     // We should update a EstadoCuenta if it exists
     @Test
-    public void test_ConsumerJob_OLD_UpdateEstadoCuenta_success() throws Exception {
+    public void test_13_ConsumerJob_OLD_UpdateEstadoCuenta_success() throws Exception {
         final ConsumerJob consumer = new ConsumerJob(dataSourceConfig, new EmptyClientFactoryMock());
         setUpEstadoCuenta(existingEstadoCuenta,
                 1001L,
@@ -240,19 +245,20 @@ public class ConsumerJobSpec {
 
     // We should insert a Cuota if it does not exists
     @Test
-    public void test_ConsumerJob_NEW_Cuota_success() throws Exception {
+    public void test_14_ConsumerJob_NEW_Cuota_success() throws Exception {
         final ConsumerJob consumer = new ConsumerJob(dataSourceConfig, new EmptyClientFactoryMock());
         setUpCuota(nonExistingCuota,
-                4L,
-                4L,
-                Timestamp.valueOf("2018-07-01 21:58:01"),
+                3L,
+                1L,
+                Timestamp.valueOf("2018-03-01 21:58:01"),
+                Timestamp.valueOf("2018-04-01 21:58:01"),
                 null,
                 null);
 
         // verify it does not exists in db
         final CuotasForm form = new CuotasForm();
-        form.setNroCuota(4L);
-        form.setEstadoCuentaId(4L);
+        form.setNroCuota(3L);
+        form.setEstadoCuentaId(1L);
         final Optional<CuotasForm> cuotasForm = cuotasDao.selectCuota(form);
         assertFalse(cuotasForm.isPresent());
         // updateCuotaDb
@@ -264,19 +270,20 @@ public class ConsumerJobSpec {
 
     // We should update a Cuota if it exists
     @Test
-    public void test_ConsumerJob_OLD_Cuota_success() throws Exception {
+    public void test_15_ConsumerJob_OLD_Cuota_success() throws Exception {
         final ConsumerJob consumer = new ConsumerJob(dataSourceConfig, new EmptyClientFactoryMock());
         setUpCuota(existingCuota,
-                3L,
                 2L,
-                Timestamp.valueOf("2018-04-01 21:58:01"),
+                1L,
+                Timestamp.valueOf("2018-02-01 21:58:01"),
+                Timestamp.valueOf("2018-03-01 21:58:01"),
                 10000,
-                Timestamp.valueOf("2018-03-21 22:58:01"));
+                Timestamp.valueOf("2018-04-21 22:58:01"));
 
         // verify it exists in db
         final CuotasForm form = new CuotasForm();
-        form.setNroCuota(3L);
-        form.setEstadoCuentaId(2L);
+        form.setNroCuota(2L);
+        form.setEstadoCuentaId(1L);
         final Optional<CuotasForm> cuotasForm = cuotasDao.selectCuota(form);
         assertTrue(cuotasForm.isPresent());
         // updateCuotaDb
