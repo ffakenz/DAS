@@ -30,7 +30,7 @@
     <!-- ########################################### -->
     <!-- Main triggers change-sets                   -->
     <!-- ########################################### -->
-    <include file="/src/main/resources/liquibase/estado_cuentas/triggers/triggers.xml"/>
+    <!-- include file="/src/main/resources/liquibase/estado_cuentas/triggers/triggers.xml"/-->
 
     <!-- ########################################### -->
     <!-- Main procedures change-sets                 -->

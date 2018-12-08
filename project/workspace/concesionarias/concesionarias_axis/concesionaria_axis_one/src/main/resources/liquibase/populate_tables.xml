@@ -19,5 +19,25 @@
         </preConditions>
         <sqlFile path="/src/main/resources/liquibase/clientes.sql"/>
     </changeSet>
+    <changeSet id="Populate table planes" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="planes"/>
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM planes
+            </sqlCheck>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/planes.sql"/>
+    </changeSet>
+    <changeSet id="Populate table cuotas" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="cuotas"/>
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM cuotas
+            </sqlCheck>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/cuotas.sql"/>
+    </changeSet>
 
 </databaseChangeLog>

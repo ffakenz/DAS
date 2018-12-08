@@ -32,6 +32,7 @@
         <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
 
         <liquibase.version>3.6.1</liquibase.version>
+        <liquibase.skip>false</liquibase.skip>
     </properties>
 
     <profiles>
@@ -119,6 +120,7 @@
                 <version>${liquibase.version}</version>
                 <configuration>
                     <changeLogFile>dbchangelog.xml</changeLogFile>
+                    <skip>${liquibase.skip}</skip>
                     <driver>${driverDB}</driver>
                     <url>${urlDB}</url>
                     <username>${usernameDB}</username>
