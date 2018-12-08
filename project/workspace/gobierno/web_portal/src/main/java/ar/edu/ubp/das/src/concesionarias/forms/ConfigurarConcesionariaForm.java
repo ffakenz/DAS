@@ -23,6 +23,7 @@ public class ConfigurarConcesionariaForm extends DynaActionForm {
                 "concesionariaId=" + concesionariaId +
                 ", configTecno='" + configTecno + '\'' +
                 ", configParam='" + configParam + '\'' +
+                ", value='" + value + '\'' +
                 '}';
     }
 

@@ -37,6 +37,7 @@ public class ConsumerJob implements Job {
     private ConsumerManager consumerManager;
     private CuotasManager cuotasManager;
     private EstadoCuentasManager estadoCuentasManager;
+    private ConsumerJobManager consumerJobManager;
 
     private ClientFactoryAdapter clientFactory;
 
@@ -63,6 +64,8 @@ public class ConsumerJob implements Job {
         this.estadoCuentasManager = new EstadoCuentasManager(msEstadoCuentasDao);
 
         this.clientFactory = new ClientFactoryAdapter(clientFactory);
+
+        this.consumerJobManager = new ConsumerJobManager(datasourceConfig);
     }
 
     @Override
@@ -171,6 +174,5 @@ public class ConsumerJob implements Job {
         cuota.setMonto(cuotaMonto);
         cuota.setFechaVencimiento(cuotaFechaVencimiento);
         cuotasManager.getDao().upsert(cuota);
-
     }
 }

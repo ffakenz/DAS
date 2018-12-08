@@ -6,5 +6,5 @@ function test_db(){
 }
 
 # Example of usages
-# test_db 1433
+# test_db # 1433
 # use db_gobierno
