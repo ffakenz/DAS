@@ -11,6 +11,7 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Optional;
 
 @WebService(targetNamespace = "http://ws.das.edu.ubp.ar/", portName = "ConcesionariaCXFOnePort", serviceName = "ConcesionariaCXFOneService")
 public class ConcesionariaCXFOne extends MSSQLConsecionaria implements ConcesionariaServiceContract {
@@ -35,7 +36,10 @@ public class ConcesionariaCXFOne extends MSSQLConsecionaria implements Concesion
     @Override
     public String consultarPlan(@WebParam(name = "planId") final Long planId) {
         System.out.println("Cxf consultar plan id -> " + planId);
-        return gson.toJson(abstractFactory.withConnection(notificationUpdateDAO.consultarPlan(planId)).get());
+        final Optional<NotificationUpdate> notificationUpdate =
+                abstractFactory.withConnection(notificationUpdateDAO.consultarPlan(planId));
+
+        return gson.toJson(notificationUpdate.orElseGet(NotificationUpdate::new));
     }
 
     @WebMethod(operationName = "cancelarPlan", action = "urn:CancelarPlan")

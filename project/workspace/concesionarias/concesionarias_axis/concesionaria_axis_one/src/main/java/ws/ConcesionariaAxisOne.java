@@ -8,6 +8,7 @@ import contract.implementors.MSSQLConsecionaria;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Optional;
 
 public class ConcesionariaAxisOne extends MSSQLConsecionaria implements ConcesionariaServiceContract {
 
@@ -29,7 +30,9 @@ public class ConcesionariaAxisOne extends MSSQLConsecionaria implements Concesio
     @Override
     public String consultarPlan(final Long planId) {
         System.out.println("Axis consultar plan id -> " + planId);
-        return gson.toJson(abstractFactory.withConnection(notificationUpdateDAO.consultarPlan(planId)).get());
+        final Optional<NotificationUpdate> notificationUpdate =
+                abstractFactory.withConnection(notificationUpdateDAO.consultarPlan(planId));
+        return gson.toJson(notificationUpdate.orElse(new NotificationUpdate()));
     }
 
     @Override

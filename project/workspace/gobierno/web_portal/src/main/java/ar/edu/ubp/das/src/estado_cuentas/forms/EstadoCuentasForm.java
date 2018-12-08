@@ -25,7 +25,7 @@ public class EstadoCuentasForm extends DynaActionForm {
     @Column(name = "fecha_ultima_actualizacion")
     private Timestamp fechaUltimaActualizacion;
     @Column(name = "estado")
-    private String estado;
+    private String estado; // TODO -> create an enum for it
 
     @Override
     public String toString() {

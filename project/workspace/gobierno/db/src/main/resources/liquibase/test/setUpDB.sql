@@ -31,9 +31,9 @@ BEGIN
 
     INSERT INTO concesionaria_config_params (concesionaria_id, config_tecno, config_param, value)
     VALUES
-        (1, 'REST', 'url', 'http://localhost:8002/concesionaria_rest_one/concesionariaRestOne')
-        , (2, 'CXF', 'wsdlUrl', 'http://192.168.1.6:8000/concesionaria_cxf_one/services/concesionaria_cxf_one?wsdl')
-        , (3, 'AXIS', 'endpointUrl', 'http://192.168.1.6:8001/concesionaria_axis_one/services/ConcesionariaAxisOne.ConcesionariaAxisOneHttpEndpoint/')
+        (1, 'REST', 'url', 'http://localhost:8001/concesionaria_rest_one/concesionariaRestOne')
+        , (2, 'CXF', 'wsdlUrl', 'http://localhost:8002/concesionaria_cxf_one/services/concesionaria_cxf_one?wsdl')
+        , (3, 'AXIS', 'endpointUrl', 'http://localhost:8000/concesionaria_axis_one/services/ConcesionariaAxisOne.ConcesionariaAxisOneHttpEndpoint/')
         , (3, 'AXIS', 'targetNameSpace', 'http://ws.ConcesionariaAxisOne/')
         , (4, 'REST', 'url', 'http://localhost:8004/concesionarias_rest_four/concesionariaRestFour')
         , (5, 'CXF', 'wsdlUrl', 'http://192.168.1.6:8000/concesionaria_cxf_one/services/concesionaria_cxf_one?wsdl')
@@ -91,26 +91,28 @@ BEGIN
         , (3, 1005, 333, 2, '2018-03-02 22:58:02', 'en_proceso')
 
     INSERT INTO cuotas (
-        estado_cuenta_id, fecha_vencimiento, monto, fecha_pago
+        nro_cuota, estado_cuenta_id, fecha_alta_concesionaria, fecha_vencimiento, monto, fecha_pago
     )
     VALUES
         -- plan al dia
-       (1, '2018-02-01 21:58:01', 10000, '2018-01-27 21:58:01')
-       , (1, '2018-03-01 21:58:01', 10000, '2018-02-11 21:58:01')
-       , (1, '2018-04-01 21:58:01', 10000, '2018-03-31 21:58:01')
+       (1, 1, '2018-01-01 21:58:01', '2018-02-01 21:58:01', 10000, '2018-01-27 21:58:01')
+       , (2, 1, '2018-02-01 21:58:01', '2018-03-01 21:58:01', 10000, '2018-02-11 21:58:01')
+       , (3, 1, '2018-03-01 21:58:01', '2018-04-01 21:58:01', 10000, '2018-03-31 21:58:01')
        -- plan vencido
-       , (2, '2018-02-01 21:58:01', 10000, '2018-02-02 21:58:01')
-       , (2, '2018-03-01 21:58:01', 10000, '2018-02-27 21:58:01')
-       , (2, '2018-04-01 21:58:01', NULL, NULL)
+       , (1, 2, '2018-01-01 21:58:01', '2018-02-01 21:58:01', 10000, '2018-02-02 21:58:01')
+       , (2, 2, '2018-02-01 21:58:01', '2018-03-01 21:58:01', 10000, '2018-02-27 21:58:01')
+       , (3, 2, '2018-03-01 21:58:01', '2018-04-01 21:58:01', NULL, NULL)
        -- plan nuevo
        -- otros al dia
-       , (3, '2018-04-01 21:58:01', 10000, '2018-03-27 21:58:01')
-       , (3, '2018-05-01 21:58:01', 10000, '2018-04-11 21:58:01')
-       , (3, '2018-06-01 21:58:01', 10000, '2018-05-30 21:58:01')
-       , (4, '2018-04-01 21:58:01', 10000, '2018-03-27 21:58:01')
-       , (4, '2018-05-01 21:58:01', 10000, '2018-04-11 21:58:01')
-       , (4, '2018-06-01 21:58:01', 10000, '2018-05-30 21:58:01')
+       , (1, 3, '2018-03-01 21:58:01', '2018-04-01 21:58:01', 10000, '2018-03-27 21:58:01')
+       , (2, 3, '2018-04-01 21:58:01', '2018-05-01 21:58:01', 10000, '2018-04-11 21:58:01')
+       , (3, 3, '2018-05-01 21:58:01', '2018-06-01 21:58:01', 10000, '2018-05-30 21:58:01')
+       , (1, 4, '2018-03-01 21:58:01', '2018-04-01 21:58:01', 10000, '2018-03-27 21:58:01')
+       , (2, 4, '2018-04-01 21:58:01', '2018-05-01 21:58:01', 10000, '2018-04-11 21:58:01')
+       , (3, 4, '2018-05-01 21:58:01', '2018-06-01 21:58:01', 10000, '2018-05-30 21:58:01')
 
+
+    -- SORTEO
     INSERT INTO estado_sorteo(nombre)
     VALUES('nuevo'),('pendiente'),('completado')
 
@@ -122,5 +124,16 @@ BEGIN
 
     INSERT INTO participantes(id_sorteo, id_plan, estado)
     VALUES (1, 4, 'ganador')
+
+    -- CONSUMO
+    INSERT INTO estado_consumo(estado)
+    VALUES ('success')
+            , ('failure')
+
+    INSERT INTO tipo_consumo_result(tipo)
+    VALUES ('success')
+            , ('failure')
+
+
 END
 GO

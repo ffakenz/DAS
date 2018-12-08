@@ -71,6 +71,9 @@ public class NotificationUpdate {
     @SerializedName("vehiculo_color")
     String vehiculoColor;
 
+    public NotificationUpdate() {
+    }
+
     public Long getPlanId() {
         return planId;
     }

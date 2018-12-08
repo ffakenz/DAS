@@ -5,12 +5,11 @@ import ar.edu.ubp.das.mvc.db.annotations.Column;
 import ar.edu.ubp.das.mvc.db.annotations.Entity;
 
 import java.sql.Timestamp;
+import java.util.Objects;
 
 @Entity
 public class CuotasForm extends DynaActionForm {
 
-    @Column(name = "id")
-    private Long id;
     @Column(name = "nro_cuota")
     private Long nroCuota;
     @Column(name = "estado_cuenta_id")
@@ -21,6 +20,28 @@ public class CuotasForm extends DynaActionForm {
     private Integer monto;
     @Column(name = "fecha_pago")
     private Timestamp fechaPago;
+    @Column(name = "fecha_alta_concesionaria")
+    private Timestamp fechaAltaConcesionaria;
+
+    @Override
+    public String toString() {
+        return "CuotasForm{" +
+                "nroCuota=" + nroCuota +
+                ", estadoCuentaId=" + estadoCuentaId +
+                ", fechaVencimiento=" + fechaVencimiento +
+                ", monto=" + monto +
+                ", fechaPago=" + fechaPago +
+                ", fechaAltaConcesionaria=" + fechaAltaConcesionaria +
+                '}';
+    }
+
+    public Long getNroCuota() {
+        return nroCuota;
+    }
+
+    public void setNroCuota(final Long nroCuota) {
+        this.nroCuota = nroCuota;
+    }
 
     public Long getEstadoCuentaId() {
         return estadoCuentaId;
@@ -28,14 +49,6 @@ public class CuotasForm extends DynaActionForm {
 
     public void setEstadoCuentaId(final Long estadoCuentaId) {
         this.estadoCuentaId = estadoCuentaId;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(final Long id) {
-        this.id = id;
     }
 
     public Timestamp getFechaVencimiento() {
@@ -62,35 +75,24 @@ public class CuotasForm extends DynaActionForm {
         this.fechaPago = fechaPago;
     }
 
-    @Override
-    public String toString() {
-        return "CuotasForm{" +
-                "id=" + id +
-                ", nroCuota=" + nroCuota +
-                ", estadoCuentaId=" + estadoCuentaId +
-                ", fechaVencimiento=" + fechaVencimiento +
-                ", monto=" + monto +
-                ", fechaPago=" + fechaPago +
-                '}';
+    public Timestamp getFechaAltaConcesionaria() {
+        return fechaAltaConcesionaria;
     }
 
-    public Long getNroCuota() {
-        return nroCuota;
+    public void setFechaAltaConcesionaria(final Timestamp fechaAltaConcesionaria) {
+        this.fechaAltaConcesionaria = fechaAltaConcesionaria;
     }
 
-    public void setNroCuota(final Long nroCuota) {
-        this.nroCuota = nroCuota;
-    }
-    
     @Override
-    public boolean equals(final Object aThat) {
-        if (this == aThat) return true;
-        if (!(aThat instanceof CuotasForm)) return false;
-        final CuotasForm that = (CuotasForm) aThat;
-        return that.id.equals(this.id) &&
-                that.nroCuota.equals(this.nroCuota) &&
-                that.estadoCuentaId.equals(this.estadoCuentaId) &&
-                that.getFechaPago().equals(this.getFechaPago()) &&
-                that.getFechaVencimiento().equals(this.getFechaVencimiento());
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        final CuotasForm that = (CuotasForm) o;
+        return Objects.equals(nroCuota, that.nroCuota) &&
+                Objects.equals(estadoCuentaId, that.estadoCuentaId) &&
+                Objects.equals(fechaVencimiento, that.fechaVencimiento) &&
+                Objects.equals(monto, that.monto) &&
+                Objects.equals(fechaPago, that.fechaPago) &&
+                Objects.equals(fechaAltaConcesionaria, that.fechaAltaConcesionaria);
     }
 }

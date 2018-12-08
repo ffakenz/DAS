@@ -39,7 +39,7 @@ public class MSEstadoCuentasDao extends DaoImpl<EstadoCuentasForm> {
 
     @Override
     public boolean valid(final EstadoCuentasForm form) throws SQLException {
-        return false;
+        return selectByNroPlanAndConcesionaria(form).isPresent();
     }
 
     public Optional<EstadoCuentasForm> selectByNroPlanAndConcesionaria(final EstadoCuentasForm form) throws SQLException {

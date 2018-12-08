@@ -19,4 +19,12 @@ public interface Dao<T> {
 
     boolean valid(T form) throws SQLException;
 
+    default void upsert(final T form) throws SQLException {
+        if (!this.valid(form)) {
+            this.insert(form);
+        } else {
+            this.update(form);
+        }
+    }
+
 }

@@ -3,6 +3,5 @@ VALUES
     (1, 1, 'GOBIERNO-INCENTIVO-2018', 'en_proceso', '2018-01-08 20:58:00')
     , (1, 2, 'GOBIERNO-INCENTIVO-2018', 'en_proceso', '2018-02-08 20:58:00')
     , (2, 2, 'GOBIERNO-INCENTIVO-2018', 'en_proceso', '2018-03-08 20:58:00')
-    , (3, 3, 'GOBIERNO-INCENTIVO-2018', 'en_proceso', '2018-04-08 20:58:00')
-    , (4, 4, 'GOBIERNO-INCENTIVO-2018', 'inicial', '2018-05-08 20:58:00')
+    , (3, 1, 'GOBIERNO-INCENTIVO-2018', 'en_proceso', '2018-04-08 20:58:00')
 ;

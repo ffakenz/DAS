@@ -14,6 +14,8 @@ import utils.JsonUtils;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -29,6 +31,16 @@ public class AxisClient implements ConcesionariaServiceContract {
         this.endpointUrl = endpointUrl;
         this.fac = OMAbstractFactory.getOMFactory();
         this.omNs = fac.createOMNamespace(targetNameSpace, "ns1");
+    }
+
+    public static Optional<ConcesionariaServiceContract> create(final Map<String, String> params) {
+        final String endpointUrl = params.getOrDefault("endpointUrl", "");
+        final String targetNameSpace = params.getOrDefault("targetNameSpace", "");
+        if (endpointUrl.isEmpty() || targetNameSpace.isEmpty())
+            return Optional.empty();
+
+        final AxisClient axisClient = new AxisClient(endpointUrl, targetNameSpace);
+        return Optional.of(axisClient);
     }
 
     // TODO: apply DRY on call because is similar to executeMethod.

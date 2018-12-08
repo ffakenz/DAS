@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!-- ******************************** -->
+    <!--   TABLE POPULATION CHANGE-SETS   -->
+    <!-- ******************************** -->
+
+    <changeSet id="Populate table clientes" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="clientes"/>
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM clientes
+            </sqlCheck>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/clientes.sql"/>
+    </changeSet>
+    <changeSet id="Populate table planes" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="planes"/>
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM planes
+            </sqlCheck>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/planes.sql"/>
+    </changeSet>
+    <changeSet id="Populate table cuotas" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="cuotas"/>
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM cuotas
+            </sqlCheck>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/cuotas.sql"/>
+    </changeSet>
+
+</databaseChangeLog>

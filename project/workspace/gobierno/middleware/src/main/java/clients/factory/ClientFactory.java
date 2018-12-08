@@ -22,27 +22,11 @@ public class ClientFactory implements IClientFactory {
             return Optional.empty();
 
         if (configTecno.equals(ClientType.AXIS)) {
-            final String endpointUrl = params.getOrDefault("endpointUrl", "");
-            final String targetNameSpace = params.getOrDefault("targetNameSpace", "");
-            if (endpointUrl.isEmpty() || targetNameSpace.isEmpty())
-                return Optional.empty();
-
-            final AxisClient axisClient = new AxisClient(endpointUrl, targetNameSpace);
-            return Optional.of(axisClient);
+            return AxisClient.create(params);
         } else if (configTecno.equals(ClientType.REST)) {
-            final String url = params.getOrDefault("url", "");
-            if (url.isEmpty())
-                return Optional.empty();
-
-            final RestClient restClient = new RestClient(url);
-            return Optional.of(restClient);
+            return RestClient.create(params);
         } else if (configTecno.equals(ClientType.CXF)) {
-            final String wsdlUrl = params.getOrDefault("wsdlUrl", "");
-            if (wsdlUrl.isEmpty())
-                return Optional.empty();
-
-            final CXFClient cxfClient = new CXFClient(wsdlUrl);
-            return Optional.of(cxfClient);
+            return CXFClient.create(params);
         } else return Optional.empty();
     }
 }

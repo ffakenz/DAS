@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-mvn clean compile tomcat7:run
+mvn clean compile -Denv="axis_one" tomcat7:run

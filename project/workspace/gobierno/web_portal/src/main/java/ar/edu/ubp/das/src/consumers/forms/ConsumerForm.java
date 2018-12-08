@@ -5,12 +5,13 @@ import ar.edu.ubp.das.mvc.db.annotations.Column;
 import ar.edu.ubp.das.mvc.db.annotations.Entity;
 
 import java.sql.Timestamp;
+import java.util.Objects;
 
 @Entity
 public class ConsumerForm extends DynaActionForm {
 
     @Column(name = "id")
-    private Long id;
+    private Long id; // remove getter
     @Column(name = "documento")
     private Long documento;
     @Column(name = "nombre")
@@ -21,7 +22,7 @@ public class ConsumerForm extends DynaActionForm {
     private String nroTelefono;
     @Column(name = "email")
     private String email;
-    @Column(name = "fecha_de_alta")
+    @Column(name = "fecha_de_alta") // remove setter
     private Timestamp fechaAlta;
     @Column(name = "concesionaria")
     private Long concesionaria;
@@ -115,4 +116,21 @@ public class ConsumerForm extends DynaActionForm {
     public void setConcesionaria(final Long concesionaria) {
         this.concesionaria = concesionaria;
     }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        final ConsumerForm that = (ConsumerForm) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(documento, that.documento) &&
+                Objects.equals(nombre, that.nombre) &&
+                Objects.equals(apellido, that.apellido) &&
+                Objects.equals(nroTelefono, that.nroTelefono) &&
+                Objects.equals(email, that.email) &&
+                Objects.equals(fechaAlta, that.fechaAlta) &&
+                Objects.equals(concesionaria, that.concesionaria) &&
+                Objects.equals(username, that.username);
+    }
+
 }

@@ -1,6 +1,6 @@
 package ar.edu.ubp.das.src.jobs.runner;
 
-import ar.edu.ubp.das.src.jobs.ConsumerJob;
+import ar.edu.ubp.das.src.jobs.consumoo.ConsumerJob;
 import ar.edu.ubp.das.src.jobs.sorteo.SorteoJob;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
@@ -8,13 +8,8 @@ import org.quartz.impl.StdSchedulerFactory;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import java.sql.Driver;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Level;
 
 
 public class JobRunner implements ServletContextListener {
