@@ -55,4 +55,10 @@ Implementation Walkthrough:
         - create a "Servlet" Action: ${module}\actions\${someaction}Action.java    
         - implement the ${someaction}Action.java
         - run under \web_portal: mvn clean install tomcat7:run-war to verify above changes
-    
+
+
+
+WORK TIPS:
+
+- if you need refresh some page when you are doing changes on the FE and tomcat is running execute:
+    * war:exploded

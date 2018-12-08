@@ -18,8 +18,9 @@
     </head>
 
     <body>
-        <H2>FELICITACIONES TE HAS REGISTRADO .. AHORA DEBES ESPERAR A SER APROBADO !!!!</H2>
-        <button id="login" name="login" class="btn btn-primary" onclick="javascript:home.goToHome();">Volver al home</button>
+        <H2>LOS DATOS QUE HAS INGRESADO NO SON VALIDOS . VUELVE A INTENTARLO O PONTE EN CONTACTO CON NOSOTROS</H2>
+        <button name="goToRegistrar" class="btn btn-primary" onclick="javascript:home.showRegistrarConcesionaria();">Volver a intentarlo</button>
+        <button name="goToHome" class="btn btn-primary" onclick="javascript:home.goToHome();">Volver al home</button>
     </body>
 
     <%@include file="../footer/footer.jsp"%>

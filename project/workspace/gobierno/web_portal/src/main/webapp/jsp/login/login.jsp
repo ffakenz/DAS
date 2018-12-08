@@ -10,65 +10,39 @@
 
 <html>
 
-    <head>
+<%@include file="../header/header.jsp" %>
 
-    <%@include file="../header/header.jsp" %>
+<body>
+<div id="login-form">
 
-    </head>
+    <h1><fmt:message key="login_cabecera" bundle="${etq}" /></h1>
 
-    <body>
-        <div id="login-form">
+    <fieldset>
 
-            <h1><fmt:message key="login_cabecera" bundle="${etq}" /></h1>
+        <form id="loginForm" action="javascript:login.validarUsuario();" method="post">
 
-            <fieldset>
+            <div class="md-form">
+                <input type="text" name="username" id="username" required placeholder="<fmt:message key="login_usuario" bundle="${etq}" />">
+            </div>
 
-                <form id="formulario" action="javascript:login.validarUsuario();" method="post">
+            <div class="md-form">
+                <input type="password" name="password" id="password" required placeholder="<fmt:message key="login_clave" bundle="${etq}" />">
+            </div>
 
-                    <div class="md-form">
-                      <input type="text" name="username" id="username" required placeholder="<fmt:message key="login_usuario" bundle="${etq}" />">
-                    </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-default" > <fmt:message key="login_ingresar" bundle="${etq}" /> </button>
+            </div>
 
-                    <div class="md-form">
-                         <input type="password" name="password" id="password" required placeholder="<fmt:message key="login_clave" bundle="${etq}" />">
-                    </div>
+        </form>
 
-                     <div class="text-center">
-                        <button type="submit" class="btn btn-default" > <fmt:message key="login_ingresar" bundle="${etq}" /> </button>
+    </fieldset>
 
-                     </div>
+    <button id="login" name="login" class="btn btn-primary" onclick="javascript:home.goToHome();">Volver al home</button>
 
-                    <!--
+</div>
 
-                    <footer class="clearfix">
+</body>
 
-                        <p> <span class="info"> ? </span>
-
-                        <a href="#"> ¿Olvidó su contraseña? </a> </p>
-
-                    </footer>
-
-                    -->
-
-                </form>
-
-            </fieldset>
-
-
-        <button id="login" name="login" class="btn btn-primary" onclick="javascript:home.goToHome();">Volver al home</button>
-
-        </div>
-
-        <div id="resultado">
-
-	        <div id="mensaje"></div>
-
-	        <div id="error"></div>
-
-        </div>
-
-    </body>
-
-    <%@include file="../footer/scripts_import.jsp"%>
+<%@include file="../footer/footer.jsp"%>
 
 </html>
