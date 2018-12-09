@@ -8,7 +8,7 @@ $(() => {
 
             console.log("%o", evt);
 
-            const url = "/web_portal/login/Login.do";
+            const url = Globals.LOGIN_ENDPOINT;
 
             $('#loginForm')
                 .attr('action', url)

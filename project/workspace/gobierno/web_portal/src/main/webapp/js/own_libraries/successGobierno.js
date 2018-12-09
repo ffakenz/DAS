@@ -7,7 +7,7 @@ $(() => {
         const idConcesionaria  = idButton.split("-")[1];
 
         $.ajax({
-            url: "/web_portal/concesionarias/AprobarConcesionaria.do",
+            url: Globals.APROBAR_CONCESIONARIA_ENDPOINT,
             type: "post",
             data: "id=" + idConcesionaria,
             dataType: "html",
@@ -28,7 +28,7 @@ $(() => {
         const idConcesionaria  = idButton.split("-")[1];
 
         $.ajax({
-            url: "/web_portal/concesionarias/DesAprobarConcesionaria.do",
+            url: Globals.DESAPROBAR_CONCESIONARIA_ENDPOINT,
             type: "post",
             data: "id=" + idConcesionaria,
             dataType: "html",
