@@ -24,23 +24,13 @@
             <%@include file="../commons/header.jsp"%>
 
             <div class="page-header text-center">
-                <h2>USUARIO CORRECTO !!!!</h2>
+                <h2>USUARIO CONSUMER CORRECTO !!!!</h2>
                 <br>
                 <h3> Session de login nº:  ${sessionScope.ssid}</h3>
             </div>
 
             <div class="container">
-                <c:choose>
-                    <c:when test="${requestScope.userType == 'gobierno'}">
-                        <label>Admin</label>
-                    </c:when>
-                    <c:when test="${requestScope.userType == 'consumer'}">
-                        <label>Consumer</label>
-                    </c:when>
-                    <c:otherwise>
-                        <label>Tipo de usuario invalido</label>
-                    </c:otherwise>
-                </c:choose>
+
             </div>
 
             <br>

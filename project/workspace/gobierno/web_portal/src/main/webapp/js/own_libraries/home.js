@@ -13,5 +13,10 @@ var home = {
     goToHome : function () {
 
         window.location.href = "/web_portal/home/Home.do";
+    },
+
+    goToProfile : function() {
+
+        window.location.href = "/web_portal/login/Login.do";
     }
 };

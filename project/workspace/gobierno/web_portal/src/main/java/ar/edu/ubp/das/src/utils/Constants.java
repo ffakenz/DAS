@@ -13,17 +13,6 @@ public final class Constants {
     //************ PARAMS SERVLETS ****************************
     public static final String USER_TYPE = "userType";
     public static final String SSID = "ssid";
-}
 
-
-class Runner {
-    public static void main(String[] args) {
-        Timestamp ts = Timestamp.from(Instant.now());
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(ts);
-        cal.add(Calendar.DAY_OF_WEEK, 14);
-        ts.setTime(cal.getTime().getTime()); // or
-        ts = new Timestamp(cal.getTime().getTime());
-        System.out.println(ts);
-    }
+    public static final String FORWARD_NAME = "forwardName";
 }

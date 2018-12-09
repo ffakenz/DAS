@@ -1,11 +1,23 @@
-var login = {
+$(() => {
 
-    validarUsuario : function() {
+    const login = {
 
-        var url = "/web_portal/login/Login.do";
+        validarUsuario : (evt) => {
 
-        $('#loginForm')
-            .attr('action', url)
-            .submit();
-    }
-};
+            evt.preventDefault();
+
+            console.log("%o", evt);
+
+            const url = "/web_portal/login/Login.do";
+
+            $('#loginForm')
+                .attr('action', url)
+                .submit();
+        }
+    };
+
+    $('#login_btn').on('click', login.validarUsuario);
+
+});
+
+
