@@ -12,75 +12,62 @@
 <html>
 
 <head>
-    <%@include file="../header/header.jsp" %>
+    <%@include file="../commons/head.jsp" %>
 </head>
 
 <body>
-<div>
-    <form class="form-horizontal" id="formConcesionarias" method="post">
+
+    <%@ include file="../commons/header.jsp"%>
+
+    <!-- Form Name -->
+    <div class="page-header text-center">
+        <h1>Registracion concesionaria</h1>
+    </div>
+
+    <div class="container">
         <fieldset>
 
-            <!-- Form Name -->
-            <legend>Registracion concesionaria</legend>
+            <form class="form-horizontal" id="formConcesionarias" method="post">
 
-            <!-- Text input-->
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="nombre">Nombre</label>
-                <div class="col-md-4">
-                    <input id="nombre" name="nombre" type="text" placeholder="" value="1" class="form-control input-md" required="">
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="nombre">Nombre</label>
+                    <input id="nombre" name="nombre" type="text" placeholder="" value="1" class="form-control form-control-lg" required="">
                 </div>
-            </div>
 
-            <!-- Text input-->
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="direccion">Direccion</label>
-                <div class="col-md-4">
-                    <input id="direccion" name="direccion" type="text" value="xxx" placeholder="" class="form-control input-md">
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="direccion">Direccion</label>
+                    <input id="direccion" name="direccion" type="text" value="xxx" placeholder="" class="form-control form-control-lg">
                 </div>
-            </div>
 
-            <!-- Text input-->
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="cuit">CUIT</label>
-                <div class="col-md-4">
-                    <input id="cuit" name="cuit" type="text" placeholder="" value="111" class="form-control input-md" required="" onkeypress="javascript:return jUtils.validNum();">
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="cuit">CUIT</label>
+                    <input id="cuit" name="cuit" type="text" placeholder="" value="111" class="form-control form-control-lg" required="" onkeypress="javascript:return jUtils.validNum();">
                 </div>
-            </div>
 
-            <!-- Text input-->
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="tel">Telefono</label>
-                <div class="col-md-4">
-                    <input id="tel" name="tel" type="text" placeholder="" value="111111" class="form-control input-md" required="" onkeypress="javascript:return jUtils.validNum();">
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="tel">Telefono</label>
+                    <input id="tel" name="tel" type="text" placeholder="" value="111111" class="form-control form-control-lg" required="" onkeypress="javascript:return jUtils.validNum();">
                 </div>
-            </div>
 
-            <!-- Text input-->
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="email">Email</label>
-                <div class="col-md-4">
-                    <input id="email" name="email" type="text" placeholder="" value="email@email.com" class="form-control input-md" required="">
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="email">Email</label>
+                    <input id="email" name="email" type="text" placeholder="" value="email@email.com" class="form-control form-control-lg" required="">
                 </div>
-            </div>
-
-            <!-- Button -->
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="btn_send_form"></label>
-                <div class="col-md-4">
-                    <button id="btn_send_form" name="btn_send_form" class="btn btn-primary" onclick="javascript:concesionarias.sendForm();">Enviar info</button>
-                </div>
-            </div>
-
+            </form>
         </fieldset>
 
-    </form>
+        <button id="btn_send_form" name="btn_send_form" class="btn btn-outline-primary btn-lg btn-block" onclick="javascript:concesionarias.sendForm();">Enviar info</button>
 
-    <button id="login" name="login" class="btn btn-primary" onclick="javascript:home.goToHome();">Volver al home</button>
-
-</div>
+        <button name="goToHome" class="btn btn-outline-secondary" onclick="javascript:home.goToHome();">Volver al home</button>
+    </div>
 
 </body>
 
-<%@include file="../footer/footer.jsp"%>
+<%@include file="../commons/footer.jsp"%>
 
 </html>

@@ -11,15 +11,26 @@
 
 <html>
 
-    <%@include file="../header/header.jsp" %>
+    <%@include file="../commons/head.jsp" %>
 
 
     <body>
-        <H2>LOS DATOS QUE HAS INGRESADO NO SON VALIDOS . VUELVE A INTENTARLO O PONTE EN CONTACTO CON NOSOTROS</H2>
-        <button name="goToRegistrar" class="btn btn-primary" onclick="javascript:home.showRegistrarConcesionaria();">Volver a intentarlo</button>
-        <button name="goToHome" class="btn btn-primary" onclick="javascript:home.goToHome();">Volver al home</button>
+        <div class="content-body">
+
+            <%@ include file="../commons/header.jsp" %>
+            <!-- Form Name -->
+            <div class="page-header text-center">
+                <h1>LOS DATOS QUE HAS INGRESADO NO SON VALIDOS</h1>
+                <br>
+                <h2>Puedes volver a intentarlo o ponerte en contacto con nosotros a través de nuestra página de contacto</h2>
+            </div>
+
+            <button name="goToRegistrar" class="btn btn-outline-primary btn-lg" onclick="javascript:home.showRegistrarConcesionaria();">Volver a intentarlo</button>
+
+            <button name="goToHome" class="btn btn-outline-secondary" onclick="javascript:home.goToHome();">Volver al home</button>
+        </div>
     </body>
 
-    <%@include file="../footer/footer.jsp"%>
+    <%@include file="../commons/footer.jsp"%>
 
 </html>

@@ -13,24 +13,22 @@
 
 <html>
 
-    <%@include file="../header/header.jsp" %>
+    <%@include file="../commons/head.jsp" %>
 
     <body>
 
-        <c:choose>
-            <c:when test="${sessionScope.ssid != null}">
-                <button id="logout" name="logout" class="btn btn-primary" onclick="javascript:logout.closeSession();">Cerrar Sesion</button>
-            </c:when>
-            <c:otherwise>
-                <button id="login" name="login" class="btn btn-primary" onclick="javascript:home.showLogin();">Login</button>
-            </c:otherwise>
-        </c:choose>
+        <div class="content-body">
 
-        <button id="registrarConcesionaria" name="registrarConcesionaria" class="btn btn-primary" onclick="javascript:home.showRegistrarConcesionaria();">Registrar Concesionaria</button>
+            <%@include file="../commons/header.jsp"%>
 
+            <div>
+                <button id="registrarConcesionaria" name="registrarConcesionaria" class="btn btn-outline-primary btn-lg btn-block" onclick="javascript:home.showRegistrarConcesionaria();">Registrar Concesionaria</button>
+            </div>
+
+        </div>
 
     </body>
 
-    <%@include file="../footer/footer.jsp"%>
+    <%@include file="../commons/footer.jsp"%>
 
 </html>
