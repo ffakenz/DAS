@@ -34,5 +34,12 @@
             <forward name="failure" path="/util/failure.jsp" />
             <forward name="warning" path="/util/warning.jsp" />
         </action>
+
+        <action type="ConsultarConcesionariaConfigParamAction" path="/ConsultarConcesionariaConfigParam.do">
+            <forward name="success" path="/concesionarias/showModalToConfig.jsp" />
+            <forward name="warning" path="/concesionarias/showModalErrorConfig.jsp" />
+            <forward name="failure" path="/concesionarias/showModalErrorConfig.jsp" />
+        </action>
+
     </action-mappings>
 </actions>

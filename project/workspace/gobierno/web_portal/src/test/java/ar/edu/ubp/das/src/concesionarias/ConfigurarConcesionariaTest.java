@@ -12,9 +12,9 @@ import util.TestDB;
 import java.sql.SQLException;
 import java.util.List;
 
-import static ar.edu.ubp.das.src.utils.Constants.REST;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static utils.MiddlewareConstants.REST;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ConfigurarConcesionariaTest {

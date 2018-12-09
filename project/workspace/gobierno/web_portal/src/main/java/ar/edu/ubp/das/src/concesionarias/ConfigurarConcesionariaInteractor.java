@@ -18,7 +18,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static ar.edu.ubp.das.src.utils.Constants.*;
+import static utils.MiddlewareConstants.*;
 
 public class ConfigurarConcesionariaInteractor implements Interactor<Boolean> {
 

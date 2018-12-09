@@ -16,9 +16,9 @@ import util.TestDB;
 import java.sql.SQLException;
 import java.util.List;
 
-import static ar.edu.ubp.das.src.utils.Constants.*;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
+import static utils.MiddlewareConstants.*;
 
 public class ConfigurarConcesionariaInteractorTest {
 

@@ -11,14 +11,13 @@ import ar.edu.ubp.das.src.core.ResponseForward;
 
 import java.sql.SQLException;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
-public class ConsultarInteractor implements Interactor<Optional<ConcesionariaForm>> {
+public class ConsultarConcesionariaInteractor implements Interactor<Optional<ConcesionariaForm>> {
 
     ConcesionariasManager concesionariasManager;
 
-    public ConsultarInteractor(DaoImpl concesionariasDao) {
+    public ConsultarConcesionariaInteractor(DaoImpl concesionariasDao) {
         this.concesionariasManager = new ConcesionariasManager(concesionariasDao);
     }
 

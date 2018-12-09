@@ -7,8 +7,7 @@ import ar.edu.ubp.das.mvc.config.ForwardConfig;
 import ar.edu.ubp.das.mvc.db.DaoFactory;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.concesionarias.AprobarInteractor;
-import ar.edu.ubp.das.src.concesionarias.ConsultarInteractor;
-
+import ar.edu.ubp.das.src.concesionarias.ConsultarConcesionariaInteractor;
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
 import ar.edu.ubp.das.src.core.InteractorResponse;
 
@@ -36,8 +35,8 @@ public class AprobarConcesionariaAction implements Action {
         request.setAttribute(RESULT_RQST_ATTRIBUTE, result.getResponse());
 
         if(result.getResult()) {
-            final ConsultarInteractor consultarInteractor = new ConsultarInteractor(msConcesionariaDao);
-            final InteractorResponse<Optional<ConcesionariaForm>> aprobada = consultarInteractor.execute(form);
+            final ConsultarConcesionariaInteractor consultarConcesionariaInteractor = new ConsultarConcesionariaInteractor(msConcesionariaDao);
+            final InteractorResponse<Optional<ConcesionariaForm>> aprobada = consultarConcesionariaInteractor.execute(form);
 
             request.setAttribute(APROBADA_RQST_ATTRIBUTE, aprobada.getResult().get());
         }

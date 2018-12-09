@@ -25,6 +25,7 @@ public final class Constants {
     public static final String APROBADAS_RQST_ATTRIBUTE = "aprobadas";
     public static final String DESAPROBADA_RQST_ATTRIBUTE = "desaprobada";
     public static final String CONFIG_SUCCEDD_RQST_ATTRIBUTE = "configurationSucceeded";
+    public static final String CONFIG_PARAMS_LIST_RQST_ATTRIBUTE = "configParams";
 
     //************ CSS {CLASSES && ID} IDENTIFIERS ****************************
     public static final String CONCESIONARIA_ROW = "concesionaria_row";
@@ -34,15 +35,5 @@ public final class Constants {
     public static final String BTN_DESAPROBAR = "desaprobar_btn";
     public static final String BTN_CONFIGURAR = "config_btn";
 
-    //************ SERVICES TECHNOS ***************************
-    public static final String REST = "REST";
-    public static final String AXIS = "AXIS";
-    public static final String CXF = "CXF";
-
-    //************ SERVICES TECHNOS PARAMS*********************
-    public static final String AXIS_PARAM_ENDP_URL = "endpointUrl";
-    public static final String AXIS_PARAM_TARGET = "targetNameSpace";
-    public static final String REST_PARAM_URL = "url";
-    public static final String CXF_PARAM_WSDL_URL = "wsdlUrl";
 
 }
