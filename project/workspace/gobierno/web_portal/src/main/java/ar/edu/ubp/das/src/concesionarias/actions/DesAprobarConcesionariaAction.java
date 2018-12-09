@@ -6,17 +6,21 @@ import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.config.ForwardConfig;
 import ar.edu.ubp.das.mvc.db.DaoFactory;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
-import ar.edu.ubp.das.src.concesionarias.RegistrarConcesionariaInteractor;
+import ar.edu.ubp.das.src.concesionarias.AprobarInteractor;
+import ar.edu.ubp.das.src.concesionarias.ConsultarInteractor;
+import ar.edu.ubp.das.src.concesionarias.DesAprobarInteractor;
+import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
 import ar.edu.ubp.das.src.core.InteractorResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
+import java.util.Optional;
 
-import static ar.edu.ubp.das.src.utils.Constants.CONCESIONARIAS_DAO_NAME;
-import static ar.edu.ubp.das.src.utils.Constants.CONCESIONARIAS_DAO_PACKAGE;
+import static ar.edu.ubp.das.src.utils.Constants.*;
 
-public class RegistrarConcesionariaAction implements Action {
+public class DesAprobarConcesionariaAction implements Action {
+
     @Override
     public ForwardConfig execute(final ActionMapping mapping,
                                  final DynaActionForm form,
@@ -25,12 +29,18 @@ public class RegistrarConcesionariaAction implements Action {
 
             throws SQLException, RuntimeException {
 
-
         final DaoImpl msConcesionariaDao = DaoFactory.getDao(CONCESIONARIAS_DAO_NAME, CONCESIONARIAS_DAO_PACKAGE);
 
-        final RegistrarConcesionariaInteractor action = new RegistrarConcesionariaInteractor(msConcesionariaDao);
-
+        final DesAprobarInteractor action = new DesAprobarInteractor(msConcesionariaDao);
         final InteractorResponse<Boolean> result = action.execute(form);
+        request.setAttribute(RESULT_RQST_ATTRIBUTE, result.getResponse());
+
+        if(result.getResult()) {
+            final ConsultarInteractor consultarInteractor = new ConsultarInteractor(msConcesionariaDao);
+            final InteractorResponse<Optional<ConcesionariaForm>> aprobada = consultarInteractor.execute(form);
+
+            request.setAttribute(DESAPROBADA_RQST_ATTRIBUTE, aprobada.getResult().get());
+        }
 
         return mapping.getForwardByName(result.getResponse().getForward());
     }

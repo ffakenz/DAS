@@ -25,9 +25,9 @@
                 <h2>Puedes volver a intentarlo o ponerte en contacto con nosotros a través de nuestra página de contacto</h2>
             </div>
 
-            <button name="goToRegistrar" class="btn btn-outline-primary btn-lg" onclick="javascript:home.showRegistrarConcesionaria();">Volver a intentarlo</button>
+            <button name="goToRegistrar" class="btn btn-outline-primary btn-lg" onclick="home.showRegistrarConcesionaria();">Volver a intentarlo</button>
 
-            <button name="goToHome" class="btn btn-outline-secondary" onclick="javascript:home.goToHome();">Volver al home</button>
+            <button name="goToHome" class="btn btn-outline-secondary" onclick="home.goToHome();">Volver al home</button>
         </div>
     </body>
 

@@ -9,6 +9,8 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<%@ taglib prefix="ct" tagdir="/WEB-INF/tags" %>
+
 <fmt:setBundle basename="properties.etiquetas" var="etq" scope="session"/>
 
 <!DOCTYPE html>
@@ -29,7 +31,8 @@
                 <h3> Session de login nº:  ${sessionScope.ssid}</h3>
             </div>
 
-            <div class="container">
+            <div id="aprobarConcesionariaDiv" class="container">
+                <ct:concesionariasTable></ct:concesionariasTable>
             </div>
 
             <br>
@@ -38,6 +41,6 @@
         </div>
     </body>
 
-    <%@include file="../commons/footer.jsp"%>
+    <%@include file="../commons/footer.jsp"%>q
 
 </html>

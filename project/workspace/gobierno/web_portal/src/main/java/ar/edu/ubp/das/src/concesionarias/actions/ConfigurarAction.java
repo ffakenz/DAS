@@ -13,20 +13,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 
+import static ar.edu.ubp.das.src.utils.Constants.*;
+
 public class ConfigurarAction implements Action {
 
     @Override
     public ForwardConfig execute(final ActionMapping mapping, final DynaActionForm form, final HttpServletRequest request, final HttpServletResponse response) throws SQLException, RuntimeException {
 
-        final DaoImpl msConfigurarConcesionariaDao = DaoFactory.getDao("ConfigurarConcesionaria", "concesionarias");
-        final DaoImpl msConcesionariasDao = DaoFactory.getDao("Concesionarias", "concesionarias");
+        final DaoImpl msConfigurarConcesionariaDao = DaoFactory.getDao(CONFI_CONCESIONARIAS_DAO_NAME, CONCESIONARIAS_DAO_PACKAGE);
+        final DaoImpl msConcesionariaDao = DaoFactory.getDao(CONCESIONARIAS_DAO_NAME, CONCESIONARIAS_DAO_PACKAGE);
 
-        final ConfigurarConcesionariaInteractor action = new ConfigurarConcesionariaInteractor(msConfigurarConcesionariaDao, msConcesionariasDao);
+        final ConfigurarConcesionariaInteractor action = new ConfigurarConcesionariaInteractor(msConfigurarConcesionariaDao, msConcesionariaDao);
         final InteractorResponse<Boolean> result = action.execute(form);
 
         final Boolean configurationSucceeded = result.getResult();
 
-        request.setAttribute("configurationSucceeded", configurationSucceeded);
+        request.setAttribute(CONFIG_SUCCEDD_RQST_ATTRIBUTE, configurationSucceeded);
 
         return mapping.getForwardByName(result.getResponse().getForward());
     }

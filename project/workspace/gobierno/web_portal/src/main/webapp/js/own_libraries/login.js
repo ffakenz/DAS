@@ -19,5 +19,3 @@ $(() => {
     $('#login_btn').on('click', login.validarUsuario);
 
 });
-
-

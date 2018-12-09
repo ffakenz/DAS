@@ -272,6 +272,7 @@ public class ConsumoJobDesNormalizationSpec {
     @Test
     public void test_15_ConsumerJob_OLD_Cuota_success() throws Exception {
         final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new EmptyClientFactoryMock());
+
         setUpCuota(existingCuota,
                 2L,
                 1L,
@@ -284,12 +285,16 @@ public class ConsumoJobDesNormalizationSpec {
         final CuotasForm form = new CuotasForm();
         form.setNroCuota(2L);
         form.setEstadoCuentaId(1L);
+
         final Optional<CuotasForm> cuotasForm = cuotasDao.selectCuota(form);
         assertTrue(cuotasForm.isPresent());
+
         // updateCuotaDb
         consumer.updateCuotaDb(existingCuota);
+
         // verify it exists in db and it changed
         final Optional<CuotasForm> cuotasForm2 = cuotasDao.selectCuota(form);
+
         assertTrue(cuotasForm2.isPresent());
         assertEquals(cuotasForm.get(), cuotasForm2.get()); // they are the same cuota
         // but got different monto and fecha pago

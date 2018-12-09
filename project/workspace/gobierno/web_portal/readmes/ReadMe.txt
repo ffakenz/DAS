@@ -62,3 +62,12 @@ WORK TIPS:
 
 - if you need refresh some page when you are doing changes on the FE and tomcat is running execute:
     * war:exploded
+
+- if a test fails due to `The index X is out of range.` is because
+    the procedure in the dao is missing a `?` as a parameter
+
+- if a test fails due to `The value is not set for the parameter number 5.` is because
+    the procedure in the dao has some extra `?` as a parameter
+
+- Do not comment code in js files which are minimized by Javascript.do because
+    we get the folowing error: `Uncaught SyntaxError: Unexpected end of input`
