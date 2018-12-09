@@ -1,31 +1,37 @@
 @CHARSET "ISO-8859-1";
 
 html, body, #map {
-    font-family: Verdana, Arial, sans-serif;
-    font-size: 10pt;
-    color: #000;
-    width: 100%;
-    height: 100%;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10pt;
+  color: #000;
+  width: 100%;
+  height: 100%;
 
 }
 
-
 body {
   margin: 0;
-  padding: 0;
+  position: relative;
   font-family: "Source Sans Pro", sans-serif;
   font-size: 20px;
+  padding-bottom: 6rem;
+  min-height: 100%;
+}
+
+header {
+  margin-bottom: 5rem;
+  background-color: darkgrey;
 }
 
 header nav {
   text-align: right;
-  background: rgba(0,0,0,0.6);
   color: white;
   font-size: 1em;
   position: fixed;
   width: 100%;
   z-index: 10;
 }
+
 header nav a {
   color: inherit;
   text-decoration: none;
@@ -33,53 +39,21 @@ header nav a {
   padding: 2em 1em .5em;
   -webkit-transition: all .3s ease-in;
 }
+
+.content-body {
+  height: 100%;
+}
+
 .small {
   padding: 3em 1em;
 }
+
 header nav a:hover {
   text-decoration: underline;
 }
 
 .active {
   background: rgba(255,255,255,0.3);
-}
-
-.portion, .ParallaxBackground{
-
-
-  background-image: url('/web_portal/img/concesionarias/central.png');
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 100% auto;
-}
-
-.portion h2 {
-  color: white;
-  font-weight: normal;
-  font-size: 3em;
-  margin: 0;
-  text-shadow: 0 0 10px black;
-}
-
-
-.ParallaxBackground.one {
-  background-image: url('/web_portal/img/concesionarias/central.png');
-  padding: 5em 0;
-}
-.ParallaxBackground.two {
-  background-image: url('/web_portal/img/concesionarias/banco_nacion_bigger-ConvertImage.jpg');
-  padding: 10em 0;
-}
-.ParallaxBackground.three {
-  background-image: url('/web_portal/img/concesionarias/central.png');
-  padding: 5em 0;
-}
-
-.info {
-  background: #FFFAF0;
-  color: #777;
-  padding: 3em 20%;
 }
 
 .button {
@@ -98,23 +72,32 @@ header nav a:hover {
   font-weight: bold;
   transition: all 0.3s ease-in-out;
 }
+
 .button a:hover {
   color: #FFFAF0;
   background: #777;
 }
+
 footer.info {
+  position: inherit;
   color: #FFFAF0;
   background: #777;
-  padding: 0 auto;
   text-align: center;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  margin: auto !important;
 }
 
 #toTop img {
   width: 50px;
 }
+
 #toTop img:hover {
   cursor: pointer;
 }
+
 nav img {
   z-index: 1000;
   height: 2.5em;
@@ -139,14 +122,3 @@ nav span {
 .down {
   top: -60px;
 }
-
-
-/*TODO
-Make the twitter icon represent either the spanish or the english logo using session
-*/
-
-
-/*FIX
-In mobile the parallax background images dont work that well,
- they leave white space around them and the first one dissapears
-*/

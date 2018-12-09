@@ -15,32 +15,40 @@
 
 <html>
 
-<head>
-    <%@include file="../header/header.jsp" %>
-</head>
+    <%@include file="../commons/head.jsp" %>
 
-<body>
-<H2>USUARIO CORRECTO ${sessionScope.ssid}!!!!</H2>
-<br>
+    <body>
 
-<c:choose>
-    <c:when test="${requestScope.userType == 'gobierno'}">
-        <label>Admin</label>
-    </c:when>
-    <c:when test="${requestScope.userType == 'consumer'}">
-        <label>Consumer</label>
-    </c:when>
-    <c:otherwise>
-        <label>Tipo de usuario invalido</label>
-    </c:otherwise>
-</c:choose>
+        <div class="content-body">
 
-<br>
+            <%@include file="../commons/header.jsp"%>
 
-<button id="login" name="login" class="btn btn-primary" onclick="javascript:home.goToHome();">Volver al home</button>
+            <div class="page-header text-center">
+                <h2>USUARIO CORRECTO !!!!</h2>
+                <br>
+                <h3> Session de login nº:  ${sessionScope.ssid}</h3>
+            </div>
 
-</body>
+            <div class="container">
+                <c:choose>
+                    <c:when test="${requestScope.userType == 'gobierno'}">
+                        <label>Admin</label>
+                    </c:when>
+                    <c:when test="${requestScope.userType == 'consumer'}">
+                        <label>Consumer</label>
+                    </c:when>
+                    <c:otherwise>
+                        <label>Tipo de usuario invalido</label>
+                    </c:otherwise>
+                </c:choose>
+            </div>
 
-<%@include file="../footer/scripts_import.jsp"%>
+            <br>
+
+            <button id="login" name="login" class="btn btn-outline-primary" onclick="javascript:home.goToHome();">Volver al home</button>
+        </div>
+    </body>
+
+    <%@include file="../commons/footer.jsp"%>
 
 </html>

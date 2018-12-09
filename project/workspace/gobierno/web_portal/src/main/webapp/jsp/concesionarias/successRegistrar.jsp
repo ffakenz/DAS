@@ -11,18 +11,18 @@
 
 <html>
 
-    <head>
+    <%@include file="../commons/head.jsp" %>
 
-        <%@include file="../header/header.jsp" %>
-
-    </head>
 
     <body>
-        <H2>FELICITACIONES TE HAS REGISTRADO .. AHORA DEBES ESPERAR A SER APROBADO !!!!</H2>
+        <div class="page-header text-center">
+            <H2>FELICITACIONES TE HAS REGISTRADO .. AHORA DEBES ESPERAR A SER APROBADO !!!!</H2>
+        </div>
+
         <button id="login" name="login" class="btn btn-primary" onclick="javascript:home.goToHome();">Volver al home</button>
     </body>
 
-    <%@include file="../footer/footer.jsp"%>
+    <%@include file="../commons/footer.jsp"%>
 
 
 </html>

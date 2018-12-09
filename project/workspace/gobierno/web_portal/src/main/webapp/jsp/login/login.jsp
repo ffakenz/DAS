@@ -10,31 +10,32 @@
 
 <html>
 
-<%@include file="../header/header.jsp" %>
+    <%@include file="../commons/head.jsp" %>
 
-<body>
+    <body>
 
-<div id="login-form">
+        <div class="content-body">
 
-    <h1><fmt:message key="login_cabecera" bundle="${etq}" /></h1>
+            <div id="login-form">
 
-    <%@include file="formLogin.jsp"%>
+                <h1><fmt:message key="login_cabecera" bundle="${etq}" /></h1>
 
-    <button id="login" name="login" class="btn btn-primary" onclick="javascript:home.goToHome();">Volver al home</button>
+                <%@include file="formLogin.jsp"%>
 
-</div>
+                <button id="login" name="login" class="btn btn-outline-secondary" onclick="javascript:home.goToHome();">Volver al home</button>
 
-<div id="resultado">
+            </div>
 
-    <div id="mensaje"></div>
+            <div id="resultado">
 
-    <div id="error"></div>
+                <div id="mensaje"></div>
 
-</div>
+                <div id="error"></div>
 
+            </div>
+        </div>
+    </body>
 
-</body>
-
-<%@include file="../footer/footer.jsp"%>
+    <%@include file="../commons/footer.jsp"%>
 
 </html>

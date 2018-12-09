@@ -1,8 +1,11 @@
 <!--Footer-->
 
 <footer class="page-footer primary-color-dark center-on-small-only info">
-  <%@include file="../footer/scripts_import.jsp"%>
+
+  <%@include file="scripts_import.jsp"%>
+
   <!--Footer Links-->
+
   <div class="container">
     <div class="row">
 

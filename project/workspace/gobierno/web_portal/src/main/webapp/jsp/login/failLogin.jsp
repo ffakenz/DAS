@@ -11,17 +11,21 @@
 
 <html>
 
-    <head>
-        <%@include file="../header/header.jsp" %>
-    </head>
+    <%@include file="../commons/head.jsp" %>
 
     <body>
-    <H2>USUARIO INCORRECTO ... si quiere puede volver a probar</H2>
-    <%@include file="formLogin.jsp"%>
+        <div class="content-body">
 
-    <button name="login" class="btn btn-primary" onclick="javascript:home.goToHome();">Volver al home</button>
+            <div class="page-header text-center">
+                <h2>USUARIO INCORRECTO ... si quiere puede volver a probar</h2>
+            </div>
+
+            <%@include file="formLogin.jsp"%>
+
+            <button name="login" class="btn btn-primary" onclick="javascript:home.goToHome();">Volver al home</button>
+        </div>
     </body>
 
-    <%@include file="../footer/scripts_import.jsp"%>
+    <%@include file="../commons/footer.jsp"%>
 
 </html>

@@ -36,5 +36,5 @@
                                     <div id="error"/>
                                 </div>
                             </body>
-                            <%@include file="../footer/footer.jsp" %>
+                            <%@include file="../templates/footer.jsp" %>
                             </html>
