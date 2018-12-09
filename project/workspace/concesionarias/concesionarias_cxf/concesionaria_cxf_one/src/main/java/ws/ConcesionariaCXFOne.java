@@ -1,6 +1,8 @@
 package ws;
 
+import beans.CuotaBean;
 import beans.NotificationUpdate;
+import beans.PlanBean;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import contract.ConcesionariaServiceContract;
@@ -10,8 +12,8 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @WebService(targetNamespace = "http://ws.das.edu.ubp.ar/", portName = "ConcesionariaCXFOnePort", serviceName = "ConcesionariaCXFOneService")
 public class ConcesionariaCXFOne extends MSSQLConsecionaria implements ConcesionariaServiceContract {
@@ -22,30 +24,44 @@ public class ConcesionariaCXFOne extends MSSQLConsecionaria implements Concesion
 
     @WebMethod(operationName = "consultarPlanes", action = "urn:ConsultarPlanes")
     @Override
-    public String consultarPlanes(@WebParam(name = "offset") final String offset) {
-        System.out.println("Cxf consultar planes offset -> " + offset);
-        // TODO => Change this using some encoding over offset
+    public String consultarPlanes(@WebParam(name = "identificador") final String identificador, @WebParam(name = "offset") final String offset) {
+        System.out.println("Cxf consultar planes offset -> " + offset + " - identificador -> " + identificador);
         final Timestamp newOffset = Timestamp.valueOf(offset.replace('T', ' '));
-        // System.out.println(newOffset.toString());
         final List<NotificationUpdate> planes =
-                abstractFactory.withConnection(notificationUpdateDAO.consultarPlanes(newOffset));
+                abstractFactory.withConnection(notificationUpdateDAO.consultarPlanes(identificador, newOffset));
         return gson.toJson(planes);
     }
 
     @WebMethod(operationName = "consultarPlan", action = "urn:ConsultarPlan")
     @Override
-    public String consultarPlan(@WebParam(name = "planId") final Long planId) {
-        System.out.println("Cxf consultar plan id -> " + planId);
-        final Optional<NotificationUpdate> notificationUpdate =
-                abstractFactory.withConnection(notificationUpdateDAO.consultarPlan(planId));
+    public String consultarPlan(@WebParam(name = "identificador") final String identificador, @WebParam(name = "planId") final Long planId) {
+        System.out.println("Cxf consultar plan id -> " + planId + " - identificador -> " + identificador);
+        final List<NotificationUpdate> notificationUpdates =
+                abstractFactory.withConnection(notificationUpdateDAO.consultarPlan(identificador, planId));
 
-        return gson.toJson(notificationUpdate.orElseGet(NotificationUpdate::new));
+        final List<CuotaBean> cuotas = new ArrayList<>();
+        for(final NotificationUpdate n : notificationUpdates) {
+            cuotas.add(CuotaBean.fromNotificationUpdate(n));
+        }
+        if(notificationUpdates.isEmpty())
+            return gson.toJson(new PlanBean());
+
+        final NotificationUpdate last = notificationUpdates.get(notificationUpdates.size() - 1);
+        final PlanBean plan = PlanBean.fromNotificationUpdate(last, cuotas);
+        return gson.toJson(plan);
     }
 
     @WebMethod(operationName = "cancelarPlan", action = "urn:CancelarPlan")
     @Override
-    public void cancelarPlan(@WebParam(name = "planId") final Long planId) {
-        System.out.println("Cxf cancelar plan id -> " + planId);
-        abstractFactory.withConnection(notificationUpdateDAO.cancelarPlan(planId));
+    public void cancelarPlan(@WebParam(name = "identificador") final String identificador, @WebParam(name = "planId") final Long planId) {
+        System.out.println("Cxf cancelar plan id -> " + planId + " - identificador -> " + identificador);
+        abstractFactory.withConnection(notificationUpdateDAO.cancelarPlan(identificador, planId));
+    }
+
+    @WebMethod(operationName = "health", action = "urn:Health")
+    @Override
+    public String health(@WebParam(name = "identificador") final String identificador) {
+        System.out.println("Cxf health identificador -> " + identificador);
+        return "OK";
     }
 }

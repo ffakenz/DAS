@@ -4,74 +4,98 @@ import annotations.Column;
 import annotations.Entity;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 @Entity
-public class NotificationUpdate {
+public class NotificationUpdate implements Serializable {
     // member variables
 
     @Column(name = "plan_id")
     @SerializedName("plan_id")
-    Long planId;
+    private Long planId;
     @Column(name = "plan_estado")
     @SerializedName("plan_estado")
-    String planEstado;
+    private String planEstado;
     @Column(name = "plan_fecha_alta")
     @SerializedName("plan_fecha_alta")
-    Timestamp planFechaAlta;
+    private Timestamp planFechaAlta;
+    @Column(name = "plan_fecha_ultima_actualizacion")
+    @SerializedName("plan_fecha_ultima_actualizacion")
+    private Timestamp planFechaUltimaActualizacion;
+    @Column(name ="plan_tipo_de_plan")
+    @SerializedName(("plan_tipo_de_plan"))
+    private String planTipoDePlan;
     @Column(name = "cuota_nro_cuota")
     @SerializedName("cuota_nro_cuota")
-    Long cuotaNroCuota;
+    private Long cuotaNroCuota;
     @Column(name = "cuota_fecha_vencimiento")
     @SerializedName("cuota_fecha_vencimiento")
-    Timestamp cuotaFechaVencimiento;
+    private Timestamp cuotaFechaVencimiento;
     @Column(name = "cuota_monto")
     @SerializedName("cuota_monto")
-    Integer cuotaMonto;
+    private Integer cuotaMonto;
     @Column(name = "cuota_fecha_pago")
     @SerializedName("cuota_fecha_pago")
-    Timestamp cuotaFechaPago;
+    private Timestamp cuotaFechaPago;
     @Column(name = "cuota_fecha_alta")
     @SerializedName("cuota_fecha_alta")
-    Timestamp cuotaFechaAlta;
+    private Timestamp cuotaFechaAlta;
     @Column(name = "cliente_documento")
     @SerializedName("cliente_documento")
-    Long clienteDocumento;
+    private Long clienteDocumento;
     @Column(name = "cliente_nombre")
     @SerializedName("cliente_nombre")
-    String clienteNombre;
+    private String clienteNombre;
     @Column(name = "cliente_apellido")
     @SerializedName("cliente_apellido")
-    String clienteApellido;
+    private String clienteApellido;
     @Column(name = "cliente_nro_telefono")
     @SerializedName("cliente_nro_telefono")
-    String clienteNroTelefono;
+    private String clienteNroTelefono;
     @Column(name = "cliente_email")
     @SerializedName("cliente_email")
-    String clienteEmail;
+    private String clienteEmail;
     @Column(name = "vehiculo_id")
     @SerializedName("vehiculo_id")
-    Long vehiculoId;
+    private Long vehiculoId;
     @Column(name = "vehiculo_tipo")
     @SerializedName("vehiculo_tipo")
-    String vehiculoTipo;
+    private String vehiculoTipo;
     @Column(name = "vehiculo_nombre")
     @SerializedName("vehiculo_nombre")
-    String vehiculoNombre;
+    private String vehiculoNombre;
     @Column(name = "vehiculo_precio")
     @SerializedName("vehiculo_precio")
-    Long vehiculoPrecio;
+    private Long vehiculoPrecio;
     @Column(name = "vehiculo_marca")
     @SerializedName("vehiculo_marca")
-    String vehiculoMarca;
+    private String vehiculoMarca;
     @Column(name = "vehiculo_modelo")
     @SerializedName("vehiculo_modelo")
-    String vehiculoModelo;
+    private String vehiculoModelo;
     @Column(name = "vehiculo_color")
     @SerializedName("vehiculo_color")
-    String vehiculoColor;
+    private String vehiculoColor;
 
     public NotificationUpdate() {
+    }
+
+    public Timestamp getPlanFechaUltimaActualizacion() {
+        return planFechaUltimaActualizacion;
+    }
+
+    public void setPlanFechaUltimaActualizacion(final Timestamp planFechaUltimaActualizacion) {
+        this.planFechaUltimaActualizacion = planFechaUltimaActualizacion;
+    }
+
+    public String getPlanTipoDePlan() {
+        return planTipoDePlan;
+    }
+
+    public void setPlanTipoDePlan(final String planTipoDePlan) {
+        this.planTipoDePlan = planTipoDePlan;
     }
 
     public Long getPlanId() {
@@ -237,5 +261,33 @@ public class NotificationUpdate {
     @Override
     public String toString() {
         return JsonUtils.toJsonString(this);
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        final NotificationUpdate that = (NotificationUpdate) o;
+        return Objects.equals(planId, that.planId) &&
+                Objects.equals(planEstado, that.planEstado) &&
+                Objects.equals(planFechaAlta, that.planFechaAlta) &&
+                Objects.equals(planTipoDePlan, that.planTipoDePlan) &&
+                Objects.equals(cuotaNroCuota, that.cuotaNroCuota) &&
+                Objects.equals(cuotaFechaVencimiento, that.cuotaFechaVencimiento) &&
+                Objects.equals(cuotaMonto, that.cuotaMonto) &&
+                Objects.equals(cuotaFechaPago, that.cuotaFechaPago) &&
+                Objects.equals(cuotaFechaAlta, that.cuotaFechaAlta) &&
+                Objects.equals(clienteDocumento, that.clienteDocumento) &&
+                Objects.equals(clienteNombre, that.clienteNombre) &&
+                Objects.equals(clienteApellido, that.clienteApellido) &&
+                Objects.equals(clienteNroTelefono, that.clienteNroTelefono) &&
+                Objects.equals(clienteEmail, that.clienteEmail) &&
+                Objects.equals(vehiculoId, that.vehiculoId) &&
+                Objects.equals(vehiculoTipo, that.vehiculoTipo) &&
+                Objects.equals(vehiculoNombre, that.vehiculoNombre) &&
+                Objects.equals(vehiculoPrecio, that.vehiculoPrecio) &&
+                Objects.equals(vehiculoMarca, that.vehiculoMarca) &&
+                Objects.equals(vehiculoModelo, that.vehiculoModelo) &&
+                Objects.equals(vehiculoColor, that.vehiculoColor);
     }
 }

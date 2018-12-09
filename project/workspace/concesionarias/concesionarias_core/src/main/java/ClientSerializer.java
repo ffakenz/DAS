@@ -4,7 +4,7 @@ import dbaccess.DAOAbstractFactory;
 import dbaccess.DAOFactory;
 import dbaccess.config.DatasourceEnum;
 
-import java.util.Optional;
+import java.util.List;
 
 public class ClientSerializer {
     public static void main(final String[] args) {
@@ -14,7 +14,8 @@ public class ClientSerializer {
         final NotificationUpdateDAO notificationUpdate = mssqlFactory.getNotificationUpdateDAO();
 
         // use api 2
-        final Optional<NotificationUpdate> plan = mssqlFactory.withConnection(notificationUpdate.consultarPlan(1L)::apply);
+        final List<NotificationUpdate> planes =
+                mssqlFactory.withConnection(notificationUpdate.consultarPlan("GOBIERNO-INCENTIVO-2018",1L)::apply);
 
         // serializer Example
         // String serializedPlan = new Gson().toJson(plan);

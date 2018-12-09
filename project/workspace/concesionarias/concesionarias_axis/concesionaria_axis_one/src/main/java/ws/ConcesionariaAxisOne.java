@@ -1,14 +1,16 @@
 package ws;
 
+import beans.CuotaBean;
 import beans.NotificationUpdate;
+import beans.PlanBean;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import contract.ConcesionariaServiceContract;
 import contract.implementors.MSSQLConsecionaria;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class ConcesionariaAxisOne extends MSSQLConsecionaria implements ConcesionariaServiceContract {
 
@@ -17,27 +19,41 @@ public class ConcesionariaAxisOne extends MSSQLConsecionaria implements Concesio
             .create();
 
     @Override
-    public String consultarPlanes(final String offset) {
-        System.out.println("Axis consultar planes offset -> " + offset);
-        // TODO => Change this using some encoding over offset
+    public String consultarPlanes(final String identificador, final String offset) {
+        System.out.println("Axis consultar planes offset -> " + offset + " - identificador -> " + identificador);
         final Timestamp newOffset = Timestamp.valueOf(offset.replace('T', ' '));
-        // System.out.println(newOffset.toString());
         final List<NotificationUpdate> planes =
-                abstractFactory.withConnection(notificationUpdateDAO.consultarPlanes(newOffset));
+                abstractFactory.withConnection(notificationUpdateDAO.consultarPlanes(identificador, newOffset));
         return gson.toJson(planes);
     }
 
     @Override
-    public String consultarPlan(final Long planId) {
-        System.out.println("Axis consultar plan id -> " + planId);
-        final Optional<NotificationUpdate> notificationUpdate =
-                abstractFactory.withConnection(notificationUpdateDAO.consultarPlan(planId));
-        return gson.toJson(notificationUpdate.orElse(new NotificationUpdate()));
+    public String consultarPlan(final String identificador, final Long planId) {
+        System.out.println("Axis consultar plan id -> " + planId + " - identificador -> " + identificador);
+        final List<NotificationUpdate> notificationUpdates =
+                abstractFactory.withConnection(notificationUpdateDAO.consultarPlan(identificador, planId));
+
+        final List<CuotaBean> cuotas = new ArrayList<>();
+        for(final NotificationUpdate n : notificationUpdates) {
+            cuotas.add(CuotaBean.fromNotificationUpdate(n));
+        }
+        if(notificationUpdates.isEmpty())
+            return gson.toJson(new PlanBean());
+
+        final NotificationUpdate last = notificationUpdates.get(notificationUpdates.size() - 1);
+        final PlanBean plan = PlanBean.fromNotificationUpdate(last, cuotas);
+        return gson.toJson(plan);
     }
 
     @Override
-    public void cancelarPlan(final Long planId) {
-        System.out.println("Axis cancelar plan id -> " + planId);
-        abstractFactory.withConnection(notificationUpdateDAO.cancelarPlan(planId));
+    public void cancelarPlan(final String identificador, final Long planId) {
+        System.out.println("Axis cancelar plan id -> " + planId + " - identificador -> " + identificador);
+        abstractFactory.withConnection(notificationUpdateDAO.cancelarPlan(identificador, planId));
+    }
+
+    @Override
+    public String health(final String identificador) {
+        System.out.println("Axis health identificador -> " + identificador);
+        return "OK";
     }
 }
