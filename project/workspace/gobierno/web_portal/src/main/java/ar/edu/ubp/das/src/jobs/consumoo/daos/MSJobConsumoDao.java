@@ -37,12 +37,12 @@ public class MSJobConsumoDao extends DaoImpl<JobConsumoForm> {
         return false;
     }
 
-    public Long createJob() throws SQLException {
-        this.executeSimpleProcedure("dbo.job_consumo");
+    public JobConsumoForm createJob() throws SQLException {
+        this.executeSimpleProcedure("dbo.log_job_consumo");
         return this.getLastJob();
     }
 
-    public Long getLastJob() throws SQLException {
-        return this.executeQueryProcedure("dbo.get_last_job").stream().findFirst().map(j -> j.getId()).get();
+    public JobConsumoForm getLastJob() throws SQLException {
+        return this.executeQueryProcedure("dbo.get_last_job").stream().findFirst().get();
     }
 }

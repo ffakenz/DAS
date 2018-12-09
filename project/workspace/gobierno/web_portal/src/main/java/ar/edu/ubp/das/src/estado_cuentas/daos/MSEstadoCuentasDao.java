@@ -59,4 +59,13 @@ public class MSEstadoCuentasDao extends DaoImpl<EstadoCuentasForm> {
                 .stream()
                 .findFirst();
     }
+
+
+    public void upsert(final EstadoCuentasForm form) throws SQLException {
+        if (!this.valid(form)) {
+            this.insert(form);
+        } else {
+            this.update(form);
+        }
+    }
 }

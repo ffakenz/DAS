@@ -1,7 +1,8 @@
 package ar.edu.ubp.das.src.jobs.consumoo.forms;
 
 public enum EstadoConsumo {
-    SUCCESS("success"), FAILURE("failure");
+    SUCCESS("success"),
+    FAILURE("failure");
 
     private String tipo;
 

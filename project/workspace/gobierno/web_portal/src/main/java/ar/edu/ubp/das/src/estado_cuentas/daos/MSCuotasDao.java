@@ -60,4 +60,12 @@ public class MSCuotasDao extends DaoImpl<CuotasForm> {
         return this.executeQueryProcedure("dbo.get_cuotas_by_estado_cuenta_id(?)",
                 form, "estadoCuentaId");
     }
+
+    public void upsert(final CuotasForm form) throws SQLException {
+        if (!this.valid(form)) {
+            this.insert(form);
+        } else {
+            this.update(form);
+        }
+    }
 }

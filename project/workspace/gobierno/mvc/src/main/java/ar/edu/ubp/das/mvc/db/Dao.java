@@ -13,18 +13,9 @@ public interface Dao<T> {
 
     List<T> select(T form) throws SQLException;
 
+    boolean valid(T form) throws SQLException;
+
     default List<T> select() throws SQLException {
         return select(null);
     }
-
-    boolean valid(T form) throws SQLException;
-
-    default void upsert(final T form) throws SQLException {
-        if (!this.valid(form)) {
-            this.insert(form);
-        } else {
-            this.update(form);
-        }
-    }
-
 }

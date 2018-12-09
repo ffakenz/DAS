@@ -17,24 +17,26 @@ import ar.edu.ubp.das.src.estado_cuentas.forms.EstadoCuentasForm;
 import ar.edu.ubp.das.src.estado_cuentas.model.CuotasManager;
 import ar.edu.ubp.das.src.estado_cuentas.model.EstadoCuentasManager;
 import ar.edu.ubp.das.src.jobs.ClientFactoryAdapter;
-import ar.edu.ubp.das.src.jobs.consumoo.forms.ConsumoForm;
-import ar.edu.ubp.das.src.jobs.consumoo.forms.ConsumoResultForm;
-import ar.edu.ubp.das.src.jobs.consumoo.forms.EstadoConsumo;
-import ar.edu.ubp.das.src.jobs.consumoo.forms.TipoConsumoResult;
+import ar.edu.ubp.das.src.jobs.consumoo.forms.*;
+import ar.edu.ubp.das.src.utils.DateUtils;
 import beans.NotificationUpdate;
 import clients.ConcesionariaServiceContract;
 import clients.IClientFactory;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import utils.JsonUtils;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 public class ConsumoJob implements Job {
+
+    private static final Logger log = LoggerFactory.getLogger(ConsumoJob.class);
 
     // from web_portal
     private ConcesionariasManager concesionariasManager;
@@ -75,160 +77,197 @@ public class ConsumoJob implements Job {
 
     @Override
     public void execute(final JobExecutionContext jobExecutionContext) {
-        System.out.println("STARTING_CONSUMER");
+
+        log.info("STARTING_CONSUMER");
+
         try {
             // insert new job_consumo
-            final Long jobId = this.consumoJobManager.getMsJobConsumoDao().createJob();
+            final JobConsumoForm jobForm = this.consumoJobManager.getMsJobConsumoDao().createJob();
+            final Long jobId = jobForm.getId();
             // tomamos todas las concesionarias aprobadas
             final List<ConcesionariaForm> concesionarias = concesionariasManager.getDao().selectAprobadas();
 
             // por cada concesionaria aprobada
             for (final ConcesionariaForm c : concesionarias) {
+
                 final Long cId = c.getId();
 
                 // obtenemos el proximo offset a usar segun su estado
                 final Optional<String> lastEstadoOpt = this.consumoJobManager.getMsConsumoDao().getLastEstadoForConcesionaria(cId);
-                final Timestamp offset;
-                if (!lastEstadoOpt.isPresent()) {
-                    // is a new consumo => offset should be the last date possible
-                    offset = Timestamp.valueOf("2018-01-08T20:58:00"); // Beggining of time
-                } else {
-                    final String lastEstado = lastEstadoOpt.get();
-                    if (lastEstado.equals(EstadoConsumo.FAILURE.name())) {
-                        offset = this.consumoJobManager.getMsConsumoDao().getLastOffsetForConcesionaria(cId).get(); // this should not fail as estado is present
-                    } else {
-                        offset = Timestamp.from(Instant.now());
-                    }
-                }
+                final Timestamp offset = getOffset(lastEstadoOpt, cId, jobForm.getFecha());
 
                 // obtenemos sus configs
                 final List<ConfigurarConcesionariaForm> configs = configurarConcesionariaManager.getDao().selectParamsByConcesionariaId(cId);
+
                 // usando las configs obtenemos un cliente
                 final Optional<ConcesionariaServiceContract> cli = clientFactory.getClientFor(configs);
+
                 if (!cli.isPresent()) {
-                    // loggeamos Consumo Failure (RqstId == NULL)
-                    final ConsumoForm consumoForm = new ConsumoForm();
-                    consumoForm.setIdConcesionaria(cId);
-                    consumoForm.setIdJobConsumo(jobId);
-                    consumoForm.setEstado(EstadoConsumo.FAILURE.name());
-                    consumoForm.setOffset(offset);
-                    consumoForm.setDescription("getClientFor(configs) failed for offset " + offset + " and configs: " + configs);
-                    this.consumoJobManager.getMsConsumoDao().insert(consumoForm);
-                } else {
-                    // generamos un random rqst-id
-                    final String rqstId = UUID.randomUUID().toString();
-                    try {
-                        // usamos el cliente p/ consultar planes
-                        final ConcesionariaServiceContract client = cli.get();
-                        final List<NotificationUpdate> notificationUpdates = client.consultarPlanes(offset.toString());
-                        // loggeamos Consumo Success
-                        final ConsumoForm consumoForm = new ConsumoForm();
-                        consumoForm.setIdConcesionaria(cId);
-                        consumoForm.setIdJobConsumo(jobId);
-                        consumoForm.setEstado(EstadoConsumo.SUCCESS.name());
-                        consumoForm.setOffset(offset);
-                        consumoForm.setIdRequestResp(rqstId);
-                        consumoForm.setDescription("consultarPlanes was success for offset: " + offset);
-                        this.consumoJobManager.getMsConsumoDao().insert(consumoForm);
-                        // por cada notificacion
-                        for (final NotificationUpdate update : notificationUpdates) {
-                            try {
-                                // actualizamos la db
-                                updateDb(cId, update);
-                                // loggeamos Consumo Result Success
-                                final ConsumoResultForm consumoResultForm = new ConsumoResultForm();
-                                consumoResultForm.setIdConcesionaria(cId);
-                                consumoResultForm.setIdConsumo(jobId);
-                                consumoResultForm.setResult(TipoConsumoResult.SUCCESS.name());
-                                consumoResultForm.setDescription("updateDb success for update: " + update);
-                                this.consumoJobManager.getMsConsumoResultDao().insert(consumoResultForm);
-                            } catch (final SQLException ex) {
-                                ex.printStackTrace();
-                                // loggeamos Consumo Result Failure
-                                final ConsumoResultForm consumoResultForm = new ConsumoResultForm();
-                                consumoResultForm.setIdConcesionaria(cId);
-                                consumoResultForm.setIdConsumo(jobId);
-                                consumoResultForm.setResult(TipoConsumoResult.FAILURE.name());
-                                consumoResultForm.setDescription("updateDb failed for update: " + update);
-                                this.consumoJobManager.getMsConsumoResultDao().insert(consumoResultForm);
-                            }
+                    log.error("[error: Fail when trying to create the client][config_tecno:{}]", JsonUtils.toJsonString(configs));
+                    final String description = "getClientFor(configs) failed for offset " + offset + " and configs: " + configs;
+                    logConsumoDb(cId, jobId, EstadoConsumo.FAILURE, offset, null, description);
+                    continue;
+                }
+
+                // generamos un random rqst-id
+                final String rqstId = UUID.randomUUID().toString();
+                try {
+                    // usamos el cliente p/ consultar planes
+                    final ConcesionariaServiceContract client = cli.get();
+                    final List<NotificationUpdate> notificationUpdates = client.consultarPlanes(offset.toString());
+                    log.info("Consume is successfull for concesionaria {} [notification_update:{}]", cId, JsonUtils.toJsonString(notificationUpdates));
+                    final String description = "consultarPlanes was success for offset: " + offset;
+                    logConsumoDb(cId, jobId, EstadoConsumo.SUCCESS, offset, rqstId, description);
+
+                    for (final NotificationUpdate update : notificationUpdates) {
+                        try {
+                            updateDb(cId, update);
+                            log.info("Consume Result is successfull for concesionaria {} [notification_update:{}]", cId, JsonUtils.toJsonString(update));
+                            final String desc = "updateDb success for update: " + update;
+                            logConsumoResultDb(cId, jobId, TipoConsumoResult.SUCCESS, desc);
+
+                        } catch (final SQLException ex) {
+                            log.error("Problems with update db [exception:{}]", ex.getMessage());
+                            final String desc = "updateDb failed for update: " + update;
+                            logConsumoResultDb(cId, jobId, TipoConsumoResult.FAILURE, desc);
                         }
-                    } catch (final Exception ex) {
-                        ex.printStackTrace();
-                        // loggeamos Consumo Failure
-                        final ConsumoForm consumoForm = new ConsumoForm();
-                        consumoForm.setIdConcesionaria(cId);
-                        consumoForm.setIdJobConsumo(jobId);
-                        consumoForm.setEstado(EstadoConsumo.FAILURE.name());
-                        consumoForm.setOffset(offset);
-                        consumoForm.setIdRequestResp(rqstId);
-                        consumoForm.setDescription("consultarPlanes failed for offset: " + offset);
-                        this.consumoJobManager.getMsConsumoDao().insert(consumoForm);
                     }
+
+                } catch (final Exception ex) {
+                    log.error("Problems with consultarPlanes [exception:{}]", ex.getMessage());
+                    final String description = "consultarPlanes failed for offset: " + offset;
+                    logConsumoDb(cId, jobId, EstadoConsumo.FAILURE, offset, rqstId, description);
                 }
             }
         } catch (final SQLException ex) {
-            ex.printStackTrace();
-            System.out.println("GOBIERNO_DB_FAILED");
+            log.error("GOBIERNO_DB_FAILED [exception:{}]", ex.getMessage());
         }
-        System.out.println("FINISHING_CONSUMER");
+
+        log.info("FINISHING_CONSUMER");
     }
 
-    // TODO move all this methods to a differnt object named DesNormalizer
+    /**
+     * obtenemos el offset segun el estado del ultimo consumo para esa concesionaria
+     *
+     * @param lastEstadoOpt
+     * @param concesionairaId
+     * @param fecha
+     * @return
+     * @throws SQLException
+     */
+    private Timestamp getOffset(final Optional<String> lastEstadoOpt, final Long concesionairaId, final Timestamp fecha) throws SQLException {
+        if (lastEstadoOpt.isPresent() && lastEstadoOpt.get().equals(EstadoConsumo.FAILURE.name())) {
+            return this.consumoJobManager.getMsConsumoDao().getLastOffsetForConcesionaria(concesionairaId).get();
+        }
+        return DateUtils.getTimestampFrom(fecha, -15);
+    }
+
+    /**
+     * logueamos en la db el estado del consumo
+     *
+     * @param idConcesionaria
+     * @param jobId
+     * @param estadoConsumo
+     * @param offset
+     * @param rqstId
+     * @param description
+     * @throws SQLException
+     */
+    private void logConsumoDb(final Long idConcesionaria, final Long jobId, final EstadoConsumo estadoConsumo, final Timestamp offset, final String rqstId, final String description)
+            throws SQLException {
+
+        final ConsumoForm consumoForm = new ConsumoForm();
+        consumoForm.setIdConcesionaria(idConcesionaria);
+        consumoForm.setIdJobConsumo(jobId);
+        consumoForm.setEstado(estadoConsumo.name());
+        consumoForm.setOffset(offset);
+        consumoForm.setIdRequestResp(rqstId);
+        consumoForm.setDescription(description);
+
+        this.consumoJobManager.getMsConsumoDao().insert(consumoForm);
+    }
+
+    /**
+     * logueamos en la db el estado del consumoResult
+     *
+     * @param idConcesionaria
+     * @param jobId
+     * @param tipoConsumoResult
+     * @param description
+     * @throws SQLException
+     */
+    private void logConsumoResultDb(final Long idConcesionaria, final Long jobId, final TipoConsumoResult tipoConsumoResult, final String description)
+            throws SQLException {
+
+        final ConsumoResultForm consumoResultForm = new ConsumoResultForm();
+        consumoResultForm.setIdConcesionaria(idConcesionaria);
+        consumoResultForm.setIdConsumo(jobId);
+        consumoResultForm.setResult(tipoConsumoResult.name());
+        consumoResultForm.setDescription(description);
+        this.consumoJobManager.getMsConsumoResultDao().insert(consumoResultForm);
+    }
+
+
+    /**
+     * @param concesionariaId
+     * @param update
+     * @throws SQLException
+     */
     private void updateDb(final Long concesionariaId, final NotificationUpdate update) throws SQLException {
         updateConsumerDb(update, concesionariaId);
         updateEstadoCuentaDb(update, concesionariaId);
         updateCuotaDb(update);
     }
 
+    /**
+     * @param update
+     * @param concesionariaId
+     * @throws SQLException
+     */
     public void updateConsumerDb(final NotificationUpdate update, final Long concesionariaId) throws SQLException {
+
         final ConsumerForm consumer = new ConsumerForm();
-        final Long clienteDocumento = update.getClienteDocumento();
-        consumer.setDocumento(clienteDocumento);
+        consumer.setDocumento(update.getClienteDocumento());
         if (!consumerManager.getDao().valid(consumer)) {
-            final String clienteNombre = update.getClienteNombre();
-            final String clienteApellido = update.getClienteApellido();
-            final String clienteNroTelefono = update.getClienteNroTelefono();
-            final String clienteEmail = update.getClienteEmail();
-            consumer.setNombre(clienteNombre);
-            consumer.setApellido(clienteApellido);
-            consumer.setNroTelefono(clienteNroTelefono);
-            consumer.setEmail(clienteEmail);
+            consumer.setNombre(update.getClienteNombre());
+            consumer.setApellido(update.getClienteApellido());
+            consumer.setNroTelefono(update.getClienteNroTelefono());
+            consumer.setEmail(update.getClienteEmail());
             consumer.setConcesionaria(concesionariaId);
             consumerManager.getDao().insert(consumer);
         }
     }
 
+    /**
+     * @param update
+     * @param concesionariaId
+     * @throws SQLException
+     */
     public void updateEstadoCuentaDb(final NotificationUpdate update, final Long concesionariaId) throws SQLException {
-        final Long planId = update.getPlanId();
-        final Long clienteDocumento = update.getClienteDocumento();
-        final Long vehiculo = update.getVehiculoId();
-        final Timestamp planFechaAlta = update.getPlanFechaAlta();
-        final String planEstado = update.getPlanEstado();
+
         final EstadoCuentasForm estadoCuenta = new EstadoCuentasForm();
-        estadoCuenta.setNroPlanConcesionaria(planId);
-        estadoCuenta.setDocumentoCliente(clienteDocumento);
-        estadoCuenta.setVehiculo(vehiculo);
-        estadoCuenta.setFechaAltaConcesionaria(planFechaAlta);
-        estadoCuenta.setEstado(planEstado);
+        estadoCuenta.setNroPlanConcesionaria(update.getPlanId());
+        estadoCuenta.setDocumentoCliente(update.getClienteDocumento());
+        estadoCuenta.setVehiculo(update.getVehiculoId());
+        estadoCuenta.setFechaAltaConcesionaria(update.getPlanFechaAlta());
+        estadoCuenta.setEstado(update.getPlanEstado());
         estadoCuenta.setConcesionariaId(concesionariaId);
         estadoCuentasManager.getDao().upsert(estadoCuenta);
     }
 
+    /**
+     * @param update
+     * @throws SQLException
+     */
     public void updateCuotaDb(final NotificationUpdate update) throws SQLException {
-        final Long planId = update.getPlanId();
-        final Long cuotaNroCuota = update.getCoutaNroCuota();
-        final Timestamp cuotaFechaVencimiento = update.getCoutaFechaVencimiento();
-        final Integer cuotaMonto = update.getCoutaMonto();
-        final Timestamp cuotaFechaPago = update.getCoutaFechaPago();
-        final Timestamp cuotaFechaAlta = update.getCuotaFechaAlta();
+
         final CuotasForm cuota = new CuotasForm();
-        cuota.setEstadoCuentaId(planId);
-        cuota.setNroCuota(cuotaNroCuota);
-        cuota.setFechaVencimiento(cuotaFechaVencimiento);
-        cuota.setMonto(cuotaMonto);
-        cuota.setFechaPago(cuotaFechaPago);
-        cuota.setFechaAltaConcesionaria(cuotaFechaAlta);
+        cuota.setEstadoCuentaId(update.getPlanId());
+        cuota.setNroCuota(update.getCoutaNroCuota());
+        cuota.setFechaVencimiento(update.getCoutaFechaVencimiento());
+        cuota.setMonto(update.getCoutaMonto());
+        cuota.setFechaPago(update.getCoutaFechaPago());
+        cuota.setFechaAltaConcesionaria(update.getCuotaFechaAlta());
         cuotasManager.getDao().upsert(cuota);
     }
 }
