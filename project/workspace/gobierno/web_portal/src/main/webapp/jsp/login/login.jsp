@@ -22,7 +22,7 @@
 
                 <%@include file="formLogin.jsp"%>
 
-                <button id="login" name="login" class="btn btn-outline-secondary" onclick="javascript:home.goToHome();">Volver al home</button>
+                <button id="login" name="login" class="btn btn-outline-secondary" onclick="home.goToHome();">Volver al home</button>
 
             </div>
 

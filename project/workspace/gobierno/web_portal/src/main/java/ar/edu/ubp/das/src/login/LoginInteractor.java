@@ -41,7 +41,7 @@ public class LoginInteractor implements Interactor<Long> {
         if (usuarioForm.isPresent()) {
 
             form.setItem(USER_TYPE, usuarioForm.get().getRol());
-
+            
             return loginManager.login(form.convertTo(LogInForm.class))
                 .map(LogInId -> new InteractorResponse<>(ResponseForward.SUCCESS, LogInId))
                 .orElse(new InteractorResponse<>(ResponseForward.FAILURE));

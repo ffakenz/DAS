@@ -1,4 +1,4 @@
-var concesionarias = {
+const concesionarias = {
 
     sendForm: function () {
 
@@ -6,7 +6,7 @@ var concesionarias = {
               return false;
           }
 
-          var url = '/web_portal/concesionarias/RegistrarConcesionaria.do';
+          var url = Globals.REGISTRAR_CONCESIONARIA_ENDPOINT;
 
           $('#formConcesionarias')
               .attr('action', url)

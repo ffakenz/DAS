@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 
+import static ar.edu.ubp.das.src.utils.Constants.CONCESIONARIAS_DAO_NAME;
+import static ar.edu.ubp.das.src.utils.Constants.CONCESIONARIAS_DAO_PACKAGE;
+
 public class RegistrarConcesionariaAction implements Action {
     @Override
     public ForwardConfig execute(final ActionMapping mapping,
@@ -23,9 +26,9 @@ public class RegistrarConcesionariaAction implements Action {
             throws SQLException, RuntimeException {
 
 
-        final DaoImpl msConcesionarias = DaoFactory.getDao("Concesionarias", "concesionarias");
+        final DaoImpl msConcesionariaDao = DaoFactory.getDao(CONCESIONARIAS_DAO_NAME, CONCESIONARIAS_DAO_PACKAGE);
 
-        final RegistrarConcesionariaInteractor action = new RegistrarConcesionariaInteractor(msConcesionarias);
+        final RegistrarConcesionariaInteractor action = new RegistrarConcesionariaInteractor(msConcesionariaDao);
 
         final InteractorResponse<Boolean> result = action.execute(form);
 
