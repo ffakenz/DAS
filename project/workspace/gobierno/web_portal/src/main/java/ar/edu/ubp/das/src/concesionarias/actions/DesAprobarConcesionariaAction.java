@@ -6,7 +6,6 @@ import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.config.ForwardConfig;
 import ar.edu.ubp.das.mvc.db.DaoFactory;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
-import ar.edu.ubp.das.src.concesionarias.AprobarInteractor;
 import ar.edu.ubp.das.src.concesionarias.ConsultarInteractor;
 import ar.edu.ubp.das.src.concesionarias.DesAprobarInteractor;
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;

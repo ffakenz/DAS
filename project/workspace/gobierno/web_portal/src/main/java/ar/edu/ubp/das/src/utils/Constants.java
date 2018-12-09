@@ -1,10 +1,14 @@
 package ar.edu.ubp.das.src.utils;
 
 public final class Constants {
+
     //************ DAOS ****************************
-    public static final String CONCESIONARIAS_DAO_PACKAGE = "concesionarias";
     public static final String CONCESIONARIAS_DAO_NAME = "Concesionarias";
-    public static final String CONFI_CONCESIONARIAS_DAO_NAME = "ConfigurarConcesionaria";
+    public static final String CONFIG_CONCESIONARIAS_DAO_NAME = "ConfigurarConcesionaria";
+    public static final String CONFIG_TECNO_PARAM_DAO_NAME = "ConfigTecnoParam";
+
+    //************ DAOS PACKAGES**********************************************
+    public static final String CONCESIONARIAS_DAO_PACKAGE = "concesionarias";
 
     //************ CONSUMERS ROLES ****************************
     public static final String ROL_GOBIERNO = "gobierno";
@@ -29,4 +33,16 @@ public final class Constants {
     public static final String BTN_APROBAR = "aprobar_btn";
     public static final String BTN_DESAPROBAR = "desaprobar_btn";
     public static final String BTN_CONFIGURAR = "config_btn";
+
+    //************ SERVICES TECHNOS ***************************
+    public static final String REST = "REST";
+    public static final String AXIS = "AXIS";
+    public static final String CXF = "CXF";
+
+    //************ SERVICES TECHNOS PARAMS*********************
+    public static final String AXIS_PARAM_ENDP_URL = "endpointUrl";
+    public static final String AXIS_PARAM_TARGET = "targetNameSpace";
+    public static final String REST_PARAM_URL = "url";
+    public static final String CXF_PARAM_WSDL_URL = "wsdlUrl";
+
 }
