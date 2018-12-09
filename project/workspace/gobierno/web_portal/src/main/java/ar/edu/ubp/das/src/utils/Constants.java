@@ -1,9 +1,5 @@
 package ar.edu.ubp.das.src.utils;
 
-import java.sql.Timestamp;
-import java.time.Instant;
-import java.util.Calendar;
-
 public final class Constants {
 
     //************ CONSUMERS ROLES ****************************
@@ -13,17 +9,26 @@ public final class Constants {
     //************ PARAMS SERVLETS ****************************
     public static final String USER_TYPE = "userType";
     public static final String SSID = "ssid";
-}
 
 
-class Runner {
-    public static void main(String[] args) {
-        Timestamp ts = Timestamp.from(Instant.now());
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(ts);
-        cal.add(Calendar.DAY_OF_WEEK, 14);
-        ts.setTime(cal.getTime().getTime()); // or
-        ts = new Timestamp(cal.getTime().getTime());
-        System.out.println(ts);
-    }
+    //************ DAO NAMES **********************************
+    public static final String DAO_CONCESIONARIA = "Concesionarias";
+    public static final String DAO_CONFIG_CONCESIONARIA = "ConfigurarConcesionaria";
+    public static final String DAO_CONFIG_TECNO_PARAM = "ConfigTecnoParam";
+
+
+    //************ DAO PACKAGES *******************************
+    public static final String DAO_CONCESIONARIA_PCKG = "concesionarias";
+
+    //************ SERVICES TECHNOS ***************************
+    public static final String REST = "REST";
+    public static final String AXIS = "AXIS";
+    public static final String CXF = "CXF";
+
+    //************ SERVICES TECHNOS PARAMS*********************
+    public static final String AXIS_PARAM_ENDP_URL = "endpointUrl";
+    public static final String AXIS_PARAM_TARGET = "targetNameSpace";
+    public static final String REST_PARAM_URL = "url";
+    public static final String CXF_PARAM_WSDL_URL = "wsdlUrl";
+
 }

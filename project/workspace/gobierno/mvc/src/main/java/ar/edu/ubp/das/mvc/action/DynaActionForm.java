@@ -57,24 +57,25 @@ public class DynaActionForm {
         try {
             if (!clazz.isAnnotationPresent(Entity.class)) {
                 throw new NoEntityException();
-            } else {
-                final Field[] attributes = clazz.getDeclaredFields(); // get all the attributes of Class clazz
-
-                bean = clazz.newInstance();
-
-                for (final Field attribute : attributes) {
-                    // if we got an item with same attribute name
-                    if (this.getItem(attribute.getName()).isPresent()) {
-                        final String fieldName = attribute.getName();
-                        // get field from class for given filedName
-                        final Field field = bean.getClass().getDeclaredField(fieldName);
-                        field.setAccessible(true); // in case the field is private
-                        final Class<?> fieldType = field.getType();
-                        final String itemValue = this.getItem(attribute.getName()).get();
-                        field.set(bean, fromStringTo(fieldType, itemValue)); // bean.field = columnValue // CHECK GET ??
-                    }
-                } // EndOf for(Field field : fields)
             }
+
+            final Field[] attributes = clazz.getDeclaredFields(); // get all the attributes of Class clazz
+
+            bean = clazz.newInstance();
+
+            for (final Field attribute : attributes) {
+                // if we got an item with same attribute name
+                if (this.getItem(attribute.getName()).isPresent()) {
+                    final String fieldName = attribute.getName();
+                    // get field from class for given filedName
+                    final Field field = bean.getClass().getDeclaredField(fieldName);
+                    field.setAccessible(true); // in case the field is private
+                    final Class<?> fieldType = field.getType();
+                    final String itemValue = this.getItem(attribute.getName()).get();
+                    field.set(bean, fromStringTo(fieldType, itemValue)); // bean.field = columnValue // CHECK GET ??
+                }
+            } // EndOf for(Field field : fields)
+
         } catch (final IllegalAccessException | InstantiationException | NoEntityException
                 | NoSuchFieldException e) {
             e.printStackTrace();
