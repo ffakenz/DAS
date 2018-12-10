@@ -29,9 +29,8 @@
             <div id="aprobarConcesionariaDiv" class="container">
                 <ct:concesionariasTable idTable="tableConcesionarias"></ct:concesionariasTable>
             </div>
-            <div id="showModalConfig">
 
-            </div>
+            <div id="update_config_div"></div>
         </div>
 
     </body>

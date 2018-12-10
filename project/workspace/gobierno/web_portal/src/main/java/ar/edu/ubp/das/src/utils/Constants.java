@@ -34,6 +34,9 @@ public final class Constants {
     public static final String BTN_APROBAR = "aprobar_btn";
     public static final String BTN_DESAPROBAR = "desaprobar_btn";
     public static final String BTN_CONFIGURAR = "config_btn";
+    public static final String BTN_UPDATE_CONFIG = "update_config_btn";
+    public static final String BTN_TEST_CONFIG = "test_config_btn";
+    public static final String UPDATE_CONFIG_FORM = "update_config_form";
 
 
 }
