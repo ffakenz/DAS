@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!-- ***************************** -->
+    <!--   TABLE DROP CHANGE-SETS      -->
+    <!-- ***************************** -->
+    <changeSet id="Drop table vehiculos" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="vehiculos"/>
+        </preConditions>
+        <dropTable tableName="vehiculos"/>
+    </changeSet>
+
+    <changeSet id="Drop table tipos_vehiculo" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="tipos_vehiculo"/>
+        </preConditions>
+        <dropTable tableName="tipos_vehiculo"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!-- ***************************** -->
+    <!--  DROP PROCEDURES CHANGE-SETS  -->
+    <!-- ***************************** -->
+    <changeSet id="Drop procedure get_vehiculos" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_vehiculos'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_vehiculos"/>
+    </changeSet>
+
+    <!-- ******************************* -->
+    <!--  CREATE PROCEDURES CHANGE-SETS  -->
+    <!-- ******************************* -->
+    <changeSet id="Create procedure get_vehiculos" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_vehiculos'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/vehiculos/procedures/get_vehiculos.sql"/>
+    </changeSet>
+
+</databaseChangeLog>
