@@ -82,9 +82,23 @@ $(() => {
 
     };
 
+    const changeUpdateConfigHandler = (evt) => {
+        console.log("Changing Config %o", evt.target.id);
+        evt.preventDefault();
+
+        const innerHtml = $("#inner_update_config_form_div").html;
+        console.log(innerHtml);
+
+    }
+
     $("#tableConcesionarias").delegate(".aprobar_btn", "click", aprobarHandler);
     $("#tableConcesionarias").delegate(".desaprobar_btn", "click", desAprobarHandler);
     $("#tableConcesionarias").delegate(".config_btn", "click", configurarHandler);
     $("#update_config_div").delegate("#update_config_btn", "click", updateConfigHandler);
     $("#update_config_div").delegate("#test_config_btn", "click", testConfigHandler);
+
+    $("#update_config_div").delegate("#update_config_select", "change", changeUpdateConfigHandler)
+
+
+
 });

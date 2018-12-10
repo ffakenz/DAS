@@ -80,9 +80,9 @@ public class FrontUtils {
 
         final StringBuilder sb = new StringBuilder();
         sb.append("<form id=\"" + UPDATE_CONFIG_FORM + "\" class=\"form-horizontal\" method=\"post\" >");
-
+        sb.append("<div> id=\"" + INNER_UPDATE_CONFIG_FORM_DIV + "\" ");
         sb.append("<div class=\"form-group\">");
-        sb.append("<select>")
+        sb.append("<select id=\"" + UPDATE_CONFIG_SELECT + "\">")
                 .append("<option value=" +
                         ClientType.REST.getName() +
                         (isRestSelected.test(configTecno) ? " selected " : " ") + ">" +
@@ -138,6 +138,7 @@ public class FrontUtils {
                 .append(getButton(BTN_TEST_CONFIG, BTN_TEST_CONFIG, "Test"))
                 .append("</div>");
 
+        sb.append("</div>");
         sb.append("</form>");
 
         return sb.toString();
