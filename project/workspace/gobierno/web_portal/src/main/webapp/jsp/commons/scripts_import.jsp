@@ -14,6 +14,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <!-- Own libs -->
+<script src="/web_portal/util/Javascript.do/load=own_libraries/globals"></script>
 <script src="/web_portal/util/Javascript.do/load=own_libraries/utils"></script>
 <script src="/web_portal/util/Javascript.do/load=own_libraries/other"></script>
 <script src="/web_portal/util/Javascript.do/load=own_libraries/home"></script>
