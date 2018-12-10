@@ -1,6 +1,7 @@
 package beans;
 
 import com.google.gson.annotations.SerializedName;
+import utils.JsonUtils;
 
 import java.io.Serializable;
 import java.sql.Timestamp;

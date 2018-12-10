@@ -79,25 +79,6 @@ public class NotificationUpdate implements Serializable {
     @SerializedName("vehiculo_color")
     private String vehiculoColor;
 
-    public NotificationUpdate() {
-    }
-
-    public Timestamp getPlanFechaUltimaActualizacion() {
-        return planFechaUltimaActualizacion;
-    }
-
-    public void setPlanFechaUltimaActualizacion(final Timestamp planFechaUltimaActualizacion) {
-        this.planFechaUltimaActualizacion = planFechaUltimaActualizacion;
-    }
-
-    public String getPlanTipoDePlan() {
-        return planTipoDePlan;
-    }
-
-    public void setPlanTipoDePlan(final String planTipoDePlan) {
-        this.planTipoDePlan = planTipoDePlan;
-    }
-
     public Long getPlanId() {
         return planId;
     }
@@ -122,35 +103,51 @@ public class NotificationUpdate implements Serializable {
         this.planFechaAlta = planFechaAlta;
     }
 
-    public Long getCoutaNroCuota() {
+    public Timestamp getPlanFechaUltimaActualizacion() {
+        return planFechaUltimaActualizacion;
+    }
+
+    public void setPlanFechaUltimaActualizacion(final Timestamp planFechaUltimaActualizacion) {
+        this.planFechaUltimaActualizacion = planFechaUltimaActualizacion;
+    }
+
+    public String getPlanTipoDePlan() {
+        return planTipoDePlan;
+    }
+
+    public void setPlanTipoDePlan(final String planTipoDePlan) {
+        this.planTipoDePlan = planTipoDePlan;
+    }
+
+    public Long getCuotaNroCuota() {
         return cuotaNroCuota;
     }
 
-    public void setCoutaNroCuota(final Long cuotaNroCuota) {
+    public void setCuotaNroCuota(final Long cuotaNroCuota) {
         this.cuotaNroCuota = cuotaNroCuota;
     }
 
-    public Timestamp getCoutaFechaVencimiento() {
+    public Timestamp getCuotaFechaVencimiento() {
         return cuotaFechaVencimiento;
     }
 
-    public void setCoutaFechaVencimiento(final Timestamp cuotaFechaVencimiento) {
+    public void setCuotaFechaVencimiento(final Timestamp cuotaFechaVencimiento) {
         this.cuotaFechaVencimiento = cuotaFechaVencimiento;
     }
 
-    public Integer getCoutaMonto() {
+    public Integer getCuotaMonto() {
         return cuotaMonto;
     }
 
-    public void setCoutaMonto(final Integer cuotaMonto) {
+    public void setCuotaMonto(final Integer cuotaMonto) {
         this.cuotaMonto = cuotaMonto;
     }
 
-    public Timestamp getCoutaFechaPago() {
+    public Timestamp getCuotaFechaPago() {
         return cuotaFechaPago;
     }
 
-    public void setCoutaFechaPago(final Timestamp cuotaFechaPago) {
+    public void setCuotaFechaPago(final Timestamp cuotaFechaPago) {
         this.cuotaFechaPago = cuotaFechaPago;
     }
 

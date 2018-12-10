@@ -3,10 +3,13 @@ package beans;
 import com.google.gson.annotations.SerializedName;
 import utils.JsonUtils;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 
-public class NotificationUpdate {
+public class PlanBean implements Serializable {
     // member variables
+
     @SerializedName("plan_id")
     private Long planId;
     @SerializedName("plan_estado")
@@ -17,16 +20,6 @@ public class NotificationUpdate {
     private Timestamp planFechaUltimaActualizacion;
     @SerializedName(("plan_tipo_de_plan"))
     private String planTipoDePlan;
-    @SerializedName("cuota_nro_cuota")
-    private Long cuotaNroCuota;
-    @SerializedName("cuota_fecha_vencimiento")
-    private Timestamp cuotaFechaVencimiento;
-    @SerializedName("cuota_monto")
-    private Integer cuotaMonto;
-    @SerializedName("cuota_fecha_pago")
-    private Timestamp cuotaFechaPago;
-    @SerializedName("cuota_fecha_alta")
-    private Timestamp cuotaFechaAlta;
     @SerializedName("cliente_documento")
     private Long clienteDocumento;
     @SerializedName("cliente_nombre")
@@ -51,6 +44,37 @@ public class NotificationUpdate {
     private String vehiculoModelo;
     @SerializedName("vehiculo_color")
     private String vehiculoColor;
+    @SerializedName("cuotas")
+    private List<CuotaBean> cuotas;
+
+    public static PlanBean fromNotificationUpdate(final NotificationUpdate notificationUpdate, final List<CuotaBean> cuotas) {
+        final PlanBean bean = new PlanBean();
+        bean.setPlanId(notificationUpdate.getPlanId());
+        bean.setPlanEstado(notificationUpdate.getPlanEstado());
+        bean.setPlanFechaAlta(notificationUpdate.getPlanFechaAlta());
+        bean.setPlanFechaUltimaActualizacion(notificationUpdate.getPlanFechaUltimaActualizacion());
+        bean.setPlanTipoDePlan(notificationUpdate.getPlanTipoDePlan());
+        bean.setClienteDocumento(notificationUpdate.getClienteDocumento());
+        bean.setClienteApellido(notificationUpdate.getClienteApellido());
+        bean.setClienteNombre(notificationUpdate.getClienteNombre());
+        bean.setClienteEmail(notificationUpdate.getClienteApellido());
+        bean.setClienteNroTelefono(notificationUpdate.getClienteNroTelefono());
+        bean.setVehiculoId(notificationUpdate.getVehiculoId());
+        bean.setVehiculoMarca(notificationUpdate.getVehiculoMarca());
+        bean.setVehiculoModelo(notificationUpdate.getVehiculoModelo());
+        bean.setVehiculoNombre(notificationUpdate.getVehiculoNombre());
+        bean.setVehiculoPrecio(notificationUpdate.getVehiculoPrecio());
+        bean.setVehiculoColor(notificationUpdate.getVehiculoColor());
+        bean.setVehiculoTipo(notificationUpdate.getVehiculoTipo());
+        bean.setCuotas(cuotas);
+        return bean;
+    }
+
+    @Override
+    public String toString() {
+        return JsonUtils.toJsonString(this);
+    }
+
 
     public Long getPlanId() {
         return planId;
@@ -90,46 +114,6 @@ public class NotificationUpdate {
 
     public void setPlanTipoDePlan(final String planTipoDePlan) {
         this.planTipoDePlan = planTipoDePlan;
-    }
-
-    public Long getCuotaNroCuota() {
-        return cuotaNroCuota;
-    }
-
-    public void setCuotaNroCuota(final Long cuotaNroCuota) {
-        this.cuotaNroCuota = cuotaNroCuota;
-    }
-
-    public Timestamp getCuotaFechaVencimiento() {
-        return cuotaFechaVencimiento;
-    }
-
-    public void setCuotaFechaVencimiento(final Timestamp cuotaFechaVencimiento) {
-        this.cuotaFechaVencimiento = cuotaFechaVencimiento;
-    }
-
-    public Integer getCuotaMonto() {
-        return cuotaMonto;
-    }
-
-    public void setCuotaMonto(final Integer cuotaMonto) {
-        this.cuotaMonto = cuotaMonto;
-    }
-
-    public Timestamp getCuotaFechaPago() {
-        return cuotaFechaPago;
-    }
-
-    public void setCuotaFechaPago(final Timestamp cuotaFechaPago) {
-        this.cuotaFechaPago = cuotaFechaPago;
-    }
-
-    public Timestamp getCuotaFechaAlta() {
-        return cuotaFechaAlta;
-    }
-
-    public void setCuotaFechaAlta(final Timestamp cuotaFechaAlta) {
-        this.cuotaFechaAlta = cuotaFechaAlta;
     }
 
     public Long getClienteDocumento() {
@@ -228,8 +212,11 @@ public class NotificationUpdate {
         this.vehiculoColor = vehiculoColor;
     }
 
-    @Override
-    public String toString() {
-        return JsonUtils.toJsonString(this);
+    public List<CuotaBean> getCuotas() {
+        return cuotas;
+    }
+
+    public void setCuotas(final List<CuotaBean> cuotas) {
+        this.cuotas = cuotas;
     }
 }

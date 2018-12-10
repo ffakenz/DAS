@@ -1,13 +1,16 @@
 package clients;
 
 import beans.NotificationUpdate;
+import beans.PlanBean;
 
 import java.util.List;
 
 public interface ConcesionariaServiceContract {
-    List<NotificationUpdate> consultarPlanes(String offset);
+    List<NotificationUpdate> consultarPlanes(String identificador, String offset);
 
-    NotificationUpdate consultarPlan(Long planId);
+    PlanBean consultarPlan(String identificador, Long planId);
 
-    void cancelarPlan(Long planId);
+    void cancelarPlan(String identificador, Long planId);
+
+    String health(String identificador);
 }

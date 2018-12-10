@@ -111,10 +111,11 @@ public class ConsumoJob implements Job {
 
                 // generamos un random rqst-id
                 final String rqstId = UUID.randomUUID().toString();
+                final String identificador = "GOBIERNO-INCENTIVO-2018";
                 try {
                     // usamos el cliente p/ consultar planes
                     final ConcesionariaServiceContract client = cli.get();
-                    final List<NotificationUpdate> notificationUpdates = client.consultarPlanes(offset.toString());
+                    final List<NotificationUpdate> notificationUpdates = client.consultarPlanes(identificador, offset.toString());
                     log.info("Consume is successfull for concesionaria {} [notification_update:{}]", cId, JsonUtils.toJsonString(notificationUpdates));
                     final String description = "consultarPlanes was success for offset: " + offset;
                     logConsumoDb(cId, jobId, EstadoConsumo.SUCCESS, offset, rqstId, description);
@@ -263,10 +264,10 @@ public class ConsumoJob implements Job {
 
         final CuotasForm cuota = new CuotasForm();
         cuota.setEstadoCuentaId(update.getPlanId());
-        cuota.setNroCuota(update.getCoutaNroCuota());
-        cuota.setFechaVencimiento(update.getCoutaFechaVencimiento());
-        cuota.setMonto(update.getCoutaMonto());
-        cuota.setFechaPago(update.getCoutaFechaPago());
+        cuota.setNroCuota(update.getCuotaNroCuota());
+        cuota.setFechaVencimiento(update.getCuotaFechaVencimiento());
+        cuota.setMonto(update.getCuotaMonto());
+        cuota.setFechaPago(update.getCuotaFechaPago());
         cuota.setFechaAltaConcesionaria(update.getCuotaFechaAlta());
         cuotasManager.getDao().upsert(cuota);
     }
