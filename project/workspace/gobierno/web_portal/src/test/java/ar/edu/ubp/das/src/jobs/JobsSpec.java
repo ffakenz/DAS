@@ -5,18 +5,12 @@ import ar.edu.ubp.das.src.jobs.runner.JobRunner;
 import ar.edu.ubp.das.src.jobs.sorteo.ISorteoInvariantsHolder;
 import ar.edu.ubp.das.src.jobs.sorteo.SorteoInvariantsHolder;
 import beans.NotificationUpdate;
-import clients.ConcesionariaServiceContract;
-import clients.IClientFactory;
-import clients.factory.ClientType;
 import org.junit.Before;
 import org.junit.Test;
 import org.quartz.JobExecutionException;
 import util.TestDB;
 
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 import static org.junit.Assert.assertTrue;
 
@@ -54,28 +48,6 @@ public class JobsSpec {
             @Override
             public Boolean isPlanCancelado(final NotificationUpdate planBeanResponse) {
                 return true;
-            }
-        }
-        class ClientFactoryMock implements IClientFactory {
-
-            @Override
-            public Optional<ConcesionariaServiceContract> getClientFor(final ClientType configTecno, final Map<String, String> params) {
-                return Optional.of(new ConcesionariaServiceContract() {
-                    @Override
-                    public List<NotificationUpdate> consultarPlanes(final String offset) {
-                        return null;
-                    }
-
-                    @Override
-                    public NotificationUpdate consultarPlan(final Long planId) {
-                        return null;
-                    }
-
-                    @Override
-                    public void cancelarPlan(final Long planId) {
-
-                    }
-                });
             }
         }
 

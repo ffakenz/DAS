@@ -1,6 +1,7 @@
 package clients;
 
 import beans.NotificationUpdate;
+import beans.PlanBean;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -96,21 +97,30 @@ public class RestClient implements ConcesionariaServiceContract {
     }
 
     @Override
-    public List<NotificationUpdate> consultarPlanes(final String offset) {
-        final String jsonPlanBeans = call.apply("GET", "/consultarPlanes?offset=" + offset);
+    public List<NotificationUpdate> consultarPlanes(final String identificador, final String offset) {
+        final String jsonPlanBeans =
+                call.apply("GET", "/consultarPlanes?identificador=" + identificador + "&offset=" + offset);
         final NotificationUpdate[] notificationUpdates = JsonUtils.toObject(jsonPlanBeans, NotificationUpdate[].class);
         return Stream.of(notificationUpdates).collect(Collectors.toList());
     }
 
     @Override
-    public NotificationUpdate consultarPlan(final Long planId) {
-        final String jsonPlanBean = call.apply("GET", "/consultarPlan?planId=" + planId.toString());
-        return JsonUtils.toObject(jsonPlanBean, NotificationUpdate.class);
+    public PlanBean consultarPlan(final String identificador, final Long planId) {
+        final String jsonPlanBean =
+                call.apply("GET", "/consultarPlan?identificador=" + identificador + "&planId=" + planId.toString());
+        return JsonUtils.toObject(jsonPlanBean, PlanBean.class);
     }
 
     // TODO: Create method that will parse multiple parameters
     @Override
-    public void cancelarPlan(final Long planId) {
-        fireAndForget.accept("PUT", "/cancelarPlan?planId=" + planId.toString());
+    public void cancelarPlan(final String identificador, final Long planId) {
+        fireAndForget.accept("PUT", "/cancelarPlan?identificador=" + identificador + "&planId=" + planId.toString());
+    }
+
+    @Override
+    public String health(final String identificador) {
+        final String jsonPlanBean =
+                call.apply("GET", "/health?identificador=" + identificador);
+        return jsonPlanBean;
     }
 }

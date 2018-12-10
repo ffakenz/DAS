@@ -20,30 +20,33 @@
                     schemaName="dbo"
                     viewName="notification_updates">
             SELECT
-                p.id                    AS 'plan_id'
-                , p.estado              AS 'plan_estado'
-                , p.fecha_alta          AS 'plan_fecha_alta'
-                , co.nro_cuota          AS 'cuota_nro_cuota'
-                , co.fecha_vencimiento  AS 'cuota_fecha_vencimiento'
-                , co.monto              AS 'cuota_monto'
-                , co.fecha_pago         AS 'cuota_fecha_pago'
-                , co.fecha_alta         AS 'cuota_fecha_alta'
-                , c.documento           AS 'cliente_documento'
-                , c.nombre              AS 'cliente_nombre'
-                , c.apellido            AS 'cliente_apellido'
-                , c.nro_telefono        AS 'cliente_nro_telefono'
-                , c.email               AS 'cliente_email'
-                , v.id                  AS 'vehiculo_id'
-                , v.tipo                AS 'vehiculo_tipo'
-                , v.nombre              AS 'vehiculo_nombre'
-                , v.precio              AS 'vehiculo_precio'
-                , v.marca               AS 'vehiculo_marca'
-                , v.modelo              AS 'vehiculo_modelo'
-                , v.color               AS 'vehiculo_color'
+                p.id                                    AS 'plan_id'
+                , p.estado                              AS 'plan_estado'
+                , p.fecha_alta                          AS 'plan_fecha_alta'
+                , p.fecha_ultima_actualizacion          AS 'plan_fecha_ultima_actualizacion'
+                , p.tipo_de_plan                        AS 'plan_tipo_de_plan'
+                , co.nro_cuota                          AS 'cuota_nro_cuota'
+                , co.fecha_vencimiento                  AS 'cuota_fecha_vencimiento'
+                , co.monto                              AS 'cuota_monto'
+                , co.fecha_pago                         AS 'cuota_fecha_pago'
+                , co.fecha_alta                         AS 'cuota_fecha_alta'
+                , c.documento                           AS 'cliente_documento'
+                , c.nombre                              AS 'cliente_nombre'
+                , c.apellido                            AS 'cliente_apellido'
+                , c.nro_telefono                        AS 'cliente_nro_telefono'
+                , c.email                               AS 'cliente_email'
+                , v.id                                  AS 'vehiculo_id'
+                , v.tipo                                AS 'vehiculo_tipo'
+                , v.nombre                              AS 'vehiculo_nombre'
+                , v.precio                              AS 'vehiculo_precio'
+                , v.marca                               AS 'vehiculo_marca'
+                , v.modelo                              AS 'vehiculo_modelo'
+                , v.color                               AS 'vehiculo_color'
             FROM planes p
-            INNER JOIN clientes c       ON p.cliente    = c.id_cliente
-            INNER JOIN vehiculos v      ON p.vehiculo   = v.id
-            LEFT OUTER JOIN cuotas co   ON p.id         = co.id_plan
+            INNER JOIN tipos_de_planes t    ON p.tipo_de_plan   = t.nombre
+            INNER JOIN clientes c           ON p.cliente        = c.id_cliente
+            INNER JOIN vehiculos v          ON p.vehiculo       = v.id
+            LEFT OUTER JOIN cuotas co       ON p.id             = co.id_plan
         </createView>
     </changeSet>
 </databaseChangeLog>

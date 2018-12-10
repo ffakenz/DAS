@@ -1,6 +1,7 @@
 package clients;
 
 import beans.NotificationUpdate;
+import beans.PlanBean;
 import com.google.gson.JsonObject;
 import org.apache.axiom.om.OMAbstractFactory;
 import org.apache.axiom.om.OMElement;
@@ -104,10 +105,12 @@ public class AxisClient implements ConcesionariaServiceContract {
     }
 
     @Override
-    public List<NotificationUpdate> consultarPlanes(final String offset) {
+    public List<NotificationUpdate> consultarPlanes(final String identificador, final String offset) {
         final OMElement method = createMethod("consultarPlanes");
-        final OMElement param = createParam("offset", offset);
+        final OMElement param = createParam("identificador", identificador);
+        final OMElement param2 = createParam("offset", offset);
         method.addChild(param);
+        method.addChild(param2);
         final OMElement res = executeMethod(method);
 
         final OMElement returnValue = res.getFirstElement();
@@ -117,23 +120,40 @@ public class AxisClient implements ConcesionariaServiceContract {
     }
 
     @Override
-    public NotificationUpdate consultarPlan(final Long planId) {
+    public PlanBean consultarPlan(final String identificador, final Long planId) {
         final OMElement method = createMethod("consultarPlan");
-        final OMElement param = createParam("planId", planId);
+        final OMElement param = createParam("identificador", identificador);
+        final OMElement param2 = createParam("planId", planId);
         method.addChild(param);
+        method.addChild(param2);
         final OMElement res = executeMethod(method); // response
 
         final OMElement returnValue = res.getFirstElement();
         final String jsonPlanBean = returnValue.getText();
 
-        return JsonUtils.toObject(jsonPlanBean, NotificationUpdate.class);
+        return JsonUtils.toObject(jsonPlanBean, PlanBean.class);
     }
 
     @Override
-    public void cancelarPlan(final Long planId) {
+    public void cancelarPlan(final String identificador, final Long planId) {
         final OMElement method = createMethod("cancelarPlan");
-        final OMElement param = createParam("planId", planId);
+        final OMElement param = createParam("identificador", identificador);
+        final OMElement param2 = createParam("planId", planId);
         method.addChild(param);
+        method.addChild(param2);
         call(method);
+    }
+
+    @Override
+    public String health(final String identificador) {
+        final OMElement method = createMethod("health");
+        final OMElement param = createParam("identificador", identificador);
+        method.addChild(param);
+        final OMElement res = executeMethod(method); // response
+
+        final OMElement returnValue = res.getFirstElement();
+        final String jsonPlanBean = returnValue.getText();
+        
+        return jsonPlanBean;
     }
 }

@@ -2,6 +2,6 @@ var logout = {
 
     closeSession : function() {
 
-        window.location.href = "/web_portal/login/Logout.do";
+        window.location.href = Globals.LOGOUT_ENDPOINT;
     }
 };

@@ -2,11 +2,15 @@ package contract;
 
 public interface ConcesionariaServiceContract {
 
-    //  Timestamp => List<NotificationUpdate>
-    String consultarPlanes(String offset);
+    //  String => Timestamp => List<NotificationUpdate>
+    String consultarPlanes(String identificador, String offset);
 
-    //  Long => Optional<NotificationUpdate>
-    String consultarPlan(Long planId);
+    //  String => Long => PlanBean
+    String consultarPlan(String identificador, Long planId);
 
-    void cancelarPlan(Long planId);
+    // String => Long => ()
+    void cancelarPlan(String identificador, Long planId);
+
+    // String => String
+    String health(String identificador);
 }

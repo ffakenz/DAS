@@ -1,6 +1,7 @@
 package clients;
 
 import beans.NotificationUpdate;
+import beans.PlanBean;
 import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.jaxws.endpoint.dynamic.JaxWsDynamicClientFactory;
 import utils.JsonUtils;
@@ -47,22 +48,29 @@ public class CXFClient implements ConcesionariaServiceContract {
     }
 
     @Override
-    public List<NotificationUpdate> consultarPlanes(final String offset) {
-        final Object res = executeMethod("consultarPlanes", offset);
+    public List<NotificationUpdate> consultarPlanes(final String identificador, final String offset) {
+        final Object res = executeMethod("consultarPlanes", identificador, offset);
         final String jsonPlanBeans = res.toString();
         final NotificationUpdate[] notificationUpdates = JsonUtils.toObject(jsonPlanBeans, NotificationUpdate[].class);
         return Stream.of(notificationUpdates).collect(Collectors.toList());
     }
 
     @Override
-    public NotificationUpdate consultarPlan(final Long planId) {
-        final Object res = executeMethod("consultarPlan", planId);
+    public PlanBean consultarPlan(final String identificador, final Long planId) {
+        final Object res = executeMethod("consultarPlan", identificador, planId);
         final String jsonPlanBean = res.toString();
-        return JsonUtils.toObject(jsonPlanBean, NotificationUpdate.class);
+        return JsonUtils.toObject(jsonPlanBean, PlanBean.class);
     }
 
     @Override
-    public void cancelarPlan(final Long planId) {
-        executeMethod("cancelarPlan", planId);
+    public void cancelarPlan(final String identificador, final Long planId) {
+        executeMethod("cancelarPlan", identificador, planId);
+    }
+
+    @Override
+    public String health(final String identificador) {
+        final Object res = executeMethod("health", identificador);
+        final String jsonPlanBean = res.toString();
+        return jsonPlanBean;
     }
 }

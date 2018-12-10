@@ -16,6 +16,20 @@
         <sqlFile path="/src/main/resources/liquibase/populate/config_tecnologica.sql"/>
     </changeSet>
 
+    <changeSet id="Populate table tipos_vehiculo" author="DAS-Team" runAlways="true" runOnChange="true" context="dev">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="tipos_vehiculo"/>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/populate/tipos_vehiculo.sql"/>
+    </changeSet>
+
+    <changeSet id="Populate table vehiculos" author="DAS-Team" runAlways="true" runOnChange="true" context="dev">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="vehiculos"/>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/populate/vehiculos.sql"/>
+    </changeSet>
+
     <changeSet id="Populate table concesionaria" author="DAS-Team" runAlways="true" runOnChange="true" context="dev">
         <preConditions onFail="MARK_RAN">
             <tableExists tableName="concesionaria"/>

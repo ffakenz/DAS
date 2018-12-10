@@ -7,12 +7,16 @@ import ar.edu.ubp.das.mvc.config.ForwardConfig;
 import ar.edu.ubp.das.mvc.db.DaoFactory;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.concesionarias.AprobarInteractor;
-import ar.edu.ubp.das.src.concesionarias.daos.MSConcesionariasDao;
+import ar.edu.ubp.das.src.concesionarias.ConsultarConcesionariaInteractor;
+import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
 import ar.edu.ubp.das.src.core.InteractorResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
+import java.util.Optional;
+
+import static ar.edu.ubp.das.src.utils.Constants.*;
 
 public class AprobarConcesionariaAction implements Action {
 
@@ -24,13 +28,18 @@ public class AprobarConcesionariaAction implements Action {
 
             throws SQLException, RuntimeException {
 
-        final DaoImpl msConcesionariasDao = DaoFactory.getDao("Concesionarias", "concesionarias");
+        final DaoImpl msConcesionariaDao = DaoFactory.getDao(CONCESIONARIAS_DAO_NAME, CONCESIONARIAS_DAO_PACKAGE);
 
-        final AprobarInteractor action = new AprobarInteractor(msConcesionariasDao);
+        final AprobarInteractor action = new AprobarInteractor(msConcesionariaDao);
         final InteractorResponse<Boolean> result = action.execute(form);
+        request.setAttribute(RESULT_RQST_ATTRIBUTE, result.getResponse());
 
+        if(result.getResult()) {
+            final ConsultarConcesionariaInteractor consultarConcesionariaInteractor = new ConsultarConcesionariaInteractor(msConcesionariaDao);
+            final InteractorResponse<Optional<ConcesionariaForm>> aprobada = consultarConcesionariaInteractor.execute(form);
 
-        request.setAttribute("result", result.getResponse());
+            request.setAttribute(APROBADA_RQST_ATTRIBUTE, aprobada.getResult().get());
+        }
 
         return mapping.getForwardByName(result.getResponse().getForward());
     }

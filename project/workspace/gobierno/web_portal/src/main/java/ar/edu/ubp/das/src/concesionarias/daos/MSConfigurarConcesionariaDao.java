@@ -38,6 +38,7 @@ public class MSConfigurarConcesionariaDao extends DaoImpl<ConfigurarConcesionari
 
 
     public List<ConfigurarConcesionariaForm> selectParamsByConcesionariaId(final Long id) throws SQLException {
+
         this.connect();
         this.setProcedure("dbo.get_concesionaria_config_params_by_concesionaria_id(?)", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
         this.setParameter(1, id);
@@ -49,5 +50,14 @@ public class MSConfigurarConcesionariaDao extends DaoImpl<ConfigurarConcesionari
     @Override
     public boolean valid(final ConfigurarConcesionariaForm form) throws SQLException {
         return false;
+    }
+
+    public void invalidateParams(final Long concesionariaId) throws SQLException {
+
+        this.connect();
+        this.setProcedure("dbo.invalidate_params(?)", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        this.setParameter(1, concesionariaId);
+        this.executeUpdate();
+        this.disconnect();
     }
 }

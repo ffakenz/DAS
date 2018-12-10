@@ -183,5 +183,4 @@
         <sqlFile path="/src/main/resources/liquibase/consumers/procedures/update_consumers.sql"/>
     </changeSet>
 
-
 </databaseChangeLog>

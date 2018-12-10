@@ -141,6 +141,48 @@
         <dropProcedure procedureName="get_concesionaria_config_params_by_concesionaria_id"/>
     </changeSet>
 
+    <changeSet id="Drop procedure invalidate_params" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'invalidate_params'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="invalidate_params"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure log_concesionaria_x_config_tecnologica" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_concesionaria_x_config_tecnologica'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="log_concesionaria_x_config_tecnologica"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure get_concesionaria_x_config_tecnologica" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_concesionaria_x_config_tecnologica'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_concesionaria_x_config_tecnologica"/>
+    </changeSet>
+
     <!-- ******************************* -->
     <!--  CREATE PROCEDURES CHANGE-SETS  -->
     <!-- ******************************* -->
@@ -275,6 +317,50 @@
         </preConditions>
         <sqlFile
                 path="/src/main/resources/liquibase/concesionarias/procedures/get_concesionaria_config_params_by_concesionaria_id.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure invalidate_params" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'invalidate_params'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/concesionarias/procedures/invalidate_params.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure log_concesionaria_x_config_tecnologica" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_concesionaria_x_config_tecnologica'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/concesionarias/procedures/log_concesionaria_x_config_tecnologica.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure get_concesionaria_x_config_tecnologica" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_concesionaria_x_config_tecnologica'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/concesionarias/procedures/get_concesionaria_x_config_tecnologica.sql"/>
     </changeSet>
 
 </databaseChangeLog>

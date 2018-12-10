@@ -8,45 +8,49 @@ import java.sql.Timestamp;
 public class NotificationUpdate {
     // member variables
     @SerializedName("plan_id")
-    Long planId;
+    private Long planId;
     @SerializedName("plan_estado")
-    String planEstado;
+    private String planEstado;
     @SerializedName("plan_fecha_alta")
-    Timestamp planFechaAlta;
+    private Timestamp planFechaAlta;
+    @SerializedName("plan_fecha_ultima_actualizacion")
+    private Timestamp planFechaUltimaActualizacion;
+    @SerializedName(("plan_tipo_de_plan"))
+    private String planTipoDePlan;
     @SerializedName("cuota_nro_cuota")
-    Long cuotaNroCuota;
+    private Long cuotaNroCuota;
     @SerializedName("cuota_fecha_vencimiento")
-    Timestamp cuotaFechaVencimiento;
+    private Timestamp cuotaFechaVencimiento;
     @SerializedName("cuota_monto")
-    Integer cuotaMonto;
+    private Integer cuotaMonto;
     @SerializedName("cuota_fecha_pago")
-    Timestamp cuotaFechaPago;
+    private Timestamp cuotaFechaPago;
     @SerializedName("cuota_fecha_alta")
-    Timestamp cuotaFechaAlta;
+    private Timestamp cuotaFechaAlta;
     @SerializedName("cliente_documento")
-    Long clienteDocumento;
+    private Long clienteDocumento;
     @SerializedName("cliente_nombre")
-    String clienteNombre;
+    private String clienteNombre;
     @SerializedName("cliente_apellido")
-    String clienteApellido;
+    private String clienteApellido;
     @SerializedName("cliente_nro_telefono")
-    String clienteNroTelefono;
+    private String clienteNroTelefono;
     @SerializedName("cliente_email")
-    String clienteEmail;
+    private String clienteEmail;
     @SerializedName("vehiculo_id")
-    Long vehiculoId;
+    private Long vehiculoId;
     @SerializedName("vehiculo_tipo")
-    String vehiculoTipo;
+    private String vehiculoTipo;
     @SerializedName("vehiculo_nombre")
-    String vehiculoNombre;
+    private String vehiculoNombre;
     @SerializedName("vehiculo_precio")
-    Long vehiculoPrecio;
+    private Long vehiculoPrecio;
     @SerializedName("vehiculo_marca")
-    String vehiculoMarca;
+    private String vehiculoMarca;
     @SerializedName("vehiculo_modelo")
-    String vehiculoModelo;
+    private String vehiculoModelo;
     @SerializedName("vehiculo_color")
-    String vehiculoColor;
+    private String vehiculoColor;
 
     public Long getPlanId() {
         return planId;
@@ -72,35 +76,51 @@ public class NotificationUpdate {
         this.planFechaAlta = planFechaAlta;
     }
 
-    public Long getCoutaNroCuota() {
+    public Timestamp getPlanFechaUltimaActualizacion() {
+        return planFechaUltimaActualizacion;
+    }
+
+    public void setPlanFechaUltimaActualizacion(final Timestamp planFechaUltimaActualizacion) {
+        this.planFechaUltimaActualizacion = planFechaUltimaActualizacion;
+    }
+
+    public String getPlanTipoDePlan() {
+        return planTipoDePlan;
+    }
+
+    public void setPlanTipoDePlan(final String planTipoDePlan) {
+        this.planTipoDePlan = planTipoDePlan;
+    }
+
+    public Long getCuotaNroCuota() {
         return cuotaNroCuota;
     }
 
-    public void setCoutaNroCuota(final Long cuotaNroCuota) {
+    public void setCuotaNroCuota(final Long cuotaNroCuota) {
         this.cuotaNroCuota = cuotaNroCuota;
     }
 
-    public Timestamp getCoutaFechaVencimiento() {
+    public Timestamp getCuotaFechaVencimiento() {
         return cuotaFechaVencimiento;
     }
 
-    public void setCoutaFechaVencimiento(final Timestamp cuotaFechaVencimiento) {
+    public void setCuotaFechaVencimiento(final Timestamp cuotaFechaVencimiento) {
         this.cuotaFechaVencimiento = cuotaFechaVencimiento;
     }
 
-    public Integer getCoutaMonto() {
+    public Integer getCuotaMonto() {
         return cuotaMonto;
     }
 
-    public void setCoutaMonto(final Integer cuotaMonto) {
+    public void setCuotaMonto(final Integer cuotaMonto) {
         this.cuotaMonto = cuotaMonto;
     }
 
-    public Timestamp getCoutaFechaPago() {
+    public Timestamp getCuotaFechaPago() {
         return cuotaFechaPago;
     }
 
-    public void setCoutaFechaPago(final Timestamp cuotaFechaPago) {
+    public void setCuotaFechaPago(final Timestamp cuotaFechaPago) {
         this.cuotaFechaPago = cuotaFechaPago;
     }
 

@@ -14,6 +14,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static utils.MiddlewareConstants.REST;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ConfigurarConcesionariaTest {
@@ -46,7 +47,7 @@ public class ConfigurarConcesionariaTest {
     public void test_02_Insert_config_ok() throws SQLException {
 
         configurarConcesionariaForm.setConcesionariaId(4l);
-        configurarConcesionariaForm.setConfigTecno("REST");
+        configurarConcesionariaForm.setConfigTecno(REST);
         configurarConcesionariaForm.setConfigParam("url");
         configurarConcesionariaForm.setValue("http://localhost:8002/concesionarias_rest_one/concesionariaRestOne");
 
@@ -61,7 +62,7 @@ public class ConfigurarConcesionariaTest {
     public void test_03_Insert_config_fail() throws SQLException {
 
         configurarConcesionariaForm.setConcesionariaId(4l);
-        configurarConcesionariaForm.setConfigTecno("REST");
+        configurarConcesionariaForm.setConfigTecno(REST);
         configurarConcesionariaForm.setConfigParam("asd");
         configurarConcesionariaForm.setValue("http://localhost:8002/concesionarias_rest_one/concesionariaRestOne");
 

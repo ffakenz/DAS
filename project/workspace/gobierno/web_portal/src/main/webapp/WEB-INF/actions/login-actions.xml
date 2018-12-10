@@ -6,7 +6,8 @@
     <action-mappings>
 
         <action type="LoginAction" path="/Login.do">
-            <forward name="success" path="/login/successLogin.jsp" />
+            <forward name="success_gobierno" path="/login/successLoginGobierno.jsp" />
+            <forward name="success_consumer" path="/login/successLoginConsumer.jsp" />
             <forward name="warning" path="/login/failParamsLogin.jsp" />
             <forward name="failure" path="/login/failLogin.jsp" />
         </action>

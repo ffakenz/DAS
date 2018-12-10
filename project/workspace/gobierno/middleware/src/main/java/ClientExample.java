@@ -1,4 +1,5 @@
 import beans.NotificationUpdate;
+import beans.PlanBean;
 import clients.ConcesionariaServiceContract;
 import clients.factory.ClientFactory;
 import clients.factory.ClientType;
@@ -9,28 +10,29 @@ import java.util.List;
 public class ClientExample {
 
     static void consumeService(final ConcesionariaServiceContract client) {
+        final String identificador = "GOBIERNO-INCENTIVO-2018";
 
         System.out.println("consultarPlanes");
-        final List<NotificationUpdate> notificationUpdates = client.consultarPlanes("2018-01-08T20:58:00");
+        final List<NotificationUpdate> notificationUpdates = client.consultarPlanes(identificador, "2018-01-08T20:58:00");
         notificationUpdates.forEach(System.out::println);
 
         System.out.println("cancelarPlan");
-        client.cancelarPlan(1L);
+        client.cancelarPlan(identificador, 1L);
 
         System.out.println("consultarPlan");
-        final NotificationUpdate plan0 = client.consultarPlan(999L);
+        final PlanBean plan0 = client.consultarPlan(identificador, 999L);
         System.out.println(plan0.toString());
 
         System.out.println("consultarPlan");
-        final NotificationUpdate plan = client.consultarPlan(1L);
+        final PlanBean plan = client.consultarPlan(identificador, 1L);
         System.out.println(plan.toString());
 
         System.out.println("consultarPlan");
-        final NotificationUpdate plan2 = client.consultarPlan(2L);
+        final PlanBean plan2 = client.consultarPlan(identificador, 2L);
         System.out.println(plan2.toString());
 
         System.out.println("consultarPlanes");
-        final List<NotificationUpdate> notificationUpdates2 = client.consultarPlanes("2018-01-08T20:58:00");
+        final List<NotificationUpdate> notificationUpdates2 = client.consultarPlanes(identificador, "2018-01-08T20:58:00");
         notificationUpdates2.forEach(System.out::println);
     }
 

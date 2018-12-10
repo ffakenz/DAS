@@ -73,5 +73,5 @@
 
 
 # Be careful with the ports
-sudo lsof -i TCP:8002
-kill -9 {{PID}}
+sudo lsof -i TCP:{PORT}
+kill {PID}

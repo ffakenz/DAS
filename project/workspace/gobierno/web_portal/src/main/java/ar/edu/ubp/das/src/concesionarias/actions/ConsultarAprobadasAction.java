@@ -15,11 +15,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 import java.util.List;
 
+import static ar.edu.ubp.das.src.utils.Constants.*;
+
 public class ConsultarAprobadasAction implements Action {
     @Override
     public ForwardConfig execute(final ActionMapping mapping, final DynaActionForm form, final HttpServletRequest request, final HttpServletResponse response) throws SQLException, RuntimeException {
 
-        final DaoImpl msConcesionariaDao = DaoFactory.getDao("Concesionarias", "concesionarias");
+        final DaoImpl msConcesionariaDao = DaoFactory.getDao(CONCESIONARIAS_DAO_NAME, CONCESIONARIAS_DAO_PACKAGE);
 
         final ConsultarAprobadasInteractor action = new ConsultarAprobadasInteractor(msConcesionariaDao);
         final InteractorResponse<List<ConcesionariaForm>> result = action.execute(form);
@@ -27,7 +29,7 @@ public class ConsultarAprobadasAction implements Action {
         final List<ConcesionariaForm> aprobadas = result.getResult();
 
 
-        request.setAttribute("aprobadas", aprobadas);
+        request.setAttribute(APROBADAS_RQST_ATTRIBUTE, aprobadas);
 
         return mapping.getForwardByName(result.getResponse().getForward());
     }

@@ -9,9 +9,7 @@ import ar.edu.ubp.das.src.estado_cuentas.forms.CuotasForm;
 import ar.edu.ubp.das.src.estado_cuentas.forms.EstadoCuentasForm;
 import ar.edu.ubp.das.src.jobs.consumoo.ConsumoJob;
 import beans.NotificationUpdate;
-import clients.ConcesionariaServiceContract;
-import clients.IClientFactory;
-import clients.factory.ClientType;
+import clients.factory.ClientFactory;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -20,8 +18,6 @@ import util.TestDB;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import static org.junit.Assert.*;
@@ -41,28 +37,6 @@ public class ConsumoJobDesNormalizationSpec {
     private NotificationUpdate nonExistingEstadoCuenta;
     private NotificationUpdate existingCuota;
     private NotificationUpdate nonExistingCuota;
-
-    class EmptyClientFactoryMock implements IClientFactory {
-        @Override
-        public Optional<ConcesionariaServiceContract> getClientFor(final ClientType configTecno, final Map<String, String> params) {
-            return Optional.of(new ConcesionariaServiceContract() {
-                @Override
-                public List<NotificationUpdate> consultarPlanes(final String offset) {
-                    return null;
-                }
-
-                @Override
-                public NotificationUpdate consultarPlan(final Long planId) {
-                    return null;
-                }
-
-                @Override
-                public void cancelarPlan(final Long planId) {
-
-                }
-            });
-        }
-    }
 
     @Before
     public void setup() throws SQLException {
@@ -123,11 +97,11 @@ public class ConsumoJobDesNormalizationSpec {
                             final Integer monto,
                             final Timestamp fechaPago) {
         consumer.setPlanId(estadoCuentaId);
-        consumer.setCoutaNroCuota(nroCuota);
+        consumer.setCuotaNroCuota(nroCuota);
         consumer.setCuotaFechaAlta(fechaAltaConcesionaria);
-        consumer.setCoutaFechaVencimiento(fechaVencimiento);
-        consumer.setCoutaMonto(monto);
-        consumer.setCoutaFechaPago(fechaPago);
+        consumer.setCuotaFechaVencimiento(fechaVencimiento);
+        consumer.setCuotaMonto(monto);
+        consumer.setCuotaFechaPago(fechaPago);
     }
 
     // UPDATE CONSUMER DB
@@ -135,7 +109,7 @@ public class ConsumoJobDesNormalizationSpec {
     // We should insert a Consumer if it does not exists
     @Test
     public void test_10_ConsumerJob_UpdateConsumer_success() throws Exception {
-        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new EmptyClientFactoryMock());
+        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, ClientFactory.getInstance());
         setUpConsumer(nonExistingConsumer,
                 777L,
                 "ChuPamela",
@@ -161,7 +135,7 @@ public class ConsumoJobDesNormalizationSpec {
     // We should not insert/update a Consumer if it exists
     @Test
     public void test_11_ConsumerJob_UpdateConsumer_failure_insert() throws Exception {
-        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new EmptyClientFactoryMock());
+        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, ClientFactory.getInstance());
         setUpConsumer(existingConsumer,
                 111L,
                 "Carlos",
@@ -191,7 +165,7 @@ public class ConsumoJobDesNormalizationSpec {
     // We should insert a EstadoCuenta if it does not exists
     @Test
     public void test_12_ConsumerJob_NEW_UpdateEstadoCuenta_success() throws Exception {
-        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new EmptyClientFactoryMock());
+        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, ClientFactory.getInstance());
         setUpEstadoCuenta(nonExistingEstadoCuenta,
                 1002L,
                 111L,
@@ -217,7 +191,7 @@ public class ConsumoJobDesNormalizationSpec {
     // We should update a EstadoCuenta if it exists
     @Test
     public void test_13_ConsumerJob_OLD_UpdateEstadoCuenta_success() throws Exception {
-        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new EmptyClientFactoryMock());
+        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, ClientFactory.getInstance());
         setUpEstadoCuenta(existingEstadoCuenta,
                 1001L,
                 111L,
@@ -246,7 +220,7 @@ public class ConsumoJobDesNormalizationSpec {
     // We should insert a Cuota if it does not exists
     @Test
     public void test_14_ConsumerJob_NEW_Cuota_success() throws Exception {
-        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new EmptyClientFactoryMock());
+        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, ClientFactory.getInstance());
         setUpCuota(nonExistingCuota,
                 3L,
                 1L,
@@ -271,7 +245,8 @@ public class ConsumoJobDesNormalizationSpec {
     // We should update a Cuota if it exists
     @Test
     public void test_15_ConsumerJob_OLD_Cuota_success() throws Exception {
-        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new EmptyClientFactoryMock());
+        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, ClientFactory.getInstance());
+
         setUpCuota(existingCuota,
                 2L,
                 1L,
@@ -284,12 +259,16 @@ public class ConsumoJobDesNormalizationSpec {
         final CuotasForm form = new CuotasForm();
         form.setNroCuota(2L);
         form.setEstadoCuentaId(1L);
+
         final Optional<CuotasForm> cuotasForm = cuotasDao.selectCuota(form);
         assertTrue(cuotasForm.isPresent());
+
         // updateCuotaDb
         consumer.updateCuotaDb(existingCuota);
+
         // verify it exists in db and it changed
         final Optional<CuotasForm> cuotasForm2 = cuotasDao.selectCuota(form);
+
         assertTrue(cuotasForm2.isPresent());
         assertEquals(cuotasForm.get(), cuotasForm2.get()); // they are the same cuota
         // but got different monto and fecha pago

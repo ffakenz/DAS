@@ -1,17 +1,22 @@
-var home = {
+const home = {
 
     showRegistrarConcesionaria : function () {
 
-        window.location.href = "/web_portal/home/ShowRegistrarConcesionaria.do";
+        window.location.href = Globals.SHOW_REGISTRAR_CONCESIONARIA_ENDPOINT;
     },
 
     showLogin : function () {
 
-        window.location.href = "/web_portal/home/ShowLogin.do";
+        window.location.href = Globals.SHOW_LOGIN_ENDPOINT;
     },
 
     goToHome : function () {
 
-        window.location.href = "/web_portal/home/Home.do";
+        window.location.href = Globals.HOME_ENDPOINT;
+    },
+
+    goToProfile : function() {
+
+        window.location.href = Globals.LOGIN_ENDPOINT;
     }
 };
