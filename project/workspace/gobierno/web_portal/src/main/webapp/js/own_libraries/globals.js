@@ -12,3 +12,9 @@ const Globals = {
     TEST_CONFIG :  "/web_portal/concesionarias/TestConfig.do",
     CONSUMO_TEST :  "/web_portal/consumo/Consumo.do"
 };
+
+const ConfigTecno = {
+    REST: "AXIS",
+    REST: "CXF",
+    REST: "REST"
+};

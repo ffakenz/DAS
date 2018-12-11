@@ -102,7 +102,7 @@ public class FrontUtils {
         sb.append("</div>");
 
 
-        sb.append("<div>");
+        sb.append("<div id=\"config_tecno_params_div\">");
         if (configsParams.isEmpty()) {
             sb.append("<div class=\"form-group\">");
             sb.append(getInput(
@@ -135,8 +135,9 @@ public class FrontUtils {
                 .append(getButton(BTN_UPDATE_CONFIG, BTN_UPDATE_CONFIG, "Update"))
                 .append("</div>");
 
-        sb.append("<div class=\"form-group\">")
+        sb.append("<div class=\"form-group\" id=\"config_test_div\">")
                 .append(getButton(BTN_TEST_CONFIG, BTN_TEST_CONFIG, "Test"))
+                .append("<label id=\"test_config_label\"></label>")
                 .append("</div>");
 
         sb.append("</div>");

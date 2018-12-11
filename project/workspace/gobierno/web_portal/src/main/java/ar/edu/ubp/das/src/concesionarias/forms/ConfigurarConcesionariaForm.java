@@ -16,15 +16,19 @@ public class ConfigurarConcesionariaForm extends DynaActionForm {
     @Column(name = "value")
     String value;
 
+    public ConfigurarConcesionariaForm() {}
 
-    @Override
-    public String toString() {
-        return "ConfigurarConcesionariaForm{" +
-                "concesionariaId=" + concesionariaId +
-                ", configTecno='" + configTecno + '\'' +
-                ", configParam='" + configParam + '\'' +
-                ", value='" + value + '\'' +
-                '}';
+    public ConfigurarConcesionariaForm(String configTecno, String configParam, String value) {
+        this.configTecno = configTecno;
+        this.configParam = configParam;
+        this.value = value;
+    }
+
+    public ConfigurarConcesionariaForm(Long concesionariaId, String configTecno, String configParam, String value) {
+        this.concesionariaId = concesionariaId;
+        this.configTecno = configTecno;
+        this.configParam = configParam;
+        this.value = value;
     }
 
     public Long getConcesionariaId() {
@@ -57,5 +61,15 @@ public class ConfigurarConcesionariaForm extends DynaActionForm {
 
     public void setValue(final String value) {
         this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return "ConfigurarConcesionariaForm{" +
+                "concesionariaId=" + concesionariaId +
+                ", configTecno='" + configTecno + '\'' +
+                ", configParam='" + configParam + '\'' +
+                ", value='" + value + '\'' +
+                '}';
     }
 }
