@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -124,6 +125,7 @@ public class ActionController extends HttpServlet {
 
                         final Action iaction = Action.class.cast(Class.forName(actionClassName).newInstance());
 
+
                         forward = iaction.execute(mapping, form, request, response);
                         if (forward == null) {
                             if (action.isNoForward()) {
@@ -151,11 +153,20 @@ public class ActionController extends HttpServlet {
             forward = ModuleConfigImpl.getForwardByName("failure");
         }
 
-            this.doForward(request, response, forward, form, parameters);
+        this.doForward(request, response, forward, form, parameters);
     }
 
     private void doForward(final HttpServletRequest request, final HttpServletResponse response, final ForwardConfig forward, final DynaActionForm form, final Map<String, ParameterConfig> parameters) throws ServletException, IOException {
-        if (!forward.isRedirect() && forward.getPath().indexOf(".do") > 0) {
+        if (forward.isJson()) {
+            // Get the printwriter object from response to write the required json object to the output stream
+            final PrintWriter out = response.getWriter();
+            // Assuming your json object is **jsonObject**, perform the following, it will return your json object
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            out.print(forward.getJson());
+            out.flush();
+            return;
+        } else if (!forward.isRedirect() && forward.getPath().indexOf(".do") > 0) {
             final Iterator<Map.Entry<String, Object>> it = form.getItems().entrySet().iterator();
             while (it.hasNext()) {
                 final Map.Entry<String, Object> item = (Map.Entry<String, Object>) it.next();
