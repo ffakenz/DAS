@@ -61,10 +61,9 @@ $(() => {
                 jUtils.showing("modal_content", hr);
                 $("#modal_generic").modal("show");
             },
-            success: function(json) {
-                console.log("AJAX RESULT SUCCESS %o", json);
+            success: function(jsonArray) {
+                console.log("AJAX RESULT SUCCESS %o", jsonArray);
 
-                const html =
                 jUtils.showing("modal_content", html);
                 $("#modal_generic").modal("show");
             }
