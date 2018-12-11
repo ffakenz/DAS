@@ -57,11 +57,15 @@ $(() => {
             dataType: "html",
             error: function(hr){
                 console.log("AJAX RESULT ERROR %o", hr);
-                alert("AJAX RESULT ERROR " + hr);
+
+                jUtils.showing("modal_content", hr);
+                $("#modal_generic").modal("show");
             },
             success: function(html) {
                 console.log("AJAX RESULT SUCCESS %o", html);
-                jUtils.showing("update_config_div", html);
+
+                jUtils.showing("modal_content", html);
+                $("#modal_generic").modal("show");
             }
         });
     };
@@ -77,8 +81,39 @@ $(() => {
     const testConfigHandler = (evt) => {
         console.log("Testing Config %o", evt.target.id);
         evt.preventDefault();
-        const data = $("#update_config_form").serializeArray();
-        console.log(data)
+
+        const configTecno = $("#update_config_select").children("option:selected").val();
+
+        let data;
+
+        if (configTecno === "REST") {
+            data = "tecno=REST&";
+            data += "url=" + $("#url").val();
+        } else if (configTecno === "AXIS") {
+            data = "tecno=AXIS&";
+            data += "endpointUrl=" + $("#endpointUrl").val() + "&";
+            data += "targetNameSpace=" + $("#targetNameSpace").val();
+        } else if (configTecno === "CXF") {
+            data = "tecno=CXF&";
+            data += "wsdlUrl=" + $("#wsdlUrl").val();
+        }
+
+        $.ajax({
+            url: Globals.TEST_CONFIG,
+            type: "post",
+            data: data,
+            dataType: "html",
+            error: function(hr){
+                console.log("AJAX RESULT ERROR %o", hr);
+                alert("AJAX RESULT ERROR " + hr);
+            },
+            success: function(html) {
+                console.log("AJAX RESULT SUCCESS %o", html);
+
+                jUtils.showing("modal_content", html);
+                $("#modal_generic").modal("show");
+            }
+        });
 
     };
 
@@ -89,16 +124,21 @@ $(() => {
         const innerHtml = $("#inner_update_config_form_div").html;
         console.log(innerHtml);
 
-    }
+    };
+
+    const testConsumo = (evt) => {
+        console.log("Test consumo %o", evt.target.id);
+        evt.preventDefault();
+
+    };
 
     $("#tableConcesionarias").delegate(".aprobar_btn", "click", aprobarHandler);
     $("#tableConcesionarias").delegate(".desaprobar_btn", "click", desAprobarHandler);
     $("#tableConcesionarias").delegate(".config_btn", "click", configurarHandler);
-    $("#update_config_div").delegate("#update_config_btn", "click", updateConfigHandler);
-    $("#update_config_div").delegate("#test_config_btn", "click", testConfigHandler);
-
-    $("#update_config_div").delegate("#update_config_select", "change", changeUpdateConfigHandler)
-
+    $("#modal_content").delegate("#update_config_btn", "click", updateConfigHandler);
+    $("#modal_content").delegate("#test_config_btn", "click", testConfigHandler);
+    $("#modal_content").delegate("#update_config_select", "change", changeUpdateConfigHandler);
+    $("#test_consumo_div").delegate("#test_consumo_div", "click", testConsumo);
 
 
 });

@@ -41,5 +41,11 @@
             <forward name="failure" path="/concesionarias/showModalErrorConfig.jsp" />
         </action>
 
+        <action type="TestConfigAction" path="/TestConfig.do">
+            <forward name="success" path="/concesionarias/testConfigSuccess.jsp" />
+            <forward name="warning" path="/concesionarias/testConfigError.jsp" />
+            <forward name="failure" path="/concesionarias/testConfigError.jsp" />
+        </action>
+
     </action-mappings>
 </actions>

@@ -73,14 +73,14 @@ public class FrontUtils {
 
     public static String makeFormConfigTecnologica(final List<ConfigurarConcesionariaForm> configsParams) {
         final String configTecno = configsParams.get(0).getConfigTecno();
-
+        final Long concId = configsParams.get(0).getConcesionariaId();
         final Predicate<String> isAxisSelected = cnfg -> cnfg.equals(ClientType.AXIS.getName());
         final Predicate<String> isCxfSelected = cnfg -> cnfg.equals(ClientType.CXF.getName());
         final Predicate<String> isRestSelected = cnfg -> cnfg.equals(ClientType.REST.getName());
 
         final StringBuilder sb = new StringBuilder();
         sb.append("<form id=\"" + UPDATE_CONFIG_FORM + "\" class=\"form-horizontal\" method=\"post\" >");
-        sb.append("<div> id=\"" + INNER_UPDATE_CONFIG_FORM_DIV + "\" ");
+        sb.append("<div id=\"" + INNER_UPDATE_CONFIG_FORM_DIV + "\" >");
         sb.append("<div class=\"form-group\">");
         sb.append("<select id=\"" + UPDATE_CONFIG_SELECT + "\">")
                 .append("<option value=" +
@@ -106,8 +106,8 @@ public class FrontUtils {
         if (configsParams.isEmpty()) {
             sb.append("<div class=\"form-group\">");
             sb.append(getInput(
-                    ClientType.REST.getName(),
-                    "config_param-url",
+                    "text",
+                    "url",
                     "config_param",
                     "url",
                     "",
@@ -118,13 +118,14 @@ public class FrontUtils {
             for (final ConfigurarConcesionariaForm config : configsParams) {
                 sb.append("<div class=\"form-group\">");
                 sb.append(getInput(
-                        config.getConfigTecno(),
-                        "config_param-" + config.getConfigParam(),
+                        "text",
+                        config.getConfigParam(),
                         "config_param",
                         config.getConfigParam(),
                         config.getValue(),
                         "Param " + config.getConfigParam() + " "
                 ));
+
                 sb.append("</div>");
             }
         }
