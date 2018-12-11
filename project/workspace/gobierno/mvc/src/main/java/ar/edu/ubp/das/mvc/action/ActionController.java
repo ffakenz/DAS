@@ -157,6 +157,7 @@ public class ActionController extends HttpServlet {
     }
 
     private void doForward(final HttpServletRequest request, final HttpServletResponse response, final ForwardConfig forward, final DynaActionForm form, final Map<String, ParameterConfig> parameters) throws ServletException, IOException {
+
         if (forward.isJson()) {
             // Get the printwriter object from response to write the required json object to the output stream
             final PrintWriter out = response.getWriter();

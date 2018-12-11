@@ -82,7 +82,9 @@ public class FrontUtils {
         sb.append("<form id=\"" + UPDATE_CONFIG_FORM + "\" class=\"form-horizontal\" method=\"post\" >");
         sb.append("<div id=\"" + INNER_UPDATE_CONFIG_FORM_DIV + "\" >");
         sb.append("<div class=\"form-group\">");
-        sb.append("<select id=\"" + UPDATE_CONFIG_SELECT + "\" name=\"config_type\">")
+        sb.append(getInput("hidden", "concesionariaId", "", "concesionariaId",
+                concId.toString(),""));
+        sb.append("<select id=\"" + UPDATE_CONFIG_SELECT + "\" name=\"configTecno\" >")
                 .append("<option value=" +
                         ClientType.REST.getName() +
                         (isRestSelected.test(configTecno) ? " selected " : " ") + ">" +
@@ -133,6 +135,7 @@ public class FrontUtils {
 
         sb.append("<div class=\"form-group\">")
                 .append(getButton(BTN_UPDATE_CONFIG, BTN_UPDATE_CONFIG, "Update"))
+                .append("<label id=\"update_config_label\"></label>")
                 .append("</div>");
 
         sb.append("<div class=\"form-group\" id=\"config_test_div\">")

@@ -23,6 +23,7 @@ public class TestConfigAction implements Action {
 
 
         log.info(form.toString());
+
         TestConfigInteractor testConfigInteractor = new TestConfigInteractor();
         InteractorResponse<Boolean> resp = testConfigInteractor.execute(form);
 

@@ -115,7 +115,7 @@ public class ConsumoJob implements Job {
                 try {
                     // usamos el cliente p/ consultar planes
                     final ConcesionariaServiceContract client = cli.get();
-                    final List<NotificationUpdate> notificationUpdates = client.consultarPlanes(identificador, offset.toString());
+                    final List<NotificationUpdate> notificationUpdates = client.consultarPlanes(identificador, offset.toString()).get(); // TODO
                     log.info("Consume is successfull for concesionaria {} [notification_update:{}]", cId, JsonUtils.toJsonString(notificationUpdates));
                     final String description = "consultarPlanes was success for offset: " + offset;
                     logConsumoDb(cId, jobId, EstadoConsumo.SUCCESS, offset, rqstId, description);

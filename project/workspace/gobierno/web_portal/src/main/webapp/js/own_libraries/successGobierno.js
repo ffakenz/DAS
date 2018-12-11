@@ -72,11 +72,23 @@ $(() => {
     };
 
     const updateConfigHandler = (evt) => {
+
         console.log("Actualizando Concesionaria %o", evt.target.id);
         evt.preventDefault();
-        const data = $("#update_config_form").serializeArray();
-        console.log(data)
 
+        $.ajax({
+            url: Globals.CONFIG_CONCESIONARIA,
+            type: "post",
+            data: $("#update_config_form").serializeArray(),
+            error: function(hr){
+                console.log("AJAX RESULT ERROR %o", hr);
+                jUtils.showing("update_config_label", hr);
+            },
+            success: function(json) {
+                console.log("AJAX RESULT SUCCESS %o", json.toString());
+                jUtils.showing("update_config_label", "Configurada exitosamente");
+            }
+        });
     };
 
     const testConfigHandler = (evt) => {

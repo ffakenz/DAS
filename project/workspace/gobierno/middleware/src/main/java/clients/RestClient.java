@@ -27,14 +27,9 @@ public class RestClient implements ConcesionariaServiceContract {
 
     private final String url;
     private final HttpClient client;
+
     private BiFunction<String, String, HttpUriRequest> HTTPFactory = (method, callTo) -> {
-//        String encodedUrl = "/";
-//        try {
-//            encodedUrl = URLEncoder.encode(getUrl() + callTo, "UTF-8");
-//            System.out.println("Encoded Url: [ " + encodedUrl + " ]");
-//        } catch (UnsupportedEncodingException ex) {
-//            ex.printStackTrace();
-//        }
+
         System.out.println(getUrl() + callTo);
         URI uri = URI.create(getUrl() + callTo);
         System.out.println(uri.toString());
@@ -56,16 +51,31 @@ public class RestClient implements ConcesionariaServiceContract {
                 throw new IllegalArgumentException("Invalid method: " + method);
         }
     };
-    private BiFunction<String, String, String> call = (method, callTo) -> {
+
+    private Optional<String> call(String method, String callTo) {
+
         try {
             HttpResponse resp = getCliente().execute(HTTPFactory.apply(method, callTo));
             HttpEntity responseEntity = resp.getEntity();
-            return EntityUtils.toString(responseEntity);
+
+            if(!responseEntity.isChunked())
+                return Optional.empty();
+
+
+            int statusCode = resp.getStatusLine().getStatusCode();
+
+            if(statusCode == 200) {
+                String jsonPlanBean = EntityUtils.toString(responseEntity);
+                return Optional.of(jsonPlanBean);
+            }
+
+            return Optional.empty();
         } catch (IOException e) {
             e.printStackTrace();
+            return Optional.empty();
         }
-        return "No respuesta";
-    };
+    }
+
     private BiConsumer<String, String> fireAndForget = (method, callTo) -> {
         try {
             getCliente().execute(HTTPFactory.apply(method, callTo));
@@ -97,30 +107,38 @@ public class RestClient implements ConcesionariaServiceContract {
     }
 
     @Override
-    public List<NotificationUpdate> consultarPlanes(final String identificador, final String offset) {
-        final String jsonPlanBeans =
-                call.apply("GET", "/consultarPlanes?identificador=" + identificador + "&offset=" + offset);
-        final NotificationUpdate[] notificationUpdates = JsonUtils.toObject(jsonPlanBeans, NotificationUpdate[].class);
-        return Stream.of(notificationUpdates).collect(Collectors.toList());
+    public Optional<List<NotificationUpdate>> consultarPlanes(final String identificador, final String offset) {
+
+        String url = String.format("/consultarPlanes?identificador=%s&offset=%s", identificador, offset);
+
+        final Optional<String> jsonPlanBeans = call("GET", url);
+
+        return jsonPlanBeans.flatMap( json -> {
+            final NotificationUpdate[] notificationUpdates = JsonUtils.toObject(json, NotificationUpdate[].class);
+            return Optional.of(Stream.of(notificationUpdates).collect(Collectors.toList()));
+        });
+
     }
 
     @Override
-    public PlanBean consultarPlan(final String identificador, final Long planId) {
-        final String jsonPlanBean =
-                call.apply("GET", "/consultarPlan?identificador=" + identificador + "&planId=" + planId.toString());
-        return JsonUtils.toObject(jsonPlanBean, PlanBean.class);
+    public Optional<PlanBean> consultarPlan(final String identificador, final Long planId) {
+
+        String url = String.format("/consultarPlan?identificador=%s&planId=%s",identificador, planId.toString());
+        final Optional<String> jsonPlanBean = call("GET", url);
+
+        return jsonPlanBean.flatMap(json -> Optional.of(JsonUtils.toObject(json, PlanBean.class)));
     }
 
     // TODO: Create method that will parse multiple parameters
     @Override
     public void cancelarPlan(final String identificador, final Long planId) {
-        fireAndForget.accept("PUT", "/cancelarPlan?identificador=" + identificador + "&planId=" + planId.toString());
+        String url = String.format("/cancelarPlan?identificador=%s&planId=%s", identificador, planId.toString());
+        fireAndForget.accept("PUT", url);
     }
 
     @Override
-    public String health(final String identificador) {
-        final String jsonPlanBean =
-                call.apply("GET", "/health?identificador=" + identificador);
-        return jsonPlanBean;
+    public Optional<String> health(final String identificador) {
+        String url = String.format("/health?identificador=%s",identificador);
+        return call("GET", url);
     }
 }

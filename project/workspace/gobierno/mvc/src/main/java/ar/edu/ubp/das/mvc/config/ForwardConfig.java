@@ -29,7 +29,7 @@ public final class ForwardConfig {
     }
 
     public void setRedirect(final String redirect) {
-        this.redirect = redirect.isEmpty() ? false : redirect.equals("true") ? true : false;
+        this.redirect = !redirect.isEmpty() && redirect.equals("true");
     }
 
     @Override

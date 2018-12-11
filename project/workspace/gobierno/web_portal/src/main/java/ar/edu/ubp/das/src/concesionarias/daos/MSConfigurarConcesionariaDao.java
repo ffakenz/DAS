@@ -22,8 +22,9 @@ public class MSConfigurarConcesionariaDao extends DaoImpl<ConfigurarConcesionari
 
     @Override
     public void update(final ConfigurarConcesionariaForm form) throws SQLException {
+        this.executeProcedure("dbo.update_concesionaria_config_params(?, ?, ?, ?)", form,
+                "concesionariaId", "configTecno", "configParam", "value");
     }
-
 
     @Override
     public void delete(final ConfigurarConcesionariaForm form) throws SQLException {
@@ -36,6 +37,12 @@ public class MSConfigurarConcesionariaDao extends DaoImpl<ConfigurarConcesionari
         return this.executeQueryProcedure("dbo.get_concesionaria_config_params");
     }
 
+    @Override
+    public boolean valid(ConfigurarConcesionariaForm form) throws SQLException {
+        return selectParamsByConcesionariaId(form.getConcesionariaId())
+                .stream()
+                .anyMatch(c -> c.getConfigTecno().equals(form.getConfigTecno()));
+    }
 
     public List<ConfigurarConcesionariaForm> selectParamsByConcesionariaId(final Long id) throws SQLException {
 
@@ -47,9 +54,12 @@ public class MSConfigurarConcesionariaDao extends DaoImpl<ConfigurarConcesionari
         return result;
     }
 
-    @Override
-    public boolean valid(final ConfigurarConcesionariaForm form) throws SQLException {
-        return false;
+    public void upsert(final ConfigurarConcesionariaForm form) throws SQLException {
+        if (!this.valid(form)) {
+            this.insert(form);
+        } else {
+            this.update(form);
+        }
     }
 
     public void invalidateParams(final Long concesionariaId) throws SQLException {
