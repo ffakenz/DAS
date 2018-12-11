@@ -64,6 +64,7 @@ $(() => {
             success: function(jsonArray) {
                 console.log("AJAX RESULT SUCCESS %o", jsonArray);
 
+                const html = updateConfigForm.buildConfigurarConcesionariasForm(jsonArray);
                 jUtils.showing("modal_content", html);
                 $("#modal_generic").modal("show");
             }
@@ -133,6 +134,7 @@ $(() => {
 
     const changeUpdateConfigHandler = (evt) => {
         console.log("Changing Config %o", evt.target.id);
+        console.log("EVT ID = %o", evt.target.id);
         evt.preventDefault();
 
         const innerHtml = $("#inner_update_config_form_div").html;

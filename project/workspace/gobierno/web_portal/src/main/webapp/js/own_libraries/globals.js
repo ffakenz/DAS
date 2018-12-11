@@ -15,7 +15,19 @@ const Globals = {
 };
 
 const ConfigTecno = {
-    REST: "AXIS",
-    REST: "CXF",
-    REST: "REST"
+    REST: {configTecno: "REST", configParams: [{name: "url", value: ""}]},
+    AXIS: {configTecno: "AXIS", configParams: [{name: "endpointUrl", value: ""}, {name: "targetNameSpace", value: ""}]},
+    CXF: {configTecno: "CXF", configParams: [{name: "wsdlUrl", value: ""}]}
+};
+
+const Id = {
+    UPDATE_CONFIG_FORM: "update_config_form",
+    INNER_UPDATE_CONFIG_FORM_DIV: "inner_update_config_form_div",
+    UPDATE_CONFIG_SELECT: "update_config_select"
+};
+
+const Class = {
+    UPDATE_CONFIG_PARAM: "config_param",
+    BTN_UPDATE_CONFIG: "update_config_btn",
+    BTN_TEST_CONFIG: "test_config_btn"
 };

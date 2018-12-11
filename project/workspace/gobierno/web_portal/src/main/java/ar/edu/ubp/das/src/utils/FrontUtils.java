@@ -1,11 +1,6 @@
 package ar.edu.ubp.das.src.utils;
 
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
-import ar.edu.ubp.das.src.concesionarias.forms.ConfigurarConcesionariaForm;
-import clients.factory.ClientType;
-
-import java.util.List;
-import java.util.function.Predicate;
 
 import static ar.edu.ubp.das.src.utils.Constants.*;
 
