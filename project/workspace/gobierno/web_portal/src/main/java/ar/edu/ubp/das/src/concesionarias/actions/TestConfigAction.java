@@ -5,6 +5,7 @@ import ar.edu.ubp.das.mvc.action.ActionMapping;
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.config.ForwardConfig;
 import ar.edu.ubp.das.src.concesionarias.TestConfigInteractor;
+import ar.edu.ubp.das.src.core.InteractorResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,8 +24,8 @@ public class TestConfigAction implements Action {
 
         log.info(form.toString());
         TestConfigInteractor testConfigInteractor = new TestConfigInteractor();
-        testConfigInteractor.execute(form);
+        InteractorResponse<Boolean> resp = testConfigInteractor.execute(form);
 
-        return mapping.getForwardByName("success");
+        return mapping.getForwardByName(resp.getResponse().getForward());
     }
 }

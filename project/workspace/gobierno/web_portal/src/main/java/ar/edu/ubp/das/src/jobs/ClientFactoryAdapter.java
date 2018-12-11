@@ -11,6 +11,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class ClientFactoryAdapter {
+
     private IClientFactory clientFactory;
 
     public ClientFactoryAdapter(final IClientFactory clientFactory) {

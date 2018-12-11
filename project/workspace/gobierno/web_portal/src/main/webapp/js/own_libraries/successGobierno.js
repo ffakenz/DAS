@@ -105,12 +105,11 @@ $(() => {
             dataType: "html",
             error: function(hr){
                 console.log("AJAX RESULT ERROR %o", hr);
-                alert("AJAX RESULT ERROR " + hr);
+                jUtils.showing("test_config_label", hr);
             },
             success: function(html) {
                 console.log("AJAX RESULT SUCCESS %o", html);
-
-                jUtils.showing("modal_content", html);
+                jUtils.showing("test_config_label", html);
                 $("#modal_generic").modal("show");
             }
         });

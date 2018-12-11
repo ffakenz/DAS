@@ -68,7 +68,9 @@ public class ConcesionariaRestOne extends MSSQLConsecionaria implements Concesio
     @Produces(MediaType.APPLICATION_JSON)
     @Override
     public String health(@QueryParam("identificador") final String identificador) {
+
         System.out.println("Rest health identificador -> " + identificador);
+
         return "OK";
     }
 }

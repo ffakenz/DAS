@@ -56,11 +56,11 @@ public class ConfigurarConcesionariaInteractor implements Interactor<Boolean> {
 
         for (final ConfigTecnoParamsForm c : genConfigConcForm.getParams()) {
 
-            final ConfigurarConcesionariaForm configurarConcesionariaForm = new ConfigurarConcesionariaForm();
-            configurarConcesionariaForm.setConcesionariaId(genConfigConcForm.getConcesionariaId());
-            configurarConcesionariaForm.setConfigParam(c.getConfigParam());
-            configurarConcesionariaForm.setConfigTecno(c.getConfigTecno());
-            configurarConcesionariaForm.setValue(c.getValue());
+            final ConfigurarConcesionariaForm configurarConcesionariaForm = new ConfigurarConcesionariaForm(
+                    genConfigConcForm.getConcesionariaId(),
+                    c.getConfigTecno(),
+                    c.getConfigParam(),
+                    c.getValue());
 
             configurarConcesionariaManager.getDao().insert(configurarConcesionariaForm);
         }
