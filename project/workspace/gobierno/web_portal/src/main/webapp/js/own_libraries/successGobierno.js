@@ -54,16 +54,17 @@ $(() => {
             url: Globals.CONCESIONARIA_CONSULTAR_CONFIG_PARAM,
             type: "post",
             data: "id=" + idConcesionaria,
-            dataType: "html",
+            dataType: "json",
             error: function(hr){
-                console.log("AJAX RESULT ERROR %o", hr);
+                console.log("AJAX RESULT ERROR %o", hr.responseText);
 
                 jUtils.showing("modal_content", hr);
                 $("#modal_generic").modal("show");
             },
-            success: function(html) {
-                console.log("AJAX RESULT SUCCESS %o", html);
+            success: function(json) {
+                console.log("AJAX RESULT SUCCESS %o", json);
 
+                const html =
                 jUtils.showing("modal_content", html);
                 $("#modal_generic").modal("show");
             }
@@ -113,6 +114,9 @@ $(() => {
                 $("#modal_generic").modal("show");
             }
         });
+
+        const data2 = $("#update_config_form").serializeArray();
+        console.log(data2)
 
     };
 

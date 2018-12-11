@@ -24,14 +24,14 @@ public class ConsultarConcesionariaConfigParamInteractor implements Interactor<L
     }
 
     @Override
-    public InteractorResponse<List<ConfigurarConcesionariaForm>> execute(DynaActionForm form) {
+    public InteractorResponse<List<ConfigurarConcesionariaForm>> execute(final DynaActionForm form) {
 
         final Pair<String, Boolean> id = form.isItemValid("id");
 
-        Boolean someIsMissing = Arrays.asList(id)
+        final Boolean someIsMissing = Arrays.asList(id)
                 .stream().anyMatch(v -> v.snd == false);
 
-        if(someIsMissing)
+        if (someIsMissing)
             return new InteractorResponse<>(ResponseForward.WARNING, new ArrayList<>());
 
         List<ConfigurarConcesionariaForm> configurarConcesionariaForms = null;
@@ -41,7 +41,7 @@ public class ConsultarConcesionariaConfigParamInteractor implements Interactor<L
 
             return new InteractorResponse(ResponseForward.SUCCESS, configurarConcesionariaForms);
 
-        } catch (SQLException e) {
+        } catch (final SQLException e) {
             e.printStackTrace();
             return new InteractorResponse(ResponseForward.FAILURE, new ArrayList<>());
         }

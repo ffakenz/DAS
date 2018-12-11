@@ -82,7 +82,7 @@ public class FrontUtils {
         sb.append("<form id=\"" + UPDATE_CONFIG_FORM + "\" class=\"form-horizontal\" method=\"post\" >");
         sb.append("<div id=\"" + INNER_UPDATE_CONFIG_FORM_DIV + "\" >");
         sb.append("<div class=\"form-group\">");
-        sb.append("<select id=\"" + UPDATE_CONFIG_SELECT + "\">")
+        sb.append("<select id=\"" + UPDATE_CONFIG_SELECT + "\" name=\"config_type\">")
                 .append("<option value=" +
                         ClientType.REST.getName() +
                         (isRestSelected.test(configTecno) ? " selected " : " ") + ">" +
