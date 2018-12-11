@@ -183,6 +183,20 @@
         <dropProcedure procedureName="get_concesionaria_x_config_tecnologica"/>
     </changeSet>
 
+    <changeSet id="Drop procedure update_concesionaria_config_params" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'update_concesionaria_config_params'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="update_concesionaria_config_params"/>
+    </changeSet>
+
     <!-- ******************************* -->
     <!--  CREATE PROCEDURES CHANGE-SETS  -->
     <!-- ******************************* -->
@@ -363,4 +377,18 @@
                 path="/src/main/resources/liquibase/concesionarias/procedures/get_concesionaria_x_config_tecnologica.sql"/>
     </changeSet>
 
+    <changeSet id="Create procedure update_concesionaria_config_params" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'update_concesionaria_config_params'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/concesionarias/procedures/update_concesionaria_config_params.sql"/>
+    </changeSet>
 </databaseChangeLog>

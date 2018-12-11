@@ -10,7 +10,8 @@ const Globals = {
     DESAPROBAR_CONCESIONARIA_ENDPOINT : "/web_portal/concesionarias/DesAprobarConcesionaria.do",
     CONCESIONARIA_CONSULTAR_CONFIG_PARAM :  "/web_portal/concesionarias/ConsultarConcesionariaConfigParam.do",
     TEST_CONFIG :  "/web_portal/concesionarias/TestConfig.do",
-    CONSUMO_TEST :  "/web_portal/consumo/Consumo.do"
+    CONSUMO_TEST :  "/web_portal/consumo/Consumo.do",
+    CONFIG_CONCESIONARIA : "/web_portal/concesionarias/Configurar.do"
 };
 
 const ConfigTecno = {

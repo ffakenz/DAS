@@ -48,7 +48,7 @@ public class TestConfigInteractor implements Interactor<Boolean> {
             return new InteractorResponse<>(ResponseForward.FAILURE, false);
 
         final ConcesionariaServiceContract client = clientOpt.get();
-        client.health("identificador_test");
+        Optional<String> identificador_test = client.health("identificador_test");
 
         return new InteractorResponse<>(ResponseForward.SUCCESS, true);
     }

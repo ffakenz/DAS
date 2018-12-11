@@ -4,13 +4,14 @@ import beans.NotificationUpdate;
 import beans.PlanBean;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ConcesionariaServiceContract {
-    List<NotificationUpdate> consultarPlanes(String identificador, String offset);
+    Optional<List<NotificationUpdate>> consultarPlanes(String identificador, String offset);
 
-    PlanBean consultarPlan(String identificador, Long planId);
+    Optional<PlanBean> consultarPlan(String identificador, Long planId);
 
     void cancelarPlan(String identificador, Long planId);
 
-    String health(String identificador);
+    Optional<String> health(String identificador);
 }

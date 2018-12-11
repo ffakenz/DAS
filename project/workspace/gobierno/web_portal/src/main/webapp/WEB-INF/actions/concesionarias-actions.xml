@@ -29,10 +29,9 @@
             <forward name="warning" path="/util/warning.jsp" />
         </action>
 
-        <action type="ConfigurarAction" path="/Configurar.do">
-            <forward name="success" path="/util/success.jsp" />
-            <forward name="failure" path="/util/failure.jsp" />
-            <forward name="warning" path="/util/warning.jsp" />
+        <action type="ConfigurarAction" path="/Configurar.do" json="true">
+            <forward name="warning" path="/concesionarias/failureConfigurar.jsp" />
+            <forward name="failure" path="/concesionarias/failureConfigurar.jsp" />
         </action>
 
         <action type="ConsultarConcesionariaConfigParamAction" path="/ConsultarConcesionariaConfigParam.do">

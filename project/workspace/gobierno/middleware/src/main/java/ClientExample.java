@@ -13,36 +13,36 @@ public class ClientExample {
         final String identificador = "GOBIERNO-INCENTIVO-2018";
 
         System.out.println("consultarPlanes");
-        final List<NotificationUpdate> notificationUpdates = client.consultarPlanes(identificador, "2018-01-08T20:58:00");
+        final List<NotificationUpdate> notificationUpdates = client.consultarPlanes(identificador, "2018-01-08T20:58:00").get();
         notificationUpdates.forEach(System.out::println);
 
         System.out.println("cancelarPlan");
         client.cancelarPlan(identificador, 1L);
 
         System.out.println("consultarPlan");
-        final PlanBean plan0 = client.consultarPlan(identificador, 999L);
+        final PlanBean plan0 = client.consultarPlan(identificador, 999L).get();
         System.out.println(plan0.toString());
 
         System.out.println("consultarPlan");
-        final PlanBean plan = client.consultarPlan(identificador, 1L);
+        final PlanBean plan = client.consultarPlan(identificador, 1L).get();
         System.out.println(plan.toString());
 
         System.out.println("consultarPlan");
-        final PlanBean plan2 = client.consultarPlan(identificador, 2L);
+        final PlanBean plan2 = client.consultarPlan(identificador, 2L).get();
         System.out.println(plan2.toString());
 
         System.out.println("consultarPlanes");
-        final List<NotificationUpdate> notificationUpdates2 = client.consultarPlanes(identificador, "2018-01-08T20:58:00");
+        final List<NotificationUpdate> notificationUpdates2 = client.consultarPlanes(identificador, "2018-01-08T20:58:00").get();
         notificationUpdates2.forEach(System.out::println);
     }
 
     public static void main(final String[] args) {
 
-        System.out.println("Running AXIS");
-        runAxis();
+//        System.out.println("Running AXIS");
+//        runAxis();
         System.out.println("Running REST");
-        runRest();
-        System.out.println("Running CXF");
+//        runRest();
+//        System.out.println("Running CXF");
         runCxf();
     }
 

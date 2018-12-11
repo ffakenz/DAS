@@ -59,7 +59,7 @@ public class AxisClient implements ConcesionariaServiceContract {
         }
     }
 
-    private OMElement executeMethod(final OMElement method) {
+    private Optional<OMElement> executeMethod(final OMElement method) {
         try {
             final ServiceClient serviceClient = new ServiceClient();
             // create option object
@@ -70,12 +70,15 @@ public class AxisClient implements ConcesionariaServiceContract {
 
             final OMElement res = serviceClient.sendReceive(method);
 
-            return res;
+            if(res.getFirstElement().getText().equals("null"))
+                return Optional.empty();
+
+            return Optional.of(res);
         } catch (final AxisFault axisFault) {
             axisFault.printStackTrace();
             System.out.println(axisFault.getMessage());
+            return Optional.empty();
         }
-        return null; // non reacheable statemet
     }
 
     private OMElement createMethod(final String methodName) {
@@ -105,33 +108,37 @@ public class AxisClient implements ConcesionariaServiceContract {
     }
 
     @Override
-    public List<NotificationUpdate> consultarPlanes(final String identificador, final String offset) {
+    public Optional<List<NotificationUpdate>> consultarPlanes(final String identificador, final String offset) {
         final OMElement method = createMethod("consultarPlanes");
         final OMElement param = createParam("identificador", identificador);
         final OMElement param2 = createParam("offset", offset);
         method.addChild(param);
         method.addChild(param2);
-        final OMElement res = executeMethod(method);
+        final Optional<OMElement> omElement = executeMethod(method);
 
-        final OMElement returnValue = res.getFirstElement();
-        final String jsonPlanBeans = returnValue.getText();
-        final NotificationUpdate[] notificationUpdates = JsonUtils.toObject(jsonPlanBeans, NotificationUpdate[].class);
-        return Stream.of(notificationUpdates).collect(Collectors.toList());
+        return omElement.flatMap(res -> {
+            final OMElement returnValue = res.getFirstElement();
+            final String jsonPlanBeans = returnValue.getText();
+            final NotificationUpdate[] notificationUpdates = JsonUtils.toObject(jsonPlanBeans, NotificationUpdate[].class);
+            return Optional.of(Stream.of(notificationUpdates).collect(Collectors.toList()));
+        });
     }
 
     @Override
-    public PlanBean consultarPlan(final String identificador, final Long planId) {
+    public Optional<PlanBean> consultarPlan(final String identificador, final Long planId) {
         final OMElement method = createMethod("consultarPlan");
         final OMElement param = createParam("identificador", identificador);
         final OMElement param2 = createParam("planId", planId);
         method.addChild(param);
         method.addChild(param2);
-        final OMElement res = executeMethod(method); // response
+        final Optional<OMElement> omElement = executeMethod(method); // response
 
-        final OMElement returnValue = res.getFirstElement();
-        final String jsonPlanBean = returnValue.getText();
+        return omElement.flatMap(res -> {
+            final OMElement returnValue = res.getFirstElement();
+            final String jsonPlanBean = returnValue.getText();
+            return Optional.of(JsonUtils.toObject(jsonPlanBean, PlanBean.class));
+        });
 
-        return JsonUtils.toObject(jsonPlanBean, PlanBean.class);
     }
 
     @Override
@@ -145,15 +152,18 @@ public class AxisClient implements ConcesionariaServiceContract {
     }
 
     @Override
-    public String health(final String identificador) {
+    public Optional<String> health(final String identificador) {
         final OMElement method = createMethod("health");
         final OMElement param = createParam("identificador", identificador);
         method.addChild(param);
-        final OMElement res = executeMethod(method); // response
+        final Optional<OMElement> omElement = executeMethod(method); // response
 
-        final OMElement returnValue = res.getFirstElement();
-        final String jsonPlanBean = returnValue.getText();
-        
-        return jsonPlanBean;
+        return omElement.flatMap(res -> {
+            final OMElement returnValue = res.getFirstElement();
+            final String jsonHealth = returnValue.getText();
+            return Optional.of(jsonHealth);
+        });
+
+
     }
 }

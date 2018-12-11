@@ -29,37 +29,43 @@ public class CXFClient implements ConcesionariaServiceContract {
         return Optional.of(cxfClient);
     }
 
-    private <A> Object executeMethod(final String methodName, final A... params) {
+    private <A> Optional<Object> executeMethod(final String methodName, final A... params) {
         final JaxWsDynamicClientFactory dcf = JaxWsDynamicClientFactory.newInstance();
-        final Client client = dcf.createClient(wsdlUrl);
-        try {
+
+        // TODO -> IMPLEMENT AXIS USING THIS client
+        try(Client client = dcf.createClient(wsdlUrl)) {
             // System.out.println("Consuming Service: " + client.getEndpoint().getService().getName().toString());
             final Object[] res = client.invoke(methodName, params);
             if (res.length == 0)
-                return null;
-            return res[0];
+                return Optional.empty();
+
+            return Optional.of(res[0]);
         } catch (final Exception e) {
             e.printStackTrace();
             System.out.println("Exception in response is " + e.getMessage());
-        } finally {
-            client.destroy();
+            return Optional.empty();
         }
-        return null;
     }
 
     @Override
-    public List<NotificationUpdate> consultarPlanes(final String identificador, final String offset) {
-        final Object res = executeMethod("consultarPlanes", identificador, offset);
-        final String jsonPlanBeans = res.toString();
-        final NotificationUpdate[] notificationUpdates = JsonUtils.toObject(jsonPlanBeans, NotificationUpdate[].class);
-        return Stream.of(notificationUpdates).collect(Collectors.toList());
+    public Optional<List<NotificationUpdate>> consultarPlanes(final String identificador, final String offset) {
+
+        final Optional<Object> object = executeMethod("consultarPlanes", identificador, offset);
+
+        return object.flatMap(res -> {
+            String jsonPlanBeans = res.toString();
+            final NotificationUpdate[] notificationUpdates = JsonUtils.toObject(jsonPlanBeans, NotificationUpdate[].class);
+            return Optional.of(Stream.of(notificationUpdates).collect(Collectors.toList()));
+        });
     }
 
     @Override
-    public PlanBean consultarPlan(final String identificador, final Long planId) {
-        final Object res = executeMethod("consultarPlan", identificador, planId);
-        final String jsonPlanBean = res.toString();
-        return JsonUtils.toObject(jsonPlanBean, PlanBean.class);
+    public Optional<PlanBean> consultarPlan(final String identificador, final Long planId) {
+        final Optional<Object> object = executeMethod("consultarPlan", identificador, planId);
+        return object.flatMap(res -> {
+            final String jsonPlanBean = res.toString();
+            return Optional.of(JsonUtils.toObject(jsonPlanBean, PlanBean.class));
+        });
     }
 
     @Override
@@ -68,9 +74,12 @@ public class CXFClient implements ConcesionariaServiceContract {
     }
 
     @Override
-    public String health(final String identificador) {
-        final Object res = executeMethod("health", identificador);
-        final String jsonPlanBean = res.toString();
-        return jsonPlanBean;
+    public Optional<String> health(final String identificador) {
+        final Optional<Object> object = executeMethod("health", identificador);
+
+        return object.flatMap(res -> {
+            String jsonPlanBean = res.toString();
+            return Optional.of(jsonPlanBean);
+        });
     }
 }

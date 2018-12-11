@@ -51,7 +51,7 @@ public class ConfigurarConcesionariaInteractorTest {
 
         final DynaActionForm form = new DynaActionForm();
         form.setItem("concesionariaId", "1");
-        form.setItem("techno", AXIS);
+        form.setItem("configTecno", AXIS);
         form.setItem(AXIS_PARAM_ENDP_URL, "endpoint_url_param");
         form.setItem(AXIS_PARAM_TARGET, "target_namespace_url_param");
 
@@ -70,7 +70,7 @@ public class ConfigurarConcesionariaInteractorTest {
 
         final DynaActionForm form = new DynaActionForm();
         form.setItem("concesionariaId", "1");
-        form.setItem("techno", REST);
+        form.setItem("configTecno", REST);
         form.setItem(REST_PARAM_URL, "new_url");
 
         final GeneralConfigConcesionariaForm generalConfigConcesionariaForm = configurarConcesionariaInteractor.convertTo(form);
@@ -87,7 +87,7 @@ public class ConfigurarConcesionariaInteractorTest {
 
         final DynaActionForm form = new DynaActionForm();
         form.setItem("concesionariaId", "1");
-        form.setItem("techno", CXF);
+        form.setItem("configTecno", CXF);
         form.setItem(CXF_PARAM_WSDL_URL, "new_url");
 
         final GeneralConfigConcesionariaForm generalConfigConcesionariaForm = configurarConcesionariaInteractor.convertTo(form);
@@ -104,7 +104,7 @@ public class ConfigurarConcesionariaInteractorTest {
 
         final DynaActionForm form = new DynaActionForm();
         form.setItem("concesionariaId", "1");
-        form.setItem("techno", REST);
+        form.setItem("configTecno", REST);
         form.setItem(REST_PARAM_URL, "new_url");
 
         assertTrue(configurarConcesionariaInteractor.isValid(form));
@@ -115,7 +115,7 @@ public class ConfigurarConcesionariaInteractorTest {
 
         final DynaActionForm form = new DynaActionForm();
         form.setItem("concesionariaId", "1");
-        form.setItem("techno", CXF);
+        form.setItem("configTecno", CXF);
         form.setItem(CXF_PARAM_WSDL_URL, "new_url");
 
         assertTrue(configurarConcesionariaInteractor.isValid(form));
@@ -126,7 +126,7 @@ public class ConfigurarConcesionariaInteractorTest {
 
         final DynaActionForm form = new DynaActionForm();
         form.setItem("concesionariaId", "1");
-        form.setItem("techno", AXIS);
+        form.setItem("configTecno", AXIS);
         form.setItem(AXIS_PARAM_TARGET, "targe_param");
         form.setItem(AXIS_PARAM_ENDP_URL, "endpoint_url_param");
 
@@ -138,7 +138,7 @@ public class ConfigurarConcesionariaInteractorTest {
 
         final DynaActionForm form = new DynaActionForm();
         form.setItem("concesionariaId", "1");
-        form.setItem("techno", REST);
+        form.setItem("configTecno", REST);
         form.setItem(REST_PARAM_URL, "url_rest");
 
         final InteractorResponse<Boolean> response = configurarConcesionariaInteractor.execute(form);
@@ -160,7 +160,7 @@ public class ConfigurarConcesionariaInteractorTest {
 
         final DynaActionForm form = new DynaActionForm();
         form.setItem("concesionariaId", "2");
-        form.setItem("techno", CXF);
+        form.setItem("configTecno", CXF);
         form.setItem(CXF_PARAM_WSDL_URL, "url_cxf");
 
         final InteractorResponse<Boolean> response = configurarConcesionariaInteractor.execute(form);
@@ -182,7 +182,7 @@ public class ConfigurarConcesionariaInteractorTest {
 
         final DynaActionForm form = new DynaActionForm();
         form.setItem("concesionariaId", "3");
-        form.setItem("techno", AXIS);
+        form.setItem("configTecno", AXIS);
         form.setItem(AXIS_PARAM_ENDP_URL, "endpoint_url");
         form.setItem(AXIS_PARAM_TARGET, "target");
 

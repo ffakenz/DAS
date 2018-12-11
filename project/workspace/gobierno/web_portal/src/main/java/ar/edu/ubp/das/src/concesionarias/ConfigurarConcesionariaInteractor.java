@@ -71,9 +71,9 @@ public class ConfigurarConcesionariaInteractor implements Interactor<Boolean> {
     public Boolean isValid(final DynaActionForm form) {
 
         final Pair<String, Boolean> concesionariaId = form.isItemValid("concesionariaId");
-        final Pair<String, Boolean> techno = form.isItemValid("techno");
+        final Pair<String, Boolean> techno = form.isItemValid("configTecno");
 
-        if (concesionariaId.snd == false) {
+        if (!concesionariaId.snd) {
             return false;
         } else if (techno.fst.equals(AXIS)) {
             return form.isItemValid(AXIS_PARAM_ENDP_URL).snd && form.isItemValid(AXIS_PARAM_TARGET).snd;
@@ -89,7 +89,7 @@ public class ConfigurarConcesionariaInteractor implements Interactor<Boolean> {
     public GeneralConfigConcesionariaForm convertTo(final DynaActionForm form) {
 
         final Long concesionariaId = Long.parseLong(form.getItem("concesionariaId").get());
-        final String techno = form.getItem("techno").get();
+        final String techno = form.getItem("configTecno").get();
 
 
         final GeneralConfigConcesionariaForm generalConfigConcesionariaForm = new GeneralConfigConcesionariaForm();
