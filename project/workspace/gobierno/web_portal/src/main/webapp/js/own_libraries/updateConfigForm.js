@@ -40,24 +40,5 @@ const updateConfigForm = {
                     ${showFooter}
             </form>
         `;
-    },
-
-    buildConfigurarConcesionariasForm : (jsonArray) => {
-        if(jsonArray.length == 0) {
-            return showForm(ConfigTecno.REST);
-        }
-        else {
-            const head = jsonArray[0];
-            const configTecno = head["configTecno"];
-            const configParams = jsonArray.map( param => {
-                let obj = {};
-                obj["name"] = param.configParam;
-                obj["value"] = param.value;
-                return obj;
-            });
-            return showForm(
-                {"configTecno": configTecno, "configParams": configParams}
-            );
-        }
     }
 };
