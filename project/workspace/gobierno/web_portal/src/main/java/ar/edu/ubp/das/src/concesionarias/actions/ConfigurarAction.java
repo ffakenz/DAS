@@ -27,14 +27,11 @@ public class ConfigurarAction implements Action {
 
         final ConfigurarConcesionariaInteractor action = new ConfigurarConcesionariaInteractor(msConfigurarConcesionariaDao, msConcesionariasDao, msConfigTecnoParamDao);
 
-        InteractorResponse<Boolean> resp = action.execute(form);
+        final InteractorResponse<Boolean> resp = action.execute(form);
 
-        if(resp.getResult())
+        if (!resp.getResult())
             return mapping.getForwardByName(resp.getResponse().getForward());
 
-        ForwardConfig forwardConfig = new ForwardConfig();
-        forwardConfig.setJson("{\"result\": \"OK\"}");
-
-        return forwardConfig;
+        return jsonResult("{\"result\": \"OK\"}");
     }
 }

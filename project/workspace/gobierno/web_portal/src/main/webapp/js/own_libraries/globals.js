@@ -23,7 +23,9 @@ const ConfigTecno = {
 const Id = {
     UPDATE_CONFIG_FORM: "update_config_form",
     INNER_UPDATE_CONFIG_FORM_DIV: "inner_update_config_form_div",
-    UPDATE_CONFIG_SELECT: "update_config_select"
+    UPDATE_CONFIG_SELECT: "update_config_select",
+    UPDATE_CONFIG_LABEL: "update_config_label",
+    TEST_CONFIG_LABEL: "test_config_label"
 };
 
 const Class = {
