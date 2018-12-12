@@ -234,7 +234,6 @@ public class ConsumoJob implements Job {
             consumer.setApellido(update.getClienteApellido());
             consumer.setNroTelefono(update.getClienteNroTelefono());
             consumer.setEmail(update.getClienteEmail());
-            consumer.setConcesionaria(concesionariaId);
             consumerManager.getDao().insert(consumer);
         }
     }

@@ -112,7 +112,7 @@ public class ConsumoJobDesNormalizationSpec {
         final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, ClientFactory.getInstance());
         setUpConsumer(nonExistingConsumer,
                 777L,
-                "ChuPamela",
+                "Pamela",
                 "Anderson",
                 "69039857123",
                 "pamelaanderson@mail.com");
@@ -120,15 +120,12 @@ public class ConsumoJobDesNormalizationSpec {
         // verify it does not exists in db
         final ConsumerForm form = new ConsumerForm();
         form.setDocumento(777L);
-        form.setConcesionaria(1L);
-        final Optional<ConsumerForm> consumerForm =
-                msConsumerDao.selectConsumerByDniAndConcesionaria(form);
+        final Optional<ConsumerForm> consumerForm = msConsumerDao.selectConsumerByDni(form);
         assertFalse(consumerForm.isPresent());
         // updateConsumerDb
         consumer.updateConsumerDb(nonExistingConsumer, 1L);
         // verify it exists in db
-        final Optional<ConsumerForm> consumerForm2 =
-                msConsumerDao.selectConsumerByDniAndConcesionaria(form);
+        final Optional<ConsumerForm> consumerForm2 = msConsumerDao.selectConsumerByDni(form);
         assertTrue(consumerForm2.isPresent());
     }
 
@@ -147,15 +144,12 @@ public class ConsumoJobDesNormalizationSpec {
         // verify it exists in db
         final ConsumerForm form = new ConsumerForm();
         form.setDocumento(111L);
-        form.setConcesionaria(1L);
-        final Optional<ConsumerForm> consumerForm =
-                msConsumerDao.selectConsumerByDniAndConcesionaria(form);
+        final Optional<ConsumerForm> consumerForm = msConsumerDao.selectConsumerByDni(form);
         assertTrue(consumerForm.isPresent());
         // updateConsumerDb
         consumer.updateConsumerDb(existingConsumer, 1L);
         // verify it exists in db and is the same
-        final Optional<ConsumerForm> consumerForm2 =
-                msConsumerDao.selectConsumerByDniAndConcesionaria(form);
+        final Optional<ConsumerForm> consumerForm2 = msConsumerDao.selectConsumerByDni(form);
         assertTrue(consumerForm2.isPresent());
         assertEquals(consumerForm.get(), consumerForm2.get());
     }

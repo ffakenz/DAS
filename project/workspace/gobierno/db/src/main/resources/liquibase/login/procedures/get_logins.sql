@@ -1,5 +1,5 @@
-CREATE PROCEDURE get_logins(@username BIGINT)  AS
+CREATE PROCEDURE get_logins(@documento BIGINT)  AS
 SELECT *
 FROM login
-WHERE username = @username
+WHERE documento = @documento
 ORDER BY log_in_time DESC;

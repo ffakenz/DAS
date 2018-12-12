@@ -61,7 +61,7 @@ public class EstadoCuentasTest {
         final EstadoCuentasForm estadoCuentaForm = new EstadoCuentasForm();
         estadoCuentaForm.setConcesionariaId(1L);
         estadoCuentaForm.setNroPlanConcesionaria(2001L);
-        estadoCuentaForm.setDocumentoCliente(111L);
+        estadoCuentaForm.setDocumentoCliente(1L);
         estadoCuentaForm.setVehiculo(1L);
         estadoCuentaForm.setFechaAltaConcesionaria(Timestamp.valueOf("2018-01-01 21:58:01"));
         estadoCuentaForm.setEstado("inicial");

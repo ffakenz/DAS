@@ -16,8 +16,12 @@ public class UsuarioManager extends Manager<MSUsuariosDao> {
     }
 
     // is there any usuario in the repository such that is equals to the one sent by parameter ?
+    public Boolean verifyDocumento(final Long documento) throws SQLException {
+        return dao.selectByDocumento(documento).isPresent();
+    }
+
     public Boolean verifyUsername(final String username) throws SQLException {
-        return !dao.selectByUserName(username).isEmpty();
+        return dao.selectByUserName(username).isPresent();
     }
 
     // is there any usuario in the repository such that is equals to the one sent by parameter ?
@@ -35,10 +39,11 @@ public class UsuarioManager extends Manager<MSUsuariosDao> {
         this.dao.delete(form);
     }
 
-    public void updatePassword(final String username, final String newPassword) throws SQLException {
-        final UsuarioForm form = new UsuarioForm();
-        form.setUsername(username);
-        form.setPassword(newPassword);
-        this.dao.update(form);
+    public void update(UsuarioForm usuarioForm) throws SQLException {
+        this.dao.update(usuarioForm);
+    }
+
+    public void updatePassword(UsuarioForm usuarioForm) throws SQLException {
+        this.dao.updatePassword(usuarioForm);
     }
 }

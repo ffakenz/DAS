@@ -11,7 +11,6 @@ import ar.edu.ubp.das.src.login.model.LoginManager;
 import ar.edu.ubp.das.src.usuarios.forms.UsuarioForm;
 import ar.edu.ubp.das.src.usuarios.model.UsuarioManager;
 
-import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.Optional;
 
@@ -30,8 +29,8 @@ public class LoginInteractor implements Interactor<Long> {
 
     @Override
     public InteractorResponse<Long> execute(final DynaActionForm form) throws SQLException {
-        final Pair<String, Boolean> password = form.isItemValid("password");
         final Pair<String, Boolean> username = form.isItemValid("username");
+        final Pair<String, Boolean> password = form.isItemValid("password");
 
         if (!username.snd || !password.snd)
             return new InteractorResponse<>(ResponseForward.WARNING); // Some error occur with username / password

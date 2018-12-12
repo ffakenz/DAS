@@ -30,7 +30,7 @@ public class MSLogInDao extends DaoImpl<LogInForm> {
 
     @Override
     public List<LogInForm> select(final LogInForm form) throws SQLException {
-        return executeQueryProcedure("dbo.get_logins(?)", form, "username");
+        return executeQueryProcedure("dbo.get_logins(?)", form, "documento");
     }
 
     @Override

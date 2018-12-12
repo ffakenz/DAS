@@ -37,10 +37,8 @@ public class VehiculosTest {
 
         final ConsumerForm consumerForm = new ConsumerForm();
         consumerForm.setDocumento(777L);
-        consumerForm.setConcesionaria(1L);
 
-        final List<VehiculoForm> vehiculos =
-                msVehiculoDao.select();
+        final List<VehiculoForm> vehiculos = msVehiculoDao.select();
 
         assertFalse(vehiculos.isEmpty());
 

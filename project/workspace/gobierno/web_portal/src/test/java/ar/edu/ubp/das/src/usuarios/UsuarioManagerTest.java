@@ -67,6 +67,21 @@ public class UsuarioManagerTest {
         assertTrue(isUsuarioValido.isPresent());
     }
 
+    @Test(expected = SQLException.class)
+    public void test12_New_User_Invalid_Dni() throws SQLException {
+        // Create a new user
+        final String username = "newusername";
+        final String password = "newpassword";
+
+        final UsuarioForm usuarioForm = new UsuarioForm();
+        usuarioForm.setDocumento(2L);
+        usuarioForm.setUsername(username);
+        usuarioForm.setPassword(password);
+        usuarioForm.setRol(UsuarioRol.GOBIERNO.toString());
+
+        usuarioManager.createUser(usuarioForm);
+    }
+
     @Test
     public void test13_New_User_Successfully() throws SQLException {
         // Create a new user
@@ -74,6 +89,7 @@ public class UsuarioManagerTest {
         final String password = "newpassword";
 
         final UsuarioForm usuarioForm = new UsuarioForm();
+        usuarioForm.setDocumento(5L);
         usuarioForm.setUsername(username);
         usuarioForm.setPassword(password);
         usuarioForm.setRol(UsuarioRol.GOBIERNO.toString());
@@ -99,6 +115,7 @@ public class UsuarioManagerTest {
 
     @Test
     public void test15_Verify_The_User_Update_His_Password_Successfully() throws SQLException {
+
         final String username = "ffakenz";
         final String password = "123";
 
@@ -108,7 +125,13 @@ public class UsuarioManagerTest {
 
         // Update the users password
         final String newPassword = "newPassword";
-        usuarioManager.updatePassword(username, newPassword);
+
+        UsuarioForm usuarioForm = new UsuarioForm();
+        usuarioForm.setDocumento(222L);
+        usuarioForm.setUsername(username);
+        usuarioForm.setPassword(newPassword);
+
+        usuarioManager.updatePassword(usuarioForm);
 
         // Verify the old password is wrong
         final Optional<UsuarioForm> isOldPasswordValid = usuarioManager.verifyUsernameAndPassword(username, password);

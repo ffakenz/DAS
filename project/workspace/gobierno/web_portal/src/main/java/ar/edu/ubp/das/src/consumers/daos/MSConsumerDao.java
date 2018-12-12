@@ -3,6 +3,7 @@ package ar.edu.ubp.das.src.consumers.daos;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.consumers.forms.ConsumerForm;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -15,15 +16,14 @@ public class MSConsumerDao extends DaoImpl<ConsumerForm> {
 
     @Override
     public void insert(final ConsumerForm bean) throws SQLException {
-        this.executeProcedure("dbo.insert_consumers(?, ?, ?, ?, ?, ?)", bean,
-                "documento", "nombre", "apellido", "nroTelefono",
-                "email", "concesionaria");
+        this.executeProcedure("dbo.insert_consumers(?, ?, ?, ?, ?)", bean,
+                "documento", "nombre", "apellido", "nroTelefono", "email");
     }
 
     @Override
     public void update(final ConsumerForm bean) throws SQLException {
-        this.executeProcedure("dbo.update_consumers(?, ?, ?, ?)", bean,
-                "documento", "concesionaria", "nroTelefono", "email");
+        this.executeProcedure("dbo.update_consumers(?, ?, ?)", bean,
+                "documento", "nroTelefono", "email");
     }
 
     @Override
@@ -45,11 +45,26 @@ public class MSConsumerDao extends DaoImpl<ConsumerForm> {
                 .isPresent();
     }
 
-    public Optional<ConsumerForm> selectConsumerByDniAndConcesionaria(final ConsumerForm form) throws SQLException {
-        return this.executeQueryProcedure("dbo.get_consumer_by_documento_and_concesionaria(?, ?)",
-                form, "documento", "concesionaria")
+    public Optional<ConsumerForm> selectConsumerByDni(ConsumerForm form) throws SQLException {
+
+        return this.executeQueryProcedure("dbo.get_consumer_by_documento(?)",
+                form, "documento")
                 .stream()
                 .findFirst();
+
+    }
+
+
+    public Optional<ConsumerForm> selectConsumerByDniAndConcesionaria(Long documento, Long concesionaria) throws SQLException {
+
+        this.connect();
+        this.setProcedure("dbo.get_consumer_by_documento_and_concesionaria(?, ?)", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        this.setParameter(1, documento);
+        this.setParameter(2, concesionaria);
+        final Optional<ConsumerForm> result = this.executeQuery().stream().findFirst();
+        this.disconnect();
+        return result;
+
     }
 
     public void addUsername(final ConsumerForm bean) throws SQLException {

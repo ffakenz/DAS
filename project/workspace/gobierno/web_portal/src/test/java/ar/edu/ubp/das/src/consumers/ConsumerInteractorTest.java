@@ -18,7 +18,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class UpdateConsumerInteractorTest {
+public class ConsumerInteractorTest {
 
     MSConsumerDao msConsumerDao;
     UpdateConsumerInteractor updateConsumerInteractor;
@@ -39,7 +39,6 @@ public class UpdateConsumerInteractorTest {
     public void test10_Update_consumer_missing_input_value() throws SQLException {
         final DynaActionForm consumerForm = new DynaActionForm();
         consumerForm.setItem("documento", "777");
-        // consumerForm.setItem("concesionaria", "1");
         consumerForm.setItem("nro_telefono", "Tel_Test_01");
         consumerForm.setItem("email", "test@test.com");
 
@@ -50,36 +49,25 @@ public class UpdateConsumerInteractorTest {
     }
 
     @Test
-    public void test11_Update_email_consumer_successfully() throws SQLException {
+    public void test12_Update_only_telefono_consumer_fail() throws SQLException {
         final DynaActionForm consumerForm = new DynaActionForm();
         consumerForm.setItem("documento", "777");
-        consumerForm.setItem("concesionaria", "1");
-        consumerForm.setItem("email", "test@test.com");
-
-        // Insert the consumer
-        final InteractorResponse<Boolean> result = updateConsumerInteractor.execute(consumerForm);
-        assertEquals(ResponseForward.SUCCESS, result.getResponse());
-        assertTrue(result.getResult());
-    }
-
-    @Test
-    public void test12_Update_telefono_consumer_successfully() throws SQLException {
-        final DynaActionForm consumerForm = new DynaActionForm();
-        consumerForm.setItem("documento", "777");
-        consumerForm.setItem("concesionaria", "1");
         consumerForm.setItem("nro_telefono", "Tel_Test_01");
 
         // Insert the consumer
         final InteractorResponse<Boolean> result = updateConsumerInteractor.execute(consumerForm);
-        assertEquals(ResponseForward.SUCCESS, result.getResponse());
-        assertTrue(result.getResult());
+        assertEquals(ResponseForward.WARNING, result.getResponse());
+        assertFalse(result.getResult());
     }
 
+
+
     @Test
-    public void test13_Update_both_values_consumer_successfully() throws SQLException {
+    public void test13_Update_all_values_success() throws SQLException {
         final DynaActionForm consumerForm = new DynaActionForm();
         consumerForm.setItem("documento", "777");
-        consumerForm.setItem("concesionaria", "1");
+        consumerForm.setItem("nombre", "nombre");
+        consumerForm.setItem("apellido", "apellido");
         consumerForm.setItem("nro_telefono", "Tel_Test_01");
         consumerForm.setItem("email", "test@test.com");
 

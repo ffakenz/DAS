@@ -10,6 +10,7 @@ import ar.edu.ubp.das.src.core.InteractorResponse;
 import ar.edu.ubp.das.src.core.ResponseForward;
 
 import java.sql.SQLException;
+import java.util.Arrays;
 
 public class UpdateConsumerInteractor implements Interactor<Boolean> {
 
@@ -22,15 +23,15 @@ public class UpdateConsumerInteractor implements Interactor<Boolean> {
     @Override
     public InteractorResponse<Boolean> execute(final DynaActionForm form) throws SQLException {
         final Pair<String, Boolean> documento = form.isItemValid("documento");
-        final Pair<String, Boolean> concesionaria = form.isItemValid("concesionaria");
+        final Pair<String, Boolean> nombre = form.isItemValid("nombre");
+        final Pair<String, Boolean> apellido = form.isItemValid("apellido");
         final Pair<String, Boolean> nro_telefono = form.isItemValid("nro_telefono");
         final Pair<String, Boolean> email = form.isItemValid("email");
 
-        final Boolean requeridosIsInvalid = !documento.snd || !concesionaria.snd; // no puede faltar ni el documento ni la concesionaria
-        final Boolean optionalsIsInvalid = !email.snd && !nro_telefono.snd; // no pueden faltar email y telefono al mismo tiempo
+        final Boolean someIsMissing = Arrays.asList(documento, nombre, apellido, nro_telefono, email)
+                .stream().anyMatch(v -> v.snd == false);
 
-        // Some error occur with the input values
-        if (requeridosIsInvalid || optionalsIsInvalid)
+        if (someIsMissing)
             return new InteractorResponse<>(ResponseForward.WARNING, false);
 
         consumerManager.getDao().update(form.convertTo(ConsumerForm.class));

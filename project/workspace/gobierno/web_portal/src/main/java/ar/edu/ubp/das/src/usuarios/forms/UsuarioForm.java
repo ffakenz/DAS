@@ -4,10 +4,11 @@ package ar.edu.ubp.das.src.usuarios.forms;
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.annotations.Column;
 import ar.edu.ubp.das.mvc.db.annotations.Entity;
-import ar.edu.ubp.das.src.usuarios.model.UsuarioRol;
 
 @Entity
 public class UsuarioForm extends DynaActionForm {
+    @Column(name = "documento")
+    private Long documento;
     @Column(name = "username")
     private String username;
     @Column(name = "password")
@@ -20,11 +21,19 @@ public class UsuarioForm extends DynaActionForm {
 
     }
 
-    // Client API
-    public UsuarioForm(final String username, final String password, final UsuarioRol rol) {
+    public UsuarioForm(Long documento, String username, String password, String rol) {
+        this.documento = documento;
         this.username = username;
         this.password = password;
-        this.rol = rol.toString();
+        this.rol = rol;
+    }
+
+    public Long getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(Long documento) {
+        this.documento = documento;
     }
 
     public String getRol() {
