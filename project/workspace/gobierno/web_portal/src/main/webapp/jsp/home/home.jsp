@@ -59,7 +59,6 @@
     <%@include file="../commons/footer.jsp"%>
 
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script src="/web_portal/util/Javascript.do/load=own_libraries/updateConfigForm"></script>
     <script src="/web_portal/util/Javascript.do/load=own_libraries/successGobierno"></script>
 
 </html>

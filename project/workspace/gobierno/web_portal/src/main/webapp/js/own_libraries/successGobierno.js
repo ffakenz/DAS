@@ -5,11 +5,37 @@ $(() => {
     $("#tableConcesionarias").DataTable();
 
     /* HELPERS */
-    const buildConfigurarConcesionariasForm = (jsonArray, concesionariaId) => {
+
+    const getNewUpdateForm = (configTecno, concesionariaId) => {
+        if(configTecno == ConfigTecno.REST) {
+            return new ConfigParam(
+                ConfigTecno.REST,
+                [{name: "url", value: ""}],
+                concesionariaId
+            ).showForm();
+        }
+        if(configTecno == ConfigTecno.AXIS) {
+            return new ConfigParam(
+                ConfigTecno.AXIS,
+                [{name: "endpointUrl", value: ""}, {name: "targetNameSpace", value: ""}],
+                concesionariaId
+            ).showForm();
+        }
+        if(configTecno == ConfigTecno.CXF) {
+            return new ConfigParam(
+                ConfigTecno.CXF,
+                [{name: "wsdlUrl", value: ""}],
+                concesionariaId
+            ).showForm();
+        }
+    };
+
+    /* the jsonArray is the result from calling CONCESIONARIA_CONSULTAR_CONFIG_PARAM Action */
+    const formConsultarConfings = (jsonArray, concesionariaId) => {
         if(jsonArray.length == 0) {
-            return updateConfigForm.showForm(
-                {"configTecno": "REST", "configParams": [{name: "url", value: ""}], "concesionariaId": concesionariaId}
-            );
+            const newState = getNewUpdateForm(ConfigTecno.REST, concesionariaId);
+            LAST_CONFIGS_CONSULTED_ST = newState;
+            return newState.showForm();
         }
         else {
             const head = jsonArray[0];
@@ -20,20 +46,66 @@ $(() => {
                 obj["value"] = param.value;
                 return obj;
             });
-            return updateConfigForm.showForm(
-                {"configTecno": configTecno, "configParams": configParams, "concesionariaId": concesionariaId}
-            );
+            const newState = new ConfigParam(configTecno, configParams, concesionariaId);
+            LAST_CONFIGS_CONSULTED_ST = newState;
+            return newState.showForm();
         }
     };
 
     /* AJAX CALLS */
+    const changeUpdateConfigHandler = (evt) => {
+        evt.preventDefault();
+
+        const currentConfigTecno = LAST_CONFIGS_CONSULTED_ST.configTecno;
+        const newConfigTecno = evt.target.value;
+        console.log("Changing Config From %o To %o", currentConfigTecno, newConfigTecno);
+
+        if(currentConfigTecno != newConfigTecno) {
+            const newHtml = getNewUpdateForm(newConfigTecno, LAST_CONFIGS_CONSULTED_ST.concesionariaId);
+            console.log("newHtml = %o", newHtml);
+            jUtils.showing("modal_content", newHtml);
+        } else {
+            const oldHtml = LAST_CONFIGS_CONSULTED_ST.showForm();
+            console.log("oldHtml = %o", oldHtml);
+            jUtils.showing("modal_content", oldHtml);
+        }
+
+    };
+
+    const configurarHandler = (evt) => {
+        console.log("Configurando Concesionaria %o", evt.target.id);
+
+        const idButton = evt.target.id;
+        const idConcesionaria = idButton.split("-")[1];
+
+        $.ajax({
+            url: Action.CONCESIONARIA_CONSULTAR_CONFIG_PARAM,
+            type: "post",
+            data: "id=" + idConcesionaria,
+            dataType: "json",
+            error: function(hr){
+                console.log("AJAX RESULT ERROR %o", hr.responseText);
+
+                jUtils.showing("modal_content", hr);
+                $("#modal_generic").modal("show");
+            },
+            success: function(jsonArray) {
+                console.log("AJAX RESULT SUCCESS %o", jsonArray);
+
+                const html = formConsultarConfings(jsonArray, idConcesionaria);
+                jUtils.showing("modal_content", html);
+                $("#modal_generic").modal("show");
+            }
+        });
+    };
+
     const aprobarHandler = (evt) => {
         console.log("Aprobando Concesionaria %o", evt.target.id);
         const idButton = evt.target.id;
         const idConcesionaria  = idButton.split("-")[1];
 
         $.ajax({
-            url: Globals.APROBAR_CONCESIONARIA_ENDPOINT,
+            url: Action.APROBAR_CONCESIONARIA_ENDPOINT,
             type: "post",
             data: "id=" + idConcesionaria,
             dataType: "html",
@@ -54,7 +126,7 @@ $(() => {
         const idConcesionaria  = idButton.split("-")[1];
 
         $.ajax({
-            url: Globals.DESAPROBAR_CONCESIONARIA_ENDPOINT,
+            url: Action.DESAPROBAR_CONCESIONARIA_ENDPOINT,
             type: "post",
             data: "id=" + idConcesionaria,
             dataType: "html",
@@ -69,33 +141,6 @@ $(() => {
         });
     };
 
-    const configurarHandler = (evt) => {
-        console.log("Configurando Concesionaria %o", evt.target.id);
-
-        const idButton = evt.target.id;
-        const idConcesionaria = idButton.split("-")[1];
-
-        $.ajax({
-            url: Globals.CONCESIONARIA_CONSULTAR_CONFIG_PARAM,
-            type: "post",
-            data: "id=" + idConcesionaria,
-            dataType: "json",
-            error: function(hr){
-                console.log("AJAX RESULT ERROR %o", hr.responseText);
-
-                jUtils.showing("modal_content", hr);
-                $("#modal_generic").modal("show");
-            },
-            success: function(jsonArray) {
-                console.log("AJAX RESULT SUCCESS %o", jsonArray);
-
-                const html = buildConfigurarConcesionariasForm(jsonArray, idConcesionaria);
-                jUtils.showing("modal_content", html);
-                $("#modal_generic").modal("show");
-            }
-        });
-    };
-
     const updateConfigHandler = (evt) => {
 
         console.log("Actualizando Concesionaria %o", evt.target.id);
@@ -105,7 +150,7 @@ $(() => {
         console.log("Actualizando Concesionaria _ %o", idConcesionaria);
 
         $.ajax({
-            url: Globals.CONFIG_CONCESIONARIA,
+            url: Action.CONFIG_CONCESIONARIA,
             type: "post",
             data: $(`#${Id.UPDATE_CONFIG_FORM}`).serializeArray(),
             error: function(hr){
@@ -140,7 +185,7 @@ $(() => {
         }
 
         $.ajax({
-            url: Globals.TEST_CONFIG,
+            url: Action.TEST_CONFIG,
             type: "post",
             data: data,
             dataType: "html",
@@ -160,16 +205,6 @@ $(() => {
 
     };
 
-    const changeUpdateConfigHandler = (evt) => {
-        console.log("Changing Config %o", evt.target.id);
-        console.log("EVT ID = %o", evt.target.id);
-        evt.preventDefault();
-
-        const innerHtml = $("#inner_update_config_form_div").html;
-        console.log(innerHtml);
-
-    };
-
     const testConsumo = (evt) => {
         console.log("Test consumo %o", evt.target.id);
         evt.preventDefault();
@@ -179,9 +214,8 @@ $(() => {
     $("#tableConcesionarias").delegate(".aprobar_btn", "click", aprobarHandler);
     $("#tableConcesionarias").delegate(".desaprobar_btn", "click", desAprobarHandler);
     $("#tableConcesionarias").delegate(".config_btn", "click", configurarHandler);
-    $("#modal_content").delegate(".update_config_btn", "click", updateConfigHandler);
-    $("#modal_content").delegate(".test_config_btn", "click", testConfigHandler);
-    $("#modal_content").delegate("#update_config_select", "change", changeUpdateConfigHandler);
+    $("#modal_content").delegate(`.${Class.BTN_UPDATE_CONFIG}`, "click", updateConfigHandler);
+    $("#modal_content").delegate(`.${Class.BTN_TEST_CONFIG}`, "click", testConfigHandler);
+    $("#modal_content").delegate(`#${Id.UPDATE_CONFIG_SELECT}`, "change", changeUpdateConfigHandler);
     $("#test_consumo_div").delegate("#test_consumo_div", "click", testConsumo);
-
 });
