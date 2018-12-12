@@ -44,7 +44,7 @@ class ConfigParam {
     showHeader(){
         return `
                 <div class="form-group">
-                <input type="hidden" name="concesionariaId" id="concesionariaId" value="${this.concesionariaId}" />
+                <input type="hidden" name="concesionariaId" value="${this.concesionariaId}" />
                 <select id="${Id.UPDATE_CONFIG_SELECT}" name="configTecno">
                     <option value="${ConfigTecno.REST}" ${this.configTecno == ConfigTecno.REST ? " selected " : ""}>
                         ${ConfigTecno.REST}

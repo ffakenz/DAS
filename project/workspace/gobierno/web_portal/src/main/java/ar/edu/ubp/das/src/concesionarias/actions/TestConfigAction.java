@@ -19,13 +19,13 @@ public class TestConfigAction implements Action {
     private static final Logger log = LoggerFactory.getLogger(TestConfigAction.class);
 
     @Override
-    public ForwardConfig execute(ActionMapping mapping, DynaActionForm form, HttpServletRequest request, HttpServletResponse response) throws SQLException, RuntimeException {
+    public ForwardConfig execute(final ActionMapping mapping, final DynaActionForm form, final HttpServletRequest request, final HttpServletResponse response) throws SQLException, RuntimeException {
 
 
         log.info(form.toString());
 
-        TestConfigInteractor testConfigInteractor = new TestConfigInteractor();
-        InteractorResponse<Boolean> resp = testConfigInteractor.execute(form);
+        final TestConfigInteractor testConfigInteractor = new TestConfigInteractor();
+        final InteractorResponse<String> resp = testConfigInteractor.execute(form);
 
         return mapping.getForwardByName(resp.getResponse().getForward());
     }
