@@ -16,13 +16,15 @@
     <body>
         <div class="content-body">
 
+            <header>
+                <button name="login" class="btn btn-primary float-right" onclick="javascript:home.goToHome();">Volver al home</button>
+            </header>
+
             <div class="page-header text-center">
                 <h2>USUARIO INCORRECTO ... si quiere puede volver a probar</h2>
             </div>
 
             <%@include file="formLogin.jsp"%>
-
-            <button name="login" class="btn btn-primary" onclick="javascript:home.goToHome();">Volver al home</button>
         </div>
     </body>
 

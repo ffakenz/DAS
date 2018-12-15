@@ -1,0 +1,154 @@
+/*********************************** TODOS ************************************/
+	
+* login:
+	- pantallas de error de login
+	- nueva pantalla para el primer inicio de sesion, en base al dni
+		
+
+* perfil consumer
+	- edicion de datos personales
+	- consulta de sus estados de cuenta
+	- fechas sorteos
+	- ganadores último sorteo
+
+
+* perfil gobierno
+	- administrar concesionarias (aprobar, desaprobar, configurar, testear)
+	- ejecutar un consumo
+	- administración sorteos (calendario de ejecuciones, consulta sorteos, ejecución de sorteo)
+	- publicar novedades
+
+
+* home
+	- registro de concesionarias
+	- listado de concesionarias aprobadas
+	- detalles del plan incentivo
+
+
+* documentación 
+	- maquetas fe
+	- arquitectura backend
+	- mer
+	- hojas de servicio
+	- requerimientos
+	- diagramas para los distintos flujos de negocio
+
+
+
+/***************************** Plan de desarrollo *****************************/ 
+
+
+Tasks:
+
+* revisión fe y be
+	FE (5h / 2p)
+	=> diseño de arquitectura de fe
+	=> componente para generacion dinamica de html
+	=> agregado de identificadores sobre html
+	=> agregado de event handlers adj a los identificadores
+	=> agregado de handlers adj a los event handlers
+	=> helpers 
+
+	BE (3h / 2p)
+	=> control cohesion daos (0,5h / 2p)
+	=> estandarización de enums (0,5h / 2p)
+	=> revisión lógica de managers (1h / 2p)
+	=> estandarización de actions forwards (1h / 2p)
+
+* login
+	=> UI (3h / 1p)
+	=> Refactor base de datos (3h / 2p)
+
+* perfil consumer
+	=> mostrar datos personales (1,5h / 1p)
+	=> modificar datos personales (1,5h / 1p)
+	=> consulta estados cuentas (2h / 1p)
+	=> fechas sorteos (1h / 1p)
+	=> ganadores último sorteo (1h / 1p)
+
+
+* perfil gobierno
+	=> administrar concesionarias (1h / 1p)
+	=> desarrollo consumo (contiene desarrollo, test, simulacion) (5h / 2p)
+	=> pantalla para ejecucion consumo (1h / 1p)
+	=> administración sorteos (1 semana + 1 finde):
+	
+		=> calendario de ejecuciones
+			=> validar configuracion de fecha
+			=> consultar fechas configuradas
+			=> reprogramar fechas configuradas
+	
+		=> consulta sorteos
+	
+		=> ejecución de sorteos manuales , sobre sorteos vencidos no exitosos
+			=> esquema dump
+	
+	=> publicar novedades
+		=> db + dao + manager + interactor + form + action + js + jsp (3h / 2p)
+
+
+* home
+	=> registro de concesionarias (1,5h / 1p)
+	=> listado de concesionarias aprobadas (1,5h / 1p)
+	=> detalles del plan incentivo (3 hs / 1p)
+
+17/12 - 23/12   s1 {
+	-> 
+	->
+	->
+	->
+}  
+
+
+24/12 - 30/12   s2 {
+	->
+	->
+	->
+	->
+}
+
+
+31/12 - 06/01   s3 {
+	->
+	->
+	->
+	->
+}
+
+
+07/01 - 13/01   s4 {
+	->
+	->
+	->
+	->
+}
+
+
+14/01 - 20/01   s5 {
+	->
+	->
+	->
+	->
+}
+
+
+21/01 - 27/01   s6 {
+	->
+	->
+	->
+	->
+}
+
+
+28/01 - 03/02   s7 {
+	->
+	->
+	->
+	->
+}
+
+
+
+
+06/02 consulta previa final 
+08/02 final

@@ -10,6 +10,4 @@
             <button id="login" name="login" class="btn btn-primary" onclick="home.showLogin();">Login</button>
         </c:otherwise>
     </c:choose>
-
-    <button id="login" name="login" class="btn btn-primary float-right" onclick="javascript:home.goToHome();">Volver al home</button>
 </header>

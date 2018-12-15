@@ -58,10 +58,6 @@ public class RestClient implements ConcesionariaServiceContract {
             HttpResponse resp = getCliente().execute(HTTPFactory.apply(method, callTo));
             HttpEntity responseEntity = resp.getEntity();
 
-            if(!responseEntity.isChunked())
-                return Optional.empty();
-
-
             int statusCode = resp.getStatusLine().getStatusCode();
 
             if(statusCode == 200) {

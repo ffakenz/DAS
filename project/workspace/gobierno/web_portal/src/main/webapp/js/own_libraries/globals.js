@@ -34,6 +34,7 @@ const Class = {
     BTN_TEST_CONFIG: "test_config_btn"
 };
 
+
 class ConfigParam {
     constructor(configTecno, configParams, concesionariaId) {
         this.configTecno = configTecno;
@@ -73,9 +74,11 @@ class ConfigParam {
         return `
                <div class="form-group">
                    <button type="button" id="${Class.BTN_UPDATE_CONFIG}-${this.concesionariaId}" class="${Class.BTN_UPDATE_CONFIG}">Update</button>
+                   <label id="${Id.UPDATE_CONFIG_LABEL}"></label>
                </div>
                <div class="form-group">
                    <button type="button" id="${Class.BTN_TEST_CONFIG}-${this.concesionariaId}" class="${Class.BTN_TEST_CONFIG}">Test</button>
+                   <label id="${Id.TEST_CONFIG_LABEL}"></label>
                </div>`;
     }
 
