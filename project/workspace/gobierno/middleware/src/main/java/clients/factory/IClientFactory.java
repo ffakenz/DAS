@@ -1,6 +1,6 @@
-package clients;
+package clients.factory;
 
-import clients.factory.ClientType;
+import clients.ConcesionariaServiceContract;
 
 import java.util.Map;
 import java.util.Optional;

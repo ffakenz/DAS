@@ -2,7 +2,7 @@ package ar.edu.ubp.das.src.jobs;
 
 import ar.edu.ubp.das.src.concesionarias.forms.ConfigurarConcesionariaForm;
 import clients.ConcesionariaServiceContract;
-import clients.IClientFactory;
+import clients.factory.IClientFactory;
 import clients.factory.ClientType;
 
 import java.util.List;

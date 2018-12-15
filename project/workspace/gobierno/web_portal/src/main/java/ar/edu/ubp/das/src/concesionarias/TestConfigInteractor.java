@@ -10,6 +10,7 @@ import ar.edu.ubp.das.src.jobs.ClientFactoryAdapter;
 import clients.ConcesionariaServiceContract;
 import clients.factory.ClientFactory;
 import clients.factory.ClientType;
+import clients.responses.ClientException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,12 +38,14 @@ public class TestConfigInteractor implements Interactor<String> {
             return new InteractorResponse<>(ResponseForward.FAILURE, "FML-C");
 
         final ConcesionariaServiceContract client = clientOpt.get();
-        final Optional<String> identificador_test = client.health("GOBIERNO-INCENTIVO-2018");
 
-        if (!identificador_test.isPresent())
+        try {
+            final String identificador_test = client.health("GOBIERNO-INCENTIVO-2018");
+            return new InteractorResponse<>(ResponseForward.SUCCESS, identificador_test);
+        } catch (ClientException e) {
+            e.printStackTrace();
             return new InteractorResponse<>(ResponseForward.FAILURE, "FML-D");
-
-        return new InteractorResponse<>(ResponseForward.SUCCESS, identificador_test.get());
+        }
     }
 
     private List<ConfigurarConcesionariaForm> formToConfigParams(final DynaActionForm form) {
