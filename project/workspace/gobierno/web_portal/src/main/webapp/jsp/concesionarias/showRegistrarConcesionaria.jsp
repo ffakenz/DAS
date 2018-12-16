@@ -62,8 +62,6 @@
         </fieldset>
 
         <button id="btn_send_form" name="btn_send_form" class="btn btn-outline-primary btn-lg btn-block" onclick="javascript:concesionarias.sendForm();">Enviar info</button>
-
-        <button name="goToHome" class="btn btn-outline-secondary" onclick="javascript:home.goToHome();">Volver al home</button>
     </div>
 
 </body>

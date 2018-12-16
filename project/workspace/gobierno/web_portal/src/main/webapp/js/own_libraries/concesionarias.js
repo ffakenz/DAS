@@ -6,7 +6,7 @@ const concesionarias = {
               return false;
           }
 
-          var url = Globals.REGISTRAR_CONCESIONARIA_ENDPOINT;
+          var url = Action.REGISTRAR_CONCESIONARIA_ENDPOINT;
 
           $('#formConcesionarias')
               .attr('action', url)

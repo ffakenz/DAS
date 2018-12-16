@@ -26,18 +26,34 @@
             <%@include file="../commons/header.jsp"%>
 
             <div class="page-header text-center">
-                <h2>USUARIO ADMIN CORRECTO !!!!</h2>
-                <br>
-                <h3> Session de login nº:  ${sessionScope.ssid}</h3>
-            </div>
-
-            <div id="aprobarConcesionariaDiv" class="container">
-                <ct:concesionariasTable></ct:concesionariasTable>
+                <h3>USUARIO ADMIN CORRECTO ... ( Session de login nº:  ${sessionScope.ssid} )</h3>
             </div>
 
             <br>
 
-            <button id="login" name="login" class="btn btn-outline-primary" onclick="javascript:home.goToHome();">Volver al home</button>
+            <div id="test_consumo_div">
+                <button id="test_consumo_btn" name="test_consumo_btn" class="btn btn-outline-primary btn-lg btn-block">TEST CONSUMO</button>
+            </div>
+
+            <br>
+
+            <div id="aprobarConcesionariaDiv" class="container">
+                <ct:concesionariasTable idTable="tableConcesionarias"></ct:concesionariasTable>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="modal_generic" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel"> CONFIGURAR CONCESIONARIA </h4>
+                        </div>
+                        <div class="modal-body" id="modal_content" style="overflow-x: scroll;"></div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </body>
 

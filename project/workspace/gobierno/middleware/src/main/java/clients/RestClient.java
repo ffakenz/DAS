@@ -2,6 +2,7 @@ package clients;
 
 import beans.NotificationUpdate;
 import beans.PlanBean;
+import clients.responses.ClientException;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -18,10 +19,11 @@ import java.net.URI;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static utils.MiddlewareConstants.*;
 
 public class RestClient implements ConcesionariaServiceContract {
 
@@ -35,15 +37,15 @@ public class RestClient implements ConcesionariaServiceContract {
         System.out.println(uri.toString());
 
         switch (method) {
-            case "POST":
+            case POST:
                 HttpPost postReq = new HttpPost();
                 postReq.setURI(uri);
                 return postReq;
-            case "GET":
+            case GET:
                 HttpGet getReq = new HttpGet();
                 getReq.setURI(uri);
                 return getReq;
-            case "PUT":
+            case PUT:
                 HttpPut putReq = new HttpPut();
                 putReq.setURI(uri);
                 return putReq;
@@ -52,37 +54,38 @@ public class RestClient implements ConcesionariaServiceContract {
         }
     };
 
-    private Optional<String> call(String method, String callTo) {
+    private String call(final String method, final String callTo) throws ClientException {
 
         try {
-            HttpResponse resp = getCliente().execute(HTTPFactory.apply(method, callTo));
-            HttpEntity responseEntity = resp.getEntity();
+            final HttpResponse resp = getCliente().execute(HTTPFactory.apply(method, callTo));
+            final HttpEntity responseEntity = resp.getEntity();
 
-            if(!responseEntity.isChunked())
-                return Optional.empty();
+            final int statusCode = resp.getStatusLine().getStatusCode();
+
+            if (statusCode == 500)
+                throw new ClientException("ENDPOINT IS DOWN = " + resp.toString());
 
 
-            int statusCode = resp.getStatusLine().getStatusCode();
-
-            if(statusCode == 200) {
-                String jsonPlanBean = EntityUtils.toString(responseEntity);
-                return Optional.of(jsonPlanBean);
-            }
-
-            return Optional.empty();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return Optional.empty();
+            final String jsonPlanBean = EntityUtils.toString(responseEntity);
+            return jsonPlanBean;
+        } catch (final IOException e) {
+            throw new ClientException("ENDPOINT IS DOWN = " + e.getMessage()); // reached if docker is not running
         }
     }
 
-    private BiConsumer<String, String> fireAndForget = (method, callTo) -> {
+    private void fireAndForget(final String method, final String callTo) throws ClientException {
         try {
-            getCliente().execute(HTTPFactory.apply(method, callTo));
-        } catch (IOException e) {
-            e.printStackTrace();
+            final HttpResponse resp = getCliente().execute(HTTPFactory.apply(method, callTo));
+
+            final int statusCode = resp.getStatusLine().getStatusCode();
+
+            if (statusCode == 500)
+                throw new ClientException("ENDPOINT IS DOWN = " + resp.toString());
+
+        } catch (final IOException e) {
+            throw new ClientException("ENDPOINT IS DOWN = " + e.getMessage()); // reached if docker is not running
         }
-    };
+    }
 
     public RestClient(final String url) {
         this.url = url;
@@ -90,7 +93,7 @@ public class RestClient implements ConcesionariaServiceContract {
     }
 
     public static Optional<ConcesionariaServiceContract> create(final Map<String, String> params) {
-        final String url = params.getOrDefault("url", "");
+        final String url = params.getOrDefault(REST_PARAM_URL, "");
         if (url.isEmpty())
             return Optional.empty();
 
@@ -106,39 +109,47 @@ public class RestClient implements ConcesionariaServiceContract {
         return this.client;
     }
 
+    public String getQuery(final String base, final String... params) {
+        final String target = "/" + base + "?";
+        final String args = Stream.of(params)
+                .map(p -> p + "=%s")
+                .collect(Collectors.joining("&"));
+        final String arg = (params.length > 1 ? args : params[0] + "=%s");
+        return target + arg;
+    }
+
     @Override
-    public Optional<List<NotificationUpdate>> consultarPlanes(final String identificador, final String offset) {
+    public List<NotificationUpdate> consultarPlanes(final String identificador, final String offset) throws ClientException {
 
-        String url = String.format("/consultarPlanes?identificador=%s&offset=%s", identificador, offset);
 
-        final Optional<String> jsonPlanBeans = call("GET", url);
+        final String query = getQuery(CONSULTAR_PLANES, IDENTIFICADOR, OFFSET);
+        final String url = String.format(query, identificador, offset);
 
-        return jsonPlanBeans.flatMap( json -> {
-            final NotificationUpdate[] notificationUpdates = JsonUtils.toObject(json, NotificationUpdate[].class);
-            return Optional.of(Stream.of(notificationUpdates).collect(Collectors.toList()));
-        });
+        final String jsonPlanBeans = call(GET, url);
+
+        final NotificationUpdate[] notificationUpdates = JsonUtils.toObject(jsonPlanBeans, NotificationUpdate[].class);
+        return Stream.of(notificationUpdates).collect(Collectors.toList());
 
     }
 
     @Override
-    public Optional<PlanBean> consultarPlan(final String identificador, final Long planId) {
+    public PlanBean consultarPlan(final String identificador, final Long planId) throws ClientException {
 
-        String url = String.format("/consultarPlan?identificador=%s&planId=%s",identificador, planId.toString());
-        final Optional<String> jsonPlanBean = call("GET", url);
+        final String url = getQuery(CONSULTAR_PLAN, IDENTIFICADOR, PLANID);
+        final String jsonPlanBean = call(GET, url);
 
-        return jsonPlanBean.flatMap(json -> Optional.of(JsonUtils.toObject(json, PlanBean.class)));
-    }
-
-    // TODO: Create method that will parse multiple parameters
-    @Override
-    public void cancelarPlan(final String identificador, final Long planId) {
-        String url = String.format("/cancelarPlan?identificador=%s&planId=%s", identificador, planId.toString());
-        fireAndForget.accept("PUT", url);
+        return JsonUtils.toObject(jsonPlanBean, PlanBean.class);
     }
 
     @Override
-    public Optional<String> health(final String identificador) {
-        String url = String.format("/health?identificador=%s",identificador);
-        return call("GET", url);
+    public void cancelarPlan(final String identificador, final Long planId) throws ClientException {
+        final String url = getQuery(CANCELAR_PLAN, IDENTIFICADOR, PLANID);
+        fireAndForget(PUT, url);
+    }
+
+    @Override
+    public String health(final String identificador) throws ClientException {
+        final String url = getQuery(HEALTH, IDENTIFICADOR);
+        return call(GET, url);
     }
 }

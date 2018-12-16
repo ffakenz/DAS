@@ -13,6 +13,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
 
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
 <!-- Own libs -->
 <script src="/web_portal/util/Javascript.do/load=own_libraries/globals"></script>
@@ -22,3 +23,4 @@
 <script src="/web_portal/util/Javascript.do/load=own_libraries/concesionarias"></script>
 <script src="/web_portal/util/Javascript.do/load=own_libraries/login"></script>
 <script src="/web_portal/util/Javascript.do/load=own_libraries/logout"></script>
+<script src="/web_portal/util/Javascript.do/load=own_libraries/successGobierno"></script>

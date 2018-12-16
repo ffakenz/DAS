@@ -53,6 +53,42 @@ $(() => {
     };
 
     /* AJAX CALLS */
+    const testConfigHandler = (evt) => {
+            console.log("Testing Config %o", evt.target.id);
+            evt.preventDefault();
+
+            const configTecno = $(`#${Id.UPDATE_CONFIG_SELECT}`).children("option:selected").val();
+
+            const paramsToData = (params) => params
+                    .map(param => `${param.name}=${param.value}`)
+                    .reduce((acc, elem) => {
+                        if(acc == "") { acc += elem; }
+                        else { acc += `&${elem}` }
+                        return acc;
+                    }, "");
+
+            const params = $(`#${Id.UPDATE_CONFIG_FORM}`).serializeArray();
+            const data = paramsToData(params);
+            console.log("Testing data %o", data);
+
+            $.ajax({
+                url: Action.TEST_CONFIG,
+                type: "post",
+                data: data,
+                dataType: "html",
+                error: function(hr){
+                    console.log("AJAX RESULT ERROR %o", hr);
+                    jUtils.showing(Id.TEST_CONFIG_LABEL, hr);
+                },
+                success: function(html) {
+                    console.log("AJAX RESULT SUCCESS %o", html);
+                    jUtils.showing(Id.TEST_CONFIG_LABEL, html);
+                    $("#modal_generic").modal("show");
+                }
+            });
+
+};
+
     const changeUpdateConfigHandler = (evt) => {
         evt.preventDefault();
 
@@ -92,6 +128,7 @@ $(() => {
             success: function(jsonArray) {
                 console.log("AJAX RESULT SUCCESS %o", jsonArray);
 
+                /* EACH SUCCESS CHANGES THE STATE { LAST_CONFIGS_CONSULTED_ST } USING formConsultarConfings */
                 const html = formConsultarConfings(jsonArray, idConcesionaria);
                 jUtils.showing("modal_content", html);
                 $("#modal_generic").modal("show");
@@ -162,47 +199,6 @@ $(() => {
                 jUtils.showing(Id.UPDATE_CONFIG_LABEL, "Configurada exitosamente");
             }
         });
-    };
-
-    const testConfigHandler = (evt) => {
-        console.log("Testing Config %o", evt.target.id);
-        evt.preventDefault();
-
-        const configTecno = $("#update_config_select").children("option:selected").val();
-
-        let data;
-
-        if (configTecno === "REST") {
-            data = "tecno=REST&";
-            data += "url=" + $("#url").val();
-        } else if (configTecno === "AXIS") {
-            data = "tecno=AXIS&";
-            data += "endpointUrl=" + $("#endpointUrl").val() + "&";
-            data += "targetNameSpace=" + $("#targetNameSpace").val();
-        } else if (configTecno === "CXF") {
-            data = "tecno=CXF&";
-            data += "wsdlUrl=" + $("#wsdlUrl").val();
-        }
-
-        $.ajax({
-            url: Action.TEST_CONFIG,
-            type: "post",
-            data: data,
-            dataType: "html",
-            error: function(hr){
-                console.log("AJAX RESULT ERROR %o", hr);
-                jUtils.showing(Id.TEST_CONFIG_LABEL, hr);
-            },
-            success: function(html) {
-                console.log("AJAX RESULT SUCCESS %o", html);
-                jUtils.showing(Id.TEST_CONFIG_LABEL, html);
-                $("#modal_generic").modal("show");
-            }
-        });
-
-        const data2 = $("#update_config_form").serializeArray();
-        console.log(data2)
-
     };
 
     const testConsumo = (evt) => {

@@ -21,7 +21,7 @@ import ar.edu.ubp.das.src.jobs.consumoo.forms.*;
 import ar.edu.ubp.das.src.utils.DateUtils;
 import beans.NotificationUpdate;
 import clients.ConcesionariaServiceContract;
-import clients.IClientFactory;
+import clients.factory.IClientFactory;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.slf4j.Logger;
@@ -114,8 +114,8 @@ public class ConsumoJob implements Job {
                 final String identificador = "GOBIERNO-INCENTIVO-2018";
                 try {
                     // usamos el cliente p/ consultar planes
-                    final ConcesionariaServiceContract client = cli.get();
-                    final List<NotificationUpdate> notificationUpdates = client.consultarPlanes(identificador, offset.toString()).get(); // TODO
+                    final ConcesionariaServiceContract client = cli.get(); // ifPresent was checked above
+                    final List<NotificationUpdate> notificationUpdates = client.consultarPlanes(identificador, offset.toString());
                     log.info("Consume is successfull for concesionaria {} [notification_update:{}]", cId, JsonUtils.toJsonString(notificationUpdates));
                     final String description = "consultarPlanes was success for offset: " + offset;
                     logConsumoDb(cId, jobId, EstadoConsumo.SUCCESS, offset, rqstId, description);

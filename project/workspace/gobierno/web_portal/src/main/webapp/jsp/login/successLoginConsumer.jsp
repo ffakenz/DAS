@@ -29,13 +29,7 @@
                 <h3> Session de login nº:  ${sessionScope.ssid}</h3>
             </div>
 
-            <div class="container">
-
-            </div>
-
-            <br>
-
-            <button id="login" name="login" class="btn btn-outline-primary" onclick="javascript:home.goToHome();">Volver al home</button>
+            <div class="container"></div>
         </div>
     </body>
 

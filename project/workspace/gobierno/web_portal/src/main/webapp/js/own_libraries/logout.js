@@ -2,6 +2,6 @@ var logout = {
 
     closeSession : function() {
 
-        window.location.href = Globals.LOGOUT_ENDPOINT;
+        window.location.href = Action.LOGOUT_ENDPOINT;
     }
 };
