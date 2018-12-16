@@ -24,6 +24,8 @@
 	- listado de concesionarias aprobadas
 	- detalles del plan incentivo
 
+* internacionalización
+	- traducción de todo el sitio
 
 * documentación 
 	- maquetas fe
@@ -56,8 +58,8 @@ Tasks:
 	=> estandarización de actions forwards (1h / 2p)
 
 * login
-	=> UI (3h / 1p)
-	=> Refactor base de datos (3h / 2p)
+	=> UI + actions (validate + css + signup page + error pages) (3h / 1p) => Nacho
+	=> Refactor base de datos (3h / 2p) => Nacho
 
 * perfil consumer
 	=> mostrar datos personales (1,5h / 1p)

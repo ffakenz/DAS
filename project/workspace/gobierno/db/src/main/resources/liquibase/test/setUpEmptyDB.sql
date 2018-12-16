@@ -59,6 +59,9 @@ BEGIN
     INSERT INTO concesionaria(nombre, direccion, cuit, tel, email)
     VALUES ('C1', 'La Tablada 5739', '21-93337511-1', '+5493513059161', 'c1@gmail.com')
 
+    INSERT INTO usuario(documento, username, password, rol)
+    VALUES (1, null, null, 'consumer')
+
     INSERT INTO consumers(documento, nombre, apellido, nro_telefono, email)
     VALUES
         (1, 'Carlos', 'Perez', '35156345678', 'carliperezozo@mail.com')
@@ -66,7 +69,7 @@ BEGIN
     INSERT INTO estado_cuentas (
         concesionaria, nro_plan_concesionaria, dni_consumer, vehiculo, fecha_alta_concesionaria, estado
     )
-    VALUES (1, 1001, 111, 1, '2018-01-01 21:58:01', 'en_proceso')
+    VALUES (1, 1001, 1, 1, '2018-01-01 21:58:01', 'en_proceso')
 
    INSERT INTO cuotas (
        nro_cuota,

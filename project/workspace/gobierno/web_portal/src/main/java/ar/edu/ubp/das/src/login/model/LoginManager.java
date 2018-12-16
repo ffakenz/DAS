@@ -22,12 +22,12 @@ public class LoginManager extends Manager<MSLogInDao> {
         dao.update(form);
     }
 
-    public void logoutByUsername(final LogInForm form) throws SQLException {
-        dao.logoutByUsername(form);
+    public void logoutByDocumento(final LogInForm form) throws SQLException {
+        dao.logoutByDocumento(form);
     }
 
     public Optional<Long> login(final LogInForm form) throws SQLException {
-        logoutByUsername(form);
+        logoutByDocumento(form);
         dao.insert(form);
         return isLoggedIn(form);
     }

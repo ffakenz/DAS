@@ -22,6 +22,6 @@
             </sqlCheck>
         </preConditions>
         <sqlFile
-                path="/src/main/resources/liquibase/estado_cuentas/triggers/t_insert_usuario.sql"/>
+                path="/src/main/resources/liquibase/estado_cuentas/triggers/insert_cuotas.sql"/>
     </changeSet>
 </databaseChangeLog>

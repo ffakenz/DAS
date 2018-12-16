@@ -47,16 +47,16 @@ public class UsuarioUpdateInteractorTest {
         assertEquals(ResponseForward.SUCCESS, response.getResponse());
     }
 
-//    @Test(expected = SQLException.class)
-//    public void test11_Verify_create_user_twice_fail() throws SQLException {
-//
-//        final DynaActionForm userForm = new DynaActionForm();
-//        userForm.setItem("documento", "111");
-//        userForm.setItem("username", "pepe2");
-//        userForm.setItem("password", "asd");
-//
-//        interactor.execute(userForm);
-//    }
+    @Test(expected = SQLException.class)
+    public void test11_Verify_update_username_fail_because_already_exist() throws SQLException {
+
+        final DynaActionForm userForm = new DynaActionForm();
+        userForm.setItem("documento", "222");
+        userForm.setItem("username", "irocca");
+        userForm.setItem("password", "asdasdas");
+
+        interactor.execute(userForm);
+    }
 
     @Test
     public void test12_Verify_create_user_fail_parameters() throws SQLException {

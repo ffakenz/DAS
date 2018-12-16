@@ -14,8 +14,6 @@ import ar.edu.ubp.das.src.usuarios.model.UsuarioManager;
 import java.sql.SQLException;
 import java.util.Optional;
 
-import static ar.edu.ubp.das.src.utils.Constants.USER_TYPE;
-
 
 public class LoginInteractor implements Interactor<Long> {
 
@@ -39,9 +37,10 @@ public class LoginInteractor implements Interactor<Long> {
 
         if (usuarioForm.isPresent()) {
 
-            form.setItem(USER_TYPE, usuarioForm.get().getRol());
-            
-            return loginManager.login(form.convertTo(LogInForm.class))
+            LogInForm logInForm = form.convertTo(LogInForm.class);
+            logInForm.setDocumento(usuarioForm.get().getDocumento());
+
+            return loginManager.login(logInForm)
                 .map(LogInId -> new InteractorResponse<>(ResponseForward.SUCCESS, LogInId))
                 .orElse(new InteractorResponse<>(ResponseForward.FAILURE));
         }

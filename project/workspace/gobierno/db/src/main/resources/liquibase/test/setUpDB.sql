@@ -91,9 +91,9 @@ BEGIN
         , (3, 1004, 3, 1, '2018-03-01 21:58:01', 'en_proceso')
         , (3, 1005, 3, 2, '2018-03-02 22:58:02', 'en_proceso')
 
-    INSERT INTO login(username, log_out_time)
-    VALUES ('irocca', GETDATE())
-    	   , ('ffakenz', default)
+    INSERT INTO login(documento, log_out_time)
+    VALUES (111, GETDATE())
+    	   , (222, default)
 
     INSERT INTO cuotas (
         nro_cuota, estado_cuenta_id, fecha_alta_concesionaria, fecha_vencimiento, monto, fecha_pago

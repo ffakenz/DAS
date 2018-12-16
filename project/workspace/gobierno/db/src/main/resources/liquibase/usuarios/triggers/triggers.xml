@@ -9,7 +9,7 @@
     <!--  CREATE PROCEDURES CHANGE-SETS  -->
     <!-- ******************************* -->
 
-    <changeSet id="Create trigger t_insert_usuario" author="DAS-Team" runAlways="true"
+    <changeSet id="Create trigger t_update_usuario" author="DAS-Team" runAlways="true"
                runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
@@ -18,10 +18,10 @@
                 INNER JOIN dbo.sysComments
                 ON dbo.SysObjects.ID = dbo.sysComments.ID
                 WHERE (dbo.SysObjects.xType = 'TR')
-                AND dbo.SysObjects.Name = 't_insert_usuario'
+                AND dbo.SysObjects.Name = 't_update_usuario'
             </sqlCheck>
         </preConditions>
         <sqlFile
-                path="/src/main/resources/liquibase/usuarios/triggers/t_insert_usuario.sql"/>
+                path="/src/main/resources/liquibase/usuarios/triggers/t_update_usuario.sql"/>
     </changeSet>
 </databaseChangeLog>

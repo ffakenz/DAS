@@ -66,33 +66,32 @@ public class ConsumersTest {
     public void test_12_Update_consumer_personal_data_successfully() throws SQLException {
 
         final ConsumerForm consumerForm = new ConsumerForm();
-        consumerForm.setDocumento(111L);
+        consumerForm.setDocumento(1L);
 
         final Optional<ConsumerForm> consumer = msConsumerDao.selectConsumerByDni(consumerForm);
 
         //actualizo telefono y seteo email en null
-        consumerForm.setNroTelefono("Tel_Test_Actualizado");
-        msConsumerDao.update(consumerForm);
+        consumer.get().setNroTelefono("Tel_Test_Actualizado");
+        msConsumerDao.update(consumer.get());
 
         //valido que el telefono este actualizado y el email sea el que tenia previamente
-        final Optional<ConsumerForm> consumerUpdate1 = msConsumerDao.selectConsumerByDni(consumerForm);
+        final Optional<ConsumerForm> consumerUpdate1 = msConsumerDao.selectConsumerByDni(consumer.get());
         assertEquals("Tel_Test_Actualizado", consumerUpdate1.get().getNroTelefono());
-        assertEquals(null, consumerUpdate1.get().getEmail());
+        assertEquals("carliperezozo@mail.com", consumerUpdate1.get().getEmail());
 
         //actualizo el email
-        consumerForm.setEmail("test@actualizado.com");
-        consumerForm.setNroTelefono(null);
-        msConsumerDao.update(consumerForm);
+        consumerUpdate1.get().setEmail("test@actualizado.com");
+        msConsumerDao.update(consumerUpdate1.get());
 
         //valido que el email este actualizado y el telefono sea el que tenia luego de la primer actualizacion
         final Optional<ConsumerForm> consumerUpdate2 = msConsumerDao.selectConsumerByDni(consumerForm);
-        assertEquals(null, consumerUpdate2.get().getNroTelefono());
+        assertEquals("Tel_Test_Actualizado", consumerUpdate2.get().getNroTelefono());
         assertEquals("test@actualizado.com", consumerUpdate2.get().getEmail());
 
         //actualizo el email y el telefono
-        consumerForm.setNroTelefono("Tel_Actualizado_2");
-        consumerForm.setEmail("test@actualizado2.com");
-        msConsumerDao.update(consumerForm);
+        consumerUpdate2.get().setNroTelefono("Tel_Actualizado_2");
+        consumerUpdate2.get().setEmail("test@actualizado2.com");
+        msConsumerDao.update(consumerUpdate2.get());
 
         //valido que el telefono y el email este actualizado
         final Optional<ConsumerForm> consumerUpdate3 = msConsumerDao.selectConsumerByDni(consumerForm);
