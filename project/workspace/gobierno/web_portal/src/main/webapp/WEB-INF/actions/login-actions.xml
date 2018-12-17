@@ -16,5 +16,15 @@
             <forward name="success" path="/home/home.jsp" />
         </action>
 
+        <action type="SuccessAction" path="/ShowLoginPrimerIngreso.do">
+            <forward name="success" path="/login/primerIngreso.jsp" />
+        </action>
+
+        <action type="RegistrarConsumerAction" path="/RegistrarConsumer.do">
+            <forward name="success_consumer" path="/login/successLoginConsumer.jsp" />
+            <forward name="warning" path="/login/failParamsLoginPrimerIngreso.jsp" />
+            <forward name="failure" path="/login/failLoginPrimerIngreso.jsp" />
+        </action>
+
     </action-mappings>
 </actions>

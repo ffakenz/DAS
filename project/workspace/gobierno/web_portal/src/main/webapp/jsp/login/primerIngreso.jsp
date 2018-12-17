@@ -15,21 +15,16 @@
     <body>
         <div class="content-body">
 
-            <%@include file="./header.jsp"%>
+            <%@include file="../commons/header.jsp"%>
 
             <div id="login-form">
 
                 <h1 style="text-align: center">
-                    <fmt:message key="login_cabecera" bundle="${etq}" />
+                    Primer Ingreso
                 </h1>
 
-                <%@include file="formLogin.jsp"%>
+                <%@include file="formLoginPrimerIngreso.jsp"%>
 
-                <div class="text-center">
-                    <button id="first_login_btn" class="btn btn-outline-primary btn-lg btn-block">
-                        Primer ingreso
-                    </button>
-                </div>
             </div>
 
 

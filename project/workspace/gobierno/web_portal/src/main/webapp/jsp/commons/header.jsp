@@ -11,5 +11,7 @@
         </c:otherwise>
     </c:choose>
 
-    <button id="login" name="login" class="btn btn-primary float-right" onclick="javascript:home.goToHome();">Volver al home</button>
+    <button id="home_btn" name="home_btn" class="btn btn-primary float-right" onclick="javascript:home.goToHome();">
+        Home
+    </button>
 </header>
