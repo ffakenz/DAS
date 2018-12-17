@@ -1,7 +1,9 @@
-class Login {
-    constructor(){}
+class Login extends Module {
+    constructor(config){
+        super(config);
+    }
 
-    closeSession() {
+    closeSession(evt) {
         Utils.moveLocationTo(Action.LOGOUT_ENDPOINT);
     }
-}
+};

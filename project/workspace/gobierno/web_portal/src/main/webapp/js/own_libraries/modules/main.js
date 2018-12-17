@@ -1,14 +1,13 @@
-$(() => { 
+$(() => {
     /* run code that MUST be after initialize */
-    const home = new Home();
-    const login = new Login();
-
-    $("#header_home").delegate("#login", "click", home.showLogin);
-    $("#header_home").delegate("#goToProfile", "click", home.goToProfile);
-    $("#header_home").delegate("#logout", "click", login.closeSession);
-    $("#registrar_concesionaria_div").delegate("#registrar_concesionaria", "click", home.showRegistrarConcesionaria);
-    $("#goToHomeDiv").delegate("#goToHome", "click", home.goToHome);
-    
+    const login = new Login(Config.login);
+    const home = new Home(Config.home);
+    [home, login].forEach(module => module.getEventHandlers().forEach(evt => {
+        evt.cnfg.forEach(cnfg => {
+            console.log("Handle Click For CTX = %o - CNFG = %o", evt.ctx, cnfg);
+            $(evt.ctx).delegate(cnfg.delegate, "click", cnfg.handler);
+        });
+    }));    
 });
 
 $(window).on('unload', function() {

@@ -1,21 +1,31 @@
 'use strict';
-class Home {
-    constructor(){
+class Module {
+    constructor(eventHandlers) {
+        this.eventHandlers = eventHandlers(this);
+    }
+    getEventHandlers(){
+        return this.eventHandlers;
+    }
+};
+
+class Home extends Module {
+    constructor(config){
+        super(config);
     }
 
-    showRegistrarConcesionaria() {
+    showRegistrarConcesionaria(evt) {
         Utils.moveLocationTo(Action.SHOW_REGISTRAR_CONCESIONARIA_ENDPOINT);
     }
 
-    showLogin() {
+    showLogin(evt) {
         Utils.moveLocationTo(Action.SHOW_LOGIN_ENDPOINT);
     }
 
-    goToHome() {
+    goToHome(evt) {
         Utils.moveLocationTo(Action.HOME_ENDPOINT);
     }
 
-    goToProfile() {
+    goToProfile(evt) {
         Utils.moveLocationTo(Action.LOGIN_ENDPOINT);
     }
 };
