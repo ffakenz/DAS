@@ -1,8 +1,36 @@
 "use strict";
 
 $(() => {
+    function initializeCode() {
+        const getAllConcesionariasHandler = () => {
+            console.log("Consultando Concesionarias");
+            $.ajax({
+                url: Action.CONCESIONARIA_CONSULTAR_TODAS,
+                type: "get",
+                dataType: "html",
+                error: function(hr){
+                    console.log("AJAX RESULT ERROR %o", hr.responseText);
+                    jUtils.showing("concesionariasDiv", hr);
+                },
+                success: function(html) {
+                    console.log("AJAX RESULT SUCCESS %o", html);
+                    jUtils.showing("tableConcesionarias", html);
+                }
+            });
+        };    
+        /*  Run code */
+        getAllConcesionariasHandler();    
+    };
 
-    $("#tableConcesionarias").DataTable();
+    /*  Run code */
+    initializeCode();   
+});
+
+
+$(window).on('load', () => {
+    $("#tableConcesionarias").DataTable({
+        "order": [[ 1, "desc" ]]
+    });
 
     /* HELPERS */
 

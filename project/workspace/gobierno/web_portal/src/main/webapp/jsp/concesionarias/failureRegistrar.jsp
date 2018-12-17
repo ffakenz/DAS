@@ -27,7 +27,7 @@
 
             <button name="goToRegistrar" class="btn btn-outline-primary btn-lg" onclick="home.showRegistrarConcesionaria();">Volver a intentarlo</button>
 
-            <button name="goToHome" class="btn btn-outline-secondary" onclick="home.goToHome();">Volver al home</button>
+            <%@include file="../home/go_to_home.jsp" %>
         </div>
     </body>
 

@@ -43,6 +43,7 @@ public class ConfigurarConcesionariaInteractor implements Interactor<Boolean> {
 
         final GeneralConfigConcesionariaForm genConfigConcForm = convertTo(form);
 
+        // TODO => this should be moved below next if ?
         configurarConcesionariaManager.getDao().invalidateParams(genConfigConcForm.getConcesionariaId());
 
         final ConfigTecnoXConcesionariaForm configTecnoXConc = new ConfigTecnoXConcesionariaForm();

@@ -5,14 +5,11 @@
         <c:choose>
             <c:when test="${sessionScope.ssid != null}">
                 <button id="logout" name="logout" class="btn btn-secondary" >Cerrar Sesion</button>
-                <button id="IDENTIFICADORProfile" name="goToProfile" class="btn btn-secondary" >Profile</button>
+                <button id="goToProfile" name="goToProfile" class="btn btn-secondary" >Profile</button>
             </c:when>
             <c:otherwise>
-                <button id="login" name="login" class="btn btn-primary" >Login</button>
+                <button id="login" name="login" class="btn btn-primary">Login</button>
             </c:otherwise>
         </c:choose>
-
-        <%@include file="../home/go_to_home.jsp" %>
-
     </header>
 </div>

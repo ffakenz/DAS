@@ -11,7 +11,3 @@ function db_install() {
 
 echo "Running Docker container"
 run_docker
-echo "Awaiting"
-sleep 15
-echo "Installing DB"
-db_install

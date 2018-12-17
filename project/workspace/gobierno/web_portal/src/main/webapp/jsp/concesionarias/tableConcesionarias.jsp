@@ -1,31 +1,30 @@
-<%@ tag language="java" pageEncoding="ISO-8859-1" %>
+<%@ page
 
-<%@ tag import="ar.edu.ubp.das.src.concesionarias.model.ConcesionariasManager" %>
-<%@ tag import="ar.edu.ubp.das.src.concesionarias.daos.MSConcesionariasDao" %>
-<%@ tag import="ar.edu.ubp.das.mvc.config.DatasourceConfig" %>
-<%@ tag import="ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm" %>
-<%@ tag import="java.util.List" %>
-<%@ tag import="java.sql.SQLException" %>
-<%@ tag import="ar.edu.ubp.das.src.utils.Constants" %>
-<%@ tag import="ar.edu.ubp.das.src.utils.FrontUtils" %>
+        language="java"
+        contentType="text/html; charset=utf-8"
+        pageEncoding="utf-8"
+%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<fmt:setBundle basename="properties.etiquetas" var="etq" scope="session"/>
 
-<%@ attribute name="idTable" required="true" %>
+<%@ page import="ar.edu.ubp.das.src.concesionarias.model.ConcesionariasManager" %>
+<%@ page import="ar.edu.ubp.das.src.concesionarias.daos.MSConcesionariasDao" %>
+<%@ page import="ar.edu.ubp.das.mvc.config.DatasourceConfig" %>
+<%@ page import="ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.lang.Exception" %>
+
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="static ar.edu.ubp.das.src.utils.Constants.RESULT_RQST_ATTRIBUTE" %>
+<%@ page import="ar.edu.ubp.das.src.utils.FrontUtils" %>
+
 <%
     StringBuilder result = new StringBuilder();
 
     try {
 
-        DatasourceConfig dataSourceConfig = new DatasourceConfig();
-        dataSourceConfig.setDriver("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        dataSourceConfig.setUrl("jdbc:sqlserver://localhost;databaseName=db_gobierno;");
-        dataSourceConfig.setUsername("SA");
-        dataSourceConfig.setPassword("Das12345");
+        List<ConcesionariaForm> concesionariaFormList = (List<ConcesionariaForm>) request.getAttribute(RESULT_RQST_ATTRIBUTE);
 
-        MSConcesionariasDao msConcesionariasDao = new MSConcesionariasDao();
-        msConcesionariasDao.setDatasource(dataSourceConfig);
-
-        ConcesionariasManager concesionariasManager = new ConcesionariasManager(msConcesionariasDao);
-        List<ConcesionariaForm> concesionariaFormList = concesionariasManager.getDao().select();
 
         StringBuilder rows = new StringBuilder();
         for( ConcesionariaForm c : concesionariaFormList) {
@@ -33,7 +32,7 @@
             rows.append(row);
         }
 
-        result.append("<table id=\""+idTable+"\" class=\"table table-striped table-bordered\" style=\"width:100%\">");
+
         result.append("<thead>                                                                                     ");
         result.append("<tr>                                                                                        ");
         result.append("   <th>Id</th>                                                                              ");
@@ -52,12 +51,9 @@
         result.append("<tbody>                                                                                     ");
         result.append(    rows.toString()                                                                           );
         result.append("</tbody>                                                                                    ");
-        result.append("</table>                                                                                    ");
-
-
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
+   } catch(Exception e) {
+        result.append(e.getMessage());
+   }
 %>
 
 <%= result.toString() %>

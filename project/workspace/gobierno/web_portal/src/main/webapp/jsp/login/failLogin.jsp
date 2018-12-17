@@ -17,7 +17,7 @@
         <div class="content-body">
 
             <header>
-                <button name="login" class="btn btn-primary float-right" onclick="javascript:home.goToHome();">Volver al home</button>
+                <%@include file="../home/go_to_home.jsp" %>
             </header>
 
             <div class="page-header text-center">

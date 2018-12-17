@@ -19,10 +19,12 @@
 
         <div class="content-body">
 
-            <%@include file="../commons/header_home.jsp"%>
+
+            <%@include file="./header_home.jsp"%>
+
 
             <div id="registrar_concesionaria_div">
-                <button id="registrar_concesionaria" name="registrar_concesionaria" class="btn btn-outline-primary btn-lg btn-block" onclick="javascript:home.showRegistrarConcesionaria();">Registrar Concesionaria</button>
+                <button id="registrar_concesionaria" name="registrar_concesionaria" class="btn btn-outline-primary btn-lg btn-block">Registrar Concesionaria</button>
             </div>
 
             <br><br>

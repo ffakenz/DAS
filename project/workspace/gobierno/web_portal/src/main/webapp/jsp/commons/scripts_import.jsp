@@ -25,10 +25,12 @@
 
 <script src="/web_portal/util/Javascript.do/load=own_libraries/modules/utils"></script>
 <script src="/web_portal/util/Javascript.do/load=own_libraries/modules/home"></script>
+<script src="/web_portal/util/Javascript.do/load=own_libraries/modules/login"></script>
+<script src="/web_portal/util/Javascript.do/load=own_libraries/modules/main"></script>
 
 
 
 <script src="/web_portal/util/Javascript.do/load=own_libraries/concesionarias"></script>
 <script src="/web_portal/util/Javascript.do/load=own_libraries/login"></script>
 <script src="/web_portal/util/Javascript.do/load=own_libraries/logout"></script>
-<script src="/web_portal/util/Javascript.do/load=own_libraries/successGobierno"></script>
+

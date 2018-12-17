@@ -8,23 +8,24 @@ import ar.edu.ubp.das.mvc.db.annotations.Entity;
 public class ConfigurarConcesionariaForm extends DynaActionForm {
 
     @Column(name = "concesionaria_id")
-    Long concesionariaId;
+    private Long concesionariaId;
     @Column(name = "config_tecno")
-    String configTecno;
+    private String configTecno;
     @Column(name = "config_param")
-    String configParam;
+    private String configParam;
     @Column(name = "value")
-    String value;
+    private String value;
 
-    public ConfigurarConcesionariaForm() {}
+    public ConfigurarConcesionariaForm() {
+    }
 
-    public ConfigurarConcesionariaForm(String configTecno, String configParam, String value) {
+    public ConfigurarConcesionariaForm(final String configTecno, final String configParam, final String value) {
         this.configTecno = configTecno;
         this.configParam = configParam;
         this.value = value;
     }
 
-    public ConfigurarConcesionariaForm(Long concesionariaId, String configTecno, String configParam, String value) {
+    public ConfigurarConcesionariaForm(final Long concesionariaId, final String configTecno, final String configParam, final String value) {
         this.concesionariaId = concesionariaId;
         this.configTecno = configTecno;
         this.configParam = configParam;

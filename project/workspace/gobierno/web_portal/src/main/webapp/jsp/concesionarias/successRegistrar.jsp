@@ -19,7 +19,7 @@
             <H2>FELICITACIONES TE HAS REGISTRADO .. AHORA DEBES ESPERAR A SER APROBADO !!!!</H2>
         </div>
 
-        <button id="login" name="login" class="btn btn-primary" onclick="home.goToHome();">Volver al home</button>
+        <button id="login" name="login" class="btn btn-primary" onclick="home.IDENTIFICADORHome();">Volver al home</button>
     </body>
 
     <%@include file="../commons/footer.jsp"%>

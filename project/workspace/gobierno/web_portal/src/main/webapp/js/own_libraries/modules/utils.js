@@ -1,6 +1,7 @@
 'use strict';
-class Utils {
-    moveLocationTo(location){
+/* Singleton */
+const Utils = {
+    moveLocationTo: (location) => {
         window.location.href = location;
     }
 };

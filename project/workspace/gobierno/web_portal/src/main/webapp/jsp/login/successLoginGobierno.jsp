@@ -37,8 +37,9 @@
 
             <br>
 
-            <div id="aprobarConcesionariaDiv" class="container">
-                <ct:concesionariasTable idTable="tableConcesionarias"></ct:concesionariasTable>
+            <div id="concesionariasDiv" class="container">
+                <table id="tableConcesionarias"  class="table table-striped table-bordered" style="width:100%">
+                </table>
             </div>
 
             <!-- Modal -->
@@ -58,5 +59,6 @@
     </body>
 
     <%@include file="../commons/footer.jsp"%>q
+    <script src="/web_portal/util/Javascript.do/load=own_libraries/successGobierno"></script>
 
 </html>
