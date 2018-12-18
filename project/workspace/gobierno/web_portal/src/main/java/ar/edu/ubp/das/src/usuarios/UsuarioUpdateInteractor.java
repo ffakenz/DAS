@@ -25,7 +25,6 @@ public class UsuarioUpdateInteractor implements Interactor<Boolean> {
         final Pair<String, Boolean> username = form.isItemValid("username");
         final Pair<String, Boolean> password = form.isItemValid("password");
 
-        // Some error occur with documento /username / password
         if (!documento.snd || !username.snd || !password.snd)
             return new InteractorResponse<>(ResponseForward.WARNING, false);
 

@@ -15,7 +15,7 @@
     <body>
         <div class="content-body">
 
-            <%@include file="./header.jsp"%>
+            <%@include file="header_login.jsp"%>
 
             <div id="login-form">
 
@@ -25,11 +25,6 @@
 
                 <%@include file="formLogin.jsp"%>
 
-                <div class="text-center">
-                    <button id="first_login_btn" class="btn btn-outline-primary btn-lg btn-block">
-                        Primer ingreso
-                    </button>
-                </div>
             </div>
 
 

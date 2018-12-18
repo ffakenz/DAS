@@ -21,10 +21,8 @@
             </header>
 
             <div class="page-header text-center">
-                <h2>USUARIO INCORRECTO ... si quiere puede volver a probar</h2>
+                <h2>DNI INCORRECTO</h2>
             </div>
-
-            <%@include file="formLogin.jsp"%>
         </div>
     </body>
 

@@ -17,5 +17,13 @@
 
         </form>
 
+        <br>
+
+        <div class="text-center">
+            <button id="first_login_btn" class="btn btn-outline-primary btn-lg btn-block">
+                Primer ingreso
+            </button>
+        </div>
+
     </fieldset>
 </div>

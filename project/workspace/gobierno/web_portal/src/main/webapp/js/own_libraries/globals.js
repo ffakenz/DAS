@@ -6,8 +6,8 @@ const Action = {
 
     LOGIN_ENDPOINT : "/web_portal/login/Login.do",
     LOGOUT_ENDPOINT : "/web_portal/login/Logout.do",
-    LOGIN_PRIMER_INGRESO : "/web_portal/login/RegistrarConsumer.do",
-    SHOW_LOGIN_PRIMER_INGRESO : "/web_portal/login/ShowLoginPrimerIngreso.do",
+    LOGIN_PRIMER_INGRESO : "/web_portal/usuarios/RegistrarConsumer.do",
+    SHOW_LOGIN_PRIMER_INGRESO : "/web_portal/usuarios/ShowPrimerIngreso.do",
 
     REGISTRAR_CONCESIONARIA_ENDPOINT : "/web_portal/concesionarias/RegistrarConcesionaria.do",
     APROBAR_CONCESIONARIA_ENDPOINT : "/web_portal/concesionarias/AprobarConcesionaria.do",

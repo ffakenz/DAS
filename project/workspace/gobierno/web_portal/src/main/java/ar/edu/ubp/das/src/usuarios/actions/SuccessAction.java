@@ -1,4 +1,4 @@
-package ar.edu.ubp.das.src.home.actions;
+package ar.edu.ubp.das.src.usuarios.actions;
 
 import ar.edu.ubp.das.mvc.action.Action;
 import ar.edu.ubp.das.mvc.action.ActionMapping;

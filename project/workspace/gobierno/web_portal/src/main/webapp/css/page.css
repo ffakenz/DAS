@@ -21,6 +21,7 @@ body {
 header {
   margin-bottom: 5rem;
   background-color: darkgrey;
+  display: flex;
 }
 
 header nav {
@@ -121,4 +122,8 @@ nav span {
 
 .down {
   top: -60px;
+}
+
+#home_btn {
+  margin-left: auto;
 }

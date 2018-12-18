@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="../schema/actions.xsd">
+    <form-beans>
+    </form-beans>
+    <action-mappings>
+
+        <action type="SuccessAction" path="/ShowPrimerIngreso.do">
+            <forward name="success" path="/usuarios/primerIngreso.jsp" />
+        </action>
+
+        <action type="RegistrarConsumerAction" path="/RegistrarConsumer.do">
+            <forward name="success" path="/web_portal/home/ShowLogin.do" redirect="true" />
+            <forward name="warning" path="/usuarios/failParamsLoginPrimerIngreso.jsp" />
+            <forward name="failure" path="/usuarios/failLoginPrimerIngreso.jsp" />
+        </action>
+
+    </action-mappings>
+</actions>

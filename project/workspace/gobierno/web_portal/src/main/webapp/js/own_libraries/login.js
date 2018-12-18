@@ -39,7 +39,5 @@ $(() => {
 
     $('#login_btn').on('click', login.validarUsuario);
     $('#first_login_btn').on('click', login.goToPrimerIngreso);
-
-
     $('#login_registrar_btn').on('click', registro.registrarUsuario);
 });
