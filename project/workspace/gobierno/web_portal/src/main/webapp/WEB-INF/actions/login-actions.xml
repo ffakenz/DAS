@@ -13,7 +13,7 @@
         </action>
 
         <action type="LogoutAction" path="/Logout.do">
-            <forward name="success" path="/home/home.jsp" redirect="true"/>
+            <forward name="success" path="/" redirect="true"/>
         </action>
 
     </action-mappings>

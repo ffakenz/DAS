@@ -28,7 +28,7 @@ $(() => {
 
 
 $(window).on('load', () => {
-    $("#tableConcesionarias").DataTable();
+    $("#tableConcesionarias").DataTable({}); /* WTF IS HAPPENING WITH THIS!!! MTFCKR */
 
     /* HELPERS */
 

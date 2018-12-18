@@ -17,11 +17,10 @@
 
 <!-- Own libs -->
 <script src="/web_portal/util/Javascript.do/load=own_libraries/globals"></script>
-<script src="/web_portal/util/Javascript.do/load=own_libraries/utils"></script>
+<script src="/web_portal/util/Javascript.do/load=own_libraries/modules/utils"></script>
 <script src="/web_portal/util/Javascript.do/load=own_libraries/other"></script>
 
 
-<script src="/web_portal/util/Javascript.do/load=own_libraries/modules/utils"></script>
 <script src="/web_portal/util/Javascript.do/load=own_libraries/modules/module"></script>
 <script src="/web_portal/util/Javascript.do/load=own_libraries/modules/config"></script>
 <script src="/web_portal/util/Javascript.do/load=own_libraries/modules/home"></script>

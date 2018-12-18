@@ -5,7 +5,7 @@ class Login extends Module {
 
     closeSession(evt) {
         console.log("closeSession = %o", evt);
-        Utils.moveLocationTo(Action.LOGOUT_ENDPOINT);
+        jUtils.moveLocationTo(Action.LOGOUT_ENDPOINT);
     }
 
     validarUsuario(evt) {
