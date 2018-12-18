@@ -4,6 +4,15 @@ class Login extends Module {
     }
 
     closeSession(evt) {
+        console.log("closeSession = %o", evt);
         Utils.moveLocationTo(Action.LOGOUT_ENDPOINT);
+    }
+
+    validarUsuario(evt) {
+        evt.preventDefault();
+        console.log("validarUsuario = %o", evt);
+
+        const url = Action.LOGIN_ENDPOINT;
+        $(evt.target.form).attr('action', url).submit();
     }
 };

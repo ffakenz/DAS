@@ -1,4 +1,3 @@
-'use strict';
 const Config = {
     home: (self) => [
         { 
@@ -26,6 +25,12 @@ const Config = {
             ctx: "#header_home", 
             cnfg: [
                 { delegate: "#logout", handler: self.closeSession}
+            ]
+        },
+        { 
+            ctx: "#loginForm", 
+            cnfg: [
+                { delegate: "#login_btn", handler: self.validarUsuario}
             ]
         }
     ]

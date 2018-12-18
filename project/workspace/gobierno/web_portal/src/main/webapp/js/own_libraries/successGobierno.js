@@ -28,9 +28,7 @@ $(() => {
 
 
 $(window).on('load', () => {
-    $("#tableConcesionarias").DataTable({
-        "order": [[ 1, "desc" ]]
-    });
+    $("#tableConcesionarias").DataTable();
 
     /* HELPERS */
 

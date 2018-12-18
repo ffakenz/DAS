@@ -1,3 +1,5 @@
+'use strict';
+
 const Action = {
     HOME_ENDPOINT : "/web_portal/home/Home.do",
     SHOW_REGISTRAR_CONCESIONARIA_ENDPOINT : "/web_portal/home/ShowRegistrarConcesionaria.do",

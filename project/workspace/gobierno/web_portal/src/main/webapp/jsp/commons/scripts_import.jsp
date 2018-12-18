@@ -21,9 +21,8 @@
 <script src="/web_portal/util/Javascript.do/load=own_libraries/other"></script>
 
 
-<!-- <script src="/web_portal/util/Javascript.do/load=own_libraries/home"></script> -->
-
 <script src="/web_portal/util/Javascript.do/load=own_libraries/modules/utils"></script>
+<script src="/web_portal/util/Javascript.do/load=own_libraries/modules/module"></script>
 <script src="/web_portal/util/Javascript.do/load=own_libraries/modules/config"></script>
 <script src="/web_portal/util/Javascript.do/load=own_libraries/modules/home"></script>
 <script src="/web_portal/util/Javascript.do/load=own_libraries/modules/login"></script>
@@ -32,6 +31,4 @@
 
 
 <script src="/web_portal/util/Javascript.do/load=own_libraries/concesionarias"></script>
-<script src="/web_portal/util/Javascript.do/load=own_libraries/login"></script>
-<script src="/web_portal/util/Javascript.do/load=own_libraries/logout"></script>
 

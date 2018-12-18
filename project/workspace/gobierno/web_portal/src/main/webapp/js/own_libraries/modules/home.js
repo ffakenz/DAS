@@ -1,13 +1,3 @@
-'use strict';
-class Module {
-    constructor(eventHandlers) {
-        this.eventHandlers = eventHandlers(this);
-    }
-    getEventHandlers(){
-        return this.eventHandlers;
-    }
-};
-
 class Home extends Module {
     constructor(config){
         super(config);
@@ -27,5 +17,5 @@ class Home extends Module {
 
     goToProfile(evt) {
         Utils.moveLocationTo(Action.LOGIN_ENDPOINT);
-    }
+    }    
 };
