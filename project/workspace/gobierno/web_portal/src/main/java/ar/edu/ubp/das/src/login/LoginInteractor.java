@@ -41,7 +41,7 @@ public class LoginInteractor implements Interactor<Long> {
             logInForm.setDocumento(usuarioForm.get().getDocumento());
 
             return loginManager.login(logInForm)
-                .map(LogInId -> new InteractorResponse<>(ResponseForward.SUCCESS, LogInId))
+                .map(logInId -> new InteractorResponse<>(ResponseForward.SUCCESS, logInId))
                 .orElse(new InteractorResponse<>(ResponseForward.FAILURE));
         }
 
