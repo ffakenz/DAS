@@ -5,7 +5,6 @@
     </form-beans>
     <action-mappings>
         <action type="JobsConsumeAction" path="/JobsConsume.do">
-            <forward name="success" path="/util/success.jsp" />
         </action>
     </action-mappings>
 </actions>
