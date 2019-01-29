@@ -1,5 +1,8 @@
 $(() => {
     /* Initialization Code */
+
+    const concesionarias = new Concesionarias(Config.concesionarias);
+    jUtils.loadModule(concesionarias);
 });
 
 $(window).on('load', () => {

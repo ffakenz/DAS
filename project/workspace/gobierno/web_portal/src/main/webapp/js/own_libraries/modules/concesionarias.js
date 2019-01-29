@@ -1,7 +1,8 @@
 class Concesionarias extends Module {
-    
+
     constructor(config) {
         super(config);
+        this.concesionariasService = new ConcesionariasService();
     }
 
     /* AJAX CALLS */

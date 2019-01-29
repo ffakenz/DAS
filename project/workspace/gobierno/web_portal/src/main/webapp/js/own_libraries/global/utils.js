@@ -60,7 +60,8 @@ const jUtils = {
         module.getEventHandlers().forEach(evt => {
             evt.cnfg.forEach(cnfg => {
                 console.log("Handle Click For CTX = %o - CNFG = %o", evt.ctx, cnfg);
-                $(evt.ctx).delegate(cnfg.delegate, "click", cnfg.handler);
+                const event_type = cnfg.event_type || "click" 
+                $(evt.ctx).delegate(cnfg.delegate, event_type, cnfg.handler);
             });
         });
     }

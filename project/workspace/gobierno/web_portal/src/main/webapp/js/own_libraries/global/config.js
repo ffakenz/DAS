@@ -48,7 +48,8 @@ const Config = {
             cnfg: [
                 { delegate: `.${Class.BTN_UPDATE_CONFIG}`, handler: self.updateConfigHandler }
                 , { delegate: `.${Class.BTN_TEST_CONFIG}`, handler: self.testConfigHandler }
-                , { delegate: `#${Id.UPDATE_CONFIG_SELECT}`, handler: self.changeUpdateConfigHandler }
+                , { delegate: `#${Id.UPDATE_CONFIG_SELECT}`, handler: self.changeUpdateConfigHandler ,
+                    event_type: "onchange" }
             ]
         },
         { 
