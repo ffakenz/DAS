@@ -45,6 +45,7 @@ const Class = {
 };
 
 
+/* TODO: move this class to its own file  */
 class ConfigParam {
     constructor(configTecno, configParams, concesionariaId) {
         this.configTecno = configTecno;

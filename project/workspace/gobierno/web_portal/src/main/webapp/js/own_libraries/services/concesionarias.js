@@ -43,15 +43,14 @@ const ConcesionariasService = {
             dataType: "json",
             error: function(hr){
                 console.log("AJAX RESULT ERROR %o", hr.responseText);
-
                 jUtils.showing("modal_content", hr);
                 $("#modal_generic").modal("show");
             },
             success: function(jsonArray) {
                 console.log("AJAX RESULT SUCCESS %o", jsonArray);
-                console.log("MODULE %o", jsonArray);
                 /* EACH SUCCESS CHANGES THE STATE { LAST_CONFIGS_CONSULTED_ST } USING formConsultarConfings */
                 const html = ConcesionariasUtils.formConsultarConfig(jsonArray, idConcesionaria);
+                console.log("CONSULTAR HTML = %o", html);
                 jUtils.showing("modal_content", html);
                 $("#modal_generic").modal("show");
             }

@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
+import java.util.Enumeration;
 
 public interface Action {
 
@@ -18,13 +19,28 @@ public interface Action {
 
 
     default void logRequest(final HttpServletRequest request) {
-        log.info("[HttpServletRequest - ] = {}", request.getSession().toString());
+        log.info("[HttpServletRequest - URL] = {}", request.getRequestURL().toString());
+        log.info("[HttpServletRequest - QUERY] = {}", request.getQueryString());
+        log.info("[HttpServletRequest - METHOD] = {}", request.getMethod());
+        log.info("[HttpServletRequest - SESSION] = {}", request.getSession().toString());
+        final Enumeration<String> attributeNames = request.getAttributeNames();
+        while (attributeNames.hasMoreElements()) {
+            final String attributeName = attributeNames.nextElement();
+            final Object attribute = request.getAttribute(attributeName);
+            log.info("[HttpServletRequest - ATTRIBUTE_NAME] = {}", attributeName);
+            log.info("[HttpServletRequest - ATTRIBUTE] = {}", attribute.toString());
+        }
+    }
+
+    default void logResponse(final HttpServletResponse response) {
+        log.info("[HttpServletResponse - STATUS] = {}", response.getStatus());
     }
 
     default void logAction(final ActionMapping mapping, final DynaActionForm form, final HttpServletRequest request, final HttpServletResponse response) {
         log.info("[ActionMapping] = {}", mapping.toString());
         log.info("[DynaActionForm] = {}", form.toString());
         logRequest(request);
+        logResponse(response);
         System.out.println();
     }
 

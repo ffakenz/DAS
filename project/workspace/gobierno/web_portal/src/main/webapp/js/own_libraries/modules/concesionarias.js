@@ -7,8 +7,9 @@ class Concesionarias extends Module {
 
     /* AJAX CALLS */
     testConfigHandler(evt) {
-        console.log("Testing Config %o", evt.target.id);
         evt.preventDefault();
+        console.log("changeUpdateConfigHandler, [EVENT] = %o", evt);
+        console.log("Testing Config %o", evt.target.id);
 
         const configTecno = $(`#${Id.UPDATE_CONFIG_SELECT}`).children("option:selected").val();
 
@@ -28,13 +29,10 @@ class Concesionarias extends Module {
     }
 
     changeUpdateConfigHandler(evt) {
-
-        console.log("Event %o", evt);
-
         evt.preventDefault();
+        console.log("changeUpdateConfigHandler, [EVENT] = %o", evt);
 
         const currentConfigTecno = LAST_CONFIGS_CONSULTED_ST.configTecno;
-
         const newConfigTecno = evt.target.value;
         console.log("Changing Config From %o To %o", currentConfigTecno, newConfigTecno);
 
@@ -44,54 +42,52 @@ class Concesionarias extends Module {
             jUtils.showing("modal_content", newHtml);
         } else {
             const oldHtml = LAST_CONFIGS_CONSULTED_ST.showForm();
-            console.lzog("oldHtml = %o", oldHtml);
+            console.log("oldHtml = %o", oldHtml);
             jUtils.showing("modal_content", oldHtml);
         }
 
     }
 
     configurarHandler(evt) {
+        evt.preventDefault();
+        console.log("configurarHandler, [EVENT] = %o", evt);
         console.log("Configurando Concesionaria %o", evt.target.id);
-
         const idButton = evt.target.id;
         const idConcesionaria = idButton.split("-")[1];
-
         ConcesionariasService.POST_CONSULTAR_CONFIG_PARAM(idConcesionaria);
     }
 
     aprobarHandler(evt) {
-
+        evt.preventDefault();
+        console.log("aprobarHandler, [EVENT] = %o", evt);
         console.log("Aprobando Concesionaria %o", evt.target.id);
-
         const idButton = evt.target.id;
         const idConcesionaria  = idButton.split("-")[1];
-
         ConcesionariasService.POST_APROBAR_CONCESIONARIA(idConcesionaria);
     }
 
     desAprobarHandler(evt) {
+        evt.preventDefault();
+        console.log("desAprobarHandler, [EVENT] = %o", evt);
         console.log("DesAprobando Concesionaria %o", evt.target.id);
         const idButton = evt.target.id;
         const idConcesionaria  = idButton.split("-")[1];
-
         ConcesionariasService.POST_DESAPROBAR_CONCESIONARIA(idConcesionaria);
     }
 
     updateConfigHandler(evt) {
-
-        console.log("Actualizando Concesionaria %o", evt.target.id);
         evt.preventDefault();
+        console.log("updateConfigHandler, [EVENT] = %o", evt);
+        console.log("Actualizando Concesionaria %o", evt.target.id);
         const idButton = evt.target.id;
         const idConcesionaria = idButton.split("-")[1];
-        console.log("Actualizando Concesionaria _ %o", idConcesionaria);
-
         const data = $(`#${Id.UPDATE_CONFIG_FORM}`).serializeArray();
         ConcesionariasService.POST_CONFIG_CONCESIONARIA(data);
     }
 
     testConsumo(evt) {
-        console.log("Test consumo %o", evt.target.id);
         evt.preventDefault();
-
+        console.log("testConsumo, [EVENT] = %o", evt);
+        console.log("Test consumo %o", evt.target.id);
     }
 };

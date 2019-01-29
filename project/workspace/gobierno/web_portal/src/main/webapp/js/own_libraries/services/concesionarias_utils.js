@@ -27,9 +27,12 @@ const ConcesionariasUtils = {
 
     /* the jsonArray is the result from calling CONCESIONARIA_CONSULTAR_CONFIG_PARAM Action */
     formConsultarConfig(jsonArray, concesionariaId) {
+        console.log("Executing formConsultarConfig for [CONCESIONARIA_ID] = %o with [ARRAY] = %o", 
+            concesionariaId, jsonArray);
         if(jsonArray.length === 0) {
             const newState = this.getNewUpdateForm(ConfigTecno.REST, concesionariaId);
             LAST_CONFIGS_CONSULTED_ST = newState;
+            console.log("formConsultarConfig for [CONCESIONARIA_ID] = %o [RETURN] = %o", newState);
             return newState.showForm();
         }
         else {
@@ -39,10 +42,12 @@ const ConcesionariasUtils = {
                 let obj = {};
                 obj["name"] = param.configParam;
                 obj["value"] = param.value;
+                console.log("formConsultarConfig for [CONCESIONARIA_ID] = %o [RETURN] = %o", obj);
                 return obj;
             });
             const newState = new ConfigParam(configTecno, configParams, concesionariaId);
             LAST_CONFIGS_CONSULTED_ST = newState;
+            console.log("formConsultarConfig for [CONCESIONARIA_ID] = %o [RETURN] = %o", newState);
             return newState.showForm();
         }
     }

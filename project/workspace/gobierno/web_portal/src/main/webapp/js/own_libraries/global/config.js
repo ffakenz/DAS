@@ -1,61 +1,61 @@
 const Config = {
-    home: (self) => [
+    home: (module) => [
         { 
             ctx: "#header_home", 
             cnfg: [
-                { delegate: "#login", handler: self.showLogin }
-                , { delegate: "#goToProfile", handler: self.goToProfile }
+                { delegate: "#login", handler: module.showLogin }
+                , { delegate: "#goToProfile", handler: module.goToProfile }
             ]
         },
         { 
             ctx: "#registrar_concesionaria_div", 
             cnfg: [
-                { delegate: "#registrar_concesionaria", handler: self.showRegistrarConcesionaria }
+                { delegate: "#registrar_concesionaria", handler: module.showRegistrarConcesionaria }
             ]
         },
         { 
             ctx: "#goToHomeDiv", 
             cnfg: [
-                { delegate: "#goToHome", handler: self.goToHome }
+                { delegate: "#goToHome", handler: module.goToHome }
             ]
         }
     ],
-    login: (self) => [
+    login: (module) => [
         { 
             ctx: "#header_home", 
             cnfg: [
-                { delegate: "#logout", handler: self.closeSession }
+                { delegate: "#logout", handler: module.closeSession }
             ]
         },
         { 
             ctx: "#loginForm", 
             cnfg: [
-                { delegate: "#login_btn", handler: self.validarUsuario }
+                { delegate: "#login_btn", handler: module.validarUsuario }
             ]
         }
     ],
-    concesionarias: (self) => [
+    concesionarias: (module) => [
         { 
             ctx: "#tableConcesionarias", 
             cnfg: [
-                { delegate: ".aprobar_btn", handler: self.aprobarHandler }
-                , { delegate: ".desaprobar_btn", handler: self.desAprobarHandler }
-                , { delegate: ".config_btn", handler: self.configurarHandler }
+                { delegate: ".aprobar_btn", handler: module.aprobarHandler }
+                , { delegate: ".desaprobar_btn", handler: module.desAprobarHandler }
+                , { delegate: ".config_btn", handler: module.configurarHandler }
             ]
         },
         { 
             ctx: "#modal_content", 
             cnfg: [
-                { delegate: `.${Class.BTN_UPDATE_CONFIG}`, handler: self.updateConfigHandler }
-                , { delegate: `.${Class.BTN_TEST_CONFIG}`, handler: self.testConfigHandler }
-                , { delegate: `#${Id.UPDATE_CONFIG_SELECT}`, handler: self.changeUpdateConfigHandler ,
+                { delegate: `.${Class.BTN_UPDATE_CONFIG}`, handler: module.updateConfigHandler }
+                , { delegate: `.${Class.BTN_TEST_CONFIG}`, handler: module.testConfigHandler }
+                , { delegate: `#${Id.UPDATE_CONFIG_SELECT}`, handler: module.changeUpdateConfigHandler ,
                     event_type: "onchange" }
             ]
         },
         { 
             ctx: "#test_consumo_div", 
             cnfg: [
-                { delegate: "#test_consumo_div", handler: self.testConsumo }
+                { delegate: "#test_consumo_div", handler: module.testConsumo }
             ]
         }
     ]
