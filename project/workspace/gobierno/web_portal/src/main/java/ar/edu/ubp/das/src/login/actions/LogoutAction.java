@@ -9,8 +9,6 @@ import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.core.InteractorResponse;
 import ar.edu.ubp.das.src.core.ResponseForward;
 import ar.edu.ubp.das.src.login.LogoutInteractor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +19,6 @@ import static ar.edu.ubp.das.src.utils.Constants.SSID;
 
 public class LogoutAction implements Action {
 
-    private static final Logger log = LoggerFactory.getLogger(LogoutAction.class);
 
     @Override
     public ForwardConfig execute(final ActionMapping mapping, final DynaActionForm form, final HttpServletRequest request,

@@ -71,3 +71,5 @@ WORK TIPS:
 
 - Do not comment code in js files which are minimized by Javascript.do because
     we get the folowing error: `Uncaught SyntaxError: Unexpected end of input`
+
+- If a test fail and you do some change in db, remember to do clean install

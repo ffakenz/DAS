@@ -16,7 +16,7 @@ public class MSLogInDao extends DaoImpl<LogInForm> {
 
     @Override
     public void insert(final LogInForm f) throws SQLException {
-        executeProcedure("dbo.log_login(?)", f, "username");
+        executeProcedure("dbo.log_login(?)", f, "documento");
     }
 
     @Override
@@ -30,7 +30,7 @@ public class MSLogInDao extends DaoImpl<LogInForm> {
 
     @Override
     public List<LogInForm> select(final LogInForm form) throws SQLException {
-        return executeQueryProcedure("dbo.get_logins(?)", form, "username");
+        return executeQueryProcedure("dbo.get_logins(?)", form, "documento");
     }
 
     @Override
@@ -39,16 +39,16 @@ public class MSLogInDao extends DaoImpl<LogInForm> {
     }
 
     public List<LogInForm> selectUserLoggIn(final LogInForm form) throws SQLException {
-        return this.executeQueryProcedure("dbo.get_login_by_username(?)", form, "username");
+        return this.executeQueryProcedure("dbo.get_login_by_documento(?)", form, "documento");
     }
 
 
-    public void logoutByUsername(final LogInForm f) throws SQLException {
-        executeProcedure("dbo.log_out_by_username(?)", f, "username");
+    public void logoutByDocumento(final LogInForm f) throws SQLException {
+        executeProcedure("dbo.log_out_by_documento(?)", f, "documento");
     }
 
     // Needed For Tests Purpose
     public Optional<LogInForm> selectLastUserLogin(final LogInForm form) throws SQLException {
-        return this.executeQueryProcedure("dbo.get_last_login_by_username(?)", form, "username").stream().findFirst();
+        return this.executeQueryProcedure("dbo.get_last_login_by_documento(?)", form, "documento").stream().findFirst();
     }
 }

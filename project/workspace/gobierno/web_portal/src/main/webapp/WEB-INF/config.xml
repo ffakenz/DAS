@@ -11,7 +11,6 @@
 
     <alias-mappings>
         <!-- A -->
-        <alias name="admin" />
         <!-- B -->
         <!-- C -->
         <alias name="concesionarias" />
@@ -39,6 +38,7 @@
         <!-- T -->
         <!-- U -->
         <alias name="util" />
+        <alias name="usuarios" />
         <!-- V -->
         <!-- W -->
         <!-- X -->

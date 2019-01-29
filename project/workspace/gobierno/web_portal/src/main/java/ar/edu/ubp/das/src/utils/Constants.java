@@ -6,9 +6,11 @@ public final class Constants {
     public static final String CONCESIONARIAS_DAO_NAME = "Concesionarias";
     public static final String CONFIG_CONCESIONARIAS_DAO_NAME = "ConfigurarConcesionaria";
     public static final String CONFIG_TECNO_PARAM_DAO_NAME = "ConfigTecnoParam";
+    public static final String USUARIOS_DAO_NAME = "Usuarios";
 
     //************ DAOS PACKAGES**********************************************
     public static final String CONCESIONARIAS_DAO_PACKAGE = "concesionarias";
+    public static final String USUARIOS_DAO_PACKAGE = "usuarios";
 
     //************ CONSUMERS ROLES ****************************
     public static final String ROL_GOBIERNO = "gobierno";

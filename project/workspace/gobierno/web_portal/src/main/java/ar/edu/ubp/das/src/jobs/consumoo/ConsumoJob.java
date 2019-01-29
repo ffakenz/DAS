@@ -18,6 +18,9 @@ import ar.edu.ubp.das.src.estado_cuentas.model.CuotasManager;
 import ar.edu.ubp.das.src.estado_cuentas.model.EstadoCuentasManager;
 import ar.edu.ubp.das.src.jobs.ClientFactoryAdapter;
 import ar.edu.ubp.das.src.jobs.consumoo.forms.*;
+import ar.edu.ubp.das.src.usuarios.daos.MSUsuariosDao;
+import ar.edu.ubp.das.src.usuarios.forms.UsuarioForm;
+import ar.edu.ubp.das.src.usuarios.model.UsuarioManager;
 import ar.edu.ubp.das.src.utils.DateUtils;
 import beans.NotificationUpdate;
 import clients.ConcesionariaServiceContract;
@@ -34,6 +37,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static ar.edu.ubp.das.src.utils.Constants.ROL_CONSUMER;
+
 public class ConsumoJob implements Job {
 
     private static final Logger log = LoggerFactory.getLogger(ConsumoJob.class);
@@ -45,6 +50,7 @@ public class ConsumoJob implements Job {
     private CuotasManager cuotasManager;
     private EstadoCuentasManager estadoCuentasManager;
     private ConsumoJobManager consumoJobManager;
+    private UsuarioManager usuarioManager;
 
     private ClientFactoryAdapter clientFactory;
 
@@ -69,6 +75,10 @@ public class ConsumoJob implements Job {
         final MSEstadoCuentasDao msEstadoCuentasDao = new MSEstadoCuentasDao();
         msEstadoCuentasDao.setDatasource(datasourceConfig);
         this.estadoCuentasManager = new EstadoCuentasManager(msEstadoCuentasDao);
+
+        final MSUsuariosDao msUsuariosDao = new MSUsuariosDao();
+        msUsuariosDao.setDatasource(datasourceConfig);
+        this.usuarioManager = new UsuarioManager(msUsuariosDao);
 
         this.clientFactory = new ClientFactoryAdapter(clientFactory);
 
@@ -215,26 +225,31 @@ public class ConsumoJob implements Job {
      * @throws SQLException
      */
     private void updateDb(final Long concesionariaId, final NotificationUpdate update) throws SQLException {
-        updateConsumerDb(update, concesionariaId);
+        updateConsumerDb(update);
         updateEstadoCuentaDb(update, concesionariaId);
         updateCuotaDb(update);
     }
 
     /**
      * @param update
-     * @param concesionariaId
      * @throws SQLException
      */
-    public void updateConsumerDb(final NotificationUpdate update, final Long concesionariaId) throws SQLException {
+    public void updateConsumerDb(final NotificationUpdate update) throws SQLException {
 
         final ConsumerForm consumer = new ConsumerForm();
         consumer.setDocumento(update.getClienteDocumento());
+
         if (!consumerManager.getDao().valid(consumer)) {
+
+            UsuarioForm usuarioForm = new UsuarioForm();
+            usuarioForm.setDocumento(update.getClienteDocumento());
+            usuarioForm.setRol(ROL_CONSUMER);
+            usuarioManager.getDao().insert(usuarioForm);
+
             consumer.setNombre(update.getClienteNombre());
             consumer.setApellido(update.getClienteApellido());
             consumer.setNroTelefono(update.getClienteNroTelefono());
             consumer.setEmail(update.getClienteEmail());
-            consumer.setConcesionaria(concesionariaId);
             consumerManager.getDao().insert(consumer);
         }
     }

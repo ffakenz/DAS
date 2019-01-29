@@ -53,13 +53,14 @@ public class CreateConsumerInteractorTest {
 
     @Test
     public void test11_Create_consumer_successfully() throws SQLException {
+
         final DynaActionForm consumerForm = new DynaActionForm();
-        consumerForm.setItem("documento", "777");
+        consumerForm.setItem("documento", "4");
         consumerForm.setItem("concesionaria", "1");
-        consumerForm.setItem("nombre", "Nombre_Test_1");
-        consumerForm.setItem("apellido", "Apellido_Test_1");
-        consumerForm.setItem("nro_telefono", "Tel_Test_01");
-        consumerForm.setItem("email", "test@test.com");
+        consumerForm.setItem("nombre", "Nombre_Test_4");
+        consumerForm.setItem("apellido", "Apellido_Test_4");
+        consumerForm.setItem("nro_telefono", "Tel_Test_4");
+        consumerForm.setItem("email", "test_4@test.com");
 
         // Insert the consumer
         final InteractorResponse<Boolean> result = createConsumerInteractor.execute(consumerForm);

@@ -13,18 +13,22 @@
     <%@include file="../commons/head.jsp" %>
 
     <body>
-
         <div class="content-body">
+
+            <%@include file="header_login.jsp"%>
 
             <div id="login-form">
 
-                <h1><fmt:message key="login_cabecera" bundle="${etq}" /></h1>
+                <h1 style="text-align: center">
+                    <fmt:message key="login_cabecera" bundle="${etq}" />
+                </h1>
 
                 <%@include file="formLogin.jsp"%>
 
                 <%@include file="../home/go_to_home.jsp" %>
 
             </div>
+
 
             <div id="resultado">
 

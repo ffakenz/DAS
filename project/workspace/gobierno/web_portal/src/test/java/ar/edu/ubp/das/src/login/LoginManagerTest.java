@@ -38,10 +38,10 @@ public class LoginManagerTest {
 
     @Test
     public void test10_Verify_is_logged_in_OK() throws SQLException {
-        final String username = "ffakenz";
+        final Long doc = 222L;
 
         final LogInForm logInForm = new LogInForm();
-        logInForm.setUsername(username);
+        logInForm.setDocumento(doc);
 
         final Optional<Long> loggedIn = loginManager.isLoggedIn(logInForm);
 
@@ -50,10 +50,10 @@ public class LoginManagerTest {
 
     @Test
     public void test11_Verify_is_logged_in_Fail() throws SQLException {
-        final String username = "irocca";
+        final Long doc = 111L;
 
         final LogInForm logInForm = new LogInForm();
-        logInForm.setUsername(username);
+        logInForm.setDocumento(doc);
 
         final Optional<Long> loggedIn = loginManager.isLoggedIn(logInForm);
 
@@ -62,10 +62,10 @@ public class LoginManagerTest {
 
     @Test
     public void test12_Verify_login_Ok() throws SQLException {
-        final String username = "irocca";
+        final Long doc = 111L;
 
         final LogInForm logInForm = new LogInForm();
-        logInForm.setUsername(username);
+        logInForm.setDocumento(doc);
 
         final Optional<Long> login = loginManager.login(logInForm);
 
@@ -74,10 +74,10 @@ public class LoginManagerTest {
 
     @Test
     public void test13_Verify_login_twice_ok() throws SQLException {
-        final String username = "irocca";
+        final Long doc = 111L;
 
         final LogInForm logInForm = new LogInForm();
-        logInForm.setUsername(username);
+        logInForm.setDocumento(doc);
 
         final Optional<Long> login = loginManager.login(logInForm);
 

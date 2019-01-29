@@ -20,6 +20,7 @@ public interface Action {
     default void logRequest(final HttpServletRequest request) {
         log.info("[HttpServletRequest - ] = {}", request.getSession().toString());
     }
+
     default void logAction(final ActionMapping mapping, final DynaActionForm form, final HttpServletRequest request, final HttpServletResponse response) {
         log.info("[ActionMapping] = {}", mapping.toString());
         log.info("[DynaActionForm] = {}", form.toString());

@@ -15,12 +15,13 @@ public class MSUsuariosDao extends DaoImpl<UsuarioForm> {
 
     @Override
     public void insert(final UsuarioForm form) throws SQLException {
-        executeProcedure("dbo.insert_usuario(?, ?, ?)", form, "username", "password", "rol");
+        executeProcedure("dbo.insert_usuario(?, ?, ?, ?)",
+                form, "documento","username", "password", "rol");
     }
 
     @Override
     public void update(final UsuarioForm form) throws SQLException {
-        executeProcedure("dbo.update_usuario_password(?, ?)", form, "username", "password");
+        executeProcedure("dbo.update_usuario(?, ?, ?)", form, "documento", "username", "password");
     }
 
     @Override
@@ -49,29 +50,30 @@ public class MSUsuariosDao extends DaoImpl<UsuarioForm> {
                 .findFirst();
     }
 
-    public List<UsuarioForm> selectByUserName(final String username) throws SQLException {
+    public Optional<UsuarioForm> selectByDocumento(final Long documento) throws SQLException {
+
+        final UsuarioForm usuarioForm = new UsuarioForm();
+        usuarioForm.setDocumento(documento);
+
+        return this.executeQueryProcedure("dbo.get_usuario_by_documento(?)",
+                usuarioForm, "documento")
+                .stream()
+                .findFirst();
+    }
+
+    public Optional<UsuarioForm> selectByUserName(final String username) throws SQLException {
 
         final UsuarioForm usuarioForm = new UsuarioForm();
         usuarioForm.setUsername(username);
 
-        return this.executeQueryProcedure("dbo.get_usuarios_by_username(?)", usuarioForm, "username");
+        return this.executeQueryProcedure("dbo.get_usuarios_by_username(?)",
+                usuarioForm, "username")
+                .stream()
+                .findFirst();
+    }
+
+    public void updatePassword(final UsuarioForm form) throws SQLException {
+        executeProcedure("dbo.update_usuario_password(?, ?)", form, "documento", "password");
     }
 
 }
-
-
-/*
-    TODO: Registrar Usuario Consumer
-    dni = parameter.get('dni')
-    Option<consumer> = getConsumerByDNI(dni)
-
-    if(!consumer.isPresent){
-        throw Exception("No consumer exists for with dni ${dni}")
-    } else if (consumer.get.username.isPresent) {
-        throw Exception("The consumer already have a user")
-    } else {
-        username = parameter.get('username')
-        username = parameter.get('password')
-        createUsuario(username, 'consumer')
-    }
-*/
