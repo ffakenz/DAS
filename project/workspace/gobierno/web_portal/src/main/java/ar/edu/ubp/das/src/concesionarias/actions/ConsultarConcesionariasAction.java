@@ -31,6 +31,7 @@ public class ConsultarConcesionariasAction implements Action {
 
         request.setAttribute(RESULT_RQST_ATTRIBUTE, allResult);
 
+        logAction(mapping, form, request, response);
         return mapping.getForwardByName(result.getResponse().getForward());
     }
 }

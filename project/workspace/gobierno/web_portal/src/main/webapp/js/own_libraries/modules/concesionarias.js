@@ -1,8 +1,8 @@
 class Concesionarias extends Module {
-    
-    constructor(config) {
+
+    constructor(config, concesionariasService) {
         super(config);
-        this.concesionariasService = new ConcesionariasService();
+        this.concesionariasService = concesionariasService;
     }
 
     /* HELPERS */
@@ -71,7 +71,7 @@ class Concesionarias extends Module {
         const data = paramsToData(params);
         console.log("Testing data %o", data);
 
-        concesionariasService.POST_TEST_CONFIG(data);
+        this.concesionariasService.POST_TEST_CONFIG(data);
     }
 
     changeUpdateConfigHandler(evt) {
@@ -99,7 +99,7 @@ class Concesionarias extends Module {
         const idButton = evt.target.id;
         const idConcesionaria = idButton.split("-")[1];
 
-        concesionariasService.POST_CONSULTAR_CONFIG_PARAM(idConcesionaria);
+        this.concesionariasService.POST_CONSULTAR_CONFIG_PARAM(idConcesionaria);
     }
 
     aprobarHandler(evt) {
@@ -107,7 +107,7 @@ class Concesionarias extends Module {
         const idButton = evt.target.id;
         const idConcesionaria  = idButton.split("-")[1];
 
-        concesionariasService.POST_APROBAR_CONCESIONARIA(idConcesionaria);
+        this.concesionariasService.POST_APROBAR_CONCESIONARIA(idConcesionaria);
     }
 
     desAprobarHandler(evt) {
@@ -115,7 +115,7 @@ class Concesionarias extends Module {
         const idButton = evt.target.id;
         const idConcesionaria  = idButton.split("-")[1];
 
-        concesionariasService.POST_DESAPROBAR_CONCESIONARIA(idConcesionaria);
+        this.concesionariasService.POST_DESAPROBAR_CONCESIONARIA(idConcesionaria);
     }
 
     updateConfigHandler(evt) {
@@ -127,7 +127,7 @@ class Concesionarias extends Module {
         console.log("Actualizando Concesionaria _ %o", idConcesionaria);
 
         const data = $(`#${Id.UPDATE_CONFIG_FORM}`).serializeArray();
-        concesionariasService.POST_CONFIG_CONCESIONARIA(data);
+        this.concesionariasService.POST_CONFIG_CONCESIONARIA(data);
     }
 
     testConsumo(evt) {

@@ -34,13 +34,14 @@ public class DesAprobarConcesionariaAction implements Action {
         final InteractorResponse<Boolean> result = action.execute(form);
         request.setAttribute(RESULT_RQST_ATTRIBUTE, result.getResponse());
 
-        if(result.getResult()) {
+        if (result.getResult()) {
             final ConsultarConcesionariaInteractor consultarConcesionariaInteractor = new ConsultarConcesionariaInteractor(msConcesionariaDao);
             final InteractorResponse<Optional<ConcesionariaForm>> aprobada = consultarConcesionariaInteractor.execute(form);
 
             request.setAttribute(DESAPROBADA_RQST_ATTRIBUTE, aprobada.getResult().get());
         }
 
+        logAction(mapping, form, request, response);
         return mapping.getForwardByName(result.getResponse().getForward());
     }
 }

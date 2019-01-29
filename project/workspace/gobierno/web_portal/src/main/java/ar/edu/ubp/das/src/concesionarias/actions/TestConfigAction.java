@@ -27,6 +27,7 @@ public class TestConfigAction implements Action {
         final TestConfigInteractor testConfigInteractor = new TestConfigInteractor();
         final InteractorResponse<String> resp = testConfigInteractor.execute(form);
 
+        logAction(mapping, form, request, response);
         return mapping.getForwardByName(resp.getResponse().getForward());
     }
 }

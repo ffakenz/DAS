@@ -16,18 +16,15 @@
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
 <!-- Own libs -->
-<script src="/web_portal/util/Javascript.do/load=own_libraries/globals"></script>
-<script src="/web_portal/util/Javascript.do/load=own_libraries/modules/utils"></script>
+<script src="/web_portal/util/Javascript.do/load=own_libraries/global/globals"></script>
+<script src="/web_portal/util/Javascript.do/load=own_libraries/global/utils"></script>
+<script src="/web_portal/util/Javascript.do/load=own_libraries/global/module"></script>
+<script src="/web_portal/util/Javascript.do/load=own_libraries/global/config"></script>
 <script src="/web_portal/util/Javascript.do/load=own_libraries/other"></script>
 
 
-<script src="/web_portal/util/Javascript.do/load=own_libraries/modules/module"></script>
-<script src="/web_portal/util/Javascript.do/load=own_libraries/modules/config"></script>
 <script src="/web_portal/util/Javascript.do/load=own_libraries/modules/home"></script>
 <script src="/web_portal/util/Javascript.do/load=own_libraries/modules/login"></script>
+
 <script src="/web_portal/util/Javascript.do/load=own_libraries/views/main"></script>
-
-
-
-<script src="/web_portal/util/Javascript.do/load=own_libraries/concesionarias"></script>
 

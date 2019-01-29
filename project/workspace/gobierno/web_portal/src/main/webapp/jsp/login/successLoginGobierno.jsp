@@ -1,16 +1,12 @@
-<%@ page
-
+<%@
+        page
         language="java"
         contentType="text/html; charset=utf-8"
         pageEncoding="utf-8"
 %>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<%@ taglib prefix="ct" tagdir="/WEB-INF/tags" %>
-
 <fmt:setBundle basename="properties.etiquetas" var="etq" scope="session"/>
 
 <!DOCTYPE html>
@@ -58,7 +54,7 @@
         </div>
     </body>
 
-    <%@include file="../commons/footer.jsp"%>q
+    <%@include file="../commons/footer.jsp"%>
     <script src="/web_portal/util/Javascript.do/load=own_libraries/services/concesionarias"></script>
     <script src="/web_portal/util/Javascript.do/load=own_libraries/modules/concesionarias"></script>
     <script src="/web_portal/util/Javascript.do/load=own_libraries/views/concesionarias"></script>

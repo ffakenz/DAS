@@ -33,6 +33,7 @@ public class ConsultarConcesionariaConfigParamAction implements Action {
         if (!resp.getResponse().equals(ResponseForward.SUCCESS))
             return mapping.getForwardByName(resp.getResponse().getForward());
 
+        logAction(mapping, form, request, response);
         return jsonResult(resp.getResult());
     }
 }

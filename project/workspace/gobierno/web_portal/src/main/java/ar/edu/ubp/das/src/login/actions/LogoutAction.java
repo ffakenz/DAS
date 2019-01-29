@@ -29,9 +29,9 @@ public class LogoutAction implements Action {
 
         final DaoImpl loginDao = DaoFactory.getDao("LogIn", "login");
 
-        HttpSession session = request.getSession();
+        final HttpSession session = request.getSession();
 
-        if( session.getAttribute(SSID) == null ) {
+        if (session.getAttribute(SSID) == null) {
             // jamas deberia acceder a esta parte del código
             // si se accede significa que alguien esta tratando de encontrar backdoors
             log.error("Se intenta cerrar una sesion y no hay ningun usuario logueado");
@@ -43,6 +43,7 @@ public class LogoutAction implements Action {
 
         session.removeAttribute(SSID);
 
+        logAction(mapping, form, request, response);
         return mapping.getForwardByName(result.getResponse().getForward());
     }
 

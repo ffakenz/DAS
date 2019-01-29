@@ -31,6 +31,7 @@ public class ConsultarAprobadasAction implements Action {
 
         request.setAttribute(APROBADAS_RQST_ATTRIBUTE, aprobadas);
 
+        logAction(mapping, form, request, response);
         return mapping.getForwardByName(result.getResponse().getForward());
     }
 }
