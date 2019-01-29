@@ -27,9 +27,13 @@ class Concesionarias extends Module {
     }
 
     changeUpdateConfigHandler(evt) {
+
+        console.log("Event %o", evt);
+
         evt.preventDefault();
 
         const currentConfigTecno = LAST_CONFIGS_CONSULTED_ST.configTecno;
+
         const newConfigTecno = evt.target.value;
         console.log("Changing Config From %o To %o", currentConfigTecno, newConfigTecno);
 
@@ -39,7 +43,7 @@ class Concesionarias extends Module {
             jUtils.showing("modal_content", newHtml);
         } else {
             const oldHtml = LAST_CONFIGS_CONSULTED_ST.showForm();
-            console.log("oldHtml = %o", oldHtml);
+            console.lzog("oldHtml = %o", oldHtml);
             jUtils.showing("modal_content", oldHtml);
         }
 
