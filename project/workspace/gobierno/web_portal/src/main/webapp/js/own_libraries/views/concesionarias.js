@@ -1,14 +1,11 @@
 $(() => {
     /* Initialization Code */
-    const concesionariasService = new ConcesionariasService();
-    concesionariasService.GET_CONSULTAR_TODAS(); 
 
-    const concesionarias = new Concesionarias(Config.concesionarias, concesionariasService);
-    jUtils.loadModule(concesionarias);
 });
 
 $(window).on('load', () => {
     /*  $("#tableConcesionarias").DataTable({}); WTF IS HAPPENING WITH THIS!!! MTFCKR */
+    ConcesionariasService.GET_CONSULTAR_TODAS();
 });
 
 $(window).on('unload', function() {

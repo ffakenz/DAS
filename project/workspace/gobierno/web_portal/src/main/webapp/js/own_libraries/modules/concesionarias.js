@@ -1,8 +1,7 @@
 class Concesionarias extends Module {
-
-    constructor(config, concesionariasService) {
+    
+    constructor(config) {
         super(config);
-        this.concesionariasService = concesionariasService;
     }
 
     /* HELPERS */
@@ -31,7 +30,7 @@ class Concesionarias extends Module {
     };
 
     /* the jsonArray is the result from calling CONCESIONARIA_CONSULTAR_CONFIG_PARAM Action */
-    formConsultarConfings(jsonArray, concesionariaId) {
+    formConsultarConfig(jsonArray, concesionariaId) {
         if(jsonArray.length == 0) {
             const newState = getNewUpdateForm(ConfigTecno.REST, concesionariaId);
             LAST_CONFIGS_CONSULTED_ST = newState;
@@ -71,7 +70,7 @@ class Concesionarias extends Module {
         const data = paramsToData(params);
         console.log("Testing data %o", data);
 
-        this.concesionariasService.POST_TEST_CONFIG(data);
+        ConcesionariasService.POST_TEST_CONFIG(data);
     }
 
     changeUpdateConfigHandler(evt) {
@@ -99,15 +98,17 @@ class Concesionarias extends Module {
         const idButton = evt.target.id;
         const idConcesionaria = idButton.split("-")[1];
 
-        this.concesionariasService.POST_CONSULTAR_CONFIG_PARAM(idConcesionaria);
+        ConcesionariasService.POST_CONSULTAR_CONFIG_PARAM(idConcesionaria, this.formConsultarConfig.bind(this));
     }
 
     aprobarHandler(evt) {
+
         console.log("Aprobando Concesionaria %o", evt.target.id);
+
         const idButton = evt.target.id;
         const idConcesionaria  = idButton.split("-")[1];
 
-        this.concesionariasService.POST_APROBAR_CONCESIONARIA(idConcesionaria);
+        ConcesionariasService.POST_APROBAR_CONCESIONARIA(idConcesionaria);
     }
 
     desAprobarHandler(evt) {
@@ -115,7 +116,7 @@ class Concesionarias extends Module {
         const idButton = evt.target.id;
         const idConcesionaria  = idButton.split("-")[1];
 
-        this.concesionariasService.POST_DESAPROBAR_CONCESIONARIA(idConcesionaria);
+        ConcesionariasService.POST_DESAPROBAR_CONCESIONARIA(idConcesionaria);
     }
 
     updateConfigHandler(evt) {
@@ -127,7 +128,7 @@ class Concesionarias extends Module {
         console.log("Actualizando Concesionaria _ %o", idConcesionaria);
 
         const data = $(`#${Id.UPDATE_CONFIG_FORM}`).serializeArray();
-        this.concesionariasService.POST_CONFIG_CONCESIONARIA(data);
+        ConcesionariasService.POST_CONFIG_CONCESIONARIA(data);
     }
 
     testConsumo(evt) {

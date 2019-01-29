@@ -1,7 +1,4 @@
-class ConcesionariasService {
-    constructor(){
-
-    }
+const ConcesionariasService = {
 
     GET_CONSULTAR_TODAS() {
         $.ajax({
@@ -17,7 +14,7 @@ class ConcesionariasService {
                 jUtils.showing("tableConcesionarias", html);
             }
         });
-    }
+    },
 
     POST_TEST_CONFIG(data) {
         $.ajax({
@@ -35,9 +32,9 @@ class ConcesionariasService {
                 $("#modal_generic").modal("show");
             }
         });
-    }
+    },
 
-    POST_CONSULTAR_CONFIG_PARAM(idConcesionaria) {
+    POST_CONSULTAR_CONFIG_PARAM(idConcesionaria, formConsultarConfig) {
         $.ajax({
             url: Action.CONCESIONARIA_CONSULTAR_CONFIG_PARAM,
             type: "post",
@@ -53,12 +50,12 @@ class ConcesionariasService {
                 console.log("AJAX RESULT SUCCESS %o", jsonArray);
 
                 /* EACH SUCCESS CHANGES THE STATE { LAST_CONFIGS_CONSULTED_ST } USING formConsultarConfings */
-                const html = formConsultarConfings(jsonArray, idConcesionaria);
+                const html = formConsultarConfig(jsonArray, idConcesionaria);
                 jUtils.showing("modal_content", html);
                 $("#modal_generic").modal("show");
             }
         });
-    }
+    },
 
     POST_APROBAR_CONCESIONARIA(idConcesionaria) {
         $.ajax({
@@ -75,7 +72,7 @@ class ConcesionariasService {
                 $(`#concesionaria_row-${idConcesionaria}`).replaceWith(html);
             }
         });
-    }
+    },
 
     POST_DESAPROBAR_CONCESIONARIA(idConcesionaria) {
         $.ajax({
@@ -92,7 +89,7 @@ class ConcesionariasService {
                 $(`#concesionaria_row-${idConcesionaria}`).replaceWith(html);
             }
         });
-    }
+    },
 
     POST_CONFIG_CONCESIONARIA(data) {
         $.ajax({
