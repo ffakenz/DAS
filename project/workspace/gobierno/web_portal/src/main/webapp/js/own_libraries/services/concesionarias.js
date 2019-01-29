@@ -34,7 +34,8 @@ const ConcesionariasService = {
         });
     },
 
-    POST_CONSULTAR_CONFIG_PARAM(idConcesionaria, formConsultarConfig) {
+    /*todo: change to get*/
+    POST_CONSULTAR_CONFIG_PARAM(idConcesionaria) {
         $.ajax({
             url: Action.CONCESIONARIA_CONSULTAR_CONFIG_PARAM,
             type: "post",
@@ -48,9 +49,9 @@ const ConcesionariasService = {
             },
             success: function(jsonArray) {
                 console.log("AJAX RESULT SUCCESS %o", jsonArray);
-
+                console.log("MODULE %o", jsonArray);
                 /* EACH SUCCESS CHANGES THE STATE { LAST_CONFIGS_CONSULTED_ST } USING formConsultarConfings */
-                const html = formConsultarConfig(jsonArray, idConcesionaria);
+                const html = ConcesionariasUtils.formConsultarConfig(jsonArray, idConcesionaria);
                 jUtils.showing("modal_content", html);
                 $("#modal_generic").modal("show");
             }

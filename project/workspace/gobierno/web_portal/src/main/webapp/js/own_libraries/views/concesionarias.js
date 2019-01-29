@@ -1,6 +1,5 @@
 $(() => {
     /* Initialization Code */
-
 });
 
 $(window).on('load', () => {
