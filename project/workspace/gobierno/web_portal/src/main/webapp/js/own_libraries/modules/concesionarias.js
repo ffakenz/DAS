@@ -37,7 +37,7 @@ class Concesionarias extends Module {
         console.log("Changing Config From %o To %o", currentConfigTecno, newConfigTecno);
 
         if(currentConfigTecno != newConfigTecno) {
-            const newHtml = getNewUpdateForm(newConfigTecno, LAST_CONFIGS_CONSULTED_ST.concesionariaId);
+            const newHtml = ConcesionariasUtils.getNewUpdateForm(newConfigTecno, LAST_CONFIGS_CONSULTED_ST.concesionariaId);
             console.log("newHtml = %o", newHtml);
             jUtils.showing("modal_content", newHtml);
         } else {

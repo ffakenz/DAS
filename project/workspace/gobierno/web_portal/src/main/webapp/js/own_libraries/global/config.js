@@ -49,7 +49,7 @@ const Config = {
                 { delegate: `.${Class.BTN_UPDATE_CONFIG}`, handler: module.updateConfigHandler }
                 , { delegate: `.${Class.BTN_TEST_CONFIG}`, handler: module.testConfigHandler }
                 , { delegate: `#${Id.UPDATE_CONFIG_SELECT}`, handler: module.changeUpdateConfigHandler ,
-                    event_type: "onchange" }
+                    event_type: "change" }
             ]
         },
         { 
