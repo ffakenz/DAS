@@ -7,14 +7,11 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <fmt:setBundle basename="properties.etiquetas" var="etq" scope="session"/>
 
-<%@ page import="ar.edu.ubp.das.src.concesionarias.model.ConcesionariasManager" %>
-<%@ page import="ar.edu.ubp.das.src.concesionarias.daos.MSConcesionariasDao" %>
-<%@ page import="ar.edu.ubp.das.mvc.config.DatasourceConfig" %>
 <%@ page import="ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.lang.Exception" %>
 
-<%@ page import="java.sql.SQLException" %>
+
 <%@ page import="static ar.edu.ubp.das.src.utils.Constants.RESULT_RQST_ATTRIBUTE" %>
 <%@ page import="ar.edu.ubp.das.src.utils.FrontUtils" %>
 

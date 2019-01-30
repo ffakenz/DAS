@@ -14,15 +14,6 @@ class Login extends Module {
         const url = Action.LOGIN_ENDPOINT;
         $(evt.target.form).attr('action', url).submit();
     }
-    
-    validarUsuario(evt) {
-        evt.preventDefault();
-        console.log("%o", evt);
-        const url = Action.LOGIN_ENDPOINT;
-        $('#login_form')
-            .attr('action', url)
-            .submit();
-    }
 
     goToPrimerIngreso(evt) {
         evt.preventDefault();

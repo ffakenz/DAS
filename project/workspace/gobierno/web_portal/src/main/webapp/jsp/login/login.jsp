@@ -15,7 +15,9 @@
     <body>
         <div class="content-body">
 
-            <%@include file="header_login.jsp"%>
+            <header>
+                <%@include file="../commons/go_to_home.jsp"%>
+            </header>
 
             <div id="login-form">
 
@@ -24,8 +26,6 @@
                 </h1>
 
                 <%@include file="formLogin.jsp"%>
-
-                <%@include file="../home/go_to_home.jsp" %>
 
             </div>
 
@@ -37,6 +37,7 @@
                 <div id="error"></div>
 
             </div>
+
         </div>
     </body>
 

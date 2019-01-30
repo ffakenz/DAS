@@ -22,7 +22,7 @@
         </action>
 
         <action type="ConsultarConcesionariasAction" path="/ConsultarConcesionarias.do">
-            <forward name="success" path="/concesionarias/tableConcesionarias.jsp"/>
+            <forward name="success" path="/concesionarias/components/tableConcesionarias.jsp"/>
         </action>
 
         <action type="ConfigurarAction" path="/Configurar.do" json="true">

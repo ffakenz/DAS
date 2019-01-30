@@ -11,7 +11,7 @@ const ConcesionariasService = {
             },
             success: function(html) {
                 console.log("AJAX RESULT GET_CONSULTAR_TODAS SUCCESS %o", html);
-                jUtils.showing("tableConcesionarias", html);
+                jUtils.showing("concesionarias_table", html);
             }
         });
     },

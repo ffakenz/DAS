@@ -22,10 +22,7 @@
 
             <%@include file="./header_home.jsp"%>
 
-
-            <div id="registrar_concesionaria_div">
-                <button id="registrar_concesionaria" name="registrar_concesionaria" class="btn btn-outline-primary btn-lg btn-block">Registrar Concesionaria</button>
-            </div>
+            <%@include file="../concesionarias/components/registrar_btn.jsp"%>
 
             <br><br>
 

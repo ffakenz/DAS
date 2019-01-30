@@ -2,20 +2,20 @@ const HomeConfig = (module) => [
     { 
         ctx: "#header_home", 
         cnfg: [
-            { delegate: "#login", handler: module.showLogin }
-            , { delegate: "#goToProfile", handler: module.goToProfile }
+            { delegate: "#show_login_btn", handler: module.showLogin }
+            , { delegate: "#go_to_profile_btn", handler: module.goToProfile }
         ]
     },
     { 
         ctx: "#registrar_concesionaria_div", 
         cnfg: [
-            { delegate: "#registrar_concesionaria", handler: module.showRegistrarConcesionaria }
+            { delegate: "#registrar_concesionaria_btn", handler: module.showRegistrarConcesionaria }
         ]
     },
     { 
-        ctx: "#goToHomeDiv", 
+        ctx: "#go_to_home_div",
         cnfg: [
-            { delegate: "#goToHome", handler: module.goToHome }
+            { delegate: "#go_to_home_btn", handler: module.goToHome }
         ]
     }
 ];

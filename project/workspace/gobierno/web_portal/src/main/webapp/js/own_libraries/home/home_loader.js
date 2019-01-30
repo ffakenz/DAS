@@ -7,7 +7,7 @@ $(() => {
 });
 
 $(window).on('load', () => {
-    /*  $("#tableConcesionarias").DataTable({}); WTF IS HAPPENING WITH THIS!!! MTFCKR */
+    /*  $("#concesionarias_table").DataTable({}); WTF IS HAPPENING WITH THIS!!! MTFCKR */
     console.log("Home View executed on Load");
 });
 

@@ -1,6 +1,6 @@
 const ConcesionariasConfig = (module) => [
     { 
-        ctx: "#tableConcesionarias", 
+        ctx: "#concesionarias_table",
         cnfg: [
             { delegate: ".aprobar_btn", handler: module.aprobarHandler }
             , { delegate: ".desaprobar_btn", handler: module.desAprobarHandler }

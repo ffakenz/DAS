@@ -2,7 +2,7 @@ const LoginConfig = (module) => [
     { 
         ctx: "#header_home", 
         cnfg: [
-            { delegate: "#logout", handler: module.closeSession }
+            { delegate: "#logout_btn", handler: module.closeSession }
         ]
     },
     { 

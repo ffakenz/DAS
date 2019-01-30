@@ -17,7 +17,7 @@
         <div class="content-body">
 
             <header>
-                <%@include file="../home/go_to_home.jsp" %>
+                <%@include file="../commons/go_to_home.jsp" %>
             </header>
 
             <div class="page-header text-center">

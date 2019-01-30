@@ -28,7 +28,7 @@
         <div id="registrar_concesionaria">
             <fieldset>
 
-                <form class="form-horizontal" id="formRegistrarConcesionaria" method="post">
+                <form class="form-horizontal" id="form_registrar_concesionaria" method="post">
 
                     <!-- Text input-->
                     <div class="form-group">

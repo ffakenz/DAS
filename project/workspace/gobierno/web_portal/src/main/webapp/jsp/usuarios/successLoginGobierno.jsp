@@ -34,7 +34,7 @@
             <br>
 
             <div id="concesionariasDiv" class="container">
-                <table id="tableConcesionarias"  class="table table-striped table-bordered" style="width:100%">
+                <table id="concesionarias_table"  class="table table-striped table-bordered" style="width:100%">
                 </table>
             </div>
 
