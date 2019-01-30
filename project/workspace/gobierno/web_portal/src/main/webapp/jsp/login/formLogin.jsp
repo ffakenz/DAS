@@ -1,7 +1,7 @@
 <div class="container">
     <fieldset>
 
-        <form id="loginForm" action="javascript:void(0)" method="post">
+        <form id="login_form" action="javascript:void(0)" method="post">
 
             <div class="form-group">
                 <input type="text" name="username" id="username" class="form-control form-control-lg" required placeholder="<fmt:message key="login_usuario" bundle="${etq}" />">
@@ -19,7 +19,7 @@
 
         <br>
 
-        <div class="text-center">
+        <div id="first_login_div" class="text-center">
             <button id="first_login_btn" class="btn btn-outline-primary btn-lg btn-block">
                 Primer ingreso
             </button>

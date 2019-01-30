@@ -1,7 +1,7 @@
 <div class="container">
     <fieldset>
 
-        <form id="loginPrimerIngresoForm" method="post">
+        <form id="login_primer_ingreso_form" method="post">
 
             <div class="form-group">
                 <input type="text" name="documento" id="documento" class="form-control form-control-lg" required placeholder="<fmt:message key="login_documento" bundle="${etq}" />">
