@@ -20,7 +20,6 @@ public class ConfigurarAction implements Action {
     @Override
     public ForwardConfig execute(final ActionMapping mapping, final DynaActionForm form, final HttpServletRequest request, final HttpServletResponse response) throws SQLException, RuntimeException {
 
-
         final DaoImpl msConcesionariasDao = DaoFactory.getDao(CONCESIONARIAS_DAO_NAME, CONCESIONARIAS_DAO_PACKAGE);
         final DaoImpl msConfigurarConcesionariaDao = DaoFactory.getDao(CONFIG_CONCESIONARIAS_DAO_NAME, CONCESIONARIAS_DAO_PACKAGE);
         final DaoImpl msConfigTecnoParamDao = DaoFactory.getDao(CONFIG_TECNO_PARAM_DAO_NAME, CONCESIONARIAS_DAO_PACKAGE);

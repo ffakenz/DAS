@@ -7,7 +7,6 @@ $(() => {
 });
 
 $(window).on('load', () => {
-    /*  $("#tableConcesionarias").DataTable({}); WTF IS HAPPENING WITH THIS!!! MTFCKR */
     ConcesionariasService.GET_CONSULTAR_TODAS();
     console.log("Concesionarias View executed on Load");
 });
