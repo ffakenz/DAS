@@ -1,6 +1,5 @@
 $(() => {
     /* Initialization Code */
-
     const concesionarias = new Concesionarias(Config.concesionarias);
     jUtils.loadModule(concesionarias);
     console.log("Concesionarias View Loaded Modules: [CONFIG] = %o, [CONCESIONARIAS] = %o", 

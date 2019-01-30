@@ -6,11 +6,11 @@ const ConcesionariasService = {
             type: "get",
             dataType: "html",
             error: function(hr){
-                console.log("AJAX RESULT ERROR %o", hr.responseText);
+                console.log("AJAX RESULT GET_CONSULTAR_TODAS ERROR %o", hr.responseText);
                 jUtils.showing("concesionariasDiv", hr);
             },
             success: function(html) {
-                console.log("AJAX RESULT SUCCESS %o", html);
+                console.log("AJAX RESULT GET_CONSULTAR_TODAS SUCCESS %o", html);
                 jUtils.showing("tableConcesionarias", html);
             }
         });
@@ -23,11 +23,11 @@ const ConcesionariasService = {
             data: data,
             dataType: "html",
             error: function(hr){
-                console.log("AJAX RESULT ERROR %o", hr);
+                console.log("AJAX RESULT POST_TEST_CONFIG ERROR %o", hr);
                 jUtils.showing(Id.TEST_CONFIG_LABEL, hr);
             },
             success: function(html) {
-                console.log("AJAX RESULT SUCCESS %o", html);
+                console.log("AJAX RESULT POST_TEST_CONFIG SUCCESS %o", html);
                 jUtils.showing(Id.TEST_CONFIG_LABEL, html);
                 $("#modal_generic").modal("show");
             }
@@ -42,12 +42,12 @@ const ConcesionariasService = {
             data: "id=" + idConcesionaria,
             dataType: "json",
             error: function(hr){
-                console.log("AJAX RESULT ERROR %o", hr.responseText);
+                console.log("AJAX RESULT POST_CONSULTAR_CONFIG_PARAM ERROR %o", hr.responseText);
                 jUtils.showing("modal_content", hr);
                 $("#modal_generic").modal("show");
             },
             success: function(jsonArray) {
-                console.log("AJAX RESULT SUCCESS %o", jsonArray);
+                console.log("AJAX RESULT POST_CONSULTAR_CONFIG_PARAM SUCCESS %o", jsonArray);
                 /* EACH SUCCESS CHANGES THE STATE { LAST_CONFIGS_CONSULTED_ST } USING formConsultarConfings */
                 const html = ConcesionariasUtils.formConsultarConfig(jsonArray, idConcesionaria);
                 console.log("CONSULTAR HTML = %o", html);
@@ -64,11 +64,11 @@ const ConcesionariasService = {
             data: "id=" + idConcesionaria,
             dataType: "html",
             error: function(hr){
-                console.log("AJAX RESULT ERROR %o", hr);
+                console.log("AJAX RESULT POST_APROBAR_CONCESIONARIA ERROR %o", hr);
                 alert("AJAX RESULT ERROR " + hr);
             },
             success: function(html) {
-                console.log("AJAX RESULT SUCCESS %o", html);
+                console.log("AJAX RESULT POST_APROBAR_CONCESIONARIA SUCCESS %o", html);
                 $(`#concesionaria_row-${idConcesionaria}`).replaceWith(html);
             }
         });
@@ -81,11 +81,11 @@ const ConcesionariasService = {
             data: "id=" + idConcesionaria,
             dataType: "html",
             error: function(hr){
-                console.log("AJAX RESULT ERROR %o", hr);
+                console.log("AJAX RESULT POST_DESAPROBAR_CONCESIONARIA ERROR %o", hr);
                 alert("AJAX RESULT ERROR " + hr);
             },
             success: function(html) {
-                console.log("AJAX RESULT SUCCESS %o", html);
+                console.log("AJAX RESULT POST_DESAPROBAR_CONCESIONARIA SUCCESS %o", html);
                 $(`#concesionaria_row-${idConcesionaria}`).replaceWith(html);
             }
         });
@@ -97,11 +97,11 @@ const ConcesionariasService = {
             type: "post",
             data: data,
             error: function(hr){
-                console.log("AJAX RESULT ERROR %o", hr);
+                console.log("AJAX RESULT POST_CONFIG_CONCESIONARIA ERROR %o", hr);
                 jUtils.showing(Id.UPDATE_CONFIG_LABEL, hr);
             },
             success: function(json) {
-                console.log("AJAX RESULT SUCCESS %o", json.toString());
+                console.log("AJAX RESULT POST_CONFIG_CONCESIONARIA SUCCESS %o", json.toString());
                 jUtils.showing(Id.UPDATE_CONFIG_LABEL, "Configurada exitosamente");
             }
         });

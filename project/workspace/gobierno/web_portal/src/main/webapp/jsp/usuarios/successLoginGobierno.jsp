@@ -55,9 +55,8 @@
     </body>
 
     <%@include file="../commons/footer.jsp"%>
-    <script src="/web_portal/util/Javascript.do/load=own_libraries/services/concesionarias_utils"></script>
-    <script src="/web_portal/util/Javascript.do/load=own_libraries/services/concesionarias"></script>
-    <script src="/web_portal/util/Javascript.do/load=own_libraries/modules/concesionarias"></script>
-    <script src="/web_portal/util/Javascript.do/load=own_libraries/views/concesionarias"></script>
+    <%@include file="../js_imports/home.jsp"%>
+    <%@include file="../js_imports/login.jsp"%>
+    <%@include file="../js_imports/concesionarias.jsp"%>
 
 </html>

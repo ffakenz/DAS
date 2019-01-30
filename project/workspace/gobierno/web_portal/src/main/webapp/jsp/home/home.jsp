@@ -55,5 +55,6 @@
     </body>
 
     <%@include file="../commons/footer.jsp"%>
-
+    <%@include file="../js_imports/home.jsp"%>
+    <%@include file="../js_imports/login.jsp"%>
 </html>
