@@ -35,7 +35,7 @@ const ConcesionariasService = {
     },
 
     /*todo: change to get*/
-    POST_CONSULTAR_CONFIG_PARAM(idConcesionaria) {
+    POST_CONSULTAR_CONFIG_PARAM(idConcesionaria, formConsultarConfig) {
         $.ajax({
             url: Action.CONCESIONARIA_CONSULTAR_CONFIG_PARAM,
             type: "post",
@@ -49,7 +49,7 @@ const ConcesionariasService = {
             success: function(jsonArray) {
                 console.log("AJAX RESULT POST_CONSULTAR_CONFIG_PARAM SUCCESS %o", jsonArray);
                 /* EACH SUCCESS CHANGES THE STATE { LAST_CONFIGS_CONSULTED_ST } USING formConsultarConfings */
-                const html = ConcesionariasUtils.formConsultarConfig(jsonArray, idConcesionaria);
+                const html = formConsultarConfig(jsonArray, idConcesionaria);
                 console.log("CONSULTAR HTML = %o", html);
                 jUtils.showing("modal_content", html);
                 $("#modal_generic").modal("show");

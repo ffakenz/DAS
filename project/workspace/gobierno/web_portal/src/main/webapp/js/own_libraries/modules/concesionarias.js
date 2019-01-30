@@ -54,7 +54,7 @@ class Concesionarias extends Module {
         console.log("Configurando Concesionaria %o", evt.target.id);
         const idButton = evt.target.id;
         const idConcesionaria = idButton.split("-")[1];
-        ConcesionariasService.POST_CONSULTAR_CONFIG_PARAM(idConcesionaria);
+        ConcesionariasService.POST_CONSULTAR_CONFIG_PARAM(idConcesionaria, ConcesionariasUtils.formConsultarConfig);
     }
 
     aprobarHandler(evt) {
