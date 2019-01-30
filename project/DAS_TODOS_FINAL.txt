@@ -43,13 +43,13 @@
 Tasks:
 
 * revisión fe y be
-	FE (5h / 2p)
-	=> diseño de arquitectura de fe
-	=> componente para generacion dinamica de html
-	=> agregado de identificadores sobre html
-	=> agregado de event handlers adj a los identificadores
-	=> agregado de handlers adj a los event handlers
-	=> helpers 
+	FE (5h / 2p) (done)
+	=> diseño de arquitectura de fe (done)
+	=> componente para generacion dinamica de html (done)
+	=> agregado de identificadores sobre html (done)
+	=> agregado de event handlers adj a los identificadores (done)
+	=> agregado de handlers adj a los event handlers (done)
+	=> helpers (done)
 
 	BE (3h / 2p)
 	=> control cohesion daos (0,5h / 2p)
@@ -58,8 +58,8 @@ Tasks:
 	=> estandarización de actions forwards (1h / 2p)
 
 * login
-	=> UI + actions (validate + css + signup page + error pages) (3h / 1p)
-	=> Refactor base de datos (3h / 2p)
+	=> Actions (3h / 1p) (done)
+	=> Refactor base de datos (3h / 2p) (done)
 
 * perfil consumer
 	=> mostrar datos personales (1,5h / 1p)
@@ -70,7 +70,7 @@ Tasks:
 
 
 * perfil gobierno
-	=> administrar concesionarias (1h / 1p)
+	=> administrar concesionarias (1h / 1p) (done)
 	=> desarrollo consumo (contiene desarrollo, test, simulacion) (5h / 2p)
 	=> pantalla para ejecucion consumo (1h / 1p)
 	=> administración sorteos (1 semana + 1 finde):
@@ -90,7 +90,7 @@ Tasks:
 
 
 * home
-	=> registro de concesionarias (1,5h / 1p)
+	=> registro de concesionarias (1,5h / 1p) (done)
 	=> listado de concesionarias aprobadas (1,5h / 1p)
 	=> detalles del plan incentivo (3 hs / 1p)
 
