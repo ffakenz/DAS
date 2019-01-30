@@ -40,10 +40,11 @@ const jUtils = {
     },
 
     inputsAreOk : function (form) {
-        return form.find("input").reduce((acc, elem) => {
-            console.log(this.name, this.value);
-            if ($.trim(this.value) === "") result = acc && false;
-            else acc && true;
+        return Array.from(form.find("input")).reduce((acc, elem) => {
+            console.log(elem.name, elem.value);
+            if ($.trim(elem.value) === "") acc = acc && false;
+            else acc = acc && true;
+            return acc;
         }, true);
     },
 

@@ -31,20 +31,21 @@ class Concesionarias extends Module {
         evt.preventDefault();
         console.log("changeUpdateConfigHandler, [EVENT] = %o", evt);
 
-        const currentConfigTecno = LAST_CONFIGS_CONSULTED_ST.configTecno;
+        const currentConfigTecno = GlobalState.getLastConfigConsulted().configTecno;
         const newConfigTecno = evt.target.value;
         console.log("Changing Config From %o To %o", currentConfigTecno, newConfigTecno);
 
         if(currentConfigTecno != newConfigTecno) {
-            const newHtml = ConcesionariasUtils.getNewUpdateForm(newConfigTecno, LAST_CONFIGS_CONSULTED_ST.concesionariaId);
+            const newHtml = 
+                ConcesionariasHelpers.getNewUpdateForm(newConfigTecno, GlobalState.getLastConfigConsulted().concesionariaId)
+                                    .showForm();
             console.log("newHtml = %o", newHtml);
             jUtils.showing("modal_content", newHtml);
         } else {
-            const oldHtml = LAST_CONFIGS_CONSULTED_ST.showForm();
+            const oldHtml = GlobalState.getLastConfigConsulted().showForm();
             console.log("oldHtml = %o", oldHtml);
             jUtils.showing("modal_content", oldHtml);
         }
-
     }
 
     configurarHandler(evt) {
@@ -53,7 +54,7 @@ class Concesionarias extends Module {
         console.log("Configurando Concesionaria %o", evt.target.id);
         const idButton = evt.target.id;
         const idConcesionaria = idButton.split("-")[1];
-        ConcesionariasService.POST_CONSULTAR_CONFIG_PARAM(idConcesionaria);
+        ConcesionariasService.POST_CONSULTAR_CONFIG_PARAM(idConcesionaria, ConcesionariasHelpers.formConsultarConfig);
     }
 
     aprobarHandler(evt) {
@@ -88,5 +89,24 @@ class Concesionarias extends Module {
         evt.preventDefault();
         console.log("testConsumo, [EVENT] = %o", evt);
         console.log("Test consumo %o", evt.target.id);
+    }
+
+    registrarConcesionaria(evt) {
+        evt.preventDefault();
+        console.log("registrarConcesionaria, [EVENT] = %o", evt);
+        const _formRegistrarConcesionaria = $('#formRegistrarConcesionaria');
+        const _email = $("#email");
+        const isFormValid =
+            jUtils.inputsAreOk(_formRegistrarConcesionaria) && 
+            jUtils.isValidEmail(_email.val());    
+
+        if(!isFormValid) {
+            console.log("Form is Invalid");
+            return false;
+        }
+
+        var url = Action.REGISTRAR_CONCESIONARIA_ENDPOINT;
+
+        _formRegistrarConcesionaria.attr('action', url).submit();
     }
 };

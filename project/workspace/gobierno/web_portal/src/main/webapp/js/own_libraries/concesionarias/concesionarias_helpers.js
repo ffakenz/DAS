@@ -1,4 +1,4 @@
-const ConcesionariasUtils = {
+const ConcesionariasHelpers = {
 
     /* HELPERS */
     getNewUpdateForm(configTecno, concesionariaId) {
@@ -7,21 +7,21 @@ const ConcesionariasUtils = {
                 ConfigTecno.REST,
                 [{name: "url", value: ""}],
                 concesionariaId
-            ).showForm();
+            );
         }
         if(configTecno === ConfigTecno.AXIS) {
             return new ConfigParam(
                 ConfigTecno.AXIS,
                 [{name: "endpointUrl", value: ""}, {name: "targetNameSpace", value: ""}],
                 concesionariaId
-            ).showForm();
+            );
         }
         if(configTecno === ConfigTecno.CXF) {
             return new ConfigParam(
                 ConfigTecno.CXF,
                 [{name: "wsdlUrl", value: ""}],
                 concesionariaId
-            ).showForm();
+            );
         }
     },
 
@@ -30,8 +30,8 @@ const ConcesionariasUtils = {
         console.log("Executing formConsultarConfig for [CONCESIONARIA_ID] = %o with [ARRAY] = %o", 
             concesionariaId, jsonArray);
         if(jsonArray.length === 0) {
-            const newState = ConcesionariasUtils.getNewUpdateForm(ConfigTecno.REST, concesionariaId);
-            LAST_CONFIGS_CONSULTED_ST = newState;
+            const newState = ConcesionariasHelpers.getNewUpdateForm(ConfigTecno.REST, concesionariaId);
+            GlobalState.setLasConfigConsulted(newState);
             console.log("formConsultarConfig for [CONCESIONARIA_ID] = %o [RETURN] = %o", newState);
             return newState.showForm();
         }
@@ -46,7 +46,7 @@ const ConcesionariasUtils = {
                 return obj;
             });
             const newState = new ConfigParam(configTecno, configParams, concesionariaId);
-            LAST_CONFIGS_CONSULTED_ST = newState;
+            GlobalState.setLasConfigConsulted(newState);
             console.log("formConsultarConfig for [CONCESIONARIA_ID] = %o [RETURN] = %o", newState);
             return newState.showForm();
         }
