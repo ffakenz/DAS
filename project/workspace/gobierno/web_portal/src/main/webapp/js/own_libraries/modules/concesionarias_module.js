@@ -31,16 +31,18 @@ class Concesionarias extends Module {
         evt.preventDefault();
         console.log("changeUpdateConfigHandler, [EVENT] = %o", evt);
 
-        const currentConfigTecno = LAST_CONFIGS_CONSULTED_ST.configTecno;
+        const currentConfigTecno = GlobalState.getLastConfigConsulted().configTecno;
         const newConfigTecno = evt.target.value;
         console.log("Changing Config From %o To %o", currentConfigTecno, newConfigTecno);
 
         if(currentConfigTecno != newConfigTecno) {
-            const newHtml = ConcesionariasHelpers.getNewUpdateForm(newConfigTecno, LAST_CONFIGS_CONSULTED_ST.concesionariaId);
+            const newHtml = 
+                ConcesionariasHelpers.getNewUpdateForm(newConfigTecno, GlobalState.getLastConfigConsulted().concesionariaId)
+                                    .showForm();
             console.log("newHtml = %o", newHtml);
             jUtils.showing("modal_content", newHtml);
         } else {
-            const oldHtml = LAST_CONFIGS_CONSULTED_ST.showForm();
+            const oldHtml = GlobalState.getLastConfigConsulted().showForm();
             console.log("oldHtml = %o", oldHtml);
             jUtils.showing("modal_content", oldHtml);
         }

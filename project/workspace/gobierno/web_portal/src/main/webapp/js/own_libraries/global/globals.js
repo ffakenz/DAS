@@ -43,7 +43,3 @@ const Class = {
     BTN_UPDATE_CONFIG: "update_config_btn",
     BTN_TEST_CONFIG: "test_config_btn"
 };
-
-
-/* Application State */
-let LAST_CONFIGS_CONSULTED_ST = undefined;
