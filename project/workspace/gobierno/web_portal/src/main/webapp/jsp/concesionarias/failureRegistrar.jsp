@@ -28,9 +28,6 @@
             <div id="registrar_concesionaria_div">
                 <button id="registrar_concesionaria_btn" class="btn btn-outline-primary btn-lg">Volver a intentarlo</button>
             </div>
-
-
-            <%@include file="../commons/go_to_home.jsp" %>
         </div>
     </body>
 

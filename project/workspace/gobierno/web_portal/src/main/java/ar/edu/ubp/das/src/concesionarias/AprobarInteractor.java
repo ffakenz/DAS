@@ -3,9 +3,8 @@ package ar.edu.ubp.das.src.concesionarias;
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.mvc.util.Pair;
-import ar.edu.ubp.das.src.concesionarias.daos.MSConcesionariasDao;
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
-import ar.edu.ubp.das.src.concesionarias.model.ConcesionariasManager;
+import ar.edu.ubp.das.src.concesionarias.managers.ConcesionariasManager;
 import ar.edu.ubp.das.src.core.Interactor;
 import ar.edu.ubp.das.src.core.InteractorResponse;
 import ar.edu.ubp.das.src.core.ResponseForward;
@@ -18,7 +17,7 @@ public class AprobarInteractor implements Interactor<Boolean> {
     private ConcesionariasManager concesionariasManager;
 
     public AprobarInteractor(final DaoImpl msConcesionariasDao) {
-        this.concesionariasManager= new ConcesionariasManager(msConcesionariasDao);
+        this.concesionariasManager = new ConcesionariasManager(msConcesionariasDao);
     }
 
     @Override
@@ -30,11 +29,11 @@ public class AprobarInteractor implements Interactor<Boolean> {
         if (id.snd == false)
             return new InteractorResponse<>(ResponseForward.WARNING, false);
 
-        ConcesionariaForm concesionariaForm = form.convertTo(ConcesionariaForm.class);
+        final ConcesionariaForm concesionariaForm = form.convertTo(ConcesionariaForm.class);
 
-        Optional<ConcesionariaForm> concesionariaToApprove = concesionariasManager.getDao().selectById(concesionariaForm);
+        final Optional<ConcesionariaForm> concesionariaToApprove = concesionariasManager.getDao().selectById(concesionariaForm);
 
-        if(!concesionariaToApprove.isPresent())
+        if (!concesionariaToApprove.isPresent())
             return new InteractorResponse<>(ResponseForward.FAILURE, false);
 
         concesionariaForm.setCodigo(generarCodigo(concesionariaForm));

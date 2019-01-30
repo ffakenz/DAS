@@ -4,7 +4,7 @@ import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.mvc.util.Pair;
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
-import ar.edu.ubp.das.src.concesionarias.model.ConcesionariasManager;
+import ar.edu.ubp.das.src.concesionarias.managers.ConcesionariasManager;
 import ar.edu.ubp.das.src.core.Interactor;
 import ar.edu.ubp.das.src.core.InteractorResponse;
 import ar.edu.ubp.das.src.core.ResponseForward;
@@ -17,7 +17,7 @@ public class RegistrarConcesionariaInteractor implements Interactor<Boolean> {
     private ConcesionariasManager concesionariasManager;
 
     public RegistrarConcesionariaInteractor(final DaoImpl msConcesionariasDao) {
-        this.concesionariasManager= new ConcesionariasManager(msConcesionariasDao);
+        this.concesionariasManager = new ConcesionariasManager(msConcesionariasDao);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class RegistrarConcesionariaInteractor implements Interactor<Boolean> {
 
         try {
             concesionariasManager.getDao().insert(form.convertTo(ConcesionariaForm.class));
-        } catch (SQLException e) {
+        } catch (final SQLException e) {
             return new InteractorResponse<>(ResponseForward.FAILURE, false);
         }
         return new InteractorResponse<>(ResponseForward.SUCCESS, true);

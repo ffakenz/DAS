@@ -5,22 +5,22 @@ import ar.edu.ubp.das.src.concesionarias.daos.MSConcesionariasDao;
 import ar.edu.ubp.das.src.concesionarias.daos.MSConfigurarConcesionariaDao;
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
 import ar.edu.ubp.das.src.concesionarias.forms.ConfigurarConcesionariaForm;
-import ar.edu.ubp.das.src.concesionarias.model.ConcesionariasManager;
-import ar.edu.ubp.das.src.concesionarias.model.ConfigurarConcesionariaManager;
+import ar.edu.ubp.das.src.concesionarias.managers.ConcesionariasManager;
+import ar.edu.ubp.das.src.concesionarias.managers.ConfigurarConcesionariaManager;
 import ar.edu.ubp.das.src.consumers.daos.MSConsumerDao;
 import ar.edu.ubp.das.src.consumers.forms.ConsumerForm;
-import ar.edu.ubp.das.src.consumers.model.ConsumerManager;
+import ar.edu.ubp.das.src.consumers.managers.ConsumerManager;
 import ar.edu.ubp.das.src.estado_cuentas.daos.MSCuotasDao;
 import ar.edu.ubp.das.src.estado_cuentas.daos.MSEstadoCuentasDao;
 import ar.edu.ubp.das.src.estado_cuentas.forms.CuotasForm;
 import ar.edu.ubp.das.src.estado_cuentas.forms.EstadoCuentasForm;
-import ar.edu.ubp.das.src.estado_cuentas.model.CuotasManager;
-import ar.edu.ubp.das.src.estado_cuentas.model.EstadoCuentasManager;
+import ar.edu.ubp.das.src.estado_cuentas.managers.CuotasManager;
+import ar.edu.ubp.das.src.estado_cuentas.managers.EstadoCuentasManager;
 import ar.edu.ubp.das.src.jobs.ClientFactoryAdapter;
 import ar.edu.ubp.das.src.jobs.consumoo.forms.*;
 import ar.edu.ubp.das.src.usuarios.daos.MSUsuariosDao;
 import ar.edu.ubp.das.src.usuarios.forms.UsuarioForm;
-import ar.edu.ubp.das.src.usuarios.model.UsuarioManager;
+import ar.edu.ubp.das.src.usuarios.managers.UsuarioManager;
 import ar.edu.ubp.das.src.utils.DateUtils;
 import beans.NotificationUpdate;
 import clients.ConcesionariaServiceContract;
@@ -241,7 +241,7 @@ public class ConsumoJob implements Job {
 
         if (!consumerManager.getDao().valid(consumer)) {
 
-            UsuarioForm usuarioForm = new UsuarioForm();
+            final UsuarioForm usuarioForm = new UsuarioForm();
             usuarioForm.setDocumento(update.getClienteDocumento());
             usuarioForm.setRol(ROL_CONSUMER);
             usuarioManager.getDao().insert(usuarioForm);

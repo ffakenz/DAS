@@ -1,10 +1,10 @@
 package ar.edu.ubp.das.src.consumers;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
+import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.mvc.util.Pair;
-import ar.edu.ubp.das.src.consumers.daos.MSConsumerDao;
 import ar.edu.ubp.das.src.consumers.forms.ConsumerForm;
-import ar.edu.ubp.das.src.consumers.model.ConsumerManager;
+import ar.edu.ubp.das.src.consumers.managers.ConsumerManager;
 import ar.edu.ubp.das.src.core.Interactor;
 import ar.edu.ubp.das.src.core.InteractorResponse;
 import ar.edu.ubp.das.src.core.ResponseForward;
@@ -16,7 +16,7 @@ public class UpdateConsumerInteractor implements Interactor<Boolean> {
 
     private ConsumerManager consumerManager;
 
-    public UpdateConsumerInteractor(final MSConsumerDao msConsumerDao) {
+    public UpdateConsumerInteractor(final DaoImpl msConsumerDao) {
         this.consumerManager = new ConsumerManager(msConsumerDao);
     }
 

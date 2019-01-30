@@ -4,7 +4,7 @@ import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.login.daos.MSLogInDao;
 import ar.edu.ubp.das.src.login.forms.LogInForm;
-import ar.edu.ubp.das.src.login.model.LoginManager;
+import ar.edu.ubp.das.src.login.managers.LoginManager;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;

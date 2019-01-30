@@ -17,7 +17,7 @@
 
 <body>
 
-    <%@ include file="../commons/header.jsp"%>
+    <%@include file="../commons/header.jsp"%>
 
     <!-- Form Name -->
     <div class="page-header text-center">

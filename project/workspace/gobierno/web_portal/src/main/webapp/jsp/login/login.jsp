@@ -29,14 +29,8 @@
 
             </div>
 
+            <%@include file="../commons/resultado.jsp"%>
 
-            <div id="resultado">
-
-                <div id="mensaje"></div>
-
-                <div id="error"></div>
-
-            </div>
 
         </div>
     </body>

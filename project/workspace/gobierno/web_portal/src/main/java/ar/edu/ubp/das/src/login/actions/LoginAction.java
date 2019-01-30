@@ -28,7 +28,7 @@ public class LoginAction implements Action {
 
         final HttpSession session = request.getSession();
 
-        if (session != null && session.getAttribute(SSID) != null && session.getAttribute(FORWARD_NAME) != null) {
+        if (session.getAttribute(SSID) != null && session.getAttribute(FORWARD_NAME) != null) {
             // significa que ya tenemos un usuario logueado y no debemos volver a loguearlo
             return mapping.getForwardByName(session.getAttribute(FORWARD_NAME).toString());
         }

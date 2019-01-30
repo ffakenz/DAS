@@ -6,10 +6,10 @@
     <action-mappings>
 
         <action type="LoginAction" path="/Login.do">
-            <forward name="success_gobierno" path="/usuarios/successLoginGobierno.jsp" />
-            <forward name="success_consumer" path="/usuarios/successLoginConsumer.jsp" />
-            <forward name="warning" path="/login/failParamsLogin.jsp" />
-            <forward name="failure" path="/login/failLogin.jsp" />
+            <forward name="success_gobierno" path="/profiles/successLoginGobierno.jsp"/>
+            <forward name="success_consumer" path="/profiles/successLoginConsumer.jsp"/>
+            <forward name="warning" path="/login/failures/failParamsLogin.jsp"/>
+            <forward name="failure" path="/login/failures/failLogin.jsp"/>
         </action>
 
         <action type="LogoutAction" path="/Logout.do">
@@ -17,7 +17,7 @@
         </action>
 
         <action type="SuccessGobiernoAction" path="/SuccessGobierno.do">
-            <forward name="success" path="/login/successLoginGobierno.jsp"/>
+            <forward name="success" path="/profiles/successLoginGobierno.jsp"/>
         </action>
 
     </action-mappings>

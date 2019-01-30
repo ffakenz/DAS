@@ -94,7 +94,7 @@ class Concesionarias extends Module {
     registrarConcesionaria(evt) {
         evt.preventDefault();
         console.log("registrarConcesionaria, [EVENT] = %o", evt);
-        const _formRegistrarConcesionaria = $('#formRegistrarConcesionaria');
+        const _formRegistrarConcesionaria = $('#form_registrar_concesionaria');
         const _email = $("#email");
         const isFormValid =
             jUtils.inputsAreOk(_formRegistrarConcesionaria) && 

@@ -7,7 +7,7 @@ import ar.edu.ubp.das.src.core.Interactor;
 import ar.edu.ubp.das.src.core.InteractorResponse;
 import ar.edu.ubp.das.src.core.ResponseForward;
 import ar.edu.ubp.das.src.login.forms.LogInForm;
-import ar.edu.ubp.das.src.login.model.LoginManager;
+import ar.edu.ubp.das.src.login.managers.LoginManager;
 
 import java.sql.SQLException;
 

@@ -1,4 +1,4 @@
-package ar.edu.ubp.das.src.usuarios.model;
+package ar.edu.ubp.das.src.usuarios.managers;
 
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.core.Manager;
@@ -39,11 +39,11 @@ public class UsuarioManager extends Manager<MSUsuariosDao> {
         this.dao.delete(form);
     }
 
-    public void update(UsuarioForm usuarioForm) throws SQLException {
+    public void update(final UsuarioForm usuarioForm) throws SQLException {
         this.dao.update(usuarioForm);
     }
 
-    public void updatePassword(UsuarioForm usuarioForm) throws SQLException {
+    public void updatePassword(final UsuarioForm usuarioForm) throws SQLException {
         this.dao.updatePassword(usuarioForm);
     }
 }

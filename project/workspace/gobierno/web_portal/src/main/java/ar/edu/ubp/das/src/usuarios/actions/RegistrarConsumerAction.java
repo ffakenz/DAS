@@ -13,8 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 
-import static ar.edu.ubp.das.src.utils.Constants.*;
+import static ar.edu.ubp.das.src.utils.Constants.USUARIOS_DAO_NAME;
+import static ar.edu.ubp.das.src.utils.Constants.USUARIOS_DAO_PACKAGE;
 
+// This respond to the First Login USE CASE for the consumer
 public class RegistrarConsumerAction implements Action {
 
     @Override
@@ -30,7 +32,7 @@ public class RegistrarConsumerAction implements Action {
 
         final UsuarioUpdateInteractor usuarioUpdateInteractor = new UsuarioUpdateInteractor(msUsuariosDao);
 
-        InteractorResponse<Boolean> resp = usuarioUpdateInteractor.execute(form);
+        final InteractorResponse<Boolean> resp = usuarioUpdateInteractor.execute(form);
 
         return mapping.getForwardByName(resp.getResponse().getForward());
     }

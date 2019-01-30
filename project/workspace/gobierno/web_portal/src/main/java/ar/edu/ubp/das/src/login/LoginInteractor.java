@@ -7,9 +7,9 @@ import ar.edu.ubp.das.src.core.Interactor;
 import ar.edu.ubp.das.src.core.InteractorResponse;
 import ar.edu.ubp.das.src.core.ResponseForward;
 import ar.edu.ubp.das.src.login.forms.LogInForm;
-import ar.edu.ubp.das.src.login.model.LoginManager;
+import ar.edu.ubp.das.src.login.managers.LoginManager;
 import ar.edu.ubp.das.src.usuarios.forms.UsuarioForm;
-import ar.edu.ubp.das.src.usuarios.model.UsuarioManager;
+import ar.edu.ubp.das.src.usuarios.managers.UsuarioManager;
 
 import java.sql.SQLException;
 import java.util.Optional;
@@ -33,16 +33,16 @@ public class LoginInteractor implements Interactor<Long> {
         if (!username.snd || !password.snd)
             return new InteractorResponse<>(ResponseForward.WARNING); // Some error occur with username / password
 
-        Optional<UsuarioForm> usuarioForm = usuarioManager.verifyUsernameAndPassword(username.fst, password.fst);
+        final Optional<UsuarioForm> usuarioForm = usuarioManager.verifyUsernameAndPassword(username.fst, password.fst);
 
         if (usuarioForm.isPresent()) {
 
-            LogInForm logInForm = form.convertTo(LogInForm.class);
+            final LogInForm logInForm = form.convertTo(LogInForm.class);
             logInForm.setDocumento(usuarioForm.get().getDocumento());
 
             return loginManager.login(logInForm)
-                .map(logInId -> new InteractorResponse<>(ResponseForward.SUCCESS, logInId))
-                .orElse(new InteractorResponse<>(ResponseForward.FAILURE));
+                    .map(logInId -> new InteractorResponse<>(ResponseForward.SUCCESS, logInId))
+                    .orElse(new InteractorResponse<>(ResponseForward.FAILURE));
         }
 
         return new InteractorResponse<>(ResponseForward.FAILURE);

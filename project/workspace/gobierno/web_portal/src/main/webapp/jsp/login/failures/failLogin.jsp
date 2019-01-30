@@ -11,25 +11,25 @@
 
 <html>
 
-    <%@include file="../commons/head.jsp" %>
+    <%@include file="../../commons/head.jsp" %>
 
     <body>
         <div class="content-body">
 
             <header>
-                <%@include file="../commons/go_to_home.jsp" %>
+                <%@include file="../../commons/go_to_home.jsp" %>
             </header>
 
             <div class="page-header text-center">
                 <h2>USUARIO INCORRECTO ... si quiere puede volver a probar</h2>
             </div>
 
-            <%@include file="formLogin.jsp"%>
+            <%@include file="../formLogin.jsp"%>
         </div>
     </body>
 
-    <%@include file="../commons/footer.jsp"%>
-    <%@include file="../js_imports/home.jsp"%>
-    <%@include file="../js_imports/login.jsp"%>
+    <%@include file="../../commons/footer.jsp"%>
+    <%@include file="../../js_imports/home.jsp"%>
+    <%@include file="../../js_imports/login.jsp"%>
 
 </html>

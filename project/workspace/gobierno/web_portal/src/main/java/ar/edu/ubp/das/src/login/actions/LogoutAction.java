@@ -36,7 +36,8 @@ public class LogoutAction implements Action {
         }
 
         form.setItem(SSID, session.getAttribute(SSID).toString());
-        final InteractorResponse<Long> result = new LogoutInteractor(loginDao).execute(form);
+        final LogoutInteractor logoutInteractor = new LogoutInteractor(loginDao);
+        final InteractorResponse result = logoutInteractor.execute(form);
 
         session.removeAttribute(SSID);
 

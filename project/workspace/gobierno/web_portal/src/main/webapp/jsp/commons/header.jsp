@@ -8,7 +8,7 @@
                 <button id="go_to_profile_btn" name="goToProfile" class="btn btn-secondary" >Profile</button>
             </c:when>
             <c:otherwise>
-                <button id="login_btn" name="login" class="btn btn-primary" >Login</button>
+                <button id="show_login_btn" name="login" class="btn btn-primary" >Login</button>
             </c:otherwise>
         </c:choose>
 

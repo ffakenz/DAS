@@ -1,4 +1,4 @@
-package ar.edu.ubp.das.src.estado_cuentas.model;
+package ar.edu.ubp.das.src.estado_cuentas.managers;
 
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.core.Manager;

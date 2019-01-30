@@ -1,4 +1,4 @@
-package ar.edu.ubp.das.src.login.model;
+package ar.edu.ubp.das.src.login.managers;
 
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.core.Manager;

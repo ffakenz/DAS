@@ -7,10 +7,12 @@ public final class Constants {
     public static final String CONFIG_CONCESIONARIAS_DAO_NAME = "ConfigurarConcesionaria";
     public static final String CONFIG_TECNO_PARAM_DAO_NAME = "ConfigTecnoParam";
     public static final String USUARIOS_DAO_NAME = "Usuarios";
+    public static final String CONSUMER_DAO_NAME = "Consumer";
 
     //************ DAOS PACKAGES**********************************************
     public static final String CONCESIONARIAS_DAO_PACKAGE = "concesionarias";
     public static final String USUARIOS_DAO_PACKAGE = "usuarios";
+    public static final String CONSUMERS_DAO_PACKAGE = "consumers";
 
     //************ CONSUMERS ROLES ****************************
     public static final String ROL_GOBIERNO = "gobierno";
