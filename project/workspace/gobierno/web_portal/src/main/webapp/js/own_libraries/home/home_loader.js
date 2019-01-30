@@ -2,8 +2,8 @@ $(() => {
     /* Initialization Code */
     const home = new Home(HomeConfig);
     jUtils.loadModule(home);
-    console.log("Home View Loaded Modules: [CONFIG] = %o, [Home] = %o", 
-        Config, home);
+    console.log("Home View Loaded Modules: [HomeConfig] = %o, [Home] = %o", 
+        HomeConfig, home);
 });
 
 $(window).on('load', () => {

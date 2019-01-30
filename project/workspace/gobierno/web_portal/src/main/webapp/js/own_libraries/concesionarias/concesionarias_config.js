@@ -21,5 +21,11 @@ const ConcesionariasConfig = (module) => [
         cnfg: [
             { delegate: "#test_consumo_div", handler: module.testConsumo }
         ]
+    },
+    {
+        ctx: "#registrar_concesionaria",
+        cnfg: [
+            { delegate: `#${Id.REGISTRAR_CONCESIONARIA}`, handler: module.registrarConcesionaria}
+        ]
     }
 ];

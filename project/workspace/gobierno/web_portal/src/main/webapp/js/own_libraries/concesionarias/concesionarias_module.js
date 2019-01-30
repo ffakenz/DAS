@@ -90,4 +90,23 @@ class Concesionarias extends Module {
         console.log("testConsumo, [EVENT] = %o", evt);
         console.log("Test consumo %o", evt.target.id);
     }
+
+    registrarConcesionaria(evt) {
+        evt.preventDefault();
+        console.log("registrarConcesionaria, [EVENT] = %o", evt);
+        const _formRegistrarConcesionaria = $('#formRegistrarConcesionaria');
+        const _email = $("#email");
+        const isFormValid =
+            jUtils.inputsAreOk(_formRegistrarConcesionaria) && 
+            jUtils.isValidEmail(_email.val());    
+
+        if(!isFormValid) {
+            console.log("Form is Invalid");
+            return false;
+        }
+
+        var url = Action.REGISTRAR_CONCESIONARIA_ENDPOINT;
+
+        _formRegistrarConcesionaria.attr('action', url).submit();
+    }
 };

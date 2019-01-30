@@ -1,9 +1,9 @@
 $(() => {
     /* Initialization Code */
-    const concesionarias = new Concesionarias(Config.concesionarias);
+    const concesionarias = new Concesionarias(ConcesionariasConfig);
     jUtils.loadModule(concesionarias);
     console.log("Concesionarias View Loaded Modules: [CONFIG] = %o, [CONCESIONARIAS] = %o", 
-        Config, concesionarias);
+        ConcesionariasConfig, concesionarias);
 });
 
 $(window).on('load', () => {
