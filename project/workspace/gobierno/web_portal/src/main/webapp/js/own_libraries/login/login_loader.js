@@ -1,6 +1,6 @@
 $(() => {
     /* Initialization Code */
-    const login = new Login(Config.login);
+    const login = new Login(LoginConfig);
     jUtils.loadModule(login);
     console.log("Login View Loaded Modules: [CONFIG] = %o, [Login] = %o", 
         Config, login);
