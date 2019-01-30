@@ -2,7 +2,6 @@ class Concesionarias extends Module {
 
     constructor(config) {
         super(config);
-        /* this.concesionariasService = new ConcesionariasService();*/
     }
 
     /* AJAX CALLS */
@@ -37,7 +36,7 @@ class Concesionarias extends Module {
         console.log("Changing Config From %o To %o", currentConfigTecno, newConfigTecno);
 
         if(currentConfigTecno != newConfigTecno) {
-            const newHtml = ConcesionariasUtils.getNewUpdateForm(newConfigTecno, LAST_CONFIGS_CONSULTED_ST.concesionariaId);
+            const newHtml = ConcesionariasHelpers.getNewUpdateForm(newConfigTecno, LAST_CONFIGS_CONSULTED_ST.concesionariaId);
             console.log("newHtml = %o", newHtml);
             jUtils.showing("modal_content", newHtml);
         } else {
@@ -45,7 +44,6 @@ class Concesionarias extends Module {
             console.log("oldHtml = %o", oldHtml);
             jUtils.showing("modal_content", oldHtml);
         }
-
     }
 
     configurarHandler(evt) {
@@ -54,7 +52,7 @@ class Concesionarias extends Module {
         console.log("Configurando Concesionaria %o", evt.target.id);
         const idButton = evt.target.id;
         const idConcesionaria = idButton.split("-")[1];
-        ConcesionariasService.POST_CONSULTAR_CONFIG_PARAM(idConcesionaria, ConcesionariasUtils.formConsultarConfig);
+        ConcesionariasService.POST_CONSULTAR_CONFIG_PARAM(idConcesionaria, ConcesionariasHelpers.formConsultarConfig);
     }
 
     aprobarHandler(evt) {

@@ -1,4 +1,4 @@
-const ConcesionariasUtils = {
+const ConcesionariasHelpers = {
 
     /* HELPERS */
     getNewUpdateForm(configTecno, concesionariaId) {
@@ -30,7 +30,7 @@ const ConcesionariasUtils = {
         console.log("Executing formConsultarConfig for [CONCESIONARIA_ID] = %o with [ARRAY] = %o", 
             concesionariaId, jsonArray);
         if(jsonArray.length === 0) {
-            const newState = ConcesionariasUtils.getNewUpdateForm(ConfigTecno.REST, concesionariaId);
+            const newState = ConcesionariasHelpers.getNewUpdateForm(ConfigTecno.REST, concesionariaId);
             LAST_CONFIGS_CONSULTED_ST = newState;
             console.log("formConsultarConfig for [CONCESIONARIA_ID] = %o [RETURN] = %o", newState);
             return newState.showForm();
