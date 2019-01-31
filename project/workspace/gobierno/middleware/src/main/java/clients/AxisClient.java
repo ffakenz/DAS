@@ -2,7 +2,7 @@ package clients;
 
 import beans.NotificationUpdate;
 import beans.PlanBean;
-import com.google.gson.JsonObject;
+import clients.responses.ClientException;
 import org.apache.axiom.om.OMAbstractFactory;
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.OMFactory;
@@ -13,12 +13,13 @@ import org.apache.axis2.client.Options;
 import org.apache.axis2.client.ServiceClient;
 import utils.JsonUtils;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static utils.MiddlewareConstants.*;
 
 public class AxisClient implements ConcesionariaServiceContract {
 
@@ -35,8 +36,8 @@ public class AxisClient implements ConcesionariaServiceContract {
     }
 
     public static Optional<ConcesionariaServiceContract> create(final Map<String, String> params) {
-        final String endpointUrl = params.getOrDefault("endpointUrl", "");
-        final String targetNameSpace = params.getOrDefault("targetNameSpace", "");
+        final String endpointUrl = params.getOrDefault(AXIS_PARAM_ENDP_URL, "");
+        final String targetNameSpace = params.getOrDefault(AXIS_PARAM_TARGET, "");
         if (endpointUrl.isEmpty() || targetNameSpace.isEmpty())
             return Optional.empty();
 
@@ -44,22 +45,21 @@ public class AxisClient implements ConcesionariaServiceContract {
         return Optional.of(axisClient);
     }
 
-    // TODO: apply DRY on call because is similar to executeMethod.
-    private void call(final OMElement method) {
+
+    private void call(final OMElement method) throws ClientException {
         try {
             final ServiceClient serviceClient = new ServiceClient();
             // create option object
             final Options opts = new Options();
             opts.setTo(new EndpointReference(endpointUrl));
             serviceClient.setOptions(opts);
-            serviceClient.fireAndForget(method); // TODO: Note: this is the only line differet
-        } catch (final AxisFault axisFault) {
-            axisFault.printStackTrace();
-            System.out.println(axisFault.getMessage());
+            serviceClient.fireAndForget(method); // Note: this is the only line difference with executeMethod
+        } catch (final AxisFault e) {
+            throw new ClientException("ENDPOINT IS DOWN = " + e.getMessage()); // reached if docker is not running
         }
     }
 
-    private OMElement executeMethod(final OMElement method) {
+    private OMElement executeMethod(final OMElement method) throws ClientException {
         try {
             final ServiceClient serviceClient = new ServiceClient();
             // create option object
@@ -70,12 +70,13 @@ public class AxisClient implements ConcesionariaServiceContract {
 
             final OMElement res = serviceClient.sendReceive(method);
 
+            if (res.getFirstElement().getText().equals("null"))
+                throw new ClientException("ENDPOINT IS DOWN = null");
+
             return res;
-        } catch (final AxisFault axisFault) {
-            axisFault.printStackTrace();
-            System.out.println(axisFault.getMessage());
+        } catch (final AxisFault e) {
+            throw new ClientException("ENDPOINT IS DOWN = " + e.getMessage()); // reached if docker is not running
         }
-        return null; // non reacheable statemet
     }
 
     private OMElement createMethod(final String methodName) {
@@ -88,72 +89,56 @@ public class AxisClient implements ConcesionariaServiceContract {
         return param;
     }
 
-    // TODO: Move this method to an GSON Utils in order to remove above import com.google.gson.*
-    private JsonObject deserializeXML(final Iterator it, final JsonObject bag) {
-        if (it.hasNext()) {
-            final OMElement child = (OMElement) it.next();
-            final String elementName = child.getLocalName();
-
-            if (!child.getChildElements().hasNext())
-                bag.addProperty(elementName, child.getText());
-            else
-                bag.add(elementName, deserializeXML(child.getChildElements(), new JsonObject()));
-
-            return deserializeXML(it, bag);
-        }
-        return bag;
-    }
-
     @Override
-    public List<NotificationUpdate> consultarPlanes(final String identificador, final String offset) {
-        final OMElement method = createMethod("consultarPlanes");
-        final OMElement param = createParam("identificador", identificador);
-        final OMElement param2 = createParam("offset", offset);
+    public List<NotificationUpdate> consultarPlanes(final String identificador, final String offset) throws ClientException {
+        final OMElement method = createMethod(CONSULTAR_PLANES);
+        final OMElement param = createParam(IDENTIFICADOR, identificador);
+        final OMElement param2 = createParam(OFFSET, offset);
         method.addChild(param);
         method.addChild(param2);
-        final OMElement res = executeMethod(method);
-
-        final OMElement returnValue = res.getFirstElement();
+        final OMElement omElement = executeMethod(method);
+        final OMElement returnValue = omElement.getFirstElement();
         final String jsonPlanBeans = returnValue.getText();
         final NotificationUpdate[] notificationUpdates = JsonUtils.toObject(jsonPlanBeans, NotificationUpdate[].class);
         return Stream.of(notificationUpdates).collect(Collectors.toList());
     }
 
     @Override
-    public PlanBean consultarPlan(final String identificador, final Long planId) {
-        final OMElement method = createMethod("consultarPlan");
-        final OMElement param = createParam("identificador", identificador);
-        final OMElement param2 = createParam("planId", planId);
+    public PlanBean consultarPlan(final String identificador, final Long planId) throws ClientException {
+        final OMElement method = createMethod(CONSULTAR_PLAN);
+        final OMElement param = createParam(IDENTIFICADOR, identificador);
+        final OMElement param2 = createParam(PLANID, planId);
         method.addChild(param);
         method.addChild(param2);
-        final OMElement res = executeMethod(method); // response
+        final OMElement omElement = executeMethod(method); // response
 
-        final OMElement returnValue = res.getFirstElement();
+        final OMElement returnValue = omElement.getFirstElement();
         final String jsonPlanBean = returnValue.getText();
-
         return JsonUtils.toObject(jsonPlanBean, PlanBean.class);
+
     }
 
     @Override
-    public void cancelarPlan(final String identificador, final Long planId) {
-        final OMElement method = createMethod("cancelarPlan");
-        final OMElement param = createParam("identificador", identificador);
-        final OMElement param2 = createParam("planId", planId);
+    public void cancelarPlan(final String identificador, final Long planId) throws ClientException {
+        final OMElement method = createMethod(CANCELAR_PLAN);
+        final OMElement param = createParam(IDENTIFICADOR, identificador);
+        final OMElement param2 = createParam(PLANID, planId);
         method.addChild(param);
         method.addChild(param2);
         call(method);
     }
 
     @Override
-    public String health(final String identificador) {
-        final OMElement method = createMethod("health");
-        final OMElement param = createParam("identificador", identificador);
+    public String health(final String identificador) throws ClientException {
+        final OMElement method = createMethod(HEALTH);
+        final OMElement param = createParam(IDENTIFICADOR, identificador);
         method.addChild(param);
-        final OMElement res = executeMethod(method); // response
+        final OMElement omElement = executeMethod(method); // response
 
-        final OMElement returnValue = res.getFirstElement();
-        final String jsonPlanBean = returnValue.getText();
-        
-        return jsonPlanBean;
+        final OMElement returnValue = omElement.getFirstElement();
+        final String jsonHealth = returnValue.getText();
+        return jsonHealth;
+
+
     }
 }

@@ -9,8 +9,6 @@ import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.core.InteractorResponse;
 import ar.edu.ubp.das.src.core.ResponseForward;
 import ar.edu.ubp.das.src.login.LogoutInteractor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +19,6 @@ import static ar.edu.ubp.das.src.utils.Constants.SSID;
 
 public class LogoutAction implements Action {
 
-    private static final Logger log = LoggerFactory.getLogger(LogoutAction.class);
 
     @Override
     public ForwardConfig execute(final ActionMapping mapping, final DynaActionForm form, final HttpServletRequest request,
@@ -29,9 +26,9 @@ public class LogoutAction implements Action {
 
         final DaoImpl loginDao = DaoFactory.getDao("LogIn", "login");
 
-        HttpSession session = request.getSession();
+        final HttpSession session = request.getSession();
 
-        if( session.getAttribute(SSID) == null ) {
+        if (session.getAttribute(SSID) == null) {
             // jamas deberia acceder a esta parte del código
             // si se accede significa que alguien esta tratando de encontrar backdoors
             log.error("Se intenta cerrar una sesion y no hay ningun usuario logueado");
@@ -39,10 +36,12 @@ public class LogoutAction implements Action {
         }
 
         form.setItem(SSID, session.getAttribute(SSID).toString());
-        final InteractorResponse<Long> result = new LogoutInteractor(loginDao).execute(form);
+        final LogoutInteractor logoutInteractor = new LogoutInteractor(loginDao);
+        final InteractorResponse result = logoutInteractor.execute(form);
 
         session.removeAttribute(SSID);
 
+        logAction(mapping, form, request, response);
         return mapping.getForwardByName(result.getResponse().getForward());
     }
 

@@ -59,6 +59,7 @@
             <xsd:attribute name="form"      type="xsd:string"  use="optional" />
             <xsd:attribute name="validate"  type="xsd:boolean" use="optional" />
             <xsd:attribute name="noforward" type="xsd:boolean" use="optional" />
+            <xsd:attribute name="json"      type="xsd:boolean" use="optional" />
         </xsd:complexType>
     </xsd:element>
 

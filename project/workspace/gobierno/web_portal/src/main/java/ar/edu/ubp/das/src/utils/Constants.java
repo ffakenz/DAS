@@ -6,9 +6,13 @@ public final class Constants {
     public static final String CONCESIONARIAS_DAO_NAME = "Concesionarias";
     public static final String CONFIG_CONCESIONARIAS_DAO_NAME = "ConfigurarConcesionaria";
     public static final String CONFIG_TECNO_PARAM_DAO_NAME = "ConfigTecnoParam";
+    public static final String USUARIOS_DAO_NAME = "Usuarios";
+    public static final String CONSUMER_DAO_NAME = "Consumer";
 
     //************ DAOS PACKAGES**********************************************
     public static final String CONCESIONARIAS_DAO_PACKAGE = "concesionarias";
+    public static final String USUARIOS_DAO_PACKAGE = "usuarios";
+    public static final String CONSUMERS_DAO_PACKAGE = "consumers";
 
     //************ CONSUMERS ROLES ****************************
     public static final String ROL_GOBIERNO = "gobierno";
@@ -34,11 +38,4 @@ public final class Constants {
     public static final String BTN_APROBAR = "aprobar_btn";
     public static final String BTN_DESAPROBAR = "desaprobar_btn";
     public static final String BTN_CONFIGURAR = "config_btn";
-    public static final String BTN_UPDATE_CONFIG = "update_config_btn";
-    public static final String BTN_TEST_CONFIG = "test_config_btn";
-    public static final String UPDATE_CONFIG_FORM = "update_config_form";
-    public static final String INNER_UPDATE_CONFIG_FORM_DIV = "inner_update_config_form_div";
-    public static final String UPDATE_CONFIG_SELECT = "update_config_select";
-
-
 }

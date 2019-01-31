@@ -5,96 +5,104 @@ import java.util.Map;
 
 public final class ActionConfig {
 
-	private String  path;
-	private String  type;
-	private String  form;
-	private boolean validate;
-	private boolean noForward;
-	private Map<String, ParameterConfig> parameters;
-	private Map<String, ForwardConfig>   forwards;
-	
-	public ActionConfig() {
-		this.validate   = false;
-		this.noForward  = false;
-		this.parameters = new HashMap<String, ParameterConfig>();
-		this.forwards   = new HashMap<String, ForwardConfig>();
-	}
+    private String path;
+    private String type;
+    private String form;
+    private boolean validate;
+    private boolean noForward;
+    private Map<String, ParameterConfig> parameters;
+    private Map<String, ForwardConfig> forwards;
+    private boolean json;
 
-	public String getPath() {
-		return path;
-	}
+    public ActionConfig() {
+        this.validate = false;
+        this.noForward = false;
+        this.parameters = new HashMap<>();
+        this.forwards = new HashMap<>();
+    }
 
-	public String getType() {
-		return type;
-	}
+    public String getPath() {
+        return path;
+    }
 
-	public String getForm() {
-		return form;
-	}
+    public String getType() {
+        return type;
+    }
 
-	public boolean isValidate() {
-		return validate;
-	}
+    public String getForm() {
+        return form;
+    }
 
-	public boolean isNoForward() {
-		return noForward;
-	}
-	
-	public ParameterConfig getParameterByName(String name) {
-		if(this.parameters.containsKey(name)) {
-			return this.parameters.get(name);
-		}
-		return null;
-	}
+    public boolean isValidate() {
+        return validate;
+    }
 
-	public ForwardConfig getForwardByName(String name) {
-		if(this.forwards.containsKey(name)) {
-			return this.forwards.get(name);
-		}
-		return null;
-	}
+    public boolean isNoForward() {
+        return noForward;
+    }
 
-	public Map<String, ParameterConfig> getParameters() {
-		return parameters;
-	}
+    public ParameterConfig getParameterByName(final String name) {
+        if (this.parameters.containsKey(name)) {
+            return this.parameters.get(name);
+        }
+        return null;
+    }
 
-	public Map<String, ForwardConfig> getForwards() {
-		return forwards;
-	}
+    public ForwardConfig getForwardByName(final String name) {
+        if (this.forwards.containsKey(name)) {
+            return this.forwards.get(name);
+        }
+        return null;
+    }
 
-	public void setPath(String path) {
-		this.path = path;
-	}
+    public Map<String, ParameterConfig> getParameters() {
+        return parameters;
+    }
 
-	public void setType(String type) {
-		this.type = type;
-	}
+    public Map<String, ForwardConfig> getForwards() {
+        return forwards;
+    }
 
-	public void setForm(String form) {
-		this.form = form;
-	}
+    public void setPath(final String path) {
+        this.path = path;
+    }
 
-	public void setValidate(String validate) {
-		this.validate = validate.isEmpty() ? false : validate.equals("true") ? true : false;
-	}
+    public void setType(final String type) {
+        this.type = type;
+    }
 
-	public void setNoForward(String noForward) {
-		this.noForward = noForward.isEmpty() ? false : noForward.equals("true") ? true : false;
-	}
+    public void setForm(final String form) {
+        this.form = form;
+    }
 
-	public void addParameter(ParameterConfig parameter) {
-		this.parameters.put(parameter.getName(), parameter);
-	}
+    public void setValidate(final String validate) {
+        this.validate = validate.isEmpty() ? false : validate.equals("true") ? true : false;
+    }
 
-	public void addForward(ForwardConfig forward) {
-		this.forwards.put(forward.getName(), forward);
-	}
+    public void setNoForward(final String noForward) {
+        this.noForward = noForward.isEmpty() ? false : noForward.equals("true") ? true : false;
+    }
 
-	@Override
-	public String toString() {
-		return "ActionConfig [path=" + path + ", type=" + type + ", form="
-				+ form + ", validate=" + validate + ", noForward=" + noForward
-				+ ", parameters=" + parameters + ", forwards=" + forwards + "]";
-	}
-	
+    public void addParameter(final ParameterConfig parameter) {
+        this.parameters.put(parameter.getName(), parameter);
+    }
+
+    public void addForward(final ForwardConfig forward) {
+        this.forwards.put(forward.getName(), forward);
+    }
+
+    @Override
+    public String toString() {
+        return "ActionConfig [path=" + path + ", type=" + type + ", form="
+                + form + ", validate=" + validate + ", noForward=" + noForward
+                + ", parameters=" + parameters + ", forwards=" + forwards + "]";
+    }
+
+    public void setJson(final String json) {
+        this.json = json.isEmpty() ? false : json.equals("true") ? true : false;
+    }
+
+    public boolean isJson() {
+        return this.json;
+    }
 }

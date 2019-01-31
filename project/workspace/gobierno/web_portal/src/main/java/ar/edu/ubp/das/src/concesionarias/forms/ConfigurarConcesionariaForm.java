@@ -8,23 +8,28 @@ import ar.edu.ubp.das.mvc.db.annotations.Entity;
 public class ConfigurarConcesionariaForm extends DynaActionForm {
 
     @Column(name = "concesionaria_id")
-    Long concesionariaId;
+    private Long concesionariaId;
     @Column(name = "config_tecno")
-    String configTecno;
+    private String configTecno;
     @Column(name = "config_param")
-    String configParam;
+    private String configParam;
     @Column(name = "value")
-    String value;
+    private String value;
 
+    public ConfigurarConcesionariaForm() {
+    }
 
-    @Override
-    public String toString() {
-        return "ConfigurarConcesionariaForm{" +
-                "concesionariaId=" + concesionariaId +
-                ", configTecno='" + configTecno + '\'' +
-                ", configParam='" + configParam + '\'' +
-                ", value='" + value + '\'' +
-                '}';
+    public ConfigurarConcesionariaForm(final String configTecno, final String configParam, final String value) {
+        this.configTecno = configTecno;
+        this.configParam = configParam;
+        this.value = value;
+    }
+
+    public ConfigurarConcesionariaForm(final Long concesionariaId, final String configTecno, final String configParam, final String value) {
+        this.concesionariaId = concesionariaId;
+        this.configTecno = configTecno;
+        this.configParam = configParam;
+        this.value = value;
     }
 
     public Long getConcesionariaId() {
@@ -57,5 +62,15 @@ public class ConfigurarConcesionariaForm extends DynaActionForm {
 
     public void setValue(final String value) {
         this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return "ConfigurarConcesionariaForm{" +
+                "concesionariaId=" + concesionariaId +
+                ", configTecno='" + configTecno + '\'' +
+                ", configParam='" + configParam + '\'' +
+                ", value='" + value + '\'' +
+                '}';
     }
 }

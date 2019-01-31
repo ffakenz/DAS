@@ -28,9 +28,9 @@ public class ConsultarAprobadasAction implements Action {
 
         final List<ConcesionariaForm> aprobadas = result.getResult();
 
-
         request.setAttribute(APROBADAS_RQST_ATTRIBUTE, aprobadas);
 
+        logAction(mapping, form, request, response);
         return mapping.getForwardByName(result.getResponse().getForward());
     }
 }

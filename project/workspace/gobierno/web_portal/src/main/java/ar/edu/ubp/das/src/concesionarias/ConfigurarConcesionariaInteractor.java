@@ -7,9 +7,9 @@ import ar.edu.ubp.das.src.concesionarias.forms.ConfigTecnoParamsForm;
 import ar.edu.ubp.das.src.concesionarias.forms.ConfigTecnoXConcesionariaForm;
 import ar.edu.ubp.das.src.concesionarias.forms.ConfigurarConcesionariaForm;
 import ar.edu.ubp.das.src.concesionarias.forms.GeneralConfigConcesionariaForm;
-import ar.edu.ubp.das.src.concesionarias.model.ConcesionariasManager;
-import ar.edu.ubp.das.src.concesionarias.model.ConfigTecnoParamManager;
-import ar.edu.ubp.das.src.concesionarias.model.ConfigurarConcesionariaManager;
+import ar.edu.ubp.das.src.concesionarias.managers.ConcesionariasManager;
+import ar.edu.ubp.das.src.concesionarias.managers.ConfigTecnoParamManager;
+import ar.edu.ubp.das.src.concesionarias.managers.ConfigurarConcesionariaManager;
 import ar.edu.ubp.das.src.core.Interactor;
 import ar.edu.ubp.das.src.core.InteractorResponse;
 import ar.edu.ubp.das.src.core.ResponseForward;
@@ -43,6 +43,7 @@ public class ConfigurarConcesionariaInteractor implements Interactor<Boolean> {
 
         final GeneralConfigConcesionariaForm genConfigConcForm = convertTo(form);
 
+        // TODO => this should be moved below next if ?
         configurarConcesionariaManager.getDao().invalidateParams(genConfigConcForm.getConcesionariaId());
 
         final ConfigTecnoXConcesionariaForm configTecnoXConc = new ConfigTecnoXConcesionariaForm();
@@ -56,11 +57,11 @@ public class ConfigurarConcesionariaInteractor implements Interactor<Boolean> {
 
         for (final ConfigTecnoParamsForm c : genConfigConcForm.getParams()) {
 
-            final ConfigurarConcesionariaForm configurarConcesionariaForm = new ConfigurarConcesionariaForm();
-            configurarConcesionariaForm.setConcesionariaId(genConfigConcForm.getConcesionariaId());
-            configurarConcesionariaForm.setConfigParam(c.getConfigParam());
-            configurarConcesionariaForm.setConfigTecno(c.getConfigTecno());
-            configurarConcesionariaForm.setValue(c.getValue());
+            final ConfigurarConcesionariaForm configurarConcesionariaForm = new ConfigurarConcesionariaForm(
+                    genConfigConcForm.getConcesionariaId(),
+                    c.getConfigTecno(),
+                    c.getConfigParam(),
+                    c.getValue());
 
             configurarConcesionariaManager.getDao().insert(configurarConcesionariaForm);
         }
@@ -71,9 +72,9 @@ public class ConfigurarConcesionariaInteractor implements Interactor<Boolean> {
     public Boolean isValid(final DynaActionForm form) {
 
         final Pair<String, Boolean> concesionariaId = form.isItemValid("concesionariaId");
-        final Pair<String, Boolean> techno = form.isItemValid("techno");
+        final Pair<String, Boolean> techno = form.isItemValid("configTecno");
 
-        if (concesionariaId.snd == false) {
+        if (!concesionariaId.snd) {
             return false;
         } else if (techno.fst.equals(AXIS)) {
             return form.isItemValid(AXIS_PARAM_ENDP_URL).snd && form.isItemValid(AXIS_PARAM_TARGET).snd;
@@ -89,7 +90,7 @@ public class ConfigurarConcesionariaInteractor implements Interactor<Boolean> {
     public GeneralConfigConcesionariaForm convertTo(final DynaActionForm form) {
 
         final Long concesionariaId = Long.parseLong(form.getItem("concesionariaId").get());
-        final String techno = form.getItem("techno").get();
+        final String techno = form.getItem("configTecno").get();
 
 
         final GeneralConfigConcesionariaForm generalConfigConcesionariaForm = new GeneralConfigConcesionariaForm();

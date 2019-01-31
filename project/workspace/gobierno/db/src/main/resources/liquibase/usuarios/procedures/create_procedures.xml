@@ -47,6 +47,19 @@
         <dropProcedure procedureName="delete_usuario"/>
     </changeSet>
 
+    <changeSet id="Drop procedure update_usuario" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'update_usuario'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="update_usuario"/>
+    </changeSet>
+
     <changeSet id="Drop procedure update_usuario_password" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="1">
@@ -87,6 +100,21 @@
         </preConditions>
         <dropProcedure procedureName="get_usuarios_by_username_password"/>
     </changeSet>
+
+    <changeSet id="Drop procedure get_usuario_by_documento" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_usuario_by_documento'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_usuario_by_documento"/>
+    </changeSet>
+
 
     <!-- ******************************* -->
     <!--  CREATE PROCEDURES CHANGE-SETS  -->
@@ -130,6 +158,19 @@
         <sqlFile path="/src/main/resources/liquibase/usuarios/procedures/delete_usuario.sql"/>
     </changeSet>
 
+    <changeSet id="Create procedure update_usuario" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'update_usuario'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/usuarios/procedures/update_usuario.sql"/>
+    </changeSet>
+
     <changeSet id="Create procedure update_usuario_password" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
@@ -170,5 +211,20 @@
         </preConditions>
         <sqlFile path="/src/main/resources/liquibase/usuarios/procedures/get_usuarios_by_username_password.sql"/>
     </changeSet>
+
+    <changeSet id="Create procedure get_usuario_by_documento" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_usuario_by_documento'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/usuarios/procedures/get_usuario_by_documento.sql"/>
+    </changeSet>
+
 
 </databaseChangeLog>

@@ -15,24 +15,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-import static ar.edu.ubp.das.src.utils.Constants.*;
+import static ar.edu.ubp.das.src.utils.Constants.CONCESIONARIAS_DAO_PACKAGE;
+import static ar.edu.ubp.das.src.utils.Constants.CONFIG_CONCESIONARIAS_DAO_NAME;
 
 public class ConsultarConcesionariaConfigParamAction implements Action {
 
     @Override
-    public ForwardConfig execute(ActionMapping mapping, DynaActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ForwardConfig execute(final ActionMapping mapping, final DynaActionForm form, final HttpServletRequest request, final HttpServletResponse response) {
 
         final DaoImpl msConfigurarConcesionariaDao = DaoFactory.getDao(CONFIG_CONCESIONARIAS_DAO_NAME, CONCESIONARIAS_DAO_PACKAGE);
 
         final ConsultarConcesionariaConfigParamInteractor interactor =
                 new ConsultarConcesionariaConfigParamInteractor(msConfigurarConcesionariaDao);
 
-        InteractorResponse<List<ConfigurarConcesionariaForm>> resp = interactor.execute(form);
+        final InteractorResponse<List<ConfigurarConcesionariaForm>> resp = interactor.execute(form);
 
-        if(resp.getResponse().equals(ResponseForward.SUCCESS))
-            request.setAttribute(CONFIG_PARAMS_LIST_RQST_ATTRIBUTE, resp.getResult());
+        if (!resp.getResponse().equals(ResponseForward.SUCCESS))
+            return mapping.getForwardByName(resp.getResponse().getForward());
 
-        return mapping.getForwardByName(resp.getResponse().getForward());
-
+        logAction(mapping, form, request, response);
+        return jsonResult(resp.getResult());
     }
 }

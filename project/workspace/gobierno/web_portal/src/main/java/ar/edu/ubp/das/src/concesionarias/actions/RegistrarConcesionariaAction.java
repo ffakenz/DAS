@@ -32,6 +32,7 @@ public class RegistrarConcesionariaAction implements Action {
 
         final InteractorResponse<Boolean> result = action.execute(form);
 
+        logAction(mapping, form, request, response);
         return mapping.getForwardByName(result.getResponse().getForward());
     }
 }

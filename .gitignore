@@ -47,3 +47,5 @@ project/\.DS_Store
 \.DS_Store
 
 project/workspace/concesionarias/ws/
+
+*.code-workspace

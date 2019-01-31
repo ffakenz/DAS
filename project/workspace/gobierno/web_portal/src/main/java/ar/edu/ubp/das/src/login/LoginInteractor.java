@@ -7,15 +7,12 @@ import ar.edu.ubp.das.src.core.Interactor;
 import ar.edu.ubp.das.src.core.InteractorResponse;
 import ar.edu.ubp.das.src.core.ResponseForward;
 import ar.edu.ubp.das.src.login.forms.LogInForm;
-import ar.edu.ubp.das.src.login.model.LoginManager;
+import ar.edu.ubp.das.src.login.managers.LoginManager;
 import ar.edu.ubp.das.src.usuarios.forms.UsuarioForm;
-import ar.edu.ubp.das.src.usuarios.model.UsuarioManager;
+import ar.edu.ubp.das.src.usuarios.managers.UsuarioManager;
 
-import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.Optional;
-
-import static ar.edu.ubp.das.src.utils.Constants.USER_TYPE;
 
 
 public class LoginInteractor implements Interactor<Long> {
@@ -30,21 +27,22 @@ public class LoginInteractor implements Interactor<Long> {
 
     @Override
     public InteractorResponse<Long> execute(final DynaActionForm form) throws SQLException {
-        final Pair<String, Boolean> password = form.isItemValid("password");
         final Pair<String, Boolean> username = form.isItemValid("username");
+        final Pair<String, Boolean> password = form.isItemValid("password");
 
         if (!username.snd || !password.snd)
             return new InteractorResponse<>(ResponseForward.WARNING); // Some error occur with username / password
 
-        Optional<UsuarioForm> usuarioForm = usuarioManager.verifyUsernameAndPassword(username.fst, password.fst);
+        final Optional<UsuarioForm> usuarioForm = usuarioManager.verifyUsernameAndPassword(username.fst, password.fst);
 
         if (usuarioForm.isPresent()) {
 
-            form.setItem(USER_TYPE, usuarioForm.get().getRol());
-            
-            return loginManager.login(form.convertTo(LogInForm.class))
-                .map(LogInId -> new InteractorResponse<>(ResponseForward.SUCCESS, LogInId))
-                .orElse(new InteractorResponse<>(ResponseForward.FAILURE));
+            final LogInForm logInForm = form.convertTo(LogInForm.class);
+            logInForm.setDocumento(usuarioForm.get().getDocumento());
+
+            return loginManager.login(logInForm)
+                    .map(logInId -> new InteractorResponse<>(ResponseForward.SUCCESS, logInId))
+                    .orElse(new InteractorResponse<>(ResponseForward.FAILURE));
         }
 
         return new InteractorResponse<>(ResponseForward.FAILURE);

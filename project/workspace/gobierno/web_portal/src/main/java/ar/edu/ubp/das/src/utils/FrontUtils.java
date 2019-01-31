@@ -1,11 +1,6 @@
 package ar.edu.ubp.das.src.utils;
 
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
-import ar.edu.ubp.das.src.concesionarias.forms.ConfigurarConcesionariaForm;
-import clients.factory.ClientType;
-
-import java.util.List;
-import java.util.function.Predicate;
 
 import static ar.edu.ubp.das.src.utils.Constants.*;
 
@@ -51,96 +46,6 @@ public class FrontUtils {
                 .append(" class=\"" + clase + "\">")
                 .append(description)
                 .append("</button>");
-        return sb.toString();
-    }
-
-    public static String getInput(final String type, final String id, final String clase, final String name, final String value, final String label) {
-        final StringBuilder sb = new StringBuilder();
-
-        sb.append("<label class=\"col-md-4 control-label\"").append(" for=\"" + id + "\">")
-                .append(label)
-                .append("</label>");
-        sb.append("<input")
-                .append(" type=\"" + type + "\" ")
-                .append(" id=\"" + id + "\" ")
-                .append(" class=\"form-control form-control-lg " + clase + "\" ")
-                .append(" name=\"" + name + "\" ")
-                .append(" value=\"" + value + "\" ")
-                .append(" size=120 ")
-                .append(" required/>");
-        return sb.toString();
-    }
-
-    public static String makeFormConfigTecnologica(final List<ConfigurarConcesionariaForm> configsParams) {
-        final String configTecno = configsParams.get(0).getConfigTecno();
-
-        final Predicate<String> isAxisSelected = cnfg -> cnfg.equals(ClientType.AXIS.getName());
-        final Predicate<String> isCxfSelected = cnfg -> cnfg.equals(ClientType.CXF.getName());
-        final Predicate<String> isRestSelected = cnfg -> cnfg.equals(ClientType.REST.getName());
-
-        final StringBuilder sb = new StringBuilder();
-        sb.append("<form id=\"" + UPDATE_CONFIG_FORM + "\" class=\"form-horizontal\" method=\"post\" >");
-        sb.append("<div> id=\"" + INNER_UPDATE_CONFIG_FORM_DIV + "\" ");
-        sb.append("<div class=\"form-group\">");
-        sb.append("<select id=\"" + UPDATE_CONFIG_SELECT + "\">")
-                .append("<option value=" +
-                        ClientType.REST.getName() +
-                        (isRestSelected.test(configTecno) ? " selected " : " ") + ">" +
-                        ClientType.REST.getName() +
-                        "</option>")
-                .append("<option value=" +
-                        ClientType.AXIS.getName() +
-                        (isAxisSelected.test(configTecno) ? " selected " : " ") + ">" +
-                        ClientType.AXIS.getName() +
-                        "</option>")
-                .append("<option value=" +
-                        ClientType.CXF.getName() +
-                        (isCxfSelected.test(configTecno) ? " selected " : " ") + ">" +
-                        ClientType.CXF.getName() +
-                        "</option>")
-                .append("</select>");
-        sb.append("</div>");
-
-
-        sb.append("<div>");
-        if (configsParams.isEmpty()) {
-            sb.append("<div class=\"form-group\">");
-            sb.append(getInput(
-                    ClientType.REST.getName(),
-                    "config_param-url",
-                    "config_param",
-                    "url",
-                    "",
-                    "Param url"
-            ));
-            sb.append("</div>");
-        } else {
-            for (final ConfigurarConcesionariaForm config : configsParams) {
-                sb.append("<div class=\"form-group\">");
-                sb.append(getInput(
-                        config.getConfigTecno(),
-                        "config_param-" + config.getConfigParam(),
-                        "config_param",
-                        config.getConfigParam(),
-                        config.getValue(),
-                        "Param " + config.getConfigParam() + " "
-                ));
-                sb.append("</div>");
-            }
-        }
-        sb.append("</div>");
-
-        sb.append("<div class=\"form-group\">")
-                .append(getButton(BTN_UPDATE_CONFIG, BTN_UPDATE_CONFIG, "Update"))
-                .append("</div>");
-
-        sb.append("<div class=\"form-group\">")
-                .append(getButton(BTN_TEST_CONFIG, BTN_TEST_CONFIG, "Test"))
-                .append("</div>");
-
-        sb.append("</div>");
-        sb.append("</form>");
-
         return sb.toString();
     }
 }

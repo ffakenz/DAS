@@ -70,8 +70,8 @@ public class LoginInteractorTest {
     public void test10_Login_Interactor() throws SQLException {
 
         final DynaActionForm userForm = new DynaActionForm();
-        userForm.setItem("username", "pepe2");
-        userForm.setItem("password", "asd");
+        userForm.setItem("username", "pepe");
+        userForm.setItem("password", "perez");
 
         final InteractorResponse<Long> response = interactor.execute(userForm);
 
@@ -83,8 +83,8 @@ public class LoginInteractorTest {
     public void test11_Login_Twice() throws SQLException {
 
         final DynaActionForm userForm = new DynaActionForm();
-        userForm.setItem("username", "pepe2");
-        userForm.setItem("password", "asd");
+        userForm.setItem("username", "pepe");
+        userForm.setItem("password", "perez");
 
         final InteractorResponse<Long> response = interactor.execute(userForm);
 

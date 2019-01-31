@@ -1,3 +1,3 @@
-CREATE PROCEDURE log_login(@username VARCHAR(100)) AS
-INSERT INTO login(username)
-VALUES (@username);
+CREATE PROCEDURE log_login(@documento BIGINT) AS
+INSERT INTO login(documento)
+VALUES (@documento);

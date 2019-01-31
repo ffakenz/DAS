@@ -3,17 +3,20 @@ import beans.PlanBean;
 import clients.ConcesionariaServiceContract;
 import clients.factory.ClientFactory;
 import clients.factory.ClientType;
+import clients.responses.ClientException;
 
 import java.util.HashMap;
 import java.util.List;
 
 public class ClientExample {
 
-    static void consumeService(final ConcesionariaServiceContract client) {
+    static void consumeService(final ConcesionariaServiceContract client) throws ClientException {
         final String identificador = "GOBIERNO-INCENTIVO-2018";
+        final String offset = "2018-01-08T20:58:00";
 
         System.out.println("consultarPlanes");
-        final List<NotificationUpdate> notificationUpdates = client.consultarPlanes(identificador, "2018-01-08T20:58:00");
+        final List<NotificationUpdate> notificationUpdates =
+                client.consultarPlanes(identificador, offset);
         notificationUpdates.forEach(System.out::println);
 
         System.out.println("cancelarPlan");
@@ -32,21 +35,25 @@ public class ClientExample {
         System.out.println(plan2.toString());
 
         System.out.println("consultarPlanes");
-        final List<NotificationUpdate> notificationUpdates2 = client.consultarPlanes(identificador, "2018-01-08T20:58:00");
+        final List<NotificationUpdate> notificationUpdates2 =
+                client.consultarPlanes(identificador, offset);
         notificationUpdates2.forEach(System.out::println);
     }
 
     public static void main(final String[] args) {
-
-        System.out.println("Running AXIS");
-        runAxis();
-        System.out.println("Running REST");
-        runRest();
-        System.out.println("Running CXF");
-        runCxf();
+        try {
+            System.out.println("Running AXIS");
+            runAxis();
+            System.out.println("Running REST");
+            runRest();
+            System.out.println("Running CXF");
+            runCxf();
+        } catch (final ClientException e) {
+            e.printStackTrace();
+        }
     }
 
-    private static void runAxis() {
+    private static void runAxis() throws ClientException {
         // TODO: quitar/services
 //        final AxisClient axis =
 //                new AxisClient(
@@ -67,7 +74,7 @@ public class ClientExample {
         consumeService(axis);
     }
 
-    private static void runRest() {
+    private static void runRest() throws ClientException {
 //        final RestClient rest =
 //                new RestClient("http://localhost:8001/concesionaria_rest_one/concesionariaRestOne");
 
@@ -82,7 +89,7 @@ public class ClientExample {
         consumeService(rest);
     }
 
-    private static void runCxf() {
+    private static void runCxf() throws ClientException {
         // TODO: quitar "/services"
 //        final CXFClient cxf =
 //                new CXFClient("http://localhost:8002/concesionaria_cxf_one/services/concesionaria_cxf_one?wsdl");

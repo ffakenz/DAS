@@ -20,15 +20,18 @@ public class ConfigurarAction implements Action {
     @Override
     public ForwardConfig execute(final ActionMapping mapping, final DynaActionForm form, final HttpServletRequest request, final HttpServletResponse response) throws SQLException, RuntimeException {
 
-
         final DaoImpl msConcesionariasDao = DaoFactory.getDao(CONCESIONARIAS_DAO_NAME, CONCESIONARIAS_DAO_PACKAGE);
         final DaoImpl msConfigurarConcesionariaDao = DaoFactory.getDao(CONFIG_CONCESIONARIAS_DAO_NAME, CONCESIONARIAS_DAO_PACKAGE);
         final DaoImpl msConfigTecnoParamDao = DaoFactory.getDao(CONFIG_TECNO_PARAM_DAO_NAME, CONCESIONARIAS_DAO_PACKAGE);
 
         final ConfigurarConcesionariaInteractor action = new ConfigurarConcesionariaInteractor(msConfigurarConcesionariaDao, msConcesionariasDao, msConfigTecnoParamDao);
 
-        final InteractorResponse<Boolean> result = action.execute(form);
+        final InteractorResponse<Boolean> resp = action.execute(form);
 
-        return mapping.getForwardByName(result.getResponse().getForward());
+        if (!resp.getResult())
+            return mapping.getForwardByName(resp.getResponse().getForward());
+
+        logAction(mapping, form, request, response);
+        return jsonResult("{\"result\": \"OK\"}");
     }
 }

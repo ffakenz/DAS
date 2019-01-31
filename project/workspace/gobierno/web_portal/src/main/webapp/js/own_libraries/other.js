@@ -4,7 +4,7 @@ var translator = {
 
         jUtils.executing( "mensaje" );
         $.ajax({
-            url: Globals.CHANGE_LANGUAGE_ENDPOINT,
+            url: Action.CHANGE_LANGUAGE_ENDPOINT,
             type: "post",
             data: "idioma=" + idioma,
             dataType: "html",

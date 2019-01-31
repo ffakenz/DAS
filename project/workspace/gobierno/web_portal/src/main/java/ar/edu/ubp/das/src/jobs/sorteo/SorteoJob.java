@@ -1,33 +1,7 @@
 package ar.edu.ubp.das.src.jobs.sorteo;
 
-import ar.edu.ubp.das.mvc.config.DatasourceConfig;
-import ar.edu.ubp.das.src.concesionarias.daos.MSConcesionariasDao;
-import ar.edu.ubp.das.src.concesionarias.daos.MSConfigurarConcesionariaDao;
-import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
-import ar.edu.ubp.das.src.concesionarias.forms.ConfigurarConcesionariaForm;
-import ar.edu.ubp.das.src.concesionarias.model.ConcesionariasManager;
-import ar.edu.ubp.das.src.concesionarias.model.ConfigurarConcesionariaManager;
-import ar.edu.ubp.das.src.consumers.daos.MSConsumerDao;
-import ar.edu.ubp.das.src.consumers.model.ConsumerManager;
-import ar.edu.ubp.das.src.estado_cuentas.daos.MSCuotasDao;
-import ar.edu.ubp.das.src.estado_cuentas.daos.MSEstadoCuentasDao;
-import ar.edu.ubp.das.src.estado_cuentas.forms.EstadoCuentasForm;
-import ar.edu.ubp.das.src.estado_cuentas.model.CuotasManager;
-import ar.edu.ubp.das.src.estado_cuentas.model.EstadoCuentasManager;
-import ar.edu.ubp.das.src.jobs.daos.MSParticipanteDao;
-import ar.edu.ubp.das.src.jobs.daos.MSSorteoDao;
-import ar.edu.ubp.das.src.jobs.forms.ParticipanteForm;
-import clients.ConcesionariaServiceContract;
-import clients.IClientFactory;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
-
-import java.sql.SQLException;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class SorteoJob implements Job {
 

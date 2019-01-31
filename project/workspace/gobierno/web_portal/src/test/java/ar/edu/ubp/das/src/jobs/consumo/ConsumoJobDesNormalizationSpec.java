@@ -8,6 +8,8 @@ import ar.edu.ubp.das.src.estado_cuentas.daos.MSEstadoCuentasDao;
 import ar.edu.ubp.das.src.estado_cuentas.forms.CuotasForm;
 import ar.edu.ubp.das.src.estado_cuentas.forms.EstadoCuentasForm;
 import ar.edu.ubp.das.src.jobs.consumoo.ConsumoJob;
+import ar.edu.ubp.das.src.usuarios.daos.MSUsuariosDao;
+import ar.edu.ubp.das.src.usuarios.forms.UsuarioForm;
 import beans.NotificationUpdate;
 import clients.factory.ClientFactory;
 import org.junit.Before;
@@ -27,6 +29,7 @@ public class ConsumoJobDesNormalizationSpec {
     // Daos
     private DatasourceConfig dataSourceConfig;
     private MSConsumerDao msConsumerDao;
+    private MSUsuariosDao msUsuariosDao;
     private MSEstadoCuentasDao estadoCuentaDao;
     private MSCuotasDao cuotasDao;
 
@@ -46,10 +49,16 @@ public class ConsumoJobDesNormalizationSpec {
 
         // Setup Daos
         this.dataSourceConfig = TestDB.getInstance().getDataSourceConfig();
+
         msConsumerDao = new MSConsumerDao();
         msConsumerDao.setDatasource(dataSourceConfig);
+
+        msUsuariosDao = new MSUsuariosDao();
+        msUsuariosDao.setDatasource(dataSourceConfig);
+
         estadoCuentaDao = new MSEstadoCuentasDao();
         estadoCuentaDao.setDatasource(dataSourceConfig);
+
         cuotasDao = new MSCuotasDao();
         cuotasDao.setDatasource(dataSourceConfig);
 
@@ -110,52 +119,61 @@ public class ConsumoJobDesNormalizationSpec {
     @Test
     public void test_10_ConsumerJob_UpdateConsumer_success() throws Exception {
         final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, ClientFactory.getInstance());
-        setUpConsumer(nonExistingConsumer,
-                777L,
-                "ChuPamela",
-                "Anderson",
-                "69039857123",
-                "pamelaanderson@mail.com");
 
-        // verify it does not exists in db
+        Long doc = 2L;
+
+        setUpConsumer(nonExistingConsumer,
+                doc,
+                "Nombre_test_2",
+                "Apellido_test_2",
+                "telefono_test_2",
+                "test_2@test.com");
+
+
         final ConsumerForm form = new ConsumerForm();
-        form.setDocumento(777L);
-        form.setConcesionaria(1L);
-        final Optional<ConsumerForm> consumerForm =
-                msConsumerDao.selectConsumerByDniAndConcesionaria(form);
+        form.setDocumento(doc);
+
+        final Optional<ConsumerForm> consumerForm = msConsumerDao.selectConsumerByDni(form);
         assertFalse(consumerForm.isPresent());
+
         // updateConsumerDb
-        consumer.updateConsumerDb(nonExistingConsumer, 1L);
+        consumer.updateConsumerDb(nonExistingConsumer);
+
         // verify it exists in db
-        final Optional<ConsumerForm> consumerForm2 =
-                msConsumerDao.selectConsumerByDniAndConcesionaria(form);
+        final Optional<ConsumerForm> consumerForm2 = msConsumerDao.selectConsumerByDni(form);
+        final Optional<UsuarioForm> usuarioFormOpt = msUsuariosDao.selectByDocumento(doc);
+
         assertTrue(consumerForm2.isPresent());
+        assertTrue(usuarioFormOpt.isPresent());
     }
 
     // We should not insert/update a Consumer if it exists
     @Test
     public void test_11_ConsumerJob_UpdateConsumer_failure_insert() throws Exception {
+
         final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, ClientFactory.getInstance());
+
+        Long doc = 1L;
+
         setUpConsumer(existingConsumer,
-                111L,
+                doc,
                 "Carlos",
                 "Perez",
                 "35156345678",
                 "carliperezozo@mail.com");
 
-
         // verify it exists in db
         final ConsumerForm form = new ConsumerForm();
-        form.setDocumento(111L);
-        form.setConcesionaria(1L);
-        final Optional<ConsumerForm> consumerForm =
-                msConsumerDao.selectConsumerByDniAndConcesionaria(form);
+        form.setDocumento(doc);
+
+        final Optional<ConsumerForm> consumerForm = msConsumerDao.selectConsumerByDni(form);
         assertTrue(consumerForm.isPresent());
+
         // updateConsumerDb
-        consumer.updateConsumerDb(existingConsumer, 1L);
+        consumer.updateConsumerDb(existingConsumer);
+
         // verify it exists in db and is the same
-        final Optional<ConsumerForm> consumerForm2 =
-                msConsumerDao.selectConsumerByDniAndConcesionaria(form);
+        final Optional<ConsumerForm> consumerForm2 = msConsumerDao.selectConsumerByDni(form);
         assertTrue(consumerForm2.isPresent());
         assertEquals(consumerForm.get(), consumerForm2.get());
     }
@@ -165,10 +183,12 @@ public class ConsumoJobDesNormalizationSpec {
     // We should insert a EstadoCuenta if it does not exists
     @Test
     public void test_12_ConsumerJob_NEW_UpdateEstadoCuenta_success() throws Exception {
+
         final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, ClientFactory.getInstance());
+
         setUpEstadoCuenta(nonExistingEstadoCuenta,
                 1002L,
-                111L,
+                1L,
                 2L,
                 Timestamp.valueOf("2018-03-03 23:58:02"),
                 "inicial");
@@ -177,14 +197,17 @@ public class ConsumoJobDesNormalizationSpec {
         final EstadoCuentasForm form = new EstadoCuentasForm();
         form.setConcesionariaId(1L);
         form.setNroPlanConcesionaria(1002L);
-        final Optional<EstadoCuentasForm> estadoCuentasForm =
-                estadoCuentaDao.selectByNroPlanAndConcesionaria(form);
+
+        final Optional<EstadoCuentasForm> estadoCuentasForm = estadoCuentaDao.selectByNroPlanAndConcesionaria(form);
+
         assertFalse(estadoCuentasForm.isPresent());
+
         // updateEstadoCuentaDb
         consumer.updateEstadoCuentaDb(nonExistingEstadoCuenta, 1L);
+
         // verify it exists in db
-        final Optional<EstadoCuentasForm> estadoCuentasForm2 =
-                estadoCuentaDao.selectByNroPlanAndConcesionaria(form);
+        final Optional<EstadoCuentasForm> estadoCuentasForm2 = estadoCuentaDao.selectByNroPlanAndConcesionaria(form);
+
         assertTrue(estadoCuentasForm2.isPresent());
     }
 
@@ -192,6 +215,7 @@ public class ConsumoJobDesNormalizationSpec {
     @Test
     public void test_13_ConsumerJob_OLD_UpdateEstadoCuenta_success() throws Exception {
         final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, ClientFactory.getInstance());
+
         setUpEstadoCuenta(existingEstadoCuenta,
                 1001L,
                 111L,
@@ -203,14 +227,17 @@ public class ConsumoJobDesNormalizationSpec {
         final EstadoCuentasForm form = new EstadoCuentasForm();
         form.setConcesionariaId(1L);
         form.setNroPlanConcesionaria(1001L);
-        final Optional<EstadoCuentasForm> estadoCuentasForm =
-                estadoCuentaDao.selectByNroPlanAndConcesionaria(form);
+
+        final Optional<EstadoCuentasForm> estadoCuentasForm = estadoCuentaDao.selectByNroPlanAndConcesionaria(form);
+
         assertTrue(estadoCuentasForm.isPresent());
+
         // updateEstadoCuentaDb
         consumer.updateEstadoCuentaDb(existingEstadoCuenta, 1L);
+
         // verify it exists in db and it changed
-        final Optional<EstadoCuentasForm> estadoCuentasForm2 =
-                estadoCuentaDao.selectByNroPlanAndConcesionaria(form);
+        final Optional<EstadoCuentasForm> estadoCuentasForm2 = estadoCuentaDao.selectByNroPlanAndConcesionaria(form);
+
         assertTrue(estadoCuentasForm2.isPresent());
         assertNotEquals(estadoCuentasForm.get(), estadoCuentasForm2.get());
     }

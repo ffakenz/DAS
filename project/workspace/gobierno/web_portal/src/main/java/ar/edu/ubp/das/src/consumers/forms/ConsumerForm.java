@@ -6,12 +6,11 @@ import ar.edu.ubp.das.mvc.db.annotations.Entity;
 
 import java.sql.Timestamp;
 import java.util.Objects;
+import java.util.StringJoiner;
 
 @Entity
 public class ConsumerForm extends DynaActionForm {
 
-    @Column(name = "id")
-    private Long id; // remove getter
     @Column(name = "documento")
     private Long documento;
     @Column(name = "nombre")
@@ -24,42 +23,7 @@ public class ConsumerForm extends DynaActionForm {
     private String email;
     @Column(name = "fecha_de_alta") // remove setter
     private Timestamp fechaAlta;
-    @Column(name = "concesionaria")
-    private Long concesionaria;
-    @Column(name = "username")
-    private String username;
 
-
-    @Override
-    public String toString() {
-        return "ConsumerForm{" +
-                "id=" + id +
-                ", documento=" + documento +
-                ", nombre='" + nombre + '\'' +
-                ", apellido='" + apellido + '\'' +
-                ", nroTelefono='" + nroTelefono + '\'' +
-                ", email='" + email + '\'' +
-                ", fechaAlta=" + fechaAlta + '\'' +
-                ", concesionaria=" + concesionaria + '\'' +
-                ", username=" + username + '\'' +
-                '}';
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(final String username) {
-        this.username = username;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(final Long id) {
-        this.id = id;
-    }
 
     public Long getDocumento() {
         return documento;
@@ -109,12 +73,16 @@ public class ConsumerForm extends DynaActionForm {
         this.fechaAlta = fechaAlta;
     }
 
-    public Long getConcesionaria() {
-        return concesionaria;
-    }
-
-    public void setConcesionaria(final Long concesionaria) {
-        this.concesionaria = concesionaria;
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", ConsumerForm.class.getSimpleName() + "[", "]")
+                .add("documento=" + documento)
+                .add("nombre='" + nombre + "'")
+                .add("apellido='" + apellido + "'")
+                .add("nroTelefono='" + nroTelefono + "'")
+                .add("email='" + email + "'")
+                .add("fechaAlta=" + fechaAlta)
+                .toString();
     }
 
     @Override
@@ -122,9 +90,6 @@ public class ConsumerForm extends DynaActionForm {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         final ConsumerForm that = (ConsumerForm) o;
-        return Objects.equals(id, that.id) ||
-                (Objects.equals(documento, that.documento) &&
-                        Objects.equals(concesionaria, that.concesionaria));
+        return Objects.equals(documento, that.documento);
     }
-
 }

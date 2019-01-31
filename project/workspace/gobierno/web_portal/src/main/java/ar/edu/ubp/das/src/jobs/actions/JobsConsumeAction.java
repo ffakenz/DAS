@@ -11,9 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 public class JobsConsumeAction implements Action {
 
     @Override
-    public ForwardConfig execute(ActionMapping mapping, DynaActionForm form, HttpServletRequest request,
-                                                                          HttpServletResponse response) throws RuntimeException {
+    public ForwardConfig execute(final ActionMapping mapping, final DynaActionForm form, final HttpServletRequest request,
+                                 final HttpServletResponse response) throws RuntimeException {
 
-        return mapping.getForwardByName( "success" );
+        logAction(mapping, form, request, response);
+        return mapping.getForwardByName("success");
     }
 }
