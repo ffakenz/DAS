@@ -21,6 +21,19 @@
         <dropProcedure procedureName="cleanDB"/>
     </changeSet>
 
+    <changeSet id="Drop procedure setUpDBConsumoIntegration" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'setUpDBConsumoIntegration'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="setUpDBConsumoIntegration"/>
+    </changeSet>
+
     <changeSet id="Drop procedure setUpDB" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="1">
@@ -61,6 +74,19 @@
             </sqlCheck>
         </preConditions>
         <sqlFile path="/src/main/resources/liquibase/test/cleanDB.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure setUpDBConsumoIntegration" author="DAS-Team" runAlways="true" runOnChange="true" context="test">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'setUpDBConsumoIntegration'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/test/setUpDBConsumoIntegration.sql"/>
     </changeSet>
 
     <changeSet id="Create procedure setUpDB" author="DAS-Team" runAlways="true" runOnChange="true" context="test">

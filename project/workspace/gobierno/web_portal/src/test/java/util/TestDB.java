@@ -68,4 +68,8 @@ public class TestDB extends DaoImpl<Boolean> {
     public boolean valid(final Boolean form) throws SQLException {
         return false;
     }
+
+    public void setUpDBConsumoIntegration() throws SQLException {
+        this.executeSimpleProcedure("dbo.setUpDBConsumoIntegration");
+    }
 }

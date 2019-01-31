@@ -25,6 +25,7 @@ import ar.edu.ubp.das.src.utils.DateUtils;
 import beans.NotificationUpdate;
 import clients.ConcesionariaServiceContract;
 import clients.factory.IClientFactory;
+import clients.responses.ClientException;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.slf4j.Logger;
@@ -144,12 +145,13 @@ public class ConsumoJob implements Job {
                         }
                     }
 
-                } catch (final Exception ex) {
+                } catch (final ClientException ex) {
                     log.error("Problems with consultarPlanes [exception:{}]", ex.getMessage());
                     final String description = "consultarPlanes failed for offset: " + offset;
                     logConsumoDb(cId, jobId, EstadoConsumo.FAILURE, offset, rqstId, description);
                 }
             }
+
         } catch (final SQLException ex) {
             log.error("GOBIERNO_DB_FAILED [exception:{}]", ex.getMessage());
         }

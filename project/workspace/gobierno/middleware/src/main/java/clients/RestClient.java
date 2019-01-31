@@ -15,7 +15,9 @@ import org.apache.http.util.EntityUtils;
 import utils.JsonUtils;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -123,7 +125,13 @@ public class RestClient implements ConcesionariaServiceContract {
 
 
         final String query = getQuery(CONSULTAR_PLANES, IDENTIFICADOR, OFFSET);
-        final String url = String.format(query, identificador, offset);
+        final String url;
+        try {
+            url = URLEncoder.encode(String.format(query, identificador, offset), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            throw new ClientException(e.getMessage());
+        }
 
         final String jsonPlanBeans = call(GET, url);
 
