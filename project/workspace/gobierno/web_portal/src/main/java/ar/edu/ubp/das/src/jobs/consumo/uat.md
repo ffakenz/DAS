@@ -3,14 +3,14 @@
 - Escenario 1: OK
     1. Ejecutar consumo sin concesionarias en db
     
-- Escenario 2:
+- Escenario 2: OK
     1. Ejecutar consumo con 1 concesionaria en la db sin aprobar 
     
 - Escenario 3: OK
     1. Ejecutar consumo con 1 concesionaria en la db aprobada 
     2. El servicio no está disponible
     
-- Escenario 4:
+- Escenario 4: 
     1. Ejecutar consumo con 1 concesionaria en la db aprobada
     2. El servicio está disponible
     3. No hay planes nuevos para consumir

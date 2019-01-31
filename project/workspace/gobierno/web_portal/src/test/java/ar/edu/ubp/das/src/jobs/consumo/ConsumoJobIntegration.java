@@ -1,6 +1,7 @@
 package ar.edu.ubp.das.src.jobs.consumo;
 
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
+import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
 import ar.edu.ubp.das.src.jobs.consumoo.ConsumoJob;
 import ar.edu.ubp.das.src.jobs.consumoo.ConsumoJobManager;
 import ar.edu.ubp.das.src.jobs.consumoo.daos.MSConsumoDao;
@@ -16,8 +17,10 @@ import util.scenarios.ConsumoJobScenarios;
 import java.sql.SQLException;
 
 import static ar.edu.ubp.das.src.core.ResponseForward.FAILURE;
+import static clients.factory.ClientType.REST;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ConsumoJobIntegration {
@@ -43,7 +46,8 @@ public class ConsumoJobIntegration {
     }
 
     @Test
-    public void it_test_with_0_concesionaria_09() throws Exception {
+    public void test_09() throws Exception {
+        // Case: 0 concesionarias
 
         final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, ClientFactory.getInstance());
 
@@ -54,17 +58,34 @@ public class ConsumoJobIntegration {
 
 
     @Test
-    public void it_test_with_1_concesionaria_with_service_down_10() throws Exception {
+    public void test_10() throws Exception {
+        // Case: 1 concesionaria approved, service down
 
-        consumoJobScenarios.oneRestConcesionaria();
+        ConcesionariaForm concesionariaForm = consumoJobScenarios.setConcesionaria(REST, true);
 
         final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, ClientFactory.getInstance());
 
         consumer.execute(null);
 
-        ConsumoForm consumoResult = consumoJobManager.getMsConsumoDao().getLastConsumo(1L).get();
+        ConsumoForm consumoResult = consumoJobManager.getMsConsumoDao().getLastConsumo(concesionariaForm.getId()).orElse(null);
 
         assertEquals(FAILURE.toString(), consumoResult.getEstado());
     }
+
+    @Test
+    public void test_11() throws Exception {
+        // Case: 1 concesionaria disapproved
+        ConcesionariaForm concesionariaForm = consumoJobScenarios.setConcesionaria(REST, false);
+
+        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, ClientFactory.getInstance());
+
+        consumer.execute(null);
+
+        ConsumoForm consumoResult =
+                consumoJobManager.getMsConsumoDao().getLastConsumo(concesionariaForm.getId()).orElse(null);
+
+        assertNull(consumoResult);
+    }
+
 
 }

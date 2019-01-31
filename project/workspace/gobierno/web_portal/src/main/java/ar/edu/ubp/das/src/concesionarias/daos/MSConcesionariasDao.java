@@ -59,6 +59,13 @@ public class MSConcesionariasDao extends DaoImpl<ConcesionariaForm> {
                 .findFirst();
     }
 
+    public Optional<ConcesionariaForm> selectByCuit(final ConcesionariaForm form) throws SQLException {
+        return this.executeQueryProcedure("dbo.get_concesionaria_by_cuit(?)", form,
+                "cuit")
+                .stream()
+                .findFirst();
+    }
+
     public Optional<ConcesionariaForm> selectByCodigo(final ConcesionariaForm form) throws SQLException {
         return this.executeQueryProcedure("dbo.get_concesionaria_by_codigo(?)", form,
                 "codigo")

@@ -17,6 +17,11 @@ import clients.factory.ClientType;
 import util.Mocks;
 
 import java.sql.SQLException;
+import java.util.List;
+import java.util.UUID;
+
+import static clients.factory.ClientType.CXF;
+import static clients.factory.ClientType.REST;
 
 public class ConsumoJobScenarios {
 
@@ -58,24 +63,52 @@ public class ConsumoJobScenarios {
 
     }
 
-    public void oneRestConcesionaria() throws SQLException {
+    public ConcesionariaForm setConcesionaria(ClientType clientType, Boolean isApproved) throws SQLException {
 
-        ConcesionariaForm concesionariaFormFiat = Mocks.INSTANCE.getConcesionariaFormFiat();
+        ConcesionariaForm concesionariaForm = registrarConcesionaria();
 
-        concesionariasManager.insert(concesionariaFormFiat);
+        if(isApproved) {
+            aprobarConcesionaria(concesionariaForm, UUID.randomUUID().toString());
+            configurarConcesionaria(concesionariaForm, clientType);
+            return concesionariasManager.selectById(concesionariaForm.getId()).get();
+        }
 
-        concesionariaFormFiat.setId(1L);
-        concesionariaFormFiat.setCodigo("CODIGO_1");
+        return concesionariaForm;
+    }
 
-        concesionariasManager.approveConcesionaria(concesionariaFormFiat);
+    public void configurarConcesionaria(ConcesionariaForm concesionariaForm, ClientType clientType) throws SQLException {
 
-        ConfigurarConcesionariaForm configRest = Mocks.INSTANCE.getConfigRest(concesionariaFormFiat.getId());
+        List<ConfigurarConcesionariaForm> configConcesionariaList;
+
+        if(REST == clientType)
+            configConcesionariaList = Mocks.INSTANCE.getConfigRest(concesionariaForm.getId());
+        else if (CXF == clientType)
+            configConcesionariaList = Mocks.INSTANCE.getConfigCxf(concesionariaForm.getId());
+        else
+            configConcesionariaList = Mocks.INSTANCE.getConfigAxis(concesionariaForm.getId());
 
         ConfigTecnoXConcesionariaForm configTecnoXConcesionaria =
-                Mocks.INSTANCE.getConfigTecnoXConcesionaria(concesionariaFormFiat.getId(), ClientType.REST.getName());
+                Mocks.INSTANCE.getConfigTecnoXConcesionaria(concesionariaForm.getId(), clientType.getName());
 
         msConfigTecnoParamDao.insert(configTecnoXConcesionaria);
 
-        configurarConcManager.upsert(configRest);
+        for (ConfigurarConcesionariaForm c : configConcesionariaList) {
+            configurarConcManager.upsert(c);
+        }
+    }
+
+    public void aprobarConcesionaria(ConcesionariaForm concesionariaForm, String codigo) throws SQLException {
+
+        concesionariaForm.setCodigo(codigo);
+        concesionariasManager.approveConcesionaria(concesionariaForm);
+    }
+
+    public ConcesionariaForm registrarConcesionaria() throws SQLException {
+        ConcesionariaForm concesionariaFormFiat = Mocks.INSTANCE.getConcesionariaFormFiat();
+        concesionariasManager.insert(concesionariaFormFiat);
+
+        ConcesionariaForm concesionariaForm = concesionariasManager.selectByCuit(concesionariaFormFiat).get();
+
+        return concesionariaForm;
     }
 }
