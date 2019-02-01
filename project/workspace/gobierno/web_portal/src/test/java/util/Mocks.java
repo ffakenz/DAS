@@ -13,9 +13,9 @@ import static utils.MiddlewareConstants.*;
 public enum Mocks {
     INSTANCE;
 
-    public ConcesionariaForm getConcesionariaFormFiat() {
+    public ConcesionariaForm getConcesionariaFormFiat(String cuit) {
         ConcesionariaForm concesionariaForm = new ConcesionariaForm();
-        concesionariaForm.setCuit("20-93337511-1");
+        concesionariaForm.setCuit(cuit);
         concesionariaForm.setEmail("concesionaria_fiat@gmail.com");
         concesionariaForm.setDireccion("direccion concesionaria fiat 123");
         concesionariaForm.setNombre("Concesionaria Fiat");

@@ -6,18 +6,23 @@ import ar.edu.ubp.das.src.jobs.consumoo.ConsumoJob;
 import ar.edu.ubp.das.src.jobs.consumoo.ConsumoJobManager;
 import ar.edu.ubp.das.src.jobs.consumoo.daos.MSConsumoDao;
 import ar.edu.ubp.das.src.jobs.consumoo.forms.ConsumoForm;
+import ar.edu.ubp.das.src.jobs.consumoo.forms.EstadoConsumo;
 import clients.factory.ClientFactory;
+import clients.factory.ClientType;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
-import util.ClentFactoryStubImpl;
+import util.ClentFactoryStub;
 import util.TestDB;
 import util.scenarios.ConsumoJobScenarios;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 
 import static ar.edu.ubp.das.src.core.ResponseForward.FAILURE;
+import static clients.factory.ClientType.AXIS;
+import static clients.factory.ClientType.CXF;
 import static clients.factory.ClientType.REST;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
@@ -32,6 +37,7 @@ public class ConsumoJobIntegration {
     private MSConsumoDao msConsumoDao;
     private ConsumoJobManager consumoJobManager;
 
+    private final static String SUCCESS = EstadoConsumo.SUCCESS.getTipo().toUpperCase();
     @Before
     public void setup() throws SQLException {
         // Clean DB
@@ -91,16 +97,56 @@ public class ConsumoJobIntegration {
     @Test
     public void test_12() throws Exception {
         // Case: 1 concesionaria approved with service available return empty list for notification updates
-        ConcesionariaForm concesionariaForm = consumoJobScenarios.setConcesionaria(REST, true);
+        ConcesionariaForm concesionariaFormREST = consumoJobScenarios.setConcesionaria(REST, true);
 
-        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new ClentFactoryStubImpl("notification_update.json"));
+        HashMap concesionariasXnotificationFileName = new HashMap<ClientType, String>() {{
+            put(REST, "notification_update_rest.json");
+        }};
+
+
+        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new ClentFactoryStub(concesionariasXnotificationFileName));
 
         consumer.execute(null);
 
-        ConsumoForm consumoResult =
-                consumoJobManager.getMsConsumoDao().getLastConsumo(concesionariaForm.getId()).orElse(null);
+        ConsumoForm consumoResultREST =
+                consumoJobManager.getMsConsumoDao().getLastConsumo(concesionariaFormREST.getId()).orElse(null);
+        System.out.printf(consumoResultREST.toString());
 
-        System.out.printf(consumoResult.toString());
+        assertEquals(SUCCESS, consumoResultREST.getEstado());
+    }
+
+    @Test
+    public void test_13() throws Exception {
+        // Case: 3 concesionaria approved with service available return empty list for notification updates
+        ConcesionariaForm concesionariaFormAXIS = consumoJobScenarios.setConcesionaria(AXIS, true);
+        ConcesionariaForm concesionariaFormREST = consumoJobScenarios.setConcesionaria(REST, true);
+        ConcesionariaForm concesionariaFormCXF = consumoJobScenarios.setConcesionaria(CXF, true);
+
+        HashMap concesionariasXnotificationFileName = new HashMap<ClientType, String>() {{
+            put(AXIS, "notification_update_axis.json");
+            put(REST, "notification_update_rest.json");
+            put(CXF, "notification_update_cxf.json");
+        }};
+
+
+        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new ClentFactoryStub(concesionariasXnotificationFileName));
+
+        consumer.execute(null);
+
+        ConsumoForm consumoResultAXIS =
+                consumoJobManager.getMsConsumoDao().getLastConsumo(concesionariaFormAXIS.getId()).orElse(null);
+
+        assertEquals(SUCCESS, consumoResultAXIS.getEstado());
+
+        ConsumoForm consumoResultREST =
+                consumoJobManager.getMsConsumoDao().getLastConsumo(concesionariaFormREST.getId()).orElse(null);
+
+        assertEquals(SUCCESS, consumoResultREST.getEstado());
+
+        ConsumoForm consumoResultCXF =
+                consumoJobManager.getMsConsumoDao().getLastConsumo(concesionariaFormCXF.getId()).orElse(null);
+
+        assertEquals(SUCCESS, consumoResultCXF.getEstado());
     }
 
 

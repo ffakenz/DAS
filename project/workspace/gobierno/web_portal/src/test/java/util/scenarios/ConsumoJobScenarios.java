@@ -65,7 +65,7 @@ public class ConsumoJobScenarios {
 
     public ConcesionariaForm setConcesionaria(ClientType clientType, Boolean isApproved) throws SQLException {
 
-        ConcesionariaForm concesionariaForm = registrarConcesionaria();
+        ConcesionariaForm concesionariaForm = registrarConcesionaria(UUID.randomUUID().toString());
 
         if(isApproved) {
             aprobarConcesionaria(concesionariaForm, UUID.randomUUID().toString());
@@ -103,8 +103,8 @@ public class ConsumoJobScenarios {
         concesionariasManager.approveConcesionaria(concesionariaForm);
     }
 
-    public ConcesionariaForm registrarConcesionaria() throws SQLException {
-        ConcesionariaForm concesionariaFormFiat = Mocks.INSTANCE.getConcesionariaFormFiat();
+    public ConcesionariaForm registrarConcesionaria(String cuit) throws SQLException {
+        ConcesionariaForm concesionariaFormFiat = Mocks.INSTANCE.getConcesionariaFormFiat(cuit);
         concesionariasManager.insert(concesionariaFormFiat);
 
         ConcesionariaForm concesionariaForm = concesionariasManager.selectByCuit(concesionariaFormFiat).get();

@@ -119,6 +119,7 @@ public class ConsumoJob implements Job {
                     logConsumoDb(cId, jobId, EstadoConsumo.FAILURE, offset, null, description);
                     continue;
                 }
+                log.info("Client for concesionaria {} obtained with configs {}", cId, configs);
 
                 // generamos un random rqst-id
                 final String rqstId = UUID.randomUUID().toString();
