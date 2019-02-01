@@ -21,17 +21,17 @@ public class FrontUtils {
         rows.append("<td>" + c.getFechaAlta() + "</td>");
         rows.append("<td>" + c.getFechaRegistracion() + "</td>");
         if (clase.equals(CONCESIONARIA_NO_APROBADA)) {
-            final String aprobarBtn = getButton(BTN_APROBAR + "-" + c.getId(), BTN_APROBAR, "Aprobar");
+            final String aprobarBtn = getButton(APROBAR_BTN + "-" + c.getId(), APROBAR_BTN, "Aprobar");
             rows.append("<td>")
                     .append(aprobarBtn)
                     .append("</td>");
         } else {
-            final String desAprobarBtn = getButton(BTN_DESAPROBAR + "-" + c.getId(), BTN_DESAPROBAR, "DesAprobar");
+            final String desAprobarBtn = getButton(DESAPROBAR_BTN + "-" + c.getId(), DESAPROBAR_BTN, "DesAprobar");
             rows.append("<td>")
                     .append(desAprobarBtn)
                     .append("</td>");
         }
-        final String configBtn = getButton(BTN_CONFIGURAR + "-" + c.getId(), BTN_CONFIGURAR, "Configurar");
+        final String configBtn = getButton(CONFIG_BTN + "-" + c.getId(), CONFIG_BTN, "Configurar");
         rows.append("<td>")
                 .append(configBtn)
                 .append("</td>");

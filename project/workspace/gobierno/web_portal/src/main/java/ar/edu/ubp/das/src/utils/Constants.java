@@ -35,7 +35,7 @@ public final class Constants {
     public static final String CONCESIONARIA_ROW = "concesionaria_row";
     public static final String CONCESIONARIA_APROBADA = "concesionaria_aprobada";
     public static final String CONCESIONARIA_NO_APROBADA = "concesionaria_no_aprobada";
-    public static final String BTN_APROBAR = "aprobar_btn";
-    public static final String BTN_DESAPROBAR = "desaprobar_btn";
-    public static final String BTN_CONFIGURAR = "config_btn";
+    public static final String APROBAR_BTN = "aprobar_btn";
+    public static final String DESAPROBAR_BTN = "desaprobar_btn";
+    public static final String CONFIG_BTN = "config_btn";
 }

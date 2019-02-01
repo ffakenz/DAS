@@ -36,11 +36,32 @@ const Id = {
     UPDATE_CONFIG_SELECT: "update_config_select",
     UPDATE_CONFIG_LABEL: "update_config_label",
     TEST_CONFIG_LABEL: "test_config_label",
-    REGISTRAR_CONCESIONARIA: "concesionaria_registrar_send_form_btn"
+    REGISTRAR_CONCESIONARIA_FORM_BTN: "concesionaria_registrar_send_form_btn",
+    TEST_CONSUMO_BTN: "test_consumo_btn",
+    TEST_CONSUMO_DIV: "test_consumo_div",
+    CONCESIONARIAS_TABLE: "concesionarias_table",
+    MODAL_CONTENT: "modal_content",
+    REGISTRAR_CONCESIONARIA_DIV: "registrar_concesionaria_div",
+    HEADER_HOME: "header_home",
+    SHOW_LOGIN_BTN: "show_login_btn",
+    GO_TO_PROFILE_BTN: "go_to_profile_btn",
+    REGISTRAR_CONCESIONARIA_BTN: "registrar_concesionaria_btn",
+    GO_TO_HOME_DIV: "go_to_home_div",
+    GO_TO_HOME_BTN: "go_to_home_btn",
+    LOGOUT_BTN: "logout_btn",
+    LOGIN_FORM: "login_form",
+    LOGIN_BTN: "login_btn",
+    FIRST_LOGIN_DIV: "first_login_div",
+    FIRST_LOGIN_BTN: "first_login_btn",
+    LOGIN_PRIMER_INGRESO_FORM: "login_primer_ingreso_form",
+    LOGIN_REGISTRAR_BTN: "login_registrar_btn"
 };
 
 const Class = {
     UPDATE_CONFIG_PARAM: "config_param",
     BTN_UPDATE_CONFIG: "update_config_btn",
-    BTN_TEST_CONFIG: "test_config_btn"
+    BTN_TEST_CONFIG: "test_config_btn",
+    APROBAR_BTN: "aprobar_btn",
+    DESAPROBAR_BTN: "desaprobar_btn",
+    CONFIG_BTN: "config_btn"
 };

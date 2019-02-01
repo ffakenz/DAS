@@ -25,7 +25,7 @@
     </div>
 
     <div class="container">
-        <div id="registrar_concesionaria">
+        <div id="registrar_concesionaria_div">
             <fieldset>
 
                 <form class="form-horizontal" id="form_registrar_concesionaria" method="post">
