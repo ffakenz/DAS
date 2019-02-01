@@ -57,26 +57,23 @@ const jUtils = {
             window.location.href = location;
     },
 
+    toIdentifier: (key) => {
+        const _key = key.toUpperCase();
+        if(Id[_key] !== undefined) {
+            return "#"+key;
+        } else if(Class[_key] !== undefined) {
+            return "."+key;
+        }
+        return key;
+    },
+
     loadModule: (module) => {
-
-        const toIdentifier = (key) => {
-
-            const _key = key.toUpperCase();
-
-            if(Id[_key] !== undefined) {
-                return "#"+key;
-            } else if(Class[_key] !== undefined) {
-                return "."+key;
-            }
-            return key;
-        };
-
         module.getEventHandlers().forEach(evt => {
             evt.cnfg.forEach(cnfg => {
                 /* click is the default event type */
                 const event_type = cnfg.event_type || "click";
                 console.log("Handle Click For CTX = %o ; CNFG = %o ; EVT_TYPE = %o", evt.ctx, cnfg, event_type);
-                $(toIdentifier(evt.ctx)).delegate(toIdentifier(cnfg.delegate), event_type, cnfg.handler);
+                $(jUtils.toIdentifier(evt.ctx)).delegate(jUtils.toIdentifier(cnfg.delegate), event_type, cnfg.handler);
             });
         });
     }
