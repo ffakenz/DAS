@@ -36,7 +36,7 @@ const Id = {
     UPDATE_CONFIG_SELECT: "update_config_select",
     UPDATE_CONFIG_LABEL: "update_config_label",
     TEST_CONFIG_LABEL: "test_config_label",
-    REGISTRAR_CONCESIONARIA_FORM_BTN: "concesionaria_registrar_send_form_btn",
+    CONCESIONARIA_REGISTRAR_SEND_FORM_BTN: "concesionaria_registrar_send_form_btn",
     TEST_CONSUMO_BTN: "test_consumo_btn",
     TEST_CONSUMO_DIV: "test_consumo_div",
     CONCESIONARIAS_TABLE: "concesionarias_table",
@@ -58,9 +58,9 @@ const Id = {
 };
 
 const Class = {
-    UPDATE_CONFIG_PARAM: "config_param",
-    BTN_UPDATE_CONFIG: "update_config_btn",
-    BTN_TEST_CONFIG: "test_config_btn",
+    UPDATE_CONFIG_PARAM: "update_config_param",
+    UPDATE_CONFIG_BTN: "update_config_btn",
+    TEST_CONFIG_BTN: "test_config_btn",
     APROBAR_BTN: "aprobar_btn",
     DESAPROBAR_BTN: "desaprobar_btn",
     CONFIG_BTN: "config_btn"

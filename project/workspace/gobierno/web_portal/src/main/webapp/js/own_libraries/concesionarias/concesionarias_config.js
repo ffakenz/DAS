@@ -10,8 +10,8 @@ const ConcesionariasConfig = (module) => [
     { 
         ctx: Id.MODAL_CONTENT,
         cnfg: [
-            { delegate: Class.BTN_UPDATE_CONFIG, handler: module.updateConfigHandler }
-            , { delegate: Class.BTN_TEST_CONFIG, handler: module.testConfigHandler }
+            { delegate: Class.UPDATE_CONFIG_BTN, handler: module.updateConfigHandler }
+            , { delegate: Class.TEST_CONFIG_BTN, handler: module.testConfigHandler }
             , { delegate: Id.UPDATE_CONFIG_SELECT, handler: module.changeUpdateConfigHandler ,
                 event_type: "change" }
         ]
@@ -25,7 +25,7 @@ const ConcesionariasConfig = (module) => [
     {
         ctx: Id.REGISTRAR_CONCESIONARIA_DIV,
         cnfg: [
-            { delegate: Id.REGISTRAR_CONCESIONARIA_FORM_BTN, handler: module.registrarConcesionaria}
+            { delegate: Id.CONCESIONARIA_REGISTRAR_SEND_FORM_BTN, handler: module.registrarConcesionaria}
         ]
     }
 ];
