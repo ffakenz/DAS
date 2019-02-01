@@ -7,7 +7,6 @@ import ar.edu.ubp.das.src.estado_cuentas.daos.MSCuotasDao;
 import ar.edu.ubp.das.src.estado_cuentas.daos.MSEstadoCuentasDao;
 import ar.edu.ubp.das.src.estado_cuentas.forms.CuotasForm;
 import ar.edu.ubp.das.src.estado_cuentas.forms.EstadoCuentasForm;
-import ar.edu.ubp.das.src.jobs.consumoo.ConsumoJob;
 import ar.edu.ubp.das.src.usuarios.daos.MSUsuariosDao;
 import ar.edu.ubp.das.src.usuarios.forms.UsuarioForm;
 import beans.NotificationUpdate;

@@ -1,4 +1,4 @@
-package ar.edu.ubp.das.src.jobs.consumoo;
+package ar.edu.ubp.das.src.jobs.consumo;
 
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.src.concesionarias.daos.MSConcesionariasDao;
@@ -17,7 +17,7 @@ import ar.edu.ubp.das.src.estado_cuentas.forms.EstadoCuentasForm;
 import ar.edu.ubp.das.src.estado_cuentas.managers.CuotasManager;
 import ar.edu.ubp.das.src.estado_cuentas.managers.EstadoCuentasManager;
 import ar.edu.ubp.das.src.jobs.ClientFactoryAdapter;
-import ar.edu.ubp.das.src.jobs.consumoo.forms.*;
+import ar.edu.ubp.das.src.jobs.consumo.forms.*;
 import ar.edu.ubp.das.src.usuarios.daos.MSUsuariosDao;
 import ar.edu.ubp.das.src.usuarios.forms.UsuarioForm;
 import ar.edu.ubp.das.src.usuarios.managers.UsuarioManager;
@@ -55,6 +55,7 @@ public class ConsumoJob implements Job {
 
     private ClientFactoryAdapter clientFactory;
 
+    // TODO: Send the DaoFactory instead of DatasourceConfig
     public ConsumoJob(final DatasourceConfig datasourceConfig, final IClientFactory clientFactory) {
 
         final MSConcesionariasDao msConcesionariasDao = new MSConcesionariasDao();

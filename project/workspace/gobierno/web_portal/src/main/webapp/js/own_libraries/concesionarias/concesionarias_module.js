@@ -86,12 +86,6 @@ class Concesionarias extends Module {
         ConcesionariasService.POST_CONFIG_CONCESIONARIA(data);
     }
 
-    testConsumo(evt) {
-        evt.preventDefault();
-        console.log("testConsumo, [EVENT] = %o", evt);
-        console.log("Test consumo %o", evt.target.id);
-    }
-
     registrarConcesionaria(evt) {
         evt.preventDefault();
         console.log("registrarConcesionaria, [EVENT] = %o", evt);

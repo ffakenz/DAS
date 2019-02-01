@@ -16,12 +16,6 @@ const ConcesionariasConfig = (module) => [
                 event_type: "change" }
         ]
     },
-    { 
-        ctx: Id.TEST_CONSUMO_DIV,
-        cnfg: [
-            { delegate: Id.TEST_CONSUMO_BTN, handler: module.testConsumo }
-        ]
-    },
     {
         ctx: Id.REGISTRAR_CONCESIONARIA_DIV,
         cnfg: [

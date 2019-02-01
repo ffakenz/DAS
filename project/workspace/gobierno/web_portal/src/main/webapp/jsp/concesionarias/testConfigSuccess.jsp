@@ -1,1 +1,1 @@
-<div>OK</div>
+OK

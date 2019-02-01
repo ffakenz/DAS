@@ -1,7 +1,7 @@
-package ar.edu.ubp.das.src.jobs.consumoo.daos;
+package ar.edu.ubp.das.src.jobs.consumo.daos;
 
 import ar.edu.ubp.das.mvc.db.DaoImpl;
-import ar.edu.ubp.das.src.jobs.consumoo.forms.ConsumoForm;
+import ar.edu.ubp.das.src.jobs.consumo.forms.ConsumoForm;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

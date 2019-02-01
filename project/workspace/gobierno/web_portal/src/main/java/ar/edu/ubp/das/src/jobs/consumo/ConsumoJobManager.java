@@ -1,9 +1,9 @@
-package ar.edu.ubp.das.src.jobs.consumoo;
+package ar.edu.ubp.das.src.jobs.consumo;
 
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
-import ar.edu.ubp.das.src.jobs.consumoo.daos.MSConsumoDao;
-import ar.edu.ubp.das.src.jobs.consumoo.daos.MSConsumoResultDao;
-import ar.edu.ubp.das.src.jobs.consumoo.daos.MSJobConsumoDao;
+import ar.edu.ubp.das.src.jobs.consumo.daos.MSConsumoDao;
+import ar.edu.ubp.das.src.jobs.consumo.daos.MSConsumoResultDao;
+import ar.edu.ubp.das.src.jobs.consumo.daos.MSJobConsumoDao;
 
 public class ConsumoJobManager {
 

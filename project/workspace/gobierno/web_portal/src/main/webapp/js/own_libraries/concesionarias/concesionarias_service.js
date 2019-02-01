@@ -29,7 +29,6 @@ const ConcesionariasService = {
             success: function(html) {
                 console.log("AJAX RESULT POST_TEST_CONFIG SUCCESS %o", html);
                 jUtils.showing(Id.TEST_CONFIG_LABEL, html);
-                $("#modal_generic").modal("show");
             }
         });
     },
@@ -44,7 +43,7 @@ const ConcesionariasService = {
             error: function(hr){
                 console.log("AJAX RESULT POST_CONSULTAR_CONFIG_PARAM ERROR %o", hr.responseText);
                 jUtils.showing("modal_content", hr);
-                $("#modal_generic").modal("show");
+                $("#config_concesionaria_modal").modal("show");
             },
             success: function(jsonArray) {
                 console.log("AJAX RESULT POST_CONSULTAR_CONFIG_PARAM SUCCESS %o", jsonArray);
@@ -52,7 +51,7 @@ const ConcesionariasService = {
                 const html = formConsultarConfig(jsonArray, idConcesionaria);
                 console.log("CONSULTAR HTML = %o", html);
                 jUtils.showing("modal_content", html);
-                $("#modal_generic").modal("show");
+                $("#config_concesionaria_modal").modal("show");
             }
         });
     },

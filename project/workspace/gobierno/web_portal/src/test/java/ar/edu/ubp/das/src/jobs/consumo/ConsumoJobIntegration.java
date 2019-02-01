@@ -2,11 +2,9 @@ package ar.edu.ubp.das.src.jobs.consumo;
 
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
-import ar.edu.ubp.das.src.jobs.consumoo.ConsumoJob;
-import ar.edu.ubp.das.src.jobs.consumoo.ConsumoJobManager;
-import ar.edu.ubp.das.src.jobs.consumoo.daos.MSConsumoDao;
-import ar.edu.ubp.das.src.jobs.consumoo.forms.ConsumoForm;
-import ar.edu.ubp.das.src.jobs.consumoo.forms.EstadoConsumo;
+import ar.edu.ubp.das.src.jobs.consumo.daos.MSConsumoDao;
+import ar.edu.ubp.das.src.jobs.consumo.forms.ConsumoForm;
+import ar.edu.ubp.das.src.jobs.consumo.forms.EstadoConsumo;
 import clients.factory.ClientFactory;
 import clients.factory.ClientType;
 import org.junit.Before;

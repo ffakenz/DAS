@@ -30,6 +30,7 @@
             <div id="test_consumo_div">
                 <button id="test_consumo_btn" name="test_consumo_btn" class="btn btn-outline-primary btn-lg btn-block">TEST CONSUMO</button>
             </div>
+            <%@include file="../commons/resultado.jsp"%>
 
             <br>
 
@@ -39,7 +40,7 @@
             </div>
 
             <!-- Modal -->
-            <div class="modal fade" id="modal_generic" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal fade" id="config_concesionaria_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">

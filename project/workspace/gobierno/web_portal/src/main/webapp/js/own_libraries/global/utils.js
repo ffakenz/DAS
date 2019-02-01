@@ -11,7 +11,7 @@ const jUtils = {
     },
 
     hiding: function(divId, clean) {
-        clean = (clean === false ? false : true);
+        clean = (clean !== false);
         $('#' + divId).hide();
         if(clean) {
             $('#' + divId).html('&nbsp;');

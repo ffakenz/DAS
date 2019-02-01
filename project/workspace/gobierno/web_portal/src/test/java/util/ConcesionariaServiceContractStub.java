@@ -1,6 +1,6 @@
 package util;
 
-import ar.edu.ubp.das.src.jobs.consumoo.ConsumoJob;
+import ar.edu.ubp.das.src.jobs.consumo.ConsumoJob;
 import beans.NotificationUpdate;
 import beans.PlanBean;
 import clients.ConcesionariaServiceContract;

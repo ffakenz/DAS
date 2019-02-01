@@ -158,6 +158,6 @@ public class RestClient implements ConcesionariaServiceContract {
     @Override
     public String health(final String identificador) throws ClientException {
         final String url = getQuery(HEALTH, IDENTIFICADOR);
-        return call(GET, url);
+        return call(GET, String.format(url, identificador));
     }
 }

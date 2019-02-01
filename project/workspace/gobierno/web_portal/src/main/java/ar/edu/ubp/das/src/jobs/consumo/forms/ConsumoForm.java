@@ -1,4 +1,4 @@
-package ar.edu.ubp.das.src.jobs.consumoo.forms;
+package ar.edu.ubp.das.src.jobs.consumo.forms;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.annotations.Column;

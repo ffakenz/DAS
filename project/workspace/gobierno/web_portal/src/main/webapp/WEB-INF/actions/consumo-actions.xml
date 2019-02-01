@@ -4,12 +4,10 @@
     <form-beans>
     </form-beans>
     <action-mappings>
-
         <action type="ConsumoAction" path="/Consumo.do">
-            <forward name="success" path="/consumo/consumoSuccess.jsp"/>
-            <forward name="failure" path="/consumo/consumoFailure.jsp" />
-            <forward name="warning" path="/consumo/consumoWarning.jsp" />
+            <forward name="success" path="/util/success.jsp"/>
+            <forward name="warning" path="/util/warning.jsp"/>
+            <forward name="failure" path="/util/failure.jsp"/>
         </action>
-
     </action-mappings>
 </actions>

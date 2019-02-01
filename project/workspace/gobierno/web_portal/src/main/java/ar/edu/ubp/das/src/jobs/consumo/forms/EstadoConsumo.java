@@ -1,4 +1,4 @@
-package ar.edu.ubp.das.src.jobs.consumoo.forms;
+package ar.edu.ubp.das.src.jobs.consumo.forms;
 
 public enum EstadoConsumo {
     SUCCESS("success"),
