@@ -18,39 +18,12 @@ body {
   min-height: 100%;
 }
 
-header {
-  margin-bottom: 5rem;
-  background-color: darkgrey;
-  display: flex;
-}
-
-header nav {
-  text-align: right;
-  color: white;
-  font-size: 1em;
-  position: fixed;
-  width: 100%;
-  z-index: 10;
-}
-
-header nav a {
-  color: inherit;
-  text-decoration: none;
-  display: inline-block;
-  padding: 2em 1em .5em;
-  -webkit-transition: all .3s ease-in;
-}
-
 .content-body {
   height: 100%;
 }
 
 .small {
   padding: 3em 1em;
-}
-
-header nav a:hover {
-  text-decoration: underline;
 }
 
 .active {
@@ -60,6 +33,7 @@ header nav a:hover {
 .button {
   text-align: center;
 }
+
 .button a {
   display: inline-block;
   border: 2px solid #777;
@@ -79,51 +53,23 @@ header nav a:hover {
   background: #777;
 }
 
-footer.info {
-  position: inherit;
-  color: #FFFAF0;
-  background: #777;
-  text-align: center;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 1rem;
-  margin: auto !important;
-}
-
-#toTop img {
-  width: 50px;
-}
-
-#toTop img:hover {
-  cursor: pointer;
-}
-
-nav img {
-  z-index: 1000;
-  height: 2.5em;
-  position: absolute;
-  left: 40px;
-  top: 40px;
-  transition: all 0.5s ease-in-out;
-}
-
-nav span {
-  position: absolute;
-  left: 40px;
-  top: 40px;
-  font-weight: bold;
-  transition: all 0.5s ease-in-out;
-}
-
-.up {
-  top: +100px;
-}
-
-.down {
-  top: -60px;
-}
-
 #home_btn {
   margin-left: auto;
+}
+
+#footer_navbar {
+  height: 75px;
+  text-align:center !important;
+}
+
+#footer_navbar img {
+  width: 66px;
+  height: 60px;
+}
+
+#footer_navbar {
+  display: inline-block;
+  float: none;
+  vertical-align: top;
+  text-align: center;
 }

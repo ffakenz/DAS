@@ -19,7 +19,6 @@
 
         <div class="content-body">
 
-
             <%@include file="./header_home.jsp"%>
 
             <%@include file="../concesionarias/components/registrar_btn.jsp"%>
