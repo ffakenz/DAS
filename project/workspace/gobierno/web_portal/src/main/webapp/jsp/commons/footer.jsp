@@ -1,7 +1,5 @@
 <footer>
-
   <%@include file="scripts_import.jsp"%>
-
   <div id="footer_div">
     <nav id="footer_navbar" class="navbar navbar-dark bg-primary fixed-bottom">
 
@@ -10,5 +8,4 @@
             </a>
     </nav>
   </div>
-
 </footer>

@@ -7,10 +7,10 @@
 <!DOCTYPE html>
 <html>
     <%@include file="../commons/head.jsp" %>
-    <link type="text/css" rel="stylesheet" href="/web_portal/util/StyleSheet.do/load=loginbox" />
     <body>
         <div class="content-body">
             <%@include file="../commons/header.jsp"%>
+            <link type="text/css" rel="stylesheet" href="/web_portal/util/StyleSheet.do/load=loginbox" />
             <div class="loginbox">
                 <img src="/web_portal/img/login/avatar.png" class="avatar"/>
                 <h1 style="text-align: center"> Primer Ingreso</h1>
