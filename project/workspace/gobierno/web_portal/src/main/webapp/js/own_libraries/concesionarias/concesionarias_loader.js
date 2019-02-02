@@ -1,6 +1,6 @@
 $(window).on('load', () => {
+    /* $('#concesionarias_table').DataTable({});*/
 
-    ConcesionariasService.GET_CONSULTAR_TODAS();
     console.log("Concesionarias View executed on Load");
 });
 

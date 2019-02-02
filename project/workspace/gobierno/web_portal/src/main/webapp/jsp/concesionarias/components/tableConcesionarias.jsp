@@ -10,26 +10,17 @@
 <%@ page import="ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.lang.Exception" %>
-
-
-<%@ page import="static ar.edu.ubp.das.src.utils.Constants.RESULT_RQST_ATTRIBUTE" %>
+<%@ page import="static ar.edu.ubp.das.src.utils.Constants.CONCESIONARIAS_LIST_RQST_ATTRIBUTE" %>
 <%@ page import="ar.edu.ubp.das.src.utils.FrontUtils" %>
-
 <%
     StringBuilder result = new StringBuilder();
-
     try {
-
-        List<ConcesionariaForm> concesionariaFormList = (List<ConcesionariaForm>) request.getAttribute(RESULT_RQST_ATTRIBUTE);
-
-
+        List<ConcesionariaForm> concesionariaFormList = (List<ConcesionariaForm>) request.getAttribute(CONCESIONARIAS_LIST_RQST_ATTRIBUTE);
         StringBuilder rows = new StringBuilder();
         for( ConcesionariaForm c : concesionariaFormList) {
             String row = FrontUtils.concesionariaFormRow(c);
             rows.append(row);
         }
-
-
         result.append("<thead>                                                                                     ");
         result.append("<tr>                                                                                        ");
         result.append("   <th>Id</th>                                                                              ");
@@ -52,5 +43,4 @@
         result.append(e.getMessage());
    }
 %>
-
 <%= result.toString() %>

@@ -1,6 +1,7 @@
 package ar.edu.ubp.das.src.utils;
 
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
+import ar.edu.ubp.das.src.estado_cuentas.forms.EstadoCuentasForm;
 
 import java.util.List;
 
@@ -17,6 +18,21 @@ public class FrontUtils {
         lista.append("</ul>");
 
         return lista.toString();
+    }
+
+    public static String estadoCuentasFormRow(final EstadoCuentasForm e) {
+        final StringBuilder rows = new StringBuilder();
+        rows.append("<tr id=\"" + ESTADO_CUENTA_ROW + "-" + e.getId() + "\">");
+        rows.append("<td>" + e.getId() + "</td>");
+        rows.append("<td>" + e.getEstado() + "</td>");
+        rows.append("<td>" + e.getConcesionariaId() + "</td>");
+        rows.append("<td>" + e.getNroPlanConcesionaria() + "</td>");
+        rows.append("<td>" + e.getDocumentoCliente() + "</td>");
+        rows.append("<td>" + e.getFechaAltaConcesionaria() + "</td>");
+        rows.append("<td>" + e.getFechaAltaSistema() + "</td>");
+        rows.append("<td>" + e.getVehiculo() + "</td>");
+        rows.append("</tr>");
+        return rows.toString();
     }
 
     public static String concesionariaFormRow(final ConcesionariaForm c) {

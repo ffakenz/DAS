@@ -14,5 +14,5 @@ const AdminService = {
                 jUtils.showing("resultado", html);
             }
         });
-    },
-}
+    }
+};

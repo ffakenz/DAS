@@ -10,35 +10,24 @@
 <fmt:setBundle basename="properties.etiquetas" var="etq" scope="session"/>
 
 <!DOCTYPE html>
-
 <html>
-
     <%@include file="../commons/head.jsp" %>
-
     <body>
-
         <div class="content-body">
-
             <%@include file="../commons/header.jsp"%>
 
-            <div class="page-header text-center">
-                <h3>USUARIO ADMIN CORRECTO ... ( Session de login nº:  ${sessionScope.ssid} )</h3>
-            </div>
-
-            <br>
-
             <div id="test_consumo_div">
-                <button id="test_consumo_btn" name="test_consumo_btn" class="btn btn-outline-primary btn-lg btn-block">TEST CONSUMO</button>
+                  <button id="test_consumo_btn" name="test_consumo_btn" class="btn btn-outline-primary btn-lg btn-block">TEST CONSUMO</button>
             </div>
             <%@include file="../commons/resultado.jsp"%>
-
-            <br>
-
-            <div id="concesionariasDiv" class="container">
-                <table id="concesionarias_table"  class="table table-striped table-bordered" style="width:100%">
+            <div id="concesionariasDiv">
+                <table id="concesionarias_table" class="table table-striped table-bordered">
                 </table>
             </div>
-
+            <div id="planesDiv">
+                <table id="planes_table" class="table table-striped table-bordered">
+                </table>
+            </div>
             <!-- Modal -->
             <div class="modal fade" id="config_concesionaria_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
@@ -51,10 +40,10 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </body>
 
+    <label>USUARIO ADMIN CORRECTO ... ( Session de login nº:  ${sessionScope.ssid} )</label>
     <%@include file="../commons/footer.jsp"%>
 
 </html>

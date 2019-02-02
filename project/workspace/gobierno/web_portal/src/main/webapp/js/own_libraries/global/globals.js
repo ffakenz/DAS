@@ -17,12 +17,14 @@ const Action = {
     CONCESIONARIA_CONSULTAR_CONFIG_PARAM :  "/web_portal/concesionarias/ConsultarConcesionariaConfigParam.do",
     CONCESIONARIA_CONSULTAR_TODAS :  "/web_portal/concesionarias/ConsultarConcesionarias.do",
     CONCESIONARIA_CONSULTAR_APROBADAS :  "/web_portal/concesionarias/ConsultarAprobadas.do",
+    ESTADO_CUENTA_CONSULTAR_TODOS :  "/web_portal/estado_cuentas/ConsultarEstadoCuentas.do",
     TEST_CONFIG :  "/web_portal/concesionarias/TestConfig.do",
     CONFIG_CONCESIONARIA : "/web_portal/concesionarias/Configurar.do",
 
     CHANGE_LANGUAGE_ENDPOINT : "/web_portal/other/ChangeLanguage.do",
 
-    CONSUMO_TEST :  "/web_portal/consumo/Consumo.do"
+    CONSUMO_TEST :  "/web_portal/consumo/Consumo.do",
+    
 };
 
 const ConfigTecno = {
