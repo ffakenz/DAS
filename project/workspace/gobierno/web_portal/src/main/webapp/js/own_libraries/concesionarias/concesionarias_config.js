@@ -17,7 +17,7 @@ const ConcesionariasConfig = (module) => [
         ]
     },
     {
-        ctx: Id.REGISTRAR_CONCESIONARIA_DIV,
+        ctx: Class.LOGINBOX,
         cnfg: [
             { delegate: Id.CONCESIONARIA_REGISTRAR_SEND_FORM_BTN, handler: module.registrarConcesionaria}
         ]
