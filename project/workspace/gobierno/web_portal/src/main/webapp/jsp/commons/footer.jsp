@@ -1,36 +1,19 @@
-<!--Footer-->
-
-<footer class="page-footer primary-color-dark center-on-small-only info">
+<footer>
 
   <%@include file="scripts_import.jsp"%>
 
-  <!--Footer Links-->
-
-  <div class="container">
-    <div class="row">
-
-      <!--First column-->
-      <div class="col-md-6">
-        <h5 class="title">Footer Content</h5> &copy; 2017 <a href="https://mdbootstrap.com"> Programa de incentivo </a>
-      </div>
-      <!--/.First column-->
-
-      <!--Second column-->
-      <div class="col-md-6">
-        <h5 class="title">Links</h5>
-        <ul>
-          <li><a href="https://github.com/ffakenz/DAS">Git hub repo</a></li>
+  <div id="footer_div">
+    <nav id="footer_navbar" class="navbar navbar-expand-lg navbar-dark bg-primary fixed-bottom">
+      <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="nav bar-nav mr-auto">
+          <li class="nav-item">
+            <a href="https://github.com/ffakenz/DAS" class="nav-link">
+              <img src="/web_portal/img/github_logo.png" class="img-thumbnail">
+            </a>
+          </li>
         </ul>
       </div>
-      <!--/.Second column-->
-    </div>
+    </nav>
   </div>
-  <!--/.Footer Links-->
-
 
 </footer>
-<!--/.Footer-->
-
-
-
-

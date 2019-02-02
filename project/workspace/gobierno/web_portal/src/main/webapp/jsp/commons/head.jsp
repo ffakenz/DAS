@@ -14,6 +14,6 @@
         <!-- Data Table Bootstrap -->
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 
-        <link type="text/css" rel="stylesheet" href="/web_portal/util/StyleSheet.do/load=page,messages" />
+        <link type="text/css" rel="stylesheet" href="/web_portal/util/StyleSheet.do/load=page,messages,flatly.bootstrap.min" />
 
 </head>

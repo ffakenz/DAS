@@ -15,9 +15,12 @@
     <body>
         <div class="content-body">
 
-            <header>
-                <%@include file="../commons/go_to_home.jsp"%>
-            </header>
+            <div id="header_home">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                <div class="collapse navbar-collapse" id="navbarColor01">
+                    <%@include file="../commons/go_to_home.jsp"%>
+                </div>
+            </nav>
 
             <div id="login-form">
 

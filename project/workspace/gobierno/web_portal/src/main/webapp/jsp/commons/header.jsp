@@ -1,18 +1,27 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div id="header_home">
-    <header>
-        <c:choose>
-            <c:when test="${sessionScope.ssid != null}">
-                <button id="logout_btn" name="logout" class="btn btn-secondary" >Cerrar Sesion</button>
-                <button id="go_to_profile_btn" name="goToProfile" class="btn btn-secondary" >Profile</button>
-            </c:when>
-            <c:otherwise>
-                <button id="show_login_btn" name="login" class="btn btn-primary" >Login</button>
-            </c:otherwise>
-        </c:choose>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <c:choose>
+                        <c:when test="${sessionScope.ssid != null}">
+                            <a id="logout_btn" name="logout" class="nav-link">Cerrar Sesion</a>
+                            <a id="go_to_profile_btn" name="goToProfile" class="nav-link">Profile</a>
+                        </c:when>
+                        <c:otherwise>
+                            <a id="show_login_btn" name="login" class="nav-link" >Login</a>
+                        </c:otherwise>
+                    </c:choose>
 
-        <%@include file="go_to_home.jsp" %>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contacto</a>
+                </li>
+            </ul>
 
-    </header>
+            <%@include file="go_to_home.jsp" %>
+        </div>
+    </nav>
 </div>
