@@ -10,12 +10,7 @@
     <link type="text/css" rel="stylesheet" href="/web_portal/util/StyleSheet.do/load=loginbox" />
     <body>
         <div class="content-body">
-            <div id="header_home">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-                <div class="collapse navbar-collapse" id="navbarColor01">
-                    <%@include file="../commons/go_to_home.jsp"%>
-                </div>
-            </nav>
+            <%@include file="../commons/header.jsp"%>
             <div class="loginbox">
                 <img src="/web_portal/img/login/avatar.png" class="avatar"/>
                 <h1><fmt:message key="login_cabecera" bundle="${etq}" /></h1>

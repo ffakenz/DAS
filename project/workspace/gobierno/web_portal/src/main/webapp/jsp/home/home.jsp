@@ -19,7 +19,7 @@
 
         <div class="content-body">
 
-            <%@include file="./header_home.jsp"%>
+            <%@include file="../commons/header.jsp"%>
 
             <br><br>
 
