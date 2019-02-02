@@ -10,7 +10,6 @@ import ar.edu.ubp.das.src.core.ResponseForward;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 public class ConsultarAprobadasInteractor implements Interactor<List<ConcesionariaForm>> {
 
@@ -25,6 +24,6 @@ public class ConsultarAprobadasInteractor implements Interactor<List<Concesionar
 
         final List<ConcesionariaForm> aprobadas = concesionariasManager.getDao().selectAprobadas();
 
-        return new InteractorResponse(ResponseForward.SUCCESS, Optional.of(aprobadas));
+        return new InteractorResponse(ResponseForward.SUCCESS, aprobadas);
     }
 }

@@ -1,7 +1,9 @@
 $(() => {
     /* Initialization Code */
+    const home = new Home(HomeConfig);
+    jUtils.loadModule(home);
     const login = new Login(LoginConfig);
-    jUtils.loadModule(login);
+    [login, home].forEach(jUtils.loadModule);
     console.log("Login View Loaded Modules: [LoginConfig] = %o, [Login] = %o", 
         LoginConfig, login);
 });

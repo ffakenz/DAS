@@ -32,6 +32,7 @@ public class ConfigurarAction implements Action {
             return mapping.getForwardByName(resp.getResponse().getForward());
 
         logAction(mapping, form, request, response);
+
         return jsonResult("{\"result\": \"OK\"}");
     }
 }

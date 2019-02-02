@@ -16,6 +16,7 @@ const Action = {
     DESAPROBAR_CONCESIONARIA_ENDPOINT : "/web_portal/concesionarias/DesAprobarConcesionaria.do",
     CONCESIONARIA_CONSULTAR_CONFIG_PARAM :  "/web_portal/concesionarias/ConsultarConcesionariaConfigParam.do",
     CONCESIONARIA_CONSULTAR_TODAS :  "/web_portal/concesionarias/ConsultarConcesionarias.do",
+    CONCESIONARIA_CONSULTAR_APROBADAS :  "/web_portal/concesionarias/ConsultarAprobadas.do",
     TEST_CONFIG :  "/web_portal/concesionarias/TestConfig.do",
     CONFIG_CONCESIONARIA : "/web_portal/concesionarias/Configurar.do",
 

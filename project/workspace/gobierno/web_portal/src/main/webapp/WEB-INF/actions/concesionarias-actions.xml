@@ -19,6 +19,7 @@
         </action>
 
         <action type="ConsultarAprobadasAction" path="/ConsultarAprobadas.do">
+            <forward name="success" path="/concesionarias/getAprobadas.jsp"/>
         </action>
 
         <action type="ConsultarConcesionariasAction" path="/ConsultarConcesionarias.do">
@@ -28,9 +29,6 @@
         <action type="ConfigurarAction" path="/Configurar.do" json="true">
             <forward name="warning" path="/concesionarias/failureConfigurar.jsp"/>
             <forward name="failure" path="/concesionarias/failureConfigurar.jsp"/>
-        </action>
-
-        <action type="ConsultarConcesionariaConfigParamAction" path="/ConsultarConcesionariaConfigParam.do" json="true">
         </action>
 
         <action type="TestConfigAction" path="/TestConfig.do">

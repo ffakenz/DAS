@@ -2,9 +2,22 @@ package ar.edu.ubp.das.src.utils;
 
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
 
+import java.util.List;
+
 import static ar.edu.ubp.das.src.utils.Constants.*;
 
 public class FrontUtils {
+
+    public static String listOfConcesionarias(final List<ConcesionariaForm> concList) {
+
+        final StringBuilder lista = new StringBuilder();
+
+        lista.append("<ul id=\"conc_aprobadas_ul\" class=\"list-group\">");
+        concList.forEach(c -> lista.append("<li class=\"list-group-item\">"+c.getNombre()+"</li>"));
+        lista.append("</ul>");
+
+        return lista.toString();
+    }
 
     public static String concesionariaFormRow(final ConcesionariaForm c) {
 
