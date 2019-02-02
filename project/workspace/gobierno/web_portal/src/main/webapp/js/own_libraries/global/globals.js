@@ -63,5 +63,6 @@ const Class = {
     TEST_CONFIG_BTN: "test_config_btn",
     APROBAR_BTN: "aprobar_btn",
     DESAPROBAR_BTN: "desaprobar_btn",
-    CONFIG_BTN: "config_btn"
+    CONFIG_BTN: "config_btn",
+    LOGINBOX: "loginbox"
 };

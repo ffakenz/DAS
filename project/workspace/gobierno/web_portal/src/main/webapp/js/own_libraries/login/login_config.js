@@ -6,21 +6,11 @@ const LoginConfig = (module) => [
         ]
     },
     { 
-        ctx: Id.LOGIN_FORM,
+        ctx: Class.LOGINBOX,
         cnfg: [
+            { delegate: Id.FIRST_LOGIN_BTN, handler: module.goToPrimerIngreso },
+            { delegate: Id.LOGIN_REGISTRAR_BTN, handler: module.registrarUsuario },
             { delegate: Id.LOGIN_BTN, handler: module.validarUsuario }
-        ]
-    },
-    { 
-        ctx: Id.FIRST_LOGIN_DIV,
-        cnfg: [
-            { delegate: Id.FIRST_LOGIN_BTN, handler: module.goToPrimerIngreso }
-        ]
-    },
-    { 
-        ctx: Id.LOGIN_PRIMER_INGRESO_FORM,
-        cnfg: [
-            { delegate: Id.LOGIN_REGISTRAR_BTN, handler: module.registrarUsuario }
         ]
     }
 ];
