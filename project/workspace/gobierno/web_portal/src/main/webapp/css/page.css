@@ -73,3 +73,7 @@ body {
   vertical-align: top;
   text-align: center;
 }
+
+img.d-block.w-100.h-50 {
+    height: 500px !important;
+}

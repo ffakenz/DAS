@@ -6,21 +6,21 @@
     </ol>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img class="d-block w-100" src="/web_portal/img/carousel/carousel_1.jpg" alt="First slide">
+            <img class="d-block w-100 h-50" src="/web_portal/img/carousel/carousel_1.jpg" alt="First slide">
             <div class="carousel-caption d-none d-md-block">
                 <h5>slide 1 title</h5>
                 <p>paragraph 1 loremipsum</p>
             </div>
         </div>
         <div class="carousel-item">
-            <img class="d-block w-100" src="/web_portal/img/carousel/carousel_2.jpg" alt="Second slide">
+            <img class="d-block w-100 h-50" src="/web_portal/img/carousel/carousel_2.jpg" alt="Second slide">
             <div class="carousel-caption d-none d-md-block">
                 <h5>slide 2 title</h5>
                 <p>paragraph 2 loremipsum</p>
             </div>
         </div>
         <div class="carousel-item">
-            <img class="d-block w-100" src="/web_portal/img/carousel/carousel_3.jpeg" alt="Third slide">
+            <img class="d-block w-100 h-50" src="/web_portal/img/carousel/carousel_3.jpeg" alt="Third slide">
             <div class="carousel-caption d-none d-md-block">
                 <h5>slide 3 title</h5>
                 <p>paragraph 3 loremipsum</p>

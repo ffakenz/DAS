@@ -21,33 +21,18 @@
 
             <%@include file="../commons/header.jsp"%>
 
-            <br><br>
-
             <%@include file="./carousel_home.jsp"%>
 
 
-
-            <div class="page-header text-center">
-                    <h3>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et Lorem ipsum dolor sit amet, consectetur
-                        adipiscing elit, sed do eiusmod tempor incididunt ut labore etLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                    </h3>
+            <div class="jumbotron">
+              <h1 class="display-3">Hello, world!</h1>
+              <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+              <hr class="my-4">
+              <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+              <p class="lead">
+                <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+              </p>
             </div>
-
-            <div class="page-header text-center">
-                <h3>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et Lorem ipsum dolor sit amet, consectetur
-                    adipiscing elit, sed do eiusmod tempor incididunt ut labore etLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                </h3>
-            </div>
-
-            <div class="page-header text-center">
-                <h3>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et Lorem ipsum dolor sit amet, consectetur
-                    adipiscing elit, sed do eiusmod tempor incididunt ut labore etLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                </h3>
-            </div>
-
         </div>
 
     </body>
