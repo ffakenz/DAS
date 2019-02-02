@@ -21,9 +21,11 @@
 
             <%@include file="./header_home.jsp"%>
 
-            <%@include file="../concesionarias/components/registrar_btn.jsp"%>
-
             <br><br>
+
+            <%@include file="./carousel_home.jsp"%>
+
+
 
             <div class="page-header text-center">
                     <h3>

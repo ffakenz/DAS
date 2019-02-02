@@ -19,6 +19,9 @@
                     <a class="nav-link" href="#">Contacto</a>
                 </li>
             </ul>
+            <div id="registrar_concesionaria_div">
+                <button id="registrar_concesionaria_btn" name="registrarConcesionaria" class="btn btn-primary float-right">Registrar Concesionaria</button>
+            </div>
         </div>
     </nav>
 </div>
