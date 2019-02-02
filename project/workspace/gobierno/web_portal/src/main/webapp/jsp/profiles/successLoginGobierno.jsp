@@ -56,9 +56,5 @@
     </body>
 
     <%@include file="../commons/footer.jsp"%>
-    <%@include file="../js_imports/home.jsp"%>
-    <%@include file="../js_imports/login.jsp"%>
-    <%@include file="../js_imports/concesionarias.jsp"%>
-    <%@include file="../js_imports/admin.jsp"%>
 
 </html>

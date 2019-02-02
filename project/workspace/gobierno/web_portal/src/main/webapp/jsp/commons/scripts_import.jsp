@@ -22,3 +22,5 @@
 <script src="/web_portal/util/Javascript.do/load=own_libraries/global/module"></script>
 <script src="/web_portal/util/Javascript.do/load=own_libraries/global/config"></script>
 <script src="/web_portal/util/Javascript.do/load=own_libraries/other"></script>
+
+<%@include file="./js_loaders.jsp"%>

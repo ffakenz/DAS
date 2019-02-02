@@ -19,3 +19,9 @@ class Home extends Module {
         jUtils.moveLocationTo(Action.LOGIN_ENDPOINT);
     }    
 };
+
+$(() => {
+    const home = new Home(HomeConfig);
+    jUtils.loadModule(home);
+    console.log("Home View Loaded Modules: [HomeConfig] = %o, [Home] = %o", HomeConfig, home);
+});
