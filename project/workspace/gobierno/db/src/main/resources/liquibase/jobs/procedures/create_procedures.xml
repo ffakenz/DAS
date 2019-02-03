@@ -143,7 +143,7 @@
         <dropProcedure procedureName="get_ultimo_ganador"/>
     </changeSet>
 
-    <changeSet id="Drop procedure insert_participante" author="DAS-Team" runAlways="true"
+    <changeSet id="Drop procedure log_sorteo" author="DAS-Team" runAlways="true"
                runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="1">
@@ -151,13 +151,13 @@
                 FROM information_schema.routines
                 WHERE ROUTINE_TYPE = 'PROCEDURE'
                 AND SPECIFIC_CATALOG = 'db_gobierno'
-                AND ROUTINE_NAME = 'insert_participante'
+                AND ROUTINE_NAME = 'log_sorteo'
             </sqlCheck>
         </preConditions>
-        <dropProcedure procedureName="insert_participante"/>
+        <dropProcedure procedureName="log_sorteo"/>
     </changeSet>
 
-    <changeSet id="Drop procedure update_participante" author="DAS-Team" runAlways="true"
+    <changeSet id="Drop procedure log_participante" author="DAS-Team" runAlways="true"
                runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="1">
@@ -165,10 +165,66 @@
                 FROM information_schema.routines
                 WHERE ROUTINE_TYPE = 'PROCEDURE'
                 AND SPECIFIC_CATALOG = 'db_gobierno'
-                AND ROUTINE_NAME = 'update_participante'
+                AND ROUTINE_NAME = 'log_participante'
             </sqlCheck>
         </preConditions>
-        <dropProcedure procedureName="update_participante"/>
+        <dropProcedure procedureName="log_participante"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure update_estado_participante" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'update_estado_participante'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="update_estado_participante"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure ejecutar_sorteo" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'ejecutar_sorteo'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="ejecutar_sorteo"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure get_sorteos" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_sorteos'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_sorteos"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure update_estado_sorteo" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'update_estado_sorteo'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="update_estado_sorteo"/>
     </changeSet>
 
 
@@ -316,10 +372,10 @@
             </sqlCheck>
         </preConditions>
         <sqlFile
-                path="/src/main/resources/liquibase/jobs/procedures/get_ultimo_ganador.sql"/>
+                path="/src/main/resources/liquibase/jobs/procedures/sorteo/get_ultimo_ganador.sql"/>
     </changeSet>
 
-    <changeSet id="Create procedure insert_participante" author="DAS-Team" runAlways="true"
+    <changeSet id="Create procedure log_sorteo" author="DAS-Team" runAlways="true"
                runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
@@ -327,14 +383,14 @@
                 FROM information_schema.routines
                 WHERE ROUTINE_TYPE = 'PROCEDURE'
                 AND SPECIFIC_CATALOG = 'db_gobierno'
-                AND ROUTINE_NAME = 'insert_participante'
+                AND ROUTINE_NAME = 'log_sorteo'
             </sqlCheck>
         </preConditions>
         <sqlFile
-                path="/src/main/resources/liquibase/jobs/procedures/insert_participante.sql"/>
+                path="/src/main/resources/liquibase/jobs/procedures/sorteo/log_sorteo.sql"/>
     </changeSet>
 
-    <changeSet id="Create procedure update_participante" author="DAS-Team" runAlways="true"
+    <changeSet id="Create procedure log_participante" author="DAS-Team" runAlways="true"
                runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
@@ -342,11 +398,71 @@
                 FROM information_schema.routines
                 WHERE ROUTINE_TYPE = 'PROCEDURE'
                 AND SPECIFIC_CATALOG = 'db_gobierno'
-                AND ROUTINE_NAME = 'update_participante'
+                AND ROUTINE_NAME = 'log_participante'
             </sqlCheck>
         </preConditions>
         <sqlFile
-                path="/src/main/resources/liquibase/jobs/procedures/update_participante.sql"/>
+                path="/src/main/resources/liquibase/jobs/procedures/sorteo/log_participante.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure update_estado_participante" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'update_estado_participante'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/sorteo/update_estado_participante.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure ejecutar_sorteo" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'ejecutar_sorteo'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/sorteo/ejecutar_sorteo.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure get_sorteos" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_sorteos'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/sorteo/get_sorteos.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure update_estado_sorteo" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'update_estado_sorteo'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/sorteo/update_estado_sorteo.sql"/>
     </changeSet>
 
 </databaseChangeLog>
