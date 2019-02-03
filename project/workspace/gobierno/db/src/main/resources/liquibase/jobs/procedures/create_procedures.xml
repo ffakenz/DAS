@@ -83,6 +83,20 @@
         <dropProcedure procedureName="get_last_consumo"/>
     </changeSet>
 
+    <changeSet id="Drop procedure get_job_by_id" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_job_by_id'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_job_by_id"/>
+    </changeSet>
+
     <!-- ******************************* -->
     <!--  DROPS SORTEO                   -->
     <!-- ******************************* -->
@@ -211,6 +225,21 @@
         </preConditions>
         <sqlFile
                 path="/src/main/resources/liquibase/jobs/procedures/consumo/get_last_consumo.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure get_job_by_id" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_job_by_id'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/consumo/get_job_by_id.sql"/>
     </changeSet>
 
     <!-- ******************************* -->
