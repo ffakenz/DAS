@@ -215,39 +215,12 @@ public class ConsumoAbsoluto {
 
     /* LOGGERS */
     public void logConsumoAbsolutoForm(final ConsumoAbsolutoForm consumoAbsolutoForm) {
-        if (consumoAbsolutoForm.getPlanId() != null && consumoAbsolutoForm.getEstadoCuentaId() != null && consumoAbsolutoForm.getIdRequestResp() != null) {
-            logConsumoAbsolutoConcesionariaPlanDb(consumoAbsolutoForm);
-        } else if (consumoAbsolutoForm.getConcesionariaId() != null) {
-            logConsumoAbsolutoConcesionariaDb(consumoAbsolutoForm);
-        } else {
-            logConsumoAbsolutoDb(consumoAbsolutoForm);
-        }
-    }
-
-    private void logConsumoAbsolutoDb(final ConsumoAbsolutoForm consumoAbsolutoForm) {
-        try {
-            msConsumoAbsolutoDao.insertConsumoAbsoluto(consumoAbsolutoForm);
-        } catch (final SQLException e) {
-            e.printStackTrace();
-            log.error("[ConsumoAbsoluto.ejecutar][FAILED logConsumoAbsolutoDb]");
-        }
-    }
-
-    private void logConsumoAbsolutoConcesionariaDb(final ConsumoAbsolutoForm consumoAbsolutoForm) {
-        try {
+        if (consumoAbsolutoForm.isForConcesionariaPlan()) {
             msConsumoAbsolutoDao.insertConsumoAbsolutoConcesionaria(consumoAbsolutoForm);
-        } catch (final SQLException e) {
-            e.printStackTrace();
-            log.error("[ConsumoAbsoluto.ejecutar][FAILED logConsumoAbsolutoConcesionariaDb]");
-        }
-    }
-
-    private void logConsumoAbsolutoConcesionariaPlanDb(final ConsumoAbsolutoForm consumoAbsolutoForm) {
-        try {
+        } else if (consumoAbsolutoForm.isForConcesionaria()) {
             msConsumoAbsolutoDao.insertConsumoAbsolutoConcesionariaPlan(consumoAbsolutoForm);
-        } catch (final SQLException e) {
-            e.printStackTrace();
-            log.error("[ConsumoAbsoluto.ejecutar][FAILED insertConsumoAbsolutoConcesionariaPlan]");
+        } else {
+            msConsumoAbsolutoDao.insertConsumoAbsoluto(consumoAbsolutoForm);
         }
     }
 }

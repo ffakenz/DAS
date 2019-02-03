@@ -39,6 +39,14 @@ public class ConsumoAbsolutoForm extends DynaActionForm {
                 '}';
     }
 
+    public Boolean isForConcesionariaPlan() {
+        return this.getPlanId() != null && this.getEstadoCuentaId() != null && this.getIdRequestResp() != null;
+    }
+
+    public Boolean isForConcesionaria() {
+        return this.getConcesionariaId() != null;
+    }
+
     public Long getId() {
         return id;
     }

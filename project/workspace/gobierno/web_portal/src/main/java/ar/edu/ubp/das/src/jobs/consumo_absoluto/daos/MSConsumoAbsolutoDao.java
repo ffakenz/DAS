@@ -2,11 +2,14 @@ package ar.edu.ubp.das.src.jobs.consumo_absoluto.daos;
 
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.jobs.consumo_absoluto.forms.ConsumoAbsolutoForm;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public class MSConsumoAbsolutoDao extends DaoImpl<ConsumoAbsolutoForm> {
+    private static final Logger log = LoggerFactory.getLogger(MSConsumoAbsolutoDao.class);
 
     public MSConsumoAbsolutoDao() {
         super(ConsumoAbsolutoForm.class);
@@ -37,18 +40,34 @@ public class MSConsumoAbsolutoDao extends DaoImpl<ConsumoAbsolutoForm> {
         return false;
     }
 
-    public void insertConsumoAbsoluto(final ConsumoAbsolutoForm form) throws SQLException {
-        executeProcedure("dbo.log_consumo_absoluto(?,?,?)", form,
-                "fecha", "estado", "cause");
+    public void insertConsumoAbsoluto(final ConsumoAbsolutoForm form) {
+        try {
+            executeProcedure("dbo.log_consumo_absoluto(?,?,?)", form,
+                    "fecha", "estado", "cause");
+        } catch (final SQLException e) {
+            e.printStackTrace();
+            log.error("[ConsumoAbsoluto.ejecutar][FAILED insertConsumoAbsoluto]");
+        }
+
     }
 
-    public void insertConsumoAbsolutoConcesionaria(final ConsumoAbsolutoForm form) throws SQLException {
-        executeProcedure("dbo.log_consumo_absoluto_concesionaria(?,?,?,?)", form,
-                "concesionariaId", "fecha", "estado", "cause");
+    public void insertConsumoAbsolutoConcesionaria(final ConsumoAbsolutoForm form) {
+        try {
+            executeProcedure("dbo.log_consumo_absoluto_concesionaria(?,?,?,?)", form,
+                    "concesionariaId", "fecha", "estado", "cause");
+        } catch (final SQLException e) {
+            e.printStackTrace();
+            log.error("[ConsumoAbsoluto.ejecutar][FAILED insertConsumoAbsolutoConcesionaria]");
+        }
     }
 
-    public void insertConsumoAbsolutoConcesionariaPlan(final ConsumoAbsolutoForm form) throws SQLException {
-        executeProcedure("dbo.log_consumo_absoluto_concesionaria_plan(?,?,?,?,?,?,?)", form,
-                "concesionariaId", "idRequestResp", "planId", "estadoCuentaId", "fecha", "estado", "cause");
+    public void insertConsumoAbsolutoConcesionariaPlan(final ConsumoAbsolutoForm form) {
+        try {
+            executeProcedure("dbo.log_consumo_absoluto_concesionaria_plan(?,?,?,?,?,?,?)", form,
+                    "concesionariaId", "idRequestResp", "planId", "estadoCuentaId", "fecha", "estado", "cause");
+        } catch (final SQLException e) {
+            e.printStackTrace();
+            log.error("[ConsumoAbsoluto.ejecutar][FAILED insertConsumoAbsolutoConcesionariaPlan]");
+        }
     }
 }
