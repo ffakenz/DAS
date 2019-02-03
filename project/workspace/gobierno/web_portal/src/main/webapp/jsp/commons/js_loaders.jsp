@@ -10,14 +10,12 @@
 <%-- LOGIN --%>
 <c:set var = "login_config" value="own_libraries/login/login_config"/>
 <c:set var = "login_module" value="own_libraries/login/login_module"/>
-<c:set var = "login_loader" value="own_libraries/login/login_loader"/>
 <%-- CONCESIONARIAS --%>
 <c:set var = "concesionarias_config" value="own_libraries/concesionarias/concesionarias_config"/>
 <c:set var = "concesionarias_helpers" value="own_libraries/concesionarias/concesionarias_helpers"/>
 <c:set var = "concesionarias_config_param" value="own_libraries/concesionarias/config_param"/>
 <c:set var = "concesionarias_service" value="own_libraries/concesionarias/concesionarias_service"/>
 <c:set var = "concesionarias_module" value="own_libraries/concesionarias/concesionarias_module"/>
-<c:set var = "concesionarias_loader" value="own_libraries/concesionarias/concesionarias_loader"/>
 <%-- ADMIN --%>
 <c:set var = "admin_config" value="own_libraries/admin/admin_config"/>
 <c:set var = "admin_service" value="own_libraries/admin/admin_service"/>
@@ -27,25 +25,31 @@
 
 <c:choose>
     <c:when test="${(uri == '/web_portal/') or (uri == '/web_portal/home/Home.do')}">
-        <script src="${js_import}${home_config},${home_service},${home_module},${home_loader}">
+        <script src="${js_import}${home_config},${home_service},${home_module},${home_loader},${login_config},${login_module}">
         </script>
     </c:when>
     <c:when test="${(uri == '/web_portal/home/ShowRegistrarConcesionaria.do')}">
 
-        <script src="${js_import}${home_config},${home_service},${home_module},${login_config},${login_module},
-            ${concesionarias_config},${concesionarias_helpers},${concesionarias_config_param},${concesionarias_service},
-            ${concesionarias_module}">
+        <script src="${js_import}${home_config},${home_service},${home_module},${login_config},${login_module},${concesionarias_config},${concesionarias_helpers},${concesionarias_config_param},${concesionarias_service},${concesionarias_module}">
         </script>
     </c:when>
 
     <c:when test="${uri == '/web_portal/home/ShowLogin.do'}">
-
+        <script src="${js_import}${home_config},${home_service},${home_module},${login_config},${login_module}">
+        </script>
+    </c:when>
+    <c:when test="${uri == '/web_portal/usuarios/RegistrarConsumer.do'}">
         <script src="${js_import}${home_config},${home_service},${home_module},${login_config},${login_module}">
         </script>
     </c:when>
 
     <c:when test="${uri == '/web_portal/usuarios/ShowPrimerIngreso.do'}">
         <script src="${js_import}${home_config},${home_service},${home_module},${login_config},${login_module}">
+        </script>
+    </c:when>
+
+    <c:when test="${uri == '/web_portal/concesionarias/RegistrarConcesionaria.do'}">
+        <script src="${js_import}${home_config},${home_module},${login_config},${login_module}  ">
         </script>
     </c:when>
 

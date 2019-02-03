@@ -27,6 +27,4 @@
 </body>
 
 <%@include file="../../commons/footer.jsp"%>
-<%@include file="../../js_imports/home.jsp"%>
-
 </html>

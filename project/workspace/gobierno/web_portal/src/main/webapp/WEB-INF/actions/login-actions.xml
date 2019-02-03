@@ -15,10 +15,5 @@
         <action type="LogoutAction" path="/Logout.do">
             <forward name="success" path="/web_portal" redirect="true"/>
         </action>
-
-        <action type="SuccessGobiernoAction" path="/SuccessGobierno.do">
-            <forward name="success" path="/profiles/successLoginGobierno.jsp"/>
-        </action>
-
     </action-mappings>
 </actions>

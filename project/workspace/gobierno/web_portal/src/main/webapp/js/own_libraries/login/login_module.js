@@ -3,6 +3,14 @@ class Login extends Module {
         super(config);
     }
 
+    goToProfile(evt) {
+        jUtils.moveLocationTo(Action.LOGIN_ENDPOINT);
+    }
+
+    showLogin(evt) {
+        jUtils.moveLocationTo(Action.SHOW_LOGIN_ENDPOINT);
+    }
+
     closeSession(evt) {
         console.log("closeSession = %o", evt);
         jUtils.moveLocationTo(Action.LOGOUT_ENDPOINT);

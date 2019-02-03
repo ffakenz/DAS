@@ -12,11 +12,11 @@
                         <a id="go_to_profile_btn" name="goToProfile" class="nav-link" >Profile</a>
                     </li>
                 </c:when>
-                <c:otherwise>
+                <c:when test="${requestScope['javax.servlet.forward.request_uri'] != '/web_portal/home/ShowLogin.do'}">
                     <li class="nav-item">
                         <a id="show_login_btn" name="login" class="nav-link">Login</a>
                     </li>
-                </c:otherwise>
+                </c:when>
             </c:choose>
             <c:choose>
                 <c:when test="${requestScope['javax.servlet.forward.request_uri'] != '/web_portal/home/ShowRegistrarConcesionaria.do'}">

@@ -3,6 +3,8 @@ const LoginConfig = (module) => [
         ctx: Id.HEADER_HOME,
         cnfg: [
             { delegate: Id.LOGOUT_BTN, handler: module.closeSession }
+            , { delegate: Id.SHOW_LOGIN_BTN, handler: module.showLogin }
+            , { delegate: Id.GO_TO_PROFILE_BTN, handler: module.goToProfile }
         ]
     },
     { 

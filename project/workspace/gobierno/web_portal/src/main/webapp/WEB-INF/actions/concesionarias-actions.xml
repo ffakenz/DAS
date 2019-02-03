@@ -22,6 +22,9 @@
             <forward name="success" path="/concesionarias/getAprobadas.jsp"/>
         </action>
 
+        <action type="ConsultarConcesionariaConfigParamAction" path="/ConsultarConcesionariaConfigParam.do" json="true">
+        </action>
+
         <action type="ConsultarConcesionariasAction" path="/ConsultarConcesionarias.do">
             <forward name="success" path="/concesionarias/components/tableConcesionarias.jsp"/>
         </action>
