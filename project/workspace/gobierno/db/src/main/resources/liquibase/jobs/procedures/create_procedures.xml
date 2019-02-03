@@ -10,6 +10,52 @@
     <!-- ***************************** -->
 
     <!-- ******************************* -->
+    <!--  DROPS CONSUMO   ABSOLUTO       -->
+    <!-- ******************************* -->
+
+    <changeSet id="Drop procedure log_consumo_absoluto" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_consumo_absoluto'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="log_consumo_absoluto"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure log_consumo_absoluto_concesionaria" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_consumo_absoluto_concesionaria'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="log_consumo_absoluto_concesionaria"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure log_consumo_absoluto_concesionaria_plan" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_consumo_absoluto_concesionaria_plan'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="log_consumo_absoluto_concesionaria_plan"/>
+    </changeSet>
+
+    <!-- ******************************* -->
     <!--  DROPS CONSUMO                  -->
     <!-- ******************************* -->
 
@@ -287,6 +333,54 @@
     <!-- ******************************* -->
     <!--  CREATE PROCEDURES CHANGE-SETS  -->
     <!-- ******************************* -->
+
+    <!-- ******************************* -->
+    <!--  CREATE CONSUMO ABSOLUTO        -->
+    <!-- ******************************* -->
+    <changeSet id="Create procedure log_consumo_absoluto" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_consumo_absoluto'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/consumo_absoluto/log_consumo_absoluto.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure log_consumo_absoluto_concesionaria" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_consumo_absoluto_concesionaria'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/consumo_absoluto/log_consumo_absoluto_concesionaria.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure log_consumo_absoluto_concesionaria_plan" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_consumo_absoluto_concesionaria_plan'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/consumo_absoluto/log_consumo_absoluto_concesionaria_plan.sql"/>
+    </changeSet>
 
     <!-- ******************************* -->
     <!--  CREATE CONSUMO                 -->

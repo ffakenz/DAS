@@ -9,6 +9,16 @@
     <!--   TABLE DROP CHANGE-SETS      -->
     <!-- ***************************** -->
 
+    <!-- ***************************** -->
+    <!--   CONSUMO ABSOLUTO            -->
+    <!-- ***************************** -->
+
+    <changeSet id="Drop table consumo_absoluto" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="consumo_absoluto"/>
+        </preConditions>
+        <dropTable tableName="consumo_absoluto"/>
+    </changeSet>
 
     <!-- ***************************** -->
     <!--   CONSUMO                     -->

@@ -28,6 +28,11 @@ public class MSEstadoCuentasDao extends DaoImpl<EstadoCuentasForm> {
                 "concesionariaId", "nroPlanConcesionaria", "estado");
     }
 
+    public void updateEstado(final EstadoCuentasForm bean) throws SQLException {
+        this.executeProcedure("dbo.update_estado_cuentas_estado(?, ?, ?)", bean,
+                "id", "estado");
+    }
+
     @Override
     public void delete(final EstadoCuentasForm form) throws SQLException {
     }
@@ -58,6 +63,16 @@ public class MSEstadoCuentasDao extends DaoImpl<EstadoCuentasForm> {
         return result
                 .stream()
                 .findFirst();
+    }
+
+
+    public List<EstadoCuentasForm> selectEstadoCuentasByConcesionariaId(final Long concesionariaId) throws SQLException {
+        this.connect();
+        this.setProcedure("dbo.get_estado_cuentas_by_concesionaria_id(?)", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        this.setParameter(1, concesionariaId);
+        final List<EstadoCuentasForm> result = this.executeQuery();
+        this.disconnect();
+        return result;
     }
 
 

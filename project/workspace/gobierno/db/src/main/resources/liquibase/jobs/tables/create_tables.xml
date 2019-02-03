@@ -10,6 +10,18 @@
     <!-- ***************************** -->
 
     <!-- ***************************** -->
+    <!--   CONSUMO ABSOLUTO            -->
+    <!-- ***************************** -->
+    <changeSet id="Create table consumo_absoluto" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="consumo_absoluto"/>
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/jobs/tables/consumo_absoluto/consumo_absoluto.sql"/>
+    </changeSet>
+
+    <!-- ***************************** -->
     <!--   CONSUMO                     -->
     <!-- ***************************** -->
     <changeSet id="Create table job_consumo" author="DAS-Team" runAlways="true" runOnChange="true">

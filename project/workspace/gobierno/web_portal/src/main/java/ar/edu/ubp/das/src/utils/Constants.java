@@ -24,6 +24,9 @@ public final class Constants {
     public static final String ROL_GOBIERNO = "gobierno";
     public static final String ROL_CONSUMER = "consumer";
 
+    //************ IDENTIFICADOR ****************************
+    public static final String IDENTIFICADOR = "GOBIERNO-INCENTIVO-2018";
+
     //************ PARAMS SERVLETS ****************************
     public static final String USER_TYPE = "userType";
     public static final String SSID = "ssid";

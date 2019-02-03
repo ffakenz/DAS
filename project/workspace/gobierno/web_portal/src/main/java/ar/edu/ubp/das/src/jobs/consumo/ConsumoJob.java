@@ -52,8 +52,8 @@ public class ConsumoJob implements Job {
     private EstadoCuentasManager estadoCuentasManager;
     private ConsumoJobManager consumoJobManager;
     private UsuarioManager usuarioManager;
-
     private ClientFactoryAdapter clientFactory;
+    private final String identificador = "GOBIERNO-INCENTIVO-2018";
 
     // TODO: Send the DaoFactory instead of DatasourceConfig
     public ConsumoJob(final DatasourceConfig datasourceConfig, final IClientFactory clientFactory) {
@@ -124,7 +124,6 @@ public class ConsumoJob implements Job {
 
                 // generamos un random rqst-id
                 final String rqstId = UUID.randomUUID().toString();
-                final String identificador = "GOBIERNO-INCENTIVO-2018";
                 try {
                     // usamos el cliente p/ consultar planes
                     final ConcesionariaServiceContract client = cli.get(); // ifPresent was checked above
@@ -189,51 +188,7 @@ public class ConsumoJob implements Job {
         return DateUtils.getTimestampFrom(fecha, -15);
     }
 
-    /**
-     * logueamos en la db el estado del consumo
-     *
-     * @param idConcesionaria
-     * @param jobId
-     * @param estadoConsumo
-     * @param offset
-     * @param rqstId
-     * @param description
-     * @throws SQLException
-     */
-    private void logConsumoDb(final Long idConcesionaria, final Long jobId, final EstadoConsumo estadoConsumo, final Timestamp offset, final String rqstId, final String description)
-            throws SQLException {
-
-        final ConsumoForm consumoForm = new ConsumoForm();
-        consumoForm.setIdConcesionaria(idConcesionaria);
-        consumoForm.setIdJobConsumo(jobId);
-        consumoForm.setEstado(estadoConsumo.name());
-        consumoForm.setOffset(offset);
-        consumoForm.setIdRequestResp(rqstId);
-        consumoForm.setDescription(description);
-
-        this.consumoJobManager.getMsConsumoDao().insert(consumoForm);
-    }
-
-    /**
-     * logueamos en la db el estado del consumoResult
-     *
-     * @param idConcesionaria
-     * @param jobId
-     * @param tipoConsumoResult
-     * @param description
-     * @throws SQLException
-     */
-    private void logConsumoResultDb(final Long idConcesionaria, final Long jobId, final TipoConsumoResult tipoConsumoResult, final String description)
-            throws SQLException {
-
-        final ConsumoResultForm consumoResultForm = new ConsumoResultForm();
-        consumoResultForm.setIdConcesionaria(idConcesionaria);
-        consumoResultForm.setIdConsumo(jobId);
-        consumoResultForm.setResult(tipoConsumoResult.name());
-        consumoResultForm.setDescription(description);
-        this.consumoJobManager.getMsConsumoResultDao().insert(consumoResultForm);
-    }
-
+    /* DESNORMALIZER */
 
     /**
      * @param concesionariaId
@@ -302,4 +257,52 @@ public class ConsumoJob implements Job {
         cuota.setFechaAltaConcesionaria(update.getCuotaFechaAlta());
         cuotasManager.getDao().upsert(cuota);
     }
+
+    /* LOGGERS */
+
+    /**
+     * logueamos en la db el estado del consumo
+     *
+     * @param idConcesionaria
+     * @param jobId
+     * @param estadoConsumo
+     * @param offset
+     * @param rqstId
+     * @param description
+     * @throws SQLException
+     */
+    private void logConsumoDb(final Long idConcesionaria, final Long jobId, final EstadoConsumo estadoConsumo, final Timestamp offset, final String rqstId, final String description)
+            throws SQLException {
+
+        final ConsumoForm consumoForm = new ConsumoForm();
+        consumoForm.setIdConcesionaria(idConcesionaria);
+        consumoForm.setIdJobConsumo(jobId);
+        consumoForm.setEstado(estadoConsumo.name());
+        consumoForm.setOffset(offset);
+        consumoForm.setIdRequestResp(rqstId);
+        consumoForm.setDescription(description);
+
+        this.consumoJobManager.getMsConsumoDao().insert(consumoForm);
+    }
+
+    /**
+     * logueamos en la db el estado del consumoResult
+     *
+     * @param idConcesionaria
+     * @param jobId
+     * @param tipoConsumoResult
+     * @param description
+     * @throws SQLException
+     */
+    private void logConsumoResultDb(final Long idConcesionaria, final Long jobId, final TipoConsumoResult tipoConsumoResult, final String description)
+            throws SQLException {
+
+        final ConsumoResultForm consumoResultForm = new ConsumoResultForm();
+        consumoResultForm.setIdConcesionaria(idConcesionaria);
+        consumoResultForm.setIdConsumo(jobId);
+        consumoResultForm.setResult(tipoConsumoResult.name());
+        consumoResultForm.setDescription(description);
+        this.consumoJobManager.getMsConsumoResultDao().insert(consumoResultForm);
+    }
+
 }

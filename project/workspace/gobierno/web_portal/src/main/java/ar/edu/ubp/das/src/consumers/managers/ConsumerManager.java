@@ -6,6 +6,7 @@ import ar.edu.ubp.das.src.core.Manager;
 
 public class ConsumerManager extends Manager<MSConsumerDao> {
 
+
     public ConsumerManager(final DaoImpl dao) {
         super(dao);
     }
