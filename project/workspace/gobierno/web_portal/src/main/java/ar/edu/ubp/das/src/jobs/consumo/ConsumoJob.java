@@ -233,12 +233,12 @@ public class ConsumoJob implements Job {
     public void updateEstadoCuentaDb(final NotificationUpdate update, final Long concesionariaId) throws SQLException {
 
         final EstadoCuentasForm estadoCuenta = new EstadoCuentasForm();
+        estadoCuenta.setConcesionariaId(concesionariaId);
         estadoCuenta.setNroPlanConcesionaria(update.getPlanId());
         estadoCuenta.setDocumentoCliente(update.getClienteDocumento());
         estadoCuenta.setVehiculo(update.getVehiculoId());
         estadoCuenta.setFechaAltaConcesionaria(update.getPlanFechaAlta());
         estadoCuenta.setEstado(update.getPlanEstado());
-        estadoCuenta.setConcesionariaId(concesionariaId);
         estadoCuentasManager.getDao().upsert(estadoCuenta);
     }
 

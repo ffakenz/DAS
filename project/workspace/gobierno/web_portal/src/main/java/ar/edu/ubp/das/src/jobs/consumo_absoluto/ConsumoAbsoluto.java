@@ -7,7 +7,6 @@ import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
 import ar.edu.ubp.das.src.concesionarias.managers.ConcesionariasManager;
 import ar.edu.ubp.das.src.concesionarias.managers.ConfigurarConcesionariaManager;
 import ar.edu.ubp.das.src.consumers.daos.MSConsumerDao;
-import ar.edu.ubp.das.src.consumers.forms.ConsumerForm;
 import ar.edu.ubp.das.src.consumers.managers.ConsumerManager;
 import ar.edu.ubp.das.src.estado_cuentas.daos.MSCuotasDao;
 import ar.edu.ubp.das.src.estado_cuentas.daos.MSEstadoCuentasDao;
@@ -176,26 +175,15 @@ public class ConsumoAbsoluto {
 
     /* DESNORMALIZER */
     private void updateDb(final Long concesionariaId, final PlanBean update) throws SQLException {
-        final ConsumerForm consumer = new ConsumerForm();
-        consumer.setDocumento(update.getClienteDocumento());
-        if (!consumerManager.getDao().valid(consumer)) {
-            // fail due to invalid plan bean
-        }
         updateEstadoCuentaDb(update, concesionariaId);
         updateCuotaDb(update);
     }
 
     private void updateEstadoCuentaDb(final PlanBean update, final Long concesionariaId) throws SQLException {
-
         final EstadoCuentasForm estadoCuenta = new EstadoCuentasForm();
+        estadoCuenta.setConcesionariaId(concesionariaId);
         estadoCuenta.setNroPlanConcesionaria(update.getPlanId());
         estadoCuenta.setEstado(update.getPlanEstado());
-        estadoCuenta.setFechaAltaConcesionaria(update.getPlanFechaAlta());
-        update.getPlanFechaUltimaActualizacion();
-
-        estadoCuenta.setDocumentoCliente(update.getClienteDocumento());
-        estadoCuenta.setVehiculo(update.getVehiculoId());
-        estadoCuenta.setConcesionariaId(concesionariaId);
         estadoCuentasManager.getDao().update(estadoCuenta);
     }
 

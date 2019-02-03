@@ -54,11 +54,13 @@ public class PlanBean implements Serializable {
         bean.setPlanFechaAlta(notificationUpdate.getPlanFechaAlta());
         bean.setPlanFechaUltimaActualizacion(notificationUpdate.getPlanFechaUltimaActualizacion());
         bean.setPlanTipoDePlan(notificationUpdate.getPlanTipoDePlan());
+
         bean.setClienteDocumento(notificationUpdate.getClienteDocumento());
         bean.setClienteApellido(notificationUpdate.getClienteApellido());
         bean.setClienteNombre(notificationUpdate.getClienteNombre());
         bean.setClienteEmail(notificationUpdate.getClienteApellido());
         bean.setClienteNroTelefono(notificationUpdate.getClienteNroTelefono());
+
         bean.setVehiculoId(notificationUpdate.getVehiculoId());
         bean.setVehiculoMarca(notificationUpdate.getVehiculoMarca());
         bean.setVehiculoModelo(notificationUpdate.getVehiculoModelo());
@@ -66,6 +68,7 @@ public class PlanBean implements Serializable {
         bean.setVehiculoPrecio(notificationUpdate.getVehiculoPrecio());
         bean.setVehiculoColor(notificationUpdate.getVehiculoColor());
         bean.setVehiculoTipo(notificationUpdate.getVehiculoTipo());
+
         bean.setCuotas(cuotas);
         return bean;
     }
