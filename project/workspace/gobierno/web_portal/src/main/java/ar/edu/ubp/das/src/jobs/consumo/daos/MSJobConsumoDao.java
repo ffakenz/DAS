@@ -31,7 +31,7 @@ public class MSJobConsumoDao extends DaoImpl<JobConsumoForm> {
 
     @Override
     public List<JobConsumoForm> select(final JobConsumoForm form) throws SQLException {
-        return null;
+        return this.executeQueryProcedure("dbo.get_consumo_jobs");
     }
 
     @Override

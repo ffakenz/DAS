@@ -27,6 +27,48 @@
         <dropProcedure procedureName="log_job_consumo"/>
     </changeSet>
 
+    <changeSet id="Drop procedure get_consumos" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_consumos'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_consumos"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure get_consumo_jobs" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_consumo_jobs'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_consumo_jobs"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure get_consumo_results" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_consumo_results'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_consumo_results"/>
+    </changeSet>
+
     <changeSet id="Drop procedure get_last_job" author="DAS-Team" runAlways="true"
                runOnChange="true">
         <preConditions onFail="MARK_RAN">
@@ -263,6 +305,51 @@
         </preConditions>
         <sqlFile
                 path="/src/main/resources/liquibase/jobs/procedures/consumo/log_job_consumo.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure get_consumos" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_consumos'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/consumo/get_consumos.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure get_consumo_jobs" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_consumo_jobs'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/consumo/get_consumo_jobs.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure get_consumo_results" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_consumo_results'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/consumo/get_consumo_results.sql"/>
     </changeSet>
 
     <changeSet id="Create procedure get_last_job" author="DAS-Team" runAlways="true"

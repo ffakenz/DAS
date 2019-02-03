@@ -24,7 +24,13 @@ class ConcesionariaServiceContractStub implements ConcesionariaServiceContract {
     }
 
     public List<NotificationUpdate> consultarPlanesInner(final String identificador, final String offset) throws ClientException {
+
         log.info("RUNNING [CONSULTAR PLANES][IDENTIFICADOR = {}][OFFSET= {}]", identificador, offset);
+
+        if(notificationFileName == null) {
+            throw new ClientException("the service is unavailable");
+        }
+
         final String fileContent = MockUtils.readMockBodyFromFile(notificationFileName);
         final NotificationUpdate[] notificationUpdates = JsonUtils.toObject(fileContent, NotificationUpdate[].class);
 

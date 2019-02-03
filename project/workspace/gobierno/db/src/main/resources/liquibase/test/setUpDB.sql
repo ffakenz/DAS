@@ -121,8 +121,8 @@ BEGIN
     INSERT INTO estado_sorteo(nombre)
     VALUES('nuevo'),('pendiente'),('completado')
 
-    INSERT INTO sorteos (mes_sorteo, estado, fecha_ejecucion)
-    VALUES(10, 'completado', GETDATE())
+    INSERT INTO sorteos (estado, fecha_ejecucion)
+    VALUES('completado', GETDATE())
 
     INSERT INTO estado_participante(nombre)
     VALUES('participante'),('ganador'),('cancelado')

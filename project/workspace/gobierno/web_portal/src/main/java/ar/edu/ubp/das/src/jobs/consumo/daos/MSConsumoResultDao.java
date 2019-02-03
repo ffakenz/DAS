@@ -30,7 +30,7 @@ public class MSConsumoResultDao extends DaoImpl<ConsumoResultForm> {
 
     @Override
     public List<ConsumoResultForm> select(final ConsumoResultForm form) throws SQLException {
-        return null;
+        return executeQueryProcedure("dbo.get_consumo_results", form);
     }
 
     @Override
