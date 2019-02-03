@@ -106,7 +106,7 @@ public class ConsumoJob implements Job {
 
                 // obtenemos el proximo offset a usar segun su estado
                 final Optional<String> lastEstadoOpt = this.consumoJobManager.getMsConsumoDao().getLastEstadoForConcesionaria(cId);
-                final Timestamp offset = getOffset(lastEstadoOpt, cId, jobForm.getFecha());
+                final Timestamp offset = getOffset(lastEstadoOpt, cId, jobForm.getFecha()); // offset segun ultimo estado
 
                 // obtenemos sus configs
                 final List<ConfigurarConcesionariaForm> configs = configurarConcesionariaManager.getDao().selectParamsByConcesionariaId(cId);
@@ -129,21 +129,26 @@ public class ConsumoJob implements Job {
                     // usamos el cliente p/ consultar planes
                     final ConcesionariaServiceContract client = cli.get(); // ifPresent was checked above
                     final List<NotificationUpdate> notificationUpdates = client.consultarPlanes(identificador, offset.toString());
-                    log.info("Consume is successfull for concesionaria {} [notification_update:{}]", cId, JsonUtils.toJsonString(notificationUpdates));
+                    log.info("Consume is successfull for concesionaria {} [notification_updates:{}]", cId, JsonUtils.toJsonString(notificationUpdates));
                     final String description = "consultarPlanes was success for offset: " + offset;
-                    logConsumoDb(cId, jobId, EstadoConsumo.SUCCESS, offset, rqstId, description);
+                    logConsumoDb(cId, jobId, EstadoConsumo.SUCCESS, offset, rqstId, description); // esto marca ultimo resultado como successs
 
                     for (final NotificationUpdate update : notificationUpdates) {
                         try {
-                            updateDb(cId, update);
-                            log.info("Consume Result is successfull for concesionaria {} [notification_update:{}]", cId, JsonUtils.toJsonString(update));
+
+                            final NotificationUpdateForm notificationUpdateForm = transformNotificationUpdate(update, cId);
+                            if (this.consumoJobManager.getMsNotificationUpdateDao().valid(notificationUpdateForm)) {
+                                updateDb(cId, update);
+                                this.consumoJobManager.getMsNotificationUpdateDao().insert(notificationUpdateForm);
+                            }
+                            log.info("Consume Result is successfull for concesionaria {} [notification_update:{}]", cId, JsonUtils.toJsonString(notificationUpdateForm));
                             final String desc = "updateDb success for update: " + update;
                             logConsumoResultDb(cId, jobId, TipoConsumoResult.SUCCESS, desc);
 
                         } catch (final SQLException ex) {
                             log.error("Problems with update db [exception:{}]", ex.getMessage());
                             final String desc = "updateDb failed for update: " + update;
-                            logConsumoResultDb(cId, jobId, TipoConsumoResult.FAILURE, desc);
+                            logConsumoResultDb(cId, jobId, TipoConsumoResult.FAILURE, desc); // esto es un fallo en el ultimmo resultado
                         }
                     }
 
@@ -159,6 +164,13 @@ public class ConsumoJob implements Job {
         }
 
         log.info("FINISHING_CONSUMER");
+    }
+
+
+    private NotificationUpdateForm transformNotificationUpdate(final NotificationUpdate nu, final Long cId) {
+        final NotificationUpdateForm transformer = JsonUtils.transformer(nu, NotificationUpdateForm.class);
+        transformer.setConcesionariaId(cId);
+        return transformer;
     }
 
     /**

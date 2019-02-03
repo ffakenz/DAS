@@ -56,6 +56,13 @@
         <dropTable tableName="job_consumo"/>
     </changeSet>
 
+    <changeSet id="Drop table notification_update" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="notification_update"/>
+        </preConditions>
+        <dropTable tableName="notification_update"/>
+    </changeSet>
+
 
     <!-- ***************************** -->
     <!--   SORTEO                      -->

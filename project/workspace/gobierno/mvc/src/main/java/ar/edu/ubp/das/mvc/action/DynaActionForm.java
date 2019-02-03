@@ -29,6 +29,10 @@ public class DynaActionForm {
         this.items.put(name, value);
     }
 
+    public void setItem(final String name, final Object value) {
+        this.items.put(name, value);
+    }
+
     public void removeItem(final String name) {
         this.items.remove(name);
     }
@@ -51,6 +55,7 @@ public class DynaActionForm {
         }
         return Optional.empty();
     }
+
 
     public <T> T convertTo(final Class<T> clazz) {
         T bean = null;

@@ -97,6 +97,34 @@
         <dropProcedure procedureName="get_job_by_id"/>
     </changeSet>
 
+    <changeSet id="Drop procedure is_valid_notification_update" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'is_valid_notification_update'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="is_valid_notification_update"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure log_notification_update" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_notification_update'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="log_notification_update"/>
+    </changeSet>
+
     <!-- ******************************* -->
     <!--  DROPS SORTEO                   -->
     <!-- ******************************* -->
@@ -240,6 +268,36 @@
         </preConditions>
         <sqlFile
                 path="/src/main/resources/liquibase/jobs/procedures/consumo/get_job_by_id.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure is_valid_notification_update" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'is_valid_notification_update'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/consumo/is_valid_notification_update.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure log_notification_update" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_notification_update'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/consumo/log_notification_update.sql"/>
     </changeSet>
 
     <!-- ******************************* -->

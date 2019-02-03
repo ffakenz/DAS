@@ -20,6 +20,10 @@ public class JsonUtils {
         return jsonObj;
     }
 
+    public static <A, B> B transformer(final A update, final Class<B> clazz) {
+        return JsonUtils.toObject(JsonUtils.toJsonString(update), clazz);
+    }
+
     public static JsonObject deserializeXML(final Iterator<OMElement> it, final JsonObject bag) {
         if (it.hasNext()) {
             final OMElement child = it.next();

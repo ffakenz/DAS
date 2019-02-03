@@ -4,12 +4,14 @@ import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.src.jobs.consumo.daos.MSConsumoDao;
 import ar.edu.ubp.das.src.jobs.consumo.daos.MSConsumoResultDao;
 import ar.edu.ubp.das.src.jobs.consumo.daos.MSJobConsumoDao;
+import ar.edu.ubp.das.src.jobs.consumo.daos.MSNotificationUpdateDao;
 
 public class ConsumoJobManager {
 
     private MSConsumoDao msConsumoDao;
     private MSConsumoResultDao msConsumoResultDao;
     private MSJobConsumoDao msJobConsumoDao;
+    private MSNotificationUpdateDao msNotificationUpdateDao;
 
     public ConsumoJobManager(final DatasourceConfig datasourceConfig) {
         this.msConsumoDao = new MSConsumoDao();
@@ -18,6 +20,8 @@ public class ConsumoJobManager {
         this.msConsumoResultDao.setDatasource(datasourceConfig);
         this.msJobConsumoDao = new MSJobConsumoDao();
         this.msJobConsumoDao.setDatasource(datasourceConfig);
+        this.msNotificationUpdateDao = new MSNotificationUpdateDao();
+        this.msNotificationUpdateDao.setDatasource(datasourceConfig);
     }
 
     public MSConsumoDao getMsConsumoDao() {
@@ -30,5 +34,9 @@ public class ConsumoJobManager {
 
     public MSJobConsumoDao getMsJobConsumoDao() {
         return msJobConsumoDao;
+    }
+
+    public MSNotificationUpdateDao getMsNotificationUpdateDao() {
+        return msNotificationUpdateDao;
     }
 }
