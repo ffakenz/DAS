@@ -3,6 +3,7 @@ package ar.edu.ubp.das.src.jobs.sorteo.daos;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.ParticipanteForm;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -39,6 +40,15 @@ public class MSParticipanteDao extends DaoImpl<ParticipanteForm> {
     @Override
     public boolean valid(final ParticipanteForm form) throws SQLException {
         return false;
+    }
+
+    public List<ParticipanteForm> getParticipantes(final Integer mesSorteo) throws SQLException {
+        this.connect();
+        this.setProcedure("dbo.get_participantes(?)", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        this.setParameter(1, mesSorteo);
+        final List<ParticipanteForm> result = this.executeQuery();
+        this.disconnect();
+        return result;
     }
 
     public Optional<ParticipanteForm> getUltimoGanador() throws SQLException {

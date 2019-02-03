@@ -79,4 +79,13 @@ public class ParticipanteForm extends DynaActionForm {
     public void setEstado(final String estado) {
         this.estado = estado;
     }
+
+    public void setEstado(final EstadoParticipante estado) {
+        this.estado = estado.getTipo();
+    }
+
+    public EstadoParticipante getEstadoParticipante() {
+        return EstadoParticipante.valueOf(this.estado);
+    }
+
 }

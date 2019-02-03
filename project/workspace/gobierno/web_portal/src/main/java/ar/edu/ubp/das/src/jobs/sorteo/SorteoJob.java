@@ -1,10 +1,14 @@
 package ar.edu.ubp.das.src.jobs.sorteo;
 
+import ar.edu.ubp.das.src.jobs.consumo.ConsumoJob;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SorteoJob implements Job {
 
+        private static final Logger log = LoggerFactory.getLogger(ConsumoJob.class);
     // from web_portal
 //    private ConcesionariasManager concesionariasManager;
 //    private ConfigurarConcesionariaManager configurarConcesionariaManager;

@@ -13,6 +13,3 @@ WHERE id_sorteo = @id_sorteo
   AND id_concesionaria = @id_concesionaria
   AND id_consumer = @id_consumer
   AND id_vehiculo = @id_vehiculo;
-
-
-

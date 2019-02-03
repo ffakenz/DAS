@@ -9,12 +9,16 @@ public final class Constants {
     public static final String USUARIOS_DAO_NAME = "Usuarios";
     public static final String CONSUMER_DAO_NAME = "Consumer";
     public static final String ESTADO_CUENTAS_DAO_NAME = "EstadoCuentas";
+    public static final String SORTEO_DAO_NAME = "Sorteo";
+    public static final String CONSUMO_DAO_NAME = "Consumo";
 
     //************ DAOS PACKAGES**********************************************
     public static final String CONCESIONARIAS_DAO_PACKAGE = "concesionarias";
     public static final String USUARIOS_DAO_PACKAGE = "usuarios";
     public static final String CONSUMERS_DAO_PACKAGE = "consumers";
     public static final String ESTAD_CUENTAS_DAO_PACKAGE = "estado_cuentas";
+    public static final String SORTEO_DAO_PACKAGE = "jobs.sorteo";
+    public static final String CONSUMO_DAO_PACKAGE = "jobs.consumo";
 
     //************ CONSUMERS ROLES ****************************
     public static final String ROL_GOBIERNO = "gobierno";
@@ -34,6 +38,7 @@ public final class Constants {
     public static final String CONFIG_PARAMS_LIST_RQST_ATTRIBUTE = "configParams";
     public static final String CONCESIONARIAS_LIST_RQST_ATTRIBUTE = "concesionariasList";
     public static final String ESTADO_CUENTAS_LIST_RQST_ATTRIBUTE = "estadoCuentasList";
+    public static final String SORTEOS_RQST_ATTRIBUTE = "sorteos";
 
     //************ CSS {CLASSES && ID} IDENTIFIERS ****************************
     public static final String CONCESIONARIA_ROW = "concesionaria_row";

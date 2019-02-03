@@ -7,8 +7,8 @@ class Calendario extends Module {
         evt.preventDefault();
         console.log("crearSorteo, [EVENT] = %o", evt);
         const idButton = evt.target.id;
-        const idSorteo = idButton.split("-")[1];
-        CalendarioService.CREAR_SORTEO(idSorteo);
+        const fechaEjecucion = idButton.split("-")[1];  /* TODO: add this to `data` or hidden input */
+        CalendarioService.CREAR_SORTEO(fechaEjecucion);
     }
 
     ejecutarSorteo(evt) {

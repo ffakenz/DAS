@@ -16,12 +16,12 @@ const CalendarioService = {
         });
     },
 
-    CREAR_SORTEO(idSorteo) {
+    CREAR_SORTEO(fechaEjecucion) {
         $.ajax({
             url: Action.CREAR_SORTEO,
             type: "post",
             dataType: "html",
-            data: "id=" + idSorteo,
+            data: "fecha_ejecucion=" + fechaEjecucion,
             error: function (hr) {
                 console.log("AJAX RESULT CREAR_SORTEO ERROR %o", hr.responseText);
                 jUtils.showing("resultado", hr);

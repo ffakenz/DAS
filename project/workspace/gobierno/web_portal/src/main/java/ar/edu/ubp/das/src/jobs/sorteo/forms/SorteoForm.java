@@ -19,6 +19,14 @@ public class SorteoForm extends DynaActionForm {
     @Column(name = "fecha_ejecucion")
     private Timestamp fechaEjecucion;
 
+    public void setEstado(final EstadoSorteo estado) {
+        this.estado = estado.getTipo();
+    }
+
+    public EstadoSorteo getEstadoSorteo() {
+        return EstadoSorteo.valueOf(this.estado);
+    }
+
     public Long getId() {
         return id;
     }
@@ -43,11 +51,11 @@ public class SorteoForm extends DynaActionForm {
         this.estado = estado;
     }
 
-    public Timestamp getFecha() {
+    public Timestamp getFechaEjecucion() {
         return fechaEjecucion;
     }
 
-    public void setFecha(final Timestamp fecha) {
+    public void setFechaEjecucion(final Timestamp fecha) {
         this.fechaEjecucion = fecha;
     }
 

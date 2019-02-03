@@ -3,6 +3,7 @@ package ar.edu.ubp.das.src.jobs.sorteo.forms;
 public enum EstadoSorteo {
     NUEVO("nuevo"),
     PENDIENTE("pendiente"),
+    EN_EJECUCION("en_ejecucion"),
     COMPLETADO("completado");
 
     private String tipo;

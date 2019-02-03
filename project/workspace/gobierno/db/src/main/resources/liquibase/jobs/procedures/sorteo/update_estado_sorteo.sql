@@ -5,6 +5,3 @@ CREATE PROCEDURE update_estado_sorteo (
 UPDATE sorteos
 SET estado = @estado
 WHERE id = @id_sorteo;
-
-
-

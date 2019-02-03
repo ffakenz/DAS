@@ -1,6 +1,7 @@
 package ar.edu.ubp.das.src.jobs.sorteo.daos;
 
 import ar.edu.ubp.das.mvc.db.DaoImpl;
+import ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.SorteoForm;
 
 import java.sql.SQLException;
@@ -16,8 +17,7 @@ public class MSSorteoDao extends DaoImpl<SorteoForm> {
 
     @Override
     public void insert(final SorteoForm form) throws SQLException {
-        this.executeProcedure("dbo.log_sorteo(?)", form,
-                "mesSorteo");
+        this.executeProcedure("dbo.log_sorteo(?)", form, "fechaEjecucion");
     }
 
     @Override
@@ -42,7 +42,12 @@ public class MSSorteoDao extends DaoImpl<SorteoForm> {
     }
 
     public void ejecutar(final SorteoForm form) throws SQLException {
-        this.executeProcedure("dbo.ejecutar_sorteo(?,?)", form,
+        form.setEstado(EstadoSorteo.EN_EJECUCION);
+        this.update(form);
+    }
+
+    public void actualizarFechaSorteo(final SorteoForm form) throws SQLException {
+        this.executeProcedure("dbo.actualizar_fecha_sorteo(?,?)", form,
                 "id", "fechaEjecucion");
     }
 

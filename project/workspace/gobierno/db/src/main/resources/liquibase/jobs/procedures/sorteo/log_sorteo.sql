@@ -1,5 +1,5 @@
 CREATE PROCEDURE log_sorteo (
-    @mes_sorteo INT
+    @fecha_ejecucion DATETIME
 ) AS
-INSERT INTO sorteos(mes_sorteo)
-VALUES(@mes_sorteo);
+INSERT INTO sorteos(fecha_ejecucion)
+VALUES(@fecha_ejecucion);
