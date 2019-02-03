@@ -1,7 +1,7 @@
-package ar.edu.ubp.das.src.jobs.daos;
+package ar.edu.ubp.das.src.jobs.sorteo.daos;
 
 import ar.edu.ubp.das.mvc.db.DaoImpl;
-import ar.edu.ubp.das.src.jobs.forms.ParticipanteForm;
+import ar.edu.ubp.das.src.jobs.sorteo.forms.ParticipanteForm;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -16,13 +16,14 @@ public class MSParticipanteDao extends DaoImpl<ParticipanteForm> {
 
     @Override
     public void insert(final ParticipanteForm form) throws SQLException {
-        executeProcedure("dbo.insert_participante(?,?)", form, "idSorteo", "idPlan");
+        executeProcedure("dbo.log_participante(?,?,?,?,?)", form,
+                "idSorteo", "idPlan", "idConcesionaria", "idConsumer", "idVehiculo");
     }
 
     @Override
     public void update(final ParticipanteForm form) throws SQLException {
-        executeProcedure("dbo.update_participante(?,?,?)", form, "idSorteo", "idPlan",
-                "estado");
+        executeProcedure("dbo.update_estado_participante(?,?,?,?,?,?)", form,
+                "idSorteo", "idPlan", "idConcesionaria", "idConsumer", "idVehiculo", "estado");
     }
 
     @Override

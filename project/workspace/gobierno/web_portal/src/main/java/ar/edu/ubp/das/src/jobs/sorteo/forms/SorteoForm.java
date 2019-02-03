@@ -1,4 +1,4 @@
-package ar.edu.ubp.das.src.jobs.forms;
+package ar.edu.ubp.das.src.jobs.sorteo.forms;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.annotations.Column;
@@ -23,7 +23,7 @@ public class SorteoForm extends DynaActionForm {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -31,7 +31,7 @@ public class SorteoForm extends DynaActionForm {
         return mesSorteo;
     }
 
-    public void setMesSorteo(Integer mesSorteo) {
+    public void setMesSorteo(final Integer mesSorteo) {
         this.mesSorteo = mesSorteo;
     }
 
@@ -39,7 +39,7 @@ public class SorteoForm extends DynaActionForm {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(final String estado) {
         this.estado = estado;
     }
 
@@ -47,7 +47,7 @@ public class SorteoForm extends DynaActionForm {
         return fechaEjecucion;
     }
 
-    public void setFecha(Timestamp fecha) {
+    public void setFecha(final Timestamp fecha) {
         this.fechaEjecucion = fecha;
     }
 
