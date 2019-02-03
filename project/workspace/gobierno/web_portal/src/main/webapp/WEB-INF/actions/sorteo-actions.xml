@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="../schema/actions.xsd">
+    <form-beans>
+    </form-beans>
+    <action-mappings>
+        <action type="ConsultarSorteosAction" path="/ConsultarSorteos.do"></action>
+        <action type="CrearSorteoAction" path="/CrearSorteo.do"></action>
+        <action type="EjecutarSorteoAction" path="/EjecutarSorteo.do"></action>
+        <action type="ActualizarSorteoAction" path="/ActualizarSorteo.do"></action>
+    </action-mappings>
+</actions>

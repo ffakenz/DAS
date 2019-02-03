@@ -36,6 +36,7 @@
         <!-- Q -->
         <!-- R -->
         <!-- S -->
+        <alias name="sorteo"/>
         <!-- T -->
         <!-- U -->
         <alias name="util"/>

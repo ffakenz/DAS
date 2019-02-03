@@ -119,7 +119,7 @@ public class ConsumoJobDesNormalizationSpec {
     public void test_10_ConsumerJob_UpdateConsumer_success() throws Exception {
         final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, ClientFactory.getInstance());
 
-        Long doc = 2L;
+        final Long doc = 2L;
 
         setUpConsumer(nonExistingConsumer,
                 doc,
@@ -152,7 +152,7 @@ public class ConsumoJobDesNormalizationSpec {
 
         final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, ClientFactory.getInstance());
 
-        Long doc = 1L;
+        final Long doc = 1L;
 
         setUpConsumer(existingConsumer,
                 doc,

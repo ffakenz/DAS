@@ -22,6 +22,11 @@
 <c:set var = "admin_module" value="own_libraries/admin/admin_module"/>
 <c:set var = "admin_loader" value="own_libraries/admin/admin_loader"/>
 <c:set var = "admin_estado_cuenta_service" value="own_libraries/admin/estado_cuenta/estado_cuenta_service"/>
+<%-- CALENDARIO --%>
+<c:set var = "calendario_config" value="own_libraries/admin/calendario/calendario_config"/>
+<c:set var = "calendario_module" value="own_libraries/admin/calendario/calendario_module"/>
+<c:set var = "calendario_service" value="own_libraries/admin/calendario/calendario_service"/>
+
 
 <c:choose>
     <c:when test="${(uri == '/web_portal/') or (uri == '/web_portal/home/Home.do')}">
@@ -54,7 +59,7 @@
     </c:when>
 
     <c:when test="${(uri == '/web_portal/login/Login.do') and (sessionScope.forwardName == 'success_gobierno')}">
-        <script src="${js_import}${home_config},${home_service},${home_module},${login_config},${login_module},${concesionarias_config},${concesionarias_helpers},${concesionarias_config_param},${concesionarias_service},${concesionarias_module},${concesionarias_loader},${admin_config},${admin_service},${admin_estado_cuenta_service},${admin_module},${admin_loader}">
+        <script src="${js_import}${home_config},${home_service},${home_module},${login_config},${login_module},${concesionarias_config},${concesionarias_helpers},${concesionarias_config_param},${concesionarias_service},${concesionarias_module},${concesionarias_loader},${admin_config},${admin_service},${admin_estado_cuenta_service},${admin_module},${calendario_config},${calendario_module},${calendario_service},${admin_loader}">
         </script>
     </c:when>
 

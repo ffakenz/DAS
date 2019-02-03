@@ -22,18 +22,18 @@ public class ConsumoAction implements Action {
     public ForwardConfig execute(final ActionMapping mapping, final DynaActionForm form, final HttpServletRequest request,
                                  final HttpServletResponse response) throws RuntimeException {
 
-        DatasourceConfig datasourceConfig = ModuleConfigImpl.getDatasourceById("default");
-        ConsumoJob consumoJob = new ConsumoJob(datasourceConfig, ClientFactory.getInstance());
+        final DatasourceConfig datasourceConfig = ModuleConfigImpl.getDatasourceById("default");
+        final ConsumoJob consumoJob = new ConsumoJob(datasourceConfig, ClientFactory.getInstance());
         consumoJob.execute(null);
-        ConsumoJobManager consumoJobManager = new ConsumoJobManager(datasourceConfig);
+        final ConsumoJobManager consumoJobManager = new ConsumoJobManager(datasourceConfig);
         try {
-            JobConsumoForm lastJob = consumoJobManager.getMsJobConsumoDao().getLastJob();
+            final JobConsumoForm lastJob = consumoJobManager.getMsJobConsumoDao().getLastJob();
             log.info("JOB {} EXECUTED SUCCESSFULLY ", lastJob.getId());
 
             request.setAttribute("message", String.format("JOB %s EXECUTED SUCCESSFULLY", lastJob.getId()));
 
             return mapping.getForwardByName(ResponseForward.SUCCESS.getForward());
-        } catch (SQLException e) {
+        } catch (final SQLException e) {
             e.printStackTrace();
             return mapping.getForwardByName(ResponseForward.FAILURE.getForward());
         }

@@ -19,36 +19,40 @@ class ConcesionariaServiceContractStub implements ConcesionariaServiceContract {
 
     private String notificationFileName;
 
-    public ConcesionariaServiceContractStub(String notificationFileName) {
+    public ConcesionariaServiceContractStub(final String notificationFileName) {
         this.notificationFileName = notificationFileName;
     }
 
-    public List<NotificationUpdate> consultarPlanesInner(String identificador, String offset) throws ClientException {
+    public List<NotificationUpdate> consultarPlanesInner(final String identificador, final String offset) throws ClientException {
         log.info("RUNNING [CONSULTAR PLANES][IDENTIFICADOR = {}][OFFSET= {}]", identificador, offset);
-        String fileContent = MockUtils.readMockBodyFromFile(notificationFileName);
-        NotificationUpdate[] notificationUpdates = JsonUtils.toObject(fileContent, NotificationUpdate[].class);
+        final String fileContent = MockUtils.readMockBodyFromFile(notificationFileName);
+        final NotificationUpdate[] notificationUpdates = JsonUtils.toObject(fileContent, NotificationUpdate[].class);
 
-        List<NotificationUpdate> notifications = new ArrayList<>();
-        Stream.of(notificationUpdates).forEach( notification -> {
+        final List<NotificationUpdate> notifications = new ArrayList<>();
+        Stream.of(notificationUpdates).forEach(notification -> {
             log.info("[NOTIFICATION UPDATE {}]", notification);
             notifications.add(notification);
         });
         return notifications;
     }
+
     @Override
-    public List<NotificationUpdate> consultarPlanes(String identificador, String offset) throws ClientException {
+    public List<NotificationUpdate> consultarPlanes(final String identificador, final String offset) throws ClientException {
         return consultarPlanesInner(identificador, offset);
     }
+
     @Override
-    public PlanBean consultarPlan(String identificador, Long planId) throws ClientException {
+    public PlanBean consultarPlan(final String identificador, final Long planId) throws ClientException {
         return null;
     }
+
     @Override
-    public void cancelarPlan(String identificador, Long planId) throws ClientException {
+    public void cancelarPlan(final String identificador, final Long planId) throws ClientException {
 
     }
+
     @Override
-    public String health(String identificador) throws ClientException {
+    public String health(final String identificador) throws ClientException {
         return null;
     }
 }

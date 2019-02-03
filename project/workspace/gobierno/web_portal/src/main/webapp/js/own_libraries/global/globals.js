@@ -4,13 +4,13 @@ const Action = {
 
     HOME_ENDPOINT : "/web_portal/home/Home.do",
     SHOW_REGISTRAR_CONCESIONARIA_ENDPOINT : "/web_portal/home/ShowRegistrarConcesionaria.do",
+    /* LOGIN */
     SHOW_LOGIN_ENDPOINT : "/web_portal/home/ShowLogin.do",
-
     LOGIN_ENDPOINT : "/web_portal/login/Login.do",
     LOGOUT_ENDPOINT : "/web_portal/login/Logout.do",
     LOGIN_PRIMER_INGRESO : "/web_portal/usuarios/RegistrarConsumer.do",
     SHOW_LOGIN_PRIMER_INGRESO : "/web_portal/usuarios/ShowPrimerIngreso.do",
-
+    /* CONCESIONARIA */
     REGISTRAR_CONCESIONARIA_ENDPOINT : "/web_portal/concesionarias/RegistrarConcesionaria.do",
     APROBAR_CONCESIONARIA_ENDPOINT : "/web_portal/concesionarias/AprobarConcesionaria.do",
     DESAPROBAR_CONCESIONARIA_ENDPOINT : "/web_portal/concesionarias/DesAprobarConcesionaria.do",
@@ -20,11 +20,15 @@ const Action = {
     ESTADO_CUENTA_CONSULTAR_TODOS :  "/web_portal/estado_cuentas/ConsultarEstadoCuentas.do",
     TEST_CONFIG :  "/web_portal/concesionarias/TestConfig.do",
     CONFIG_CONCESIONARIA : "/web_portal/concesionarias/Configurar.do",
-
+    /* LANGUAGE */
     CHANGE_LANGUAGE_ENDPOINT : "/web_portal/other/ChangeLanguage.do",
-
+    /* CONSUMO */
     CONSUMO_TEST :  "/web_portal/consumo/Consumo.do",
-    
+    /* SORTEO  */
+    GET_SORTEOS :  "/web_portal/sorteo/ConsultarSorteos.do",
+    CREAR_SORTEO :  "/web_portal/sorteo/CrearSorteo.do",
+    EJECUTAR_SORTEO :  "/web_portal/sorteo/EjecutarSorteo.do",
+    ACTUALIZAR_SORTEO :  "/web_portal/sorteo/ActualizarSorteo.do"
 };
 
 const ConfigTecno = {
@@ -57,7 +61,7 @@ const Id = {
     FIRST_LOGIN_DIV: "first_login_div",
     FIRST_LOGIN_BTN: "first_login_btn",
     LOGIN_PRIMER_INGRESO_FORM: "login_primer_ingreso_form",
-    LOGIN_REGISTRAR_BTN: "login_registrar_btn"
+    CALENDARIO: "calendario"
 };
 
 const Class = {
@@ -67,5 +71,8 @@ const Class = {
     APROBAR_BTN: "aprobar_btn",
     DESAPROBAR_BTN: "desaprobar_btn",
     CONFIG_BTN: "config_btn",
-    LOGINBOX: "loginbox"
+    LOGINBOX: "loginbox",
+    EJECUTAR_SORTEO_BTN: "ejecutar_sorteo_btn",
+    ACTUALIZAR_FECHA_SORTEO_BTN: "actualizar_fecha_sorteo_btn",
+    CALENDARIO_CELL: "calendario_cell"
 };

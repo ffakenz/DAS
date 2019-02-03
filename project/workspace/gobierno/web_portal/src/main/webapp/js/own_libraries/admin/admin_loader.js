@@ -7,6 +7,10 @@ $(window).on('load', () => {
         EstadoCuentaService.GET_CONSULTAR_TODOS();
     }, 2000);
 
+    setTimeout(function(){
+        CalendarioService.GET_SORTEOS();
+    }, 3000);
+
     console.log("Admin View executed on Load");
 });
 
