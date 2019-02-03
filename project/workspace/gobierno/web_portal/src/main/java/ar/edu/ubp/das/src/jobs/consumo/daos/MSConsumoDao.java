@@ -33,7 +33,7 @@ public class MSConsumoDao extends DaoImpl<ConsumoForm> {
 
     @Override
     public List<ConsumoForm> select(final ConsumoForm form) throws SQLException {
-        return null;
+        return this.select();
     }
 
     @Override

@@ -1,4 +1,4 @@
-CREATE PROCEDURE get_participantes (
+/*CREATE PROCEDURE get_participantes (
     @mes_sorteo INT
 ) AS
 WITH concesionarias_participantes AS (
@@ -8,7 +8,7 @@ WITH concesionarias_participantes AS (
     WHERE c.codigo IS NOT NULL -- concesionaria aprobada
         -- concesionaria consumida en los ultimos 5 dias
         AND js.estado = 'success'
-        AND js.offset > (GATEDATE() - 5)
+        AND js.offset > (GETDATE() - 5)
         AND DATE_PART(js.offset, MONTH()) <= @mes_sorteo
     ORDER BY id DESC;
 ), estado_cuentas_participantes AS (
@@ -34,3 +34,4 @@ FROM estado_cuentas ec
         ON ec.id = ecp.estado_cuenta_id
 WHERE ecp.total_cuotas = total_cuotas_paagas -- todas las cuotas al dia
 ORDER BY id DESC;
+*/

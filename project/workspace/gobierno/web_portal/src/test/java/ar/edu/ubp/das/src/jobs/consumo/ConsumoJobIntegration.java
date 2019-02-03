@@ -49,13 +49,14 @@ public class ConsumoJobIntegration {
 
     @Test
     public void test_09() throws Exception {
-        // Case: 0 concesionarias
+        // Case: 0 concesionarias in db
 
         final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, ClientFactory.getInstance());
 
         consumer.execute(null);
 
         assertNotNull(consumoJobManager.getMsJobConsumoDao().getLastJob());
+        assertNull(consumoJobManager.getMsConsumoDao().select());
     }
 
 

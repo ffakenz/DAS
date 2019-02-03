@@ -3,6 +3,5 @@ CREATE PROCEDURE actualizar_fecha_sorteo (
     , @fecha_ejecucion  DATETIME
 ) AS
 UPDATE sorteos
-SET fecha_ejecucion = @fecha_ejecucion,
-    mes_sorteo = DATEPART(MONTH, @fecha_ejecucion)
+SET fecha_ejecucion = @fecha_ejecucion
 WHERE id = @id_sorteo;
