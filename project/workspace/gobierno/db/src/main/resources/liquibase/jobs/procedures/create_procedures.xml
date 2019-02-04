@@ -244,6 +244,33 @@
     <!-- ******************************* -->
     <!--  DROPS SORTEO                   -->
     <!-- ******************************* -->
+    <changeSet id="Drop procedure get_concesionarias_notificadas" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_concesionarias_notificadas'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_concesionarias_notificadas"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure log_concesionarias_notificadas" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_concesionarias_notificadas'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="log_concesionarias_notificadas"/>
+    </changeSet>
 
     <changeSet id="Drop procedure get_ultimo_ganador" author="DAS-Team" runAlways="true"
                runOnChange="true">
@@ -625,6 +652,36 @@
     <!-- ******************************* -->
     <!--  CREATE SORTEO                  -->
     <!-- ******************************* -->
+
+    <changeSet id="Create procedure get_concesionarias_notificadas" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_concesionarias_notificadas'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/sorteo/get_concesionarias_notificadas.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure log_concesionarias_notificadas" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_concesionarias_notificadas'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/sorteo/log_concesionarias_notificadas.sql"/>
+    </changeSet>
 
     <changeSet id="Create procedure get_ultimo_ganador" author="DAS-Team" runAlways="true"
                runOnChange="true">
