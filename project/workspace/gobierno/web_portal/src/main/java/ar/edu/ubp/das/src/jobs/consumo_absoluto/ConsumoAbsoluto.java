@@ -78,7 +78,7 @@ public class ConsumoAbsoluto {
 
 
     // TODO : Change Return Time to DTO Response
-    public void ejecutar() {
+    public boolean ejecutar() {
         final ConsumoAbsolutoForm consumoAbsolutoForm = new ConsumoAbsolutoForm();
         consumoAbsolutoForm.setFecha(Timestamp.from(Instant.now()));
         // GET ALL CONCESIONARIAS APROBADAS
@@ -87,21 +87,37 @@ public class ConsumoAbsoluto {
         for (final ConcesionariaForm aprobada : aprobadas) {
             // OBTAIN CLIENT FOR CONCESIONARIA
             final Optional<ConcesionariaServiceContract> client = this.getClient(consumoAbsolutoForm, aprobada.getId());
-            if (!client.isPresent()) {
-                continue;
-            }
-            // GET ALL ESTADO DE CUENTAS FROM CONCESIONARIA
-            final List<EstadoCuentasForm> estadoCuentasForms = this.getAllEstadoCuentasByConcesionaria(consumoAbsolutoForm, aprobada.getId());
-            // UPDATE ALL ESTADOS DE CUENTAS X CONCESIONARIA APROBADA
-            for (final EstadoCuentasForm estadoCuentasForm : estadoCuentasForms) {
-                final String rqstId = UUID.randomUUID().toString();
-                final Optional<PlanBean> planBean = this.consultarPlan(client.get(), consumoAbsolutoForm, estadoCuentasForm, rqstId);
-                // insert(planBean, consumo absoluto plan aprobada id);
-                planBean.ifPresent(planBean1 -> this.updateDb(consumoAbsolutoForm, estadoCuentasForm, rqstId, planBean1));
-            }
-            // si todos los estados de cuenta resultaron exitosos => mark [consumo absoluto aprobada] as success => [query]
+            client.ifPresent(cli -> {
+                // GET ALL ESTADO DE CUENTAS FROM CONCESIONARIA
+                final List<EstadoCuentasForm> estadoCuentasForms = this.getAllEstadoCuentasByConcesionaria(consumoAbsolutoForm, aprobada.getId());
+                // UPDATE ALL ESTADOS DE CUENTAS X CONCESIONARIA APROBADA
+                for (final EstadoCuentasForm estadoCuentasForm : estadoCuentasForms) {
+                    final String rqstId = UUID.randomUUID().toString();
+                    final Optional<PlanBean> planBean = this.consultarPlan(cli, consumoAbsolutoForm, estadoCuentasForm, rqstId);
+                    // insert(planBean, consumo absoluto plan aprobada id);
+                    planBean.ifPresent(pb -> this.updateDb(consumoAbsolutoForm, estadoCuentasForm, rqstId, pb));
+                }
+                if (!estadoCuentasForms.isEmpty()) {
+                    // TODO <- Improve this with comment below
+                    // si todos los estados de cuenta resultaron exitosos => mark [consumo absoluto aprobada] as success => [query]
+                    log.info("[ConsumoAbsoluto.ejecutar][SUCCEDED aprobada {}]", aprobada.getId());
+                    consumoAbsolutoForm.setEstado("SUCCESS");
+                    consumoAbsolutoForm.setCause("aprobada");
+                    consumoAbsolutoForm.setConcesionariaId(aprobada.getId());
+                    logConsumoAbsolutoForm(consumoAbsolutoForm);
+                }
+            });
         }
-        // si todas las aprobadas resultaron exitosas => mark [consumo absoluto] as success => [query]
+        if (!aprobadas.isEmpty()) {
+            // TODO <- Improve this with comment below
+            // si todas las aprobadas resultaron exitosas => mark [consumo absoluto] as success => [query]
+            log.info("[ConsumoAbsoluto.ejecutar][SUCCESS]");
+            consumoAbsolutoForm.setEstado("SUCCESS");
+            consumoAbsolutoForm.setCause("job");
+            logConsumoAbsolutoForm(consumoAbsolutoForm);
+        }
+
+        return consumoAbsolutoForm.getEstado().equals("SUCCESS");
     }
 
     private List<ConcesionariaForm> getAllConcesionariasAprobadas(final ConsumoAbsolutoForm consumoAbsolutoForm) {

@@ -117,7 +117,11 @@ public class SorteoJob implements Job {
             final Timestamp fechaDelDia = Timestamp.from(Instant.now());
 
             final ConsumoAbsoluto consumoAbsoluto = new ConsumoAbsoluto(datasourceConfig, clientFactory);
-            consumoAbsoluto.ejecutar(); // check against consumo absoluto result
+            if (consumoAbsoluto.ejecutar()) {
+                // check against consumo absoluto result
+            } else {
+
+            }
 
             if (!ultimoGanador.isPresent()) {
                 // SORTEO NUEVO
