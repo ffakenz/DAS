@@ -82,6 +82,7 @@ public class SorteoJob implements Job {
 
         // TODO: definir estados, steps y modularizar la ejecución en distintos metodos, tener en cuenta que un sorteo pendiente_x tiene que volver a ejecutarse desde donde termino
         // TODO: revisar como resolver si falla en comunicacion a concesionarias (tener la lista en la db tal vez)
+
         log.info("STARTING_SORTEO");
         final Optional<SorteoForm> sorteoDeHoy = getSorteoDeHoy();
 
