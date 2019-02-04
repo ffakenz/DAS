@@ -476,6 +476,4 @@ public class ConsumoJobIntegrationSpec {
                 .allMatch(c -> c.getResult().equals(SUCCESS))
         );
     }
-
-
 }
