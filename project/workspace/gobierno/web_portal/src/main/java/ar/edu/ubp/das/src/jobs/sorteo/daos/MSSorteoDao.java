@@ -70,4 +70,11 @@ public class MSSorteoDao extends DaoImpl<SorteoForm> {
                 .filter(s -> s.getMesSorteo().equals(mesSorteo))
                 .collect(Collectors.toList());
     }
+
+    public List<SorteoForm> getSorteosByAnio(final Integer anioSorteo) throws SQLException {
+        return this.select()
+                .stream()
+                .filter(s -> s.getAnioSorteo().equals(anioSorteo))
+                .collect(Collectors.toList());
+    }
 }

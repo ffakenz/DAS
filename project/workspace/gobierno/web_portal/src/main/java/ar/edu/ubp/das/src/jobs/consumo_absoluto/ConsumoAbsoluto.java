@@ -78,9 +78,10 @@ public class ConsumoAbsoluto {
 
 
     // TODO : Change Return Time to DTO Response
-    public boolean ejecutar() {
+    public boolean ejecutar(Long sorteoId) {
         final ConsumoAbsolutoForm consumoAbsolutoForm = new ConsumoAbsolutoForm();
         consumoAbsolutoForm.setFecha(Timestamp.from(Instant.now()));
+        consumoAbsolutoForm.setIdSorteo(sorteoId);
         // GET ALL CONCESIONARIAS APROBADAS
         final List<ConcesionariaForm> aprobadas = this.getAllConcesionariasAprobadas(consumoAbsolutoForm);
         // UPDATE ALL CONCESIONARIAS APROBADAS

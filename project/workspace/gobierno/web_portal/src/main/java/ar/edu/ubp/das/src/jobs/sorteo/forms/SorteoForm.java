@@ -5,7 +5,6 @@ import ar.edu.ubp.das.mvc.db.annotations.Column;
 import ar.edu.ubp.das.mvc.db.annotations.Entity;
 
 import java.sql.Timestamp;
-import java.util.StringJoiner;
 
 @Entity
 public class SorteoForm extends DynaActionForm {
@@ -14,6 +13,8 @@ public class SorteoForm extends DynaActionForm {
     private Long id;
     @Column(name = "mes_sorteo")
     private Integer mesSorteo;
+    @Column(name = "anio_sorteo")
+    private Integer anioSorteo;
     @Column(name = "estado")
     private String estado;
     @Column(name = "fecha_ejecucion")
@@ -43,6 +44,14 @@ public class SorteoForm extends DynaActionForm {
         this.mesSorteo = mesSorteo;
     }
 
+    public Integer getAnioSorteo() {
+        return anioSorteo;
+    }
+
+    public void setAnioSorteo(Integer anioSorteo) {
+        this.anioSorteo = anioSorteo;
+    }
+
     public String getEstado() {
         return estado;
     }
@@ -61,11 +70,12 @@ public class SorteoForm extends DynaActionForm {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", SorteoForm.class.getSimpleName() + "[", "]")
-                .add("id=" + id)
-                .add("mesSorteo=" + mesSorteo)
-                .add("estado='" + estado + "'")
-                .add("fecha_ejecucion=" + fechaEjecucion)
-                .toString();
+        return "SorteoForm{" +
+                "id=" + id +
+                ", mesSorteo=" + mesSorteo +
+                ", anioSorteo=" + anioSorteo +
+                ", estado='" + estado + '\'' +
+                ", fechaEjecucion=" + fechaEjecucion +
+                '}';
     }
 }

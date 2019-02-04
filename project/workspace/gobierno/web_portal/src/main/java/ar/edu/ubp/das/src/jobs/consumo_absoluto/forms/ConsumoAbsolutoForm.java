@@ -10,6 +10,8 @@ import java.sql.Timestamp;
 public class ConsumoAbsolutoForm extends DynaActionForm {
     @Column(name = "id")
     private Long id;
+    @Column(name = "id_sorteo")
+    private Long idSorteo;
     @Column(name = "fecha")
     private Timestamp fecha;
     @Column(name = "concesionaria_id")
@@ -29,6 +31,7 @@ public class ConsumoAbsolutoForm extends DynaActionForm {
     public String toString() {
         return "ConsumoAbsolutoForm{" +
                 "id=" + id +
+                ", idSorteo=" + idSorteo +
                 ", fecha=" + fecha +
                 ", concesionariaId=" + concesionariaId +
                 ", planId=" + planId +
@@ -37,6 +40,14 @@ public class ConsumoAbsolutoForm extends DynaActionForm {
                 ", estado='" + estado + '\'' +
                 ", cause='" + cause + '\'' +
                 '}';
+    }
+
+    public Long getIdSorteo() {
+        return idSorteo;
+    }
+
+    public void setIdSorteo(Long idSorteo) {
+        this.idSorteo = idSorteo;
     }
 
     public Boolean isForConcesionariaPlan() {

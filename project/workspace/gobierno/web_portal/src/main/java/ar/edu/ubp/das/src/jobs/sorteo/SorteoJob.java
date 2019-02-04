@@ -117,7 +117,9 @@ public class SorteoJob implements Job {
             final Timestamp fechaDelDia = Timestamp.from(Instant.now());
 
             final ConsumoAbsoluto consumoAbsoluto = new ConsumoAbsoluto(datasourceConfig, clientFactory);
-            if (consumoAbsoluto.ejecutar()) {
+
+            //TODO: obtener sorteoId , cuando se definan los 2 todos de arriba
+            if (consumoAbsoluto.ejecutar(1L)) {
                 // check against consumo absoluto result
             } else {
 

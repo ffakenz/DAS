@@ -92,6 +92,13 @@
         <dropTable tableName="estado_participante"/>
     </changeSet>
 
+    <changeSet id="Drop table ejecuciones_sorteo" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="sorteos"/>
+        </preConditions>
+        <dropTable tableName="sorteos"/>
+    </changeSet>
+
     <changeSet id="Drop table sorteos" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <tableExists tableName="sorteos"/>

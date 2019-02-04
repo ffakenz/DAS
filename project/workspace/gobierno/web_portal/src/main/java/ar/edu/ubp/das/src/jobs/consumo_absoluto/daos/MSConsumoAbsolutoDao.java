@@ -42,8 +42,8 @@ public class MSConsumoAbsolutoDao extends DaoImpl<ConsumoAbsolutoForm> {
 
     public void insertConsumoAbsoluto(final ConsumoAbsolutoForm form) {
         try {
-            executeProcedure("dbo.log_consumo_absoluto(?,?,?)", form,
-                    "fecha", "estado", "cause");
+            executeProcedure("dbo.log_consumo_absoluto(?,?,?,?)", form,
+                    "idSorteo","fecha", "estado", "cause");
         } catch (final SQLException e) {
             e.printStackTrace();
             log.error("[ConsumoAbsoluto.ejecutar][FAILED insertConsumoAbsoluto]");
@@ -53,8 +53,8 @@ public class MSConsumoAbsolutoDao extends DaoImpl<ConsumoAbsolutoForm> {
 
     public void insertConsumoAbsolutoConcesionaria(final ConsumoAbsolutoForm form) {
         try {
-            executeProcedure("dbo.log_consumo_absoluto_concesionaria(?,?,?,?)", form,
-                    "concesionariaId", "fecha", "estado", "cause");
+            executeProcedure("dbo.log_consumo_absoluto_concesionaria(?,?,?,?,?)", form,
+                    "idSorteo", "concesionariaId", "fecha", "estado", "cause");
         } catch (final SQLException e) {
             e.printStackTrace();
             log.error("[ConsumoAbsoluto.ejecutar][FAILED insertConsumoAbsolutoConcesionaria]");
@@ -63,8 +63,8 @@ public class MSConsumoAbsolutoDao extends DaoImpl<ConsumoAbsolutoForm> {
 
     public void insertConsumoAbsolutoConcesionariaPlan(final ConsumoAbsolutoForm form) {
         try {
-            executeProcedure("dbo.log_consumo_absoluto_concesionaria_plan(?,?,?,?,?,?,?)", form,
-                    "concesionariaId", "idRequestResp", "planId", "estadoCuentaId", "fecha", "estado", "cause");
+            executeProcedure("dbo.log_consumo_absoluto_concesionaria_plan(?,?,?,?,?,?,?,?)", form,
+                    "idSorteo", "concesionariaId", "idRequestResp", "planId", "estadoCuentaId", "fecha", "estado", "cause");
         } catch (final SQLException e) {
             e.printStackTrace();
             log.error("[ConsumoAbsoluto.ejecutar][FAILED insertConsumoAbsolutoConcesionariaPlan]");

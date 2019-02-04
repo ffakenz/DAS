@@ -87,6 +87,20 @@
         <dropProcedure procedureName="get_consumos"/>
     </changeSet>
 
+    <changeSet id="Drop procedure get_ejecuciones_sorteo" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_ejecuciones_sorteo'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_ejecuciones_sorteo"/>
+    </changeSet>
+
     <changeSet id="Drop procedure get_consumo_jobs" author="DAS-Team" runAlways="true"
                runOnChange="true">
         <preConditions onFail="MARK_RAN">
@@ -229,6 +243,34 @@
             </sqlCheck>
         </preConditions>
         <dropProcedure procedureName="get_ultimo_ganador"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure get_ejecuciones_sorteo" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_ejecuciones_sorteo'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_ejecuciones_sorteo"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure log_ejecuciones_sorteo" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_ejecuciones_sorteo'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="log_ejecuciones_sorteo"/>
     </changeSet>
 
     <changeSet id="Drop procedure log_sorteo" author="DAS-Team" runAlways="true"
@@ -568,6 +610,21 @@
         </preConditions>
         <sqlFile
                 path="/src/main/resources/liquibase/jobs/procedures/sorteo/get_ultimo_ganador.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure log_ejecuciones_sorteo" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_ejecuciones_sorteo'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/sorteo/log_ejecuciones_sorteo.sql"/>
     </changeSet>
 
     <changeSet id="Create procedure log_sorteo" author="DAS-Team" runAlways="true"

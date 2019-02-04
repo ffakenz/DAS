@@ -1,5 +1,6 @@
 CREATE TABLE consumo_absoluto (
     id                  BIGINT          NOT NULL IDENTITY
+    , id_sorteo         BIGINT          NOT NULL
     , fecha             DATETIME        NOT NULL
     , concesionaria_id  BIGINT          NULL
     , plan_id           BIGINT          NULL
@@ -8,4 +9,5 @@ CREATE TABLE consumo_absoluto (
     , estado            VARCHAR(100)    NOT NULL
     , cause             VARCHAR(1000)   NOT NULL
     , PRIMARY KEY(id)
+    , FOREIGN KEY(id_sorteo) REFERENCES sorteos(id)
 );

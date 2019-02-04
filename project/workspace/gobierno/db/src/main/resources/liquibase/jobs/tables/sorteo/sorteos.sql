@@ -5,6 +5,9 @@ CREATE TABLE sorteos (
 	, mes_sorteo AS CAST (
         DATEPART(MONTH, fecha_ejecucion) AS INT
 	)
+	, anio_sorteo AS CAST (
+        DATEPART(YEAR, fecha_ejecucion) AS INT
+	)
 	, PRIMARY KEY(id)
 	, FOREIGN KEY(estado) REFERENCES estado_sorteo(nombre)
 );

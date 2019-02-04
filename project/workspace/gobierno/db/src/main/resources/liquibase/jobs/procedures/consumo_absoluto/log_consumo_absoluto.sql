@@ -1,7 +1,8 @@
 CREATE PROCEDURE log_consumo_absoluto (
-    @fecha            DATETIME
+    @idSorteo         BIGINT
+    , @fecha          DATETIME
     , @estado         VARCHAR(100)
     , @cause          VARCHAR(1000)
 ) AS
-INSERT INTO consumo_absoluto(fecha, estado, cause)
-VALUES(@fecha, @estado, @cause);
+INSERT INTO consumo_absoluto(id_sorteo, fecha, estado, cause)
+VALUES(@idSorteo, @fecha, @estado, @cause);
