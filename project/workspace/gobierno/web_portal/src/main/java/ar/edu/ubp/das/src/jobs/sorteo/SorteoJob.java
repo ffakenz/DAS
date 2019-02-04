@@ -3,17 +3,19 @@ package ar.edu.ubp.das.src.jobs.sorteo;
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.src.concesionarias.daos.MSConcesionariasDao;
 import ar.edu.ubp.das.src.concesionarias.daos.MSConfigurarConcesionariaDao;
+import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
 import ar.edu.ubp.das.src.concesionarias.managers.ConcesionariasManager;
 import ar.edu.ubp.das.src.concesionarias.managers.ConfigurarConcesionariaManager;
 import ar.edu.ubp.das.src.estado_cuentas.daos.MSEstadoCuentasDao;
-import ar.edu.ubp.das.src.estado_cuentas.forms.EstadoCuentasForm;
-import ar.edu.ubp.das.src.estado_cuentas.forms.TipoEstadoCuenta;
 import ar.edu.ubp.das.src.estado_cuentas.managers.EstadoCuentasManager;
 import ar.edu.ubp.das.src.jobs.ClientFactoryAdapter;
 import ar.edu.ubp.das.src.jobs.consumo_absoluto.ConsumoAbsoluto;
-import ar.edu.ubp.das.src.jobs.sorteo.forms.*;
+import ar.edu.ubp.das.src.jobs.sorteo.forms.EjecucionesSorteoForm;
+import ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo;
+import ar.edu.ubp.das.src.jobs.sorteo.forms.ParticipanteForm;
+import ar.edu.ubp.das.src.jobs.sorteo.forms.SorteoForm;
+import ar.edu.ubp.das.src.utils.Constants;
 import ar.edu.ubp.das.src.utils.DateUtils;
-import beans.PlanBean;
 import clients.ConcesionariaServiceContract;
 import clients.factory.IClientFactory;
 import clients.responses.ClientException;
@@ -23,11 +25,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
-
-import static utils.MiddlewareConstants.IDENTIFICADOR;
+import java.util.Random;
 
 public class SorteoJob implements Job {
 
@@ -61,43 +61,6 @@ public class SorteoJob implements Job {
 
     }
 
-    /*
-    class PlanState {
-        final private EstadoCuentasForm estadoCuentaGobierno;
-        final private PlanBean planBeanConcesionaria;
-        final private Long concesionariaId;
-    }
-     */
-
-
-    public Boolean verificarCancelacionCuenta(final ParticipanteForm ganador) {
-        final Optional<ConcesionariaServiceContract> client =
-                clientFactory.getClientForConcesionaria(ganador.getIdConcesionaria(), configurarConcesionariaManager);
-        if (!client.isPresent()) {
-            return false;
-        }
-        // selectEstadoCuentasById cannot fail if there is a winner
-        final EstadoCuentasForm estadoCuentaGanador =
-                estadoCuentasManager.getDao().selectEstadoCuentasById(ganador.getIdPlan()).get();
-        final PlanBean planBeanResponse = client.get().consultarPlan(IDENTIFICADOR, ganador.getIdPlan());
-
-        // si el plan esta cancelado en la concesionaria y pendiente de cancelacione en el sistema
-        if (planBeanResponse.getPlanEstado().equals(TipoEstadoCuenta.CANCELADO.getTipo()) &&
-                estadoCuentaGanador.getEstado().equals(TipoEstadoCuenta.PENDIENTE_CANCELACION.getTipo())) {
-
-            ganador.setEstado(EstadoParticipante.GANADOR); // set participante as ganador
-            estadoCuentaGanador.setEstado(TipoEstadoCuenta.CANCELADO.getTipo()); // set plan as cancelado
-            sorteoJobManager.getMsParticipanteDao().update(ganador);
-            estadoCuentasManager.getDao().updateEstado(estadoCuentaGanador);
-            // log cancelacion de cuenta success
-            return true;
-        } else {
-            // notify concesionaria ganador about this issue
-            log.error("SORTEO [FAILED] [REASON - {}]", "ganador is not canceled");
-            return false;
-        }
-    }
-
     private Optional<SorteoForm> getSorteoDeHoy() {
         try {
             final Optional<SorteoForm> ultimoSorteo = this.sorteoJobManager.getMsSorteoDao().getUltimoSorteo();
@@ -114,14 +77,11 @@ public class SorteoJob implements Job {
         }
     }
 
-
-    private List<ParticipanteForm> getParticipantesSorteo(final Timestamp fechaEjecucion) throws SQLException {
-        return sorteoJobManager.getMsParticipanteDao().getParticipantes(fechaEjecucion);
-    }
-
     @Override
     public void execute(final JobExecutionContext jobExecutionContext) {
 
+        // TODO: definir estados, steps y modularizar la ejecución en distintos metodos, tener en cuenta que un sorteo pendiente_x tiene que volver a ejecutarse desde donde termino
+        // TODO: revisar como resolver si falla en comunicacion a concesionarias (tener la lista en la db tal vez)
         log.info("STARTING_SORTEO");
         final Optional<SorteoForm> sorteoDeHoy = getSorteoDeHoy();
 
@@ -129,29 +89,46 @@ public class SorteoJob implements Job {
 
             try {
                 final EjecucionesSorteoForm ejecucion = new EjecucionesSorteoForm();
-
                 final ConsumoAbsoluto consumoAbsoluto = new ConsumoAbsoluto(datasourceConfig, clientFactory);
 
                 if (consumoAbsoluto.ejecutar(sorteoForm.getId())) {
-                    // check against consumo absoluto result
-                } else {
+                    final List<ParticipanteForm> participantes = sorteoJobManager.getMsParticipanteDao().getParticipantes(-5, 1, 2);
+                    final int indexGanador = new Random().nextInt(participantes.size() - 1);
+                    final ParticipanteForm ganador = participantes.get(indexGanador);
+                    final Long idConcesionariaGanadora = ganador.getIdConcesionaria();
+                    final Optional<ConcesionariaServiceContract> clientForConcesionaria =
+                            clientFactory.getClientForConcesionaria(idConcesionariaGanadora, configurarConcesionariaManager);
 
-                }
+                    if (!clientForConcesionaria.isPresent()) {
+                        // mark sorteo as failed due to client for concesionaria
+                        return;
+                    }
 
-                if (!ultimoGanador.isPresent()) {
-                    // SORTEO NUEVO
-                } else if (verificarCancelacionCuenta(ultimoGanador.get())) {
-                    // LAST SORTEO SUCCEEDED -> set estado
-                    // ejecutar hasta "obtener planes"
+                    final ConcesionariaServiceContract client = clientForConcesionaria.get();
+                    try {
+                        client.cancelarPlan(Constants.IDENTIFICADOR, ganador.getIdPlan()); // notificamos a la concesionaria ganadora primero
+                    } catch (final ClientException e) {
+                        // mark sorteo as pendiente de cancelacion
+                    }
+
+                    final List<ConcesionariaForm> aprobadas = concesionariasManager.getDao().selectAprobadas();
+                    for (final ConcesionariaForm aprobada : aprobadas) {
+                        final Optional<ConcesionariaServiceContract> clienteAprobada =
+                                clientFactory.getClientForConcesionaria(aprobada.getId(), configurarConcesionariaManager);
+                        try {
+                            client.cancelarPlan(Constants.IDENTIFICADOR, ganador.getIdPlan()); // notificamos a todas las aprobadas
+                        } catch (final ClientException e) {
+                            // mark concesionarias sorteo as pendiente de notificacion
+                        }
+                    }
+                    // mark sorteo as completado
                 } else {
-                    // LAST SORTEO FAILED -> set estado
-                    // ejecutar hasta "obtener planes"
+                    // mark sorteo as pendiente de consumo absoluto
                 }
-            } catch (final SQLException | ClientException ex) {
+            } catch (final SQLException ex) {
                 log.error("SORTEO [FAILED] [exception:{}]", ex.getMessage());
             }
         });
-
         log.info("FINISHING_CONSUMER");
     }
 }

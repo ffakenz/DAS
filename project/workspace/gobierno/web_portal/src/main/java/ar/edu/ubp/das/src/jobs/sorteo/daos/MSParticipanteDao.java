@@ -5,7 +5,6 @@ import ar.edu.ubp.das.src.jobs.sorteo.forms.ParticipanteForm;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,10 +42,14 @@ public class MSParticipanteDao extends DaoImpl<ParticipanteForm> {
         return false;
     }
 
-    public List<ParticipanteForm> getParticipantes(final Timestamp fechaEjecucion) throws SQLException {
+    public List<ParticipanteForm> getParticipantes(final Integer days,
+                                                   final Integer cuotasMin,
+                                                   final Integer cuotasMax) throws SQLException {
         this.connect();
-        this.setProcedure("dbo.get_participantes(?)", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        this.setParameter(1, fechaEjecucion);
+        this.setProcedure("dbo.get_participantes(?,?,?)", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        this.setParameter(1, days);
+        this.setParameter(2, cuotasMin);
+        this.setParameter(3, cuotasMax);
         final List<ParticipanteForm> result = this.executeQuery();
         this.disconnect();
         return result;
