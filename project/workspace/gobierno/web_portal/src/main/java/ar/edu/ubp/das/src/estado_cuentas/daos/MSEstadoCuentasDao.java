@@ -47,6 +47,7 @@ public class MSEstadoCuentasDao extends DaoImpl<EstadoCuentasForm> {
         return selectByNroPlanAndConcesionaria(form).isPresent();
     }
 
+    // select by unique
     public Optional<EstadoCuentasForm> selectByNroPlanAndConcesionaria(final EstadoCuentasForm form) throws SQLException {
         return this.executeQueryProcedure("dbo.get_estado_cuentas_by_nro_plan_and_concesionaria(?, ?)",
                 form, "concesionariaId", "nroPlanConcesionaria")
@@ -76,11 +77,12 @@ public class MSEstadoCuentasDao extends DaoImpl<EstadoCuentasForm> {
     }
 
 
-    public void upsert(final EstadoCuentasForm form) throws SQLException {
+    public EstadoCuentasForm upsert(final EstadoCuentasForm form) throws SQLException {
         if (!this.valid(form)) {
             this.insert(form);
         } else {
             this.update(form);
         }
+        return this.selectByNroPlanAndConcesionaria(form).orElseGet(null); // return the updated or inserted
     }
 }

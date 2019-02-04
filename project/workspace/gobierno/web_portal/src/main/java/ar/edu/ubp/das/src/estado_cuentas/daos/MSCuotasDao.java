@@ -49,6 +49,7 @@ public class MSCuotasDao extends DaoImpl<CuotasForm> {
                 "nroCuota", "estadoCuentaId", "monto", "fechaPago");
     }
 
+    // select by unique
     public Optional<CuotasForm> selectCuota(final CuotasForm form) throws SQLException {
         return this.executeQueryProcedure("dbo.get_cuota(?, ?)",
                 form, "nroCuota", "estadoCuentaId")
@@ -67,5 +68,6 @@ public class MSCuotasDao extends DaoImpl<CuotasForm> {
         } else {
             this.update(form);
         }
+        // return this.selectCuota(form); // return the updated or inserted
     }
 }

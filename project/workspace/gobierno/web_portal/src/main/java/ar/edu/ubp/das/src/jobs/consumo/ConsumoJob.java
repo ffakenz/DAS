@@ -197,8 +197,8 @@ public class ConsumoJob implements Job {
      */
     private void updateDb(final Long concesionariaId, final NotificationUpdate update) throws SQLException {
         updateConsumerDb(update);
-        updateEstadoCuentaDb(update, concesionariaId);
-        updateCuotaDb(update);
+        final EstadoCuentasForm upserted = updateEstadoCuentaDb(update, concesionariaId);
+        updateCuotaDb(update, upserted.getId());
     }
 
     /**
@@ -230,7 +230,7 @@ public class ConsumoJob implements Job {
      * @param concesionariaId
      * @throws SQLException
      */
-    public void updateEstadoCuentaDb(final NotificationUpdate update, final Long concesionariaId) throws SQLException {
+    public EstadoCuentasForm updateEstadoCuentaDb(final NotificationUpdate update, final Long concesionariaId) throws SQLException {
 
         final EstadoCuentasForm estadoCuenta = new EstadoCuentasForm();
         estadoCuenta.setConcesionariaId(concesionariaId);
@@ -239,17 +239,17 @@ public class ConsumoJob implements Job {
         estadoCuenta.setVehiculo(update.getVehiculoId());
         estadoCuenta.setFechaAltaConcesionaria(update.getPlanFechaAlta());
         estadoCuenta.setEstado(update.getPlanEstado());
-        estadoCuentasManager.getDao().upsert(estadoCuenta);
+        return estadoCuentasManager.getDao().upsert(estadoCuenta);
     }
 
     /**
      * @param update
      * @throws SQLException
      */
-    public void updateCuotaDb(final NotificationUpdate update) throws SQLException {
+    public void updateCuotaDb(final NotificationUpdate update, final Long estadoCuentaId) throws SQLException {
 
         final CuotasForm cuota = new CuotasForm();
-        cuota.setEstadoCuentaId(update.getPlanId());
+        cuota.setEstadoCuentaId(estadoCuentaId);
         cuota.setNroCuota(update.getCuotaNroCuota());
         cuota.setFechaVencimiento(update.getCuotaFechaVencimiento());
         cuota.setMonto(update.getCuotaMonto());

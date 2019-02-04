@@ -262,7 +262,7 @@ public class ConsumoJobDesNormalizationSpec {
         final Optional<CuotasForm> cuotasForm = cuotasDao.selectCuota(form);
         assertFalse(cuotasForm.isPresent());
         // updateCuotaDb
-        consumer.updateCuotaDb(nonExistingCuota);
+        consumer.updateCuotaDb(nonExistingCuota, 1L);
         // verify it exists in db
         final Optional<CuotasForm> cuotasForm2 = cuotasDao.selectCuota(form);
         assertTrue(cuotasForm2.isPresent());
@@ -290,7 +290,7 @@ public class ConsumoJobDesNormalizationSpec {
         assertTrue(cuotasForm.isPresent());
 
         // updateCuotaDb
-        consumer.updateCuotaDb(existingCuota);
+        consumer.updateCuotaDb(existingCuota, 1L);
 
         // verify it exists in db and it changed
         final Optional<CuotasForm> cuotasForm2 = cuotasDao.selectCuota(form);

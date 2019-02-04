@@ -175,29 +175,30 @@ public class ConsumoAbsoluto {
 
     /* DESNORMALIZER */
     private void updateDb(final Long concesionariaId, final PlanBean update) throws SQLException {
-        updateEstadoCuentaDb(update, concesionariaId);
-        updateCuotaDb(update);
+        final EstadoCuentasForm upserted = updateEstadoCuentaDb(update, concesionariaId);
+        updateCuotaDb(update, upserted.getId());
     }
 
-    private void updateEstadoCuentaDb(final PlanBean update, final Long concesionariaId) throws SQLException {
+    private EstadoCuentasForm updateEstadoCuentaDb(final PlanBean update, final Long concesionariaId) throws SQLException {
         final EstadoCuentasForm estadoCuenta = new EstadoCuentasForm();
         estadoCuenta.setConcesionariaId(concesionariaId);
         estadoCuenta.setNroPlanConcesionaria(update.getPlanId());
         estadoCuenta.setEstado(update.getPlanEstado());
-        estadoCuentasManager.getDao().update(estadoCuenta);
+        return estadoCuentasManager.getDao().upsert(estadoCuenta); // will be always update
     }
 
-    private void updateCuotaDb(final PlanBean update) throws SQLException {
+    private void updateCuotaDb(final PlanBean update, final Long estadoCuentaId) throws SQLException {
 
         for (final CuotaBean cuotaBean : update.getCuotas()) {
             final CuotasForm cuota = new CuotasForm();
-            cuota.setEstadoCuentaId(update.getPlanId());
+            cuota.setEstadoCuentaId(estadoCuentaId);
+
             cuota.setNroCuota(cuotaBean.getCuotaNroCuota());
             cuota.setFechaVencimiento(cuotaBean.getCuotaFechaVencimiento());
             cuota.setMonto(cuotaBean.getCuotaMonto());
             cuota.setFechaPago(cuotaBean.getCuotaFechaPago());
             cuota.setFechaAltaConcesionaria(cuotaBean.getCuotaFechaAlta());
-            cuotasManager.getDao().update(cuota);
+            cuotasManager.getDao().upsert(cuota);
         }
     }
 
