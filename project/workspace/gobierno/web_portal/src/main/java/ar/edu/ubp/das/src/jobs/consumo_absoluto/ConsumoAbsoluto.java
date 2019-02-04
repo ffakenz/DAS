@@ -76,107 +76,123 @@ public class ConsumoAbsoluto {
 
     }
 
+
     // TODO : Change Return Time to DTO Response
     public void ejecutar() {
         final ConsumoAbsolutoForm consumoAbsolutoForm = new ConsumoAbsolutoForm();
         consumoAbsolutoForm.setFecha(Timestamp.from(Instant.now()));
         // GET ALL CONCESIONARIAS APROBADAS
-        List<ConcesionariaForm> aprobadas = new ArrayList<>();
-        try {
-            aprobadas = concesionariasManager.getDao().selectAprobadas();
-        } catch (final SQLException e) {
-            e.printStackTrace();
-            log.error("[ConsumoAbsoluto.ejecutar][FAILED selectAprobadas]");
-            consumoAbsolutoForm.setEstado("FAILED");
-            consumoAbsolutoForm.setCause("selectAprobadas");
-            logConsumoAbsolutoForm(consumoAbsolutoForm);
-        }
+        final List<ConcesionariaForm> aprobadas = this.getAllConcesionariasAprobadas(consumoAbsolutoForm);
         // UPDATE ALL CONCESIONARIAS APROBADAS
         for (final ConcesionariaForm aprobada : aprobadas) {
             // OBTAIN CLIENT FOR CONCESIONARIA
-            final Optional<ConcesionariaServiceContract> client = getClient(aprobada.getId());
+            final Optional<ConcesionariaServiceContract> client = this.getClient(consumoAbsolutoForm, aprobada.getId());
             if (!client.isPresent()) {
-                log.error("[ConsumoAbsoluto.ejecutar][FAILED getClientForConcesionaria][ConcesionariaId {}]", aprobada.getId());
-                consumoAbsolutoForm.setEstado("FAILED");
-                consumoAbsolutoForm.setCause("getClientForConcesionaria");
-                consumoAbsolutoForm.setConcesionariaId(aprobada.getId());
-                logConsumoAbsolutoForm(consumoAbsolutoForm);
                 continue;
             }
-            log.info("[ConsumoAbsoluto.ejecutar][SUCCESS getClientForConcesionaria][ConcesionariaId {}]", aprobada.getId());
             // GET ALL ESTADO DE CUENTAS FROM CONCESIONARIA
-            List<EstadoCuentasForm> estadoCuentasForms = new ArrayList<>();
-            try {
-                estadoCuentasForms =
-                        estadoCuentasManager.getDao().selectEstadoCuentasByConcesionariaId(aprobada.getId());
-                log.info("[EJECUTAR][SUCCESS selectEstadoCuentasByConcesionariaId][ConcesionariaId {}]", aprobada.getId());
-            } catch (final SQLException e) {
-                e.printStackTrace();
-                log.error("[EJECUTAR][FAILED selectEstadoCuentasByConcesionariaId][ConcesionariaId {}]", aprobada.getId());
-                consumoAbsolutoForm.setEstado("FAILED");
-                consumoAbsolutoForm.setCause("selectEstadoCuentasByConcesionariaId");
-                consumoAbsolutoForm.setConcesionariaId(aprobada.getId());
-                logConsumoAbsolutoForm(consumoAbsolutoForm);
-            }
+            final List<EstadoCuentasForm> estadoCuentasForms = this.getAllEstadoCuentasByConcesionaria(consumoAbsolutoForm, aprobada.getId());
             // UPDATE ALL ESTADOS DE CUENTAS X CONCESIONARIA APROBADA
             for (final EstadoCuentasForm estadoCuentasForm : estadoCuentasForms) {
                 final String rqstId = UUID.randomUUID().toString();
-                try {
-                    final PlanBean planBean = client.get().consultarPlan(Constants.IDENTIFICADOR, estadoCuentasForm.getNroPlanConcesionaria());
-                    // insert(planBean, consumo absoluto plan aprobada id);
-                    log.info("[EJECUTAR][SUCCESS consultarPlan][ConcesionariaId {}][PlanId {}][RQST {}]",
-                            aprobada.getId(), estadoCuentasForm.getNroPlanConcesionaria(), rqstId);
-                    try {
-                        updateDb(aprobada.getId(), planBean);
-                        log.info("[EJECUTAR][SUCCESS updateDb][ConcesionariaId {}][PlanId {}][RQST {}]",
-                                aprobada.getId(), estadoCuentasForm.getNroPlanConcesionaria(), rqstId);
-                        consumoAbsolutoForm.setEstado("SUCCESS");
-                        consumoAbsolutoForm.setCause("updateDb");
-                        consumoAbsolutoForm.setConcesionariaId(aprobada.getId());
-                        consumoAbsolutoForm.setEstadoCuentaId(estadoCuentasForm.getId());
-                        consumoAbsolutoForm.setPlanId(estadoCuentasForm.getNroPlanConcesionaria());
-                        consumoAbsolutoForm.setIdRequestResp(rqstId);
-                        logConsumoAbsolutoForm(consumoAbsolutoForm);
-                    } catch (final SQLException e) {
-                        e.printStackTrace();
-                        log.error("[EJECUTAR][FAILED updateDb][ConcesionariaId {}][PlanId {}][RQST {}]",
-                                aprobada.getId(), estadoCuentasForm.getNroPlanConcesionaria(), rqstId);
-                        consumoAbsolutoForm.setEstado("FAILED");
-                        consumoAbsolutoForm.setCause("updateDb");
-                        consumoAbsolutoForm.setConcesionariaId(aprobada.getId());
-                        consumoAbsolutoForm.setEstadoCuentaId(estadoCuentasForm.getId());
-                        consumoAbsolutoForm.setPlanId(estadoCuentasForm.getNroPlanConcesionaria());
-                        consumoAbsolutoForm.setIdRequestResp(rqstId);
-                        logConsumoAbsolutoForm(consumoAbsolutoForm);
-                    }
-                } catch (final ClientException e) {
-                    e.printStackTrace();
-                    log.error("[EJECUTAR][FAILED consultarPlan][ConcesionariaId {}][PlanId {}]",
-                            aprobada.getId(), estadoCuentasForm.getNroPlanConcesionaria());
-                    consumoAbsolutoForm.setEstado("FAILED");
-                    consumoAbsolutoForm.setCause("consultarPlan");
-                    consumoAbsolutoForm.setConcesionariaId(aprobada.getId());
-                    consumoAbsolutoForm.setEstadoCuentaId(estadoCuentasForm.getId());
-                    consumoAbsolutoForm.setPlanId(estadoCuentasForm.getNroPlanConcesionaria());
-                    consumoAbsolutoForm.setIdRequestResp(rqstId);
-                    logConsumoAbsolutoForm(consumoAbsolutoForm);
-                }
+                final Optional<PlanBean> planBean = this.consultarPlan(client.get(), consumoAbsolutoForm, estadoCuentasForm, rqstId);
+                // insert(planBean, consumo absoluto plan aprobada id);
+                planBean.ifPresent(planBean1 -> this.updateDb(consumoAbsolutoForm, estadoCuentasForm, rqstId, planBean1));
             }
             // si todos los estados de cuenta resultaron exitosos => mark [consumo absoluto aprobada] as success => [query]
         }
         // si todas las aprobadas resultaron exitosas => mark [consumo absoluto] as success => [query]
     }
 
-
-    private Optional<ConcesionariaServiceContract> getClient(final Long concesionariaId) {
-        return clientFactoryAdapter.getClientForConcesionaria(concesionariaId, configurarConcesionariaManager);
+    private List<ConcesionariaForm> getAllConcesionariasAprobadas(final ConsumoAbsolutoForm consumoAbsolutoForm) {
+        try {
+            return concesionariasManager.getDao().selectAprobadas();
+        } catch (final SQLException e) {
+            e.printStackTrace();
+            log.error("[ConsumoAbsoluto.ejecutar][FAILED selectAprobadas]");
+            consumoAbsolutoForm.setEstado("FAILED");
+            consumoAbsolutoForm.setCause("selectAprobadas");
+            logConsumoAbsolutoForm(consumoAbsolutoForm);
+            return new ArrayList<>();
+        }
     }
 
+    private Optional<ConcesionariaServiceContract> getClient(final ConsumoAbsolutoForm consumoAbsolutoForm, final Long concesionariaId) {
+        final Optional<ConcesionariaServiceContract> clientForConcesionaria = clientFactoryAdapter.getClientForConcesionaria(concesionariaId, configurarConcesionariaManager);
+        if (!clientForConcesionaria.isPresent()) {
+            log.error("[ConsumoAbsoluto.ejecutar][FAILED getClientForConcesionaria][ConcesionariaId {}]", concesionariaId);
+            consumoAbsolutoForm.setEstado("FAILED");
+            consumoAbsolutoForm.setCause("getClientForConcesionaria");
+            consumoAbsolutoForm.setConcesionariaId(concesionariaId);
+            logConsumoAbsolutoForm(consumoAbsolutoForm);
+            return Optional.empty();
+        }
+        return clientForConcesionaria;
+    }
+
+    private List<EstadoCuentasForm> getAllEstadoCuentasByConcesionaria(final ConsumoAbsolutoForm consumoAbsolutoForm, final Long concesionariaId) {
+        try {
+            return estadoCuentasManager.getDao().selectEstadoCuentasByConcesionariaId(concesionariaId);
+        } catch (final SQLException e) {
+            e.printStackTrace();
+            log.error("[EJECUTAR][FAILED selectEstadoCuentasByConcesionariaId][ConcesionariaId {}]", concesionariaId);
+            consumoAbsolutoForm.setEstado("FAILED");
+            consumoAbsolutoForm.setCause("selectEstadoCuentasByConcesionariaId");
+            consumoAbsolutoForm.setConcesionariaId(concesionariaId);
+            logConsumoAbsolutoForm(consumoAbsolutoForm);
+            return new ArrayList<>();
+        }
+    }
+
+    private Optional<PlanBean> consultarPlan(final ConcesionariaServiceContract client,
+                                             final ConsumoAbsolutoForm consumoAbsolutoForm,
+                                             final EstadoCuentasForm estadoCuentasForm,
+                                             final String rqstId) {
+        try {
+            final PlanBean planBean = client.consultarPlan(Constants.IDENTIFICADOR, estadoCuentasForm.getNroPlanConcesionaria());
+            return Optional.of(planBean);
+        } catch (final ClientException e) {
+            e.printStackTrace();
+            log.error("[EJECUTAR][FAILED consultarPlan][ConcesionariaId {}][PlanId {}]",
+                    estadoCuentasForm.getConcesionariaId(), estadoCuentasForm.getNroPlanConcesionaria());
+            consumoAbsolutoForm.setEstado("FAILED");
+            consumoAbsolutoForm.setCause("consultarPlan");
+            consumoAbsolutoForm.setConcesionariaId(estadoCuentasForm.getConcesionariaId());
+            consumoAbsolutoForm.setEstadoCuentaId(estadoCuentasForm.getId());
+            consumoAbsolutoForm.setPlanId(estadoCuentasForm.getNroPlanConcesionaria());
+            consumoAbsolutoForm.setIdRequestResp(rqstId);
+            logConsumoAbsolutoForm(consumoAbsolutoForm);
+            return Optional.empty();
+        }
+    }
 
     /* DESNORMALIZER */
-    private void updateDb(final Long concesionariaId, final PlanBean update) throws SQLException {
-        final EstadoCuentasForm upserted = updateEstadoCuentaDb(update, concesionariaId);
-        updateCuotaDb(update, upserted.getId());
+    private void updateDb(final ConsumoAbsolutoForm consumoAbsolutoForm,
+                          final EstadoCuentasForm estadoCuentasForm,
+                          final String rqstId,
+                          final PlanBean update) {
+        try {
+            final EstadoCuentasForm upserted = updateEstadoCuentaDb(update, estadoCuentasForm.getConcesionariaId());
+            updateCuotaDb(update, upserted.getId());
+            consumoAbsolutoForm.setEstado("SUCCESS");
+            consumoAbsolutoForm.setCause("updateDb");
+            consumoAbsolutoForm.setConcesionariaId(estadoCuentasForm.getConcesionariaId());
+            consumoAbsolutoForm.setEstadoCuentaId(estadoCuentasForm.getId());
+            consumoAbsolutoForm.setPlanId(estadoCuentasForm.getNroPlanConcesionaria());
+            consumoAbsolutoForm.setIdRequestResp(rqstId);
+            logConsumoAbsolutoForm(consumoAbsolutoForm);
+        } catch (final SQLException e) {
+            e.printStackTrace();
+            log.error("[EJECUTAR][FAILED updateDb][ConcesionariaId {}][PlanId {}][RQST {}]",
+                    estadoCuentasForm.getConcesionariaId(), estadoCuentasForm.getNroPlanConcesionaria(), rqstId);
+            consumoAbsolutoForm.setEstado("FAILED");
+            consumoAbsolutoForm.setCause("updateDb");
+            consumoAbsolutoForm.setConcesionariaId(estadoCuentasForm.getConcesionariaId());
+            consumoAbsolutoForm.setEstadoCuentaId(estadoCuentasForm.getId());
+            consumoAbsolutoForm.setPlanId(estadoCuentasForm.getNroPlanConcesionaria());
+            consumoAbsolutoForm.setIdRequestResp(rqstId);
+            logConsumoAbsolutoForm(consumoAbsolutoForm);
+        }
     }
 
     private EstadoCuentasForm updateEstadoCuentaDb(final PlanBean update, final Long concesionariaId) throws SQLException {
@@ -192,7 +208,6 @@ public class ConsumoAbsoluto {
         for (final CuotaBean cuotaBean : update.getCuotas()) {
             final CuotasForm cuota = new CuotasForm();
             cuota.setEstadoCuentaId(estadoCuentaId);
-
             cuota.setNroCuota(cuotaBean.getCuotaNroCuota());
             cuota.setFechaVencimiento(cuotaBean.getCuotaFechaVencimiento());
             cuota.setMonto(cuotaBean.getCuotaMonto());
