@@ -72,4 +72,8 @@ public class TestDB extends DaoImpl<Boolean> {
     public void setUpDBConsumoIntegration() throws SQLException {
         this.executeSimpleProcedure("dbo.setUpDBConsumoIntegration");
     }
+
+    public void setUpDBGetAllAprobadasDesactualizadas() throws SQLException {
+        this.executeSimpleProcedure("dbo.setUpDBGetAllAprobadasDesactualizadas");
+    }
 }

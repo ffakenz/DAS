@@ -41,12 +41,15 @@ BEGIN
 
     INSERT INTO estado_sorteo(nombre)
     VALUES ('nuevo')
-            , ('pendiente'),('completado')
+            , ('pendiente')
+            , ('en_ejecucion')
+            , ('completado')
 
     INSERT INTO estado_participante(nombre)
     VALUES ('participante')
             , ('ganador')
             , ('cancelado')
+            , ('pendiente_cancelacion')
 
     INSERT INTO estado_consumo(estado)
     VALUES ('success')

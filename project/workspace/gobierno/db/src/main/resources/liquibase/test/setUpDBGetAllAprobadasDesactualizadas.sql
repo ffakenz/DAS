@@ -1,5 +1,5 @@
 -- USED TO SUPPORT ConsumerJobIntegration
-CREATE PROCEDURE setUpDBConsumoIntegration AS
+CREATE PROCEDURE setUpDBGetAllAprobadasDesactualizadas AS
 BEGIN
 
     INSERT INTO tipos_vehiculo(nombre)
@@ -30,8 +30,8 @@ BEGIN
             , ('REST', 'url')
 
     INSERT INTO tipo_usuario(nombre)
-        VALUES ('consumer')
-                , ('gobierno')
+    VALUES ('consumer')
+            , ('gobierno')
 
     INSERT INTO tipos_estado_cuentas (tipo)
     VALUES ('inicial')

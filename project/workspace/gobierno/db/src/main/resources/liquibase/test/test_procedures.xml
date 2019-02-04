@@ -60,6 +60,20 @@
         <dropProcedure procedureName="setUpEmptyDB"/>
     </changeSet>
 
+    <changeSet id="Drop procedure setUpDBGetAllAprobadasDesactualizadas" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'setUpDBGetAllAprobadasDesactualizadas'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="setUpDBGetAllAprobadasDesactualizadas"/>
+    </changeSet>
+
     <!-- ******************************* -->
     <!--  CREATE PROCEDURES CHANGE-SETS  -->
     <!-- ******************************* -->
@@ -76,7 +90,8 @@
         <sqlFile path="/src/main/resources/liquibase/test/cleanDB.sql"/>
     </changeSet>
 
-    <changeSet id="Create procedure setUpDBConsumoIntegration" author="DAS-Team" runAlways="true" runOnChange="true" context="test">
+    <changeSet id="Create procedure setUpDBConsumoIntegration" author="DAS-Team" runAlways="true" runOnChange="true"
+               context="test">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                 SELECT COUNT(*)
@@ -113,6 +128,20 @@
             </sqlCheck>
         </preConditions>
         <sqlFile path="/src/main/resources/liquibase/test/setUpEmptyDB.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure setUpDBGetAllAprobadasDesactualizadas" author="DAS-Team" runAlways="true"
+               runOnChange="true" context="test">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'setUpDBGetAllAprobadasDesactualizadas'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/test/setUpDBGetAllAprobadasDesactualizadas.sql"/>
     </changeSet>
 
 </databaseChangeLog>
