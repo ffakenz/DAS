@@ -11,8 +11,8 @@ import ar.edu.ubp.das.src.estado_cuentas.forms.TipoEstadoCuenta;
 import ar.edu.ubp.das.src.estado_cuentas.managers.EstadoCuentasManager;
 import ar.edu.ubp.das.src.jobs.ClientFactoryAdapter;
 import ar.edu.ubp.das.src.jobs.consumo_absoluto.ConsumoAbsoluto;
-import ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoParticipante;
-import ar.edu.ubp.das.src.jobs.sorteo.forms.ParticipanteForm;
+import ar.edu.ubp.das.src.jobs.sorteo.forms.*;
+import ar.edu.ubp.das.src.utils.DateUtils;
 import beans.PlanBean;
 import clients.ConcesionariaServiceContract;
 import clients.factory.IClientFactory;
@@ -24,7 +24,6 @@ import org.slf4j.LoggerFactory;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -71,7 +70,7 @@ public class SorteoJob implements Job {
      */
 
 
-    public Boolean verificarCancelacionCuenta(final ParticipanteForm ganador) throws SQLException, ClientException {
+    public Boolean verificarCancelacionCuenta(final ParticipanteForm ganador) {
         final Optional<ConcesionariaServiceContract> client =
                 clientFactory.getClientForConcesionaria(ganador.getIdConcesionaria(), configurarConcesionariaManager);
         if (!client.isPresent()) {
@@ -99,6 +98,22 @@ public class SorteoJob implements Job {
         }
     }
 
+    private Optional<SorteoForm> getSorteoDeHoy() {
+        try {
+            final Optional<SorteoForm> ultimoSorteo = this.sorteoJobManager.getMsSorteoDao().getUltimoSorteo();
+
+            if (!ultimoSorteo.isPresent() || ultimoSorteo.get().getEstadoSorteo().equals(EstadoSorteo.COMPLETADO)) {
+                return sorteoJobManager.getMsSorteoDao().getSorteosByFecha(DateUtils.getDayDate());
+            } else {
+                return ultimoSorteo;
+            }
+
+        } catch (final SQLException e) {
+            e.printStackTrace();
+            return Optional.empty();
+        }
+    }
+
 
     private List<ParticipanteForm> getParticipantesSorteo(final Timestamp fechaEjecucion) throws SQLException {
         return sorteoJobManager.getMsParticipanteDao().getParticipantes(fechaEjecucion);
@@ -106,37 +121,37 @@ public class SorteoJob implements Job {
 
     @Override
     public void execute(final JobExecutionContext jobExecutionContext) {
+
         log.info("STARTING_SORTEO");
-        try {
-            // TODO : Verificar si hay sorteos pendientes
-            // TODO : Verificar si en esta fecha hay algun sorteo nuevo
-            final Optional<ParticipanteForm> ultimoGanador = sorteoJobManager.getMsParticipanteDao().getUltimoGanador();
-            final Optional<ConcesionariaServiceContract> clienteUltimoGanador = ultimoGanador.flatMap(ganador ->
-                    clientFactory.getClientForConcesionaria(ganador.getIdConcesionaria(), configurarConcesionariaManager)
-            );
-            final Timestamp fechaDelDia = Timestamp.from(Instant.now());
+        final Optional<SorteoForm> sorteoDeHoy = getSorteoDeHoy();
 
-            final ConsumoAbsoluto consumoAbsoluto = new ConsumoAbsoluto(datasourceConfig, clientFactory);
+        sorteoDeHoy.ifPresent(sorteoForm -> {
 
-            //TODO: obtener sorteoId , cuando se definan los 2 todos de arriba
-            if (consumoAbsoluto.ejecutar(1L)) {
-                // check against consumo absoluto result
-            } else {
+            try {
+                final EjecucionesSorteoForm ejecucion = new EjecucionesSorteoForm();
 
+                final ConsumoAbsoluto consumoAbsoluto = new ConsumoAbsoluto(datasourceConfig, clientFactory);
+
+                if (consumoAbsoluto.ejecutar(sorteoForm.getId())) {
+                    // check against consumo absoluto result
+                } else {
+
+                }
+
+                if (!ultimoGanador.isPresent()) {
+                    // SORTEO NUEVO
+                } else if (verificarCancelacionCuenta(ultimoGanador.get())) {
+                    // LAST SORTEO SUCCEEDED -> set estado
+                    // ejecutar hasta "obtener planes"
+                } else {
+                    // LAST SORTEO FAILED -> set estado
+                    // ejecutar hasta "obtener planes"
+                }
+            } catch (final SQLException | ClientException ex) {
+                log.error("SORTEO [FAILED] [exception:{}]", ex.getMessage());
             }
+        });
 
-            if (!ultimoGanador.isPresent()) {
-                // SORTEO NUEVO
-            } else if (verificarCancelacionCuenta(ultimoGanador.get())) {
-                // LAST SORTEO SUCCEEDED -> set estado
-                // ejecutar hasta "obtener planes"
-            } else {
-                // LAST SORTEO FAILED -> set estado
-                // ejecutar hasta "obtener planes"
-            }
-        } catch (final SQLException | ClientException ex) {
-            log.error("SORTEO [FAILED] [exception:{}]", ex.getMessage());
-        }
         log.info("FINISHING_CONSUMER");
     }
 }

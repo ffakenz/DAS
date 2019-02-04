@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+// TODO: refactor name "ConsumoAbsoluto" to "ConsumoSorteo" <3
 public class ConsumoAbsoluto {
 
     private static final Logger log = LoggerFactory.getLogger(ConsumoAbsoluto.class);
@@ -78,25 +79,22 @@ public class ConsumoAbsoluto {
 
 
     // TODO : Change Return Time to DTO Response
-    public boolean ejecutar(Long sorteoId) {
+    public boolean ejecutar(final Long sorteoId) {
         final ConsumoAbsolutoForm consumoAbsolutoForm = new ConsumoAbsolutoForm();
         consumoAbsolutoForm.setFecha(Timestamp.from(Instant.now()));
         consumoAbsolutoForm.setIdSorteo(sorteoId);
-        // GET ALL CONCESIONARIAS APROBADAS
-        final List<ConcesionariaForm> aprobadas = this.getAllConcesionariasAprobadas(consumoAbsolutoForm);
-        // UPDATE ALL CONCESIONARIAS APROBADAS
+        final List<ConcesionariaForm> aprobadas = this.getAllConcesionariasAprobadasDesactualizadas(consumoAbsolutoForm);
         for (final ConcesionariaForm aprobada : aprobadas) {
-            // OBTAIN CLIENT FOR CONCESIONARIA
             final Optional<ConcesionariaServiceContract> client = this.getClient(consumoAbsolutoForm, aprobada.getId());
             client.ifPresent(cli -> {
-                // GET ALL ESTADO DE CUENTAS FROM CONCESIONARIA
                 final List<EstadoCuentasForm> estadoCuentasForms = this.getAllEstadoCuentasByConcesionaria(consumoAbsolutoForm, aprobada.getId());
-                // UPDATE ALL ESTADOS DE CUENTAS X CONCESIONARIA APROBADA
                 for (final EstadoCuentasForm estadoCuentasForm : estadoCuentasForms) {
                     final String rqstId = UUID.randomUUID().toString();
                     final Optional<PlanBean> planBean = this.consultarPlan(cli, consumoAbsolutoForm, estadoCuentasForm, rqstId);
-                    // insert(planBean, consumo absoluto plan aprobada id);
-                    planBean.ifPresent(pb -> this.updateDb(consumoAbsolutoForm, estadoCuentasForm, rqstId, pb));
+                    planBean.ifPresent(pb -> {
+                        // insert(planBean, consumo absoluto plan aprobada id);
+                        this.updateDb(consumoAbsolutoForm, estadoCuentasForm, rqstId, pb);
+                    });
                 }
                 if (!estadoCuentasForms.isEmpty()) {
                     // TODO <- Improve this with comment below
@@ -121,14 +119,14 @@ public class ConsumoAbsoluto {
         return consumoAbsolutoForm.getEstado().equals("SUCCESS");
     }
 
-    private List<ConcesionariaForm> getAllConcesionariasAprobadas(final ConsumoAbsolutoForm consumoAbsolutoForm) {
+    private List<ConcesionariaForm> getAllConcesionariasAprobadasDesactualizadas(final ConsumoAbsolutoForm consumoAbsolutoForm) {
         try {
-            return concesionariasManager.getDao().selectAprobadas();
+            return concesionariasManager.getDao().selectAprobadasDesactualizadas(-5); // Magic Number [Franco:I love you Mariela]
         } catch (final SQLException e) {
             e.printStackTrace();
-            log.error("[ConsumoAbsoluto.ejecutar][FAILED selectAprobadas]");
+            log.error("[ConsumoAbsoluto.ejecutar][FAILED getAllConcesionariasAprobadasDesactualizadas]");
             consumoAbsolutoForm.setEstado("FAILED");
-            consumoAbsolutoForm.setCause("selectAprobadas");
+            consumoAbsolutoForm.setCause("getAllConcesionariasAprobadasDesactualizadas");
             logConsumoAbsolutoForm(consumoAbsolutoForm);
             return new ArrayList<>();
         }

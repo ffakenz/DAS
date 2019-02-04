@@ -1,6 +1,6 @@
 CREATE TABLE participantes (
 	id_sorteo BIGINT NOT NULL
-	, id_plan BIGINT NOT NULL
+	, id_plan BIGINT NOT NULL -- TODO: change this to id_estado_cuenta
 	, id_concesionaria BIGINT NOT NULL
 	, id_consumer BIGINT NOT NULL
 	, id_vehiculo BIGINT NOT NULL

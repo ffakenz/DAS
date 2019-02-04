@@ -77,6 +77,15 @@ public class MSConcesionariasDao extends DaoImpl<ConcesionariaForm> {
         return this.executeQueryProcedure("dbo.get_aprobadas");
     }
 
+    public List<ConcesionariaForm> selectAprobadasDesactualizadas(final Integer days) throws SQLException {
+        this.connect();
+        this.setProcedure("dbo.get_aprobadas_desactualizadas(?)", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        this.setParameter(1, days);
+        final List<ConcesionariaForm> result = this.executeQuery();
+        this.disconnect();
+        return result;
+    }
+
     public void approveConcesionaria(final ConcesionariaForm form) throws SQLException {
         this.executeProcedure("dbo.approve_concesionaria(?, ?)", form,
                 "id", "codigo");

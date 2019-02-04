@@ -3,8 +3,10 @@ package ar.edu.ubp.das.src.jobs.sorteo.daos;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.SorteoForm;
+import ar.edu.ubp.das.src.utils.DateUtils;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -76,5 +78,12 @@ public class MSSorteoDao extends DaoImpl<SorteoForm> {
                 .stream()
                 .filter(s -> s.getAnioSorteo().equals(anioSorteo))
                 .collect(Collectors.toList());
+    }
+
+    public Optional<SorteoForm> getSorteosByFecha(final Date today) throws SQLException {
+        return this.select()
+                .stream()
+                .filter(s -> DateUtils.getDayDateFromTimestamp(s.getFechaEjecucion()).equals(today)) // TODO CHECK THIS
+                .findFirst();
     }
 }
