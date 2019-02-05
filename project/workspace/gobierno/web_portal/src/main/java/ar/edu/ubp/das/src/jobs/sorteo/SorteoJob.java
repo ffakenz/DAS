@@ -15,7 +15,6 @@ import ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.ParticipanteForm;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.SorteoForm;
 import ar.edu.ubp.das.src.utils.Constants;
-import ar.edu.ubp.das.src.utils.DateUtils;
 import clients.ConcesionariaServiceContract;
 import clients.factory.IClientFactory;
 import clients.responses.ClientException;
@@ -61,18 +60,32 @@ public class SorteoJob implements Job {
 
     }
 
-    private Optional<SorteoForm> getSorteoDeHoy() {
-        try {
-            final Optional<SorteoForm> ultimoSorteo = this.sorteoJobManager.getMsSorteoDao().getUltimoSorteo();
 
-            if (!ultimoSorteo.isPresent() || ultimoSorteo.get().getEstadoSorteo().equals(EstadoSorteo.COMPLETADO)) {
-                return sorteoJobManager.getMsSorteoDao().getSorteosByFecha(DateUtils.getDayDate());
-            } else {
-                return ultimoSorteo;
+    private void invalidateOldNuevosIfIsNecessary(List<SorteoForm> oldNuevos) {
+        oldNuevos.forEach( sorteo -> {
+            try {
+                sorteo.setEstado(EstadoSorteo.FALLADO.getTipo());
+                sorteoJobManager.getMsSorteoDao().update(sorteo);
+            } catch (SQLException e) {
+                log.error("[exception:{}]", e.getMessage());
+            }
+        });
+    }
+
+    public Optional<SorteoForm> getSorteoDeHoy() {
+        try {
+
+            invalidateOldNuevosIfIsNecessary(sorteoJobManager.getMsSorteoDao().getSorteoViejosEnEstadoNuevo());
+
+            final Optional<SorteoForm> pendiente = this.sorteoJobManager.getMsSorteoDao().getSorteoPendiente();
+            if(pendiente.isPresent()) {
+                return pendiente;
             }
 
+            return sorteoJobManager.getMsSorteoDao().getSorteoNuevoParaHoy();
+
         } catch (final SQLException e) {
-            e.printStackTrace();
+            log.error("[exception:{}]", e.getMessage());
             return Optional.empty();
         }
     }
@@ -84,6 +97,7 @@ public class SorteoJob implements Job {
         // TODO: revisar como resolver si falla en comunicacion a concesionarias (tener la lista en la db tal vez)
 
         log.info("STARTING_SORTEO");
+
         final Optional<SorteoForm> sorteoDeHoy = getSorteoDeHoy();
 
         sorteoDeHoy.ifPresent(sorteoForm -> {

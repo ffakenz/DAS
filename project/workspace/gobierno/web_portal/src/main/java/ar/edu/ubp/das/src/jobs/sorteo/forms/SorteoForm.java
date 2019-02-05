@@ -4,7 +4,7 @@ import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.annotations.Column;
 import ar.edu.ubp.das.mvc.db.annotations.Entity;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 public class SorteoForm extends DynaActionForm {
@@ -18,15 +18,7 @@ public class SorteoForm extends DynaActionForm {
     @Column(name = "estado")
     private String estado;
     @Column(name = "fecha_ejecucion")
-    private Timestamp fechaEjecucion;
-
-    public void setEstado(final EstadoSorteo estado) {
-        this.estado = estado.getTipo();
-    }
-
-    public EstadoSorteo getEstadoSorteo() {
-        return EstadoSorteo.valueOf(this.estado);
-    }
+    private Date fechaEjecucion;
 
     public Long getId() {
         return id;
@@ -60,11 +52,11 @@ public class SorteoForm extends DynaActionForm {
         this.estado = estado;
     }
 
-    public Timestamp getFechaEjecucion() {
+    public Date getFechaEjecucion() {
         return fechaEjecucion;
     }
 
-    public void setFechaEjecucion(final Timestamp fecha) {
+    public void setFechaEjecucion(final Date fecha) {
         this.fechaEjecucion = fecha;
     }
 

@@ -212,6 +212,8 @@ public abstract class DaoImpl<T> implements Dao<T> {
             this.statement.setDate(paramIndex, (Date) object);
         } else if (object instanceof Timestamp) {
             this.statement.setTimestamp(paramIndex, (Timestamp) object);
+        } else if (object instanceof Date) {
+            this.statement.setDate(paramIndex, (Date) object);
         } else if (object instanceof Boolean) {
             this.statement.setBoolean(paramIndex, (Boolean) object);
         }

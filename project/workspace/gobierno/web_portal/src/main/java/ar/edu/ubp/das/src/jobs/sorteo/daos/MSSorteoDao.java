@@ -6,7 +6,6 @@ import ar.edu.ubp.das.src.jobs.sorteo.forms.SorteoForm;
 import ar.edu.ubp.das.src.utils.DateUtils;
 
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -20,6 +19,10 @@ public class MSSorteoDao extends DaoImpl<SorteoForm> {
     @Override
     public void insert(final SorteoForm form) throws SQLException {
         this.executeProcedure("dbo.log_sorteo(?)", form, "fechaEjecucion");
+    }
+
+    public void insertWithEstado(final SorteoForm form) throws SQLException {
+        this.executeProcedure("dbo.log_sorteo_with_estado(?,?)", form, "fechaEjecucion", "estado");
     }
 
     @Override
@@ -43,18 +46,13 @@ public class MSSorteoDao extends DaoImpl<SorteoForm> {
         return false;
     }
 
-    public void ejecutar(final SorteoForm form) throws SQLException {
-        form.setEstado(EstadoSorteo.EN_EJECUCION);
-        this.update(form);
-    }
-
     public void actualizarFechaSorteo(final SorteoForm form) throws SQLException {
         this.executeProcedure("dbo.actualizar_fecha_sorteo(?,?)", form,
                 "id", "fechaEjecucion");
     }
 
-    public Optional<SorteoForm> getUltimoSorteo() throws SQLException {
-        return this.select()
+    public Optional<SorteoForm> getSorteoPendiente() throws SQLException {
+        return this.executeQueryProcedure("dbo.get_sorteos_pendientes")
                 .stream()
                 .findFirst();
     }
@@ -80,10 +78,27 @@ public class MSSorteoDao extends DaoImpl<SorteoForm> {
                 .collect(Collectors.toList());
     }
 
-    public Optional<SorteoForm> getSorteosByFecha(final Date today) throws SQLException {
+    public Optional<SorteoForm> getSorteoNuevoParaHoy() throws SQLException {
         return this.select()
                 .stream()
-                .filter(s -> DateUtils.getDayDateFromTimestamp(s.getFechaEjecucion()).equals(today)) // TODO CHECK THIS
+                .filter(s -> s.getEstado().equals(EstadoSorteo.NUEVO.getTipo()))
+                .filter(s -> s.getFechaEjecucion().equals(DateUtils.getDayDate()))
                 .findFirst();
     }
+
+    public List<SorteoForm> getSorteosByEstado(EstadoSorteo estadoSorteo) throws SQLException {
+        return this.select()
+                .stream()
+                .filter(s -> s.getEstado().equals(estadoSorteo.getTipo()))
+                .collect(Collectors.toList());
+    }
+
+    public List<SorteoForm> getSorteoViejosEnEstadoNuevo() throws SQLException {
+        return this.select()
+                .stream()
+                .filter(s -> s.getEstado().equals(EstadoSorteo.NUEVO.getTipo()))
+                .filter(s -> s.getFechaEjecucion().compareTo(DateUtils.getDayDate()) < 0)
+                .collect(Collectors.toList());
+    }
+
 }
