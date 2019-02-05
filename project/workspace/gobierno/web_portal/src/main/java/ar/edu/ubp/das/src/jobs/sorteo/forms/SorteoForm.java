@@ -40,7 +40,7 @@ public class SorteoForm extends DynaActionForm {
         return anioSorteo;
     }
 
-    public void setAnioSorteo(Integer anioSorteo) {
+    public void setAnioSorteo(final Integer anioSorteo) {
         this.anioSorteo = anioSorteo;
     }
 
@@ -50,6 +50,10 @@ public class SorteoForm extends DynaActionForm {
 
     public void setEstado(final String estado) {
         this.estado = estado;
+    }
+
+    public void setEstado(final EstadoSorteo estado) {
+        this.estado = estado.getTipo();
     }
 
     public Date getFechaEjecucion() {

@@ -8,18 +8,14 @@ import ar.edu.ubp.das.src.concesionarias.forms.ConfigurarConcesionariaForm;
 import ar.edu.ubp.das.src.concesionarias.managers.ConcesionariasManager;
 import ar.edu.ubp.das.src.concesionarias.managers.ConfigurarConcesionariaManager;
 import ar.edu.ubp.das.src.consumers.daos.MSConsumerDao;
-import ar.edu.ubp.das.src.consumers.forms.ConsumerForm;
 import ar.edu.ubp.das.src.consumers.managers.ConsumerManager;
 import ar.edu.ubp.das.src.estado_cuentas.daos.MSCuotasDao;
 import ar.edu.ubp.das.src.estado_cuentas.daos.MSEstadoCuentasDao;
-import ar.edu.ubp.das.src.estado_cuentas.forms.CuotasForm;
-import ar.edu.ubp.das.src.estado_cuentas.forms.EstadoCuentasForm;
 import ar.edu.ubp.das.src.estado_cuentas.managers.CuotasManager;
 import ar.edu.ubp.das.src.estado_cuentas.managers.EstadoCuentasManager;
 import ar.edu.ubp.das.src.jobs.ClientFactoryAdapter;
 import ar.edu.ubp.das.src.jobs.consumo.forms.*;
 import ar.edu.ubp.das.src.usuarios.daos.MSUsuariosDao;
-import ar.edu.ubp.das.src.usuarios.forms.UsuarioForm;
 import ar.edu.ubp.das.src.usuarios.managers.UsuarioManager;
 import ar.edu.ubp.das.src.utils.DateUtils;
 import beans.NotificationUpdate;
@@ -40,11 +36,11 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static ar.edu.ubp.das.src.utils.Constants.IDENTIFICADOR;
-import static ar.edu.ubp.das.src.utils.Constants.ROL_CONSUMER;
 
 public class ConsumoJob implements Job {
 
     private static final Logger log = LoggerFactory.getLogger(ConsumoJob.class);
+    private final Desnormalizer desnormalizer;
 
     // from web_portal
     private ConcesionariasManager concesionariasManager;
@@ -93,6 +89,8 @@ public class ConsumoJob implements Job {
 
         this.consumoJobManager = new ConsumoJobManager(datasourceConfig);
         this.fechaEjecucion = fechaEjecucion;
+
+        this.desnormalizer = new Desnormalizer(datasourceConfig);
     }
 
     @Override
@@ -145,7 +143,7 @@ public class ConsumoJob implements Job {
 
                             final NotificationUpdateForm notificationUpdateForm = transformNotificationUpdate(update, cId);
                             if (this.consumoJobManager.getMsNotificationUpdateDao().valid(notificationUpdateForm)) {
-                                updateDb(cId, update);
+                                desnormalizer.updateDb(cId, update);
                                 this.consumoJobManager.getMsNotificationUpdateDao().insert(notificationUpdateForm);
                             }
                             log.info("Consume Result is successfull for concesionaria {} [notification_update:{}]", cId, JsonUtils.toJsonString(notificationUpdateForm));
@@ -196,75 +194,8 @@ public class ConsumoJob implements Job {
         return DateUtils.getTimestampFrom(fecha, -15);
     }
 
-    /* DESNORMALIZER */
 
-    /**
-     * @param concesionariaId
-     * @param update
-     * @throws SQLException
-     */
-    private void updateDb(final Long concesionariaId, final NotificationUpdate update) throws SQLException {
-        updateConsumerDb(update);
-        final EstadoCuentasForm upserted = updateEstadoCuentaDb(update, concesionariaId);
-        updateCuotaDb(update, upserted.getId());
-    }
 
-    /**
-     * @param update
-     * @throws SQLException
-     */
-    public void updateConsumerDb(final NotificationUpdate update) throws SQLException {
-
-        final ConsumerForm consumer = new ConsumerForm();
-        consumer.setDocumento(update.getClienteDocumento());
-
-        if (!consumerManager.getDao().valid(consumer)) {
-
-            final UsuarioForm usuarioForm = new UsuarioForm();
-            usuarioForm.setDocumento(update.getClienteDocumento());
-            usuarioForm.setRol(ROL_CONSUMER);
-            usuarioManager.getDao().insert(usuarioForm);
-
-            consumer.setNombre(update.getClienteNombre());
-            consumer.setApellido(update.getClienteApellido());
-            consumer.setNroTelefono(update.getClienteNroTelefono());
-            consumer.setEmail(update.getClienteEmail());
-            consumerManager.getDao().insert(consumer);
-        }
-    }
-
-    /**
-     * @param update
-     * @param concesionariaId
-     * @throws SQLException
-     */
-    public EstadoCuentasForm updateEstadoCuentaDb(final NotificationUpdate update, final Long concesionariaId) throws SQLException {
-
-        final EstadoCuentasForm estadoCuenta = new EstadoCuentasForm();
-        estadoCuenta.setConcesionariaId(concesionariaId);
-        estadoCuenta.setNroPlanConcesionaria(update.getPlanId());
-        estadoCuenta.setDocumentoCliente(update.getClienteDocumento());
-        estadoCuenta.setVehiculo(update.getVehiculoId());
-        estadoCuenta.setFechaAltaConcesionaria(update.getPlanFechaAlta());
-        estadoCuenta.setEstado(update.getPlanEstado());
-        return estadoCuentasManager.getDao().upsert(estadoCuenta);
-    }
-
-    /**
-     * @param update
-     * @throws SQLException
-     */
-    public void updateCuotaDb(final NotificationUpdate update, final Long estadoCuentaId) throws SQLException {
-
-        final CuotasForm cuota = new CuotasForm();
-        cuota.setEstadoCuentaId(estadoCuentaId);
-        cuota.setNroCuota(update.getCuotaNroCuota());
-        cuota.setFechaVencimiento(update.getCuotaFechaVencimiento());
-        cuota.setMonto(update.getCuotaMonto());
-        cuota.setFechaPago(update.getCuotaFechaPago());
-        cuota.setFechaAltaConcesionaria(update.getCuotaFechaAlta());
-        cuotasManager.getDao().upsert(cuota);
-    }
 
     /* LOGGERS */
 

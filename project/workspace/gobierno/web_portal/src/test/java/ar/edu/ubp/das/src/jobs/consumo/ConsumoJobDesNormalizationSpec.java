@@ -39,6 +39,7 @@ public class ConsumoJobDesNormalizationSpec {
     private NotificationUpdate nonExistingEstadoCuenta;
     private NotificationUpdate existingCuota;
     private NotificationUpdate nonExistingCuota;
+    private Desnormalizer desnormalizer;
 
     @Before
     public void setup() throws SQLException {
@@ -60,6 +61,8 @@ public class ConsumoJobDesNormalizationSpec {
 
         cuotasDao = new MSCuotasDao();
         cuotasDao.setDatasource(dataSourceConfig);
+
+        this.desnormalizer = new Desnormalizer(dataSourceConfig);
 
         // Setup Mocks
         this.existingConsumer = new NotificationUpdate();
@@ -136,7 +139,7 @@ public class ConsumoJobDesNormalizationSpec {
         assertFalse(consumerForm.isPresent());
 
         // updateConsumerDb
-        consumer.updateConsumerDb(nonExistingConsumer);
+        desnormalizer.updateConsumerDb(nonExistingConsumer);
 
         // verify it exists in db
         final Optional<ConsumerForm> consumerForm2 = msConsumerDao.selectConsumerByDni(form);
@@ -169,7 +172,7 @@ public class ConsumoJobDesNormalizationSpec {
         assertTrue(consumerForm.isPresent());
 
         // updateConsumerDb
-        consumer.updateConsumerDb(existingConsumer);
+        desnormalizer.updateConsumerDb(existingConsumer);
 
         // verify it exists in db and is the same
         final Optional<ConsumerForm> consumerForm2 = msConsumerDao.selectConsumerByDni(form);
@@ -202,7 +205,7 @@ public class ConsumoJobDesNormalizationSpec {
         assertFalse(estadoCuentasForm.isPresent());
 
         // updateEstadoCuentaDb
-        consumer.updateEstadoCuentaDb(nonExistingEstadoCuenta, 1L);
+        desnormalizer.updateEstadoCuentaDb(nonExistingEstadoCuenta, 1L);
 
         // verify it exists in db
         final Optional<EstadoCuentasForm> estadoCuentasForm2 = estadoCuentaDao.selectByNroPlanAndConcesionaria(form);
@@ -232,7 +235,7 @@ public class ConsumoJobDesNormalizationSpec {
         assertTrue(estadoCuentasForm.isPresent());
 
         // updateEstadoCuentaDb
-        consumer.updateEstadoCuentaDb(existingEstadoCuenta, 1L);
+        desnormalizer.updateEstadoCuentaDb(existingEstadoCuenta, 1L);
 
         // verify it exists in db and it changed
         final Optional<EstadoCuentasForm> estadoCuentasForm2 = estadoCuentaDao.selectByNroPlanAndConcesionaria(form);
@@ -262,7 +265,7 @@ public class ConsumoJobDesNormalizationSpec {
         final Optional<CuotasForm> cuotasForm = cuotasDao.selectCuota(form);
         assertFalse(cuotasForm.isPresent());
         // updateCuotaDb
-        consumer.updateCuotaDb(nonExistingCuota, 1L);
+        desnormalizer.updateCuotaDb(nonExistingCuota, 1L);
         // verify it exists in db
         final Optional<CuotasForm> cuotasForm2 = cuotasDao.selectCuota(form);
         assertTrue(cuotasForm2.isPresent());
@@ -290,7 +293,7 @@ public class ConsumoJobDesNormalizationSpec {
         assertTrue(cuotasForm.isPresent());
 
         // updateCuotaDb
-        consumer.updateCuotaDb(existingCuota, 1L);
+        desnormalizer.updateCuotaDb(existingCuota, 1L);
 
         // verify it exists in db and it changed
         final Optional<CuotasForm> cuotasForm2 = cuotasDao.selectCuota(form);

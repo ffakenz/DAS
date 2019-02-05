@@ -5,6 +5,7 @@ import utils.JsonUtils;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlanBean implements Serializable {
@@ -71,6 +72,42 @@ public class PlanBean implements Serializable {
 
         bean.setCuotas(cuotas);
         return bean;
+    }
+
+
+    public List<NotificationUpdate> toNotificationUpdates() {
+        final List<NotificationUpdate> updates = new ArrayList<>();
+        for (final CuotaBean cuota : this.cuotas) {
+            final NotificationUpdate update = new NotificationUpdate();
+            update.setPlanId(this.planId);
+            update.setPlanEstado(this.planEstado);
+            update.setPlanFechaAlta(this.planFechaAlta);
+            update.setPlanFechaUltimaActualizacion(this.getPlanFechaUltimaActualizacion());
+            update.setPlanTipoDePlan(this.planTipoDePlan);
+
+            update.setClienteDocumento(this.clienteDocumento);
+            update.setClienteApellido(this.clienteApellido);
+            update.setClienteNombre(this.clienteNombre);
+            update.setClienteEmail(this.clienteEmail);
+            update.setClienteNroTelefono(this.clienteNroTelefono);
+
+            update.setVehiculoId(this.getVehiculoId());
+            update.setVehiculoMarca(this.getVehiculoMarca());
+            update.setVehiculoModelo(this.getVehiculoModelo());
+            update.setVehiculoNombre(this.getVehiculoNombre());
+            update.setVehiculoPrecio(this.getVehiculoPrecio());
+            update.setVehiculoColor(this.getVehiculoColor());
+            update.setVehiculoTipo(this.getVehiculoTipo());
+
+            update.setCuotaNroCuota(cuota.getCuotaNroCuota());
+            update.setCuotaFechaAlta(cuota.getCuotaFechaAlta());
+            update.setCuotaFechaPago(cuota.getCuotaFechaPago());
+            update.setCuotaFechaVencimiento(cuota.getCuotaFechaVencimiento());
+            update.setCuotaMonto(cuota.getCuotaMonto());
+
+            updates.add(update);
+        }
+        return updates;
     }
 
     @Override

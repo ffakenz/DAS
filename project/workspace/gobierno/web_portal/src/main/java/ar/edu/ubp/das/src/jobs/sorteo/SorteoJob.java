@@ -15,6 +15,7 @@ import ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.ParticipanteForm;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.SorteoForm;
 import ar.edu.ubp.das.src.utils.Constants;
+import ar.edu.ubp.das.src.utils.Utils;
 import clients.ConcesionariaServiceContract;
 import clients.factory.IClientFactory;
 import clients.responses.ClientException;
@@ -26,7 +27,9 @@ import org.slf4j.LoggerFactory;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
+
+import static ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoParticipante.GANADOR;
+import static ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo.PENDIENTE_CANCELACION;
 
 public class SorteoJob implements Job {
 
@@ -61,12 +64,12 @@ public class SorteoJob implements Job {
     }
 
 
-    private void invalidateOldNuevosIfIsNecessary(List<SorteoForm> oldNuevos) {
-        oldNuevos.forEach( sorteo -> {
+    private void invalidateOldNuevosIfIsNecessary(final List<SorteoForm> oldNuevos) {
+        oldNuevos.forEach(sorteo -> {
             try {
                 sorteo.setEstado(EstadoSorteo.FALLADO.getTipo());
                 sorteoJobManager.getMsSorteoDao().update(sorteo);
-            } catch (SQLException e) {
+            } catch (final SQLException e) {
                 log.error("[exception:{}]", e.getMessage());
             }
         });
@@ -78,7 +81,7 @@ public class SorteoJob implements Job {
             invalidateOldNuevosIfIsNecessary(sorteoJobManager.getMsSorteoDao().getSorteoViejosEnEstadoNuevo());
 
             final Optional<SorteoForm> pendiente = this.sorteoJobManager.getMsSorteoDao().getSorteoPendiente();
-            if(pendiente.isPresent()) {
+            if (pendiente.isPresent()) {
                 return pendiente;
             }
 
@@ -107,23 +110,29 @@ public class SorteoJob implements Job {
                 final ConsumoAbsoluto consumoAbsoluto = new ConsumoAbsoluto(datasourceConfig, clientFactory);
 
                 if (consumoAbsoluto.ejecutar(sorteoForm.getId())) {
-                    final List<ParticipanteForm> participantes = sorteoJobManager.getMsParticipanteDao().getParticipantes(-5, 1, 2);
-                    final int indexGanador = new Random().nextInt(participantes.size() - 1);
-                    final ParticipanteForm ganador = participantes.get(indexGanador);
+
+                    final List<ParticipanteForm> participantes = sorteoJobManager.getMsParticipanteDao().getParticipantes(1, 3);
+                    insertParticipantes(participantes, sorteoForm.getId());
+                    final ParticipanteForm ganador = getGanador(participantes);
                     final Long idConcesionariaGanadora = ganador.getIdConcesionaria();
+
                     final Optional<ConcesionariaServiceContract> clientForConcesionaria =
                             clientFactory.getClientForConcesionaria(idConcesionariaGanadora, configurarConcesionariaManager);
 
                     if (!clientForConcesionaria.isPresent()) {
-                        // mark sorteo as failed due to client for concesionaria
+                        sorteoForm.setEstado(PENDIENTE_CANCELACION);
+                        sorteoJobManager.getMsSorteoDao().update(sorteoForm);
                         return;
                     }
 
                     final ConcesionariaServiceContract client = clientForConcesionaria.get();
+
                     try {
-                        client.cancelarPlan(Constants.IDENTIFICADOR, ganador.getIdPlan()); // notificamos a la concesionaria ganadora primero
+                        client.cancelarPlan(Constants.IDENTIFICADOR, ganador.getIdPlan());
                     } catch (final ClientException e) {
-                        // mark sorteo as pendiente de cancelacion
+                        sorteoForm.setEstado(PENDIENTE_CANCELACION);
+                        sorteoJobManager.getMsSorteoDao().update(sorteoForm);
+                        return;
                     }
 
                     final List<ConcesionariaForm> aprobadas = concesionariasManager.getDao().selectAprobadas();
@@ -145,5 +154,29 @@ public class SorteoJob implements Job {
             }
         });
         log.info("FINISHING_CONSUMER");
+    }
+
+    private ParticipanteForm getGanador(final List<ParticipanteForm> participantes) {
+
+        final int indexGanador = Utils.getRandom(participantes.size());
+        final ParticipanteForm ganador = participantes.get(indexGanador);
+        try {
+            ganador.setEstado(GANADOR);
+            sorteoJobManager.getMsParticipanteDao().update(ganador);
+        } catch (final SQLException e) {
+            log.error("[exception:{}]", e.getMessage());
+        }
+        return ganador;
+    }
+
+    private void insertParticipantes(final List<ParticipanteForm> participantes, final Long idSorteo) {
+        participantes.forEach(p -> {
+            try {
+                p.setIdSorteo(idSorteo);
+                sorteoJobManager.getMsParticipanteDao().insert(p);
+            } catch (final SQLException e) {
+                e.printStackTrace();
+            }
+        });
     }
 }
