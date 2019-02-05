@@ -1,4 +1,4 @@
-CREATE PROCEDURE get_ejecuciones_sorteo AS
+CREATE PROCEDURE get_sorteos AS
 SELECT *
-FROM ejecuciones_sorteo
-ORDER BY id DESC;
+FROM sorteos
+ORDER BY fecha_ejecucion DESC;
