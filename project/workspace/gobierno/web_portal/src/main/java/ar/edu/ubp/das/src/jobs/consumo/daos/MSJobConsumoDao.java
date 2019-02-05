@@ -5,6 +5,7 @@ import ar.edu.ubp.das.src.jobs.consumo.forms.JobConsumoForm;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,7 +17,7 @@ public class MSJobConsumoDao extends DaoImpl<JobConsumoForm> {
 
     @Override
     public void insert(final JobConsumoForm form) throws SQLException {
-        this.executeSimpleProcedure("dbo.job_consumo");
+        this.executeProcedure("dbo.log_job_consumo(?)", form, "fecha");
     }
 
     @Override
@@ -39,8 +40,10 @@ public class MSJobConsumoDao extends DaoImpl<JobConsumoForm> {
         return false;
     }
 
-    public JobConsumoForm createJob() throws SQLException {
-        this.executeSimpleProcedure("dbo.log_job_consumo");
+    public JobConsumoForm createJob(final Timestamp fecha_ejecucion) throws SQLException {
+        final JobConsumoForm job = new JobConsumoForm();
+        job.setFecha(fecha_ejecucion);
+        this.insert(job);
         return this.getLastJob();
     }
 

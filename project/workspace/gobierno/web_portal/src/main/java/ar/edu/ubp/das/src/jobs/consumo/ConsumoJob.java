@@ -34,10 +34,12 @@ import utils.JsonUtils;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static ar.edu.ubp.das.src.utils.Constants.IDENTIFICADOR;
 import static ar.edu.ubp.das.src.utils.Constants.ROL_CONSUMER;
 
 public class ConsumoJob implements Job {
@@ -53,10 +55,15 @@ public class ConsumoJob implements Job {
     private ConsumoJobManager consumoJobManager;
     private UsuarioManager usuarioManager;
     private ClientFactoryAdapter clientFactory;
-    private final String identificador = "GOBIERNO-INCENTIVO-2018";
+
+    private Timestamp fechaEjecucion;
 
     // TODO: Send the DaoFactory instead of DatasourceConfig
     public ConsumoJob(final DatasourceConfig datasourceConfig, final IClientFactory clientFactory) {
+        this(datasourceConfig, clientFactory, Timestamp.from(Instant.now()));
+    }
+
+    public ConsumoJob(final DatasourceConfig datasourceConfig, final IClientFactory clientFactory, final Timestamp fechaEjecucion) {
 
         final MSConcesionariasDao msConcesionariasDao = new MSConcesionariasDao();
         msConcesionariasDao.setDatasource(datasourceConfig);
@@ -85,6 +92,7 @@ public class ConsumoJob implements Job {
         this.clientFactory = new ClientFactoryAdapter(clientFactory);
 
         this.consumoJobManager = new ConsumoJobManager(datasourceConfig);
+        this.fechaEjecucion = fechaEjecucion;
     }
 
     @Override
@@ -93,8 +101,8 @@ public class ConsumoJob implements Job {
         log.info("STARTING_CONSUMER");
 
         try {
-            // insert new job_consumo
-            final JobConsumoForm jobForm = this.consumoJobManager.getMsJobConsumoDao().createJob();
+            // insert new job_consumo -> if fechaEjecucion is null the procedure bejoind createJob will set GETDATE() as default
+            final JobConsumoForm jobForm = this.consumoJobManager.getMsJobConsumoDao().createJob(fechaEjecucion);
             final Long jobId = jobForm.getId();
             // tomamos todas las concesionarias aprobadas
             final List<ConcesionariaForm> concesionarias = concesionariasManager.getDao().selectAprobadas();
@@ -127,7 +135,7 @@ public class ConsumoJob implements Job {
                 try {
                     // usamos el cliente p/ consultar planes
                     final ConcesionariaServiceContract client = cli.get(); // ifPresent was checked above
-                    final List<NotificationUpdate> notificationUpdates = client.consultarPlanes(identificador, offset.toString());
+                    final List<NotificationUpdate> notificationUpdates = client.consultarPlanes(IDENTIFICADOR, offset.toString());
                     log.info("Consume is successfull for concesionaria {} [notification_updates:{}]", cId, JsonUtils.toJsonString(notificationUpdates));
                     final String description = "consultarPlanes was success for offset: " + offset;
                     logConsumoDb(cId, jobId, EstadoConsumo.SUCCESS, offset, rqstId, description); // esto marca ultimo resultado como successs
