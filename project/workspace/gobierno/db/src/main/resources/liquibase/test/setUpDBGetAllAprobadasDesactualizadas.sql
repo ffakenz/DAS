@@ -1,5 +1,5 @@
--- USED TO SUPPORT ConsumerJobSpec
-CREATE PROCEDURE setUpEmptyDB AS
+-- USED TO SUPPORT ConsumerJobIntegration
+CREATE PROCEDURE setUpDBGetAllAprobadasDesactualizadas AS
 BEGIN
 
     INSERT INTO tipos_vehiculo(nombre)
@@ -40,13 +40,10 @@ BEGIN
             , ('cancelado')
 
     INSERT INTO estado_sorteo(nombre)
-    VALUES('nuevo')
-      ,('pendiente_consumo')
-      ,('pendiente_cancelacion')
-      ,('pendiente_notificacion_ganador')
-      ,('pendiente_notificacion_concesionarias')
-      ,('completado')
-      ,('fallado')
+    VALUES ('nuevo')
+            , ('pendiente')
+            , ('en_ejecucion')
+            , ('completado')
 
     INSERT INTO estado_participante(nombre)
     VALUES ('participante')
@@ -61,31 +58,5 @@ BEGIN
     INSERT INTO tipo_consumo_result(tipo)
     VALUES ('success')
             , ('failure')
-
-    INSERT INTO concesionaria(nombre, direccion, cuit, tel, email)
-    VALUES ('C1', 'La Tablada 5739', '21-93337511-1', '+5493513059161', 'c1@gmail.com')
-
-    INSERT INTO usuario(documento, username, password, rol)
-    VALUES (1, null, null, 'consumer')
-
-    INSERT INTO consumers(documento, nombre, apellido, nro_telefono, email)
-    VALUES
-        (1, 'Carlos', 'Perez', '35156345678', 'carliperezozo@mail.com')
-
-    INSERT INTO estado_cuentas (
-        concesionaria, nro_plan_concesionaria, dni_consumer, vehiculo, fecha_alta_concesionaria, estado
-    )
-    VALUES (1, 1001, 1, 1, '2018-01-01 21:58:01', 'en_proceso')
-
-   INSERT INTO cuotas (
-       nro_cuota,
-       estado_cuenta_id,
-       fecha_alta_concesionaria,
-       fecha_vencimiento,
-       monto,
-       fecha_pago
-   )
-   VALUES (1, 1, '2018-01-01 21:58:01', '2018-02-01 21:58:01', 10000, '2018-01-27 21:58:01')
-          , (2, 1, '2018-02-01 21:58:01', '2018-03-01 21:58:01', null, null)
 END
 GO

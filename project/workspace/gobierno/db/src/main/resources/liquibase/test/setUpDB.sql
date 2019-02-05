@@ -58,11 +58,11 @@ BEGIN
 
     INSERT INTO usuario(documento, username, password, rol)
     VALUES (111, 'irocca' , 'lam'  , 'gobierno')
-	       , (222, 'ffakenz', '123'  , 'gobierno')
-         , (1, 'pepe'   , 'perez', 'consumer')
-         , (2, 'ricky'  , 'fort' , 'consumer')
-         , (3,  null    ,  null  , 'consumer')
-         , (4,  null    ,  null  , 'consumer')
+	        , (222, 'ffakenz', '123'  , 'gobierno')
+            , (1, 'pepe'   , 'perez', 'consumer')
+            , (2, 'ricky'  , 'fort' , 'consumer')
+            , (3,  null    ,  null  , 'consumer')
+            , (4,  null    ,  null  , 'consumer')
 
     INSERT INTO consumers
         (documento, nombre, apellido, nro_telefono, email)
@@ -75,9 +75,9 @@ BEGIN
 
     INSERT INTO tipos_estado_cuentas (tipo)
         VALUES ('inicial')
-            ,('en_proceso')
-            ,('pagado')
-            ,('cancelado')
+                , ('en_proceso')
+                , ('pagado')
+                , ('cancelado')
 
     INSERT INTO estado_cuentas
       ( concesionaria, nro_plan_concesionaria, dni_consumer, vehiculo, fecha_alta_concesionaria, estado)
@@ -131,7 +131,10 @@ BEGIN
     VALUES('completado', GETDATE())
 
     INSERT INTO estado_participante(nombre)
-    VALUES('participante'),('ganador'),('cancelado')
+    VALUES ('participante')
+            , ('ganador')
+            , ('cancelado')
+            , ('pendiente_cancelacion')
 
     INSERT INTO participantes(id_sorteo, id_plan, estado)
     VALUES (1, 4, 'ganador')

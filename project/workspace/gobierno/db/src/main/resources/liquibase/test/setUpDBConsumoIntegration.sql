@@ -30,8 +30,8 @@ BEGIN
             , ('REST', 'url')
 
     INSERT INTO tipo_usuario(nombre)
-    VALUES ('consumer')
-            , ('gobierno')
+        VALUES ('consumer')
+                , ('gobierno')
 
     INSERT INTO tipos_estado_cuentas (tipo)
     VALUES ('inicial')
@@ -41,12 +41,15 @@ BEGIN
 
     INSERT INTO estado_sorteo(nombre)
     VALUES ('nuevo')
-            , ('pendiente'),('completado')
+            , ('pendiente')
+            , ('en_ejecucion')
+            , ('completado')
 
     INSERT INTO estado_participante(nombre)
     VALUES ('participante')
             , ('ganador')
             , ('cancelado')
+            , ('pendiente_cancelacion')
 
     INSERT INTO estado_consumo(estado)
     VALUES ('success')
