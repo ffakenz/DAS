@@ -10,7 +10,6 @@ import ar.edu.ubp.das.src.estado_cuentas.daos.MSEstadoCuentasDao;
 import ar.edu.ubp.das.src.estado_cuentas.managers.EstadoCuentasManager;
 import ar.edu.ubp.das.src.jobs.ClientFactoryAdapter;
 import ar.edu.ubp.das.src.jobs.consumo_absoluto.ConsumoAbsoluto;
-import ar.edu.ubp.das.src.jobs.sorteo.forms.EjecucionesSorteoForm;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.ParticipanteForm;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.SorteoForm;
@@ -77,7 +76,6 @@ public class SorteoJob implements Job {
         sorteoDeHoy.ifPresent(sorteoForm -> {
 
             try {
-                final EjecucionesSorteoForm ejecucion = new EjecucionesSorteoForm();
                 final ConsumoAbsoluto consumoAbsoluto = new ConsumoAbsoluto(datasourceConfig, clientFactory);
 
                 if (consumoAbsoluto.ejecutar(sorteoForm.getId())) {
