@@ -7,11 +7,11 @@ const CalendarioService = {
             dataType: "html",
             error: function (hr) {
                 console.log("AJAX RESULT GET_SORTEOS ERROR %o", hr.responseText);
-                jUtils.showing("calendario", hr);
+                jUtils.showing("sorteos_table", hr);
             },
             success: function (html) {
                 console.log("AJAX RESULT GET_SORTEOS SUCCESS %o", html);
-                jUtils.showing("calendario", html);
+                jUtils.showing("sorteos_table", html);
             }
         });
     },

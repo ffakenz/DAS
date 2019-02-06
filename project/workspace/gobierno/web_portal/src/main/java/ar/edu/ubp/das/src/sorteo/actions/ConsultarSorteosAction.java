@@ -26,7 +26,7 @@ public class ConsultarSorteosAction implements Action {
         final SorteoJobManager sorteoJobManager = new SorteoJobManager(datasourceConfig);
         try {
             final List<SorteoForm> sorteos = sorteoJobManager.getMsSorteoDao().select();
-            request.setAttribute(Constants.SORTEOS_RQST_ATTRIBUTE, sorteos);
+            request.setAttribute(Constants.SORTEOS_LIST_RQST_ATTRIBUTE, sorteos);
             log.info("ConsultarSorteosAction [SUCCEDED] [REASON - {}]", sorteos);
             return mapping.getForwardByName(ResponseForward.SUCCESS.getForward());
         } catch (final SQLException e) {
