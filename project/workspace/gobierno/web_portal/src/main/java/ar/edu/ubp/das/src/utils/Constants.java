@@ -2,7 +2,7 @@ package ar.edu.ubp.das.src.utils;
 
 public final class Constants {
 
-    //************ DAOS ****************************
+    /************ DAOS ****************************/
     public static final String CONCESIONARIAS_DAO_NAME = "Concesionarias";
     public static final String CONFIG_CONCESIONARIAS_DAO_NAME = "ConfigurarConcesionaria";
     public static final String CONFIG_TECNO_PARAM_DAO_NAME = "ConfigTecnoParam";
@@ -12,7 +12,7 @@ public final class Constants {
     public static final String SORTEO_DAO_NAME = "Sorteo";
     public static final String CONSUMO_DAO_NAME = "Consumo";
 
-    //************ DAOS PACKAGES**********************************************
+    /************ DAOS PACKAGES**********************************************/
     public static final String CONCESIONARIAS_DAO_PACKAGE = "concesionarias";
     public static final String USUARIOS_DAO_PACKAGE = "usuarios";
     public static final String CONSUMERS_DAO_PACKAGE = "consumers";
@@ -20,19 +20,19 @@ public final class Constants {
     public static final String SORTEO_DAO_PACKAGE = "jobs.sorteo";
     public static final String CONSUMO_DAO_PACKAGE = "jobs.consumo";
 
-    //************ CONSUMERS ROLES ****************************
+    /************ CONSUMERS ROLES ****************************/
     public static final String ROL_GOBIERNO = "gobierno";
     public static final String ROL_CONSUMER = "consumer";
 
-    //************ IDENTIFICADOR ****************************
+    /************ IDENTIFICADOR ****************************/
     public static final String IDENTIFICADOR = "GOBIERNO-INCENTIVO-2018";
 
-    //************ PARAMS SERVLETS ****************************
+    /************ PARAMS SERVLETS ****************************/
     public static final String USER_TYPE = "userType";
     public static final String SSID = "ssid";
     public static final String FORWARD_NAME = "forwardName";
 
-    //************ SERVLET REQUEST ATTRIBUTES ****************************
+    /************ SERVLET REQUEST ATTRIBUTES ****************************/
     public static final String RESULT_RQST_ATTRIBUTE = "result";
     public static final String APROBADA_RQST_ATTRIBUTE = "aprobada";
     public static final String APROBADAS_RQST_ATTRIBUTE = "aprobadas";
@@ -43,7 +43,7 @@ public final class Constants {
     public static final String ESTADO_CUENTAS_LIST_RQST_ATTRIBUTE = "estadoCuentasList";
     public static final String SORTEOS_RQST_ATTRIBUTE = "sorteos";
 
-    //************ CSS {CLASSES && ID} IDENTIFIERS ****************************
+    /************ CSS {CLASSES && ID} IDENTIFIERS ****************************/
     public static final String CONCESIONARIA_ROW = "concesionaria_row";
     public static final String ESTADO_CUENTA_ROW = "estado_cuenta_row";
     public static final String CONCESIONARIA_APROBADA = "concesionaria_aprobada";
@@ -51,4 +51,8 @@ public final class Constants {
     public static final String APROBAR_BTN = "aprobar_btn";
     public static final String DESAPROBAR_BTN = "desaprobar_btn";
     public static final String CONFIG_BTN = "config_btn";
+
+    /************ SORTEO ****************************/
+    public static Integer CUOTAS_MIN = 5;
+    public static Integer CUOTAS_MAX = 10;
 }
