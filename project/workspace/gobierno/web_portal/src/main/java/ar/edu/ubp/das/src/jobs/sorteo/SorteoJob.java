@@ -64,35 +64,6 @@ public class SorteoJob implements Job {
     }
 
 
-    private void invalidateOldNuevosIfIsNecessary(final List<SorteoForm> oldNuevos) {
-        oldNuevos.forEach(sorteo -> {
-            try {
-                sorteo.setEstado(EstadoSorteo.FALLADO.getTipo());
-                sorteoJobManager.getMsSorteoDao().update(sorteo);
-            } catch (final SQLException e) {
-                log.error("[exception:{}]", e.getMessage());
-            }
-        });
-    }
-
-    public Optional<SorteoForm> getSorteoDeHoy() {
-        try {
-
-            invalidateOldNuevosIfIsNecessary(sorteoJobManager.getMsSorteoDao().getSorteoViejosEnEstadoNuevo());
-
-            final Optional<SorteoForm> pendiente = this.sorteoJobManager.getMsSorteoDao().getSorteoPendiente();
-            if (pendiente.isPresent()) {
-                return pendiente;
-            }
-
-            return sorteoJobManager.getMsSorteoDao().getSorteoNuevoParaHoy();
-
-        } catch (final SQLException e) {
-            log.error("[exception:{}]", e.getMessage());
-            return Optional.empty();
-        }
-    }
-
     @Override
     public void execute(final JobExecutionContext jobExecutionContext) {
 
@@ -154,6 +125,35 @@ public class SorteoJob implements Job {
             }
         });
         log.info("FINISHING_CONSUMER");
+    }
+
+    private void invalidateOldNuevosIfIsNecessary(final List<SorteoForm> oldNuevos) {
+        oldNuevos.forEach(sorteo -> {
+            try {
+                sorteo.setEstado(EstadoSorteo.FALLADO.getTipo());
+                sorteoJobManager.getMsSorteoDao().update(sorteo);
+            } catch (final SQLException e) {
+                log.error("[exception:{}]", e.getMessage());
+            }
+        });
+    }
+
+    public Optional<SorteoForm> getSorteoDeHoy() {
+        try {
+
+            invalidateOldNuevosIfIsNecessary(sorteoJobManager.getMsSorteoDao().getSorteoViejosEnEstadoNuevo());
+
+            final Optional<SorteoForm> pendiente = this.sorteoJobManager.getMsSorteoDao().getSorteoPendiente();
+            if (pendiente.isPresent()) {
+                return pendiente;
+            }
+
+            return sorteoJobManager.getMsSorteoDao().getSorteoNuevoParaHoy();
+
+        } catch (final SQLException e) {
+            log.error("[exception:{}]", e.getMessage());
+            return Optional.empty();
+        }
     }
 
     private ParticipanteForm getGanador(final List<ParticipanteForm> participantes) {

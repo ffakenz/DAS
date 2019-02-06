@@ -258,6 +258,20 @@
         <dropProcedure procedureName="get_concesionarias_notificadas"/>
     </changeSet>
 
+    <changeSet id="Drop procedure get_ganador_by_sorteo_id" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_ganador_by_sorteo_id'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_ganador_by_sorteo_id"/>
+    </changeSet>
+
     <changeSet id="Drop procedure log_sorteo_with_estado" author="DAS-Team" runAlways="true"
                runOnChange="true">
         <preConditions onFail="MARK_RAN">
@@ -694,6 +708,21 @@
         </preConditions>
         <sqlFile
                 path="/src/main/resources/liquibase/jobs/procedures/sorteo/get_concesionarias_notificadas.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure get_ganador_by_sorteo_id" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_ganador_by_sorteo_id'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/sorteo/get_ganador_by_sorteo_id.sql"/>
     </changeSet>
 
     <changeSet id="Create procedure log_sorteo_with_estado" author="DAS-Team" runAlways="true"

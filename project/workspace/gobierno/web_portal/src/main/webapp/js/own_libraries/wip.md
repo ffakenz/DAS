@@ -55,3 +55,31 @@ let Rectangle = class {
 };
 
 
+
+
+log_sorteo.sql
+get_sorteos.sql
+actualizar_fecha_sorteo.sql
+update_estado_sorteo.sql
+log_participante.sql
+update_estado_participante.sql
+get_ultimo_ganador.sql
+
+
+move strings to constants from daofactory calls
+
+
+(
+    @concesionariaId BIGINT
+    , @nroPlanConcesionaria BIGINT
+    , @documentoConsumer BIGINT
+    , @vehiculo BIGINTa
+    , @fechaAltaConcesionaria DATETIME
+    , @estado VARCHAR(100)
+)
+
+
+TODO:
+    normalizer test for ConsumoAbsoluto
+    scenarios test for ConsumoAbsoluto
+

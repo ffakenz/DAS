@@ -58,4 +58,13 @@ public class MSParticipanteDao extends DaoImpl<ParticipanteForm> {
                 .stream()
                 .findFirst();
     }
+
+    public Optional<ParticipanteForm> getGanadorBySorteo(final Long sorteoId) throws SQLException {
+
+        this.setProcedure("dbo.get_ganador_by_sorteo_id(?)", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        this.setParameter(1, sorteoId);
+        final List<ParticipanteForm> result = this.executeQuery();
+        this.disconnect();
+        return result.stream().findFirst();
+    }
 }
