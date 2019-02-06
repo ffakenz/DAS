@@ -11,7 +11,7 @@
         <div class="content-body">
             <%@include file="../commons/header.jsp"%>
             <link type="text/css" rel="stylesheet" href="/web_portal/util/StyleSheet.do/load=loginbox" />
-            <div class="loginbox">
+            <div class="loginbox loginbox-login">
                 <img src="/web_portal/img/login/avatar.png" class="avatar"/>
                 <h1><fmt:message key="login_cabecera" bundle="${etq}" /></h1>
                 <form id="login_form" action="javascript:void(0)" method="post">

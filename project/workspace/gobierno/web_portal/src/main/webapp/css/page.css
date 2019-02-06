@@ -4,8 +4,8 @@ html, body, #map {
   font-family: Verdana, Arial, sans-serif;
   font-size: 10pt;
   color: #000;
-  width: 100%;
-  height: 100%;
+  width: 100% !important;
+  height: 100% !important;
 
 }
 
@@ -77,4 +77,9 @@ body {
 
 img.d-block.w-100.h-50 {
     height: 500px !important;
+}
+
+#footer_div {
+  height: 5rem;
+  margin-top: 23rem;
 }
