@@ -1,6 +1,8 @@
 package ar.edu.ubp.das.src.jobs.sorteo;
 
+import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
+import ar.edu.ubp.das.src.jobs.ClientFactoryAdapter;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.ParticipanteForm;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.SorteoForm;
 
@@ -13,6 +15,10 @@ import static ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo.COMPLETADO;
 class NotificarConcesionarias extends SorteoStep {
 
     private List<Long> concesionariasQueEnviaEmail;
+
+    public NotificarConcesionarias(DatasourceConfig datasourceConfig, ClientFactoryAdapter clientFactoryAdapter) {
+        super(datasourceConfig, clientFactoryAdapter);
+    }
 
     @Override
     public SorteoForm runContext(final SorteoForm sorteoForm) throws StepRunnerException {

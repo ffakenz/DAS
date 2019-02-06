@@ -48,6 +48,11 @@ public class SorteoForm extends DynaActionForm {
         return estado;
     }
 
+    public EstadoSorteo getEstadoSorteo() {
+
+        return EstadoSorteo.valueOf(estado.toUpperCase());
+    }
+
     public void setEstado(final String estado) {
         this.estado = estado;
     }

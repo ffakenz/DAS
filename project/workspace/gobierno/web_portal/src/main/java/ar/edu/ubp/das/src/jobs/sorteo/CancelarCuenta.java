@@ -1,5 +1,7 @@
 package ar.edu.ubp.das.src.jobs.sorteo;
 
+import ar.edu.ubp.das.mvc.config.DatasourceConfig;
+import ar.edu.ubp.das.src.jobs.ClientFactoryAdapter;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.ParticipanteForm;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.SorteoForm;
 import ar.edu.ubp.das.src.utils.Constants;
@@ -12,6 +14,10 @@ import static ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo.PENDIENTE_CANCEL
 import static ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo.PENDIENTE_NOTIFICACION_GANADOR;
 
 class CancelarCuenta extends SorteoStep {
+
+    public CancelarCuenta(DatasourceConfig datasourceConfig, ClientFactoryAdapter clientFactoryAdapter) {
+        super(datasourceConfig, clientFactoryAdapter);
+    }
 
     @Override
     public SorteoForm runContext(final SorteoForm sorteoForm) throws StepRunnerException {

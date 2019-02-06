@@ -1,6 +1,7 @@
 package ar.edu.ubp.das.src.jobs.runner;
 
 import ar.edu.ubp.das.src.jobs.consumo.ConsumoJob;
+import ar.edu.ubp.das.src.jobs.sorteo.SorteoJob;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.impl.StdSchedulerFactory;

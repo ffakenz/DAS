@@ -9,7 +9,6 @@ import ar.edu.ubp.das.src.jobs.ClientFactoryAdapter;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.SorteoForm;
 import clients.ConcesionariaServiceContract;
-import clients.factory.ClientFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,14 +31,18 @@ abstract class SorteoStep {
     protected ConcesionariasManager concesionariasManager;
 
 
-    public SorteoStep() {
+    public SorteoStep(DatasourceConfig datasourceConfig, ClientFactoryAdapter clientFactoryAdapter) {
         this.name = this.getClass().getSimpleName();
-        datasourceConfig = new DatasourceConfig();
+
+        this.datasourceConfig = datasourceConfig;
+        this.clientFactoryAdapter = clientFactoryAdapter;
+
         this.sorteoJobManager = new SorteoJobManager(datasourceConfig);
-        this.clientFactoryAdapter = new ClientFactoryAdapter(ClientFactory.getInstance());
+
         final MSConfigurarConcesionariaDao msConfigurarConcesionariaDao = new MSConfigurarConcesionariaDao();
         msConfigurarConcesionariaDao.setDatasource(datasourceConfig);
         configurarConcesionariaManager = new ConfigurarConcesionariaManager(msConfigurarConcesionariaDao);
+
         final MSConcesionariasDao msConcesionariasDao = new MSConcesionariasDao();
         msConcesionariasDao.setDatasource(datasourceConfig);
         concesionariasManager = new ConcesionariasManager(msConcesionariasDao);

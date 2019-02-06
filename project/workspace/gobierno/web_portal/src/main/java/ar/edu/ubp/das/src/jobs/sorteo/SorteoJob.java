@@ -1,6 +1,7 @@
 package ar.edu.ubp.das.src.jobs.sorteo;
 
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
+import ar.edu.ubp.das.src.jobs.ClientFactoryAdapter;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.SorteoForm;
 import org.quartz.Job;
@@ -22,30 +23,37 @@ public class SorteoJob implements Job {
     private static HashMap<EstadoSorteo, String> stepsByEstado = new HashMap<EstadoSorteo, String>() {{
         put(NUEVO, RunConsumoAbsoluto.class.getSimpleName());
         put(PENDIENTE_CONSUMO, RunConsumoAbsoluto.class.getSimpleName());
-        put(PENDIENTE_SELECCION_GANADOR, GetGanador.class.getSimpleName());
         put(PENDIENTE_CANCELACION, CancelarCuenta.class.getSimpleName());
         put(PENDIENTE_NOTIFICACION_GANADOR, NotificarGanador.class.getSimpleName());
         put(PENDIENTE_NOTIFICACION_CONCESIONARIAS, NotificarConcesionarias.class.getSimpleName());
     }};
 
-    private final SorteoJobManager sorteoJobManager = new SorteoJobManager(new DatasourceConfig());
+    private final DatasourceConfig datasourceConfig;
+    private final ClientFactoryAdapter clientFactoryAdapter;
+    private final SorteoJobManager sorteoJobManager;
+
+    public SorteoJob(DatasourceConfig datasourceConfig, ClientFactoryAdapter clientFactoryAdapter) {
+        this.datasourceConfig = datasourceConfig;
+        this.clientFactoryAdapter = clientFactoryAdapter;
+        sorteoJobManager = new SorteoJobManager(datasourceConfig);
+    }
 
     @Override
     public void execute(final JobExecutionContext jobExecutionContext) {
 
         final Optional<SorteoForm> sorteoDeHoy = getSorteoDeHoy();
 
-        final SorteoStep result = new RunConsumoAbsoluto()
-                .then(new GetGanador())
-                .then(new CancelarCuenta())
-                .then(new NotificarGanador())
-                .then(new NotificarConcesionarias());
+        final SorteoStep result = new RunConsumoAbsoluto(datasourceConfig, clientFactoryAdapter)
+                .then(new GetGanador(datasourceConfig, clientFactoryAdapter))
+                .then(new CancelarCuenta(datasourceConfig, clientFactoryAdapter))
+                .then(new NotificarGanador(datasourceConfig, clientFactoryAdapter))
+                .then(new NotificarConcesionarias(datasourceConfig, clientFactoryAdapter));
 
         sorteoDeHoy.ifPresent(sorteoForm -> {
 
             try {
                 final SorteoForm resultSorteo =
-                        result.executeOnRoot(stepsByEstado.get(sorteoForm.getEstado()), sorteoForm);
+                        result.executeOnRoot(stepsByEstado.get(sorteoForm.getEstadoSorteo()), sorteoForm);
                 System.out.println(resultSorteo);
             } catch (final StepRunnerException e) {
                 e.printStackTrace();

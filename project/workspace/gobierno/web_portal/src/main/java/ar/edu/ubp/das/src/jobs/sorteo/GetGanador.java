@@ -1,5 +1,7 @@
 package ar.edu.ubp.das.src.jobs.sorteo;
 
+import ar.edu.ubp.das.mvc.config.DatasourceConfig;
+import ar.edu.ubp.das.src.jobs.ClientFactoryAdapter;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.ParticipanteForm;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.SorteoForm;
 import ar.edu.ubp.das.src.utils.Utils;
@@ -8,12 +10,17 @@ import java.sql.SQLException;
 import java.util.List;
 
 import static ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoParticipante.GANADOR;
+import static ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo.COMPLETADO;
 import static ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo.PENDIENTE_CANCELACION;
-import static ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo.PENDIENTE_SELECCION_GANADOR;
+import static ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo.PENDIENTE_CONSUMO;
 import static ar.edu.ubp.das.src.utils.Constants.CUOTAS_MAX;
 import static ar.edu.ubp.das.src.utils.Constants.CUOTAS_MIN;
 
 class GetGanador extends SorteoStep {
+
+    public GetGanador(DatasourceConfig datasourceConfig, ClientFactoryAdapter clientFactoryAdapter) {
+        super(datasourceConfig, clientFactoryAdapter);
+    }
 
     @Override
     public SorteoForm runContext(final SorteoForm sorteoForm) throws StepRunnerException {
@@ -22,11 +29,20 @@ class GetGanador extends SorteoStep {
             final List<ParticipanteForm> participantes =
                     sorteoJobManager.getMsParticipanteDao().getParticipantes(CUOTAS_MIN, CUOTAS_MAX);
             insertParticipantes(participantes, sorteoForm.getId());
+
+            if(participantes.isEmpty()){
+                logSorteoFormDb(sorteoForm, COMPLETADO);
+                throw new StepRunnerException("Sorteo cannot be executed because there are not participantes");
+            }
+
             getGanador(participantes);
 
         } catch (final SQLException e) {
             e.printStackTrace();
-            logSorteoFormDb(sorteoForm, PENDIENTE_SELECCION_GANADOR, e.getMessage());
+            // en este caso en particular queremos que la proxima vez el sorteo se levante desde el step
+            // pendiente_consumo debido a que si durante varios dias falla la seleccion del ganador
+            // podría en algun momento quedar desactualizadas algunas concesionarias
+            logSorteoFormDb(sorteoForm, PENDIENTE_CONSUMO, e.getMessage());
             throw new StepRunnerException(name);
         }
 

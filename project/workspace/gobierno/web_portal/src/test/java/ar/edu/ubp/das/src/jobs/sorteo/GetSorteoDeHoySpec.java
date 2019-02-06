@@ -1,6 +1,7 @@
 package ar.edu.ubp.das.src.jobs.sorteo;
 
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
+import ar.edu.ubp.das.src.jobs.ClientFactoryAdapter;
 import ar.edu.ubp.das.src.jobs.sorteo.daos.MSSorteoDao;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.SorteoForm;
@@ -24,6 +25,7 @@ public class GetSorteoDeHoySpec {
 
     // Daos
     private DatasourceConfig dataSourceConfig;
+    private ClientFactoryAdapter clientFactoryAdapter;
     private MSSorteoDao msSorteoDao;
     private SorteoJobManager sorteoJobManager;
     private SorteoJob sorteoJob;
@@ -36,13 +38,11 @@ public class GetSorteoDeHoySpec {
 
         // Setup Daos
         this.dataSourceConfig = TestDB.getInstance().getDataSourceConfig();
-
+        this.clientFactoryAdapter = new ClientFactoryAdapter(ClientFactory.getInstance());
         sorteoJobManager = new SorteoJobManager(dataSourceConfig);
-
         msSorteoDao = new MSSorteoDao();
         msSorteoDao.setDatasource(dataSourceConfig);
-
-        sorteoJob = new SorteoJob(dataSourceConfig, ClientFactory.getInstance());
+        sorteoJob = new SorteoJob(dataSourceConfig, clientFactoryAdapter);
     }
 
     @Test

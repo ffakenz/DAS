@@ -3,6 +3,7 @@ package ar.edu.ubp.das.src.jobs.consumo_absoluto.forms;
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.annotations.Column;
 import ar.edu.ubp.das.mvc.db.annotations.Entity;
+import ar.edu.ubp.das.src.jobs.consumo.forms.EstadoConsumo;
 
 import java.sql.Timestamp;
 
@@ -112,6 +113,14 @@ public class ConsumoAbsolutoForm extends DynaActionForm {
 
     public void setEstado(final String estado) {
         this.estado = estado;
+    }
+
+    public EstadoConsumo getEstadoConsumo() {
+        return EstadoConsumo.valueOf(estado.toUpperCase());
+    }
+
+    public void setEstado(final EstadoConsumo estado) {
+        this.estado = estado.getTipo();
     }
 
     public String getCause() {

@@ -122,14 +122,10 @@ BEGIN
     VALUES('nuevo')
       ,('pendiente_consumo')
       ,('pendiente_cancelacion')
-      ,('pendiente_seleccion_ganador')
       ,('pendiente_notificacion_ganador')
       ,('pendiente_notificacion_concesionarias')
       ,('completado')
       ,('fallado')
-
-    INSERT INTO sorteos (estado, fecha_ejecucion)
-    VALUES('completado', GETDATE())
 
     INSERT INTO estado_participante(nombre)
     VALUES ('participante')

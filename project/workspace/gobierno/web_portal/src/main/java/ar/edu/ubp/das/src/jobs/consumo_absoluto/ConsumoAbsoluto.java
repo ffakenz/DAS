@@ -33,6 +33,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static ar.edu.ubp.das.src.jobs.consumo.forms.EstadoConsumo.SUCCESS;
+
 // TODO: refactor name "ConsumoAbsoluto" to "ConsumoSorteo" <3
 public class ConsumoAbsoluto {
 
@@ -80,6 +82,7 @@ public class ConsumoAbsoluto {
 
     // TODO : Change Return Time to DTO Response
     public boolean ejecutar(final Long sorteoId) {
+
         final ConsumoAbsolutoForm consumoAbsolutoForm = new ConsumoAbsolutoForm();
         consumoAbsolutoForm.setFecha(Timestamp.from(Instant.now()));
         consumoAbsolutoForm.setIdSorteo(sorteoId);
@@ -100,7 +103,7 @@ public class ConsumoAbsoluto {
                     // TODO <- Improve this with comment below
                     // si todos los estados de cuenta resultaron exitosos => mark [consumo absoluto aprobada] as success => [query]
                     log.info("[ConsumoAbsoluto.ejecutar][SUCCEDED aprobada {}]", aprobada.getId());
-                    consumoAbsolutoForm.setEstado("SUCCESS");
+                    consumoAbsolutoForm.setEstado(SUCCESS);
                     consumoAbsolutoForm.setCause("aprobada");
                     consumoAbsolutoForm.setConcesionariaId(aprobada.getId());
                     logConsumoAbsolutoForm(consumoAbsolutoForm);
@@ -111,12 +114,14 @@ public class ConsumoAbsoluto {
             // TODO <- Improve this with comment below
             // si todas las aprobadas resultaron exitosas => mark [consumo absoluto] as success => [query]
             log.info("[ConsumoAbsoluto.ejecutar][SUCCESS]");
-            consumoAbsolutoForm.setEstado("SUCCESS");
+            consumoAbsolutoForm.setEstado(SUCCESS);
             consumoAbsolutoForm.setCause("job");
             logConsumoAbsolutoForm(consumoAbsolutoForm);
+        } else {
+            consumoAbsolutoForm.setEstado(SUCCESS);
         }
 
-        return consumoAbsolutoForm.getEstado().equals("SUCCESS");
+        return consumoAbsolutoForm.getEstadoConsumo().equals(SUCCESS);
     }
 
     private List<ConcesionariaForm> getAllConcesionariasAprobadasDesactualizadas(final ConsumoAbsolutoForm consumoAbsolutoForm) {

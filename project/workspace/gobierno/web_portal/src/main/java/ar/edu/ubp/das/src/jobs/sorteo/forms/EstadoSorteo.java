@@ -4,7 +4,6 @@ public enum EstadoSorteo {
     NUEVO("nuevo"),
     PENDIENTE_CONSUMO("pendiente_consumo"),
     PENDIENTE_CANCELACION("pendiente_cancelacion"),
-    PENDIENTE_SELECCION_GANADOR("pendiente_seleccion_ganador"),
     PENDIENTE_NOTIFICACION_GANADOR("pendiente_notificacion_ganador"),
     PENDIENTE_NOTIFICACION_CONCESIONARIAS("pendiente_notificacion_concesionarias"),
     COMPLETADO("completado"),

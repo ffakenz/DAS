@@ -1,12 +1,18 @@
 package ar.edu.ubp.das.src.jobs.sorteo;
 
+import ar.edu.ubp.das.mvc.config.DatasourceConfig;
+import ar.edu.ubp.das.src.jobs.ClientFactoryAdapter;
 import ar.edu.ubp.das.src.jobs.consumo_absoluto.ConsumoAbsoluto;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.SorteoForm;
 
 import static ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo.PENDIENTE_CONSUMO;
-import static ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo.PENDIENTE_SELECCION_GANADOR;
 
 class RunConsumoAbsoluto extends SorteoStep {
+
+    public RunConsumoAbsoluto(DatasourceConfig datasourceConfig, ClientFactoryAdapter clientFactoryAdapter) {
+        super(datasourceConfig, clientFactoryAdapter);
+    }
+
     @Override
     public SorteoForm runContext(final SorteoForm sorteoForm) throws StepRunnerException {
 
@@ -19,7 +25,6 @@ class RunConsumoAbsoluto extends SorteoStep {
             throw new StepRunnerException(name);
         }
 
-        logSorteoFormDb(sorteoForm, PENDIENTE_SELECCION_GANADOR);
         return sorteoForm;
     }
 }
