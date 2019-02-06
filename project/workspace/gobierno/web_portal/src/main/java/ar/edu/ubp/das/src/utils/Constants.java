@@ -41,11 +41,12 @@ public final class Constants {
     public static final String CONFIG_PARAMS_LIST_RQST_ATTRIBUTE = "configParams";
     public static final String CONCESIONARIAS_LIST_RQST_ATTRIBUTE = "concesionariasList";
     public static final String ESTADO_CUENTAS_LIST_RQST_ATTRIBUTE = "estadoCuentasList";
-    public static final String SORTEOS_RQST_ATTRIBUTE = "sorteos";
+    public static final String SORTEOS_LIST_RQST_ATTRIBUTE = "sorteosList";
 
     /************ CSS {CLASSES && ID} IDENTIFIERS ****************************/
     public static final String CONCESIONARIA_ROW = "concesionaria_row";
     public static final String ESTADO_CUENTA_ROW = "estado_cuenta_row";
+    public static final String SORTEO_ROW = "sorteo_row";
     public static final String CONCESIONARIA_APROBADA = "concesionaria_aprobada";
     public static final String CONCESIONARIA_NO_APROBADA = "concesionaria_no_aprobada";
     public static final String APROBAR_BTN = "aprobar_btn";

@@ -2,6 +2,7 @@ package ar.edu.ubp.das.src.utils;
 
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
 import ar.edu.ubp.das.src.estado_cuentas.forms.EstadoCuentasForm;
+import ar.edu.ubp.das.src.jobs.sorteo.forms.SorteoForm;
 
 import java.util.List;
 
@@ -14,10 +15,22 @@ public class FrontUtils {
         final StringBuilder lista = new StringBuilder();
 
         lista.append("<ul id=\"conc_aprobadas_ul\" class=\"list-group\">");
-        concList.forEach(c -> lista.append("<li class=\"list-group-item\">"+c.getNombre()+"</li>"));
+        concList.forEach(c -> lista.append("<li class=\"list-group-item\">" + c.getNombre() + "</li>"));
         lista.append("</ul>");
 
         return lista.toString();
+    }
+
+    public static String sorteosFormRow(final SorteoForm sorteo) {
+        final StringBuilder rows = new StringBuilder();
+        rows.append("<tr id=\"" + SORTEO_ROW + "-" + sorteo.getId() + "\">");
+        rows.append("<td>" + sorteo.getId() + "</td>");
+        rows.append("<td>" + sorteo.getMesSorteo() + "</td>");
+        rows.append("<td>" + sorteo.getAnioSorteo() + "</td>");
+        rows.append("<td>" + sorteo.getEstado() + "</td>");
+        rows.append("<td>" + sorteo.getFechaEjecucion() + "</td>");
+        rows.append("</tr>");
+        return rows.toString();
     }
 
     public static String estadoCuentasFormRow(final EstadoCuentasForm e) {
