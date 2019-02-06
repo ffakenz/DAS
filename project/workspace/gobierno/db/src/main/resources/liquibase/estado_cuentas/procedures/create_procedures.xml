@@ -202,6 +202,21 @@
                 path="/src/main/resources/liquibase/estado_cuentas/procedures/get_estado_cuentas_by_nro_plan_and_concesionaria.sql"/>
     </changeSet>
 
+    <changeSet id="Create procedure get_estado_cuentas" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_estado_cuentas'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/estado_cuentas/procedures/get_estado_cuentas.sql"/>
+    </changeSet>
+
     <changeSet id="Create procedure get_estado_cuentas_by_concesionaria_id" author="DAS-Team" runAlways="true"
                runOnChange="true">
         <preConditions onFail="MARK_RAN">
