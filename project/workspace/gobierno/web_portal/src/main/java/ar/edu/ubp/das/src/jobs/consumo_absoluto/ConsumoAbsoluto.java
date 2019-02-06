@@ -6,8 +6,6 @@ import ar.edu.ubp.das.src.concesionarias.daos.MSConfigurarConcesionariaDao;
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
 import ar.edu.ubp.das.src.concesionarias.managers.ConcesionariasManager;
 import ar.edu.ubp.das.src.concesionarias.managers.ConfigurarConcesionariaManager;
-import ar.edu.ubp.das.src.consumers.daos.MSConsumerDao;
-import ar.edu.ubp.das.src.consumers.managers.ConsumerManager;
 import ar.edu.ubp.das.src.estado_cuentas.daos.MSCuotasDao;
 import ar.edu.ubp.das.src.estado_cuentas.daos.MSEstadoCuentasDao;
 import ar.edu.ubp.das.src.estado_cuentas.forms.CuotasForm;
@@ -45,16 +43,11 @@ public class ConsumoAbsoluto {
     private EstadoCuentasManager estadoCuentasManager;
     private CuotasManager cuotasManager;
     private ClientFactoryAdapter clientFactoryAdapter;
-    private ConsumerManager consumerManager;
     private MSConsumoAbsolutoDao msConsumoAbsolutoDao;
 
 
     public ConsumoAbsoluto(final DatasourceConfig datasourceConfig,
                            final ClientFactoryAdapter clientFactoryAdapter) {
-
-        final MSConsumerDao msConsumerDao = new MSConsumerDao();
-        msConsumerDao.setDatasource(datasourceConfig);
-        this.consumerManager = new ConsumerManager(msConsumerDao);
 
         final MSConcesionariasDao msConcesionariasDao = new MSConcesionariasDao();
         msConcesionariasDao.setDatasource(datasourceConfig);
@@ -75,7 +68,7 @@ public class ConsumoAbsoluto {
         this.clientFactoryAdapter = clientFactoryAdapter;
 
         this.msConsumoAbsolutoDao = new MSConsumoAbsolutoDao();
-        msConcesionariasDao.setDatasource(datasourceConfig);
+        msConsumoAbsolutoDao.setDatasource(datasourceConfig);
 
     }
 
@@ -215,11 +208,9 @@ public class ConsumoAbsoluto {
         }
     }
 
-    private EstadoCuentasForm updateEstadoCuentaDb(final PlanBean update, final Long concesionariaId) throws SQLException {
-        final EstadoCuentasForm estadoCuenta = new EstadoCuentasForm();
-        estadoCuenta.setConcesionariaId(concesionariaId);
-        estadoCuenta.setNroPlanConcesionaria(update.getPlanId());
-        estadoCuenta.setEstado(update.getPlanEstado());
+    private EstadoCuentasForm updateEstadoCuentaDb(final PlanBean planBean, final Long concesionariaId) throws SQLException {
+        final EstadoCuentasForm estadoCuenta = EstadoCuentasForm.fromPlanBean(planBean, concesionariaId);
+
         return estadoCuentasManager.getDao().upsert(estadoCuenta); // will be always update
     }
 

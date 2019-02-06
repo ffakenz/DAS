@@ -1,6 +1,7 @@
 package util;
 
 import ar.edu.ubp.das.src.jobs.consumo.ConsumoJob;
+import beans.CuotaBean;
 import beans.NotificationUpdate;
 import beans.PlanBean;
 import clients.ConcesionariaServiceContract;
@@ -49,7 +50,19 @@ class ConcesionariaServiceContractStub implements ConcesionariaServiceContract {
 
     @Override
     public PlanBean consultarPlan(final String identificador, final Long planId) throws ClientException {
-        return null;
+        log.info("RUNNING [CONSULTAR PLANES][IDENTIFICADOR = {}][PLAN_ID= {}]", identificador, planId);
+
+        if(notificationFileName == null) {
+            throw new ClientException("the service is unavailable");
+        }
+
+        final String fileContent = MockUtils.readMockBodyFromFile(notificationFileName);
+        final NotificationUpdate notificationUpdate = JsonUtils.toObject(fileContent, NotificationUpdate.class);
+
+        final List<CuotaBean> cuotas = new ArrayList<>();
+        cuotas.add(CuotaBean.fromNotificationUpdate(notificationUpdate));
+
+        return PlanBean.fromNotificationUpdate(notificationUpdate, cuotas);
     }
 
     @Override

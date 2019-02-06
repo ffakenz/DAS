@@ -6,7 +6,7 @@ import ar.edu.ubp.das.src.jobs.consumo.ConsumoJob;
 import beans.CuotaBean;
 import beans.PlanBean;
 import clients.factory.ClientType;
-import util.ClentFactoryStub;
+import util.ClientFactoryStub;
 
 import java.sql.Timestamp;
 import java.time.Instant;
@@ -28,7 +28,7 @@ public interface ISorteoSpec {
         for (final Pair<ClientType, String> tuple : tuples) {
             concesionariasXnotificationFileName.put(tuple.fst, tuple.snd);
         }
-        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new ClentFactoryStub(concesionariasXnotificationFileName), fechaEjecucion);
+        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new ClientFactoryStub(concesionariasXnotificationFileName), fechaEjecucion);
         consumer.execute(null);
     }
 

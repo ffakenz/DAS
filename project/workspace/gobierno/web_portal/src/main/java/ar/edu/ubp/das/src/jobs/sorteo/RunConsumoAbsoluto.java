@@ -16,9 +16,7 @@ class RunConsumoAbsoluto extends SorteoStep {
     @Override
     public SorteoForm runContext(final SorteoForm sorteoForm) throws StepRunnerException {
 
-        final ConsumoAbsoluto consumoAbsoluto =
-                new ConsumoAbsoluto(datasourceConfig, clientFactoryAdapter);
-
+        final ConsumoAbsoluto consumoAbsoluto = new ConsumoAbsoluto(datasourceConfig, clientFactoryAdapter);
 
         if (!consumoAbsoluto.ejecutar(sorteoForm.getId())) {
             logSorteoFormDb(sorteoForm, PENDIENTE_CONSUMO, "Consumo Absoluto Fail");

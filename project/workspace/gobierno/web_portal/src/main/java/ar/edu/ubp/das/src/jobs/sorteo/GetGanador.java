@@ -10,9 +10,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import static ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoParticipante.GANADOR;
-import static ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo.COMPLETADO;
-import static ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo.PENDIENTE_CANCELACION;
-import static ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo.PENDIENTE_CONSUMO;
+import static ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo.*;
 import static ar.edu.ubp.das.src.utils.Constants.CUOTAS_MAX;
 import static ar.edu.ubp.das.src.utils.Constants.CUOTAS_MIN;
 

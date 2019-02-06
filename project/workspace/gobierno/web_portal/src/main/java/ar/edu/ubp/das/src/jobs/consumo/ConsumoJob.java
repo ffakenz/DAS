@@ -7,16 +7,8 @@ import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
 import ar.edu.ubp.das.src.concesionarias.forms.ConfigurarConcesionariaForm;
 import ar.edu.ubp.das.src.concesionarias.managers.ConcesionariasManager;
 import ar.edu.ubp.das.src.concesionarias.managers.ConfigurarConcesionariaManager;
-import ar.edu.ubp.das.src.consumers.daos.MSConsumerDao;
-import ar.edu.ubp.das.src.consumers.managers.ConsumerManager;
-import ar.edu.ubp.das.src.estado_cuentas.daos.MSCuotasDao;
-import ar.edu.ubp.das.src.estado_cuentas.daos.MSEstadoCuentasDao;
-import ar.edu.ubp.das.src.estado_cuentas.managers.CuotasManager;
-import ar.edu.ubp.das.src.estado_cuentas.managers.EstadoCuentasManager;
 import ar.edu.ubp.das.src.jobs.ClientFactoryAdapter;
 import ar.edu.ubp.das.src.jobs.consumo.forms.*;
-import ar.edu.ubp.das.src.usuarios.daos.MSUsuariosDao;
-import ar.edu.ubp.das.src.usuarios.managers.UsuarioManager;
 import ar.edu.ubp.das.src.utils.DateUtils;
 import beans.NotificationUpdate;
 import clients.ConcesionariaServiceContract;
@@ -45,11 +37,7 @@ public class ConsumoJob implements Job {
     // from web_portal
     private ConcesionariasManager concesionariasManager;
     private ConfigurarConcesionariaManager configurarConcesionariaManager;
-    private ConsumerManager consumerManager;
-    private CuotasManager cuotasManager;
-    private EstadoCuentasManager estadoCuentasManager;
     private ConsumoJobManager consumoJobManager;
-    private UsuarioManager usuarioManager;
     private ClientFactoryAdapter clientFactory;
 
     private Timestamp fechaEjecucion;
@@ -68,22 +56,6 @@ public class ConsumoJob implements Job {
         final MSConfigurarConcesionariaDao msConfigurarConcesionariaDao = new MSConfigurarConcesionariaDao();
         msConfigurarConcesionariaDao.setDatasource(datasourceConfig);
         this.configurarConcesionariaManager = new ConfigurarConcesionariaManager(msConfigurarConcesionariaDao);
-
-        final MSConsumerDao msConsumerDao = new MSConsumerDao();
-        msConsumerDao.setDatasource(datasourceConfig);
-        this.consumerManager = new ConsumerManager(msConsumerDao);
-
-        final MSCuotasDao msCuotasDao = new MSCuotasDao();
-        msCuotasDao.setDatasource(datasourceConfig);
-        this.cuotasManager = new CuotasManager(msCuotasDao);
-
-        final MSEstadoCuentasDao msEstadoCuentasDao = new MSEstadoCuentasDao();
-        msEstadoCuentasDao.setDatasource(datasourceConfig);
-        this.estadoCuentasManager = new EstadoCuentasManager(msEstadoCuentasDao);
-
-        final MSUsuariosDao msUsuariosDao = new MSUsuariosDao();
-        msUsuariosDao.setDatasource(datasourceConfig);
-        this.usuarioManager = new UsuarioManager(msUsuariosDao);
 
         this.clientFactory = new ClientFactoryAdapter(clientFactory);
 

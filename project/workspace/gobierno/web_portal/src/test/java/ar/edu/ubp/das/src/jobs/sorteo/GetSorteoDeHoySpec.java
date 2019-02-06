@@ -1,16 +1,16 @@
 package ar.edu.ubp.das.src.jobs.sorteo;
 
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
-import ar.edu.ubp.das.src.jobs.ClientFactoryAdapter;
 import ar.edu.ubp.das.src.jobs.sorteo.daos.MSSorteoDao;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.SorteoForm;
 import ar.edu.ubp.das.src.utils.DateUtils;
-import clients.factory.ClientFactory;
+import clients.factory.IClientFactory;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+import util.ClientFactoryStub;
 import util.TestDB;
 
 import java.sql.Date;
@@ -25,7 +25,7 @@ public class GetSorteoDeHoySpec {
 
     // Daos
     private DatasourceConfig dataSourceConfig;
-    private ClientFactoryAdapter clientFactoryAdapter;
+    private IClientFactory iClientFactory;
     private MSSorteoDao msSorteoDao;
     private SorteoJobManager sorteoJobManager;
     private SorteoJob sorteoJob;
@@ -38,11 +38,11 @@ public class GetSorteoDeHoySpec {
 
         // Setup Daos
         this.dataSourceConfig = TestDB.getInstance().getDataSourceConfig();
-        this.clientFactoryAdapter = new ClientFactoryAdapter(ClientFactory.getInstance());
+        this.iClientFactory = new ClientFactoryStub(null);
         sorteoJobManager = new SorteoJobManager(dataSourceConfig);
         msSorteoDao = new MSSorteoDao();
         msSorteoDao.setDatasource(dataSourceConfig);
-        sorteoJob = new SorteoJob(dataSourceConfig, clientFactoryAdapter);
+        sorteoJob = new SorteoJob(dataSourceConfig, iClientFactory);
     }
 
     @Test

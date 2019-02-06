@@ -4,6 +4,7 @@ import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.src.jobs.ClientFactoryAdapter;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.SorteoForm;
+import clients.factory.IClientFactory;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.slf4j.Logger;
@@ -32,9 +33,9 @@ public class SorteoJob implements Job {
     private final ClientFactoryAdapter clientFactoryAdapter;
     private final SorteoJobManager sorteoJobManager;
 
-    public SorteoJob(DatasourceConfig datasourceConfig, ClientFactoryAdapter clientFactoryAdapter) {
+    public SorteoJob(DatasourceConfig datasourceConfig, final IClientFactory iClientFactory) {
         this.datasourceConfig = datasourceConfig;
-        this.clientFactoryAdapter = clientFactoryAdapter;
+        this.clientFactoryAdapter = new ClientFactoryAdapter(iClientFactory);
         sorteoJobManager = new SorteoJobManager(datasourceConfig);
     }
 

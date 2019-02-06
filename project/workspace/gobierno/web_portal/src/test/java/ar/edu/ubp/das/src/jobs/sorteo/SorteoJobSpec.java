@@ -2,22 +2,23 @@ package ar.edu.ubp.das.src.jobs.sorteo;
 
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.src.concesionarias.daos.MSConcesionariasDao;
-import ar.edu.ubp.das.src.concesionarias.managers.ConcesionariasManager;
-import ar.edu.ubp.das.src.jobs.ClientFactoryAdapter;
-import ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.SorteoForm;
-import ar.edu.ubp.das.src.utils.DateUtils;
-import clients.factory.ClientFactory;
+import ar.edu.ubp.das.src.utils.Constants;
+import clients.factory.ClientType;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+import util.ClientFactoryStub;
 import util.TestDB;
+import util.scenarios.SorteoJobScenarios;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Optional;
 
 import static ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo.COMPLETADO;
+import static clients.factory.ClientType.REST;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 
@@ -26,10 +27,9 @@ public class SorteoJobSpec {
 
 
     private DatasourceConfig datasourceConfig;
-    private ClientFactoryAdapter clientFactoryAdapter;
     private SorteoJob sorteoJob;
     private SorteoJobManager sorteoJobManager;
-    private ConcesionariasManager concesionariasManager;
+    private SorteoJobScenarios sorteoJobScenarios;
 
     @Before
     public void setup() throws SQLException {
@@ -37,18 +37,16 @@ public class SorteoJobSpec {
         TestDB.getInstance().setUpDB();
 
         datasourceConfig = TestDB.getInstance().getDataSourceConfig();
-        clientFactoryAdapter = new ClientFactoryAdapter(ClientFactory.getInstance());
-        sorteoJob = new SorteoJob(datasourceConfig, clientFactoryAdapter);
         sorteoJobManager = new SorteoJobManager(datasourceConfig);
         MSConcesionariasDao msConcesionariasDao = new MSConcesionariasDao();
         msConcesionariasDao.setDatasource(datasourceConfig);
-        concesionariasManager = new ConcesionariasManager(msConcesionariasDao);
+        sorteoJobScenarios = new SorteoJobScenarios(datasourceConfig);
     }
 
     @Test
     public void test_01() throws SQLException {
         // without sorteo , base case
-
+        sorteoJob = new SorteoJob(datasourceConfig, new ClientFactoryStub(null));
         sorteoJob.execute(null);
 
         assertEquals(0, sorteoJobManager.getMsSorteoDao().select().size());
@@ -56,9 +54,10 @@ public class SorteoJobSpec {
 
     @Test
     public void test_02() throws SQLException {
-        // without sorteo , base case
-        setNuevoParaHoy();
+        // with sorteo nuevo , but not concesionarias approved
+        sorteoJobScenarios.setSorteoNuevoParaHoy();
 
+        sorteoJob = new SorteoJob(datasourceConfig, new ClientFactoryStub(null));
         sorteoJob.execute(null);
 
         assertEquals(1, sorteoJobManager.getMsSorteoDao().select().size());
@@ -68,12 +67,30 @@ public class SorteoJobSpec {
         assertEquals(COMPLETADO, sorteoById.get().getEstadoSorteo());
     }
 
-    private void setNuevoParaHoy() throws SQLException {
-        SorteoForm sorteoForm = new SorteoForm();
-        sorteoForm.setEstado(EstadoSorteo.NUEVO);
-        sorteoForm.setFechaEjecucion(DateUtils.getDayDate());
+    @Test
+    public void test_03() throws SQLException {
+        // sorteo nuevo para hoy , con concesionarias aprobadas, pero sin ningun estado de cuenta que cumpla las condiciones
+        sorteoJobScenarios.setSorteoNuevoParaHoy();
+        // aprobamos una concesionaria rest
+        sorteoJobScenarios.approveRestConcesionaria();
 
-        sorteoJobManager.getMsSorteoDao().insert(sorteoForm);
+        final HashMap concesionariasXnotificationFileName = new HashMap<ClientType, String>() {{
+            put(REST, "plan_bean_rest.json");
+        }};
+
+        sorteoJob = new SorteoJob(datasourceConfig, new ClientFactoryStub(concesionariasXnotificationFileName));
+        sorteoJob.execute(null);
+
+        // seteamos valores de cuotas para los que sabemos que no tenemos estados de cuenta que cumplan
+        Constants.CUOTAS_MIN = 10;
+        Constants.CUOTAS_MAX = 20;
+
+        sorteoJob.execute(null);
+
+        assertEquals(1, sorteoJobManager.getMsSorteoDao().select().size());
+        Optional<SorteoForm> sorteoById = sorteoJobManager.getMsSorteoDao().getSorteoById(1L);
+        assertTrue(sorteoById.isPresent());
+        assertEquals(COMPLETADO, sorteoById.get().getEstadoSorteo());
     }
-
+    
 }

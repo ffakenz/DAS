@@ -13,7 +13,7 @@ import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
-import util.ClentFactoryStub;
+import util.ClientFactoryStub;
 import util.TestDB;
 import util.scenarios.ConsumoJobScenarios;
 
@@ -120,7 +120,7 @@ public class ConsumoJobIntegrationSpec {
         }};
 
 
-        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new ClentFactoryStub(concesionariasXnotificationFileName));
+        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new ClientFactoryStub(concesionariasXnotificationFileName));
 
         consumer.execute(null);
 
@@ -142,7 +142,7 @@ public class ConsumoJobIntegrationSpec {
             put(REST, "notification_update_rest.json");
         }};
 
-        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new ClentFactoryStub(concesionariasXnotificationFileName));
+        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new ClientFactoryStub(concesionariasXnotificationFileName));
 
         consumer.execute(null);
 
@@ -166,7 +166,7 @@ public class ConsumoJobIntegrationSpec {
         }};
 
 
-        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new ClentFactoryStub(concesionariasXnotificationFileName));
+        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new ClientFactoryStub(concesionariasXnotificationFileName));
 
         consumer.execute(null);
 
@@ -190,7 +190,7 @@ public class ConsumoJobIntegrationSpec {
             put(REST, "notification_update_rest.json");
         }};
 
-        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new ClentFactoryStub(concesionariasXnotificationFileName));
+        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new ClientFactoryStub(concesionariasXnotificationFileName));
 
         consumer.execute(null);
 
@@ -218,7 +218,7 @@ public class ConsumoJobIntegrationSpec {
             put(REST, "notification_update_rest.json");
         }};
 
-        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new ClentFactoryStub(concesionariasXnotificationFileName));
+        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new ClientFactoryStub(concesionariasXnotificationFileName));
 
         consumer.execute(null);
 
@@ -255,7 +255,7 @@ public class ConsumoJobIntegrationSpec {
             put(CXF, "notification_update_cxf.json");
         }};
 
-        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new ClentFactoryStub(concesionariasXnotificationFileName));
+        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new ClientFactoryStub(concesionariasXnotificationFileName));
 
         consumer.execute(null);
 
@@ -291,7 +291,7 @@ public class ConsumoJobIntegrationSpec {
             put(CXF, "notification_update_cxf.json");
         }};
 
-        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new ClentFactoryStub(concesionariasXnotificationFileName));
+        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new ClientFactoryStub(concesionariasXnotificationFileName));
 
         consumer.execute(null);
 
@@ -334,7 +334,7 @@ public class ConsumoJobIntegrationSpec {
             put(REST, "notification_update_rest.json");
         }};
 
-        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new ClentFactoryStub(concesionariasXnotificationFileName));
+        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new ClientFactoryStub(concesionariasXnotificationFileName));
 
         consumer.execute(null);
 
@@ -372,7 +372,7 @@ public class ConsumoJobIntegrationSpec {
             put(REST, "notification_update_rest_invalid.json");
         }};
 
-        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new ClentFactoryStub(concesionariasXnotificationFileName));
+        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new ClientFactoryStub(concesionariasXnotificationFileName));
 
         consumer.execute(null);
 
@@ -410,7 +410,7 @@ public class ConsumoJobIntegrationSpec {
             put(REST, "notification_update_rest_empty.json");
         }};
 
-        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new ClentFactoryStub(concesionariasXnotificationFileName));
+        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new ClientFactoryStub(concesionariasXnotificationFileName));
 
         consumer.execute(null);
 
@@ -451,7 +451,7 @@ public class ConsumoJobIntegrationSpec {
         }};
 
 
-        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new ClentFactoryStub(concesionariasXnotificationFileName));
+        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new ClientFactoryStub(concesionariasXnotificationFileName));
 
         consumer.execute(null);
 
