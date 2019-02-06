@@ -33,4 +33,16 @@
         </preConditions>
         <sqlFile path="/src/main/resources/liquibase/populates/tipo_estado_planes.sql"/>
     </changeSet>
+    <changeSet id="Populate table clientes" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="clientes"/>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/populates/clientes.sql"/>
+    </changeSet>
+    <changeSet id="Populate table planes" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="planes"/>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/populates/planes.sql"/>
+    </changeSet>
 </databaseChangeLog>
