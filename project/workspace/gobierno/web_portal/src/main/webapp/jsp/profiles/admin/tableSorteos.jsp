@@ -25,9 +25,11 @@
         result.append("<thead>                                                                                     ");
         result.append("<tr>                                                                                        ");
         result.append("   <th>Id</th>                                                                              ");
+        result.append("   <th>Dia Sorteo</th>                                                                      ");
         result.append("   <th>Mes Sorteo</th>                                                                      ");
         result.append("   <th>Año Sorteo</th>                                                                      ");
         result.append("   <th>Estado</th>                                                                          ");
+        result.append("   <th>Fecha Creacion</th>                                                                  ");
         result.append("   <th>Fecha Ejecucion</th>                                                                 ");
         result.append("</tr>                                                                                       ");
         result.append("</thead>                                                                                    ");

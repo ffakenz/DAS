@@ -8,6 +8,10 @@ CREATE TABLE sorteos (
 	, anio_sorteo AS CAST (
         DATEPART(YEAR, fecha_ejecucion) AS INT
 	)
+	, dia_sorteo AS CAST (
+        DATEPART(DAY, fecha_ejecucion)  AS INT
+	)
+	, fecha_creacion                    DATE    DEFAULT GETDATE()
 	, PRIMARY KEY(id)
 	, FOREIGN KEY(estado) REFERENCES estado_sorteo(nombre)
 );

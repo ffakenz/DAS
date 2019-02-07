@@ -15,10 +15,27 @@ public class SorteoForm extends DynaActionForm {
     private Integer mesSorteo;
     @Column(name = "anio_sorteo")
     private Integer anioSorteo;
+    @Column(name = "dia_sorteo")
+    private Integer diaSorteo;
     @Column(name = "estado")
     private String estado;
     @Column(name = "fecha_ejecucion")
     private Date fechaEjecucion;
+    @Column(name = "fecha_creacion")
+    private Date fechaCreacion;
+
+    @Override
+    public String toString() {
+        return "SorteoForm{" +
+                "id=" + id +
+                ", mesSorteo=" + mesSorteo +
+                ", anioSorteo=" + anioSorteo +
+                ", diaSorteo=" + diaSorteo +
+                ", estado='" + estado + '\'' +
+                ", fechaEjecucion=" + fechaEjecucion +
+                ", fechaCreacion=" + fechaCreacion +
+                '}';
+    }
 
     public Long getId() {
         return id;
@@ -44,39 +61,43 @@ public class SorteoForm extends DynaActionForm {
         this.anioSorteo = anioSorteo;
     }
 
-    public String getEstado() {
-        return estado;
+    public Integer getDiaSorteo() {
+        return diaSorteo;
     }
 
-    public EstadoSorteo getEstadoSorteo() {
+    public void setDiaSorteo(final Integer diaSorteo) {
+        this.diaSorteo = diaSorteo;
+    }
 
-        return EstadoSorteo.valueOf(estado.toUpperCase());
+    public String getEstado() {
+        return estado;
     }
 
     public void setEstado(final String estado) {
         this.estado = estado;
     }
 
-    public void setEstado(final EstadoSorteo estado) {
-        this.estado = estado.getTipo();
-    }
-
     public Date getFechaEjecucion() {
         return fechaEjecucion;
     }
 
-    public void setFechaEjecucion(final Date fecha) {
-        this.fechaEjecucion = fecha;
+    public void setFechaEjecucion(final Date fechaEjecucion) {
+        this.fechaEjecucion = fechaEjecucion;
     }
 
-    @Override
-    public String toString() {
-        return "SorteoForm{" +
-                "id=" + id +
-                ", mesSorteo=" + mesSorteo +
-                ", anioSorteo=" + anioSorteo +
-                ", estado='" + estado + '\'' +
-                ", fechaEjecucion=" + fechaEjecucion +
-                '}';
+    public Date getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(final Date fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    public EstadoSorteo getEstadoSorteo() {
+        return EstadoSorteo.valueOf(estado.toUpperCase());
+    }
+
+    public void setEstado(final EstadoSorteo estado) {
+        this.estado = estado.getTipo();
     }
 }

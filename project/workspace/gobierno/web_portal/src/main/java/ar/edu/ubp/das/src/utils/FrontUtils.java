@@ -28,9 +28,11 @@ public class FrontUtils {
 
         rows.append("<tr id=\"" + SORTEO_ROW + "-" + sorteo.getId() + "\" class=\"table-primary\">");
         rows.append("<td>" + sorteo.getId() + "</td>");
+        rows.append("<td>" + sorteo.getDiaSorteo() + "</td>");
         rows.append("<td>" + sorteo.getMesSorteo() + "</td>");
         rows.append("<td>" + sorteo.getAnioSorteo() + "</td>");
         rows.append("<td>" + sorteo.getEstado() + "</td>");
+        rows.append("<td>" + sorteo.getFechaCreacion() + "</td>");
         rows.append("<td>" + sorteo.getFechaEjecucion() + "</td>");
         rows.append("</tr>");
         return rows.toString();
