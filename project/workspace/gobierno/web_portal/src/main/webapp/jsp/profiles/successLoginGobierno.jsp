@@ -50,6 +50,7 @@
 
                 <div id="page_content_administrador_div" class="container-fluid">
 
+                    <div id="loadingDiv" stryle=""> </div>
                     <div id="content_admin_page_div">
                         <table id="table_admin_result" class="table table-hover">
                         </table>

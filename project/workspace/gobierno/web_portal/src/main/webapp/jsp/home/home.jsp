@@ -30,6 +30,35 @@
             </div>
             <!-- carousel -->
             <%@include file="./carousel_home.jsp"%>
+
+            <div class="nuestros_partners_div">
+                <h1 class="display-3">Nuestros partners</h1>
+                <hr class="my-4">
+                <div class="marcas_partners" style="border-right: 2px solid #eee">
+                    <div class="logos_marcas">
+                        <img src="/web_portal/img/ford.png"  style="width:100% !important">
+                    </div>
+                    <div class="logos_marcas">
+                        <h2>FORD</h2>
+                    </div>
+                </div>
+                <div class="marcas_partners" style="border-right: 2px solid #eee">
+                    <div class="logos_marcas">
+                        <img src="/web_portal/img/nissan.png"  style="width:100% !important">
+                    </div>
+                    <div class="logos_marcas">
+                        <h2>NISSAN</h2>
+                    </div>
+                </div>
+                <div class="marcas_partners">
+                    <div class="logos_marcas">
+                        <img src="/web_portal/img/volkswagen.png" style="width:100% !important">
+                    </div>
+                    <div class="logos_marcas">
+                        <h2>VOLKSWAGEN</h2>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
     <%@include file="../commons/footer.jsp"%>

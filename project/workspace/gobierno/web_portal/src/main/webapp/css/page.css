@@ -98,3 +98,36 @@ img.d-block.w-100.h-50 {
   color: #fff;
   transition: all 0.3s;
 }
+
+/* PUT DIV SPINNER IN CENTER */
+#loadingDiv.parent {
+  text-align: center;
+}
+
+#loadingDiv.parent > .child {
+  margin: 0 auto;
+  width: 900px;
+}
+
+/* divs 3 en una misma section*/
+.marcas_partners {
+  padding: 0 1em 2em !important;
+  margin: 0 !important;
+  max-width: 33% !important;
+  width: 33% !important;
+  max-height: 33% !important;
+  height: 33% !important;
+}
+
+.marcas_partners.logos_marcas {
+  width: 8em !important;
+  height: 8em !important;
+}
+
+.nuestros_partners_div {
+  display: flex;
+  justify-content: center;
+  padding: 3em 0;
+  width: 100%;
+  max-width: none;
+}

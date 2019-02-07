@@ -1,9 +1,8 @@
 /* Singleton */
 const jUtils = {
 
-    executing: function(divId, mini) {
-        type = mini == undefined || mini == false ? "" : "little";
-        $('#' + divId).html("<img src=" + type + "\"/web_portal/img/iloader.gif\" border=\"0\"/>").show();
+    executing: function(divId) {
+        $('#' + divId).html("<img src=\"/web_portal/img/spinnerMD.gif\" border=\"0\"/>").show();
     },
 
     showing: function(divId, html) {
@@ -11,8 +10,8 @@ const jUtils = {
     },
 
     hiding: function(divId, clean) {
-        clean = (clean !== false);
         $('#' + divId).hide();
+
         if(clean) {
             $('#' + divId).html('&nbsp;');
         }

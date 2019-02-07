@@ -1,6 +1,8 @@
 const ConcesionariasService = {
 
     GET_CONSULTAR_TODAS() {
+
+        jUtils.executing( "loadingDiv");
         $.ajax({
             url: Action.CONCESIONARIA_CONSULTAR_TODAS,
             type: "get",
@@ -8,15 +10,18 @@ const ConcesionariasService = {
             error: function(hr){
                 console.log("AJAX RESULT GET_CONSULTAR_TODAS ERROR %o", hr.responseText);
                 jUtils.showing("table_admin_result", hr);
+                jUtils.hiding("loadingDiv",false);
             },
             success: function(html) {
                 console.log("AJAX RESULT GET_CONSULTAR_TODAS SUCCESS %o", html);
                 jUtils.showing("table_admin_result", html);
+                jUtils.hiding("loadingDiv",false);
             }
         });
     },
 
     POST_TEST_CONFIG(data) {
+        jUtils.executing( "loadingDiv");
         $.ajax({
             url: Action.TEST_CONFIG,
             type: "post",
@@ -35,6 +40,7 @@ const ConcesionariasService = {
 
     /*todo: change to get*/
     POST_CONSULTAR_CONFIG_PARAM(idConcesionaria, formConsultarConfig) {
+        jUtils.executing( "loadingDiv");
         $.ajax({
             url: Action.CONCESIONARIA_CONSULTAR_CONFIG_PARAM,
             type: "post",
@@ -57,6 +63,7 @@ const ConcesionariasService = {
     },
 
     POST_APROBAR_CONCESIONARIA(idConcesionaria) {
+        jUtils.executing( "loadingDiv");
         $.ajax({
             url: Action.APROBAR_CONCESIONARIA_ENDPOINT,
             type: "post",
@@ -74,6 +81,7 @@ const ConcesionariasService = {
     },
 
     POST_DESAPROBAR_CONCESIONARIA(idConcesionaria) {
+        jUtils.executing( "loadingDiv");
         $.ajax({
             url: Action.DESAPROBAR_CONCESIONARIA_ENDPOINT,
             type: "post",
@@ -91,6 +99,7 @@ const ConcesionariasService = {
     },
 
     POST_CONFIG_CONCESIONARIA(data) {
+        jUtils.executing( "loadingDiv");
         $.ajax({
             url: Action.CONFIG_CONCESIONARIA,
             type: "post",

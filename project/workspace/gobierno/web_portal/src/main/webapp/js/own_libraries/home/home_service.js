@@ -1,6 +1,7 @@
 const HomeService = {
 
     GET_CONSULTAR_APROBADAS() {
+        jUtils.executing( "loadingDiv");
         $.ajax({
             url: Action.CONCESIONARIA_CONSULTAR_APROBADAS,
             type: "get",
