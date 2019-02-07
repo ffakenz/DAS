@@ -31,7 +31,9 @@ const Action = {
     ACTUALIZAR_SORTEO :  "/web_portal/sorteo/ActualizarSorteo.do",
     GET_CALENDARIO: "/web_portal/sorteo/CalendarioAdmin.do",
     /* REPORTS */
-    GET_JOB_RESULTS_REPORT: "/web_portal/jobs/ViewConsumoJobResults.do"
+    GET_JOB_RESULTS_REPORT: "/web_portal/jobs/ViewConsumoJobResults.do",
+    /* CALENDAR */
+    GET_CALENDAR_CELL_MODAL: "/web_portal/sorteo/CalendarCellModal.do"
 };
 
 const ConfigTecno = {
@@ -92,5 +94,5 @@ const Class = {
     ACTUALIZAR_FECHA_SORTEO_BTN: "actualizar_fecha_sorteo_btn",
     EMPTY_CELL: "empty_cell",
     SORTEO_CELL: "sorteo_cell",
-    CALENDARIO_CELL: "calendario_cell", 
+    CALENDAR_CELL: "calendar_cell"
 };

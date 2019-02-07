@@ -10,6 +10,14 @@ class Calendario extends Module {
         console.log("data = %o", data);
         CalendarioService.GET_CALENDARIO(data);
     }
+    
+    showCalendarCellModal(evt) {
+        evt.preventDefault();
+        console.log("showCalendarCellModal, [EVENT] = %o", evt);
+        const data = $("#" + evt.target.id).find("form").serialize();
+        console.log("data = %o", data);
+        CalendarioService.GET_CALENDAR_CELL_MODAL(data);
+    }
 
     crearSorteo(evt) {
         evt.preventDefault();

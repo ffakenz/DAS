@@ -38,6 +38,28 @@ const CalendarioService = {
             }
         });
     },
+    
+    GET_CALENDAR_CELL_MODAL(data) {
+        jUtils.executing( "loadingDiv");
+        $.ajax({
+            url: Action.GET_CALENDAR_CELL_MODAL,
+            type: "POST",
+            data: data,
+            dataType: "html",
+            error: function (hr) {
+                console.log("AJAX RESULT GET_CALENDAR_CELL_MODAL ERROR %o", hr.responseText);
+                jUtils.hiding( "loadingDiv");
+                jUtils.showing("modal_content", hr);
+                $("#config_concesionaria_modal").modal("show");
+            },
+            success: function (html) {
+                console.log("AJAX RESULT GET_CALENDAR_CELL_MODAL SUCCESS %o", html);
+                jUtils.hiding( "loadingDiv");
+                jUtils.showing("modal_content", html);
+                $("#config_concesionaria_modal").modal("show");
+            }
+        });
+    },
 
     CREAR_SORTEO(fechaEjecucion) {
         jUtils.executing( "loadingDiv");

@@ -48,36 +48,76 @@
   int [][] days = aMonth.getDays();
   for( int i=0; i<aMonth.getNumberOfWeeks(); i++ )
   {
-    %><tr class="week_data_row"><%
-    for( int j=0; j<7; j++ )
-    {
-      if( days[i][j] == 0 )
-      {
-        %><td class="empty_day_cell">&nbsp;</td><%
-      }
-      else
-      {
-
-        // this is "today"
-        if( currentDayInt == days[i][j] && currentMonthInt == aMonth.getMonth() && currentYearInt == aMonth.getYear() )
-        {
-            if(mapMes.containsKey(days[i][j])) {
-                %><td class="today_cell sorteo_cell calendar_cell"><%=days[i][j]%></td><%
-            } else {
-                %><td class="today_cell empty_cell calendar_cell"><%=days[i][j]%></td><%
-            }
-        }
-        else
-        {
-          if(mapMes.containsKey(days[i][j])) {
-              %><td class="day_cell sorteo_cell calendar_cell"><%=days[i][j]%></td><%
-          } else {
-              %><td class="day_cell empty_cell calendar_cell"><%=days[i][j]%></td><%
-          }
-        }
-      } // end outer if
-    } // end for
     %>
+    <tr class="week_data_row">
+            <%
+            for( int j=0; j<7; j++ )
+            {
+              if( days[i][j] == 0 )
+              {
+                %><td class="empty_day_cell">&nbsp;</td><%
+              }
+              else
+              {
+
+                // this is "today"
+                if( currentDayInt == days[i][j] && currentMonthInt == aMonth.getMonth() && currentYearInt == aMonth.getYear() )
+                {
+                    if(mapMes.containsKey(days[i][j])) {
+                        %>
+                            <td id="cell_day-<%=days[i][j]%>" class="today_cell sorteo_cell calendar_cell">
+                                <%=days[i][j]%>
+                                <form method="post">
+                                    <input type="hidden" name="cell_id" value="<%=mapMes.get(days[i][j]).getId()%>"/>
+                                    <input type="hidden" name="cell_day" value="<%=days[i][j]%>"/>
+                                    <input type="hidden" name="cell_month" value="<%=aMonth.getMonth()%>"/>
+                                    <input type="hidden" name="cell_year" value="<%=aMonth.getYear()%>"/>
+                                </form>
+                            </td>
+                        <%
+                    } else {
+                        %>
+                            <td id="cell_day-<%=days[i][j]%>" class="today_cell empty_cell calendar_cell">
+                                <%=days[i][j]%>
+                                <form method="post">
+                                    <input type="hidden" name="cell_day" value="<%=days[i][j]%>"/>
+                                    <input type="hidden" name="cell_month" value="<%=aMonth.getMonth()%>"/>
+                                    <input type="hidden" name="cell_year" value="<%=aMonth.getYear()%>"/>
+                                </form>
+                            </td>
+                        <%
+                    }
+                }
+                else
+                {
+                  if(mapMes.containsKey(days[i][j])) {
+                      %>
+                        <td id="cell_day-<%=days[i][j]%>" class="day_cell sorteo_cell calendar_cell">
+                            <%=days[i][j]%>
+                            <form method="post">
+                                <input type="hidden" name="cell_id" value="<%=mapMes.get(days[i][j]).getId()%>"/>
+                                <input type="hidden" name="cell_day" value="<%=days[i][j]%>"/>
+                                <input type="hidden" name="cell_month" value="<%=aMonth.getMonth()%>"/>
+                                <input type="hidden" name="cell_year" value="<%=aMonth.getYear()%>"/>
+                            </form>
+                        </td>
+                      <%
+                  } else {
+                      %>
+                        <td id="cell_day-<%=days[i][j]%>" class="day_cell empty_cell calendar_cell">
+                            <%=days[i][j]%>
+                            <form method="post">
+                                <input type="hidden" name="cell_day" value="<%=days[i][j]%>"/>
+                                <input type="hidden" name="cell_month" value="<%=aMonth.getMonth()%>"/>
+                                <input type="hidden" name="cell_year" value="<%=aMonth.getYear()%>"/>
+                            </form>
+                        </td>
+                    <%
+                  }
+                }
+              } // end outer if
+            } // end for
+            %>
     </tr>
   <%}
 }

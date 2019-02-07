@@ -16,28 +16,28 @@
 <%
         StringBuilder result = new StringBuilder();
         try {
-        List<SorteoForm> sorteosList = (List<SorteoForm>) request.getAttribute(SORTEOS_LIST_RQST_ATTRIBUTE);
-        StringBuilder rows = new StringBuilder();
-        for(SorteoForm ec : sorteosList) {
-        String row = FrontUtils.sorteosFormRow(ec);
-        rows.append(row);
-        }
-        result.append("<thead>                                                                                     ");
-        result.append("<tr>                                                                                        ");
-        result.append("   <th>Id</th>                                                                              ");
-        result.append("   <th>Dia Sorteo</th>                                                                      ");
-        result.append("   <th>Mes Sorteo</th>                                                                      ");
-        result.append("   <th>Año Sorteo</th>                                                                      ");
-        result.append("   <th>Estado</th>                                                                          ");
-        result.append("   <th>Fecha Creacion</th>                                                                  ");
-        result.append("   <th>Fecha Ejecucion</th>                                                                 ");
-        result.append("</tr>                                                                                       ");
-        result.append("</thead>                                                                                    ");
-        result.append("<tbody>                                                                                     ");
-        result.append(rows.toString()                                                                               );
-        result.append("</tbody>                                                                                    ");
+            List<SorteoForm> sorteosList = (List<SorteoForm>) request.getAttribute(SORTEOS_LIST_RQST_ATTRIBUTE);
+            StringBuilder rows = new StringBuilder();
+            for(SorteoForm ec : sorteosList) {
+                String row = FrontUtils.sorteosFormRow(ec);
+                rows.append(row);
+            }
+            result.append("<thead>                                                                                     ");
+            result.append("<tr>                                                                                        ");
+            result.append("   <th>Id</th>                                                                              ");
+            result.append("   <th>Dia Sorteo</th>                                                                      ");
+            result.append("   <th>Mes Sorteo</th>                                                                      ");
+            result.append("   <th>Año Sorteo</th>                                                                      ");
+            result.append("   <th>Estado</th>                                                                          ");
+            result.append("   <th>Fecha Creacion</th>                                                                  ");
+            result.append("   <th>Fecha Ejecucion</th>                                                                 ");
+            result.append("</tr>                                                                                       ");
+            result.append("</thead>                                                                                    ");
+            result.append("<tbody>                                                                                     ");
+            result.append(rows.toString()                                                                               );
+            result.append("</tbody>                                                                                    ");
         } catch(Exception e) {
-        result.append(e.getMessage());
+            result.append(e.getMessage());
         }
         %>
 

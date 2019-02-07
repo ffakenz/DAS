@@ -38,7 +38,6 @@ const ConcesionariasService = {
         });
     },
 
-    /*todo: change to get*/
     POST_CONSULTAR_CONFIG_PARAM(idConcesionaria, formConsultarConfig) {
         jUtils.executing( "loadingDiv");
         $.ajax({
