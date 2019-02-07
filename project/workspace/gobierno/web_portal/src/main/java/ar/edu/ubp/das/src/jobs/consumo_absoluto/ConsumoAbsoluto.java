@@ -13,6 +13,7 @@ import ar.edu.ubp.das.src.estado_cuentas.forms.EstadoCuentasForm;
 import ar.edu.ubp.das.src.estado_cuentas.managers.CuotasManager;
 import ar.edu.ubp.das.src.estado_cuentas.managers.EstadoCuentasManager;
 import ar.edu.ubp.das.src.jobs.ClientFactoryAdapter;
+import ar.edu.ubp.das.src.jobs.consumo.forms.EstadoConsumo;
 import ar.edu.ubp.das.src.jobs.consumo_absoluto.daos.MSConsumoAbsolutoDao;
 import ar.edu.ubp.das.src.jobs.consumo_absoluto.forms.ConsumoAbsolutoForm;
 import ar.edu.ubp.das.src.utils.Constants;
@@ -87,14 +88,15 @@ public class ConsumoAbsoluto {
                 for (final EstadoCuentasForm estadoCuentasForm : estadoCuentasForms) {
                     final String rqstId = UUID.randomUUID().toString();
                     final Optional<PlanBean> planBean = this.consultarPlan(cli, consumoAbsolutoForm, estadoCuentasForm, rqstId);
+
                     planBean.ifPresent(pb -> {
                         // insert(planBean, consumo absoluto plan aprobada id);
                         this.updateDb(consumoAbsolutoForm, estadoCuentasForm, rqstId, pb);
                     });
+
                 }
-                if (!estadoCuentasForms.isEmpty()) {
-                    // TODO <- Improve this with comment below
-                    // si todos los estados de cuenta resultaron exitosos => mark [consumo absoluto aprobada] as success => [query]
+
+                if (!estadoCuentasForms.isEmpty() && msConsumoAbsolutoDao.areAllConsumedSuccess(consumoAbsolutoForm)) {
                     log.info("[ConsumoAbsoluto.ejecutar][SUCCEDED aprobada {}]", aprobada.getId());
                     consumoAbsolutoForm.setEstado(SUCCESS);
                     consumoAbsolutoForm.setCause("aprobada");
@@ -103,15 +105,14 @@ public class ConsumoAbsoluto {
                 }
             });
         }
-        if (!aprobadas.isEmpty()) {
+        if (aprobadas.isEmpty()) {
+            consumoAbsolutoForm.setEstado(SUCCESS);
+        } else if (msConsumoAbsolutoDao.areAllConsumedSuccess(consumoAbsolutoForm)) {
             // TODO <- Improve this with comment below
-            // si todas las aprobadas resultaron exitosas => mark [consumo absoluto] as success => [query]
             log.info("[ConsumoAbsoluto.ejecutar][SUCCESS]");
             consumoAbsolutoForm.setEstado(SUCCESS);
             consumoAbsolutoForm.setCause("job");
             logConsumoAbsolutoForm(consumoAbsolutoForm);
-        } else {
-            consumoAbsolutoForm.setEstado(SUCCESS);
         }
 
         return consumoAbsolutoForm.getEstadoConsumo().equals(SUCCESS);
@@ -165,11 +166,12 @@ public class ConsumoAbsoluto {
             final PlanBean planBean = client.consultarPlan(Constants.IDENTIFICADOR, estadoCuentasForm.getNroPlanConcesionaria());
             return Optional.of(planBean);
         } catch (final ClientException e) {
+
             e.printStackTrace();
             log.error("[EJECUTAR][FAILED consultarPlan][ConcesionariaId {}][PlanId {}]",
                     estadoCuentasForm.getConcesionariaId(), estadoCuentasForm.getNroPlanConcesionaria());
-            consumoAbsolutoForm.setEstado("FAILED");
-            consumoAbsolutoForm.setCause("consultarPlan");
+            consumoAbsolutoForm.setEstado(EstadoConsumo.FAILURE);
+            consumoAbsolutoForm.setCause("Fail consultarPlan with estado_cuenta_id = " + estadoCuentasForm.getId());
             consumoAbsolutoForm.setConcesionariaId(estadoCuentasForm.getConcesionariaId());
             consumoAbsolutoForm.setEstadoCuentaId(estadoCuentasForm.getId());
             consumoAbsolutoForm.setPlanId(estadoCuentasForm.getNroPlanConcesionaria());

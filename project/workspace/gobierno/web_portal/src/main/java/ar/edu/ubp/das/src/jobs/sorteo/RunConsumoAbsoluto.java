@@ -23,6 +23,7 @@ class RunConsumoAbsoluto extends SorteoStep {
             throw new StepRunnerException(name);
         }
 
+        name =
         return sorteoForm;
     }
 }

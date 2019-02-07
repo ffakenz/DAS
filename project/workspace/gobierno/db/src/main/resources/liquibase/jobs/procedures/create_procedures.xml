@@ -27,6 +27,48 @@
         <dropProcedure procedureName="log_consumo_absoluto"/>
     </changeSet>
 
+    <changeSet id="Drop procedure get_consumo_absoluto_by_plan_and_cid_and_sid" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_consumo_absoluto_by_plan_and_cid_and_sid'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_consumo_absoluto_by_plan_and_cid_and_sid"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure get_consumo_absoluto_by_cid_and_sid" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_consumo_absoluto_by_cid_and_sid'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_consumo_absoluto_by_cid_and_sid"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure get_consumo_absoluto_by_sorteo" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_consumo_absoluto_by_sorteo'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_consumo_absoluto_by_sorteo"/>
+    </changeSet>
+
     <changeSet id="Drop procedure get_aprobadas_desactualizadas" author="DAS-Team" runAlways="true"
                runOnChange="true">
         <preConditions onFail="MARK_RAN">
@@ -492,6 +534,52 @@
         </preConditions>
         <sqlFile
                 path="/src/main/resources/liquibase/jobs/procedures/consumo_absoluto/log_consumo_absoluto.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure get_consumo_absoluto_by_plan_and_cid_and_sid" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_consumo_absoluto_by_plan_and_cid_and_sid'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/consumo_absoluto/get_consumo_absoluto_by_plan_and_cid_and_sid.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure get_consumo_absoluto_by_sorteo" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_consumo_absoluto_by_sorteo'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/consumo_absoluto/get_consumo_absoluto_by_sorteo.sql"/>
+    </changeSet>
+
+
+    <changeSet id="Create procedure get_consumo_absoluto_by_cid_and_sid" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_consumo_absoluto_by_cid_and_sid'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/consumo_absoluto/get_consumo_absoluto_by_cid_and_sid.sql"/>
     </changeSet>
 
     <changeSet id="Create procedure get_aprobadas_desactualizadas" author="DAS-Team" runAlways="true"

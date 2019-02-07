@@ -8,6 +8,7 @@ WITH potenciales_participantes AS (
              ec.id   AS id_plan,
              ec.vehiculo AS id_vehiculo,
              cs.id AS id_consumer,
+             cs.email AS email,
              SUM(CASE WHEN cu.fecha_pago IS NOT NULL THEN 1 ELSE 0 END) AS total_cuotas_pagas,
              COUNT(cs.id) as cantidad_cuotas_emitidas
          FROM
@@ -18,7 +19,7 @@ WITH potenciales_participantes AS (
                  ON estado_cuenta_id = ec.id
              INNER JOIN consumers cs
                 ON cs.documento = ec.dni_consumer
-         GROUP BY c.id, ec.id, ec.vehiculo, cs.id
+         GROUP BY c.id, ec.id, ec.vehiculo, cs.id, cs.email
 ), participantes_after_balance AS (
     SELECT *
     FROM potenciales_participantes

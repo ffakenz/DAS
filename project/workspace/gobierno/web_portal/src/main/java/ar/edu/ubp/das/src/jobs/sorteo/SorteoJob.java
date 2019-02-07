@@ -57,10 +57,9 @@ public class SorteoJob implements Job {
                         result.executeOnRoot(stepsByEstado.get(sorteoForm.getEstadoSorteo()), sorteoForm);
                 System.out.println(resultSorteo);
             } catch (final StepRunnerException e) {
-                e.printStackTrace();
+                log.error("[exception:{}]", e.getMessage());
             }
         });
-
     }
 
     public Optional<SorteoForm> getSorteoDeHoy() {

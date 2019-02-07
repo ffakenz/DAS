@@ -127,6 +127,19 @@
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/javax.mail/javax.mail-api -->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>javax.mail-api</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/jaf/activation -->
+        <dependency>
+            <groupId>jaf</groupId>
+            <artifactId>activation</artifactId>
+            <version>1.0.2</version>
+        </dependency>
     </dependencies>
 
 
@@ -153,5 +166,12 @@
             </plugin>
         </plugins>
     </build>
+
+    <repositories>
+        <repository>
+            <id>adobe-public</id>
+            <url>https://repo.adobe.com/nexus/content/repositories/public/</url>
+        </repository>
+    </repositories>
 
 </project>

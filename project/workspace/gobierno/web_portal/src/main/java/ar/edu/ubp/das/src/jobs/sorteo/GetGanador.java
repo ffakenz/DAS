@@ -26,6 +26,7 @@ class GetGanador extends SorteoStep {
         try {
             final List<ParticipanteForm> participantes =
                     sorteoJobManager.getMsParticipanteDao().getParticipantes(CUOTAS_MIN, CUOTAS_MAX);
+
             insertParticipantes(participantes, sorteoForm.getId());
 
             if(participantes.isEmpty()){

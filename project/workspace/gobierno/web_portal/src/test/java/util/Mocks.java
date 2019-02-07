@@ -3,8 +3,13 @@ package util;
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
 import ar.edu.ubp.das.src.concesionarias.forms.ConfigTecnoXConcesionariaForm;
 import ar.edu.ubp.das.src.concesionarias.forms.ConfigurarConcesionariaForm;
+import ar.edu.ubp.das.src.consumers.forms.ConsumerForm;
+import ar.edu.ubp.das.src.estado_cuentas.forms.EstadoCuentasForm;
+import ar.edu.ubp.das.src.usuarios.forms.UsuarioForm;
 import clients.factory.ClientType;
 
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.Arrays;
 import java.util.List;
 
@@ -70,5 +75,37 @@ public enum Mocks {
         return configTecnoXConcesionariaForm;
     }
 
+    public EstadoCuentasForm getEstadoCuentaForm(ConcesionariaForm concesionariaForm, Long documento) {
 
+        EstadoCuentasForm estadoCuentasForm = new EstadoCuentasForm();
+
+        estadoCuentasForm.setConcesionariaId(concesionariaForm.getId());
+        estadoCuentasForm.setDocumentoCliente(documento);
+        estadoCuentasForm.setNroPlanConcesionaria(99L);
+        estadoCuentasForm.setVehiculo(1L);
+        estadoCuentasForm.setEstado("en_proceso");
+        estadoCuentasForm.setFechaAltaConcesionaria(Timestamp.from(Instant.now().minusSeconds(3600 * 24 * 2)));
+
+        return estadoCuentasForm;
+    }
+
+
+    public ConsumerForm getConsumerForm(Long documento) {
+        ConsumerForm consumerForm = new ConsumerForm();
+        consumerForm.setDocumento(documento);
+        consumerForm.setNombre("Pepe");
+        consumerForm.setApellido("Perez");
+        consumerForm.setNroTelefono("35156345678");
+        consumerForm.setEmail("carliperezozo@mail.com");
+
+        return consumerForm;
+    }
+
+    public UsuarioForm getUsuarioForm(Long documento) {
+        UsuarioForm usuarioForm = new UsuarioForm();
+        usuarioForm.setRol("consumer");
+        usuarioForm.setDocumento(documento);
+
+        return usuarioForm;
+    }
 }

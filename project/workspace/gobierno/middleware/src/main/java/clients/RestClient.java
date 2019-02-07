@@ -143,7 +143,15 @@ public class RestClient implements ConcesionariaServiceContract {
     @Override
     public PlanBean consultarPlan(final String identificador, final Long planId) throws ClientException {
 
-        final String url = getQuery(CONSULTAR_PLAN, IDENTIFICADOR, PLANID);
+        final String urlUnformatted = getQuery(CONSULTAR_PLAN, IDENTIFICADOR, PLANID);
+        final String url;
+        try {
+            url = URLEncoder.encode(urlUnformatted, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            throw new ClientException(e.getMessage());
+        }
+
         final String jsonPlanBean = call(GET, url);
 
         return JsonUtils.toObject(jsonPlanBean, PlanBean.class);
