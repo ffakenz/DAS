@@ -1,4 +1,22 @@
-<%@ page import="ar.edu.ubp.das.src.utils.Month,java.util.*,util.*,java.io.*" errorPage="error.jsp" %>
+<%@ page
+
+        language="java"
+                contentType="text/html; charset=utf-8"
+                pageEncoding="utf-8"
+                %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<fmt:setBundle basename="properties.etiquetas" var="etq" scope="session"/>
+
+<%@ page import="ar.edu.ubp.das.src.jobs.sorteo.forms.SorteoForm" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.lang.Exception" %>
+
+<%@ page import="static ar.edu.ubp.das.src.utils.Constants.SORTEOS_LIST_RQST_ATTRIBUTE" %>
+<%@ page import="ar.edu.ubp.das.src.utils.FrontUtils" %>
+<%@ page import="ar.edu.ubp.das.src.utils.Month" %>
+<%@ page import="java.util.*,util.*,java.io.*" %>
+
 <%-- TODO: CLEAN UP THE PAGE TAG ABOVE --%>
 
 <%@ include file="calendarCommon.jsp" %>
@@ -19,6 +37,13 @@
   </tr>
 <%
 {
+  List<SorteoForm> sorteosMes = (List<SorteoForm>) request.getAttribute(SORTEOS_LIST_RQST_ATTRIBUTE);
+
+  final HashMap<Integer, SorteoForm> mapMes = new HashMap();
+  for(SorteoForm s: sorteosMes) {
+    mapMes.put(s.getDiaSorteo(), s);
+  }
+
   Month aMonth = Month.getMonth( Integer.parseInt(currentMonthString), Integer.parseInt(currentYearString) );
   int [][] days = aMonth.getDays();
   for( int i=0; i<aMonth.getNumberOfWeeks(); i++ )
@@ -32,14 +57,23 @@
       }
       else
       {
+
         // this is "today"
         if( currentDayInt == days[i][j] && currentMonthInt == aMonth.getMonth() && currentYearInt == aMonth.getYear() )
         {
-          %><td class="today_cell"><%=days[i][j]%></td><%
+            if(mapMes.containsKey(days[i][j])) {
+                %><td class="today_cell"><%= mapMes.get(days[i][j]).toString() %></td><%
+            } else {
+                %><td class="today_cell"><%=days[i][j]%></td><%
+            }
         }
         else
         {
-          %><td class="day_cell"><%=days[i][j]%></td><% // important !!
+          if(mapMes.containsKey(days[i][j])) {
+              %><td class="day_cell"><%= mapMes.get(days[i][j]).toString() %></td><%
+          } else {
+              %><td class="day_cell"><%=days[i][j]%></td><%
+          }
         }
       } // end outer if
     } // end for
@@ -52,25 +86,20 @@
 <!-- navigation links -->
 <table id="calendar_nav_table" border="0">
   <tr>
-    <td id="next_link">
+    <td id="prev_link">
       <form method="post">
-        <input type="button" id="calendar_prev" value=" << ">
-        <input type="hidden" name="month" value="<%=prevMonth%>">
-        <input type="hidden" name="year" value="<%=prevYear%>">
+        <input type="button" id="calendar_prev" value=" << "/>
+        <input type="hidden" name="month" value="<%=prevMonth%>"/>
+        <input type="hidden" name="year" value="<%=prevYear%>"/>
       </form>
     </td>
     <td id="link_to_month_view">
-      <form action="calendarMonthPrintView.jsp" method="post">
-        <input type="button" value="  Full-Screen Print View  " class="submit_button">
-        <input type="hidden" name="month" value="<%=intMonth%>">
-        <input type="hidden" name="year"  value="<%=intYear%>">
-      </form>
     </td>
-    <td id="prev_link">
+    <td id="next_link">
       <form method="post">
-        <input type="button" id="calendar_next" value=" >> ">
-        <input type="hidden" name="month" value="<%=nextMonth%>">
-        <input type="hidden" name="year" value="<%=nextYear%>">
+        <input type="button" id="calendar_next" value=" >> "/>
+        <input type="hidden" name="month" value="<%=nextMonth%>"/>
+        <input type="hidden" name="year" value="<%=nextYear%>"/>
       </form>
     </td>
   </tr>

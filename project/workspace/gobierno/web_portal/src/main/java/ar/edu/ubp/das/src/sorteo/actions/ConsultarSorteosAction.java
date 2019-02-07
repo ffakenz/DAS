@@ -24,6 +24,7 @@ public class ConsultarSorteosAction implements Action {
 
         final DatasourceConfig datasourceConfig = ModuleConfigImpl.getDatasourceById("default");
         final SorteoJobManager sorteoJobManager = new SorteoJobManager(datasourceConfig);
+
         try {
             final List<SorteoForm> sorteos = sorteoJobManager.getMsSorteoDao().select();
             request.setAttribute(Constants.SORTEOS_LIST_RQST_ATTRIBUTE, sorteos);

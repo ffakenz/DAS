@@ -1,9 +1,9 @@
 <%
   // get the current year/month/day
   Calendar theCal = Calendar.getInstance();
-  int currentYearInt  = theCal.get(Calendar.YEAR);
-  int currentMonthInt = theCal.get(Calendar.MONTH);
-  int currentDayInt   = theCal.get(Calendar.DATE);
+  Integer currentYearInt  = theCal.get(Calendar.YEAR);
+  Integer currentMonthInt = theCal.get(Calendar.MONTH);
+  Integer currentDayInt   = theCal.get(Calendar.DATE);
   String currentYearString  = new Integer(currentYearInt).toString();
   String currentMonthString = new Integer(currentMonthInt).toString();
 

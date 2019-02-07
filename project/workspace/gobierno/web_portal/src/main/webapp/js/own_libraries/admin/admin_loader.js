@@ -6,7 +6,7 @@ $(window).on('load', () => {
     */
 
 
-    CalendarioService.GET_CALENDARIO({"year": '2019', "month": '02'});
+    CalendarioService.GET_CALENDARIO({"year": '2019', "month": '3'});
 
     console.log("Admin View executed on Load");
 });
