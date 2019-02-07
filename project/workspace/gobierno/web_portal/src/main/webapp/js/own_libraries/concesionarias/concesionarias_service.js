@@ -13,9 +13,9 @@ const ConcesionariasService = {
                 jUtils.hiding("loadingDiv",false);
             },
             success: function(html) {
+                jUtils.hiding("loadingDiv",true);
                 console.log("AJAX RESULT GET_CONSULTAR_TODAS SUCCESS %o", html);
                 jUtils.showing("table_admin_result", html);
-                jUtils.hiding("loadingDiv",false);
             }
         });
     },
@@ -30,8 +30,10 @@ const ConcesionariasService = {
             error: function(hr){
                 console.log("AJAX RESULT POST_TEST_CONFIG ERROR %o", hr);
                 jUtils.showing(Id.TEST_CONFIG_LABEL, hr);
+                jUtils.hiding("loadingDiv",false);
             },
             success: function(html) {
+                jUtils.hiding("loadingDiv",true);
                 console.log("AJAX RESULT POST_TEST_CONFIG SUCCESS %o", html);
                 jUtils.showing(Id.TEST_CONFIG_LABEL, html);
             }
@@ -49,8 +51,10 @@ const ConcesionariasService = {
                 console.log("AJAX RESULT POST_CONSULTAR_CONFIG_PARAM ERROR %o", hr.responseText);
                 jUtils.showing("modal_content", hr);
                 $("#config_concesionaria_modal").modal("show");
+                jUtils.hiding("loadingDiv",false);
             },
             success: function(jsonArray) {
+                jUtils.hiding("loadingDiv",true);
                 console.log("AJAX RESULT POST_CONSULTAR_CONFIG_PARAM SUCCESS %o", jsonArray);
                 /* EACH SUCCESS CHANGES THE STATE { LAST_CONFIGS_CONSULTED_ST } USING formConsultarConfings */
                 const html = formConsultarConfig(jsonArray, idConcesionaria);
@@ -71,8 +75,10 @@ const ConcesionariasService = {
             error: function(hr){
                 console.log("AJAX RESULT POST_APROBAR_CONCESIONARIA ERROR %o", hr);
                 alert("AJAX RESULT ERROR " + hr);
+                jUtils.hiding("loadingDiv",false);
             },
             success: function(html) {
+                jUtils.hiding("loadingDiv",true);
                 console.log("AJAX RESULT POST_APROBAR_CONCESIONARIA SUCCESS %o", html);
                 $(`#concesionaria_row-${idConcesionaria}`).replaceWith(html);
             }
@@ -89,8 +95,10 @@ const ConcesionariasService = {
             error: function(hr){
                 console.log("AJAX RESULT POST_DESAPROBAR_CONCESIONARIA ERROR %o", hr);
                 alert("AJAX RESULT ERROR " + hr);
+                jUtils.hiding("loadingDiv",false);
             },
             success: function(html) {
+                jUtils.hiding("loadingDiv",true);
                 console.log("AJAX RESULT POST_DESAPROBAR_CONCESIONARIA SUCCESS %o", html);
                 $(`#concesionaria_row-${idConcesionaria}`).replaceWith(html);
             }
@@ -106,8 +114,10 @@ const ConcesionariasService = {
             error: function(hr){
                 console.log("AJAX RESULT POST_CONFIG_CONCESIONARIA ERROR %o", hr);
                 jUtils.showing(Id.UPDATE_CONFIG_LABEL, hr);
+                jUtils.hiding("loadingDiv",false);
             },
             success: function(json) {
+                jUtils.hiding("loadingDiv",true);
                 console.log("AJAX RESULT POST_CONFIG_CONCESIONARIA SUCCESS %o", json.toString());
                 jUtils.showing(Id.UPDATE_CONFIG_LABEL, "Configurada exitosamente");
             }

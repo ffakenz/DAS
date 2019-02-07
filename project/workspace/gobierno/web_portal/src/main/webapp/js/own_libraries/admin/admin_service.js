@@ -9,12 +9,12 @@ const AdminService = {
             onLine: function () {},
             error: function (hr) {
                 console.log("AJAX RESULT GET_TEST_CONSUMO ERROR %o", hr.responseText);
-                jUtils.hiding( "loadingDiv");
                 jUtils.showing("table_admin_result", hr);
+                jUtils.hiding("loadingDiv",false);
             },
             success: function (html) {
+                jUtils.hiding("loadingDiv",true);
                 console.log("AJAX RESULT GET_TEST_CONSUMO SUCCESS %o", html);
-                jUtils.hiding( "loadingDiv");
                 jUtils.showing("table_admin_result", html);
             }
         });

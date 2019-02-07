@@ -7,12 +7,12 @@ const EstadoCuentaService = {
             dataType: "html",
             error: function(hr){
                 console.log("AJAX RESULT GET_CONSULTAR_TODOS ERROR %o", hr.responseText);
-                jUtils.hiding("loadingDiv", true);
                 jUtils.showing("table_admin_result", hr);
+                jUtils.hiding("loadingDiv", false);
             },
             success: function(html) {
-                console.log("AJAX RESULT GET_CONSULTAR_TODOS SUCCESS %o", html);
                 jUtils.hiding("loadingDiv", true);
+                console.log("AJAX RESULT GET_CONSULTAR_TODOS SUCCESS %o", html);
                 jUtils.showing("table_admin_result", html);
             }
         });
