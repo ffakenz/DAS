@@ -68,6 +68,7 @@
                             </div>
                         </div>
                     </div>
+                    <%@include file="./admin/calendar.jsp" %>
                 </div>
             </div>
             <!-- /#page-content-wrapper -->
