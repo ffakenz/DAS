@@ -31,6 +31,11 @@ public class MSSorteoDao extends DaoImpl<SorteoForm> {
                 "id", "estado");
     }
 
+    public void updateEstado(final SorteoForm form) throws SQLException {
+        this.executeProcedure("dbo.update_estado_sorteo(?,?)", form,
+                "id", "estado");
+    }
+
     @Override
     public void delete(final SorteoForm form) throws SQLException {
 
