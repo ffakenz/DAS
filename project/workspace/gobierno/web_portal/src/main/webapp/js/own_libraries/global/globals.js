@@ -31,7 +31,7 @@ const Action = {
     ACTUALIZAR_SORTEO :  "/web_portal/sorteo/ActualizarSorteo.do",
     GET_CALENDARIO: "/web_portal/sorteo/CalendarioAdmin.do",
     /* REPORTS */
-    GET_JOB_RESULTS_REPORT: "/web_portal/jobs/ViewConsumoJobResults.do",
+    GET_JOB_RESULTS_REPORT: "/web_portal/jobs/ViewConsumoJobResults.do"
 };
 
 const ConfigTecno = {
@@ -76,7 +76,7 @@ const Id = {
     TABLE_ADMIN_RESULT: "table_admin_result",
     CALENDAR_MAIN_DIV: "calendar_main_div",
     CALENDAR_NEXT: "calendar_next",
-    CALENDAR_PREV: "calendar_prev",
+    CALENDAR_PREV: "calendar_prev"
 };
 
 const Class = {

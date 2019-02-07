@@ -3,18 +3,10 @@ class Calendario extends Module {
         super(config);
     }
 
-    goToPrevMonth(evt) {
+    goTo(evt) {
         evt.preventDefault();
-        console.log("goToPrevMonth, [EVENT] = %o", evt);
-        const data = $("#calendar_next").closest("form").serialize();
-        console.log("data = %o", data);
-        CalendarioService.GET_CALENDARIO(data);
-    }
-
-    goToNextMonth(evt) {
-        evt.preventDefault();
-        console.log("goToNextMonth, [EVENT] = %o", evt);
-        const data = $("#calendar_prev").closest("form").serialize();
+        console.log("goTo, [EVENT] = %o", evt);
+        const data = $("#" + evt.target.id).closest("form").serialize();
         console.log("data = %o", data);
         CalendarioService.GET_CALENDARIO(data);
     }

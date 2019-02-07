@@ -47,16 +47,16 @@
   int nextYear = intYear;
   int prevYear = intYear;
 
-  int nextMonth = intMonth-1;
-  if ( nextMonth==-1 ) {
-    nextMonth=11;
-    nextYear--;
+  int prevMonth = intMonth-1;
+  if ( prevMonth==-1 ) {
+    prevMonth=11;
+    prevYear--;
   }
 
-  int prevMonth = intMonth+1;
-  if ( prevMonth==12 ) {
-      prevMonth = 0;
-      prevYear++;
+  int nextMonth = intMonth+1;
+  if ( nextMonth==12 ) {
+      nextMonth = 0;
+      nextYear++;
   }
 
 %>
