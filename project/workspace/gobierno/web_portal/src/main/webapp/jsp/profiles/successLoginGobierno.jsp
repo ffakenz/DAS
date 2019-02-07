@@ -56,6 +56,12 @@
                         </table>
                     </div>
 
+                    <div id="calendario">
+                        <link type="text/css" rel="stylesheet" href="/web_portal/util/StyleSheet.do/load=calendar" />
+                        <div id="calendar_main_div">
+                        </div>
+                    </div>
+
                     <!-- Modal -->
                     <div class="modal fade" id="config_concesionaria_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
@@ -68,7 +74,6 @@
                             </div>
                         </div>
                     </div>
-                    <%@include file="./admin/calendar.jsp" %>
                 </div>
             </div>
             <!-- /#page-content-wrapper -->

@@ -1,5 +1,12 @@
 $(window).on('load', () => {
-    ConcesionariasService.GET_CONSULTAR_TODAS();
+    /*
+    setTimeout(function(){
+        ConcesionariasService.GET_CONSULTAR_TODAS();
+    }, 2000);
+    */
+
+
+    CalendarioService.GET_CALENDARIO({"year": '2019', "month": '02'});
 
     console.log("Admin View executed on Load");
 });

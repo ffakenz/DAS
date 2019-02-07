@@ -29,8 +29,9 @@ const Action = {
     CREAR_SORTEO :  "/web_portal/sorteo/CrearSorteo.do",
     EJECUTAR_SORTEO :  "/web_portal/sorteo/EjecutarSorteo.do",
     ACTUALIZAR_SORTEO :  "/web_portal/sorteo/ActualizarSorteo.do",
+    GET_CALENDARIO: "/web_portal/sorteo/CalendarioAdmin.do",
     /* REPORTS */
-    GET_JOB_RESULTS_REPORT: "/web_portal/jobs/ViewConsumoJobResults.do"
+    GET_JOB_RESULTS_REPORT: "/web_portal/jobs/ViewConsumoJobResults.do",
 };
 
 const ConfigTecno = {
@@ -73,6 +74,9 @@ const Id = {
     SHOW_JOB_RESULTS_REPORT_BTN: "show_job_results_report_btn",
     CONTENT_ADMIN_PAGE_DIV: "content_admin_page_div",
     TABLE_ADMIN_RESULT: "table_admin_result",
+    CALENDAR_MAIN_DIV: "calendar_main_div",
+    CALENDAR_NEXT: "calendar_next",
+    CALENDAR_PREV: "calendar_prev",
 };
 
 const Class = {

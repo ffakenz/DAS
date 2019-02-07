@@ -8,8 +8,8 @@
   String currentMonthString = new Integer(currentMonthInt).toString();
 
   // get parameters the user might have sent by clicking fwd or back
-  String newMonth = request.getParameter("month"); // important !!
-  String newYear  = request.getParameter("year"); // important !!
+  String newMonth = (String) request.getAttribute("month"); // important !!
+  String newYear  = (String) request.getAttribute("year"); // important !!
 
   // reset the month and year if necessary
   if ( newMonth != null )
@@ -46,17 +46,17 @@
   // to simplify calendar.jsp.
   int nextYear = intYear;
   int prevYear = intYear;
-  int prevMonth = intMonth-1;
-  if ( prevMonth==-1 )
-  {
-    prevMonth=11;
-    prevYear--;
+
+  int nextMonth = intMonth-1;
+  if ( nextMonth==-1 ) {
+    nextMonth=11;
+    nextYear--;
   }
-  int nextMonth = intMonth+1;
-  if ( nextMonth==12 )
-  {
-    nextMonth = 0;
-    nextYear++;
+
+  int prevMonth = intMonth+1;
+  if ( prevMonth==12 ) {
+      prevMonth = 0;
+      prevYear++;
   }
 
 %>

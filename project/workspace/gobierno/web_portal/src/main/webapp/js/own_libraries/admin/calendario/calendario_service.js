@@ -19,6 +19,26 @@ const CalendarioService = {
         });
     },
 
+    GET_CALENDARIO(data) {
+        jUtils.executing( "loadingDiv");
+        $.ajax({
+            url: Action.GET_CALENDARIO,
+            type: "POST",
+            data: data,
+            dataType: "html",
+            error: function (hr) {
+                console.log("AJAX RESULT GET_CALENDARIO ERROR %o", hr.responseText);
+                jUtils.hiding( "loadingDiv");
+                jUtils.showing("calendar_main_div", hr);
+            },
+            success: function (html) {
+                console.log("AJAX RESULT GET_CALENDARIO SUCCESS %o", html);
+                jUtils.hiding( "loadingDiv");
+                jUtils.showing("calendar_main_div", html);
+            }
+        });
+    },
+
     CREAR_SORTEO(fechaEjecucion) {
         jUtils.executing( "loadingDiv");
         $.ajax({
