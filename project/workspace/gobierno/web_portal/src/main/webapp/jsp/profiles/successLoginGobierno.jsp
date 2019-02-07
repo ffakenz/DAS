@@ -50,19 +50,25 @@
 
                 <div id="page_content_administrador_div" class="container-fluid">
 
-                    <div id="loadingDiv" stryle=""></div>
                     <div id="content_admin_page_div">
                         <table id="table_admin_result" class="table table-hover">
                         </table>
                     </div>
-
                     <div id="calendario">
                         <link type="text/css" rel="stylesheet" href="/web_portal/util/StyleSheet.do/load=calendar" />
                         <div id="calendar_main_div"></div>
                     </div>
 
+
                     <!-- Modal -->
                     <link type="text/css" rel="stylesheet" href="/web_portal/util/StyleSheet.do/load=modal" />
+                    <div class="modal fade-scale">
+                        <div class="modal-dialog modal-dialog-centered modal-sm">
+                            <div id="loadingDiv" class="modal-content">
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="modal fade-scale" id="config_concesionaria_modal" tabindex="-1" role="dialog" aria-hidden="false">
                         <div class="modal-dialog modal-dialog-centered modal-lg">
                             <div id="modal_content" class="modal-content">
