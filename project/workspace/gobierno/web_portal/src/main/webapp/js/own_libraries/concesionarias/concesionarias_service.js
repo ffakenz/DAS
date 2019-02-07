@@ -7,11 +7,11 @@ const ConcesionariasService = {
             dataType: "html",
             error: function(hr){
                 console.log("AJAX RESULT GET_CONSULTAR_TODAS ERROR %o", hr.responseText);
-                jUtils.showing("concesionariasDiv", hr);
+                jUtils.showing("content_admin_page_div", hr);
             },
             success: function(html) {
                 console.log("AJAX RESULT GET_CONSULTAR_TODAS SUCCESS %o", html);
-                jUtils.showing("concesionarias_table", html);
+                jUtils.showing("content_admin_page_div", html);
             }
         });
     },

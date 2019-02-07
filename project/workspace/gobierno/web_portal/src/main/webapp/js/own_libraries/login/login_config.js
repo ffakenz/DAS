@@ -7,6 +7,12 @@ const LoginConfig = (module) => [
             , { delegate: Id.GO_TO_PROFILE_BTN, handler: module.goToProfile }
         ]
     },
+    {
+        ctx: Id.LOGOUT_DIV,
+        cnfg: [
+            { delegate: Id.LOGOUT_BTN, handler: module.closeSession }
+        ]
+    },
     { 
         ctx: Class.LOGINBOX,
         cnfg: [

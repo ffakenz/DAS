@@ -11,6 +11,7 @@ import static ar.edu.ubp.das.src.utils.Constants.*;
 
 public class FrontUtils {
 
+
     public static String listOfConcesionarias(final List<ConcesionariaForm> concList) {
 
         final StringBuilder lista = new StringBuilder();
@@ -24,6 +25,7 @@ public class FrontUtils {
 
     public static String sorteosFormRow(final SorteoForm sorteo) {
         final StringBuilder rows = new StringBuilder();
+
         rows.append("<tr id=\"" + SORTEO_ROW + "-" + sorteo.getId() + "\">");
         rows.append("<td>" + sorteo.getId() + "</td>");
         rows.append("<td>" + sorteo.getMesSorteo() + "</td>");
@@ -31,7 +33,7 @@ public class FrontUtils {
         rows.append("<td>" + sorteo.getEstado() + "</td>");
         rows.append("<td>" + sorteo.getFechaEjecucion() + "</td>");
         rows.append("</tr>");
-        return rows.toString();
+        return wrapperTableTag(rows.toString());
     }
 
     public static String viewConsumoResultsFormRow(final ViewConsumoResultsForm view) {
@@ -49,7 +51,7 @@ public class FrontUtils {
         rows.append("<td>" + view.getConsumoResult() + "</td>");
         rows.append("<td>" + view.getConsumoResultDescription() + "</td>");
         rows.append("</tr>");
-        return rows.toString();
+        return wrapperTableTag(rows.toString());
     }
 
     public static String estadoCuentasFormRow(final EstadoCuentasForm e) {
@@ -64,7 +66,7 @@ public class FrontUtils {
         rows.append("<td>" + e.getFechaAltaSistema() + "</td>");
         rows.append("<td>" + e.getVehiculo() + "</td>");
         rows.append("</tr>");
-        return rows.toString();
+        return wrapperTableTag(rows.toString());
     }
 
     public static String concesionariaFormRow(final ConcesionariaForm c) {
@@ -97,7 +99,7 @@ public class FrontUtils {
                 .append(configBtn)
                 .append("</td>");
         rows.append("</tr>");
-        return rows.toString();
+        return wrapperTableTag(rows.toString());
     }
 
     public static String getButton(final String id, final String clase, final String description) {
@@ -108,5 +110,13 @@ public class FrontUtils {
                 .append(description)
                 .append("</button>");
         return sb.toString();
+    }
+
+    private static String wrapperTableTag(String rows) {
+
+        return new StringBuilder().append("<table id=\"table_admin_result\" class=\"table table-striped table-bordered\">")
+                .append(rows)
+                .append("</table>")
+                .toString();
     }
 }

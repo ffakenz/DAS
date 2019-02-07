@@ -7,11 +7,11 @@ const AdminService = {
             dataType: "html",
             error: function (hr) {
                 console.log("AJAX RESULT GET_TEST_CONSUMO ERROR %o", hr.responseText);
-                jUtils.showing("resultado", hr);
+                jUtils.showing("content_admin_page_div", hr);
             },
             success: function (html) {
                 console.log("AJAX RESULT GET_TEST_CONSUMO SUCCESS %o", html);
-                jUtils.showing("resultado", html);
+                jUtils.showing("content_admin_page_div", html);
             }
         });
     }

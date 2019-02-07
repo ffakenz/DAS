@@ -58,17 +58,13 @@ body {
   margin-left: auto;
 }
 
-#footer_navbar {
-  height: 75px;
-  text-align:center !important;
-}
-
 #footer_navbar img {
-  width: 66px;
-  height: 60px;
+  width: 33px;
+  height: 26px;
 }
 
 #footer_navbar {
+  height: 36px;
   display: inline-block;
   float: none;
   vertical-align: top;
@@ -82,4 +78,23 @@ img.d-block.w-100.h-50 {
 #footer_div {
   height: 5rem;
   margin-top: 23rem;
+}
+
+
+/* SIDE BAR */
+.wrapper {
+  display: flex;
+  width: 100%;
+}
+
+#sidebar {
+  width: 250px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 999;
+  background: #7386D5;
+  color: #fff;
+  transition: all 0.3s;
 }

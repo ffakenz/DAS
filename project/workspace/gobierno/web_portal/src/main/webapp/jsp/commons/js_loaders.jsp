@@ -60,7 +60,7 @@
     </c:when>
 
     <c:when test="${(uri == '/web_portal/login/Login.do') and (sessionScope.forwardName == 'success_gobierno')}">
-        <script src="${js_import}${home_config},${home_service},${home_module},${login_config},${login_module},${concesionarias_config},${concesionarias_helpers},${concesionarias_config_param},${concesionarias_service},${concesionarias_module},${concesionarias_loader},${admin_config},${admin_service},${admin_estado_cuenta_service},${admin_module},${calendario_config},${calendario_module},${calendario_service},${consumo_service},${admin_loader}">
+        <script src="${js_import}${home_config},${home_service},${home_module},${login_config},${login_module},${concesionarias_config},${concesionarias_helpers},${concesionarias_config_param},${concesionarias_service},${concesionarias_module},${concesionarias_loader},${calendario_config},${calendario_module},${calendario_service},${consumo_service},${admin_config},${admin_service},${admin_estado_cuenta_service},${admin_module},${admin_loader}">
         </script>
     </c:when>
 

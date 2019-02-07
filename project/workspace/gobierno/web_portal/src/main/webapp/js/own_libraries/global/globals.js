@@ -48,7 +48,6 @@ const Id = {
     CONCESIONARIA_REGISTRAR_SEND_FORM_BTN: "concesionaria_registrar_send_form_btn",
     TEST_CONSUMO_BTN: "test_consumo_btn",
     TEST_CONSUMO_DIV: "test_consumo_div",
-    CONCESIONARIAS_TABLE: "concesionarias_table",
     MODAL_CONTENT: "modal_content",
     REGISTRAR_CONCESIONARIA_DIV: "registrar_concesionaria_div",
     HEADER_HOME: "header_home",
@@ -58,12 +57,21 @@ const Id = {
     GO_TO_HOME_DIV: "go_to_home_div",
     GO_TO_HOME_BTN: "go_to_home_btn",
     LOGOUT_BTN: "logout_btn",
+    LOGOUT_DIV: "logout_div",
     LOGIN_FORM: "login_form",
     LOGIN_BTN: "login_btn",
     FIRST_LOGIN_DIV: "first_login_div",
     FIRST_LOGIN_BTN: "first_login_btn",
     LOGIN_PRIMER_INGRESO_FORM: "login_primer_ingreso_form",
-    CALENDARIO: "calendario"
+    CALENDARIO: "calendario",
+    SHOW_CONFIG_CONCESIONARIAS_BTN: "show_config_concesionarias_btn",
+    SHOW_SORTEOS_BTN: "show_sorteos_btn",
+    SHOW_PLANES_BTN: "show_planes_btn",
+    EXECUTE_CONSUMO_BTN: "execute_consumo_btn",
+    EXECUTE_SORTEO_BTN: "execute_sorteo_btn",
+    ADMIN_SIDE_BAR: "admin_side_bar",
+    SHOW_JOB_RESULTS_REPORT_BTN: "show_job_results_report_btn",
+    CONTENT_ADMIN_PAGE_DIV: "content_admin_page_div"
 };
 
 const Class = {
