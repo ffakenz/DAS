@@ -19,12 +19,12 @@
 
             <!-- Sidebar -->
             <div class="bg-light border-right" id="sidebar-wrapper">
-                <div id="admin_side_bar"class="sidebar-heading">Administrador</div>
-                <div class="list-group list-group-flush">
+                <div class="sidebar-heading">Administrador</div>
+                <div id="admin_side_bar" class="list-group list-group-flush">
                     <a id="show_config_concesionarias_btn" class="list-group-item list-group-item-action bg-light">Configurar concesionarias</a>
                     <a id="show_sorteos_btn" class="list-group-item list-group-item-action bg-light">Sorteos</a>
                     <a id="show_planes_btn" class="list-group-item list-group-item-action bg-light">Planes</a>
-                    <a id="show_job_results_report_btn" class="list-group-item list-group-item-action bg-light">Planes</a>
+                    <a id="show_job_results_report_btn" class="list-group-item list-group-item-action bg-light">Job Results Report</a>
                     <a id="execute_consumo_btn" class="list-group-item list-group-item-action bg-light">Consumir planes</a>
                     <a id="execute_sorteo_btn" class="list-group-item list-group-item-action bg-light">Ejecutar sorteo</a>
                 </div>

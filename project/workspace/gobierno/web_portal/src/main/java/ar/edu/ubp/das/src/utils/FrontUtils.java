@@ -33,7 +33,7 @@ public class FrontUtils {
         rows.append("<td>" + sorteo.getEstado() + "</td>");
         rows.append("<td>" + sorteo.getFechaEjecucion() + "</td>");
         rows.append("</tr>");
-        return wrapperTableTag(rows.toString());
+        return rows.toString();
     }
 
     public static String viewConsumoResultsFormRow(final ViewConsumoResultsForm view) {
@@ -51,7 +51,7 @@ public class FrontUtils {
         rows.append("<td>" + view.getConsumoResult() + "</td>");
         rows.append("<td>" + view.getConsumoResultDescription() + "</td>");
         rows.append("</tr>");
-        return wrapperTableTag(rows.toString());
+        return rows.toString();
     }
 
     public static String estadoCuentasFormRow(final EstadoCuentasForm e) {
@@ -66,7 +66,7 @@ public class FrontUtils {
         rows.append("<td>" + e.getFechaAltaSistema() + "</td>");
         rows.append("<td>" + e.getVehiculo() + "</td>");
         rows.append("</tr>");
-        return wrapperTableTag(rows.toString());
+        return rows.toString();
     }
 
     public static String concesionariaFormRow(final ConcesionariaForm c) {
@@ -99,7 +99,7 @@ public class FrontUtils {
                 .append(configBtn)
                 .append("</td>");
         rows.append("</tr>");
-        return wrapperTableTag(rows.toString());
+        return rows.toString();
     }
 
     public static String getButton(final String id, final String clase, final String description) {
@@ -110,13 +110,5 @@ public class FrontUtils {
                 .append(description)
                 .append("</button>");
         return sb.toString();
-    }
-
-    private static String wrapperTableTag(String rows) {
-
-        return new StringBuilder().append("<table id=\"table_admin_result\" class=\"table table-striped table-bordered\">")
-                .append(rows)
-                .append("</table>")
-                .toString();
     }
 }

@@ -41,4 +41,6 @@
         result.append(e.getMessage());
         }
         %>
+<table id="table_admin_result" class="table table-striped table-bordered">
 <%= result.toString() %>
+</table>
