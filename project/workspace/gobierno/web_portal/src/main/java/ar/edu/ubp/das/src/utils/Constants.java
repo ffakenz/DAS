@@ -11,6 +11,7 @@ public final class Constants {
     public static final String ESTADO_CUENTAS_DAO_NAME = "EstadoCuentas";
     public static final String SORTEO_DAO_NAME = "Sorteo";
     public static final String CONSUMO_DAO_NAME = "Consumo";
+    public static final String VIEW_CONSUMO_RESULTS__DAO_NAME = "ViewConsumoResults";
 
     /************ DAOS PACKAGES**********************************************/
     public static final String CONCESIONARIAS_DAO_PACKAGE = "concesionarias";
@@ -42,11 +43,13 @@ public final class Constants {
     public static final String CONCESIONARIAS_LIST_RQST_ATTRIBUTE = "concesionariasList";
     public static final String ESTADO_CUENTAS_LIST_RQST_ATTRIBUTE = "estadoCuentasList";
     public static final String SORTEOS_LIST_RQST_ATTRIBUTE = "sorteosList";
+    public static final String JOB_RESULTS_REPORT_RQST_ATTRIBUTE = "sorteosList";
 
     /************ CSS {CLASSES && ID} IDENTIFIERS ****************************/
     public static final String CONCESIONARIA_ROW = "concesionaria_row";
     public static final String ESTADO_CUENTA_ROW = "estado_cuenta_row";
     public static final String SORTEO_ROW = "sorteo_row";
+    public static final String VIEW_CONSUMO_RESULTS_ROW = "view_consumo_results_row";
     public static final String CONCESIONARIA_APROBADA = "concesionaria_aprobada";
     public static final String CONCESIONARIA_NO_APROBADA = "concesionaria_no_aprobada";
     public static final String APROBAR_BTN = "aprobar_btn";

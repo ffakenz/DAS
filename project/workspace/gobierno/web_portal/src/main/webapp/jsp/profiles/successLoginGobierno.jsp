@@ -32,6 +32,10 @@
                 <table id="sorteos_table" class="table table-striped table-bordered">
                 </table>
             </div>
+            <div id="consumoResultsDiv">
+                <table id="consumo_results_table" class="table table-striped table-bordered">
+                </table>
+            </div>
             <!-- Modal -->
             <div class="modal fade" id="config_concesionaria_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">

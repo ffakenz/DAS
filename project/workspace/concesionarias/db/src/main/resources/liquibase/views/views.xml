@@ -8,7 +8,7 @@
     <!-- ***************************** -->
     <!--   TABLE DROP CHANGE-SETS      -->
     <!-- ***************************** -->
-    <changeSet id="Drop view" author="DAS-Team" runAlways="true" runOnChange="true">
+    <changeSet id="Drop view notification_updates" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <viewExists viewName="notification_updates"/>
         </preConditions>

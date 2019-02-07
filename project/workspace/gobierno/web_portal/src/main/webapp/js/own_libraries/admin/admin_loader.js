@@ -11,6 +11,10 @@ $(window).on('load', () => {
         CalendarioService.GET_SORTEOS();
     }, 3000);
 
+    setTimeout(function(){
+        ConsumoService.GET_JOB_RESULTS_REPORT();
+    }, 4000);
+
     console.log("Admin View executed on Load");
 });
 

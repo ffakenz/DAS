@@ -412,6 +412,23 @@
         <dropProcedure procedureName="get_participantes"/>
     </changeSet>
 
+    <!-- ******************************* -->
+    <!--  QUERIES                        -->
+    <!-- ******************************* -->
+    <changeSet id="Drop procedure get_job_results_report" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_job_results_report'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_job_results_report"/>
+    </changeSet>
+
 
     <!-- ******************************* -->
     <!--  CREATE PROCEDURES CHANGE-SETS  -->
@@ -846,6 +863,25 @@
         </preConditions>
         <sqlFile
                 path="/src/main/resources/liquibase/jobs/procedures/sorteo/get_participantes.sql"/>
+    </changeSet>
+
+
+    <!-- ******************************* -->
+    <!--  QUERIES                        -->
+    <!-- ******************************* -->
+    <changeSet id="Create procedure get_job_results_report" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_job_results_report'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/views/get_job_results_report.sql"/>
     </changeSet>
 
 </databaseChangeLog>

@@ -28,7 +28,9 @@ const Action = {
     GET_SORTEOS :  "/web_portal/sorteo/ConsultarSorteos.do",
     CREAR_SORTEO :  "/web_portal/sorteo/CrearSorteo.do",
     EJECUTAR_SORTEO :  "/web_portal/sorteo/EjecutarSorteo.do",
-    ACTUALIZAR_SORTEO :  "/web_portal/sorteo/ActualizarSorteo.do"
+    ACTUALIZAR_SORTEO :  "/web_portal/sorteo/ActualizarSorteo.do",
+    /* REPORTS */
+    GET_JOB_RESULTS_REPORT: "/web_portal/jobs/ViewConsumoJobResults.do"
 };
 
 const ConfigTecno = {

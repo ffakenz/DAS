@@ -2,6 +2,7 @@ package ar.edu.ubp.das.src.utils;
 
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
 import ar.edu.ubp.das.src.estado_cuentas.forms.EstadoCuentasForm;
+import ar.edu.ubp.das.src.jobs.consumo.forms.ViewConsumoResultsForm;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.SorteoForm;
 
 import java.util.List;
@@ -29,6 +30,24 @@ public class FrontUtils {
         rows.append("<td>" + sorteo.getAnioSorteo() + "</td>");
         rows.append("<td>" + sorteo.getEstado() + "</td>");
         rows.append("<td>" + sorteo.getFechaEjecucion() + "</td>");
+        rows.append("</tr>");
+        return rows.toString();
+    }
+
+    public static String viewConsumoResultsFormRow(final ViewConsumoResultsForm view) {
+        final StringBuilder rows = new StringBuilder();
+        rows.append("<tr id=\"" + VIEW_CONSUMO_RESULTS_ROW + "-" + view.getJobId() + "\">");
+        rows.append("<td>" + view.getJobId() + "</td>");
+        rows.append("<td>" + view.getJobFechaEjecucion() + "</td>");
+        rows.append("<td>" + view.getConsumoId() + "</td>");
+        rows.append("<td>" + view.getConcesionariaId() + "</td>");
+        rows.append("<td>" + view.getEstadoConsumo() + "</td>");
+        rows.append("<td>" + view.getOffsetConsumo() + "</td>");
+        rows.append("<td>" + view.getIdRequestRespConsumo() + "</td>");
+        rows.append("<td>" + view.getEstadoDescription() + "</td>");
+        rows.append("<td>" + view.getConsumoResultId() + "</td>");
+        rows.append("<td>" + view.getConsumoResult() + "</td>");
+        rows.append("<td>" + view.getConsumoResultDescription() + "</td>");
         rows.append("</tr>");
         return rows.toString();
     }
