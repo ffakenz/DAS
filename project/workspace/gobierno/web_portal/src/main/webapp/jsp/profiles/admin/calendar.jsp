@@ -62,17 +62,17 @@
         if( currentDayInt == days[i][j] && currentMonthInt == aMonth.getMonth() && currentYearInt == aMonth.getYear() )
         {
             if(mapMes.containsKey(days[i][j])) {
-                %><td class="today_cell"><%= mapMes.get(days[i][j]).toString() %></td><%
+                %><td class="today_cell sorteo_cell calendar_cell"><%=days[i][j]%></td><%
             } else {
-                %><td class="today_cell"><%=days[i][j]%></td><%
+                %><td class="today_cell empty_cell calendar_cell"><%=days[i][j]%></td><%
             }
         }
         else
         {
           if(mapMes.containsKey(days[i][j])) {
-              %><td class="day_cell"><%= mapMes.get(days[i][j]).toString() %></td><%
+              %><td class="day_cell sorteo_cell calendar_cell"><%=days[i][j]%></td><%
           } else {
-              %><td class="day_cell"><%=days[i][j]%></td><%
+              %><td class="day_cell empty_cell calendar_cell"><%=days[i][j]%></td><%
           }
         }
       } // end outer if

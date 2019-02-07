@@ -412,6 +412,48 @@
         <dropProcedure procedureName="get_participantes"/>
     </changeSet>
 
+    <changeSet id="Drop procedure update_sorteo" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'update_sorteo'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="update_sorteo"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure update_sorteo_fecha_ejecucion" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'update_sorteo_fecha_ejecucion'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="update_sorteo_fecha_ejecucion"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure get_detalle_sorteo" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_detalle_sorteo'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_detalle_sorteo"/>
+    </changeSet>
+
     <!-- ******************************* -->
     <!--  QUERIES                        -->
     <!-- ******************************* -->
@@ -863,6 +905,51 @@
         </preConditions>
         <sqlFile
                 path="/src/main/resources/liquibase/jobs/procedures/sorteo/get_participantes.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure update_sorteo_fecha_ejecucion" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'update_sorteo_fecha_ejecucion'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/sorteo/update_sorteo_fecha_ejecucion.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure update_sorteo" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'update_sorteo'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/sorteo/update_sorteo.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure get_detalle_sorteo" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_detalle_sorteo'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/sorteo/get_detalle_sorteo.sql"/>
     </changeSet>
 
 

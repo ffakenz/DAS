@@ -76,7 +76,8 @@ const Id = {
     TABLE_ADMIN_RESULT: "table_admin_result",
     CALENDAR_MAIN_DIV: "calendar_main_div",
     CALENDAR_NEXT: "calendar_next",
-    CALENDAR_PREV: "calendar_prev"
+    CALENDAR_PREV: "calendar_prev",
+    CALENDAR_TABLE: "calendar_table",
 };
 
 const Class = {
@@ -89,5 +90,7 @@ const Class = {
     LOGINBOX: "loginbox",
     EJECUTAR_SORTEO_BTN: "ejecutar_sorteo_btn",
     ACTUALIZAR_FECHA_SORTEO_BTN: "actualizar_fecha_sorteo_btn",
-    CALENDARIO_CELL: "calendario_cell"
+    EMPTY_CELL: "empty_cell",
+    SORTEO_CELL: "sorteo_cell",
+    CALENDARIO_CELL: "calendario_cell", 
 };

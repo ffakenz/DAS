@@ -105,3 +105,21 @@ body#print_view_page .day_cell, .empty_day_cell {
 
 .submit_button {
 }
+
+#calendar_table .sorteo_cell {
+    background-color: #42c5f4;
+}
+
+#calendar_table .calendar_cell:hover {
+    background-color: #41f498   ;
+}
+
+#calendar_table .sorteo_cell:hover {
+    background-color: #c1f441;
+}
+
+#calendar_table {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}
