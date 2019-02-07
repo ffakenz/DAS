@@ -20,15 +20,24 @@
     String cellYear = (String) request.getAttribute("cell_year");
     SorteoForm sorteo = (SorteoForm) request.getAttribute("sorteo");
 %>
-<form id="update_sorteo" class="form-horizontal" method="post" >
-    <p>Update Sorteo: <%=sorteo.getFechaEjecucion().toString()%> </p>
-    <div class="form-group">
-       <label class="col-md-4 control-label" for="">Nueva Fecha de Ejecucion</label>
-       <input type="date" class="form-control form-control-lg">
-    </div>
-    <div class="form-group">
-       <button type="button" id="update_sorteo_btn" class="btn-info">Update</button>
-       <button type="button" id="cancelar_update_sorteo_btn" class="btn-danger">Cancelar</button>
-       <button type="button" id="show_sorteo_details_btn" class="btn-secondary">Detalles</button>
-    </div>
-</form>
+<div class="modal-header">
+    <h5 class="modal-title">Actualizar Sorteo</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form id="update_sorteo" class="form-horizontal" method="post" >
+        <p>Actualizar Sorteo: <%=sorteo.getFechaEjecucion().toString()%> </p>
+        <div class="form-group">
+           <label class="col-md-4 control-label" for="">Nueva Fecha de Ejecucion</label>
+           <input type="date" class="form-control form-control-lg">
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+   <button type="button" id="update_sorteo_btn" class="btn btn-success">Update</button>
+   <button type="button" id="cancelar_update_sorteo_btn" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+   <button type="button" id="show_sorteo_details_btn" class="btn btn-info">Detalles</button>
+</div>
+

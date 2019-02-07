@@ -50,7 +50,7 @@
 
                 <div id="page_content_administrador_div" class="container-fluid">
 
-                    <div id="loadingDiv" stryle=""> </div>
+                    <div id="loadingDiv" stryle=""></div>
                     <div id="content_admin_page_div">
                         <table id="table_admin_result" class="table table-hover">
                         </table>
@@ -58,26 +58,20 @@
 
                     <div id="calendario">
                         <link type="text/css" rel="stylesheet" href="/web_portal/util/StyleSheet.do/load=calendar" />
-                        <div id="calendar_main_div">
-                        </div>
+                        <div id="calendar_main_div"></div>
                     </div>
 
                     <!-- Modal -->
-                    <div class="modal fade" id="config_concesionaria_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel"> CONFIGURAR CONCESIONARIA </h4>
-                                </div>
-                                <div class="modal-body" id="modal_content" style="overflow-x: scroll;"></div>
+                    <link type="text/css" rel="stylesheet" href="/web_portal/util/StyleSheet.do/load=modal" />
+                    <div class="modal fade-scale" id="config_concesionaria_modal" tabindex="-1" role="dialog" aria-hidden="false">
+                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                            <div id="modal_content" class="modal-content">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- /#page-content-wrapper -->
-
         </div>
         <!-- /#wrapper -->
     </body>

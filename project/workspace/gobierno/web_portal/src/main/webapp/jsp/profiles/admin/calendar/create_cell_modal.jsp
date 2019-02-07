@@ -16,12 +16,22 @@
     StringBuilder result = new StringBuilder();
     result.append(cellDay + "/" + cellMonth + "/" + cellYear);
 %>
-<form id="create_sorteo" class="form-horizontal" method="post" >
-    <div class="form-group">
-       <p>Desea crar un Sorteo para el dia de la fecha ?</p>
-       <p>Fecha: <%= result.toString() %> </p>
-       <button type="button" id="create_sorteo_btn" class="btn-info">Confirmar</button>
-       <button type="button" id="cancelar_create_sorteo_btn" class="btn-danger">Cancelar</button>
-    </div>
-</form>
+<div class="modal-header">
+    <h5 class="modal-title">Crear Sorteo</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form id="create_sorteo" class="form-horizontal" method="post" >
+        <div class="form-group">
+           <p>Desea crar un Sorteo para el dia de la fecha ?</p>
+           <p>Fecha: <%= result.toString() %> </p>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+   <button type="button" id="create_sorteo_btn" class="btn btn-success ">Confirmar</button>
+   <button type="button" id="cancelar_create_sorteo_btn" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+</div>
 

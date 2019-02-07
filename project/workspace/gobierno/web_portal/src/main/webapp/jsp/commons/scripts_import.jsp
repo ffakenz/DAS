@@ -3,6 +3,9 @@
 <!-- External libs -->
 <script src="/web_portal/util/Javascript.do/load=external_libraries/jquery"></script>
 <script src="/web_portal/util/Javascript.do/load=external_libraries/jquery.i18n.properties"></script>
+<script src="/web_portal/util/Javascript.do/load=external_libraries/bootstrap"></script>
+
+<!-- JQuery -->
 
 <!-- Own libs -->
 <script src="/web_portal/util/Javascript.do/load=own_libraries/global/globals"></script>
