@@ -71,7 +71,8 @@ const Id = {
     EXECUTE_SORTEO_BTN: "execute_sorteo_btn",
     ADMIN_SIDE_BAR: "admin_side_bar",
     SHOW_JOB_RESULTS_REPORT_BTN: "show_job_results_report_btn",
-    CONTENT_ADMIN_PAGE_DIV: "content_admin_page_div"
+    CONTENT_ADMIN_PAGE_DIV: "content_admin_page_div",
+    TABLE_ADMIN_RESULT: "table_admin_result",
 };
 
 const Class = {

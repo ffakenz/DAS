@@ -1,0 +1,12 @@
+#table_admin_result {
+    margin-top: 5px;
+    text-align: center;
+}
+
+#table_admin_result td {
+    border: 1px solid #c4c9ce;
+}
+
+#table_admin_result th {
+    border: 1px solid #2C3E50;
+}

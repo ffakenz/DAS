@@ -5,6 +5,7 @@
 <script src="/web_portal/util/Javascript.do/load=external_libraries/jquery.i18n.properties"></script>
 <script src="/web_portal/util/Javascript.do/load=external_libraries/bootstrap"></script>
 
+
 <!-- JQuery -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/js/mdb.min.js"></script>
@@ -20,5 +21,6 @@
 <script src="/web_portal/util/Javascript.do/load=own_libraries/global/module"></script>
 <script src="/web_portal/util/Javascript.do/load=own_libraries/global/config"></script>
 <script src="/web_portal/util/Javascript.do/load=own_libraries/other"></script>
-
 <%@include file="./js_loaders.jsp"%>
+
+

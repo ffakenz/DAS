@@ -50,7 +50,10 @@
 
                 <div id="page_content_administrador_div" class="container-fluid">
 
-                    <div id="content_admin_page_div"></div>
+                    <div id="content_admin_page_div">
+                        <table id="table_admin_result" class="table table-hover">
+                        </table>
+                    </div>
 
                     <!-- Modal -->
                     <div class="modal fade" id="config_concesionaria_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

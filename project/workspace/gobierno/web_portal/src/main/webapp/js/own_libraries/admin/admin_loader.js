@@ -1,5 +1,6 @@
 $(window).on('load', () => {
     ConcesionariasService.GET_CONSULTAR_TODAS();
+
     console.log("Admin View executed on Load");
 });
 

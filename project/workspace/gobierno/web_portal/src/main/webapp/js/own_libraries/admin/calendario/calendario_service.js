@@ -7,11 +7,11 @@ const CalendarioService = {
             dataType: "html",
             error: function (hr) {
                 console.log("AJAX RESULT GET_SORTEOS ERROR %o", hr.responseText);
-                jUtils.showing("content_admin_page_div", hr);
+                jUtils.showing("table_admin_result", hr);
             },
             success: function (html) {
                 console.log("AJAX RESULT GET_SORTEOS SUCCESS %o", html);
-                jUtils.showing("content_admin_page_div", html);
+                jUtils.showing("table_admin_result", html);
             }
         });
     },
