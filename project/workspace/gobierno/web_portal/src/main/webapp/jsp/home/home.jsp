@@ -5,8 +5,8 @@
         pageEncoding="utf-8"
 %>
 
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <fmt:setBundle basename="properties.etiquetas" var="etq" scope="session"/>
 
 <!DOCTYPE html>
@@ -14,10 +14,14 @@
     <%@include file="../commons/head.jsp" %>
     <body>
         <div class="content-body">
+            <div id="lang_div">
+                <input id="es_lang_btn" type="button" value="es" />
+                <input id="en_lang_btn" type="button" value="en" />
+            </div>
             <%@include file="../commons/header.jsp"%>
             <!-- concesionarias aprobadas -->
             <div class="jumbotron">
-                <h1 class="display-3">Concesionarias disponibles</h1>
+                <h1 class="display-3"><fmt:message key="concesionarias_disponibles" bundle="${etq}" /></h1>
                 <hr class="my-4">
                 <div id="conc_aprobadas_div"></div>
                 <br><hr class="my-4"><br>

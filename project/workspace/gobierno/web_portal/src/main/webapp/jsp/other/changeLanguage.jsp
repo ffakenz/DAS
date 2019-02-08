@@ -7,11 +7,9 @@
 <fmt:setBundle basename="properties.etiquetas" var="etq" scope="session"/>
 <fmt:setLocale value="${idioma}" scope="session" />
 
-
 <% session.setAttribute("idioma", request.getAttribute("idioma")); %>
-
 
 <script>
     jUtils.changeLang("Etiquetas_js", "${idioma}");
-    window.location.href = window.location.href.split("?")[0] + "?idioma=${idioma}";
+    /*window.location.href = window.location.href.split("?")[0] + "?idioma=idioma";*/
 </script>

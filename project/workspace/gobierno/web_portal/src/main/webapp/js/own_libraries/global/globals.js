@@ -80,6 +80,9 @@ const Id = {
     CALENDAR_NEXT: "calendar_next",
     CALENDAR_PREV: "calendar_prev",
     CALENDAR_TABLE: "calendar_table",
+    LANG_DIV: "lang_div",
+    ES_LANG_BTN: "es_lang_btn",
+    EN_LANG_BTN: "en_lang_btn"
 };
 
 const Class = {

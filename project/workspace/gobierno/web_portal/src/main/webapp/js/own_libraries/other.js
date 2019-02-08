@@ -1,12 +1,11 @@
-var translator = {
+const translator = {
 
-    setIdioma : function(idioma) {
-
+    setIdioma : function(evt) {
         jUtils.executing( "mensaje" );
         $.ajax({
             url: Action.CHANGE_LANGUAGE_ENDPOINT,
             type: "post",
-            data: "idioma=" + idioma,
+            data: "idioma=" + evt.target.value,
             dataType: "html",
             error: function(hr){
                 jUtils.hiding("resultIdioma");
