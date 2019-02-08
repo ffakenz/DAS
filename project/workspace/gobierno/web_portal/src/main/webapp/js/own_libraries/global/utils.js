@@ -86,5 +86,13 @@ const jUtils = {
             acc[key] = value;
             return acc;
         }, {});
+    },
+
+    addTitle: (title) => {
+        return `<div class="card">
+            <div class="card-header">
+                <h2 class="title" >${title}</h2>
+            </div>
+        </div>`;
     }
 };

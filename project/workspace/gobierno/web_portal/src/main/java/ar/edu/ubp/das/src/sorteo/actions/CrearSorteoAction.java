@@ -48,16 +48,13 @@ public class CrearSorteoAction implements Action {
         sorteoForm.setFechaEjecucion(rqst);
         try {
             sorteoJobManager.getMsSorteoDao().insert(sorteoForm);
+            final SorteoForm sorteoInserted = sorteoJobManager.getMsSorteoDao().getSorteosByFecha(rqst).get();
+            log.info("CrearSorteoAction [SUCCEDED][Sorteo {}]", sorteoForm);
+            return jsonResult(sorteoInserted);
         } catch (final SQLException e) {
             e.printStackTrace();
             log.info("CrearSorteoAction [FAILED] [REASON - {}]", e.getMessage());
             return jsonResult("{\"result\": \"FAILURE\"}");
         }
-        log.info("CrearSorteoAction [SUCCEDED][Sorteo {}]", sorteoForm);
-        return jsonResult("{\"result\": \"OK\"}");
-    }
-
-    public static void main(final String[] args) {
-        System.out.println(String.format("lol %s", "me"));
     }
 }

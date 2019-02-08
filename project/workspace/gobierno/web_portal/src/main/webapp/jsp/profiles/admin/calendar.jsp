@@ -21,6 +21,11 @@
 <%-- TODO: CLEAN UP THE PAGE TAG ABOVE --%>
 
 <%@ include file="calendarCommon.jsp" %>
+<div class="card">
+    <div class="card-header">
+        <h2 class="title" >Calendario Sorteo</h2>
+    </div>
+</div>
 <table border="1" cellspacing="0" cellpadding="4" id="calendar_table">
   <tr>
     <td width="100%" colspan="7" class="month_year_header">

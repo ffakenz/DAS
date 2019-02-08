@@ -16,6 +16,7 @@ const CalendarioService = {
                 $("#loadingDiv").modal("hide");
                 console.log("AJAX RESULT GET_SORTEOS SUCCESS %o", html);
                 jUtils.showing("table_admin_result", html);
+                $("#table_admin_result_title").html(jUtils.addTitle("Sorteos Registrados"));
             }
         });
     },
@@ -103,8 +104,15 @@ const CalendarioService = {
                 $("#loadingDiv").modal("hide");
                 jUtils.showing("resultado", html);
                 const value = jUtils.dataToJson(data);
-                $(`#cell_day-${value["cell_day"]}`).removeClass("empty_cell");
-                $(`#cell_day-${value["cell_day"]}`).addClass("sorteo_cell");
+                const cell = $(`#cell_day-${value["cell_day"]}`);
+                $(cell).removeClass("empty_cell");
+                $(cell).addClass("sorteo_cell");
+                const form = $(cell).find("form");
+                console.log("HTML %o", html);
+                const json = JSON.parse(html);
+                console.log("HTML ID %o", json);
+                const htmlToInsert = `<input type="hidden" name="cell_id" value="${json.id}"/>`;
+                $(form).append(htmlToInsert);
                 $("#config_concesionaria_modal").modal("hide");
             }
         });
