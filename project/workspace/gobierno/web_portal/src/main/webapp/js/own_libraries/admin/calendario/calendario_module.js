@@ -30,15 +30,10 @@ class Calendario extends Module {
     crearSorteo(evt) {
         evt.preventDefault();
         console.log("crearSorteo, [EVENT] = %o", evt);
-        /*
-        const idButton = evt.target.id;
-        const fechaEjecucion = idButton.split("-")[1];  /* TODO: add this to `data` or hidden input
-        const data = { "fecha_ejecucion": fechaEjecucion };
+        const _elem = $("#" + evt.target.id);
+        const data =  $(_elem).closest("form").serialize();
+        console.log("data = %o", data);
         CalendarioService.CREAR_SORTEO(data);
-        */
-       const data =  $("#" + evt.target.id).closest("form").serialize();
-       console.log("data = %o", data);
-       CalendarioService.CREAR_SORTEO(data);
     }
 
     actualizarSorteo(evt) {

@@ -97,11 +97,15 @@ const CalendarioService = {
                 console.log("AJAX RESULT CREAR_SORTEO ERROR %o", hr.responseText);
                 jUtils.showing("resultado", hr);
                 $("#loadingDiv").modal("hide");
+                $("#config_concesionaria_modal").modal("hide");
             },
             success: function (html) {
                 $("#loadingDiv").modal("hide");
-                console.log("AJAX RESULT CREAR_SORTEO SUCCESS %o", html);
                 jUtils.showing("resultado", html);
+                const value = jUtils.dataToJson(data);
+                $(`#cell_day-${value["cell_day"]}`).removeClass("empty_cell");
+                $(`#cell_day-${value["cell_day"]}`).addClass("sorteo_cell");
+                $("#config_concesionaria_modal").modal("hide");
             }
         });
     },

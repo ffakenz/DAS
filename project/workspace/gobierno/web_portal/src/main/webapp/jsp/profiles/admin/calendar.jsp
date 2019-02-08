@@ -71,7 +71,7 @@
                                 <form method="post">
                                     <input type="hidden" name="cell_id" value="<%=mapMes.get(days[i][j]).getId()%>"/>
                                     <input type="hidden" name="cell_day" value="<%=days[i][j]%>"/>
-                                    <input type="hidden" name="cell_month" value="<%=aMonth.getMonth()%>"/>
+                                    <input type="hidden" name="cell_month" value="<%=aMonth.getMonth() + 1%>"/>
                                     <input type="hidden" name="cell_year" value="<%=aMonth.getYear()%>"/>
                                 </form>
                             </td>
@@ -82,7 +82,7 @@
                                 <%=days[i][j]%>
                                 <form method="post">
                                     <input type="hidden" name="cell_day" value="<%=days[i][j]%>"/>
-                                    <input type="hidden" name="cell_month" value="<%=aMonth.getMonth()%>"/>
+                                    <input type="hidden" name="cell_month" value="<%=aMonth.getMonth() + 1%>"/>
                                     <input type="hidden" name="cell_year" value="<%=aMonth.getYear()%>"/>
                                 </form>
                             </td>
@@ -92,7 +92,10 @@
 
                 else {
 
-                  final String currentDayStr = String.format("%s-%s-%s", currentYearString, String.valueOf(Integer.valueOf(currentMonthString) + 1), String.valueOf(days[i][j]));
+                  final String theMonth = String.valueOf(Integer.valueOf(currentMonthString) + 1);
+                  final String theDay = String.valueOf(days[i][j]);
+                  final String theYear = String.valueOf(intYear);
+                  final String currentDayStr = String.format("%s-%s-%s", theYear, theMonth, theDay);
                   final Date currentDay = Date.valueOf(currentDayStr);
                   if(mapMes.containsKey(days[i][j])) {
                       %>
@@ -101,8 +104,8 @@
                             <form method="post">
                                 <input type="hidden" name="cell_id" value="<%=mapMes.get(days[i][j]).getId()%>"/>
                                 <input type="hidden" name="cell_day" value="<%=days[i][j]%>"/>
-                                <input type="hidden" name="cell_month" value="<%=aMonth.getMonth()%>"/>
-                                <input type="hidden" name="cell_year" value="<%=aMonth.getYear()%>"/>
+                                <input type="hidden" name="cell_month" value="<%=theMonth%>"/>
+                                <input type="hidden" name="cell_year" value="<%=theYear%>"/>
                             </form>
                         </td>
                       <%
@@ -112,8 +115,8 @@
                             <%=days[i][j]%>
                             <form method="post">
                                 <input type="hidden" name="cell_day" value="<%=days[i][j]%>"/>
-                                <input type="hidden" name="cell_month" value="<%=aMonth.getMonth()%>"/>
-                                <input type="hidden" name="cell_year" value="<%=aMonth.getYear()%>"/>
+                                <input type="hidden" name="cell_month" value="<%=theMonth%>"/>
+                                <input type="hidden" name="cell_year" value="<%=theYear%>"/>
                             </form>
                         </td>
                     <%
