@@ -5,6 +5,7 @@ import ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.SorteoForm;
 import ar.edu.ubp.das.src.utils.DateUtils;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -69,6 +70,13 @@ public class MSSorteoDao extends DaoImpl<SorteoForm> {
                 .findFirst();
     }
 
+    public Optional<SorteoForm> getSorteosByFecha(final Date fechaEjecucion) throws SQLException {
+        return this.select()
+                .stream()
+                .filter(s -> s.getFechaEjecucion().equals(fechaEjecucion))
+                .findFirst();
+    }
+
     public List<SorteoForm> getSorteosByMes(final Integer mesSorteo) throws SQLException {
         return this.select()
                 .stream()
@@ -91,7 +99,7 @@ public class MSSorteoDao extends DaoImpl<SorteoForm> {
                 .findFirst();
     }
 
-    public List<SorteoForm> getSorteosByEstado(EstadoSorteo estadoSorteo) throws SQLException {
+    public List<SorteoForm> getSorteosByEstado(final EstadoSorteo estadoSorteo) throws SQLException {
         return this.select()
                 .stream()
                 .filter(s -> s.getEstado().equals(estadoSorteo.getTipo()))

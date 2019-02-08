@@ -16,6 +16,7 @@ const ConcesionariasService = {
                 $("#loadingDiv").modal("hide");
                 console.log("AJAX RESULT GET_CONSULTAR_TODAS SUCCESS %o", html);
                 jUtils.showing("table_admin_result", html);
+                $("#table_admin_result_title").html(jUtils.addTitle("Concesionarias Registradas"));
             }
         });
     },

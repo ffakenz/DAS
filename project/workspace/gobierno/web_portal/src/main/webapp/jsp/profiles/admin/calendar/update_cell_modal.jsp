@@ -35,7 +35,7 @@
         </div>
     </form>
 </div>
-<div class="modal-footer">
+<div class="modal-footer" >
    <button type="button" id="update_sorteo_btn" class="btn btn-success">Update</button>
    <button type="button" id="cancelar_update_sorteo_btn" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
    <button type="button" id="show_sorteo_details_btn" class="btn btn-info">Detalles</button>

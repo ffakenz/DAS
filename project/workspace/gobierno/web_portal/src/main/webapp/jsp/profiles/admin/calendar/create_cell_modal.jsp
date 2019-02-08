@@ -23,15 +23,18 @@
     </button>
 </div>
 <div class="modal-body">
-    <form id="create_sorteo" class="form-horizontal" method="post" >
-        <div class="form-group">
-           <p>Desea crar un Sorteo para el dia de la fecha ?</p>
-           <p>Fecha: <%= result.toString() %> </p>
-        </div>
-    </form>
+   <p>Desea crar un Sorteo para el dia de la fecha ?</p>
+   <p>Fecha: <%= result.toString() %> </p>
 </div>
 <div class="modal-footer">
-   <button type="button" id="create_sorteo_btn" class="btn btn-success ">Confirmar</button>
-   <button type="button" id="cancelar_create_sorteo_btn" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+   <form id="create_sorteo" class="form-horizontal" method="post" >
+       <div class="form-group">
+          <input type="hidden" name="cell_day" value="<%=cellDay%>"/>
+          <input type="hidden" name="cell_month" value="<%=cellMonth%>"/>
+          <input type="hidden" name="cell_year" value="<%=cellYear%>"/>
+          <button type="submit" id="create_sorteo_btn" class="btn btn-success ">Confirmar</button>
+          <button type="button" id="cancelar_create_sorteo_btn" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+       </div>
+   </form>
 </div>
 

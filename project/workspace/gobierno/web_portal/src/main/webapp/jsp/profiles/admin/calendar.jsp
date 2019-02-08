@@ -15,11 +15,17 @@
 <%@ page import="static ar.edu.ubp.das.src.utils.Constants.SORTEOS_LIST_RQST_ATTRIBUTE" %>
 <%@ page import="ar.edu.ubp.das.src.utils.FrontUtils" %>
 <%@ page import="ar.edu.ubp.das.src.utils.Month" %>
-<%@ page import="java.util.*,util.*,java.io.*" %>
+<%@ page import="ar.edu.ubp.das.src.utils.DateUtils" %>
+<%@ page import="java.util.*,util.*,java.io.*,java.sql.Date" %>
 
 <%-- TODO: CLEAN UP THE PAGE TAG ABOVE --%>
 
 <%@ include file="calendarCommon.jsp" %>
+<div class="card">
+    <div class="card-header">
+        <h2 class="title" >Calendario Sorteo</h2>
+    </div>
+</div>
 <table border="1" cellspacing="0" cellpadding="4" id="calendar_table">
   <tr>
     <td width="100%" colspan="7" class="month_year_header">
@@ -45,6 +51,7 @@
   }
 
   Month aMonth = Month.getMonth( Integer.parseInt(currentMonthString), Integer.parseInt(currentYearString) );
+  final Date hoy = DateUtils.getDayDate();
   int [][] days = aMonth.getDays();
   for( int i=0; i<aMonth.getNumberOfWeeks(); i++ )
   {
@@ -59,7 +66,6 @@
               }
               else
               {
-
                 // this is "today"
                 if( currentDayInt == days[i][j] && currentMonthInt == aMonth.getMonth() && currentYearInt == aMonth.getYear() )
                 {
@@ -70,7 +76,7 @@
                                 <form method="post">
                                     <input type="hidden" name="cell_id" value="<%=mapMes.get(days[i][j]).getId()%>"/>
                                     <input type="hidden" name="cell_day" value="<%=days[i][j]%>"/>
-                                    <input type="hidden" name="cell_month" value="<%=aMonth.getMonth()%>"/>
+                                    <input type="hidden" name="cell_month" value="<%=aMonth.getMonth() + 1%>"/>
                                     <input type="hidden" name="cell_year" value="<%=aMonth.getYear()%>"/>
                                 </form>
                             </td>
@@ -81,15 +87,21 @@
                                 <%=days[i][j]%>
                                 <form method="post">
                                     <input type="hidden" name="cell_day" value="<%=days[i][j]%>"/>
-                                    <input type="hidden" name="cell_month" value="<%=aMonth.getMonth()%>"/>
+                                    <input type="hidden" name="cell_month" value="<%=aMonth.getMonth() + 1%>"/>
                                     <input type="hidden" name="cell_year" value="<%=aMonth.getYear()%>"/>
                                 </form>
                             </td>
                         <%
                     }
                 }
-                else
-                {
+
+                else {
+
+                  final String theMonth = String.valueOf(Integer.valueOf(currentMonthString) + 1);
+                  final String theDay = String.valueOf(days[i][j]);
+                  final String theYear = String.valueOf(intYear);
+                  final String currentDayStr = String.format("%s-%s-%s", theYear, theMonth, theDay);
+                  final Date currentDay = Date.valueOf(currentDayStr);
                   if(mapMes.containsKey(days[i][j])) {
                       %>
                         <td id="cell_day-<%=days[i][j]%>" class="day_cell sorteo_cell calendar_cell">
@@ -97,21 +109,27 @@
                             <form method="post">
                                 <input type="hidden" name="cell_id" value="<%=mapMes.get(days[i][j]).getId()%>"/>
                                 <input type="hidden" name="cell_day" value="<%=days[i][j]%>"/>
-                                <input type="hidden" name="cell_month" value="<%=aMonth.getMonth()%>"/>
-                                <input type="hidden" name="cell_year" value="<%=aMonth.getYear()%>"/>
+                                <input type="hidden" name="cell_month" value="<%=theMonth%>"/>
+                                <input type="hidden" name="cell_year" value="<%=theYear%>"/>
                             </form>
                         </td>
                       <%
-                  } else {
+                  } else if(currentDay.after(hoy)) {
                       %>
                         <td id="cell_day-<%=days[i][j]%>" class="day_cell empty_cell calendar_cell">
                             <%=days[i][j]%>
                             <form method="post">
                                 <input type="hidden" name="cell_day" value="<%=days[i][j]%>"/>
-                                <input type="hidden" name="cell_month" value="<%=aMonth.getMonth()%>"/>
-                                <input type="hidden" name="cell_year" value="<%=aMonth.getYear()%>"/>
+                                <input type="hidden" name="cell_month" value="<%=theMonth%>"/>
+                                <input type="hidden" name="cell_year" value="<%=theYear%>"/>
                             </form>
                         </td>
+                    <%
+                  } else {
+                    %>
+                      <td class="day_cell empty_cell">
+                          <%=days[i][j]%>
+                      </td>
                     <%
                   }
                 }

@@ -15,6 +15,7 @@ const EstadoCuentaService = {
                 $("#loadingDiv").modal("hide");
                 console.log("AJAX RESULT GET_CONSULTAR_TODOS SUCCESS %o", html);
                 jUtils.showing("table_admin_result", html);
+                $("#table_admin_result_title").html(jUtils.addTitle("Plans Consumidos"));
             }
         });
     }

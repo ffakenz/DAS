@@ -75,5 +75,24 @@ const jUtils = {
                 $(jUtils.toIdentifier(evt.ctx)).delegate(jUtils.toIdentifier(cnfg.delegate), event_type, cnfg.handler);
             });
         });
+    },
+
+    dataToJson: (data) => {
+        const elems = data.split("&");
+        return elems.reduce((acc, elem) => {
+            const values = elem.split("=");
+            const key = values[0];
+            const value = values[1];
+            acc[key] = value;
+            return acc;
+        }, {});
+    },
+
+    addTitle: (title) => {
+        return `<div class="card">
+            <div class="card-header">
+                <h2 class="title" >${title}</h2>
+            </div>
+        </div>`;
     }
 };

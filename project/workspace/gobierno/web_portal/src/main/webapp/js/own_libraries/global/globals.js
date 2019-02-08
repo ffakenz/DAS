@@ -80,6 +80,10 @@ const Id = {
     CALENDAR_NEXT: "calendar_next",
     CALENDAR_PREV: "calendar_prev",
     CALENDAR_TABLE: "calendar_table",
+    CREATE_CELL_MODAL_FOOTER: "update_cell_modal_footer",
+    UPDATE_CELL_MODAL_FOOTER: "create_cell_modal_footer",
+    CREATE_SORTEO_BTN: "create_sorteo_btn",
+    UPDATE_SORTEO_BTN: "update_sorteo_btn",
     LANG_DIV: "lang_div",
     ES_LANG_BTN: "es_lang_btn",
     EN_LANG_BTN: "en_lang_btn"

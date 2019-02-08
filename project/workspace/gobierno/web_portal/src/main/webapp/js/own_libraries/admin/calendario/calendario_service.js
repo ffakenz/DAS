@@ -16,6 +16,7 @@ const CalendarioService = {
                 $("#loadingDiv").modal("hide");
                 console.log("AJAX RESULT GET_SORTEOS SUCCESS %o", html);
                 jUtils.showing("table_admin_result", html);
+                $("#table_admin_result_title").html(jUtils.addTitle("Sorteos Registrados"));
             }
         });
     },
@@ -64,27 +65,6 @@ const CalendarioService = {
         });
     },
 
-    CREAR_SORTEO(fechaEjecucion) {
-        $("#loadingDiv").modal("show");
-        jUtils.executing("loadingDiv");
-        $.ajax({
-            url: Action.CREAR_SORTEO,
-            type: "post",
-            dataType: "html",
-            data: "fecha_ejecucion=" + fechaEjecucion,
-            error: function (hr) {
-                console.log("AJAX RESULT CREAR_SORTEO ERROR %o", hr.responseText);
-                jUtils.showing("resultado", hr);
-                $("#loadingDiv").modal("hide");
-            },
-            success: function (html) {
-                $("#loadingDiv").modal("hide");
-                console.log("AJAX RESULT CREAR_SORTEO SUCCESS %o", html);
-                jUtils.showing("resultado", html);
-            }
-        });
-    },
-
     EJECUTAR_SORTEO(idSorteo) {
         $("#loadingDiv").modal("show");
         jUtils.executing("loadingDiv");
@@ -106,22 +86,54 @@ const CalendarioService = {
         });
     },
 
-    ACTUALIZAR_FECHA_SORTEO(idSorteo, fecha) {
+    CREAR_SORTEO(data) {
         $("#loadingDiv").modal("show");
         jUtils.executing("loadingDiv");
         $.ajax({
-            url: Action.ACTUALIZAR_FECHA_SORTEO,
+            url: Action.CREAR_SORTEO,
             type: "post",
             dataType: "html",
-            data: {"id": idSorteo, "fecha": fecha},
+            data: data,
             error: function (hr) {
-                console.log("AJAX RESULT ACTUALIZAR_FECHA_SORTEO ERROR %o", hr.responseText);
+                console.log("AJAX RESULT CREAR_SORTEO ERROR %o", hr.responseText);
+                jUtils.showing("resultado", hr);
+                $("#loadingDiv").modal("hide");
+                $("#config_concesionaria_modal").modal("hide");
+            },
+            success: function (html) {
+                $("#loadingDiv").modal("hide");
+                jUtils.showing("resultado", html);
+                const value = jUtils.dataToJson(data);
+                const cell = $(`#cell_day-${value["cell_day"]}`);
+                $(cell).removeClass("empty_cell");
+                $(cell).addClass("sorteo_cell");
+                const form = $(cell).find("form");
+                console.log("HTML %o", html);
+                const json = JSON.parse(html);
+                console.log("HTML ID %o", json);
+                const htmlToInsert = `<input type="hidden" name="cell_id" value="${json.id}"/>`;
+                $(form).append(htmlToInsert);
+                $("#config_concesionaria_modal").modal("hide");
+            }
+        });
+    },
+    
+    ACTUALIZAR_SORTEO(data) {
+        $("#loadingDiv").modal("show");
+        jUtils.executing("loadingDiv");
+        $.ajax({
+            url: Action.ACTUALIZAR_SORTEO,
+            type: "post",
+            dataType: "html",
+            data: data,
+            error: function (hr) {
+                console.log("AJAX RESULT ACTUALIZAR_SORTEO ERROR %o", hr.responseText);
                 jUtils.showing("resultado", hr);
                 $("#loadingDiv").modal("hide");
             },
             success: function (html) {
                 $("#loadingDiv").modal("hide");
-                console.log("AJAX RESULT ACTUALIZAR_FECHA_SORTEO SUCCESS %o", html);
+                console.log("AJAX RESULT ACTUALIZAR_SORTEO SUCCESS %o", html);
                 jUtils.showing("resultado", html);
             }
         });

@@ -13,6 +13,7 @@
 <html>
     <%@include file="../commons/head.jsp" %>
     <link type="text/css" rel="stylesheet" href="/web_portal/util/StyleSheet.do/load=simple-sidebar" />
+    <link type="text/css" rel="stylesheet" href="/web_portal/util/StyleSheet.do/load=admin" />
     <body>
 
         <div class="d-flex" id="wrapper">
@@ -50,15 +51,17 @@
 
                 <div id="page_content_administrador_div" class="container-fluid">
 
-                    <div id="content_admin_page_div">
-                        <table id="table_admin_result" class="table table-hover">
-                        </table>
-                    </div>
                     <div id="calendario">
                         <link type="text/css" rel="stylesheet" href="/web_portal/util/StyleSheet.do/load=calendar" />
                         <div id="calendar_main_div"></div>
                     </div>
+                    <div id="content_admin_page_div">
+                        <div id="table_admin_result_title"></div>
+                        <table id="table_admin_result" class="table table-hover">
+                        </table>
+                    </div>
 
+                    <%@include file="../commons/resultado.jsp"%>
 
                     <!-- Modal -->
                     <link type="text/css" rel="stylesheet" href="/web_portal/util/StyleSheet.do/load=modal" />

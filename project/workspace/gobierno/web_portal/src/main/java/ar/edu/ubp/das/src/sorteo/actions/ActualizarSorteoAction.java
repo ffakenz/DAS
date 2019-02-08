@@ -7,7 +7,6 @@ import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.mvc.config.ForwardConfig;
 import ar.edu.ubp.das.mvc.config.ModuleConfigImpl;
 import ar.edu.ubp.das.mvc.util.Pair;
-import ar.edu.ubp.das.src.core.ResponseForward;
 import ar.edu.ubp.das.src.jobs.sorteo.SorteoJobManager;
 import ar.edu.ubp.das.src.jobs.sorteo.daos.MSSorteoDao;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.SorteoForm;
@@ -36,20 +35,20 @@ public class ActualizarSorteoAction implements Action {
                 msSorteoDao.update(form.convertTo(SorteoForm.class));
                 log.info("ActualizarSorteoAction [SUCCEEDED] [REASON - {}]", estado.fst);
                 request.setAttribute(Constants.RESULT_RQST_ATTRIBUTE, "estado");
-                return mapping.getForwardByName(ResponseForward.SUCCESS.getForward());
+                return jsonResult("{\"result\": \"OK\"}");
             } else if (fechaEjecucion.snd && id.snd) {
                 msSorteoDao.actualizarFechaSorteo(form.convertTo(SorteoForm.class));
                 log.info("ActualizarSorteoAction [SUCCEEDED] [REASON - {}]", fechaEjecucion.fst);
                 request.setAttribute(Constants.RESULT_RQST_ATTRIBUTE, "fecha");
-                return mapping.getForwardByName(ResponseForward.SUCCESS.getForward());
+                return jsonResult("{\"result\": \"OK\"}");
             } else {
                 log.info("ActualizarSorteoAction [FAILED] [REASON - {}]", "form is invalid");
-                return mapping.getForwardByName(ResponseForward.WARNING.getForward());
+                return jsonResult("{\"result\": \"WARNING\"}");
             }
         } catch (final SQLException e) {
             e.printStackTrace();
             log.info("ActualizarSorteoAction [FAILED] [REASON - {}]", e.getMessage());
-            return mapping.getForwardByName(ResponseForward.FAILURE.getForward());
+            return jsonResult("{\"result\": \"FAILURE\"}");
         }
     }
 }
