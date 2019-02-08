@@ -8,22 +8,19 @@
     <div class="carousel-item active">
         <img class="d-block w-100 h-50" src="/web_portal/img/carousel/carousel_1.jpg" alt="First slide">
         <div class="carousel-caption d-none d-md-block">
-            <h5>slide 1 title</h5>
-            <p>paragraph 1 loremipsum</p>
+            <h5>RENAULT KWID</h5>
         </div>
     </div>
     <div class="carousel-item">
         <img class="d-block w-100 h-50" src="/web_portal/img/carousel/carousel_2.jpg" alt="Second slide">
         <div class="carousel-caption d-none d-md-block">
-            <h5>slide 2 title</h5>
-            <p>paragraph 2 loremipsum</p>
+            <h5>VOLKSWAGEN GOL TREND</h5>
         </div>
     </div>
     <div class="carousel-item">
-        <img class="d-block w-100 h-50" src="/web_portal/img/carousel/carousel_3.jpeg" alt="Third slide">
+        <img class="d-block w-100 h-50" src="/web_portal/img/carousel/carousel_3.jpg" alt="Third slide">
         <div class="carousel-caption d-none d-md-block">
-            <h5>slide 3 title</h5>
-            <p>paragraph 3 loremipsum</p>
+            <h5>FIAT PALIO NOVO</h5>
         </div>
     </div>
   </div>

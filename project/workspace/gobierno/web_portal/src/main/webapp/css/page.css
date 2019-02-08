@@ -72,7 +72,7 @@ body {
 }
 
 img.d-block.w-100.h-50 {
-    height: 500px !important;
+    height: 800px !important;
 }
 
 #footer_div {
@@ -130,4 +130,9 @@ img.d-block.w-100.h-50 {
   padding: 3em 0;
   width: 100%;
   max-width: none;
+}
+
+.nuestros_partners_div img {
+  height: 230px !important;
+  width: 230px !important;
 }
