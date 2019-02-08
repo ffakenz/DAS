@@ -22,10 +22,10 @@ class Admin extends Module {
         console.log("showSorteos, [EVENT] = %o", evt);
         setTimeout(function(){
                 CalendarioService.GET_SORTEOS();
-        }, 100);
-        setTimeout(function(){
-            CalendarioService.GET_CALENDARIO({"year": '2019', "month": '3'});
         }, 200);
+        setTimeout(function(){
+            CalendarioService.GET_CALENDARIO({"year": '2019', "month": '02'});
+        }, 400);
     }
 
     showPlanes(evt) {

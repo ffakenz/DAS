@@ -59,6 +59,7 @@
                         <div id="calendar_main_div"></div>
                     </div>
 
+                    <%@include file="../commons/resultado.jsp"%>
 
                     <!-- Modal -->
                     <link type="text/css" rel="stylesheet" href="/web_portal/util/StyleSheet.do/load=modal" />

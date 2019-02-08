@@ -14,4 +14,5 @@ CREATE TABLE sorteos (
 	, fecha_creacion                    DATE    DEFAULT GETDATE()
 	, PRIMARY KEY(id)
 	, FOREIGN KEY(estado) REFERENCES estado_sorteo(nombre)
+	, UNIQUE(fecha_ejecucion)
 );

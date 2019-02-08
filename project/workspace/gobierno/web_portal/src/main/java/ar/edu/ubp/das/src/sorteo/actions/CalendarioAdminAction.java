@@ -42,5 +42,4 @@ public class CalendarioAdminAction implements Action {
             return mapping.getForwardByName(ResponseForward.FAILURE.getForward());
         }
     }
-
 }

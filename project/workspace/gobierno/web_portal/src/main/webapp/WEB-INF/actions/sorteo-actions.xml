@@ -7,9 +7,10 @@
         <action type="ConsultarSorteosAction" path="/ConsultarSorteos.do">
             <forward name="success" path="/profiles/admin/tableSorteos.jsp"/>
         </action>
-        <action type="CrearSorteoAction" path="/CrearSorteo.do"></action>
+        <action type="CrearSorteoAction" path="/CrearSorteo.do" json="true"></action>
+        <action type="ActualizarSorteoAction" path="/ActualizarSorteo.do" json="true"></action>
+
         <action type="EjecutarSorteoAction" path="/EjecutarSorteo.do"></action>
-        <action type="ActualizarSorteoAction" path="/ActualizarSorteo.do"></action>
 
         <action type="CalendarioAdminAction" path="/CalendarioAdmin.do">
             <forward name="success" path="/profiles/admin/calendar.jsp"/>

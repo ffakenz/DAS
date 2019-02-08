@@ -64,27 +64,6 @@ const CalendarioService = {
         });
     },
 
-    CREAR_SORTEO(fechaEjecucion) {
-        $("#loadingDiv").modal("show");
-        jUtils.executing("loadingDiv");
-        $.ajax({
-            url: Action.CREAR_SORTEO,
-            type: "post",
-            dataType: "html",
-            data: "fecha_ejecucion=" + fechaEjecucion,
-            error: function (hr) {
-                console.log("AJAX RESULT CREAR_SORTEO ERROR %o", hr.responseText);
-                jUtils.showing("resultado", hr);
-                $("#loadingDiv").modal("hide");
-            },
-            success: function (html) {
-                $("#loadingDiv").modal("hide");
-                console.log("AJAX RESULT CREAR_SORTEO SUCCESS %o", html);
-                jUtils.showing("resultado", html);
-            }
-        });
-    },
-
     EJECUTAR_SORTEO(idSorteo) {
         $("#loadingDiv").modal("show");
         jUtils.executing("loadingDiv");
@@ -106,22 +85,43 @@ const CalendarioService = {
         });
     },
 
-    ACTUALIZAR_FECHA_SORTEO(idSorteo, fecha) {
+    CREAR_SORTEO(data) {
         $("#loadingDiv").modal("show");
         jUtils.executing("loadingDiv");
         $.ajax({
-            url: Action.ACTUALIZAR_FECHA_SORTEO,
+            url: Action.CREAR_SORTEO,
             type: "post",
             dataType: "html",
-            data: {"id": idSorteo, "fecha": fecha},
+            data: data,
             error: function (hr) {
-                console.log("AJAX RESULT ACTUALIZAR_FECHA_SORTEO ERROR %o", hr.responseText);
+                console.log("AJAX RESULT CREAR_SORTEO ERROR %o", hr.responseText);
                 jUtils.showing("resultado", hr);
                 $("#loadingDiv").modal("hide");
             },
             success: function (html) {
                 $("#loadingDiv").modal("hide");
-                console.log("AJAX RESULT ACTUALIZAR_FECHA_SORTEO SUCCESS %o", html);
+                console.log("AJAX RESULT CREAR_SORTEO SUCCESS %o", html);
+                jUtils.showing("resultado", html);
+            }
+        });
+    },
+    
+    ACTUALIZAR_SORTEO(data) {
+        $("#loadingDiv").modal("show");
+        jUtils.executing("loadingDiv");
+        $.ajax({
+            url: Action.ACTUALIZAR_SORTEO,
+            type: "post",
+            dataType: "html",
+            data: data,
+            error: function (hr) {
+                console.log("AJAX RESULT ACTUALIZAR_SORTEO ERROR %o", hr.responseText);
+                jUtils.showing("resultado", hr);
+                $("#loadingDiv").modal("hide");
+            },
+            success: function (html) {
+                $("#loadingDiv").modal("hide");
+                console.log("AJAX RESULT ACTUALIZAR_SORTEO SUCCESS %o", html);
                 jUtils.showing("resultado", html);
             }
         });
