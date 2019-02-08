@@ -21,22 +21,17 @@ public class SendEmail {
                     return new PasswordAuthentication(username, password);
                 }});
 
-    public static void to(String emailRecipient, String subject, String body) throws MessagingException {
+    public void to(String emailRecipient, String subject, String body) throws MessagingException {
 
-        if (System.getenv("SCOPE").equals("development")) {
-            try{
-                submitEmail(emailRecipient, subject, body);
-            } catch (MessagingException mex) {
-                log.error("[exception:{}]", mex.getMessage());
-                throw mex;
-            }
-        } else if (System.getenv("FAIL_EMAIL") != null) {
-            // this is for testing
-            throw new MessagingException("send email failed");
+        try{
+            submitEmail(emailRecipient, subject, body);
+        } catch (MessagingException mex) {
+            log.error("[exception:{}]", mex.getMessage());
+            throw mex;
         }
     }
 
-    private static void submitEmail(String emailRecipient, String subject, String body) throws MessagingException {
+    private void submitEmail(String emailRecipient, String subject, String body) throws MessagingException {
         // Create a default MimeMessage object.
         MimeMessage message = new MimeMessage(session);
 
@@ -76,5 +71,21 @@ public class SendEmail {
         props.put("mail.transport.protocol", "smtp");
 
         return props;
+    }
+}
+
+class SendEmailStubFail extends SendEmail {
+
+    @Override
+    public void to(String emailRecipient, String subject, String body) throws MessagingException {
+        throw new MessagingException("test email fail");
+    }
+}
+
+class SendEmailStubSuccess extends SendEmail {
+
+    @Override
+    public void to(String emailRecipient, String subject, String body) throws MessagingException {
+        System.out.println("ENVIO EMAIL SUCCESS");
     }
 }

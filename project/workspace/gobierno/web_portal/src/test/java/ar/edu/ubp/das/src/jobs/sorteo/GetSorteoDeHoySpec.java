@@ -42,7 +42,7 @@ public class GetSorteoDeHoySpec {
         sorteoJobManager = new SorteoJobManager(dataSourceConfig);
         msSorteoDao = new MSSorteoDao();
         msSorteoDao.setDatasource(dataSourceConfig);
-        sorteoJob = new SorteoJob(dataSourceConfig, iClientFactory);
+        sorteoJob = new SorteoJob(dataSourceConfig, iClientFactory, new SendEmailStubSuccess());
     }
 
     @Test

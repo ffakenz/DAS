@@ -53,7 +53,7 @@ public class SorteoJobSpec {
     @Test
     public void test_01() throws SQLException {
         // without sorteo , base case
-        sorteoJob = new SorteoJob(datasourceConfig, new ClientFactoryStub(null));
+        sorteoJob = new SorteoJob(datasourceConfig, new ClientFactoryStub(null), new SendEmailStubSuccess());
         sorteoJob.execute(null);
 
         assertEquals(0, sorteoJobManager.getMsSorteoDao().select().size());
@@ -64,7 +64,7 @@ public class SorteoJobSpec {
         // with sorteo nuevo , but not concesionarias approved
         sorteoJobScenarios.setSorteoNuevoParaHoy();
 
-        sorteoJob = new SorteoJob(datasourceConfig, new ClientFactoryStub(null));
+        sorteoJob = new SorteoJob(datasourceConfig, new ClientFactoryStub(null), new SendEmailStubSuccess());
         sorteoJob.execute(null);
 
         assertEquals(1, sorteoJobManager.getMsSorteoDao().select().size());
@@ -85,7 +85,7 @@ public class SorteoJobSpec {
             put(REST, "plan_bean_rest.json");
         }};
 
-        sorteoJob = new SorteoJob(datasourceConfig, new ClientFactoryStub(concesionariasXnotificationFileName));
+        sorteoJob = new SorteoJob(datasourceConfig, new ClientFactoryStub(concesionariasXnotificationFileName), new SendEmailStubSuccess());
         sorteoJob.execute(null);
 
         // seteamos valores de cuotas para los que sabemos que no tenemos estados de cuenta que cumplan
@@ -108,7 +108,7 @@ public class SorteoJobSpec {
         ConcesionariaForm concesionariaForm = consumoJobScenarios.setConcesionaria(REST, true);
         sorteoJobScenarios.setEstadoCuentaForConcesionaria(123L, concesionariaForm);
 
-        sorteoJob = new SorteoJob(datasourceConfig, ClientFactory.getInstance());
+        sorteoJob = new SorteoJob(datasourceConfig, ClientFactory.getInstance(), new SendEmailStubSuccess());
         sorteoJob.execute(null);
 
         assertEquals(1, sorteoJobManager.getMsSorteoDao().select().size());
@@ -132,7 +132,7 @@ public class SorteoJobSpec {
             put(REST, "plan_bean_rest.json");
         }};
 
-        sorteoJob = new SorteoJob(datasourceConfig, new ClientFactoryStub(concesionariasXnotificationFileName));
+        sorteoJob = new SorteoJob(datasourceConfig, new ClientFactoryStub(concesionariasXnotificationFileName), new SendEmailStubSuccess());
         sorteoJob.execute(null);
 
         assertEquals(1, sorteoJobManager.getMsSorteoDao().select().size());
@@ -143,7 +143,7 @@ public class SorteoJobSpec {
 
     @Test
     public void test_06() throws SQLException {
-        // sorteo nuevo para hoy, con concesionarias aprobadas, todas success
+        // sorteo nuevo para hoy, con concesionarias aprobadas, todas success, sin participantes
         sorteoJobScenarios.setSorteoNuevoParaHoy();
         // aprobamos una concesionaria rest
         ConcesionariaForm concesionariaFormRest = consumoJobScenarios.setConcesionaria(REST, true);
@@ -157,7 +157,7 @@ public class SorteoJobSpec {
             put(CXF, "plan_bean_cxf.json");
         }};
 
-        sorteoJob = new SorteoJob(datasourceConfig, new ClientFactoryStub(concesionariasXnotificationFileName));
+        sorteoJob = new SorteoJob(datasourceConfig, new ClientFactoryStub(concesionariasXnotificationFileName), new SendEmailStubSuccess());
         sorteoJob.execute(null);
 
         assertEquals(1, sorteoJobManager.getMsSorteoDao().select().size());

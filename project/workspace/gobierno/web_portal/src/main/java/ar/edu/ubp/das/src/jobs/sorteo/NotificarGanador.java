@@ -14,9 +14,11 @@ import static ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo.PENDIENTE_NOTIFI
 
 class NotificarGanador extends SorteoStep {
 
+    SendEmail sendEmail;
 
-    public NotificarGanador(DatasourceConfig datasourceConfig, ClientFactoryAdapter clientFactoryAdapter) {
+    public NotificarGanador(DatasourceConfig datasourceConfig, ClientFactoryAdapter clientFactoryAdapter, SendEmail sendEmail) {
         super(datasourceConfig, clientFactoryAdapter);
+        this.sendEmail = sendEmail;
     }
 
     @Override
@@ -28,7 +30,8 @@ class NotificarGanador extends SorteoStep {
 
             if(ganadorBySorteo.isPresent()) {
                 ConsumerForm consumerForm = sorteoJobManager.getMsConsumerDao().selectById(ganadorBySorteo.get().getIdConsumer()).get();
-                SendEmail.to(consumerForm.getEmail(), "Felicitaciones sos el ganador !!!", getContentEmailGanador());
+
+                sendEmail.to(consumerForm.getEmail(), "Felicitaciones sos el ganador !!!", getContentEmailGanador());
             }
 
         } catch (SQLException | MessagingException  e) {

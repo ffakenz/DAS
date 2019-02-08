@@ -1,6 +1,7 @@
 CREATE PROCEDURE get_participantes (
     @cuotas_min INT,
-    @cuotas_max INT
+    @cuotas_max INT,
+    @fecha_creacion_sorteo DATE
 ) AS
 WITH potenciales_participantes AS (
          SELECT
@@ -9,8 +10,18 @@ WITH potenciales_participantes AS (
              ec.vehiculo AS id_vehiculo,
              cs.id AS id_consumer,
              cs.email AS email,
-             SUM(CASE WHEN cu.fecha_pago IS NOT NULL THEN 1 ELSE 0 END) AS total_cuotas_pagas,
-             COUNT(cs.id) as cantidad_cuotas_emitidas
+             SUM(CASE WHEN
+                    cu.fecha_pago IS NOT NULL
+                    AND cu.fecha_pago <= @fecha_creacion_sorteo
+                THEN 1
+                ELSE 0
+             END) AS total_cuotas_pagas,
+             SUM(CASE WHEN
+                    cu.fecha_alta_concesionaria IS NOT NULL
+                    AND cu.fecha_alta_concesionaria <= @fecha_creacion_sorteo
+                THEN 1
+                ELSE 0
+             END) as cantidad_cuotas_emitidas
          FROM
              concesionaria c
              INNER JOIN estado_cuentas ec

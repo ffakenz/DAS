@@ -10,12 +10,11 @@ import ar.edu.ubp.das.mvc.util.Pair;
 import ar.edu.ubp.das.src.core.ResponseForward;
 import ar.edu.ubp.das.src.jobs.sorteo.SorteoJobManager;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.SorteoForm;
+import ar.edu.ubp.das.src.utils.DateUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.time.Instant;
 
 // TODO: check if this action should validate if sorteo can be created
 public class CrearSorteoAction implements Action {
@@ -30,7 +29,7 @@ public class CrearSorteoAction implements Action {
             final Pair<String, Boolean> fechaEjecucion = form.isItemValid("fecha_ejecucion");
             final SorteoForm sorteoForm = form.convertTo(SorteoForm.class);
             if (!fechaEjecucion.snd) {
-                sorteoForm.setFechaEjecucion(Timestamp.from(Instant.now()));
+                sorteoForm.setFechaEjecucion(DateUtils.getDayDate());
             }
             sorteoJobManager.getMsSorteoDao().insert(sorteoForm);
             log.info("CrearSorteoAction [SUCCEDED][Sorteo {}]", sorteoForm);

@@ -13,9 +13,9 @@ import ar.edu.ubp.das.src.estado_cuentas.forms.EstadoCuentasForm;
 import ar.edu.ubp.das.src.estado_cuentas.managers.CuotasManager;
 import ar.edu.ubp.das.src.estado_cuentas.managers.EstadoCuentasManager;
 import ar.edu.ubp.das.src.jobs.ClientFactoryAdapter;
-import ar.edu.ubp.das.src.jobs.consumo.forms.EstadoConsumo;
 import ar.edu.ubp.das.src.jobs.consumo_absoluto.daos.MSConsumoAbsolutoDao;
 import ar.edu.ubp.das.src.jobs.consumo_absoluto.forms.ConsumoAbsolutoForm;
+import ar.edu.ubp.das.src.jobs.sorteo.forms.SorteoForm;
 import ar.edu.ubp.das.src.utils.Constants;
 import beans.CuotaBean;
 import beans.PlanBean;
@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static ar.edu.ubp.das.src.jobs.consumo.forms.EstadoConsumo.FAILURE;
 import static ar.edu.ubp.das.src.jobs.consumo.forms.EstadoConsumo.SUCCESS;
 
 // TODO: refactor name "ConsumoAbsoluto" to "ConsumoSorteo" <3
@@ -75,25 +76,29 @@ public class ConsumoAbsoluto {
 
 
     // TODO : Change Return Time to DTO Response
-    public boolean ejecutar(final Long sorteoId) {
+    public boolean ejecutar(final SorteoForm sorteoForm) {
 
         final ConsumoAbsolutoForm consumoAbsolutoForm = new ConsumoAbsolutoForm();
         consumoAbsolutoForm.setFecha(Timestamp.from(Instant.now()));
-        consumoAbsolutoForm.setIdSorteo(sorteoId);
-        final List<ConcesionariaForm> aprobadas = this.getAllConcesionariasAprobadasDesactualizadas(consumoAbsolutoForm);
+        consumoAbsolutoForm.setIdSorteo(sorteoForm.getId());
+
+        final List<ConcesionariaForm> aprobadas = getAprobadas(consumoAbsolutoForm);
+
         for (final ConcesionariaForm aprobada : aprobadas) {
             final Optional<ConcesionariaServiceContract> client = this.getClient(consumoAbsolutoForm, aprobada.getId());
             client.ifPresent(cli -> {
                 final List<EstadoCuentasForm> estadoCuentasForms = this.getAllEstadoCuentasByConcesionaria(consumoAbsolutoForm, aprobada.getId());
                 for (final EstadoCuentasForm estadoCuentasForm : estadoCuentasForms) {
-                    final String rqstId = UUID.randomUUID().toString();
-                    final Optional<PlanBean> planBean = this.consultarPlan(cli, consumoAbsolutoForm, estadoCuentasForm, rqstId);
+                    if(estadoCuentasForm.getFechaUltimaActualizacion().before(sorteoForm.getFechaCreacion())) {
 
-                    planBean.ifPresent(pb -> {
-                        // insert(planBean, consumo absoluto plan aprobada id);
-                        this.updateDb(consumoAbsolutoForm, estadoCuentasForm, rqstId, pb);
-                    });
+                        final String rqstId = UUID.randomUUID().toString();
+                        final Optional<PlanBean> planBean = this.consultarPlan(cli, consumoAbsolutoForm, estadoCuentasForm, rqstId);
 
+                        planBean.ifPresent(pb -> {
+                            // insert(planBean, consumo absoluto plan aprobada id);
+                            this.updateDb(consumoAbsolutoForm, estadoCuentasForm, rqstId, pb);
+                        });
+                    }
                 }
 
                 if (!estadoCuentasForms.isEmpty() && msConsumoAbsolutoDao.areAllConsumedSuccess(consumoAbsolutoForm)) {
@@ -118,24 +123,25 @@ public class ConsumoAbsoluto {
         return consumoAbsolutoForm.getEstadoConsumo().equals(SUCCESS);
     }
 
-    private List<ConcesionariaForm> getAllConcesionariasAprobadasDesactualizadas(final ConsumoAbsolutoForm consumoAbsolutoForm) {
+    private List<ConcesionariaForm> getAprobadas(ConsumoAbsolutoForm consumoAbsolutoForm) {
+        List<ConcesionariaForm> aprobadas = new ArrayList<>();
         try {
-            return concesionariasManager.getDao().selectAprobadasDesactualizadas(-5); // Magic Number [Franco:I love you Mariela]
-        } catch (final SQLException e) {
+            aprobadas = concesionariasManager.getDao().selectAprobadas();
+        } catch (SQLException e) {
             e.printStackTrace();
             log.error("[ConsumoAbsoluto.ejecutar][FAILED getAllConcesionariasAprobadasDesactualizadas]");
-            consumoAbsolutoForm.setEstado("FAILED");
+            consumoAbsolutoForm.setEstado(FAILURE);
             consumoAbsolutoForm.setCause("getAllConcesionariasAprobadasDesactualizadas");
             logConsumoAbsolutoForm(consumoAbsolutoForm);
-            return new ArrayList<>();
         }
+        return aprobadas;
     }
 
     private Optional<ConcesionariaServiceContract> getClient(final ConsumoAbsolutoForm consumoAbsolutoForm, final Long concesionariaId) {
         final Optional<ConcesionariaServiceContract> clientForConcesionaria = clientFactoryAdapter.getClientForConcesionaria(concesionariaId, configurarConcesionariaManager);
         if (!clientForConcesionaria.isPresent()) {
             log.error("[ConsumoAbsoluto.ejecutar][FAILED getClientForConcesionaria][ConcesionariaId {}]", concesionariaId);
-            consumoAbsolutoForm.setEstado("FAILED");
+            consumoAbsolutoForm.setEstado(FAILURE);
             consumoAbsolutoForm.setCause("getClientForConcesionaria");
             consumoAbsolutoForm.setConcesionariaId(concesionariaId);
             logConsumoAbsolutoForm(consumoAbsolutoForm);
@@ -150,7 +156,7 @@ public class ConsumoAbsoluto {
         } catch (final SQLException e) {
             e.printStackTrace();
             log.error("[EJECUTAR][FAILED selectEstadoCuentasByConcesionariaId][ConcesionariaId {}]", concesionariaId);
-            consumoAbsolutoForm.setEstado("FAILED");
+            consumoAbsolutoForm.setEstado(FAILURE);
             consumoAbsolutoForm.setCause("selectEstadoCuentasByConcesionariaId");
             consumoAbsolutoForm.setConcesionariaId(concesionariaId);
             logConsumoAbsolutoForm(consumoAbsolutoForm);
@@ -170,7 +176,7 @@ public class ConsumoAbsoluto {
             e.printStackTrace();
             log.error("[EJECUTAR][FAILED consultarPlan][ConcesionariaId {}][PlanId {}]",
                     estadoCuentasForm.getConcesionariaId(), estadoCuentasForm.getNroPlanConcesionaria());
-            consumoAbsolutoForm.setEstado(EstadoConsumo.FAILURE);
+            consumoAbsolutoForm.setEstado(FAILURE);
             consumoAbsolutoForm.setCause("Fail consultarPlan with estado_cuenta_id = " + estadoCuentasForm.getId());
             consumoAbsolutoForm.setConcesionariaId(estadoCuentasForm.getConcesionariaId());
             consumoAbsolutoForm.setEstadoCuentaId(estadoCuentasForm.getId());

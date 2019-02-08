@@ -21,6 +21,7 @@ import ar.edu.ubp.das.src.utils.DateUtils;
 import util.Mocks;
 
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 public class SorteoJobScenarios {
 
@@ -78,6 +79,11 @@ public class SorteoJobScenarios {
 
         EstadoCuentasForm estadoCuentasForm = Mocks.INSTANCE.getEstadoCuentaForm(concesionariaForm, documento);
         estadoCuentaDao.insert(estadoCuentasForm);
+
+        estadoCuentasForm = estadoCuentaDao.selectByNroPlanAndConcesionaria(estadoCuentasForm).get();
+
+        estadoCuentasForm.setFechaUltimaActualizacion(new Timestamp(DateUtils.getDateFromDays(-1).getTime()));
+        estadoCuentaDao.updateFechaActualizacion(estadoCuentasForm);
 
         return estadoCuentasForm;
     }

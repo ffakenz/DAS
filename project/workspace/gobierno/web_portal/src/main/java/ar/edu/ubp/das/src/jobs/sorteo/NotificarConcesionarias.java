@@ -18,9 +18,11 @@ import static ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo.PENDIENTE_NOTIFI
 class NotificarConcesionarias extends SorteoStep {
 
     private List<Long> concesionariasQueEnviaEmail;
+    private SendEmail sendEmail;
 
-    public NotificarConcesionarias(DatasourceConfig datasourceConfig, ClientFactoryAdapter clientFactoryAdapter) {
+    public NotificarConcesionarias(DatasourceConfig datasourceConfig, ClientFactoryAdapter clientFactoryAdapter, SendEmail sendEmail) {
         super(datasourceConfig, clientFactoryAdapter);
+        this.sendEmail = sendEmail;
     }
 
     @Override
@@ -34,7 +36,7 @@ class NotificarConcesionarias extends SorteoStep {
             // todo: agregar concesionarias_pendiente_notificacion en db para solo procesar esas
             for (final ConcesionariaForm aprobada : aprobadas) {
                 try {
-                    SendEmail.to(aprobada.getEmail(), "Hay un nuevo ganador !!", getEmailContent(ganador));
+                    sendEmail.to(aprobada.getEmail(), "Hay un nuevo ganador !!", getEmailContent(ganador));
                 } catch (SQLException | MessagingException e ) {
                     log.error("[exception:{}]", e.getMessage());
                     pendientesNotification.add(aprobada);

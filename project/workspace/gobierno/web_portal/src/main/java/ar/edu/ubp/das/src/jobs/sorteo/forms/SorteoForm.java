@@ -4,7 +4,7 @@ import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.annotations.Column;
 import ar.edu.ubp.das.mvc.db.annotations.Entity;
 
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 public class SorteoForm extends DynaActionForm {

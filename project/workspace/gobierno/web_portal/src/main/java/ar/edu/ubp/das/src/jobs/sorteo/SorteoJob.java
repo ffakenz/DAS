@@ -32,11 +32,13 @@ public class SorteoJob implements Job {
     private final DatasourceConfig datasourceConfig;
     private final ClientFactoryAdapter clientFactoryAdapter;
     private final SorteoJobManager sorteoJobManager;
+    private final SendEmail sendEmail;
 
-    public SorteoJob(DatasourceConfig datasourceConfig, final IClientFactory iClientFactory) {
+    public SorteoJob(DatasourceConfig datasourceConfig, final IClientFactory iClientFactory, SendEmail sendEmail) {
         this.datasourceConfig = datasourceConfig;
         this.clientFactoryAdapter = new ClientFactoryAdapter(iClientFactory);
-        sorteoJobManager = new SorteoJobManager(datasourceConfig);
+        this.sorteoJobManager = new SorteoJobManager(datasourceConfig);
+        this.sendEmail = sendEmail;
     }
 
     @Override
@@ -47,8 +49,8 @@ public class SorteoJob implements Job {
         final SorteoStep result = new RunConsumoAbsoluto(datasourceConfig, clientFactoryAdapter)
                 .then(new GetGanador(datasourceConfig, clientFactoryAdapter))
                 .then(new CancelarCuenta(datasourceConfig, clientFactoryAdapter))
-                .then(new NotificarGanador(datasourceConfig, clientFactoryAdapter))
-                .then(new NotificarConcesionarias(datasourceConfig, clientFactoryAdapter));
+                .then(new NotificarGanador(datasourceConfig, clientFactoryAdapter, sendEmail))
+                .then(new NotificarConcesionarias(datasourceConfig, clientFactoryAdapter, sendEmail));
 
         sorteoDeHoy.ifPresent(sorteoForm -> {
 

@@ -28,6 +28,11 @@ public class MSEstadoCuentasDao extends DaoImpl<EstadoCuentasForm> {
                 "concesionariaId", "nroPlanConcesionaria", "estado");
     }
 
+    public void updateFechaActualizacion(final EstadoCuentasForm bean) throws SQLException {
+        this.executeProcedure("dbo.update_estado_cuentas_fecha_actualizacion(?, ?)", bean,
+                "id", "fechaUltimaActualizacion");
+    }
+
     public void updateEstado(final EstadoCuentasForm bean) throws SQLException {
         this.executeProcedure("dbo.update_estado_cuentas_estado(?, ?, ?)", bean,
                 "id", "estado");

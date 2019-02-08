@@ -5,6 +5,7 @@ import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
 import ar.edu.ubp.das.src.jobs.consumo.Desnormalizer;
 import ar.edu.ubp.das.src.jobs.sorteo.daos.MSParticipanteDao;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.ParticipanteForm;
+import ar.edu.ubp.das.src.utils.DateUtils;
 import beans.CuotaBean;
 import beans.NotificationUpdate;
 import beans.PlanBean;
@@ -53,7 +54,7 @@ public class GetParticipantesSpec implements ISorteoSpec {
         buildPlanScenario(concesionariaForm1.getId(), 1L, 4, 1, 2, 3, 4);
         buildPlanScenario(concesionariaForm1.getId(), 2L, 4, 1, 2, 3, 4);
 
-        final List<ParticipanteForm> participantes = this.msParticipanteDao.getParticipantes(1, 6);
+        final List<ParticipanteForm> participantes = this.msParticipanteDao.getParticipantes(1, 6, DateUtils.getDateFromDays(300));
         assertEquals(2, participantes.size());
     }
 
@@ -70,7 +71,7 @@ public class GetParticipantesSpec implements ISorteoSpec {
         buildPlanScenario(concesionariaForm1.getId(), 3L, 3, 1);
         buildPlanScenario(concesionariaForm1.getId(), 4L, 5, 1, 2, 3, 4, 5);
 
-        final List<ParticipanteForm> participantes = this.msParticipanteDao.getParticipantes(2, 4);
+        final List<ParticipanteForm> participantes = this.msParticipanteDao.getParticipantes(2, 4, DateUtils.getDateFromDays(300));
         assertEquals(2, participantes.size());
     }
 
@@ -88,8 +89,8 @@ public class GetParticipantesSpec implements ISorteoSpec {
         // 1 estado cuenta (al dia pero con cuotas fuera de rango)
         buildPlanScenario(concesionariaForm1.getId(), 4L, 5, 1, 2, 3, 4, 5);
 
-        final List<ParticipanteForm> participantes = this.msParticipanteDao.getParticipantes(2, 4);
-        assertEquals(1, participantes.size());
+        final List<ParticipanteForm> participantes = this.msParticipanteDao.getParticipantes(2, 4, DateUtils.getDateFromDays(100));
+        assertEquals(3, participantes.size());
     }
 
     private void buildPlanScenario(final Long concesionariaId, final Long planId, final Integer cantCuotas, final Integer... cuotasPagas) throws SQLException {

@@ -18,12 +18,11 @@ class RunConsumoAbsoluto extends SorteoStep {
 
         final ConsumoAbsoluto consumoAbsoluto = new ConsumoAbsoluto(datasourceConfig, clientFactoryAdapter);
 
-        if (!consumoAbsoluto.ejecutar(sorteoForm.getId())) {
+        if (!consumoAbsoluto.ejecutar(sorteoForm)) {
             logSorteoFormDb(sorteoForm, PENDIENTE_CONSUMO, "Consumo Absoluto Fail");
             throw new StepRunnerException(name);
         }
 
-        name =
         return sorteoForm;
     }
 }
