@@ -9,4 +9,6 @@ screen -S cxf_two -X quit
 echo "Stopping Rest Client"
 screen -S rest_one -X quit
 echo "Stopping Containers"
+screen -S rest_two -X quit
+echo "Stopping Containers"
 ./db/src/main/resources/startup/stop.sh

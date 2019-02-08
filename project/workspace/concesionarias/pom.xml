@@ -119,6 +119,33 @@
             </properties>
         </profile>
         <profile>
+            <id>rest_two</id>
+            <activation>
+                <property>
+                    <name>env</name>
+                    <value>rest_two</value>
+                </property>
+            </activation>
+            <properties>
+                <!-- SERVER -->
+                <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
+                <webResources.resource.directory>/src/main/resources</webResources.resource.directory>
+                <webResources.resource.targetPath>WEB-INF/wsdl</webResources.resource.targetPath>
+                <includePattern>*.wsdl</includePattern>
+
+                <tomcat.server>myTomcat</tomcat.server>
+                <tomcat.url>http://localhost:8083/manager/text</tomcat.url>
+                <tomcat.path>/${project.build.finalName}</tomcat.path>
+                <tomcat.port>8003</tomcat.port>
+                <!-- DB -->
+                <driverDB>com.microsoft.sqlserver.jdbc.SQLServerDriver</driverDB>
+                <urlDB>jdbc:sqlserver://localhost:1437;databaseName=db_concesionarias;</urlDB>
+                <usernameDB>SA</usernameDB>
+                <passwordDB>Das12345</passwordDB>
+                <contextDB>concesionaria_rest_two</contextDB>
+            </properties>
+        </profile>
+        <profile>
             <id>cxf_two</id>
             <activation>
                 <property>
