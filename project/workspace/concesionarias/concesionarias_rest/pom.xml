@@ -14,6 +14,7 @@
 
     <modules>
         <module>concesionaria_rest_one</module>
+        <module>concesionaria_rest_two</module>
     </modules>
 
     <!-- Dependency properties -->

@@ -20,6 +20,7 @@ echo "Setting up general DB"
 dbstart "axis_one" # 1434
 dbstart "rest_one" # 1435
 dbstart "cxf_one"  # 1436
+dbstart "rest_two"  # 1437
 echo "Installing Core"
 # ./concesionarias_core/install_core.sh
 mvn -f ./concesionarias_core/ clean install
@@ -32,6 +33,9 @@ screen -dmS cxf_one mvn -f ./concesionarias_cxf/concesionaria_cxf_one clean comp
 echo "Running Rest Client"
 # screen -dmS rest_one ./concesionarias_rest/concesionaria_rest_one/start_up_rest.sh
 screen -dmS rest_one mvn -f ./concesionarias_rest/concesionaria_rest_one clean compile -Denv="rest_one" tomcat7:run
+echo "Running Rest Client"
+# screen -dmS rest_two ./concesionarias_rest/concesionaria_rest_two/start_up_rest.sh
+screen -dmS rest_two mvn -f ./concesionarias_rest/concesionaria_rest_two clean compile -Denv="rest_two" tomcat7:run
 
 
 # check available containers using: docker -ps
