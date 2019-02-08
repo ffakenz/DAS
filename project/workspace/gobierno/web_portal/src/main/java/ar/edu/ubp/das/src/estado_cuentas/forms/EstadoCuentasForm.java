@@ -106,14 +106,14 @@ public class EstadoCuentasForm extends DynaActionForm {
         this.estado = estado;
     }
 
-    public static EstadoCuentasForm fromPlanBean(final PlanBean planBean, Long concesionariaId) {
+    public static EstadoCuentasForm fromPlanBean(final PlanBean planBean, final Long concesionariaId) {
         final EstadoCuentasForm estadoCuentasForm = new EstadoCuentasForm();
 
         estadoCuentasForm.setConcesionariaId(concesionariaId);
         estadoCuentasForm.setDocumentoCliente(planBean.getClienteDocumento());
         estadoCuentasForm.setNroPlanConcesionaria(planBean.getPlanId());
         estadoCuentasForm.setVehiculo(planBean.getVehiculoId());
-        estadoCuentasForm.setEstado(planBean.getPlanEstado());
+        estadoCuentasForm.setEstado(planBean.getPlanEstado()); // !!!
         estadoCuentasForm.setFechaAltaConcesionaria(planBean.getPlanFechaAlta());
 
         return estadoCuentasForm;

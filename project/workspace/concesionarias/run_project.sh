@@ -9,10 +9,11 @@ function dbstart () {
 chmod +x ./give_permissions.sh
 echo "Giving Persmissions"
 ./give_permissions.sh
-echo "Runnin Containers"
-./db/src/main/resources/startup/run_docker.sh
-echo "Awaiting"
-sleep 15
+# echo "Runnin Containers"
+# ./db/src/main/resources/startup/run_docker.sh
+# docker-compose up -d ./db/src/main/resources/startup/build/docker-compose.yml
+# decho "Awaiting"
+# sleep 15
 echo "Installing DBs"
 ./db/src/main/resources/startup/db_install.sh
 echo "Setting up general DB"

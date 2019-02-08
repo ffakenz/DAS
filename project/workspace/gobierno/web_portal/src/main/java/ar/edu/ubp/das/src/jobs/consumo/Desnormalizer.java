@@ -91,7 +91,7 @@ public class Desnormalizer {
         estadoCuenta.setDocumentoCliente(update.getClienteDocumento());
         estadoCuenta.setVehiculo(update.getVehiculoId());
         estadoCuenta.setFechaAltaConcesionaria(update.getPlanFechaAlta());
-        estadoCuenta.setEstado(update.getPlanEstado());
+        estadoCuenta.setEstado(update.getPlanEstado()); // !!!
         return estadoCuentasManager.getDao().upsert(estadoCuenta);
     }
 
