@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration name="dev-log-config" strict="true" status="warn">
+
+    <Appenders>
+        <Appender type="Console" name="stdout">
+            <Layout type="PatternLayout" pattern="%notEmpty{[timestamp:%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ}]}%notEmpty{[log_level:%p]}%notEmpty{[class_name:%c{1}]}%m%n"/>
+        </Appender>
+
+        <Appender type="Async" name="async" blocking="false" bufferSize="1000">
+            <AppenderRef ref="stdout"/>
+        </Appender>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="ar.edu.ubp.das" level="debug" additivity="false">
+            <AppenderRef ref="async"/>
+        </Logger>
+        <Root level="error">
+            <AppenderRef ref="async"/>
+        </Root>
+    </Loggers>
+
+</Configuration>

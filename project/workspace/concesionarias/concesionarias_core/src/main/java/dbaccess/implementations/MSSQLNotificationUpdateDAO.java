@@ -13,7 +13,13 @@ public class MSSQLNotificationUpdateDAO implements NotificationUpdateDAO {
     @Override
     public Function<Connection, List<NotificationUpdate>> consultarPlanes(final String identificador, final Timestamp offset) {
 
+        System.out.println("IDENTIFICADOR: " + identificador);
+        System.out.println("OFFSET: " + offset);
+
+
         final String consultarPlanesQuery = "{ CALL dbo.consultar_updates(?, ?) };";
+
+
 
         return (Connection c) -> {
             try (final CallableStatement cs = c.prepareCall(consultarPlanesQuery, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY)) {

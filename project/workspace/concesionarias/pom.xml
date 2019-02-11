@@ -34,6 +34,9 @@
         <liquibase.version>3.6.1</liquibase.version>
         <maven-war-plugin.version>2.6</maven-war-plugin.version>
         <tomcat7-maven-plugin.version>2.2</tomcat7-maven-plugin.version>
+
+        <slf4j.api.version>1.7.25</slf4j.api.version>
+        <log4j.slf4j.impl.version>2.11.0</log4j.slf4j.impl.version>
     </properties>
 
     <profiles>
@@ -187,6 +190,17 @@
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-maven-plugin</artifactId>
             <version>${liquibase.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${log4j.slf4j.impl.version}</version>
         </dependency>
     </dependencies>
 

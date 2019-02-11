@@ -9,9 +9,38 @@
     <!--  DROP PROCEDURES CHANGE-SETS  -->
     <!-- ***************************** -->
 
+    <changeSet id="Drop procedure cleanDB" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'cleanDB'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="cleanDB"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure setUpEmptyDB" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'setUpEmptyDB'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="setUpEmptyDB"/>
+    </changeSet>
+
     <!-- ******************************* -->
     <!--  DROPS CONSUMO   ABSOLUTO       -->
     <!-- ******************************* -->
+
 
     <changeSet id="Drop procedure log_consumo_absoluto" author="DAS-Team" runAlways="true"
                runOnChange="true">
@@ -517,6 +546,38 @@
     <!-- ******************************* -->
     <!--  CREATE PROCEDURES CHANGE-SETS  -->
     <!-- ******************************* -->
+
+
+    <changeSet id="Create procedure cleanDB" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'cleanDB'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/cleanDB.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure setUpEmptyDB" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'setUpEmptyDB'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/setUpEmptyDB.sql"/>
+    </changeSet>
+
 
     <!-- ******************************* -->
     <!--  CREATE CONSUMO ABSOLUTO        -->

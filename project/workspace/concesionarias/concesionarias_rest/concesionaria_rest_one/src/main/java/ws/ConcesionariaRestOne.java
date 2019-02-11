@@ -7,16 +7,22 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import contract.ConcesionariaServiceContract;
 import contract.implementors.MSSQLConsecionaria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
 
 @Path("/concesionariaRestOne")
 public class ConcesionariaRestOne extends MSSQLConsecionaria implements ConcesionariaServiceContract  {
+
+
+    protected static final Logger log = LoggerFactory.getLogger(ConcesionariaRestOne.class);
 
     private Gson gson = new GsonBuilder()
             .setDateFormat("yyyy-MM-dd hh:mm:ss.SSS")
@@ -27,8 +33,14 @@ public class ConcesionariaRestOne extends MSSQLConsecionaria implements Concesio
     @Produces(MediaType.APPLICATION_JSON)
     @Override
     public String consultarPlanes(@QueryParam("identificador") final String identificador, @QueryParam("offset") final String offset) {
-        System.out.println("Rest consultar planes offset -> " + offset + " - identificador -> " + identificador);
-        final Timestamp newOffset = Timestamp.valueOf(offset.replace('T', ' '));
+
+        log.debug("OFFSET {}" , offset);
+
+        final Long longNanos = Long.valueOf(offset);
+        final Instant instant = Instant.ofEpochMilli(longNanos);
+        final Timestamp newOffset = Timestamp.from(instant);
+
+        log.debug("Rest consultar planes offset -> {} - identificador -> {}", newOffset.toString(), identificador);
         final List<NotificationUpdate> planes =
                 abstractFactory.withConnection(notificationUpdateDAO.consultarPlanes(identificador, newOffset));
         return gson.toJson(planes);
@@ -39,7 +51,7 @@ public class ConcesionariaRestOne extends MSSQLConsecionaria implements Concesio
     @Produces(MediaType.APPLICATION_JSON)
     @Override
     public String consultarPlan(@QueryParam("identificador") final String identificador, @QueryParam("planId") final Long planId) {
-        System.out.println("Rest consultar plan id -> " + planId + " - identificador -> " + identificador);
+        log.debug("Rest consultar plan id -> {} - identificador -> {}", planId, identificador);
         final List<NotificationUpdate> notificationUpdates =
                 abstractFactory.withConnection(notificationUpdateDAO.consultarPlan(identificador, planId));
 
@@ -59,7 +71,7 @@ public class ConcesionariaRestOne extends MSSQLConsecionaria implements Concesio
     @Path("/cancelarPlan")
     @Override
     public void cancelarPlan(@QueryParam("identificador") final String identificador, @QueryParam("planId") final Long planId) {
-        System.out.println("Rest cancelar plan id -> " + planId + " - identificador -> " + identificador);
+        log.debug("Rest cancelar plan id -> " + planId + " - identificador -> " + identificador);
         abstractFactory.withConnection(notificationUpdateDAO.cancelarPlan(identificador, planId));
     }
 
@@ -69,7 +81,7 @@ public class ConcesionariaRestOne extends MSSQLConsecionaria implements Concesio
     @Override
     public String health(@QueryParam("identificador") final String identificador) {
 
-        System.out.println("Rest health identificador -> " + identificador);
+        log.debug("Rest health identificador -> {}", identificador);
 
         return "OK";
     }

@@ -15,7 +15,7 @@ public class ClientSerializer {
 
         // use api 2
         final List<NotificationUpdate> planes =
-                mssqlFactory.withConnection(notificationUpdate.consultarPlan("GOBIERNO-INCENTIVO-2018",1L)::apply);
+                mssqlFactory.withConnection(notificationUpdate.consultarPlan("GOB",1L)::apply);
 
         // serializer Example
         // String serializedPlan = new Gson().toJson(plan);

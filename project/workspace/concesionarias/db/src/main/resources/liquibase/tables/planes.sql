@@ -4,8 +4,8 @@ CREATE TABLE planes (
 	, vehiculo                      BIGINT          NOT NULL
 	, tipo_de_plan                  VARCHAR(100)    NOT NULL    DEFAULT 'NORMAL'
 	, estado                        VARCHAR(100)    NOT NULL
-	, fecha_alta                    DATETIME        NOT NULL    DEFAULT GETDATE() -- informado por la consecionaria
-	, fecha_ultima_actualizacion    DATETIME        NOT NULL    DEFAULT GETDATE() -- informado por la consecionaria
+	, fecha_alta                    DATETIME        NOT NULL -- informado por la consecionaria
+	, fecha_ultima_actualizacion    DATETIME        NOT NULL -- informado por la consecionaria
 	, PRIMARY KEY(id)
 	, FOREIGN KEY(vehiculo)     REFERENCES vehiculos(id)
 	, FOREIGN KEY(cliente)      REFERENCES clientes(id_cliente)
