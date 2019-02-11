@@ -26,7 +26,7 @@ public final class Constants {
     public static final String ROL_CONSUMER = "consumer";
 
     /************ IDENTIFICADOR ****************************/
-    public static final String IDENTIFICADOR = "GOBIERNO-INCENTIVO-2018";
+    public static final String IDENTIFICADOR = "GOB";
 
     /************ PARAMS SERVLETS ****************************/
     public static final String USER_TYPE = "userType";
@@ -57,6 +57,6 @@ public final class Constants {
     public static final String CONFIG_BTN = "config_btn";
 
     /************ SORTEO ****************************/
-    public static Integer CUOTAS_MIN = 5;
-    public static Integer CUOTAS_MAX = 10;
+    public static Integer CUOTAS_MIN = 0;
+    public static Integer CUOTAS_MAX = 2;
 }

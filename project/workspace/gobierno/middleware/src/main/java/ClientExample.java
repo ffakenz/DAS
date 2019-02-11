@@ -11,7 +11,7 @@ import java.util.List;
 public class ClientExample {
 
     static void consumeService(final ConcesionariaServiceContract client) throws ClientException {
-        final String identificador = "GOBIERNO-INCENTIVO-2018";
+        final String identificador = "GOB";
         final String offset = "2018-01-08T20:58:00";
 
         System.out.println("consultarPlanes");

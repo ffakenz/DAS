@@ -12,12 +12,12 @@ import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import utils.JsonUtils;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URI;
-import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -28,6 +28,8 @@ import java.util.stream.Stream;
 import static utils.MiddlewareConstants.*;
 
 public class RestClient implements ConcesionariaServiceContract {
+
+    protected Logger log = LoggerFactory.getLogger(RestClient.class);
 
     private final String url;
     private final HttpClient client;
@@ -122,20 +124,19 @@ public class RestClient implements ConcesionariaServiceContract {
 
     @Override
     public List<NotificationUpdate> consultarPlanes(final String identificador, final String offset) throws ClientException {
-
-
         final String query = getQuery(CONSULTAR_PLANES, IDENTIFICADOR, OFFSET);
         final String url;
-        try {
-            url = URLEncoder.encode(String.format(query, identificador, offset), "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-            throw new ClientException(e.getMessage());
-        }
+        // try {
+        //     url = URLEncoder.encode(String.format(query, identificador, nanosRepr(offset)), "UTF-8");
+        // } catch (UnsupportedEncodingException e) {
+        //     e.printStackTrace();
+        //     throw new ClientException(e.getMessage());
+        // }
+        url = String.format(query, identificador, nanosRepr(offset));
 
         final String jsonPlanBeans = call(GET, url);
-
         final NotificationUpdate[] notificationUpdates = JsonUtils.toObject(jsonPlanBeans, NotificationUpdate[].class);
+        log.info("[GET consultarPlanes][URL {}][jsonPlanBeansResponse = {}][notificationUpdates = {}]", url, jsonPlanBeans, notificationUpdates);
         return Stream.of(notificationUpdates).collect(Collectors.toList());
 
     }
@@ -145,27 +146,31 @@ public class RestClient implements ConcesionariaServiceContract {
 
         final String urlUnformatted = getQuery(CONSULTAR_PLAN, IDENTIFICADOR, PLANID);
         final String url;
-        try {
-            url = URLEncoder.encode(urlUnformatted, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-            throw new ClientException(e.getMessage());
-        }
+        // try {
+        //     url = URLEncoder.encode(urlUnformatted, "UTF-8");
+        // } catch (UnsupportedEncodingException e) {
+        //     e.printStackTrace();
+        //     throw new ClientException(e.getMessage());
+        // }
 
+        url = urlUnformatted;
         final String jsonPlanBean = call(GET, url);
-
+        log.info("[GET consultarPlan][URL {}][jsonPlanBean = {}]", url, jsonPlanBean);
         return JsonUtils.toObject(jsonPlanBean, PlanBean.class);
     }
 
     @Override
     public void cancelarPlan(final String identificador, final Long planId) throws ClientException {
-        final String url = getQuery(CANCELAR_PLAN, IDENTIFICADOR, PLANID);
+        final String query = getQuery(CANCELAR_PLAN, IDENTIFICADOR, PLANID);
+        final String url = String.format(query, identificador, planId);
         fireAndForget(PUT, url);
+        log.info("[PUT cancelarPlan][URL {}]", url);
     }
 
     @Override
     public String health(final String identificador) throws ClientException {
         final String url = getQuery(HEALTH, IDENTIFICADOR);
+        log.info("[GET health][URL {}]", url);
         return call(GET, String.format(url, identificador));
     }
 }

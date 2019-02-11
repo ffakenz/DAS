@@ -9,8 +9,8 @@ function stop_docker() {
 }
 
 echo "Stopping containers"
-stop_docker 1434 # "axis_one"
-#stop_docker 1435 # "rest_one"
+#stop_docker 1434 # "axis_one"
+stop_docker 1435 # "rest_one"
 #stop_docker 1436 # "cxf_one"
 #stop_docker 1437 # "rest_two"
 #stop_docker 1438 # "cxf_two"

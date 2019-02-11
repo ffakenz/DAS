@@ -26,18 +26,18 @@ const AdminService = {
         $("#loadingDiv").modal("show");
         jUtils.executing("loadingDiv");
         $.ajax({
-            url: Action.CONSUMO_TEST,
+            url: Action.EJECUTAR_SORTEO,
             type: "get",
             dataType: "html",
             onLine: function () {},
             error: function (hr) {
-                console.log("AJAX RESULT GET_TEST_CONSUMO ERROR %o", hr.responseText);
+                console.log("AJAX RESULT GET_TEST_SORTEO ERROR %o", hr.responseText);
                 jUtils.showing("table_admin_result", hr);
                 $("#loadingDiv").modal("hide");
             },
             success: function (html) {
                 $("#loadingDiv").modal("hide");
-                console.log("AJAX RESULT GET_TEST_CONSUMO SUCCESS %o", html);
+                console.log("AJAX RESULT GET_TEST_SORTEO SUCCESS %o", html);
                 jUtils.showing("table_admin_result", html);
             }
         });

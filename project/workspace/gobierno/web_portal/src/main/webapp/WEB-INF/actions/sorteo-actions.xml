@@ -10,7 +10,8 @@
         <action type="CrearSorteoAction" path="/CrearSorteo.do" json="true"></action>
         <action type="ActualizarSorteoAction" path="/ActualizarSorteo.do" json="true"></action>
 
-        <action type="EjecutarSorteoAction" path="/EjecutarSorteo.do"></action>
+        <action type="EjecutarSorteoAction" path="/EjecutarSorteo.do">
+        </action>
 
         <action type="CalendarioAdminAction" path="/CalendarioAdmin.do">
             <forward name="success" path="/profiles/admin/calendar.jsp"/>

@@ -4,7 +4,7 @@ CREATE PROCEDURE update_estado_participante (
     , @id_concesionaria BIGINT
     , @id_consumer BIGINT
     , @id_vehiculo BIGINT
-    , @estado BIGINT
+    , @estado VARCHAR(100)
 ) AS
 UPDATE participantes
 SET estado = @estado

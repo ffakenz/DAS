@@ -5,6 +5,8 @@ import beans.PlanBean;
 import clients.responses.ClientException;
 import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.jaxws.endpoint.dynamic.JaxWsDynamicClientFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import utils.JsonUtils;
 
 import java.util.List;
@@ -18,6 +20,7 @@ import static utils.MiddlewareConstants.*;
 public class CXFClient implements ConcesionariaServiceContract {
 
     private final String wsdlUrl;
+    protected Logger log = LoggerFactory.getLogger(CXFClient.class);
 
     public CXFClient(final String wsdlUrl) {
         this.wsdlUrl = wsdlUrl; // "http://localhost:8000/concesionarias_cxf_one_war/services/concesionaria_cxf_one_service?wsdl"
@@ -51,9 +54,10 @@ public class CXFClient implements ConcesionariaServiceContract {
     @Override
     public List<NotificationUpdate> consultarPlanes(final String identificador, final String offset) throws ClientException {
 
-        final Object object = executeMethod(CONSULTAR_PLANES, identificador, offset);
+        final Object object = executeMethod(CONSULTAR_PLANES, identificador, nanosRepr(offset));
         final String jsonPlanBeans = object.toString();
         final NotificationUpdate[] notificationUpdates = JsonUtils.toObject(jsonPlanBeans, NotificationUpdate[].class);
+        log.info("[GET consultarPlanes][object {}][jsonPlanBeans = {}][notificationUpdates = {}]", object, jsonPlanBeans, notificationUpdates);
         return Stream.of(notificationUpdates).collect(Collectors.toList());
     }
 
@@ -61,18 +65,21 @@ public class CXFClient implements ConcesionariaServiceContract {
     public PlanBean consultarPlan(final String identificador, final Long planId) throws ClientException {
         final Object object = executeMethod(CONSULTAR_PLAN, identificador, planId);
         final String jsonPlanBean = object.toString();
+        log.info("[GET consultarPlan][object {}][jsonPlanBean = {}]", object, jsonPlanBean);
         return JsonUtils.toObject(jsonPlanBean, PlanBean.class);
     }
 
     @Override
     public void cancelarPlan(final String identificador, final Long planId) throws ClientException {
         executeMethod(CANCELAR_PLAN, identificador, planId);
+        log.info("[POST cancelarPlan][planId {}]", planId);
     }
 
     @Override
     public String health(final String identificador) throws ClientException {
         final Object object = executeMethod(HEALTH, identificador);
         final String jsonPlanBean = object.toString();
+        log.info("[GET health][jsonPlanBean {}]", jsonPlanBean);
         return jsonPlanBean;
     }
 }
