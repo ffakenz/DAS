@@ -25,64 +25,67 @@ public final class ModuleConfigImpl {
 	private Map<String, DatasourceConfig> datasources;
 	
 	private ModuleConfigImpl() {
-		this.datasources = new HashMap<String, DatasourceConfig>();
+		this.datasources = new HashMap<>();
 	}
 
-	public static void load(ClassLoader classLoader) throws RuntimeException {
+	public static void load(final ClassLoader classLoader) throws RuntimeException {
 		if(ModuleConfigImpl.instance == null) {
 			ModuleConfigImpl.instance = new ModuleConfigImpl();
 			ModuleConfigImpl.instance.loadDatasources(classLoader);
 		}
 	}
 	
-	private void loadDatasources(ClassLoader classLoader) throws RuntimeException {
-		try {
-			String schemaFileName = "./schema/datasources.xsd";
-			InputStream schemaInputStream = classLoader.getResourceAsStream(schemaFileName);
+	public static DatasourceConfig getDatasourceById(final String id) {
+		return ModuleConfigImpl.instance.getDatasource(id);
+	}
 
-			String      filename = "datasources.xml";
-			InputStream input    = classLoader.getResourceAsStream(filename);
+	public static DatasourceConfig getDefaultDatasource() {
+	    return getDatasourceById("default");
+    }
+
+	private void loadDatasources(final ClassLoader classLoader) throws RuntimeException {
+		try {
+			final String schemaFileName = "./schema/datasources.xsd";
+			final InputStream schemaInputStream = classLoader.getResourceAsStream(schemaFileName);
+
+			final String      filename = "datasources.xml";
+			final InputStream input    = classLoader.getResourceAsStream(filename);
 			if(input == null) {
 				throw new RuntimeException("El archivo " + filename + " no existe");
 			}
 
 
 
-			SchemaFactory          schema   = SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema");	        
-	        DocumentBuilderFactory factory  = DocumentBuilderFactory.newInstance();
+			final SchemaFactory          schema   = SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema");
+	        final DocumentBuilderFactory factory  = DocumentBuilderFactory.newInstance();
 	                               factory.setValidating(false);
 	                               factory.setNamespaceAware(true);
 	                               factory.setSchema(schema.newSchema(new Source[] {new StreamSource(schemaInputStream)}));
-	        DocumentBuilder        builder  = factory.newDocumentBuilder();        
-			XPath                  xPath    =  XPathFactory.newInstance().newXPath();
-			Document               document = builder.parse(input);
-			
-			NodeList datasources = NodeList.class.cast(xPath.compile("/datasources/datasource").evaluate(document, XPathConstants.NODESET));
+	        final DocumentBuilder        builder  = factory.newDocumentBuilder();
+			final XPath                  xPath    =  XPathFactory.newInstance().newXPath();
+			final Document               document = builder.parse(input);
+
+			final NodeList datasources = NodeList.class.cast(xPath.compile("/datasources/datasource").evaluate(document, XPathConstants.NODESET));
 			for (int i = 0, len = datasources.getLength(); i < len; i++) {
-			    DatasourceConfig datasourceConfig = new DatasourceConfig();
+			    final DatasourceConfig datasourceConfig = new DatasourceConfig();
 			                     datasourceConfig.setId(String.valueOf(xPath.compile("@id").evaluate(datasources.item(i), XPathConstants.STRING)));
 			                     datasourceConfig.setDriver(String.valueOf(xPath.compile("@driver").evaluate(datasources.item(i), XPathConstants.STRING)));
 			                     datasourceConfig.setUrl(String.valueOf(xPath.compile("@url").evaluate(datasources.item(i), XPathConstants.STRING)));
 			                     datasourceConfig.setUsername(String.valueOf(xPath.compile("@username").evaluate(datasources.item(i), XPathConstants.STRING)));
 			                     datasourceConfig.setPassword(String.valueOf(xPath.compile("@password").evaluate(datasources.item(i), XPathConstants.STRING)));
-                this.datasources.put(datasourceConfig.getId(), datasourceConfig);		
+                this.datasources.put(datasourceConfig.getId(), datasourceConfig);
 			}
-		} 
-		catch (ParserConfigurationException | SAXException | IOException | XPathExpressionException | IllegalArgumentException ex) {
-		    throw new RuntimeException(ex); 
-		}	
+		}
+		catch (final ParserConfigurationException | SAXException | IOException | XPathExpressionException | IllegalArgumentException ex) {
+		    throw new RuntimeException(ex);
+		}
 	}
 
-
-	private DatasourceConfig getDatasource(String id) {
+	private DatasourceConfig getDatasource(final String id) {
 		if(this.datasources.containsKey(id)) {
 			return this.datasources.get(id);
 		}
 		return null;
-	}
-
-	public static DatasourceConfig getDatasourceById(String id) {
-		return ModuleConfigImpl.instance.getDatasource(id);
 	}
 
 }

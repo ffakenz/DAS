@@ -13,28 +13,23 @@ public class MSConcesionariasNotificadasDao extends DaoImpl<ConcesionariasNotifi
     }
 
 
-    @Override
-    public void insert(ConcesionariasNotificadasForm form) throws SQLException {
+    public void insert(final ConcesionariasNotificadasForm form) throws SQLException {
         this.executeProcedure("dbo.log_concesionarias_notificadas(?,?)", form, "idSorteo", "idConcesionaria");
     }
 
-    @Override
-    public void update(ConcesionariasNotificadasForm form) throws SQLException {
+    public void update(final ConcesionariasNotificadasForm form) throws SQLException {
 
     }
 
-    @Override
-    public void delete(ConcesionariasNotificadasForm form) throws SQLException {
+    public void delete(final ConcesionariasNotificadasForm form) throws SQLException {
 
     }
 
-    @Override
-    public List<ConcesionariasNotificadasForm> select(ConcesionariasNotificadasForm form) throws SQLException {
+    public List<ConcesionariasNotificadasForm> select(final ConcesionariasNotificadasForm form) throws SQLException {
         return this.executeQueryProcedure("dbo.get_concesionarias_notificadas(?)", form, "idSorteo");
     }
 
-    @Override
-    public boolean valid(ConcesionariasNotificadasForm form) throws SQLException {
+    public boolean valid(final ConcesionariasNotificadasForm form) throws SQLException {
         return false;
     }
 }

@@ -16,7 +16,7 @@
                 SELECT COUNT(*)
                 FROM information_schema.routines
                 WHERE ROUTINE_TYPE = 'PROCEDURE'
-                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND SPECIFIC_CATALOG = 'db_concesionarias'
                 AND ROUTINE_NAME = 'cancelar_plan'
             </sqlCheck>
         </preConditions>
@@ -30,7 +30,7 @@
                 SELECT COUNT(*)
                 FROM information_schema.routines
                 WHERE ROUTINE_TYPE = 'PROCEDURE'
-                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND SPECIFIC_CATALOG = 'db_concesionarias'
                 AND ROUTINE_NAME = 'consultar_updates'
             </sqlCheck>
         </preConditions>

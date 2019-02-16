@@ -44,27 +44,22 @@ public class TestDB extends DaoImpl<Boolean> {
         return dataSourceConfig;
     }
 
-    @Override
     public void insert(final Boolean form) throws SQLException {
 
     }
 
-    @Override
     public void update(final Boolean form) throws SQLException {
 
     }
 
-    @Override
     public void delete(final Boolean form) throws SQLException {
 
     }
 
-    @Override
     public List<Boolean> select(final Boolean form) throws SQLException {
         return null;
     }
 
-    @Override
     public boolean valid(final Boolean form) throws SQLException {
         return false;
     }

@@ -193,7 +193,7 @@ public class ConsumoJobDesNormalizationSpec {
                 1L,
                 2L,
                 Timestamp.valueOf("2018-03-03 23:58:02"),
-                "inicial");
+                "en_proceso");
 
         // verify it does not exists in db
         final EstadoCuentasForm form = new EstadoCuentasForm();

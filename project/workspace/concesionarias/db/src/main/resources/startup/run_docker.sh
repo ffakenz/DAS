@@ -14,16 +14,16 @@ function db_install() {
 }
 
 echo "Running Docker containers"
-#run_docker 1434 # axis_one
-run_docker 1435 # rest_one
+run_docker 1434 # axis_one
+#run_docker 1435 # rest_one
 #run_docker 1436 # cxf_one
 #run_docker 1437 # rest_two
 #run_docker 1438 # cxf_two
-echo "Awaiting"
-sleep 15
+#echo "Awaiting"
+#sleep 15
 #echo "Installing DBs"
 #db_install 1434
-db_install 1435
+#db_install 1435
 #db_install 1436
 #db_install 1437
 #db_install 1438

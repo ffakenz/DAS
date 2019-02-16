@@ -74,8 +74,7 @@ BEGIN
         --, (666, 'Pamela', 'Anderson', '35156345677', 'pamelaanderson@mail.com')
 
     INSERT INTO tipos_estado_cuentas (tipo)
-        VALUES ('inicial')
-                , ('en_proceso')
+        VALUES ('en_proceso')
                 , ('pagado')
                 , ('cancelado')
 

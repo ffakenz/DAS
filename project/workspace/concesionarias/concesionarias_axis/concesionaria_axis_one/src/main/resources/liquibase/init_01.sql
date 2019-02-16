@@ -1,3 +1,20 @@
+INSERT INTO clientes(documento, nombre, apellido, nro_telefono, email)
+VALUES
+    (35014971, 'Andres', 'Petroni', '3513095123', 'franco.testagrossa@gmail.com') -- 1
+    , (6421702, 'Florencia', 'Guzman', '3515218392', 'franco.testagrossa@gmail.com') -- 2
+    , (29320947, 'Daniela', 'Monguzi', '3536029182', 'franco.testagrossa@gmail.com') -- 3
+    , (38921722, 'Lucas', 'Albertoti', '3514238821', 'franco.testagrossa@gmail.com') -- 4
+;
+
+INSERT INTO planes(cliente, vehiculo, tipo_de_plan, estado, fecha_alta)
+VALUES
+    (1, 1, 'GOB', 'en_proceso', '2018-01-08 20:58:00') -- 1
+    , (1, 2, 'GOB', 'en_proceso', '2018-02-08 20:58:00') -- 2
+    , (2, 2, 'GOB', 'en_proceso', '2018-03-08 20:58:00') -- 3
+    , (3, 2, 'GOB', 'en_proceso', '2018-04-08 20:58:00') -- 4
+    , (4, 3, 'GOB', 'en_proceso', '2018-04-08 20:58:00') -- 5
+;
+
 INSERT INTO cuotas(id_plan, nro_cuota, fecha_vencimiento, monto, fecha_pago, fecha_alta)
 VALUES (1, 1, '2018-02-08 23:59:59', 100, '2018-01-18 20:58:00', '2018-01-08 20:58:00')
        , (1, 2, '2018-03-08 23:59:59', 100, '2018-02-18 20:58:00', '2018-02-09 00:00:00')
