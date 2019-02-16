@@ -34,3 +34,4 @@ services:
 # docker-compose ps
 # docker-compose run $service
 # docker-compose stop
+# docker-compose stop cxf_one rest_one cxf_two rest_two

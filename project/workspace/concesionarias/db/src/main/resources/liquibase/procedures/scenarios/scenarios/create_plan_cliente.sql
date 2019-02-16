@@ -30,7 +30,7 @@ BEGIN
         UPDATE dbo.cuotas
         SET fecha_pago = (
             SELECT TOP 1 new_date
-            FROM dbo.date_in_range(
+            FROM dbo.date_in_range (
                 cuotas.fecha_alta,
                 cuotas.fecha_vencimiento
             )

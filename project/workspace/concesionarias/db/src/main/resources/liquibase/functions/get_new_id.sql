@@ -1,5 +1,9 @@
-CREATE OR ALTER FUNCTION get_new_id()
-returns uniqueidentifier
+DROP FUNCTION IF EXISTS get_new_id
+GO
+
+CREATE FUNCTION get_new_id()
+RETURNS UNIQUEIDENTIFIER
 AS BEGIN
-   return (SELECT new_id FROM getNewID) -- expects the view to be already created
+   RETURN (SELECT new_id FROM getNewID)
 END
+GO

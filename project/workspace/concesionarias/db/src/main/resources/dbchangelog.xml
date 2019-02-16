@@ -27,11 +27,6 @@
     <include file="/src/main/resources/liquibase/functions/functions.xml"/>
 
     <!-- ########################################### -->
-    <!-- Main triggers change-sets                   -->
-    <!-- ########################################### -->
-    <!--<include file="/src/main/resources/liquibase/triggers/triggers.xml"/>-->
-
-    <!-- ########################################### -->
     <!-- Main procedures change-sets                 -->
     <!-- ########################################### -->
     <include file="/src/main/resources/liquibase/procedures/create_procedures.xml"/>
@@ -41,11 +36,6 @@
     <!-- Main populate change-sets                   -->
     <!-- ########################################### -->
     <include file="/src/main/resources/liquibase/populates/populate_tables.xml"/>
-
-    <!-- ########################################### -->
-    <!-- Test procedures change-sets                 -->
-    <!-- ########################################### -->
-    <!--<include file="/src/main/resources/liquibase/test/test_procedures.xml"/>-->
 
     <!-- ########################################### -->
     <!-- Main triggers change-sets                   -->
