@@ -8,10 +8,10 @@ function db_install() {
 
 echo "Installing DBs"
 db_install 'axis_one'
-#db_install 'cxf_one'
-#db_install 'rest_one'
-#db_install 'rest_two'
-#db_install 'cxf_two'
+db_install 'cxf_one'
+db_install 'rest_one'
+db_install 'rest_two'
+db_install 'cxf_two'
 
 
 # db_install 'mssql_concesionarias_1434'

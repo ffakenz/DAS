@@ -153,8 +153,6 @@ public class ConsumoJobDesNormalizationSpec {
     @Test
     public void test_11_ConsumerJob_UpdateConsumer_failure_insert() throws Exception {
 
-        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, ClientFactory.getInstance());
-
         final Long doc = 1L;
 
         setUpConsumer(existingConsumer,

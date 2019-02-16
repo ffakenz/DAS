@@ -1,8 +1,6 @@
 package utils;
 
 import beans.NotificationUpdate;
-import dbaccess.config.DatasourceConfig;
-import dbaccess.config.ModuleConfigImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import utils.customer_types.CustomerWithDelay;
@@ -20,10 +18,8 @@ import java.util.Random;
 public class ScenarioRunner {
     private static final Logger log = LoggerFactory.getLogger(ScenarioRunner.class);
 
-    public void run() {
-        ModuleConfigImpl.load(ScenarioRunner.class.getClassLoader());
-        final DatasourceConfig config = ModuleConfigImpl.getDefaultDatasource();
-        final ScenarioBuilder builder = ScenarioBuilder.getInstance(config);
+    public void run(final ScenarioBuilder builder) {
+
         final int cantClientes = 10;
         try {
             for (int i = 0; i < cantClientes; i ++) {

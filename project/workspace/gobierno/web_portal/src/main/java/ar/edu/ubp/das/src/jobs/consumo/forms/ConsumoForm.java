@@ -3,6 +3,7 @@ package ar.edu.ubp.das.src.jobs.consumo.forms;
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.annotations.Column;
 import ar.edu.ubp.das.mvc.db.annotations.Entity;
+import utils.JsonUtils;
 
 import java.sql.Timestamp;
 
@@ -15,27 +16,16 @@ public class ConsumoForm extends DynaActionForm {
     private Long idConcesionaria;
     @Column(name = "id_job_consumo")
     private Long idJobConsumo;
-    @Column(name = "offset")
-    private Timestamp offset;
+    @Column(name = "from")
+    private Timestamp from;
+    @Column(name = "to")
+    private Timestamp to;
     @Column(name = "estado")
     private String estado;
     @Column(name = "description")
     private String description;
     @Column(name = "id_request_resp")
     private String idRequestResp;
-
-    @Override
-    public String toString() {
-        return "ConsumoForm{" +
-                "id=" + id +
-                ", idConcesionaria=" + idConcesionaria +
-                ", idJobConsumo=" + idJobConsumo +
-                ", offset=" + offset +
-                ", estado='" + estado + '\'' +
-                ", description='" + description + '\'' +
-                ", idRequestResp='" + idRequestResp + '\'' +
-                '}';
-    }
 
     public Long getId() {
         return id;
@@ -61,12 +51,20 @@ public class ConsumoForm extends DynaActionForm {
         this.idJobConsumo = idJobConsumo;
     }
 
-    public Timestamp getOffset() {
-        return offset;
+    public Timestamp getFrom() {
+        return from;
     }
 
-    public void setOffset(final Timestamp offset) {
-        this.offset = offset;
+    public void setFrom(final Timestamp from) {
+        this.from = from;
+    }
+
+    public Timestamp getTo() {
+        return to;
+    }
+
+    public void setTo(final Timestamp to) {
+        this.to = to;
     }
 
     public String getEstado() {
@@ -91,5 +89,10 @@ public class ConsumoForm extends DynaActionForm {
 
     public void setIdRequestResp(final String idRequestResp) {
         this.idRequestResp = idRequestResp;
+    }
+
+    @Override
+    public String toString() {
+        return JsonUtils.toJsonString(this);
     }
 }

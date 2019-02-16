@@ -7,6 +7,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import contract.ConcesionariaServiceContract;
 import contract.implementors.MSSQLConsecionaria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import utils.Utils;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -14,22 +17,28 @@ import java.util.List;
 
 public class ConcesionariaAxisOne extends MSSQLConsecionaria implements ConcesionariaServiceContract {
 
+    protected static final Logger log = LoggerFactory.getLogger(ConcesionariaAxisOne.class);
+
     private Gson gson = new GsonBuilder()
             .setDateFormat("yyyy-MM-dd hh:mm:ss.SSS")
             .create();
 
     @Override
-    public String consultarPlanes(final String identificador, final String offset) {
-        System.out.println("Axis consultar planes offset -> " + offset + " - identificador -> " + identificador);
-        final Timestamp newOffset = Timestamp.valueOf(offset.replace('T', ' '));
+    public String consultarPlanes(final String identificador, final String from, final String to) {
+        log.info("Axis consultar planes from -> " + from + " - to -> " + to + " - identificador -> " + identificador);
+
+        final Timestamp fromParsed = Utils.fromStringToTimestamp(from);
+        final Timestamp toParsed = Utils.fromStringToTimestamp(to);
         final List<NotificationUpdate> planes =
-                abstractFactory.withConnection(notificationUpdateDAO.consultarPlanes(identificador, newOffset));
+                abstractFactory.withConnection(
+                        notificationUpdateDAO.consultarPlanes(identificador, fromParsed, toParsed)
+                );
         return gson.toJson(planes);
     }
 
     @Override
     public String consultarPlan(final String identificador, final Long planId) {
-        System.out.println("Axis consultar plan id -> " + planId + " - identificador -> " + identificador);
+        log.debug("Axis consultar plan id -> " + planId + " - identificador -> " + identificador);
         final List<NotificationUpdate> notificationUpdates =
                 abstractFactory.withConnection(notificationUpdateDAO.consultarPlan(identificador, planId));
 
@@ -47,13 +56,13 @@ public class ConcesionariaAxisOne extends MSSQLConsecionaria implements Concesio
 
     @Override
     public void cancelarPlan(final String identificador, final Long planId) {
-        System.out.println("Axis cancelar plan id -> " + planId + " - identificador -> " + identificador);
+        log.debug("Axis cancelar plan id -> " + planId + " - identificador -> " + identificador);
         abstractFactory.withConnection(notificationUpdateDAO.cancelarPlan(identificador, planId));
     }
 
     @Override
     public String health(final String identificador) {
-        System.out.println("Axis health identificador -> " + identificador);
+        log.debug("Axis health identificador -> " + identificador);
         return "OK";
     }
 }

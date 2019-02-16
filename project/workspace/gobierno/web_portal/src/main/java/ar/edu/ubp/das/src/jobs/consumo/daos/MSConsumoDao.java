@@ -1,6 +1,7 @@
 package ar.edu.ubp.das.src.jobs.consumo.daos;
 
 import ar.edu.ubp.das.mvc.db.DaoImpl;
+import ar.edu.ubp.das.mvc.util.Pair;
 import ar.edu.ubp.das.src.jobs.consumo.forms.ConsumoForm;
 
 import java.sql.ResultSet;
@@ -17,8 +18,8 @@ public class MSConsumoDao extends DaoImpl<ConsumoForm> {
 
     @Override
     public void insert(final ConsumoForm form) throws SQLException {
-        this.executeProcedure("dbo.log_consumo(?, ?, ?, ?, ?, ?)", form,
-                "idConcesionaria", "idJobConsumo", "offset", "estado", "description", "idRequestResp");
+        this.executeProcedure("dbo.log_consumo(?, ?, ?, ?, ?, ?, ?)", form,
+                "idConcesionaria", "idJobConsumo", "from", "to", "estado", "description", "idRequestResp");
     }
 
     @Override
@@ -52,8 +53,8 @@ public class MSConsumoDao extends DaoImpl<ConsumoForm> {
                 .findFirst();
     }
 
-    public Optional<Timestamp> getLastOffsetForConcesionaria(final Long concesionariaId) throws SQLException {
-        return this.getLastConsumo(concesionariaId).map(j -> j.getOffset());
+    public Optional<Pair<Timestamp, Timestamp>> getLastPeriodTimeForConcesionaria(final Long concesionariaId) throws SQLException {
+        return this.getLastConsumo(concesionariaId).map(j -> Pair.of(j.getFrom(), j.getTo()));
     }
 
     public Optional<String> getLastEstadoForConcesionaria(final Long concesionariaId) throws SQLException {

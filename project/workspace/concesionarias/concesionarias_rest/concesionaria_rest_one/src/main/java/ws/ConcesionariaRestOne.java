@@ -9,18 +9,17 @@ import contract.ConcesionariaServiceContract;
 import contract.implementors.MSSQLConsecionaria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import utils.Utils;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
 
 @Path("/concesionariaRestOne")
 public class ConcesionariaRestOne extends MSSQLConsecionaria implements ConcesionariaServiceContract  {
-
 
     protected static final Logger log = LoggerFactory.getLogger(ConcesionariaRestOne.class);
 
@@ -32,17 +31,17 @@ public class ConcesionariaRestOne extends MSSQLConsecionaria implements Concesio
     @Path("/consultarPlanes")
     @Produces(MediaType.APPLICATION_JSON)
     @Override
-    public String consultarPlanes(@QueryParam("identificador") final String identificador, @QueryParam("offset") final String offset) {
+    public String consultarPlanes(@QueryParam("identificador") final String identificador,
+                                  @QueryParam("from") final String from,
+                                  @QueryParam("from") final String to) {
 
-        log.debug("OFFSET {}" , offset);
+        final Timestamp fromParsed = Utils.fromStringToTimestamp(from);
+        final Timestamp toParsed = Utils.fromStringToTimestamp(to);
 
-        final Long longNanos = Long.valueOf(offset);
-        final Instant instant = Instant.ofEpochMilli(longNanos);
-        final Timestamp newOffset = Timestamp.from(instant);
+        log.debug("Rest consultar planes from -> {} - to -> {} - identificador -> {}", fromParsed.toString(), toParsed.toString(), identificador);
 
-        log.debug("Rest consultar planes offset -> {} - identificador -> {}", newOffset.toString(), identificador);
         final List<NotificationUpdate> planes =
-                abstractFactory.withConnection(notificationUpdateDAO.consultarPlanes(identificador, newOffset));
+                abstractFactory.withConnection(notificationUpdateDAO.consultarPlanes(identificador, fromParsed, toParsed));
         return gson.toJson(planes);
     }
 

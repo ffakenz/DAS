@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import utils.JsonUtils;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -94,12 +95,14 @@ public class AxisClient implements ConcesionariaServiceContract {
     }
 
     @Override
-    public List<NotificationUpdate> consultarPlanes(final String identificador, final String offset) throws ClientException {
+    public List<NotificationUpdate> consultarPlanes(final String identificador, final Timestamp from, final Timestamp to) throws ClientException {
         final OMElement method = createMethod(CONSULTAR_PLANES);
         final OMElement param = createParam(IDENTIFICADOR, identificador);
-        final OMElement param2 = createParam(OFFSET, nanosRepr(offset));
+        final OMElement param2 = createParam(FROM, nanosRepr(from.toString()));
+        final OMElement param3 = createParam(TO, nanosRepr(from.toString()));
         method.addChild(param);
         method.addChild(param2);
+        method.addChild(param3);
         final OMElement omElement = executeMethod(method);
         final OMElement returnValue = omElement.getFirstElement();
         final String jsonPlanBeans = returnValue.getText();

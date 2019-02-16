@@ -1,6 +1,7 @@
 package ar.edu.ubp.das.src.jobs.consumo;
 
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
+import ar.edu.ubp.das.mvc.util.Pair;
 import ar.edu.ubp.das.src.concesionarias.daos.MSConcesionariasDao;
 import ar.edu.ubp.das.src.concesionarias.daos.MSConfigurarConcesionariaDao;
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
@@ -27,7 +28,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static ar.edu.ubp.das.src.utils.Constants.IDENTIFICADOR;
+import static ar.edu.ubp.das.src.utils.Constants.*;
 
 public class ConsumoJob implements Job {
 
@@ -84,18 +85,20 @@ public class ConsumoJob implements Job {
 
                 // obtenemos el proximo offset a usar segun su estado
                 final Optional<String> lastEstadoOpt = this.consumoJobManager.getMsConsumoDao().getLastEstadoForConcesionaria(cId);
-                final Timestamp offset = getOffset(lastEstadoOpt, cId, jobForm.getFecha()); // offset segun ultimo estado
 
                 // obtenemos sus configs
                 final List<ConfigurarConcesionariaForm> configs = configurarConcesionariaManager.getDao().selectParamsByConcesionariaId(cId);
 
                 // usando las configs obtenemos un cliente
                 final Optional<ConcesionariaServiceContract> cli = clientFactory.getClientFor(configs);
+                final Pair<Timestamp, Timestamp> lastJobPeriod = getLastJobPeriod(lastEstadoOpt, cId);
+                final Timestamp from = lastJobPeriod.fst;
+                final Timestamp to = lastJobPeriod.snd;
 
                 if (!cli.isPresent()) {
                     log.error("[error: Fail when trying to create the client][config_tecno:{}]", JsonUtils.toJsonString(configs));
-                    final String description = "getClientFor(configs) failed for offset " + offset + " and configs: " + configs;
-                    logConsumoDb(cId, jobId, EstadoConsumo.FAILURE, offset, null, description);
+                    final String description = "getClientFor(configs) failed. CONFIGS => " + configs;
+                    logConsumoDb(cId, jobId, EstadoConsumo.FAILURE, from, to, null, description);
                     continue;
                 }
                 log.info("Client for concesionaria {} obtained with configs {}", cId, configs);
@@ -105,10 +108,10 @@ public class ConsumoJob implements Job {
                 try {
                     // usamos el cliente p/ consultar planes
                     final ConcesionariaServiceContract client = cli.get(); // ifPresent was checked above
-                    final List<NotificationUpdate> notificationUpdates = client.consultarPlanes(IDENTIFICADOR, offset.toString());
+                    final List<NotificationUpdate> notificationUpdates = client.consultarPlanes(IDENTIFICADOR, from, to);
                     log.info("Consume is successfull for concesionaria {} [notification_updates:{}]", cId, JsonUtils.toJsonString(notificationUpdates));
-                    final String description = "consultarPlanes was success for offset: " + offset;
-                    logConsumoDb(cId, jobId, EstadoConsumo.SUCCESS, offset, rqstId, description); // esto marca ultimo resultado como successs
+                    final String description = String.format("consultarPlanes was success for offset [FROM:%s][TO:%s]", from, to);
+                    logConsumoDb(cId, jobId, EstadoConsumo.SUCCESS, from, to, rqstId, description); // esto marca ultimo resultado como successs
 
                     for (final NotificationUpdate update : notificationUpdates) {
                         try {
@@ -131,8 +134,8 @@ public class ConsumoJob implements Job {
 
                 } catch (final ClientException ex) {
                     log.error("Problems with consultarPlanes [exception:{}]", ex.getMessage());
-                    final String description = "consultarPlanes failed for offset: " + offset;
-                    logConsumoDb(cId, jobId, EstadoConsumo.FAILURE, offset, rqstId, description);
+                    final String description = String.format("consultarPlanes failed  offset [FROM:%s][TO:%s]", from, to);
+                    logConsumoDb(cId, jobId, EstadoConsumo.FAILURE, from, to, rqstId, description);
                 }
             }
 
@@ -155,21 +158,16 @@ public class ConsumoJob implements Job {
      *
      * @param lastEstadoOpt
      * @param concesionairaId
-     * @param fecha
      * @return
      * @throws SQLException
      */
-    private Timestamp getOffset(final Optional<String> lastEstadoOpt, final Long concesionairaId, final Timestamp fecha) throws SQLException {
+    private Pair<Timestamp, Timestamp> getLastJobPeriod(final Optional<String> lastEstadoOpt, final Long concesionairaId) throws SQLException {
+
         if (lastEstadoOpt.isPresent() && lastEstadoOpt.get().equals(EstadoConsumo.FAILURE.name())) {
-            return this.consumoJobManager.getMsConsumoDao().getLastOffsetForConcesionaria(concesionairaId).get();
+            return this.consumoJobManager.getMsConsumoDao().getLastPeriodTimeForConcesionaria(concesionairaId).get();
         }
-        return DateUtils.getTimestampFrom(fecha, -15);
+        return Pair.of(DateUtils.getTimestamp(FROM_DAYS), DateUtils.getTimestamp(TO_DAYS));
     }
-
-
-
-
-    /* LOGGERS */
 
     /**
      * logueamos en la db el estado del consumo
@@ -177,19 +175,21 @@ public class ConsumoJob implements Job {
      * @param idConcesionaria
      * @param jobId
      * @param estadoConsumo
-     * @param offset
+     * @param from
+     * @param to
      * @param rqstId
      * @param description
      * @throws SQLException
      */
-    private void logConsumoDb(final Long idConcesionaria, final Long jobId, final EstadoConsumo estadoConsumo, final Timestamp offset, final String rqstId, final String description)
+    private void logConsumoDb(final Long idConcesionaria, final Long jobId, final EstadoConsumo estadoConsumo, final Timestamp from, final Timestamp to, final String rqstId, final String description)
             throws SQLException {
 
         final ConsumoForm consumoForm = new ConsumoForm();
         consumoForm.setIdConcesionaria(idConcesionaria);
         consumoForm.setIdJobConsumo(jobId);
         consumoForm.setEstado(estadoConsumo.name());
-        consumoForm.setOffset(offset);
+        consumoForm.setFrom(from);
+        consumoForm.setTo(to);
         consumoForm.setIdRequestResp(rqstId);
         consumoForm.setDescription(description);
 

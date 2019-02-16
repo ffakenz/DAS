@@ -18,6 +18,7 @@ import utils.JsonUtils;
 
 import java.io.IOException;
 import java.net.URI;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -123,17 +124,12 @@ public class RestClient implements ConcesionariaServiceContract {
     }
 
     @Override
-    public List<NotificationUpdate> consultarPlanes(final String identificador, final String offset) throws ClientException {
-        final String query = getQuery(CONSULTAR_PLANES, IDENTIFICADOR, OFFSET);
-        final String url;
-        // try {
-        //     url = URLEncoder.encode(String.format(query, identificador, nanosRepr(offset)), "UTF-8");
-        // } catch (UnsupportedEncodingException e) {
-        //     e.printStackTrace();
-        //     throw new ClientException(e.getMessage());
-        // }
-        url = String.format(query, identificador, nanosRepr(offset));
+    public List<NotificationUpdate> consultarPlanes(final String identificador, final Timestamp from, final Timestamp to) throws ClientException {
 
+        final String fromParsed = nanosRepr(from.toString());
+        final String toParsed = nanosRepr(to.toString());
+        final String query = getQuery(CONSULTAR_PLANES, IDENTIFICADOR, FROM, TO);
+        final String url = String.format(query, identificador, fromParsed, toParsed);
         final String jsonPlanBeans = call(GET, url);
         final NotificationUpdate[] notificationUpdates = JsonUtils.toObject(jsonPlanBeans, NotificationUpdate[].class);
         log.info("[GET consultarPlanes][URL {}][jsonPlanBeansResponse = {}][notificationUpdates = {}]", url, jsonPlanBeans, notificationUpdates);
@@ -144,16 +140,8 @@ public class RestClient implements ConcesionariaServiceContract {
     @Override
     public PlanBean consultarPlan(final String identificador, final Long planId) throws ClientException {
 
-        final String urlUnformatted = getQuery(CONSULTAR_PLAN, IDENTIFICADOR, PLANID);
-        final String url;
-        // try {
-        //     url = URLEncoder.encode(urlUnformatted, "UTF-8");
-        // } catch (UnsupportedEncodingException e) {
-        //     e.printStackTrace();
-        //     throw new ClientException(e.getMessage());
-        // }
-
-        url = urlUnformatted;
+        final String query = getQuery(CONSULTAR_PLAN, IDENTIFICADOR, PLANID);
+        final String url = String.format(query, identificador, planId);
         final String jsonPlanBean = call(GET, url);
         log.info("[GET consultarPlan][URL {}][jsonPlanBean = {}]", url, jsonPlanBean);
         return JsonUtils.toObject(jsonPlanBean, PlanBean.class);
@@ -161,6 +149,7 @@ public class RestClient implements ConcesionariaServiceContract {
 
     @Override
     public void cancelarPlan(final String identificador, final Long planId) throws ClientException {
+
         final String query = getQuery(CANCELAR_PLAN, IDENTIFICADOR, PLANID);
         final String url = String.format(query, identificador, planId);
         fireAndForget(PUT, url);

@@ -3,6 +3,7 @@ package ar.edu.ubp.das.src.jobs.consumo.forms;
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.annotations.Column;
 import ar.edu.ubp.das.mvc.db.annotations.Entity;
+import utils.JsonUtils;
 
 @Entity
 public class ConsumoResultForm extends DynaActionForm {
@@ -15,16 +16,6 @@ public class ConsumoResultForm extends DynaActionForm {
     private String description;
     @Column(name = "result")
     private String result;
-
-    @Override
-    public String toString() {
-        return "ConsumoResultForm{" +
-                "idConcesionaria=" + idConcesionaria +
-                ", idConsumo=" + idConsumo +
-                ", description='" + description + '\'' +
-                ", result='" + result + '\'' +
-                '}';
-    }
 
     public Long getIdConcesionaria() {
         return idConcesionaria;
@@ -56,5 +47,10 @@ public class ConsumoResultForm extends DynaActionForm {
 
     public void setResult(final String result) {
         this.result = result;
+    }
+
+    @Override
+    public String toString() {
+        return JsonUtils.toJsonString(this);
     }
 }

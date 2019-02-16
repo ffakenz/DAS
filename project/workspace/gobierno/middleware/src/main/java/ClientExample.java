@@ -5,6 +5,8 @@ import clients.factory.ClientFactory;
 import clients.factory.ClientType;
 import clients.responses.ClientException;
 
+import java.sql.Timestamp;
+import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,11 +14,13 @@ public class ClientExample {
 
     static void consumeService(final ConcesionariaServiceContract client) throws ClientException {
         final String identificador = "GOB";
-        final String offset = "2018-01-08T20:58:00";
+        final Timestamp from = Timestamp.valueOf(ZonedDateTime.now().minusDays(7).toLocalDateTime());
+        final Timestamp to = Timestamp.valueOf(ZonedDateTime.now().toLocalDateTime());
+
 
         System.out.println("consultarPlanes");
         final List<NotificationUpdate> notificationUpdates =
-                client.consultarPlanes(identificador, offset);
+                client.consultarPlanes(identificador, from, to);
         notificationUpdates.forEach(System.out::println);
 
         System.out.println("cancelarPlan");
@@ -36,7 +40,7 @@ public class ClientExample {
 
         System.out.println("consultarPlanes");
         final List<NotificationUpdate> notificationUpdates2 =
-                client.consultarPlanes(identificador, offset);
+                client.consultarPlanes(identificador, from, to);
         notificationUpdates2.forEach(System.out::println);
     }
 

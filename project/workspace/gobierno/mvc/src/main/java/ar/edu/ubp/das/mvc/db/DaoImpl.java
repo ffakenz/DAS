@@ -10,7 +10,7 @@ import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 
-public abstract class DaoImpl<T> {
+public abstract class DaoImpl<T> implements Dao<T> {
 
     private Class<T> clazz;
     private DatasourceConfig datasource;

@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import utils.JsonUtils;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -24,11 +25,11 @@ class ConcesionariaServiceContractStub implements ConcesionariaServiceContract {
         this.notificationFileName = notificationFileName;
     }
 
-    public List<NotificationUpdate> consultarPlanesInner(final String identificador, final String offset) throws ClientException {
+    public List<NotificationUpdate> consultarPlanesInner(final String identificador, final Timestamp from, final Timestamp to) throws ClientException {
 
-        log.info("RUNNING [CONSULTAR PLANES][IDENTIFICADOR = {}][OFFSET= {}]", identificador, offset);
+        log.info("RUNNING [CONSULTAR PLANES][IDENTIFICADOR = {}][FROM= {}][TO= {}]", identificador, from, to);
 
-        if(notificationFileName == null) {
+        if (notificationFileName == null) {
             throw new ClientException("the service is unavailable");
         }
 
@@ -44,15 +45,15 @@ class ConcesionariaServiceContractStub implements ConcesionariaServiceContract {
     }
 
     @Override
-    public List<NotificationUpdate> consultarPlanes(final String identificador, final String offset) throws ClientException {
-        return consultarPlanesInner(identificador, offset);
+    public List<NotificationUpdate> consultarPlanes(final String identificador, final Timestamp from, final Timestamp to) throws ClientException {
+        return consultarPlanesInner(identificador, from, to);
     }
 
     @Override
     public PlanBean consultarPlan(final String identificador, final Long planId) throws ClientException {
         log.info("RUNNING [CONSULTAR PLANES][IDENTIFICADOR = {}][PLAN_ID= {}]", identificador, planId);
 
-        if(notificationFileName == null) {
+        if (notificationFileName == null) {
             throw new ClientException("the service is unavailable");
         }
 

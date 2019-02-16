@@ -46,7 +46,8 @@ public class FrontUtils {
         rows.append("<td>" + view.getConsumoId() + "</td>");
         rows.append("<td>" + view.getConcesionariaId() + "</td>");
         rows.append("<td>" + view.getEstadoConsumo() + "</td>");
-        rows.append("<td>" + view.getOffsetConsumo() + "</td>");
+        rows.append("<td>" + view.getFromConsumo() + "</td>");
+        rows.append("<td>" + view.getToConsumo() + "</td>");
         rows.append("<td>" + view.getIdRequestRespConsumo() + "</td>");
         rows.append("<td>" + view.getEstadoDescription() + "</td>");
         rows.append("<td>" + view.getConsumoResultId() + "</td>");

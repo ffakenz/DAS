@@ -12,7 +12,7 @@ public class MyResultSet <T> {
 	private final ResultSet rs;		
 	private final Class<T> clazz;
 	
-	public MyResultSet(ResultSet rs, Class<T> clazz) {
+	public MyResultSet(final ResultSet rs, final Class<T> clazz) {
 		assert rs != null;
 		assert clazz != null;
 		this.rs = rs;
@@ -29,30 +29,30 @@ public class MyResultSet <T> {
 			if (!this.clazz.isAnnotationPresent(Entity.class)) {
 				throw new NoEntityException();
 			} else {
-				ResultSetMetaData rsmd = rs.getMetaData(); // get the resultset metadata
-				Field[] attributes = this.clazz.getDeclaredFields(); // get all the attributes of Class clazz
+				final ResultSetMetaData rsmd = rs.getMetaData(); // get the resultset metadata
+				final Field[] attributes = this.clazz.getDeclaredFields(); // get all the attributes of Class clazz
 				
 				bean = (T) this.clazz.newInstance();
 
 				for (int _iterator = 0; _iterator < rsmd.getColumnCount(); _iterator++) {
-					String columnName = rsmd.getColumnName(_iterator + 1); // get the SQL column name					
+					final String columnName = rsmd.getColumnName(_iterator + 1); // get the SQL column name
 					
 					/*
-					System.out.println("ColumnName: " + columnName 
+					log.debug("ColumnName: " + columnName
 							+ "\tColumnType: " + rsmd.getColumnTypeName(_iterator + 1)
 					+ "\tColumnValue: " + rs.getObject(_iterator + 1));
 					*/
 					
-					Object columnValue = this.rs.getObject(_iterator + 1); // get the SQL column value					
+					final Object columnValue = this.rs.getObject(_iterator + 1); // get the SQL column value
 					// iterating over clazz attributes to check
-					for (Field attribute : attributes) {
+					for (final Field attribute : attributes) {
 						// if any attribute has 'Column' annotation with matching 'name' value
 						if (attribute.isAnnotationPresent(Column.class)) {
-							Column column = attribute.getAnnotation(Column.class); // get @Column for field
+							final Column column = attribute.getAnnotation(Column.class); // get @Column for field
 							if (column.name().equalsIgnoreCase(columnName)) { // missing check: columnValue != null
-								String fieldName = attribute.getName();
+								final String fieldName = attribute.getName();
 								// get field from class for given filedName
-								Field field = bean.getClass().getDeclaredField(fieldName);
+								final Field field = bean.getClass().getDeclaredField(fieldName);
 								field.setAccessible(true); // in case the field is private
 								field.set(bean, columnValue);
 								break;
@@ -61,7 +61,7 @@ public class MyResultSet <T> {
 					} // EndOf for(Field field : fields)
 				} // EndOf for(_iterator...)
 			}
-		} catch (IllegalAccessException | SQLException | InstantiationException | NoEntityException
+		} catch (final IllegalAccessException | SQLException | InstantiationException | NoEntityException
 				| NoSuchFieldException e) {
 			e.printStackTrace();
 		}
@@ -71,14 +71,14 @@ public class MyResultSet <T> {
 	public List<T> mapToObjectList() {
 		List<T> outputList = null;
 		try {
-			outputList = new ArrayList<T>();
+			outputList = new ArrayList<>();
 			
 			while (this.rs.next()) {
-				T bean = (T) mapToObject();
+				final T bean = (T) mapToObject();
 				outputList.add(bean);
 			}
 			
-		} catch (SQLException e) {
+		} catch (final SQLException e) {
 			e.printStackTrace();
 		}
 		return outputList;
@@ -91,7 +91,7 @@ public class MyResultSet <T> {
 				bean = (T) mapToObject();
 			}
 			
-		} catch (SQLException e) {
+		} catch (final SQLException e) {
 			e.printStackTrace();
 		}
 		return bean;

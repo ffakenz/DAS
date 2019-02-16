@@ -73,7 +73,7 @@ public abstract class DaoImpl<T> {
                     final Object columnValue = rs.getObject(_iterator + 1); // get the SQL column value
 
                     /*
-					System.out.println("ColumnName: " + columnName
+					log.debug("ColumnName: " + columnName
 							+ "\tColumnType: " + rsmd.getColumnTypeName(_iterator + 1)
 					+ "\tColumnValue: " + rs.getObject(_iterator + 1));
 					*/

@@ -3,6 +3,7 @@ package ar.edu.ubp.das.src.jobs.consumo.forms;
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.annotations.Column;
 import ar.edu.ubp.das.mvc.db.annotations.Entity;
+import utils.JsonUtils;
 
 import java.sql.Timestamp;
 
@@ -18,8 +19,10 @@ public class ViewConsumoResultsForm extends DynaActionForm {
     private Long concesionariaId;
     @Column(name = "estado_consumo")
     private String estadoConsumo;
-    @Column(name = "offset_consumo")
-    private Timestamp offsetConsumo;
+    @Column(name = "from_consumo")
+    private Timestamp fromConsumo;
+    @Column(name = "to_consumo")
+    private Timestamp toConsumo;
     @Column(name = "id_request_resp_consumo")
     private String idRequestRespConsumo;
     @Column(name = "estado_description")
@@ -30,23 +33,6 @@ public class ViewConsumoResultsForm extends DynaActionForm {
     private String consumoResult;
     @Column(name = "consumo_result_description")
     private String consumoResultDescription;
-
-    @Override
-    public String toString() {
-        return "ViewConsumoResultsForm{" +
-                "jobId=" + jobId +
-                ", jobFechaEjecucion=" + jobFechaEjecucion +
-                ", consumoId=" + consumoId +
-                ", concesionariaId=" + concesionariaId +
-                ", estadoConsumo='" + estadoConsumo + '\'' +
-                ", offsetConsumo=" + offsetConsumo +
-                ", idRequestRespConsumo='" + idRequestRespConsumo + '\'' +
-                ", estadoDescription='" + estadoDescription + '\'' +
-                ", consumoResultId=" + consumoResultId +
-                ", consumoResult='" + consumoResult + '\'' +
-                ", consumoResultDescription='" + consumoResultDescription + '\'' +
-                '}';
-    }
 
     public Long getJobId() {
         return jobId;
@@ -88,12 +74,20 @@ public class ViewConsumoResultsForm extends DynaActionForm {
         this.estadoConsumo = estadoConsumo;
     }
 
-    public Timestamp getOffsetConsumo() {
-        return offsetConsumo;
+    public Timestamp getFromConsumo() {
+        return fromConsumo;
     }
 
-    public void setOffsetConsumo(final Timestamp offsetConsumo) {
-        this.offsetConsumo = offsetConsumo;
+    public void setFromConsumo(final Timestamp fromConsumo) {
+        this.fromConsumo = fromConsumo;
+    }
+
+    public Timestamp getToConsumo() {
+        return toConsumo;
+    }
+
+    public void setToConsumo(final Timestamp toConsumo) {
+        this.toConsumo = toConsumo;
     }
 
     public String getIdRequestRespConsumo() {
@@ -134,5 +128,10 @@ public class ViewConsumoResultsForm extends DynaActionForm {
 
     public void setConsumoResultDescription(final String consumoResultDescription) {
         this.consumoResultDescription = consumoResultDescription;
+    }
+
+    @Override
+    public String toString() {
+        return JsonUtils.toJsonString(this);
     }
 }

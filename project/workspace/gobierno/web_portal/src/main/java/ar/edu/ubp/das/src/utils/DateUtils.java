@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Calendar;
 
 public class DateUtils {
@@ -23,15 +24,25 @@ public class DateUtils {
 
     public static Date getDateFromDays(final long days) {
 
-        LocalDate localDate = LocalDate.now().plusDays(days);
-        java.util.Date uDate = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        final LocalDate localDate = LocalDate.now().plusDays(days);
+        final java.util.Date uDate = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
         return new Date(uDate.getTime());
     }
 
     public static Date getDayDate() {
 
-        LocalDate localDate = LocalDate.now();
-        java.util.Date uDate = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        final LocalDate localDate = LocalDate.now();
+        final java.util.Date uDate = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
         return new Date(uDate.getTime());
+    }
+
+    /**
+     * this method get timestamp object plus any number of days
+     *
+     * @param days
+     * @return
+     */
+    public static Timestamp getTimestamp(final long days) {
+        return Timestamp.valueOf(ZonedDateTime.now().plusDays(days).toLocalDateTime());
     }
 }

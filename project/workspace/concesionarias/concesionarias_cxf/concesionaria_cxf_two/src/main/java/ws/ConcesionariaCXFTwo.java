@@ -7,6 +7,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import contract.ConcesionariaServiceContract;
 import contract.implementors.MSSQLConsecionaria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import utils.Utils;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -18,24 +21,33 @@ import java.util.List;
 @WebService(targetNamespace = "http://ws.das.edu.ubp.ar/", portName = "ConcesionariaCXFTwoPort", serviceName = "ConcesionariaCXFTwoService")
 public class ConcesionariaCXFTwo extends MSSQLConsecionaria implements ConcesionariaServiceContract {
 
+    protected static final Logger log = LoggerFactory.getLogger(ConcesionariaCXFTwo.class);
+
     private Gson gson = new GsonBuilder()
             .setDateFormat("yyyy-MM-dd hh:mm:ss.SSS")
             .create();
 
     @WebMethod(operationName = "consultarPlanes", action = "urn:ConsultarPlanes")
     @Override
-    public String consultarPlanes(@WebParam(name = "identificador") final String identificador, @WebParam(name = "offset") final String offset) {
-        System.out.println("Cxf consultar planes offset -> " + offset + " - identificador -> " + identificador);
-        final Timestamp newOffset = Timestamp.valueOf(offset.replace('T', ' '));
+    public String consultarPlanes(@WebParam(name = "identificador") final String identificador,
+                                  @WebParam(name = "from") final String from,
+                                  @WebParam(name = "to") final String to) {
+
+        final Timestamp fromParsed = Utils.fromStringToTimestamp(from);
+        final Timestamp toParsed = Utils.fromStringToTimestamp(to);
+        log.debug("Cxf consultar planes from -> {} - to -> {} - identificador -> {}", fromParsed.toString(), toParsed.toString(), identificador);
+
         final List<NotificationUpdate> planes =
-                abstractFactory.withConnection(notificationUpdateDAO.consultarPlanes(identificador, newOffset));
+                abstractFactory.withConnection(
+                        notificationUpdateDAO.consultarPlanes(identificador, fromParsed, toParsed)
+                );
         return gson.toJson(planes);
     }
 
     @WebMethod(operationName = "consultarPlan", action = "urn:ConsultarPlan")
     @Override
     public String consultarPlan(@WebParam(name = "identificador") final String identificador, @WebParam(name = "planId") final Long planId) {
-        System.out.println("Cxf consultar plan id -> " + planId + " - identificador -> " + identificador);
+        log.debug("Cxf consultar plan id -> " + planId + " - identificador -> " + identificador);
         final List<NotificationUpdate> notificationUpdates =
                 abstractFactory.withConnection(notificationUpdateDAO.consultarPlan(identificador, planId));
 
@@ -54,14 +66,14 @@ public class ConcesionariaCXFTwo extends MSSQLConsecionaria implements Concesion
     @WebMethod(operationName = "cancelarPlan", action = "urn:CancelarPlan")
     @Override
     public void cancelarPlan(@WebParam(name = "identificador") final String identificador, @WebParam(name = "planId") final Long planId) {
-        System.out.println("Cxf cancelar plan id -> " + planId + " - identificador -> " + identificador);
+        log.debug("Cxf cancelar plan id -> " + planId + " - identificador -> " + identificador);
         abstractFactory.withConnection(notificationUpdateDAO.cancelarPlan(identificador, planId));
     }
 
     @WebMethod(operationName = "health", action = "urn:Health")
     @Override
     public String health(@WebParam(name = "identificador") final String identificador) {
-        System.out.println("Cxf health identificador -> " + identificador);
+        log.debug("Cxf health identificador -> " + identificador);
         return "OK";
     }
 }

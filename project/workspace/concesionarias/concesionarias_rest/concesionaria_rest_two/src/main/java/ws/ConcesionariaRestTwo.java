@@ -7,6 +7,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import contract.ConcesionariaServiceContract;
 import contract.implementors.MSSQLConsecionaria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import utils.Utils;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -18,6 +21,8 @@ import java.util.List;
 @Path("/concesionariaRestTwo")
 public class ConcesionariaRestTwo extends MSSQLConsecionaria implements ConcesionariaServiceContract  {
 
+    protected static final Logger log = LoggerFactory.getLogger(ConcesionariaRestTwo.class);
+
     private Gson gson = new GsonBuilder()
             .setDateFormat("yyyy-MM-dd hh:mm:ss.SSS")
             .create();
@@ -26,11 +31,18 @@ public class ConcesionariaRestTwo extends MSSQLConsecionaria implements Concesio
     @Path("/consultarPlanes")
     @Produces(MediaType.APPLICATION_JSON)
     @Override
-    public String consultarPlanes(@QueryParam("identificador") final String identificador, @QueryParam("offset") final String offset) {
-        System.out.println("Rest consultar planes offset -> " + offset + " - identificador -> " + identificador);
-        final Timestamp newOffset = Timestamp.valueOf(offset.replace('T', ' '));
+    public String consultarPlanes(@QueryParam("identificador") final String identificador,
+                                  @QueryParam("from") final String from,
+                                  @QueryParam("from") final String to) {
+
+
+        final Timestamp fromParsed = Utils.fromStringToTimestamp(from);
+        final Timestamp toParsed = Utils.fromStringToTimestamp(to);
+
+        log.debug("Rest consultar planes from -> {} - to -> {} - identificador -> {}", fromParsed.toString(), toParsed.toString(), identificador);
+
         final List<NotificationUpdate> planes =
-                abstractFactory.withConnection(notificationUpdateDAO.consultarPlanes(identificador, newOffset));
+                abstractFactory.withConnection(notificationUpdateDAO.consultarPlanes(identificador, fromParsed, toParsed));
         return gson.toJson(planes);
     }
 
@@ -39,7 +51,7 @@ public class ConcesionariaRestTwo extends MSSQLConsecionaria implements Concesio
     @Produces(MediaType.APPLICATION_JSON)
     @Override
     public String consultarPlan(@QueryParam("identificador") final String identificador, @QueryParam("planId") final Long planId) {
-        System.out.println("Rest consultar plan id -> " + planId + " - identificador -> " + identificador);
+        log.debug("Rest consultar plan id -> " + planId + " - identificador -> " + identificador);
         final List<NotificationUpdate> notificationUpdates =
                 abstractFactory.withConnection(notificationUpdateDAO.consultarPlan(identificador, planId));
 
@@ -59,7 +71,7 @@ public class ConcesionariaRestTwo extends MSSQLConsecionaria implements Concesio
     @Path("/cancelarPlan")
     @Override
     public void cancelarPlan(@QueryParam("identificador") final String identificador, @QueryParam("planId") final Long planId) {
-        System.out.println("Rest cancelar plan id -> " + planId + " - identificador -> " + identificador);
+        log.debug("Rest cancelar plan id -> " + planId + " - identificador -> " + identificador);
         abstractFactory.withConnection(notificationUpdateDAO.cancelarPlan(identificador, planId));
     }
 
@@ -69,7 +81,7 @@ public class ConcesionariaRestTwo extends MSSQLConsecionaria implements Concesio
     @Override
     public String health(@QueryParam("identificador") final String identificador) {
 
-        System.out.println("Rest health identificador -> " + identificador);
+        log.debug("Rest health identificador -> " + identificador);
 
         return "OK";
     }

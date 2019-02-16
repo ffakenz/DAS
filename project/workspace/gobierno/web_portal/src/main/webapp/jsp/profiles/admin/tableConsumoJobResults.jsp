@@ -23,24 +23,25 @@
         String row = FrontUtils.viewConsumoResultsFormRow(v);
         rows.append(row);
         }
-        result.append("<thead>                                                                                     ");
-        result.append("<tr>                                                                                        ");
+        result.append("<thead>                                                                                      ");
+        result.append("<tr>                                                                                         ");
         result.append("   <th>Job Id</th>                                                                           ");
-        result.append("   <th>Job Fecha Ejecucion</th>                                                               ");
+        result.append("   <th>Job Fecha Ejecucion</th>                                                              ");
         result.append("   <th>Consumo Id</th>                                                                       ");
         result.append("   <th>Concesionaria Id</th>                                                                 ");
         result.append("   <th>Estado Consumo</th>                                                                   ");
-        result.append("   <th>Offset Consumo</th>                                                                   ");
-        result.append("   <th>Id Request-Resp Consumo</th>                                                            ");
+        result.append("   <th>From date</th>                                                                        ");
+        result.append("   <th>To date</th>                                                                          ");
+        result.append("   <th>Id Request-Resp Consumo</th>                                                          ");
         result.append("   <th>Estado Description</th>                                                               ");
-        result.append("   <th>Consumo Result Id</th>                                                                 ");
+        result.append("   <th>Consumo Result Id</th>                                                                ");
         result.append("   <th>Consumo Result</th>                                                                   ");
-        result.append("   <th>Consumo Result Description</th>                                                        ");
-        result.append("</tr>                                                                                       ");
-        result.append("</thead>                                                                                    ");
-        result.append("<tbody>                                                                                     ");
-        result.append(rows.toString()                                                                               );
-        result.append("</tbody>                                                                                    ");
+        result.append("   <th>Consumo Result Description</th>                                                       ");
+        result.append("</tr>                                                                                        ");
+        result.append("</thead>                                                                                     ");
+        result.append("<tbody>                                                                                      ");
+        result.append(rows.toString()                                                                                );
+        result.append("</tbody>                                                                                     ");
         } catch(Exception e) {
         result.append(e.getMessage());
         }

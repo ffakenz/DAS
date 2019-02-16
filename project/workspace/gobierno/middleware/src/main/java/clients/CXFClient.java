@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import utils.JsonUtils;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -52,9 +53,11 @@ public class CXFClient implements ConcesionariaServiceContract {
     }
 
     @Override
-    public List<NotificationUpdate> consultarPlanes(final String identificador, final String offset) throws ClientException {
+    public List<NotificationUpdate> consultarPlanes(final String identificador, final Timestamp from, final Timestamp to) throws ClientException {
 
-        final Object object = executeMethod(CONSULTAR_PLANES, identificador, nanosRepr(offset));
+        final String fromParsed = nanosRepr(from.toString());
+        final String toParsed = nanosRepr(to.toString());
+        final Object object = executeMethod(CONSULTAR_PLANES, identificador, fromParsed, toParsed);
         final String jsonPlanBeans = object.toString();
         final NotificationUpdate[] notificationUpdates = JsonUtils.toObject(jsonPlanBeans, NotificationUpdate[].class);
         log.info("[GET consultarPlanes][object {}][jsonPlanBeans = {}][notificationUpdates = {}]", object, jsonPlanBeans, notificationUpdates);
