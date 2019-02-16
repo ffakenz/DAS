@@ -7,7 +7,7 @@ public class CustomerWithDelay extends TypeOfCustomer {
         this.delay = delay;
     }
     @Override
-    boolean willPay(final Long nroCuota) {
+    public boolean willPay(final Long nroCuota) {
         return nroCuota < (DEFAULT_NRO_CUOTAS - delay);
     }
 }
