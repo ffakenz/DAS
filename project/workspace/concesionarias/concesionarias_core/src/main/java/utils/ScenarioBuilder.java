@@ -25,4 +25,5 @@ public class ScenarioBuilder extends DaoImpl<Object> {
                 "clienteDocumento","clienteNombre","clienteApellido","clienteNroTelefono"
                 , "clienteEmail", "planFechaAlta", "vehiculoId");
     }
+
 }

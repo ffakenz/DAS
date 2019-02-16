@@ -85,6 +85,20 @@
         <dropProcedure procedureName="update_cuota"/>
     </changeSet>
 
+    <changeSet id="Drop procedure trigger_insert_cuotas" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_concesionarias'
+                AND ROUTINE_NAME = 'trigger_insert_cuotas'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="trigger_insert_cuotas"/>
+    </changeSet>
+
     <!-- ******************************* -->
     <!--  DROP PROCEDURES PLANES         -->
     <!-- ******************************* -->

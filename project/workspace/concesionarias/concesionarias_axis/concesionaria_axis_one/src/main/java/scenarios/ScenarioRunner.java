@@ -19,19 +19,11 @@ public class ScenarioRunner {
         final DatasourceConfig config = ModuleConfigImpl.getDefaultDatasource();
         final ScenarioBuilder builder = ScenarioBuilder.getInstance(config);
 
-        final NotificationUpdate update = new NotificationUpdate();
-        update.setClienteDocumento(nextDocumento());
-        update.setClienteNombre(nextNombre());
-        update.setClienteApellido(nextApellido());
-        update.setClienteNroTelefono(nextPhone());
-        update.setClienteEmail("franco.testagrossa@gmail.com");
-        update.setPlanFechaAlta(Timestamp.from(Instant.now()));
-        update.setVehiculoId(nextVehiculo());
-
-
-
         final List<NotificationUpdate> beans = Arrays.asList(
-                update
+                // nextUpdate(),
+                // nextUpdate(),
+                // nextUpdate(),
+                nextUpdate()
         );
 
         try {
@@ -41,6 +33,18 @@ public class ScenarioRunner {
         } catch (final SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    private static NotificationUpdate nextUpdate() {
+        final NotificationUpdate update = new NotificationUpdate();
+        update.setClienteDocumento(nextDocumento());
+        update.setClienteNombre(nextNombre());
+        update.setClienteApellido(nextApellido());
+        update.setClienteNroTelefono(nextPhone());
+        update.setClienteEmail("franco.testagrossa@gmail.com");
+        update.setPlanFechaAlta(Timestamp.from(Instant.now()));
+        update.setVehiculoId(nextVehiculo());
+        return update;
     }
 
     private static Long nextVehiculo() {
