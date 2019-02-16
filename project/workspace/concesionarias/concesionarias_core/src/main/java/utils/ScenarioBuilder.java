@@ -26,4 +26,8 @@ public class ScenarioBuilder extends DaoImpl<Object> {
                 , "clienteEmail", "planFechaAlta", "vehiculoId");
     }
 
+    public void pagarCuotas(final NotificationUpdate bean) throws SQLException {
+        executeProcedure("create_plan_cliente(?,?,?,?)", bean,
+                "clienteDocumento", "planFechaAlta", "vehiculoId", "cuotaNroCuota");
+    }
 }

@@ -1,7 +1,8 @@
 CREATE PROCEDURE create_plan_cliente (
-    @documento                    BIGINT
-    , @fecha_alta                DATETIME
+    @documento                      BIGINT
+    , @fecha_alta                   DATETIME
     , @vehiculo                     BIGINT
+    , @nro_cuota                    BIGINT
     , @tipo_de_plan                 VARCHAR(100) = 'GOB'
 )
 AS
@@ -21,12 +22,36 @@ BEGIN
         AND tipo_de_plan   = @tipo_de_plan
     ORDER BY id DESC
 
-
-    UPDATE dbo.planes
-    SET estado = 'en_proceso'
-    WHERE id = @plan_id
-
-
-    INSERT INTO dbo.cuotas (id_plan, nro_cuota, fecha_alta)
-    VALUES (@plan_id, 1, @fecha_alta)
+    DECLARE @random BIGINT
+    SET @random = FLOOR(RAND() * 99 + 1)
+    IF(@random < 75)
+    BEGIN
+        -- paga en termino
+        UPDATE dbo.cuotas
+        SET fecha_pago = (
+            SELECT TOP 1 new_date
+            FROM dbo.date_in_range(
+                cuotas.fecha_alta,
+                cuotas.fecha_vencimiento
+            )
+        )
+        WHERE cuotas.id_plan = @plan_id
+        AND cuotas.nro_cuota = @nro_cuota
+    END
+    ELSE
+    BEGIN
+        -- paga fuera de termino
+        DECLARE @delay BIGINT
+        SET @delay = FLOOR(RAND() * 9 + 1)
+        UPDATE dbo.cuotas
+        SET fecha_pago = (
+            SELECT TOP 1 new_date
+            FROM dbo.date_in_range(
+                cuotas.fecha_vencimiento,
+                DATEADD(DAY, @delay, cuotas.fecha_vencimiento)
+            )
+        )
+        WHERE cuotas.id_plan = @plan_id
+        AND cuotas.nro_cuota = @nro_cuota
+    END
 END

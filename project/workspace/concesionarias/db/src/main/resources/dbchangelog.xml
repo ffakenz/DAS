@@ -17,12 +17,17 @@
     <include file="/src/main/resources/liquibase/tables/create_tables.xml"/>
 
     <!-- ########################################### -->
-    <!-- Main create and drop views change-sets               -->
+    <!-- Main create and drop views change-sets      -->
     <!-- ########################################### -->
     <include file="/src/main/resources/liquibase/views/views.xml"/>
 
     <!-- ########################################### -->
-    <!-- Main triggers change-sets               -->
+    <!-- Main create and drop functions change-sets  -->
+    <!-- ########################################### -->
+    <include file="/src/main/resources/liquibase/functions/functions.xml"/>
+
+    <!-- ########################################### -->
+    <!-- Main triggers change-sets                   -->
     <!-- ########################################### -->
     <!--<include file="/src/main/resources/liquibase/triggers/triggers.xml"/>-->
 
