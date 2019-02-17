@@ -25,10 +25,11 @@ public class ConcesionariaAxisOne extends MSSQLConsecionaria implements Concesio
 
     @Override
     public String consultarPlanes(final String identificador, final String from, final String to) {
-        log.info("Axis consultar planes from -> " + from + " - to -> " + to + " - identificador -> " + identificador);
-
+        
         final Timestamp fromParsed = Utils.fromStringToTimestamp(from);
         final Timestamp toParsed = Utils.fromStringToTimestamp(to);
+        log.info("Axis consultar planes from -> " + from + " - to -> " + to + " - identificador -> " + identificador);
+
         final List<NotificationUpdate> planes =
                 abstractFactory.withConnection(
                         notificationUpdateDAO.consultarPlanes(identificador, fromParsed, toParsed)

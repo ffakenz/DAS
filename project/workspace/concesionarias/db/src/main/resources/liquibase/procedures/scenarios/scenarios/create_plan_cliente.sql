@@ -29,11 +29,10 @@ BEGIN
         -- paga en termino
         UPDATE dbo.cuotas
         SET fecha_pago = (
-            SELECT TOP 1 new_date
-            FROM dbo.date_in_range (
+            SELECT dbo.date_in_range (
                 cuotas.fecha_alta,
                 cuotas.fecha_vencimiento
-            )
+            ) as new_date
         )
         WHERE cuotas.id_plan = @plan_id
         AND cuotas.nro_cuota = @nro_cuota
@@ -45,11 +44,10 @@ BEGIN
         SET @delay = FLOOR(RAND() * 9 + 1)
         UPDATE dbo.cuotas
         SET fecha_pago = (
-            SELECT TOP 1 new_date
-            FROM dbo.date_in_range(
+            SELECT dbo.date_in_range(
                 cuotas.fecha_vencimiento,
                 DATEADD(DAY, @delay, cuotas.fecha_vencimiento)
-            )
+            ) as new_date
         )
         WHERE cuotas.id_plan = @plan_id
         AND cuotas.nro_cuota = @nro_cuota

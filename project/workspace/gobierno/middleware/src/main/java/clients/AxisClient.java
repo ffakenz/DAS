@@ -99,7 +99,7 @@ public class AxisClient implements ConcesionariaServiceContract {
         final OMElement method = createMethod(CONSULTAR_PLANES);
         final OMElement param = createParam(IDENTIFICADOR, identificador);
         final OMElement param2 = createParam(FROM, nanosRepr(from.toString()));
-        final OMElement param3 = createParam(TO, nanosRepr(from.toString()));
+        final OMElement param3 = createParam(TO, nanosRepr(to.toString()));
         method.addChild(param);
         method.addChild(param2);
         method.addChild(param3);

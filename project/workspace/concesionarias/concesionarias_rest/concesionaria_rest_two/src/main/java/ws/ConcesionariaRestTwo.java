@@ -33,7 +33,7 @@ public class ConcesionariaRestTwo extends MSSQLConsecionaria implements Concesio
     @Override
     public String consultarPlanes(@QueryParam("identificador") final String identificador,
                                   @QueryParam("from") final String from,
-                                  @QueryParam("from") final String to) {
+                                  @QueryParam("to") final String to) {
 
 
         final Timestamp fromParsed = Utils.fromStringToTimestamp(from);
