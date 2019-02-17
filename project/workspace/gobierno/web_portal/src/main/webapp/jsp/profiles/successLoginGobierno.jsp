@@ -66,15 +66,14 @@
                     <%@include file="../commons/resultado.jsp"%>
 
                     <!-- Modal -->
-                    <link type="text/css" rel="stylesheet" href="/web_portal/util/StyleSheet.do/load=modal" />
-                    <div class="modal fade-scale">
+                    <div class="modal">
                         <div class="modal-dialog modal-dialog-centered modal-sm">
                             <div id="loadingDiv" class="modal-content">
                             </div>
                         </div>
                     </div>
 
-                    <div class="modal fade-scale" id="config_concesionaria_modal" tabindex="-1" role="dialog" aria-hidden="false">
+                    <div class="modal" id="config_concesionaria_modal">
                         <div class="modal-dialog modal-dialog-centered modal-lg">
                             <div id="modal_content" class="modal-content">
                             </div>
