@@ -29,7 +29,7 @@ public interface ISorteoSpec {
             concesionariasXnotificationFileName.put(tuple.fst, tuple.snd);
         }
         final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new ClientFactoryStub(concesionariasXnotificationFileName), fechaEjecucion);
-        consumer.execute(null);
+        consumer.execute();
     }
 
     default Pair<ClientType, String> pair(final ClientType fst, final String snd) {

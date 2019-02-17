@@ -14,8 +14,6 @@ import beans.NotificationUpdate;
 import clients.ConcesionariaServiceContract;
 import clients.factory.IClientFactory;
 import clients.responses.ClientException;
-import org.quartz.Job;
-import org.quartz.JobExecutionContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import utils.JsonUtils;
@@ -29,7 +27,7 @@ import java.util.UUID;
 
 import static ar.edu.ubp.das.src.utils.Constants.*;
 
-public class ConsumoJob implements Job {
+public class ConsumoJob {
 
     private static final Logger log = LoggerFactory.getLogger(ConsumoJob.class);
     private final Desnormalizer desnormalizer;
@@ -42,9 +40,33 @@ public class ConsumoJob implements Job {
 
     private Timestamp fechaEjecucion;
 
+    private static Integer FROM_DAYS = -15;
+    private static Integer TO_DAYS = 0;
+
     // TODO: Send the DaoFactory instead of DatasourceConfig
     public ConsumoJob(final DatasourceConfig datasourceConfig, final IClientFactory clientFactory) {
         this(datasourceConfig, clientFactory, Timestamp.from(Instant.now()));
+    }
+
+    public ConsumoJob(final DatasourceConfig datasourceConfig,
+                      final IClientFactory clientFactory,
+                      final Timestamp fechaEjecucion,
+                      final Integer from,
+                      final Integer to) {
+
+        this(datasourceConfig, clientFactory, fechaEjecucion);
+        FROM_DAYS = from;
+        TO_DAYS = to;
+    }
+
+    public ConsumoJob(final DatasourceConfig datasourceConfig,
+                      final IClientFactory clientFactory,
+                      final Integer from,
+                      final Integer to) {
+
+        this(datasourceConfig, clientFactory, Timestamp.from(Instant.now()));
+        FROM_DAYS = from;
+        TO_DAYS = to;
     }
 
     public ConsumoJob(final DatasourceConfig datasourceConfig, final IClientFactory clientFactory, final Timestamp fechaEjecucion) {
@@ -65,8 +87,7 @@ public class ConsumoJob implements Job {
         this.desnormalizer = new Desnormalizer(datasourceConfig);
     }
 
-    @Override
-    public void execute(final JobExecutionContext jobExecutionContext) {
+    public void execute() {
 
         log.info("STARTING_CONSUMER");
 
@@ -144,7 +165,6 @@ public class ConsumoJob implements Job {
 
         log.info("FINISHING_CONSUMER");
     }
-
 
     private NotificationUpdateForm transformNotificationUpdate(final NotificationUpdate nu, final Long cId) {
         final NotificationUpdateForm transformer = JsonUtils.transformer(nu, NotificationUpdateForm.class);

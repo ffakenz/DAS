@@ -59,8 +59,4 @@ public final class Constants {
     /************ SORTEO ****************************/
     public static Integer CUOTAS_MIN = 0;
     public static Integer CUOTAS_MAX = 2;
-
-    /************ CONSUMO ****************************/
-    public static Integer FROM_DAYS = 15;
-    public static Integer TO_DAYS = 0;
 }

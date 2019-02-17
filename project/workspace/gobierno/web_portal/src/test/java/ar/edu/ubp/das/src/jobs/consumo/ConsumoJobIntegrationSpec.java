@@ -63,7 +63,7 @@ public class ConsumoJobIntegrationSpec {
 
         final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, ClientFactory.getInstance());
 
-        consumer.execute(null);
+        consumer.execute();
 
         assertNotNull(consumoJobManager.getMsJobConsumoDao().getLastJob());
         assertEquals(0, consumoJobManager.getMsConsumoDao().select(new ConsumoForm()).size());
@@ -76,7 +76,7 @@ public class ConsumoJobIntegrationSpec {
 
         final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, ClientFactory.getInstance());
 
-        consumer.execute(null);
+        consumer.execute();
 
         final ConsumoForm consumoResult =
                 consumoJobManager.getMsConsumoDao().getLastConsumo(concesionariaForm.getId()).orElse(null);
@@ -100,7 +100,7 @@ public class ConsumoJobIntegrationSpec {
 
         final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, ClientFactory.getInstance());
 
-        consumer.execute(null);
+        consumer.execute();
 
         final ConsumoForm lastConsumoForConcesionaria =
                 consumoJobManager.getMsConsumoDao().getLastConsumo(concesionariaFormREST.getId()).orElse(null);
@@ -122,7 +122,7 @@ public class ConsumoJobIntegrationSpec {
 
         final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new ClientFactoryStub(concesionariasXnotificationFileName));
 
-        consumer.execute(null);
+        consumer.execute();
 
         final ConsumoForm lastConsumoForConcesionaria =
                 consumoJobManager.getMsConsumoDao().getLastConsumo(concesionariaFormREST.getId()).orElse(null);
@@ -144,7 +144,7 @@ public class ConsumoJobIntegrationSpec {
 
         final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new ClientFactoryStub(concesionariasXnotificationFileName));
 
-        consumer.execute(null);
+        consumer.execute();
 
         final ConsumoForm lastConsumoForConcesionaria =
                 consumoJobManager.getMsConsumoDao().getLastConsumo(concesionariaFormREST.getId()).orElse(null);
@@ -168,7 +168,7 @@ public class ConsumoJobIntegrationSpec {
 
         final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new ClientFactoryStub(concesionariasXnotificationFileName));
 
-        consumer.execute(null);
+        consumer.execute();
 
         final ConsumoForm lastConsumoForConcesionaria =
                 consumoJobManager.getMsConsumoDao().getLastConsumo(concesionariaFormREST.getId()).orElse(null);
@@ -192,7 +192,7 @@ public class ConsumoJobIntegrationSpec {
 
         final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new ClientFactoryStub(concesionariasXnotificationFileName));
 
-        consumer.execute(null);
+        consumer.execute();
 
         final ConsumoForm lastConsumoForConcesionariaRest =
                 consumoJobManager.getMsConsumoDao().getLastConsumo(concesionariaFormREST.getId()).orElse(null);
@@ -220,7 +220,7 @@ public class ConsumoJobIntegrationSpec {
 
         final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new ClientFactoryStub(concesionariasXnotificationFileName));
 
-        consumer.execute(null);
+        consumer.execute();
 
         final ConsumoForm lastConsumoForConcesionariaRest =
                 consumoJobManager.getMsConsumoDao().getLastConsumo(concesionariaFormREST.getId()).orElse(null);
@@ -257,7 +257,7 @@ public class ConsumoJobIntegrationSpec {
 
         final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new ClientFactoryStub(concesionariasXnotificationFileName));
 
-        consumer.execute(null);
+        consumer.execute();
 
 
         // run job
@@ -293,7 +293,7 @@ public class ConsumoJobIntegrationSpec {
 
         final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new ClientFactoryStub(concesionariasXnotificationFileName));
 
-        consumer.execute(null);
+        consumer.execute();
 
         // run job
         assertNotNull(consumoJobManager.getMsJobConsumoDao().getLastJob());
@@ -336,7 +336,7 @@ public class ConsumoJobIntegrationSpec {
 
         final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new ClientFactoryStub(concesionariasXnotificationFileName));
 
-        consumer.execute(null);
+        consumer.execute();
 
         // run job
         assertNotNull(consumoJobManager.getMsJobConsumoDao().getLastJob());
@@ -374,7 +374,7 @@ public class ConsumoJobIntegrationSpec {
 
         final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new ClientFactoryStub(concesionariasXnotificationFileName));
 
-        consumer.execute(null);
+        consumer.execute();
 
         // run job
         assertNotNull(consumoJobManager.getMsJobConsumoDao().getLastJob());
@@ -412,7 +412,7 @@ public class ConsumoJobIntegrationSpec {
 
         final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new ClientFactoryStub(concesionariasXnotificationFileName));
 
-        consumer.execute(null);
+        consumer.execute();
 
         // run job
         assertNotNull(consumoJobManager.getMsJobConsumoDao().getLastJob());
@@ -453,7 +453,7 @@ public class ConsumoJobIntegrationSpec {
 
         final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, new ClientFactoryStub(concesionariasXnotificationFileName));
 
-        consumer.execute(null);
+        consumer.execute();
 
         // run job
         assertNotNull(consumoJobManager.getMsJobConsumoDao().getLastJob());

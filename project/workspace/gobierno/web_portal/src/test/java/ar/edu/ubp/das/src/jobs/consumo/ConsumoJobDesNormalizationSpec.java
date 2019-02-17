@@ -10,7 +10,6 @@ import ar.edu.ubp.das.src.estado_cuentas.forms.EstadoCuentasForm;
 import ar.edu.ubp.das.src.usuarios.daos.MSUsuariosDao;
 import ar.edu.ubp.das.src.usuarios.forms.UsuarioForm;
 import beans.NotificationUpdate;
-import clients.factory.ClientFactory;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -120,7 +119,6 @@ public class ConsumoJobDesNormalizationSpec {
     // We should insert a Consumer if it does not exists
     @Test
     public void test_10_ConsumerJob_UpdateConsumer_success() throws Exception {
-        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, ClientFactory.getInstance());
 
         final Long doc = 2L;
 
@@ -184,8 +182,6 @@ public class ConsumoJobDesNormalizationSpec {
     @Test
     public void test_12_ConsumerJob_NEW_UpdateEstadoCuenta_success() throws Exception {
 
-        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, ClientFactory.getInstance());
-
         setUpEstadoCuenta(nonExistingEstadoCuenta,
                 1002L,
                 1L,
@@ -214,7 +210,6 @@ public class ConsumoJobDesNormalizationSpec {
     // We should update a EstadoCuenta if it exists
     @Test
     public void test_13_ConsumerJob_OLD_UpdateEstadoCuenta_success() throws Exception {
-        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, ClientFactory.getInstance());
 
         setUpEstadoCuenta(existingEstadoCuenta,
                 1001L,
@@ -247,7 +242,7 @@ public class ConsumoJobDesNormalizationSpec {
     // We should insert a Cuota if it does not exists
     @Test
     public void test_14_ConsumerJob_NEW_Cuota_success() throws Exception {
-        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, ClientFactory.getInstance());
+
         setUpCuota(nonExistingCuota,
                 3L,
                 1L,
@@ -272,7 +267,6 @@ public class ConsumoJobDesNormalizationSpec {
     // We should update a Cuota if it exists
     @Test
     public void test_15_ConsumerJob_OLD_Cuota_success() throws Exception {
-        final ConsumoJob consumer = new ConsumoJob(dataSourceConfig, ClientFactory.getInstance());
 
         setUpCuota(existingCuota,
                 2L,
