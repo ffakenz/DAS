@@ -11,8 +11,11 @@ import org.apache.axis2.AxisFault;
 import org.apache.axis2.addressing.EndpointReference;
 import org.apache.axis2.client.Options;
 import org.apache.axis2.client.ServiceClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import utils.JsonUtils;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -26,6 +29,8 @@ public class AxisClient implements ConcesionariaServiceContract {
     private final String endpointUrl;
     private final OMFactory fac;
     private final OMNamespace omNs;
+
+    protected Logger log = LoggerFactory.getLogger(AxisClient.class);
 
     public AxisClient(final String endpointUrl // "http://localhost:8001/concesionarias_axis_one_war/services/ConcesionariaAxisOne.ConcesionariaAxisOneHttpEndpoint/"
             , final String targetNameSpace // "http://ws.ConcesionariaAxisOne/"
@@ -90,16 +95,19 @@ public class AxisClient implements ConcesionariaServiceContract {
     }
 
     @Override
-    public List<NotificationUpdate> consultarPlanes(final String identificador, final String offset) throws ClientException {
+    public List<NotificationUpdate> consultarPlanes(final String identificador, final Timestamp from, final Timestamp to) throws ClientException {
         final OMElement method = createMethod(CONSULTAR_PLANES);
         final OMElement param = createParam(IDENTIFICADOR, identificador);
-        final OMElement param2 = createParam(OFFSET, offset);
+        final OMElement param2 = createParam(FROM, nanosRepr(from.toString()));
+        final OMElement param3 = createParam(TO, nanosRepr(to.toString()));
         method.addChild(param);
         method.addChild(param2);
+        method.addChild(param3);
         final OMElement omElement = executeMethod(method);
         final OMElement returnValue = omElement.getFirstElement();
         final String jsonPlanBeans = returnValue.getText();
         final NotificationUpdate[] notificationUpdates = JsonUtils.toObject(jsonPlanBeans, NotificationUpdate[].class);
+        log.info("[GET consultarPlanes][method {}][jsonPlanBeans = {}][notificationUpdates = {}]", method, jsonPlanBeans, notificationUpdates);
         return Stream.of(notificationUpdates).collect(Collectors.toList());
     }
 
@@ -114,6 +122,7 @@ public class AxisClient implements ConcesionariaServiceContract {
 
         final OMElement returnValue = omElement.getFirstElement();
         final String jsonPlanBean = returnValue.getText();
+        log.info("[GET consultarPlan][method {}][jsonPlanBean = {}]", method, jsonPlanBean);
         return JsonUtils.toObject(jsonPlanBean, PlanBean.class);
 
     }
@@ -126,6 +135,7 @@ public class AxisClient implements ConcesionariaServiceContract {
         method.addChild(param);
         method.addChild(param2);
         call(method);
+        log.info("[POST cancelarPlan][method {}]", method);
     }
 
     @Override
@@ -137,6 +147,7 @@ public class AxisClient implements ConcesionariaServiceContract {
 
         final OMElement returnValue = omElement.getFirstElement();
         final String jsonHealth = returnValue.getText();
+        log.info("[GET health][jsonHealth {}]", jsonHealth);
         return jsonHealth;
 
 

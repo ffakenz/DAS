@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>concesionaria_cxf_one</module>
+        <module>concesionaria_cxf_two</module>
     </modules>
 
     <!-- Dependency properties -->

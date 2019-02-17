@@ -1,43 +1,34 @@
 import beans.NotificationUpdate;
-import beans.PlanBean;
 import clients.ConcesionariaServiceContract;
 import clients.factory.ClientFactory;
 import clients.factory.ClientType;
 import clients.responses.ClientException;
 
+import java.sql.Timestamp;
+import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.List;
 
 public class ClientExample {
 
     static void consumeService(final ConcesionariaServiceContract client) throws ClientException {
-        final String identificador = "GOBIERNO-INCENTIVO-2018";
-        final String offset = "2018-01-08T20:58:00";
+        final String identificador = "GOB";
+        final Timestamp from = Timestamp.valueOf(ZonedDateTime.now().minusYears(3).toLocalDateTime());
+        final Timestamp to = Timestamp.valueOf(ZonedDateTime.now().toLocalDateTime());
+
 
         System.out.println("consultarPlanes");
         final List<NotificationUpdate> notificationUpdates =
-                client.consultarPlanes(identificador, offset);
+                client.consultarPlanes(identificador, from, to);
         notificationUpdates.forEach(System.out::println);
 
-        System.out.println("cancelarPlan");
-        client.cancelarPlan(identificador, 1L);
+//        System.out.println("cancelarPlan");
+//        client.cancelarPlan(identificador, 1L);
 
-        System.out.println("consultarPlan");
-        final PlanBean plan0 = client.consultarPlan(identificador, 999L);
-        System.out.println(plan0.toString());
+//        System.out.println("consultarPlan");
+//        final PlanBean plan0 = client.consultarPlan(identificador, 999L);
+//        System.out.println(plan0.toString());
 
-        System.out.println("consultarPlan");
-        final PlanBean plan = client.consultarPlan(identificador, 1L);
-        System.out.println(plan.toString());
-
-        System.out.println("consultarPlan");
-        final PlanBean plan2 = client.consultarPlan(identificador, 2L);
-        System.out.println(plan2.toString());
-
-        System.out.println("consultarPlanes");
-        final List<NotificationUpdate> notificationUpdates2 =
-                client.consultarPlanes(identificador, offset);
-        notificationUpdates2.forEach(System.out::println);
     }
 
     public static void main(final String[] args) {
@@ -54,13 +45,6 @@ public class ClientExample {
     }
 
     private static void runAxis() throws ClientException {
-        // TODO: quitar/services
-//        final AxisClient axis =
-//                new AxisClient(
-//                        "http://localhost:8000/concesionaria_axis_one/services/ConcesionariaAxisOne.ConcesionariaAxisOneHttpEndpoint/"
-//                        , "http://ws.ConcesionariaAxisOne/"
-//                );
-
         final String endpointUrl = "http://localhost:8000/concesionaria_axis_one/services/ConcesionariaAxisOne.ConcesionariaAxisOneHttpEndpoint/";
         final String targetNameSpace = "http://ws.ConcesionariaAxisOne/";
         final HashMap<String, String> params = new HashMap<>();
@@ -75,9 +59,6 @@ public class ClientExample {
     }
 
     private static void runRest() throws ClientException {
-//        final RestClient rest =
-//                new RestClient("http://localhost:8001/concesionaria_rest_one/concesionariaRestOne");
-
         final String url = "http://localhost:8001/concesionaria_rest_one/concesionariaRestOne";
         final HashMap<String, String> params = new HashMap<>();
         params.put("url", url);
@@ -90,10 +71,6 @@ public class ClientExample {
     }
 
     private static void runCxf() throws ClientException {
-        // TODO: quitar "/services"
-//        final CXFClient cxf =
-//                new CXFClient("http://localhost:8002/concesionaria_cxf_one/services/concesionaria_cxf_one?wsdl");
-
         final String wsdlUrl = "http://localhost:8002/concesionaria_cxf_one/services/concesionaria_cxf_one?wsdl";
         final HashMap<String, String> params = new HashMap<>();
         params.put("wsdlUrl", wsdlUrl);

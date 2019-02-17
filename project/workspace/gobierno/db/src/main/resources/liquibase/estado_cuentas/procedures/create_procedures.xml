@@ -23,6 +23,20 @@
         <dropProcedure procedureName="get_estado_cuentas_by_nro_plan_and_concesionaria"/>
     </changeSet>
 
+    <changeSet id="Drop procedure update_estado_cuentas_fecha_actualizacion" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'update_estado_cuentas_fecha_actualizacion'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="update_estado_cuentas_fecha_actualizacion"/>
+    </changeSet>
+
     <changeSet id="Drop procedure get_estado_cuentas" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="1">
@@ -34,6 +48,20 @@
             </sqlCheck>
         </preConditions>
         <dropProcedure procedureName="get_estado_cuentas"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure get_estado_cuentas_by_concesionaria_id" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_estado_cuentas_by_concesionaria_id'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_estado_cuentas_by_concesionaria_id"/>
     </changeSet>
 
     <changeSet id="Drop procedure log_cuota" author="DAS-Team" runAlways="true" runOnChange="true">
@@ -86,6 +114,19 @@
             </sqlCheck>
         </preConditions>
         <dropProcedure procedureName="update_estado_cuentas"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure update_estado_cuentas_estado" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'update_estado_cuentas_estado'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="update_estado_cuentas_estado"/>
     </changeSet>
 
     <changeSet id="Drop procedure log_estado_cuentas" author="DAS-Team" runAlways="true" runOnChange="true">
@@ -175,7 +216,23 @@
                 path="/src/main/resources/liquibase/estado_cuentas/procedures/get_estado_cuentas_by_nro_plan_and_concesionaria.sql"/>
     </changeSet>
 
-    <changeSet id="Create procedure get_estado_cuentas" author="DAS-Team" runAlways="true" runOnChange="true">
+    <changeSet id="Create procedure update_estado_cuentas_fecha_actualizacion" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'update_estado_cuentas_fecha_actualizacion'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/estado_cuentas/procedures/update_estado_cuentas_fecha_actualizacion.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure get_estado_cuentas" author="DAS-Team" runAlways="true"
+               runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                 SELECT COUNT(*)
@@ -185,7 +242,23 @@
                 AND ROUTINE_NAME = 'get_estado_cuentas'
             </sqlCheck>
         </preConditions>
-        <sqlFile path="/src/main/resources/liquibase/estado_cuentas/procedures/get_estado_cuentas.sql"/>
+        <sqlFile
+                path="/src/main/resources/liquibase/estado_cuentas/procedures/get_estado_cuentas.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure get_estado_cuentas_by_concesionaria_id" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_estado_cuentas_by_concesionaria_id'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/estado_cuentas/procedures/get_estado_cuentas_by_concesionaria_id.sql"/>
     </changeSet>
 
     <changeSet id="Create procedure get_cuotas" author="DAS-Team" runAlways="true" runOnChange="true">
@@ -226,6 +299,19 @@
             </sqlCheck>
         </preConditions>
         <sqlFile path="/src/main/resources/liquibase/estado_cuentas/procedures/update_estado_cuentas.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure update_estado_cuentas_estado" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'update_estado_cuentas_estado'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/estado_cuentas/procedures/update_estado_cuentas_estado.sql"/>
     </changeSet>
 
     <changeSet id="Create procedure log_estado_cuentas" author="DAS-Team" runAlways="true" runOnChange="true">

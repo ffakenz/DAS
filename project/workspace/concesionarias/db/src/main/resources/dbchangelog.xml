@@ -17,19 +17,20 @@
     <include file="/src/main/resources/liquibase/tables/create_tables.xml"/>
 
     <!-- ########################################### -->
-    <!-- Main create and drop views change-sets               -->
+    <!-- Main create and drop views change-sets      -->
     <!-- ########################################### -->
     <include file="/src/main/resources/liquibase/views/views.xml"/>
 
     <!-- ########################################### -->
-    <!-- Main triggers change-sets               -->
+    <!-- Main create and drop functions change-sets  -->
     <!-- ########################################### -->
-    <!--<include file="/src/main/resources/liquibase/triggers/triggers.xml"/>-->
+    <include file="/src/main/resources/liquibase/functions/functions.xml"/>
 
     <!-- ########################################### -->
     <!-- Main procedures change-sets                 -->
     <!-- ########################################### -->
     <include file="/src/main/resources/liquibase/procedures/create_procedures.xml"/>
+    <include file="/src/main/resources/liquibase/procedures/scenarios/scenarios_procedures.xml"/>
 
     <!-- ########################################### -->
     <!-- Main populate change-sets                   -->
@@ -37,8 +38,9 @@
     <include file="/src/main/resources/liquibase/populates/populate_tables.xml"/>
 
     <!-- ########################################### -->
-    <!-- Test procedures change-sets                 -->
+    <!-- Main triggers change-sets                   -->
     <!-- ########################################### -->
-    <!--<include file="/src/main/resources/liquibase/test/test_procedures.xml"/>-->
+    <include file="/src/main/resources/liquibase/triggers/triggers.xml"/>
+
 
 </databaseChangeLog>

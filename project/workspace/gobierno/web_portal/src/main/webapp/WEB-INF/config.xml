@@ -1,44 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	    xsi:noNamespaceSchemaLocation="schema/config.xsd">
+        xsi:noNamespaceSchemaLocation="schema/config.xsd">
 
     <global-forwards>
-        <forward name="failure"     path="/util/failure.jsp" />
-        <forward name="information" path="/util/information.jsp" />
-        <forward name="success"     path="/util/success.jsp" />
-        <forward name="warning"     path="/util/warning.jsp" />
+        <forward name="failure" path="/util/failure.jsp"/>
+        <forward name="information" path="/util/information.jsp"/>
+        <forward name="success" path="/util/success.jsp"/>
+        <forward name="warning" path="/util/warning.jsp"/>
     </global-forwards>
 
     <alias-mappings>
         <!-- A -->
         <!-- B -->
         <!-- C -->
-        <alias name="concesionarias" />
-        <alias name="consumo" />
+        <alias name="concesionarias"/>
+        <alias name="consumo"/>
         <!-- D -->
         <!-- E -->
+        <alias name="estado_cuentas"/>
         <!-- F -->
         <!-- G -->
         <!-- H -->
-        <alias name="home" />
+        <alias name="home"/>
         <!-- I -->
         <!-- J -->
-        <alias name="jobs" />
+        <alias name="jobs"/>
         <!-- K -->
         <!-- L -->
-        <alias name="login" />
+        <alias name="login"/>
         <!-- M -->
         <!-- N -->
         <!-- O -->
-        <alias name="other" />
+        <alias name="other"/>
         <!-- P -->
         <!-- Q -->
         <!-- R -->
         <!-- S -->
+        <alias name="sorteo"/>
         <!-- T -->
         <!-- U -->
-        <alias name="util" />
-        <alias name="usuarios" />
+        <alias name="util"/>
+        <alias name="usuarios"/>
         <!-- V -->
         <!-- W -->
         <!-- X -->

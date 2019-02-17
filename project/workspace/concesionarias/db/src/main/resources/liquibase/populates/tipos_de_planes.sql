@@ -1,2 +1,2 @@
 INSERT INTO tipos_de_planes(nombre)
-VALUES ('GOBIERNO-INCENTIVO-2018'),('NORMAL')
+VALUES ('GOB'),('NORMAL')

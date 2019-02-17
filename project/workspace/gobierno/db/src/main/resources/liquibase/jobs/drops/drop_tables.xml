@@ -9,6 +9,16 @@
     <!--   TABLE DROP CHANGE-SETS      -->
     <!-- ***************************** -->
 
+    <!-- ***************************** -->
+    <!--   CONSUMO ABSOLUTO            -->
+    <!-- ***************************** -->
+
+    <changeSet id="Drop table consumo_absoluto" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="consumo_absoluto"/>
+        </preConditions>
+        <dropTable tableName="consumo_absoluto"/>
+    </changeSet>
 
     <!-- ***************************** -->
     <!--   CONSUMO                     -->
@@ -56,10 +66,24 @@
         <dropTable tableName="job_consumo"/>
     </changeSet>
 
+    <changeSet id="Drop table notification_update" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="notification_update"/>
+        </preConditions>
+        <dropTable tableName="notification_update"/>
+    </changeSet>
+
 
     <!-- ***************************** -->
     <!--   SORTEO                      -->
     <!-- ***************************** -->
+
+    <changeSet id="Drop table concesionarias_notificadas" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="concesionarias_notificadas"/>
+        </preConditions>
+        <dropTable tableName="concesionarias_notificadas"/>
+    </changeSet>
 
     <changeSet id="Drop table participantes" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">

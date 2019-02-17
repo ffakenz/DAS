@@ -10,13 +10,13 @@ BEGIN
         ,('utilitario')
 
     INSERT INTO vehiculos(tipo, nombre, precio, marca, modelo, color)
-    VALUES ('taxi', 'Corsa', 10000, 'chevrolet', 'v1','c1' )
-        , ('particular', 'Gol', 10000, 'volkswagen', 'v3','c2' )
-        ,('particular', 'Clio', 10000, 'renault', 'v1','c1' )
-        , ('comercial', '208', 10000, 'peugeot', 'v1','c4' )
-        , ('comercial', 'Focus', 10000, 'ford', 'v5','c3' )
-        , ('utilitario', 'Fiorino', 10000, 'fiat', 'v1','c1' )
-        , ('utilitario', 'Saveiro', 10000, 'volkswagen', 'v2','c1' )
+    VALUES ('taxi', 'Corsa', 300000, 'chevrolet', 'v1','c1' )
+         , ('particular', 'Gol', 300000, 'volkswagen', 'v3','c2' )
+         , ('particular', 'Clio', 300000, 'renault', 'v1','c1' )
+         , ('comercial', '208', 400000, 'peugeot', 'v1','c4' )
+         , ('comercial', 'Focus', 600000, 'ford', 'v5','c3' )
+         , ('utilitario', 'Fiorino', 600000, 'fiat', 'v1','c1' )
+         , ('utilitario', 'Saveiro', 600000, 'volkswagen', 'v2','c1' )
 
     INSERT INTO config_tecnologica(nombre)
     VALUES ('REST')
@@ -34,19 +34,25 @@ BEGIN
             , ('gobierno')
 
     INSERT INTO tipos_estado_cuentas (tipo)
-    VALUES ('inicial')
-            , ('en_proceso')
+    VALUES ('en_proceso')
             , ('pagado')
             , ('cancelado')
 
     INSERT INTO estado_sorteo(nombre)
-    VALUES ('nuevo')
-            , ('pendiente'),('completado')
+    VALUES('nuevo')
+      ,('pendiente_consumo')
+      ,('pendiente_cancelacion')
+      ,('pendiente_seleccion_ganador')
+      ,('pendiente_notificacion_ganador')
+      ,('pendiente_notificacion_concesionarias')
+      ,('completado')
+      ,('fallado')
 
     INSERT INTO estado_participante(nombre)
     VALUES ('participante')
             , ('ganador')
             , ('cancelado')
+            , ('pendiente_cancelacion')
 
     INSERT INTO estado_consumo(estado)
     VALUES ('success')
@@ -56,7 +62,7 @@ BEGIN
     VALUES ('success')
             , ('failure')
 
-    INSERT INTO concesionaria(nombre, direccion, cuit, tel, email)
+INSERT INTO concesionaria(nombre, direccion, cuit, tel, email)
     VALUES ('C1', 'La Tablada 5739', '21-93337511-1', '+5493513059161', 'c1@gmail.com')
 
     INSERT INTO usuario(documento, username, password, rol)
@@ -81,5 +87,10 @@ BEGIN
    )
    VALUES (1, 1, '2018-01-01 21:58:01', '2018-02-01 21:58:01', 10000, '2018-01-27 21:58:01')
           , (2, 1, '2018-02-01 21:58:01', '2018-03-01 21:58:01', null, null)
+
+    INSERT INTO usuario(documento, username, password, rol)
+    VALUES
+      (111, 'irocca' , 'lam'  , 'gobierno')
+
 END
 GO

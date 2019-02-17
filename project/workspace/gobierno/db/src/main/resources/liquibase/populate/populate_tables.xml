@@ -110,21 +110,6 @@
         <sqlFile path="/src/main/resources/liquibase/populate/cuotas.sql"/>
     </changeSet>
 
-    <changeSet id="Populate table estado_sorteo" author="DAS-Team" runAlways="true" runOnChange="true" context="dev">
-        <preConditions onFail="MARK_RAN">
-            <tableExists tableName="estado_sorteo"/>
-        </preConditions>
-        <sqlFile path="/src/main/resources/liquibase/populate/estado_sorteo.sql"/>
-    </changeSet>
-
-    <changeSet id="Populate table estado_participante" author="DAS-Team" runAlways="true" runOnChange="true"
-               context="dev">
-        <preConditions onFail="MARK_RAN">
-            <tableExists tableName="estado_participante"/>
-        </preConditions>
-        <sqlFile path="/src/main/resources/liquibase/populate/estado_participante.sql"/>
-    </changeSet>
-
     <!-- ***************************** -->
     <!--   CONSUMO                     -->
     <!-- ***************************** -->
@@ -142,6 +127,25 @@
             <tableExists tableName="tipo_consumo_result"/>
         </preConditions>
         <sqlFile path="/src/main/resources/liquibase/populate/consumo/tipo_consumo_result.sql"/>
+    </changeSet>
+
+    <!-- ***************************** -->
+    <!--   SORTEO                      -->
+    <!-- ***************************** -->
+
+    <changeSet id="Populate table estado_sorteo" author="DAS-Team" runAlways="true" runOnChange="true" context="dev">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="estado_sorteo"/>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/populate/sorteo/estado_sorteo.sql"/>
+    </changeSet>
+
+    <changeSet id="Populate table estado_participante" author="DAS-Team" runAlways="true" runOnChange="true"
+               context="dev">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="estado_participante"/>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/populate/sorteo/estado_participante.sql"/>
     </changeSet>
 
 </databaseChangeLog>

@@ -22,7 +22,8 @@ public class MiddlewareConstants {
 
     //************ ConcesionariaServiceContract **********************
     public static final String IDENTIFICADOR = "identificador";
-    public static final String OFFSET = "offset";
+    public static final String FROM = "from";
+    public static final String TO = "to";
     public static final String PLANID = "planId";
     public static final String CONSULTAR_PLANES = "consultarPlanes";
     public static final String CONSULTAR_PLAN = "consultarPlan";

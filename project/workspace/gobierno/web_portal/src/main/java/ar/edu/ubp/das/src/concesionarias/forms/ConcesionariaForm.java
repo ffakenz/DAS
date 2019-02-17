@@ -6,6 +6,7 @@ import ar.edu.ubp.das.mvc.db.annotations.Entity;
 import utils.JsonUtils;
 
 import java.sql.Timestamp;
+import java.util.Objects;
 
 @Entity
 public class ConcesionariaForm extends DynaActionForm {
@@ -104,5 +105,12 @@ public class ConcesionariaForm extends DynaActionForm {
 
     public void setEmail(final String email) {
         this.email = email;
+    }
+
+    @Override
+    public boolean equals(final Object other) {
+        return other instanceof ConcesionariaForm &&
+                Objects.equals(this.id, ((ConcesionariaForm) other).id) ||
+                Objects.equals(this.cuit, ((ConcesionariaForm) other).cuit);
     }
 }

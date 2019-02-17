@@ -40,7 +40,7 @@ public class TestConfigInteractor implements Interactor<String> {
         final ConcesionariaServiceContract client = clientOpt.get();
 
         try {
-            final String identificador_test = client.health("GOBIERNO-INCENTIVO-2018");
+            final String identificador_test = client.health("GOB");
             return new InteractorResponse<>(ResponseForward.SUCCESS, identificador_test);
         } catch (ClientException e) {
             e.printStackTrace();

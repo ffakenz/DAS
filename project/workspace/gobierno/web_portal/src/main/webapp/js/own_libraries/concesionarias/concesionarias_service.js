@@ -1,22 +1,29 @@
 const ConcesionariasService = {
 
     GET_CONSULTAR_TODAS() {
+        $("#loadingDiv").modal("show");
+        jUtils.executing("loadingDiv");
         $.ajax({
             url: Action.CONCESIONARIA_CONSULTAR_TODAS,
             type: "get",
             dataType: "html",
             error: function(hr){
                 console.log("AJAX RESULT GET_CONSULTAR_TODAS ERROR %o", hr.responseText);
-                jUtils.showing("concesionariasDiv", hr);
+                jUtils.showing("table_admin_result", hr);
+                $("#loadingDiv").modal("hide");
             },
             success: function(html) {
+                $("#loadingDiv").modal("hide");
                 console.log("AJAX RESULT GET_CONSULTAR_TODAS SUCCESS %o", html);
-                jUtils.showing("concesionarias_table", html);
+                jUtils.showing("table_admin_result", html);
+                $("#table_admin_result_title").html(jUtils.addTitle("Concesionarias Registradas"));
             }
         });
     },
 
     POST_TEST_CONFIG(data) {
+        $("#loadingDiv").modal("show");
+        jUtils.executing("loadingDiv");
         $.ajax({
             url: Action.TEST_CONFIG,
             type: "post",
@@ -25,17 +32,19 @@ const ConcesionariasService = {
             error: function(hr){
                 console.log("AJAX RESULT POST_TEST_CONFIG ERROR %o", hr);
                 jUtils.showing(Id.TEST_CONFIG_LABEL, hr);
+                $("#loadingDiv").modal("hide");
             },
             success: function(html) {
+                $("#loadingDiv").modal("hide");
                 console.log("AJAX RESULT POST_TEST_CONFIG SUCCESS %o", html);
                 jUtils.showing(Id.TEST_CONFIG_LABEL, html);
-                $("#modal_generic").modal("show");
             }
         });
     },
 
-    /*todo: change to get*/
     POST_CONSULTAR_CONFIG_PARAM(idConcesionaria, formConsultarConfig) {
+        $("#loadingDiv").modal("show");
+        jUtils.executing("loadingDiv");
         $.ajax({
             url: Action.CONCESIONARIA_CONSULTAR_CONFIG_PARAM,
             type: "post",
@@ -44,20 +53,24 @@ const ConcesionariasService = {
             error: function(hr){
                 console.log("AJAX RESULT POST_CONSULTAR_CONFIG_PARAM ERROR %o", hr.responseText);
                 jUtils.showing("modal_content", hr);
-                $("#modal_generic").modal("show");
+                $("#config_concesionaria_modal").modal("show");
+                $("#loadingDiv").modal("hide");
             },
             success: function(jsonArray) {
+                $("#loadingDiv").modal("hide");
                 console.log("AJAX RESULT POST_CONSULTAR_CONFIG_PARAM SUCCESS %o", jsonArray);
                 /* EACH SUCCESS CHANGES THE STATE { LAST_CONFIGS_CONSULTED_ST } USING formConsultarConfings */
                 const html = formConsultarConfig(jsonArray, idConcesionaria);
                 console.log("CONSULTAR HTML = %o", html);
                 jUtils.showing("modal_content", html);
-                $("#modal_generic").modal("show");
+                $("#config_concesionaria_modal").modal("show");
             }
         });
     },
 
     POST_APROBAR_CONCESIONARIA(idConcesionaria) {
+        $("#loadingDiv").modal("show");
+        jUtils.executing("loadingDiv");
         $.ajax({
             url: Action.APROBAR_CONCESIONARIA_ENDPOINT,
             type: "post",
@@ -66,8 +79,10 @@ const ConcesionariasService = {
             error: function(hr){
                 console.log("AJAX RESULT POST_APROBAR_CONCESIONARIA ERROR %o", hr);
                 alert("AJAX RESULT ERROR " + hr);
+                $("#loadingDiv").modal("hide");
             },
             success: function(html) {
+                $("#loadingDiv").modal("hide");
                 console.log("AJAX RESULT POST_APROBAR_CONCESIONARIA SUCCESS %o", html);
                 $(`#concesionaria_row-${idConcesionaria}`).replaceWith(html);
             }
@@ -75,6 +90,8 @@ const ConcesionariasService = {
     },
 
     POST_DESAPROBAR_CONCESIONARIA(idConcesionaria) {
+        $("#loadingDiv").modal("show");
+        jUtils.executing("loadingDiv");
         $.ajax({
             url: Action.DESAPROBAR_CONCESIONARIA_ENDPOINT,
             type: "post",
@@ -83,8 +100,10 @@ const ConcesionariasService = {
             error: function(hr){
                 console.log("AJAX RESULT POST_DESAPROBAR_CONCESIONARIA ERROR %o", hr);
                 alert("AJAX RESULT ERROR " + hr);
+                $("#loadingDiv").modal("hide");
             },
             success: function(html) {
+                $("#loadingDiv").modal("hide");
                 console.log("AJAX RESULT POST_DESAPROBAR_CONCESIONARIA SUCCESS %o", html);
                 $(`#concesionaria_row-${idConcesionaria}`).replaceWith(html);
             }
@@ -92,6 +111,8 @@ const ConcesionariasService = {
     },
 
     POST_CONFIG_CONCESIONARIA(data) {
+        $("#loadingDiv").modal("show");
+        jUtils.executing("loadingDiv");
         $.ajax({
             url: Action.CONFIG_CONCESIONARIA,
             type: "post",
@@ -99,8 +120,10 @@ const ConcesionariasService = {
             error: function(hr){
                 console.log("AJAX RESULT POST_CONFIG_CONCESIONARIA ERROR %o", hr);
                 jUtils.showing(Id.UPDATE_CONFIG_LABEL, hr);
+                $("#loadingDiv").modal("hide");
             },
             success: function(json) {
+                $("#loadingDiv").modal("hide");
                 console.log("AJAX RESULT POST_CONFIG_CONCESIONARIA SUCCESS %o", json.toString());
                 jUtils.showing(Id.UPDATE_CONFIG_LABEL, "Configurada exitosamente");
             }

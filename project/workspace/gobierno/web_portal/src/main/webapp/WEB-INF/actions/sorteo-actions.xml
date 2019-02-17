@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="../schema/actions.xsd">
+    <form-beans>
+    </form-beans>
+    <action-mappings>
+        <action type="ConsultarSorteosAction" path="/ConsultarSorteos.do">
+            <forward name="success" path="/profiles/admin/tableSorteos.jsp"/>
+        </action>
+        <action type="CrearSorteoAction" path="/CrearSorteo.do" json="true"></action>
+        <action type="ActualizarSorteoAction" path="/ActualizarSorteo.do" json="true"></action>
+
+        <action type="EjecutarSorteoAction" path="/EjecutarSorteo.do">
+        </action>
+
+        <action type="CalendarioAdminAction" path="/CalendarioAdmin.do">
+            <forward name="success" path="/profiles/admin/calendar.jsp"/>
+        </action>
+
+        <action type="CalendarCellModalAction" path="/CalendarCellModal.do">
+            <forward name="create" path="/profiles/admin/calendar/create_cell_modal.jsp"/>
+            <forward name="update" path="/profiles/admin/calendar/update_cell_modal.jsp"/>
+        </action>
+    </action-mappings>
+</actions>

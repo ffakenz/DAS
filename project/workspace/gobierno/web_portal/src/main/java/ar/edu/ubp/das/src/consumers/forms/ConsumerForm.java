@@ -3,14 +3,16 @@ package ar.edu.ubp.das.src.consumers.forms;
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.annotations.Column;
 import ar.edu.ubp.das.mvc.db.annotations.Entity;
+import utils.JsonUtils;
 
 import java.sql.Timestamp;
 import java.util.Objects;
-import java.util.StringJoiner;
 
 @Entity
 public class ConsumerForm extends DynaActionForm {
 
+    @Column(name = "id")
+    private Long id;
     @Column(name = "documento")
     private Long documento;
     @Column(name = "nombre")
@@ -24,6 +26,13 @@ public class ConsumerForm extends DynaActionForm {
     @Column(name = "fecha_de_alta") // remove setter
     private Timestamp fechaAlta;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Long getDocumento() {
         return documento;
@@ -75,14 +84,7 @@ public class ConsumerForm extends DynaActionForm {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", ConsumerForm.class.getSimpleName() + "[", "]")
-                .add("documento=" + documento)
-                .add("nombre='" + nombre + "'")
-                .add("apellido='" + apellido + "'")
-                .add("nroTelefono='" + nroTelefono + "'")
-                .add("email='" + email + "'")
-                .add("fechaAlta=" + fechaAlta)
-                .toString();
+        return JsonUtils.toJsonString(this);
     }
 
     @Override

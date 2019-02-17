@@ -23,7 +23,7 @@ public class ClientFactoryAdapterSpec {
 
     DatasourceConfig dataSourceConfig;
     MSConfigurarConcesionariaDao dao;
-    final String identificador = "GOBIERNO-INCENTIVO-2018";
+    final String identificador = "GOB";
 
     @Before
     public void setup() throws SQLException {

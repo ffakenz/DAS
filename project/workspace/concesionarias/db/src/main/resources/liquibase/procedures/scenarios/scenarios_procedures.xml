@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!-- ***************************** -->
+    <!--  DROP PROCEDURES CHANGE-SETS  -->
+    <!-- ***************************** -->
+
+    <!-- ******************************* -->
+    <!--  DROP PROCEDURES CLIENTES       -->
+    <!-- ******************************* -->
+    <changeSet id="Drop procedure get_cliente" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_concesionarias'
+                AND ROUTINE_NAME = 'get_cliente'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_cliente"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure insert_cliente" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_concesionarias'
+                AND ROUTINE_NAME = 'insert_cliente'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="insert_cliente"/>
+    </changeSet>
+
+    <!-- ******************************* -->
+    <!--  DROP PROCEDURES CUOTAS         -->
+    <!-- ******************************* -->
+    <changeSet id="Drop procedure get_cuota" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_concesionarias'
+                AND ROUTINE_NAME = 'get_cuota'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_cuota"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure insert_cuota" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_concesionarias'
+                AND ROUTINE_NAME = 'insert_cuota'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="insert_cuota"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure update_cuota" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_concesionarias'
+                AND ROUTINE_NAME = 'update_cuota'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="update_cuota"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure trigger_insert_cuotas" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_concesionarias'
+                AND ROUTINE_NAME = 'trigger_insert_cuotas'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="trigger_insert_cuotas"/>
+    </changeSet>
+
+    <!-- ******************************* -->
+    <!--  DROP PROCEDURES PLANES         -->
+    <!-- ******************************* -->
+    <changeSet id="Drop procedure get_plan" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_concesionarias'
+                AND ROUTINE_NAME = 'get_plan'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_plan"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure insert_plan" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_concesionarias'
+                AND ROUTINE_NAME = 'insert_plan'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="insert_plan"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure update_plan" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_concesionarias'
+                AND ROUTINE_NAME = 'update_plan'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="update_plan"/>
+    </changeSet>
+
+    <!-- ******************************* -->
+    <!--  DROP PROCEDURES SCENARIOS      -->
+    <!-- ******************************* -->
+    <changeSet id="Drop procedure create_plan_cliente" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_concesionarias'
+                AND ROUTINE_NAME = 'create_plan_cliente'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="create_plan_cliente"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure create_plan_new_cliente" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_concesionarias'
+                AND ROUTINE_NAME = 'create_plan_new_cliente'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="create_plan_new_cliente"/>
+    </changeSet>
+
+    <!-- ******************************* -->
+    <!--  CREATE PROCEDURES CHANGE-SETS  -->
+    <!-- ******************************* -->
+
+    <!-- ******************************* -->
+    <!--  CREATE PROCEDURES CLIENTES     -->
+    <!-- ******************************* -->
+    <changeSet id="Create procedure get_cliente" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_concesionarias'
+                AND ROUTINE_NAME = 'get_cliente'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/procedures/scenarios/clientes/get_cliente.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure insert_cliente" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_concesionarias'
+                AND ROUTINE_NAME = 'insert_cliente'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/procedures/scenarios/clientes/insert_cliente.sql"/>
+    </changeSet>
+
+    <!-- ******************************* -->
+    <!--  CREATE PROCEDURES CUOTAS       -->
+    <!-- ******************************* -->
+    <changeSet id="Create procedure get_cuota" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_concesionarias'
+                AND ROUTINE_NAME = 'get_cuota'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/procedures/scenarios/cuotas/get_cuota.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure insert_cuota" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_concesionarias'
+                AND ROUTINE_NAME = 'insert_cuota'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/procedures/scenarios/cuotas/insert_cuota.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure update_cuota" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_concesionarias'
+                AND ROUTINE_NAME = 'update_cuota'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/procedures/scenarios/cuotas/update_cuota.sql"/>
+    </changeSet>
+
+    <!-- ******************************* -->
+    <!--  CREATE PROCEDURES PLANES       -->
+    <!-- ******************************* -->
+    <changeSet id="Create procedure get_plan" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_concesionarias'
+                AND ROUTINE_NAME = 'get_plan'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/procedures/scenarios/planes/get_plan.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure insert_plan" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_concesionarias'
+                AND ROUTINE_NAME = 'insert_plan'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/procedures/scenarios/planes/insert_plan.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure update_plan" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_concesionarias'
+                AND ROUTINE_NAME = 'update_plan'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/procedures/scenarios/planes/update_plan.sql"/>
+    </changeSet>
+
+    <!-- ******************************* -->
+    <!--  CREATE PROCEDURES SCENARIOS    -->
+    <!-- ******************************* -->
+    <changeSet id="Create procedure create_plan_cliente" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_concesionarias'
+                AND ROUTINE_NAME = 'create_plan_cliente'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/procedures/scenarios/scenarios/create_plan_cliente.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure create_plan_new_cliente" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_concesionarias'
+                AND ROUTINE_NAME = 'create_plan_new_cliente'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/procedures/scenarios/scenarios/create_plan_new_cliente.sql"/>
+    </changeSet>
+
+</databaseChangeLog>

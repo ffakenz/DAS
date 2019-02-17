@@ -16,7 +16,7 @@
                 SELECT COUNT(*)
                 FROM information_schema.routines
                 WHERE ROUTINE_TYPE = 'PROCEDURE'
-                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND SPECIFIC_CATALOG = 'db_concesionarias'
                 AND ROUTINE_NAME = 'cancelar_plan'
             </sqlCheck>
         </preConditions>
@@ -30,11 +30,39 @@
                 SELECT COUNT(*)
                 FROM information_schema.routines
                 WHERE ROUTINE_TYPE = 'PROCEDURE'
-                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND SPECIFIC_CATALOG = 'db_concesionarias'
                 AND ROUTINE_NAME = 'consultar_updates'
             </sqlCheck>
         </preConditions>
         <dropProcedure procedureName="consultar_updates"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure setUpEmptyDB" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'setUpEmptyDB'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="setUpEmptyDB"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure cleanDB" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'cleanDB'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="cleanDB"/>
     </changeSet>
 
 
@@ -71,6 +99,36 @@
         </preConditions>
         <sqlFile
                 path="/src/main/resources/liquibase/procedures/consultar_updates.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure setUpEmptyDB" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_concesionarias'
+                AND ROUTINE_NAME = 'setUpEmptyDB'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/procedures/setUpEmptyDB.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure cleanDB" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_concesionarias'
+                AND ROUTINE_NAME = 'cleanDB'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/procedures/cleanDB.sql"/>
     </changeSet>
 
 </databaseChangeLog>

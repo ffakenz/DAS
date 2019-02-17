@@ -12,10 +12,13 @@ import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import utils.JsonUtils;
 
 import java.io.IOException;
 import java.net.URI;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -26,6 +29,8 @@ import java.util.stream.Stream;
 import static utils.MiddlewareConstants.*;
 
 public class RestClient implements ConcesionariaServiceContract {
+
+    protected Logger log = LoggerFactory.getLogger(RestClient.class);
 
     private final String url;
     private final HttpClient client;
@@ -119,15 +124,15 @@ public class RestClient implements ConcesionariaServiceContract {
     }
 
     @Override
-    public List<NotificationUpdate> consultarPlanes(final String identificador, final String offset) throws ClientException {
+    public List<NotificationUpdate> consultarPlanes(final String identificador, final Timestamp from, final Timestamp to) throws ClientException {
 
-
-        final String query = getQuery(CONSULTAR_PLANES, IDENTIFICADOR, OFFSET);
-        final String url = String.format(query, identificador, offset);
-
+        final String fromParsed = nanosRepr(from.toString());
+        final String toParsed = nanosRepr(to.toString());
+        final String query = getQuery(CONSULTAR_PLANES, IDENTIFICADOR, FROM, TO);
+        final String url = String.format(query, identificador, fromParsed, toParsed);
         final String jsonPlanBeans = call(GET, url);
-
         final NotificationUpdate[] notificationUpdates = JsonUtils.toObject(jsonPlanBeans, NotificationUpdate[].class);
+        log.info("[GET consultarPlanes][URL {}][jsonPlanBeansResponse = {}][notificationUpdates = {}]", url, jsonPlanBeans, notificationUpdates);
         return Stream.of(notificationUpdates).collect(Collectors.toList());
 
     }
@@ -135,21 +140,26 @@ public class RestClient implements ConcesionariaServiceContract {
     @Override
     public PlanBean consultarPlan(final String identificador, final Long planId) throws ClientException {
 
-        final String url = getQuery(CONSULTAR_PLAN, IDENTIFICADOR, PLANID);
+        final String query = getQuery(CONSULTAR_PLAN, IDENTIFICADOR, PLANID);
+        final String url = String.format(query, identificador, planId);
         final String jsonPlanBean = call(GET, url);
-
+        log.info("[GET consultarPlan][URL {}][jsonPlanBean = {}]", url, jsonPlanBean);
         return JsonUtils.toObject(jsonPlanBean, PlanBean.class);
     }
 
     @Override
     public void cancelarPlan(final String identificador, final Long planId) throws ClientException {
-        final String url = getQuery(CANCELAR_PLAN, IDENTIFICADOR, PLANID);
+
+        final String query = getQuery(CANCELAR_PLAN, IDENTIFICADOR, PLANID);
+        final String url = String.format(query, identificador, planId);
         fireAndForget(PUT, url);
+        log.info("[PUT cancelarPlan][URL {}]", url);
     }
 
     @Override
     public String health(final String identificador) throws ClientException {
         final String url = getQuery(HEALTH, IDENTIFICADOR);
-        return call(GET, url);
+        log.info("[GET health][URL {}]", url);
+        return call(GET, String.format(url, identificador));
     }
 }

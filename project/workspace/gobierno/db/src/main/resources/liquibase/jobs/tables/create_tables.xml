@@ -57,6 +57,16 @@
         <sqlFile path="/src/main/resources/liquibase/jobs/tables/consumo/consumo_result.sql"/>
     </changeSet>
 
+
+    <changeSet id="Create table notification_update" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="notification_update"/>
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/jobs/tables/consumo/notification_update.sql"/>
+    </changeSet>
+
     <!-- ***************************** -->
     <!--   SORTEO                      -->
     <!-- ***************************** -->
@@ -67,7 +77,7 @@
                 <tableExists tableName="estado_sorteo"/>
             </not>
         </preConditions>
-        <sqlFile path="/src/main/resources/liquibase/jobs/tables/estado_sorteo.sql"/>
+        <sqlFile path="/src/main/resources/liquibase/jobs/tables/sorteo/estado_sorteo.sql"/>
     </changeSet>
 
     <changeSet id="Create table sorteos" author="DAS-Team" runAlways="true" runOnChange="true">
@@ -76,7 +86,7 @@
                 <tableExists tableName="sorteos"/>
             </not>
         </preConditions>
-        <sqlFile path="/src/main/resources/liquibase/jobs/tables/sorteos.sql"/>
+        <sqlFile path="/src/main/resources/liquibase/jobs/tables/sorteo/sorteos.sql"/>
     </changeSet>
 
     <changeSet id="Create table estado_participante" author="DAS-Team" runAlways="true" runOnChange="true">
@@ -85,7 +95,7 @@
                 <tableExists tableName="estado_participante"/>
             </not>
         </preConditions>
-        <sqlFile path="/src/main/resources/liquibase/jobs/tables/estado_participante.sql"/>
+        <sqlFile path="/src/main/resources/liquibase/jobs/tables/sorteo/estado_participante.sql"/>
     </changeSet>
 
     <changeSet id="Create table participantes" author="DAS-Team" runAlways="true" runOnChange="true">
@@ -94,7 +104,28 @@
                 <tableExists tableName="participantes"/>
             </not>
         </preConditions>
-        <sqlFile path="/src/main/resources/liquibase/jobs/tables/participantes.sql"/>
+        <sqlFile path="/src/main/resources/liquibase/jobs/tables/sorteo/participantes.sql"/>
+    </changeSet>
+
+    <changeSet id="Create table concesionarias_notificadas" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="concesionarias_notificadas"/>
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/jobs/tables/sorteo/concesionarias_notificadas.sql"/>
+    </changeSet>
+
+    <!-- ***************************** -->
+    <!--   CONSUMO ABSOLUTO            -->
+    <!-- ***************************** -->
+    <changeSet id="Create table consumo_absoluto" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="consumo_absoluto"/>
+            </not>
+        </preConditions>
+        <sqlFile path="/src/main/resources/liquibase/jobs/tables/consumo_absoluto/consumo_absoluto.sql"/>
     </changeSet>
 
 </databaseChangeLog>

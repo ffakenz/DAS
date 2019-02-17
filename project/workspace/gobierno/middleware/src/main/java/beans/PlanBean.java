@@ -5,6 +5,7 @@ import utils.JsonUtils;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlanBean implements Serializable {
@@ -54,11 +55,13 @@ public class PlanBean implements Serializable {
         bean.setPlanFechaAlta(notificationUpdate.getPlanFechaAlta());
         bean.setPlanFechaUltimaActualizacion(notificationUpdate.getPlanFechaUltimaActualizacion());
         bean.setPlanTipoDePlan(notificationUpdate.getPlanTipoDePlan());
+
         bean.setClienteDocumento(notificationUpdate.getClienteDocumento());
         bean.setClienteApellido(notificationUpdate.getClienteApellido());
         bean.setClienteNombre(notificationUpdate.getClienteNombre());
         bean.setClienteEmail(notificationUpdate.getClienteApellido());
         bean.setClienteNroTelefono(notificationUpdate.getClienteNroTelefono());
+
         bean.setVehiculoId(notificationUpdate.getVehiculoId());
         bean.setVehiculoMarca(notificationUpdate.getVehiculoMarca());
         bean.setVehiculoModelo(notificationUpdate.getVehiculoModelo());
@@ -66,8 +69,45 @@ public class PlanBean implements Serializable {
         bean.setVehiculoPrecio(notificationUpdate.getVehiculoPrecio());
         bean.setVehiculoColor(notificationUpdate.getVehiculoColor());
         bean.setVehiculoTipo(notificationUpdate.getVehiculoTipo());
+
         bean.setCuotas(cuotas);
         return bean;
+    }
+
+
+    public List<NotificationUpdate> toNotificationUpdates() {
+        final List<NotificationUpdate> updates = new ArrayList<>();
+        for (final CuotaBean cuota : this.cuotas) {
+            final NotificationUpdate update = new NotificationUpdate();
+            update.setPlanId(this.planId);
+            update.setPlanEstado(this.planEstado);
+            update.setPlanFechaAlta(this.planFechaAlta);
+            update.setPlanFechaUltimaActualizacion(this.getPlanFechaUltimaActualizacion());
+            update.setPlanTipoDePlan(this.planTipoDePlan);
+
+            update.setClienteDocumento(this.clienteDocumento);
+            update.setClienteApellido(this.clienteApellido);
+            update.setClienteNombre(this.clienteNombre);
+            update.setClienteEmail(this.clienteEmail);
+            update.setClienteNroTelefono(this.clienteNroTelefono);
+
+            update.setVehiculoId(this.getVehiculoId());
+            update.setVehiculoMarca(this.getVehiculoMarca());
+            update.setVehiculoModelo(this.getVehiculoModelo());
+            update.setVehiculoNombre(this.getVehiculoNombre());
+            update.setVehiculoPrecio(this.getVehiculoPrecio());
+            update.setVehiculoColor(this.getVehiculoColor());
+            update.setVehiculoTipo(this.getVehiculoTipo());
+
+            update.setCuotaNroCuota(cuota.getCuotaNroCuota());
+            update.setCuotaFechaAlta(cuota.getCuotaFechaAlta());
+            update.setCuotaFechaPago(cuota.getCuotaFechaPago());
+            update.setCuotaFechaVencimiento(cuota.getCuotaFechaVencimiento());
+            update.setCuotaMonto(cuota.getCuotaMonto());
+
+            updates.add(update);
+        }
+        return updates;
     }
 
     @Override

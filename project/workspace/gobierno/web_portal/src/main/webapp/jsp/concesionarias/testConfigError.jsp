@@ -1,1 +1,1 @@
-<div>FAIL</div>
+FAIL

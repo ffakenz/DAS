@@ -9,13 +9,13 @@ BEGIN
     	    , ('utilitario')
 
     INSERT INTO vehiculos(tipo, nombre, precio, marca, modelo, color)
-    VALUES  ('taxi', 'Corsa', 10000, 'chevrolet', 'v1','c1' )
-    	    , ('particular', 'Gol', 10000, 'volkswagen', 'v3','c2' )
-    	    , ('particular', 'Clio', 10000, 'renault', 'v1','c1' )
-    	    , ('comercial', '208', 10000, 'peugeot', 'v1','c4' )
-    	    , ('comercial', 'Focus', 10000, 'ford', 'v5','c3' )
-    	    , ('utilitario', 'Fiorino', 10000, 'fiat', 'v1','c1' )
-    	    , ('utilitario', 'Saveiro', 10000, 'volkswagen', 'v2','c1' )
+    VALUES ('taxi', 'Corsa', 300000, 'chevrolet', 'v1','c1' )
+         , ('particular', 'Gol', 300000, 'volkswagen', 'v3','c2' )
+         , ('particular', 'Clio', 300000, 'renault', 'v1','c1' )
+         , ('comercial', '208', 400000, 'peugeot', 'v1','c4' )
+         , ('comercial', 'Focus', 600000, 'ford', 'v5','c3' )
+         , ('utilitario', 'Fiorino', 600000, 'fiat', 'v1','c1' )
+         , ('utilitario', 'Saveiro', 600000, 'volkswagen', 'v2','c1' )
 
     INSERT INTO config_tecnologica(nombre)
     VALUES  ('REST')
@@ -23,7 +23,7 @@ BEGIN
           , ('AXIS')
 
     INSERT INTO config_param (config_tecnologica, nombre)
-        VALUES ('AXIS', 'endpointUrl')
+    VALUES ('AXIS', 'endpointUrl')
              , ('AXIS', 'targetNameSpace')
              , ('CXF', 'wsdlUrl')
              , ('REST', 'url')
@@ -58,11 +58,11 @@ BEGIN
 
     INSERT INTO usuario(documento, username, password, rol)
     VALUES (111, 'irocca' , 'lam'  , 'gobierno')
-	       , (222, 'ffakenz', '123'  , 'gobierno')
-         , (1, 'pepe'   , 'perez', 'consumer')
-         , (2, 'ricky'  , 'fort' , 'consumer')
-         , (3,  null    ,  null  , 'consumer')
-         , (4,  null    ,  null  , 'consumer')
+	        , (222, 'ffakenz', '123'  , 'gobierno')
+            , (1, 'pepe'   , 'perez', 'consumer')
+            , (2, 'ricky'  , 'fort' , 'consumer')
+            , (3,  null    ,  null  , 'consumer')
+            , (4,  null    ,  null  , 'consumer')
 
     INSERT INTO consumers
         (documento, nombre, apellido, nro_telefono, email)
@@ -74,10 +74,9 @@ BEGIN
         --, (666, 'Pamela', 'Anderson', '35156345677', 'pamelaanderson@mail.com')
 
     INSERT INTO tipos_estado_cuentas (tipo)
-        VALUES ('inicial')
-            ,('en_proceso')
-            ,('pagado')
-            ,('cancelado')
+        VALUES ('en_proceso')
+                , ('pagado')
+                , ('cancelado')
 
     INSERT INTO estado_cuentas
       ( concesionaria, nro_plan_concesionaria, dni_consumer, vehiculo, fecha_alta_concesionaria, estado)
@@ -119,13 +118,19 @@ BEGIN
 
     -- SORTEO
     INSERT INTO estado_sorteo(nombre)
-    VALUES('nuevo'),('pendiente'),('completado')
-
-    INSERT INTO sorteos (mes_sorteo, estado, fecha_ejecucion)
-    VALUES(10, 'completado', GETDATE())
+    VALUES('nuevo')
+      ,('pendiente_consumo')
+      ,('pendiente_cancelacion')
+      ,('pendiente_notificacion_ganador')
+      ,('pendiente_notificacion_concesionarias')
+      ,('completado')
+      ,('fallado')
 
     INSERT INTO estado_participante(nombre)
-    VALUES('participante'),('ganador'),('cancelado')
+    VALUES ('participante')
+            , ('ganador')
+            , ('cancelado')
+            , ('pendiente_cancelacion')
 
     INSERT INTO participantes(id_sorteo, id_plan, estado)
     VALUES (1, 4, 'ganador')

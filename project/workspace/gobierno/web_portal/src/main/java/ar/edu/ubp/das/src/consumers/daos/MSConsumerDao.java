@@ -32,9 +32,11 @@ public class MSConsumerDao extends DaoImpl<ConsumerForm> {
     }
 
     @Override
-    public List<ConsumerForm> select(final ConsumerForm form) throws SQLException {
-        return this.executeQueryProcedure("dbo.get_consumers", form);
+    public List<ConsumerForm> select(ConsumerForm form) throws SQLException {
+        return this.executeQueryProcedure("dbo.get_consumers", null);
     }
+
+
 
     @Override
     public boolean valid(final ConsumerForm form) throws SQLException {
@@ -50,6 +52,15 @@ public class MSConsumerDao extends DaoImpl<ConsumerForm> {
         return this.executeQueryProcedure("dbo.get_consumer_by_documento(?)",
                 form, "documento")
                 .stream()
+                .findFirst();
+
+    }
+
+    public Optional<ConsumerForm> selectById(Long id) throws SQLException {
+
+        return select(null)
+                .stream()
+                .filter( c -> c.getId().equals(id))
                 .findFirst();
 
     }

@@ -56,4 +56,9 @@
     <!-- ########################################### -->
     <include file="/src/main/resources/liquibase/test/test_procedures.xml"/>
 
+    <!-- ########################################### -->
+    <!-- Main create and drop views change-sets      -->
+    <!-- ########################################### -->
+    <include file="/src/main/resources/liquibase/jobs/views/views.xml"/>
+
 </databaseChangeLog>

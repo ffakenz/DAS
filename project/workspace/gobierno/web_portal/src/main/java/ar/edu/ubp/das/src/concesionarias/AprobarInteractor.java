@@ -36,7 +36,7 @@ public class AprobarInteractor implements Interactor<Boolean> {
         if (!concesionariaToApprove.isPresent())
             return new InteractorResponse<>(ResponseForward.FAILURE, false);
 
-        concesionariaForm.setCodigo(generarCodigo(concesionariaForm));
+            concesionariaForm.setCodigo(generarCodigo(concesionariaForm));
         concesionariasManager.getDao().approveConcesionaria(concesionariaForm);
         return new InteractorResponse<>(ResponseForward.SUCCESS, true);
     }

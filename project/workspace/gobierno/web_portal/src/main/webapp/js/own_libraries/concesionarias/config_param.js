@@ -36,22 +36,37 @@ class ConfigParam {
     showFooter() {
         return `
                <div class="form-group">
-                   <button type="button" id="${Class.BTN_UPDATE_CONFIG}-${this.concesionariaId}" class="${Class.BTN_UPDATE_CONFIG}">Update</button>
+                   <button type="button" id="${Class.UPDATE_CONFIG_BTN}-${this.concesionariaId}" class="${Class.UPDATE_CONFIG_BTN} btn btn-success">Update</button>
                    <label id="${Id.UPDATE_CONFIG_LABEL}"></label>
                </div>
                <div class="form-group">
-                   <button type="button" id="${Class.BTN_TEST_CONFIG}-${this.concesionariaId}" class="${Class.BTN_TEST_CONFIG}">Test</button>
+                   <button type="button" id="${Class.TEST_CONFIG_BTN}-${this.concesionariaId}" class="${Class.TEST_CONFIG_BTN} btn btn-info">Test</button>
                    <label id="${Id.TEST_CONFIG_LABEL}"></label>
-               </div>`;
+               </div>
+               <div class="form-group">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+              </div>
+              `;
     }
 
     showForm(){
         return `
-            <form id="${Id.UPDATE_CONFIG_FORM}" class="form-horizontal" method="post" >
-                    ${this.showHeader()}
-                    ${this.showControls()}
-                    ${this.showFooter()}
-            </form>
+            <div class="modal-header">
+                <h5 class="modal-title">Actualizar Config Param</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="${Id.UPDATE_CONFIG_FORM}" class="form-horizontal" method="post" >
+                        ${this.showHeader()}
+                        ${this.showControls()}
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                ${this.showFooter()}
+            </div>
         `;
     }
 };

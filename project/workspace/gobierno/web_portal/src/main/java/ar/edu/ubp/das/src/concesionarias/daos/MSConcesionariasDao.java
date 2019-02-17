@@ -59,6 +59,13 @@ public class MSConcesionariasDao extends DaoImpl<ConcesionariaForm> {
                 .findFirst();
     }
 
+    public Optional<ConcesionariaForm> selectByCuit(final ConcesionariaForm form) throws SQLException {
+        return this.executeQueryProcedure("dbo.get_concesionaria_by_cuit(?)", form,
+                "cuit")
+                .stream()
+                .findFirst();
+    }
+
     public Optional<ConcesionariaForm> selectByCodigo(final ConcesionariaForm form) throws SQLException {
         return this.executeQueryProcedure("dbo.get_concesionaria_by_codigo(?)", form,
                 "codigo")
@@ -68,6 +75,15 @@ public class MSConcesionariasDao extends DaoImpl<ConcesionariaForm> {
 
     public List<ConcesionariaForm> selectAprobadas() throws SQLException {
         return this.executeQueryProcedure("dbo.get_aprobadas");
+    }
+
+    public List<ConcesionariaForm> selectAprobadasDesactualizadas(final Integer days) throws SQLException {
+        this.connect();
+        this.setProcedure("dbo.get_aprobadas_desactualizadas(?)", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        this.setParameter(1, days);
+        final List<ConcesionariaForm> result = this.executeQuery();
+        this.disconnect();
+        return result;
     }
 
     public void approveConcesionaria(final ConcesionariaForm form) throws SQLException {

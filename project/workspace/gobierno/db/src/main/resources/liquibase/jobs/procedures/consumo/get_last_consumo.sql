@@ -3,5 +3,4 @@ CREATE PROCEDURE get_last_consumo (
 ) AS
 SELECT TOP 1 *
 FROM consumo
-WHERE id_concesionaria = @id_concesionaria
-ORDER BY id DESC;
+WHERE id_concesionaria = @id_concesionaria;

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!-- ***************************** -->
+    <!--   TABLE DROP CHANGE-SETS      -->
+    <!-- ***************************** -->
+    <changeSet id="Drop view consumo_results" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <viewExists viewName="consumo_results"/>
+        </preConditions>
+        <dropView schemaName="dbo"
+                  viewName="consumo_results"/>
+    </changeSet>
+    <changeSet id="Create view consumo_results" author="DAS-Team" runAlways="true" runOnChange="true">
+        <createView replaceIfExists="true"
+                    schemaName="dbo"
+                    viewName="consumo_results">
+            SELECT
+            jc.id AS 'job_id'
+            , jc.fecha AS 'job_fecha_ejecucion'
+            , c.id AS 'consumo_id'
+            , c.id_concesionaria AS 'concesionaria_id'
+            , c.estado AS 'estado_consumo'
+            , c.[from] AS 'from_consumo'
+            , c.[to] AS 'to_consumo'
+            , c.id_request_resp AS 'id_request_resp_consumo'
+            , c.description AS 'estado_description'
+            , cr.id AS 'consumo_result_id'
+            , cr.result AS 'consumo_result'
+            , cr.description AS 'consumo_result_description'
+            FROM job_consumo jc
+            INNER JOIN consumo c
+            ON c.id_job_consumo = jc.id
+            INNER JOIN consumo_result cr
+            ON cr.id_concesionaria = c.id_concesionaria
+            AND cr.id_consumo = c.id
+        </createView>
+    </changeSet>
+</databaseChangeLog>

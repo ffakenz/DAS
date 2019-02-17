@@ -9,6 +9,137 @@
     <!--  DROP PROCEDURES CHANGE-SETS  -->
     <!-- ***************************** -->
 
+    <changeSet id="Drop procedure cleanDB" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'cleanDB'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="cleanDB"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure setUpEmptyDB" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'setUpEmptyDB'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="setUpEmptyDB"/>
+    </changeSet>
+
+    <!-- ******************************* -->
+    <!--  DROPS CONSUMO   ABSOLUTO       -->
+    <!-- ******************************* -->
+
+
+    <changeSet id="Drop procedure log_consumo_absoluto" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_consumo_absoluto'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="log_consumo_absoluto"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure get_consumo_absoluto_by_plan_and_cid_and_sid" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_consumo_absoluto_by_plan_and_cid_and_sid'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_consumo_absoluto_by_plan_and_cid_and_sid"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure get_consumo_absoluto_by_cid_and_sid" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_consumo_absoluto_by_cid_and_sid'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_consumo_absoluto_by_cid_and_sid"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure get_consumo_absoluto_by_sorteo" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_consumo_absoluto_by_sorteo'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_consumo_absoluto_by_sorteo"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure get_aprobadas_desactualizadas" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_aprobadas_desactualizadas'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_aprobadas_desactualizadas"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure log_consumo_absoluto_concesionaria" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_consumo_absoluto_concesionaria'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="log_consumo_absoluto_concesionaria"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure log_consumo_absoluto_concesionaria_plan" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_consumo_absoluto_concesionaria_plan'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="log_consumo_absoluto_concesionaria_plan"/>
+    </changeSet>
+
     <!-- ******************************* -->
     <!--  DROPS CONSUMO                  -->
     <!-- ******************************* -->
@@ -25,6 +156,48 @@
             </sqlCheck>
         </preConditions>
         <dropProcedure procedureName="log_job_consumo"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure get_consumos" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_consumos'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_consumos"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure get_consumo_jobs" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_consumo_jobs'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_consumo_jobs"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure get_consumo_results" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_consumo_results'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_consumo_results"/>
     </changeSet>
 
     <changeSet id="Drop procedure get_last_job" author="DAS-Team" runAlways="true"
@@ -83,9 +256,120 @@
         <dropProcedure procedureName="get_last_consumo"/>
     </changeSet>
 
+    <changeSet id="Drop procedure get_job_by_id" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_job_by_id'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_job_by_id"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure is_valid_notification_update" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'is_valid_notification_update'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="is_valid_notification_update"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure log_notification_update" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_notification_update'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="log_notification_update"/>
+    </changeSet>
+
     <!-- ******************************* -->
     <!--  DROPS SORTEO                   -->
     <!-- ******************************* -->
+    <changeSet id="Drop procedure get_concesionarias_notificadas" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_concesionarias_notificadas'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_concesionarias_notificadas"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure get_ganador_by_sorteo_id" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_ganador_by_sorteo_id'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_ganador_by_sorteo_id"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure log_sorteo_with_estado" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_sorteo_with_estado'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="log_sorteo_with_estado"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure get_sorteos_pendientes" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_sorteos_pendientes'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_sorteos_pendientes"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure log_concesionarias_notificadas" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_concesionarias_notificadas'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="log_concesionarias_notificadas"/>
+    </changeSet>
 
     <changeSet id="Drop procedure get_ultimo_ganador" author="DAS-Team" runAlways="true"
                runOnChange="true">
@@ -101,7 +385,7 @@
         <dropProcedure procedureName="get_ultimo_ganador"/>
     </changeSet>
 
-    <changeSet id="Drop procedure insert_participante" author="DAS-Team" runAlways="true"
+    <changeSet id="Drop procedure log_sorteo" author="DAS-Team" runAlways="true"
                runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="1">
@@ -109,13 +393,13 @@
                 FROM information_schema.routines
                 WHERE ROUTINE_TYPE = 'PROCEDURE'
                 AND SPECIFIC_CATALOG = 'db_gobierno'
-                AND ROUTINE_NAME = 'insert_participante'
+                AND ROUTINE_NAME = 'log_sorteo'
             </sqlCheck>
         </preConditions>
-        <dropProcedure procedureName="insert_participante"/>
+        <dropProcedure procedureName="log_sorteo"/>
     </changeSet>
 
-    <changeSet id="Drop procedure update_participante" author="DAS-Team" runAlways="true"
+    <changeSet id="Drop procedure log_participante" author="DAS-Team" runAlways="true"
                runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="1">
@@ -123,16 +407,286 @@
                 FROM information_schema.routines
                 WHERE ROUTINE_TYPE = 'PROCEDURE'
                 AND SPECIFIC_CATALOG = 'db_gobierno'
-                AND ROUTINE_NAME = 'update_participante'
+                AND ROUTINE_NAME = 'log_participante'
             </sqlCheck>
         </preConditions>
-        <dropProcedure procedureName="update_participante"/>
+        <dropProcedure procedureName="log_participante"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure update_estado_participante" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'update_estado_participante'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="update_estado_participante"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure actualizar_fecha_sorteo" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'actualizar_fecha_sorteo'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="actualizar_fecha_sorteo"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure get_sorteos" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_sorteos'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_sorteos"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure update_estado_sorteo" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'update_estado_sorteo'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="update_estado_sorteo"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure get_participantes" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_participantes'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_participantes"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure update_sorteo" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'update_sorteo'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="update_sorteo"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure update_sorteo_fecha_ejecucion" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'update_sorteo_fecha_ejecucion'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="update_sorteo_fecha_ejecucion"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure get_detalle_sorteo" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_detalle_sorteo'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_detalle_sorteo"/>
+    </changeSet>
+
+    <!-- ******************************* -->
+    <!--  QUERIES                        -->
+    <!-- ******************************* -->
+    <changeSet id="Drop procedure get_job_results_report" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_job_results_report'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_job_results_report"/>
     </changeSet>
 
 
     <!-- ******************************* -->
     <!--  CREATE PROCEDURES CHANGE-SETS  -->
     <!-- ******************************* -->
+
+
+    <changeSet id="Create procedure cleanDB" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'cleanDB'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/cleanDB.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure setUpEmptyDB" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'setUpEmptyDB'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/setUpEmptyDB.sql"/>
+    </changeSet>
+
+
+    <!-- ******************************* -->
+    <!--  CREATE CONSUMO ABSOLUTO        -->
+    <!-- ******************************* -->
+    <changeSet id="Create procedure log_consumo_absoluto" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_consumo_absoluto'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/consumo_absoluto/log_consumo_absoluto.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure get_consumo_absoluto_by_plan_and_cid_and_sid" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_consumo_absoluto_by_plan_and_cid_and_sid'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/consumo_absoluto/get_consumo_absoluto_by_plan_and_cid_and_sid.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure get_consumo_absoluto_by_sorteo" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_consumo_absoluto_by_sorteo'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/consumo_absoluto/get_consumo_absoluto_by_sorteo.sql"/>
+    </changeSet>
+
+
+    <changeSet id="Create procedure get_consumo_absoluto_by_cid_and_sid" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_consumo_absoluto_by_cid_and_sid'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/consumo_absoluto/get_consumo_absoluto_by_cid_and_sid.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure get_aprobadas_desactualizadas" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_aprobadas_desactualizadas'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/consumo_absoluto/get_aprobadas_desactualizadas.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure log_consumo_absoluto_concesionaria" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_consumo_absoluto_concesionaria'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/consumo_absoluto/log_consumo_absoluto_concesionaria.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure log_consumo_absoluto_concesionaria_plan" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_consumo_absoluto_concesionaria_plan'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/consumo_absoluto/log_consumo_absoluto_concesionaria_plan.sql"/>
+    </changeSet>
 
     <!-- ******************************* -->
     <!--  CREATE CONSUMO                 -->
@@ -151,6 +705,51 @@
         </preConditions>
         <sqlFile
                 path="/src/main/resources/liquibase/jobs/procedures/consumo/log_job_consumo.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure get_consumos" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_consumos'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/consumo/get_consumos.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure get_consumo_jobs" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_consumo_jobs'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/consumo/get_consumo_jobs.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure get_consumo_results" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_consumo_results'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/consumo/get_consumo_results.sql"/>
     </changeSet>
 
     <changeSet id="Create procedure get_last_job" author="DAS-Team" runAlways="true"
@@ -213,9 +812,129 @@
                 path="/src/main/resources/liquibase/jobs/procedures/consumo/get_last_consumo.sql"/>
     </changeSet>
 
+    <changeSet id="Create procedure get_job_by_id" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_job_by_id'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/consumo/get_job_by_id.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure is_valid_notification_update" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'is_valid_notification_update'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/consumo/is_valid_notification_update.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure log_notification_update" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_notification_update'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/consumo/log_notification_update.sql"/>
+    </changeSet>
+
     <!-- ******************************* -->
     <!--  CREATE SORTEO                  -->
     <!-- ******************************* -->
+
+    <changeSet id="Create procedure get_concesionarias_notificadas" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_concesionarias_notificadas'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/sorteo/get_concesionarias_notificadas.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure get_ganador_by_sorteo_id" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_ganador_by_sorteo_id'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/sorteo/get_ganador_by_sorteo_id.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure log_sorteo_with_estado" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_sorteo_with_estado'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/sorteo/log_sorteo_with_estado.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure get_sorteos_pendientes" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_sorteos_pendientes'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/sorteo/get_sorteos_pendientes.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure log_concesionarias_notificadas" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'log_concesionarias_notificadas'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/sorteo/log_concesionarias_notificadas.sql"/>
+    </changeSet>
 
     <changeSet id="Create procedure get_ultimo_ganador" author="DAS-Team" runAlways="true"
                runOnChange="true">
@@ -229,10 +948,10 @@
             </sqlCheck>
         </preConditions>
         <sqlFile
-                path="/src/main/resources/liquibase/jobs/procedures/get_ultimo_ganador.sql"/>
+                path="/src/main/resources/liquibase/jobs/procedures/sorteo/get_ultimo_ganador.sql"/>
     </changeSet>
 
-    <changeSet id="Create procedure insert_participante" author="DAS-Team" runAlways="true"
+    <changeSet id="Create procedure log_sorteo" author="DAS-Team" runAlways="true"
                runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
@@ -240,14 +959,14 @@
                 FROM information_schema.routines
                 WHERE ROUTINE_TYPE = 'PROCEDURE'
                 AND SPECIFIC_CATALOG = 'db_gobierno'
-                AND ROUTINE_NAME = 'insert_participante'
+                AND ROUTINE_NAME = 'log_sorteo'
             </sqlCheck>
         </preConditions>
         <sqlFile
-                path="/src/main/resources/liquibase/jobs/procedures/insert_participante.sql"/>
+                path="/src/main/resources/liquibase/jobs/procedures/sorteo/log_sorteo.sql"/>
     </changeSet>
 
-    <changeSet id="Create procedure update_participante" author="DAS-Team" runAlways="true"
+    <changeSet id="Create procedure log_participante" author="DAS-Team" runAlways="true"
                runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
@@ -255,11 +974,150 @@
                 FROM information_schema.routines
                 WHERE ROUTINE_TYPE = 'PROCEDURE'
                 AND SPECIFIC_CATALOG = 'db_gobierno'
-                AND ROUTINE_NAME = 'update_participante'
+                AND ROUTINE_NAME = 'log_participante'
             </sqlCheck>
         </preConditions>
         <sqlFile
-                path="/src/main/resources/liquibase/jobs/procedures/update_participante.sql"/>
+                path="/src/main/resources/liquibase/jobs/procedures/sorteo/log_participante.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure update_estado_participante" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'update_estado_participante'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/sorteo/update_estado_participante.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure actualizar_fecha_sorteo" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'actualizar_fecha_sorteo'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/sorteo/actualizar_fecha_sorteo.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure get_sorteos" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_sorteos'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/sorteo/get_sorteos.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure update_estado_sorteo" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'update_estado_sorteo'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/sorteo/update_estado_sorteo.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure get_participantes" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_participantes'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/sorteo/get_participantes.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure update_sorteo_fecha_ejecucion" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'update_sorteo_fecha_ejecucion'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/sorteo/update_sorteo_fecha_ejecucion.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure update_sorteo" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'update_sorteo'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/sorteo/update_sorteo.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure get_detalle_sorteo" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_detalle_sorteo'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/sorteo/get_detalle_sorteo.sql"/>
+    </changeSet>
+
+
+    <!-- ******************************* -->
+    <!--  QUERIES                        -->
+    <!-- ******************************* -->
+    <changeSet id="Create procedure get_job_results_report" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_job_results_report'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/views/get_job_results_report.sql"/>
     </changeSet>
 
 </databaseChangeLog>

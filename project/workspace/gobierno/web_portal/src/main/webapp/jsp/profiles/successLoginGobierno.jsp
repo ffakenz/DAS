@@ -8,55 +8,85 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <fmt:setBundle basename="properties.etiquetas" var="etq" scope="session"/>
+<fmt:setLocale value="${idioma}" scope="session" />
 
 <!DOCTYPE html>
-
 <html>
-
     <%@include file="../commons/head.jsp" %>
-
+    <link type="text/css" rel="stylesheet" href="/web_portal/util/StyleSheet.do/load=simple-sidebar" />
+    <link type="text/css" rel="stylesheet" href="/web_portal/util/StyleSheet.do/load=admin" />
     <body>
 
-        <div class="content-body">
+        <div class="d-flex" id="wrapper">
 
-            <%@include file="../commons/header.jsp"%>
-
-            <div class="page-header text-center">
-                <h3>USUARIO ADMIN CORRECTO ... ( Session de login nº:  ${sessionScope.ssid} )</h3>
+            <!-- Sidebar -->
+            <div class="bg-light border-right" id="sidebar-wrapper">
+                <div class="sidebar-heading">Administrador</div>
+                <div id="admin_side_bar" class="list-group list-group-flush">
+                    <a id="show_config_concesionarias_btn" class="list-group-item list-group-item-action bg-light">Configurar concesionarias</a>
+                    <a id="show_sorteos_btn" class="list-group-item list-group-item-action bg-light">Sorteos</a>
+                    <a id="show_planes_btn" class="list-group-item list-group-item-action bg-light">Planes</a>
+                    <a id="show_job_results_report_btn" class="list-group-item list-group-item-action bg-light">Job Results Report</a>
+                    <a id="execute_consumo_btn" class="list-group-item list-group-item-action bg-light">Consumir planes</a>
+                    <a id="execute_sorteo_btn" class="list-group-item list-group-item-action bg-light">Ejecutar sorteo</a>
+                </div>
             </div>
+            <!-- /#sidebar-wrapper -->
 
-            <br>
+            <!-- Page Content -->
+            <div id="page-content-wrapper">
 
-            <div id="test_consumo_div">
-                <button id="test_consumo_btn" name="test_consumo_btn" class="btn btn-outline-primary btn-lg btn-block">TEST CONSUMO</button>
-            </div>
+                <!-- ### HEADER ### -->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom" style="padding-left: 80% !IMPORTANT;">
+                    <div id="go_to_home_div" style="margin-right: 5px;">
+                        <button id="go_to_home_btn" name="login" class="btn btn-primary pull-right" >Volver al home</button>
+                    </div>
+                    <div id="logout_div" style="margin-left: 5px;">
+                        <button id="logout_btn" name="logout" class="btn btn-primary pull-right">Cerrar Sesion</button>
+                    </div>
+                    <%@include file="../commons/language.jsp" %>
 
-            <br>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </nav>
 
-            <div id="concesionariasDiv" class="container">
-                <table id="concesionarias_table"  class="table table-striped table-bordered" style="width:100%">
-                </table>
-            </div>
+                <div id="page_content_administrador_div" class="container-fluid">
 
-            <!-- Modal -->
-            <div class="modal fade" id="modal_generic" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel"> CONFIGURAR CONCESIONARIA </h4>
+                    <div id="calendario">
+                        <link type="text/css" rel="stylesheet" href="/web_portal/util/StyleSheet.do/load=calendar" />
+                        <div id="calendar_main_div"></div>
+                    </div>
+                    <div id="content_admin_page_div">
+                        <div id="table_admin_result_title"></div>
+                        <table id="table_admin_result" class="table table-hover">
+                        </table>
+                    </div>
+
+                    <%@include file="../commons/resultado.jsp"%>
+
+                    <!-- Modal -->
+                    <div class="modal">
+                        <div class="modal-dialog modal-dialog-centered modal-sm">
+                            <div id="loadingDiv" class="modal-content">
+                            </div>
                         </div>
-                        <div class="modal-body" id="modal_content" style="overflow-x: scroll;"></div>
+                    </div>
+
+                    <div class="modal" id="config_concesionaria_modal">
+                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                            <div id="modal_content" class="modal-content">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-
+            <!-- /#page-content-wrapper -->
         </div>
+        <!-- /#wrapper -->
     </body>
 
-    <%@include file="../commons/footer.jsp"%>
-    <%@include file="../js_imports/home.jsp"%>
-    <%@include file="../js_imports/login.jsp"%>
-    <%@include file="../js_imports/concesionarias.jsp"%>
 
+    <%@include file="../commons/footer.jsp"%>
+    <label>USUARIO ADMIN CORRECTO ... ( Session de login nº:  ${sessionScope.ssid} )</label>
 </html>

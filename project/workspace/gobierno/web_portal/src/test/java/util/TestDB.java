@@ -44,28 +44,32 @@ public class TestDB extends DaoImpl<Boolean> {
         return dataSourceConfig;
     }
 
-    @Override
     public void insert(final Boolean form) throws SQLException {
 
     }
 
-    @Override
     public void update(final Boolean form) throws SQLException {
 
     }
 
-    @Override
     public void delete(final Boolean form) throws SQLException {
 
     }
 
-    @Override
     public List<Boolean> select(final Boolean form) throws SQLException {
         return null;
     }
 
-    @Override
     public boolean valid(final Boolean form) throws SQLException {
         return false;
+    }
+
+    public void setUpDBConsumoIntegration() throws SQLException {
+        this.executeSimpleProcedure("dbo.setUpDBConsumoIntegration");
+    }
+
+    // TODO: remove this as it is just a simple basic setup
+    public void setUpDBGetAllAprobadasDesactualizadas() throws SQLException {
+        this.executeSimpleProcedure("dbo.setUpDBGetAllAprobadasDesactualizadas");
     }
 }

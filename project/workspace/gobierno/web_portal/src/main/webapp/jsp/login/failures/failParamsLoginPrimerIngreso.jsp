@@ -17,7 +17,7 @@
 <div class="content-body">
 
     <header>
-        <%@include file="../../commons/go_to_home.jsp"%>
+        <%@include file="../../commons/header.jsp"%>
     </header>
 
     <div class="page-header text-center">
@@ -27,6 +27,4 @@
 </body>
 
 <%@include file="../../commons/footer.jsp"%>
-<%@include file="../../js_imports/home.jsp"%>
-
 </html>

@@ -1,7 +1,7 @@
 CREATE TABLE estado_cuentas (
     id BIGINT IDENTITY
-    , nro_plan_concesionaria BIGINT NOT NULL
     , concesionaria BIGINT NOT NULL
+    , nro_plan_concesionaria BIGINT NOT NULL
     , dni_consumer BIGINT NOT NULL
     , vehiculo BIGINT NOT NULL
     , fecha_alta_concesionaria DATETIME NOT NULL

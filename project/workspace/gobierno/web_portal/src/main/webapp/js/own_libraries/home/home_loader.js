@@ -1,14 +1,10 @@
 $(() => {
-    /* Initialization Code */
-    const home = new Home(HomeConfig);
-    jUtils.loadModule(home);
-    console.log("Home View Loaded Modules: [HomeConfig] = %o, [Home] = %o", 
-        HomeConfig, home);
+    $('#carousel-1').carousel();
 });
 
 $(window).on('load', () => {
-    /*  $("#concesionarias_table").DataTable({}); WTF IS HAPPENING WITH THIS!!! MTFCKR */
-    console.log("Home View executed on Load");
+    HomeService.GET_CONSULTAR_APROBADAS();
+    console.log("Executed get_consultar_aprobadas");
 });
 
 $(window).on('unload', function() {

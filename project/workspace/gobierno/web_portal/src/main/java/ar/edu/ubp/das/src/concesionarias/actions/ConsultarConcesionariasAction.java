@@ -29,7 +29,7 @@ public class ConsultarConcesionariasAction implements Action {
         final List<ConcesionariaForm> allResult = result.getResult();
 
 
-        request.setAttribute(RESULT_RQST_ATTRIBUTE, allResult);
+        request.setAttribute(CONCESIONARIAS_LIST_RQST_ATTRIBUTE, allResult);
 
         logAction(mapping, form, request, response);
         return mapping.getForwardByName(result.getResponse().getForward());

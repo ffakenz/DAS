@@ -70,6 +70,7 @@
 |axis_one        |1434      |mssql_concesionarias_1434 |8000     |8080        |
 |rest_one        |1435      |mssql_concesionarias_1435 |8001     |8081        |
 |cxf_one         |1436      |mssql_concesionarias_1436 |8002     |8082        |
+|cxf_two         |1438      |mssql_concesionarias_1438 |8004     |8084        |
 
 
 # Be careful with the ports

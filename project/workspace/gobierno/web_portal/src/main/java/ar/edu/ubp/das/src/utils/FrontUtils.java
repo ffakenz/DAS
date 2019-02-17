@@ -1,16 +1,82 @@
 package ar.edu.ubp.das.src.utils;
 
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
+import ar.edu.ubp.das.src.estado_cuentas.forms.EstadoCuentasForm;
+import ar.edu.ubp.das.src.jobs.consumo.forms.ViewConsumoResultsForm;
+import ar.edu.ubp.das.src.jobs.sorteo.forms.SorteoForm;
+
+import java.util.List;
 
 import static ar.edu.ubp.das.src.utils.Constants.*;
 
 public class FrontUtils {
 
+
+    public static String listOfConcesionarias(final List<ConcesionariaForm> concList) {
+
+        final StringBuilder lista = new StringBuilder();
+
+        lista.append("<ul id=\"conc_aprobadas_ul\" class=\"list-group\">");
+        concList.forEach(c -> lista.append("<li class=\"list-group-item\">" + c.getNombre() + "</li>"));
+        lista.append("</ul>");
+
+        return lista.toString();
+    }
+
+    public static String sorteosFormRow(final SorteoForm sorteo) {
+        final StringBuilder rows = new StringBuilder();
+
+        rows.append("<tr id=\"" + SORTEO_ROW + "-" + sorteo.getId() + "\" class=\"table-primary\">");
+        rows.append("<td>" + sorteo.getId() + "</td>");
+        rows.append("<td>" + sorteo.getDiaSorteo() + "</td>");
+        rows.append("<td>" + sorteo.getMesSorteo() + "</td>");
+        rows.append("<td>" + sorteo.getAnioSorteo() + "</td>");
+        rows.append("<td>" + sorteo.getEstado() + "</td>");
+        rows.append("<td>" + sorteo.getFechaCreacion() + "</td>");
+        rows.append("<td>" + sorteo.getFechaEjecucion() + "</td>");
+        rows.append("</tr>");
+        return rows.toString();
+    }
+
+    public static String viewConsumoResultsFormRow(final ViewConsumoResultsForm view) {
+        final StringBuilder rows = new StringBuilder();
+        rows.append("<tr id=\"" + VIEW_CONSUMO_RESULTS_ROW + "-" + view.getJobId() + "\" class=\"table-primary\">");
+        rows.append("<td>" + view.getJobId() + "</td>");
+        rows.append("<td>" + view.getJobFechaEjecucion() + "</td>");
+        rows.append("<td>" + view.getConsumoId() + "</td>");
+        rows.append("<td>" + view.getConcesionariaId() + "</td>");
+        rows.append("<td>" + view.getEstadoConsumo() + "</td>");
+        rows.append("<td>" + view.getFromConsumo() + "</td>");
+        rows.append("<td>" + view.getToConsumo() + "</td>");
+        rows.append("<td>" + view.getIdRequestRespConsumo() + "</td>");
+        rows.append("<td>" + view.getEstadoDescription() + "</td>");
+        rows.append("<td>" + view.getConsumoResultId() + "</td>");
+        rows.append("<td>" + view.getConsumoResult() + "</td>");
+        rows.append("<td>" + view.getConsumoResultDescription() + "</td>");
+        rows.append("</tr>");
+        return rows.toString();
+    }
+
+    public static String estadoCuentasFormRow(final EstadoCuentasForm e) {
+        final StringBuilder rows = new StringBuilder();
+        rows.append("<tr id=\"" + ESTADO_CUENTA_ROW + "-" + e.getId() + "\" class=\"table-primary\">");
+        rows.append("<td>" + e.getId() + "</td>");
+        rows.append("<td>" + e.getEstado() + "</td>");
+        rows.append("<td>" + e.getConcesionariaId() + "</td>");
+        rows.append("<td>" + e.getNroPlanConcesionaria() + "</td>");
+        rows.append("<td>" + e.getDocumentoCliente() + "</td>");
+        rows.append("<td>" + e.getFechaAltaConcesionaria() + "</td>");
+        rows.append("<td>" + e.getFechaAltaSistema() + "</td>");
+        rows.append("<td>" + e.getVehiculo() + "</td>");
+        rows.append("</tr>");
+        return rows.toString();
+    }
+
     public static String concesionariaFormRow(final ConcesionariaForm c) {
 
         final StringBuilder rows = new StringBuilder();
         final String clase = c.getCodigo() == null ? CONCESIONARIA_NO_APROBADA : CONCESIONARIA_APROBADA;
-        rows.append("<tr id=\"" + CONCESIONARIA_ROW + "-" + c.getId() + "\" class=" + clase + ">");
+        rows.append("<tr id=\"" + CONCESIONARIA_ROW + "-" + c.getId() + "\" class=\"" + clase + " table-primary\">");
         rows.append("<td>" + c.getId() + "</td>");
         rows.append("<td>" + c.getNombre() + "</td>");
         rows.append("<td>" + c.getCuit() + "</td>");
@@ -21,17 +87,17 @@ public class FrontUtils {
         rows.append("<td>" + c.getFechaAlta() + "</td>");
         rows.append("<td>" + c.getFechaRegistracion() + "</td>");
         if (clase.equals(CONCESIONARIA_NO_APROBADA)) {
-            final String aprobarBtn = getButton(BTN_APROBAR + "-" + c.getId(), BTN_APROBAR, "Aprobar");
+            final String aprobarBtn = getButton(APROBAR_BTN + "-" + c.getId(), APROBAR_BTN + " btn btn-success", "Aprobar");
             rows.append("<td>")
                     .append(aprobarBtn)
                     .append("</td>");
         } else {
-            final String desAprobarBtn = getButton(BTN_DESAPROBAR + "-" + c.getId(), BTN_DESAPROBAR, "DesAprobar");
+            final String desAprobarBtn = getButton(DESAPROBAR_BTN + "-" + c.getId(), DESAPROBAR_BTN + " btn btn-danger", "DesAprobar");
             rows.append("<td>")
                     .append(desAprobarBtn)
                     .append("</td>");
         }
-        final String configBtn = getButton(BTN_CONFIGURAR + "-" + c.getId(), BTN_CONFIGURAR, "Configurar");
+        final String configBtn = getButton(CONFIG_BTN + "-" + c.getId(), CONFIG_BTN + " btn btn-info", "Configurar");
         rows.append("<td>")
                 .append(configBtn)
                 .append("</td>");

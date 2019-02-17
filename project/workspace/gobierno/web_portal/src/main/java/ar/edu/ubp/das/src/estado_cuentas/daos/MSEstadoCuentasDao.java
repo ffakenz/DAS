@@ -28,6 +28,16 @@ public class MSEstadoCuentasDao extends DaoImpl<EstadoCuentasForm> {
                 "concesionariaId", "nroPlanConcesionaria", "estado");
     }
 
+    public void updateFechaActualizacion(final EstadoCuentasForm bean) throws SQLException {
+        this.executeProcedure("dbo.update_estado_cuentas_fecha_actualizacion(?, ?)", bean,
+                "id", "fechaUltimaActualizacion");
+    }
+
+    public void updateEstado(final EstadoCuentasForm bean) throws SQLException {
+        this.executeProcedure("dbo.update_estado_cuentas_estado(?, ?, ?)", bean,
+                "id", "estado");
+    }
+
     @Override
     public void delete(final EstadoCuentasForm form) throws SQLException {
     }
@@ -42,6 +52,7 @@ public class MSEstadoCuentasDao extends DaoImpl<EstadoCuentasForm> {
         return selectByNroPlanAndConcesionaria(form).isPresent();
     }
 
+    // select by unique
     public Optional<EstadoCuentasForm> selectByNroPlanAndConcesionaria(final EstadoCuentasForm form) throws SQLException {
         return this.executeQueryProcedure("dbo.get_estado_cuentas_by_nro_plan_and_concesionaria(?, ?)",
                 form, "concesionariaId", "nroPlanConcesionaria")
@@ -61,11 +72,22 @@ public class MSEstadoCuentasDao extends DaoImpl<EstadoCuentasForm> {
     }
 
 
-    public void upsert(final EstadoCuentasForm form) throws SQLException {
+    public List<EstadoCuentasForm> selectEstadoCuentasByConcesionariaId(final Long concesionariaId) throws SQLException {
+        this.connect();
+        this.setProcedure("dbo.get_estado_cuentas_by_concesionaria_id(?)", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        this.setParameter(1, concesionariaId);
+        final List<EstadoCuentasForm> result = this.executeQuery();
+        this.disconnect();
+        return result;
+    }
+
+
+    public EstadoCuentasForm upsert(final EstadoCuentasForm form) throws SQLException {
         if (!this.valid(form)) {
             this.insert(form);
         } else {
             this.update(form);
         }
+        return this.selectByNroPlanAndConcesionaria(form).orElseGet(null); // return the updated or inserted
     }
 }

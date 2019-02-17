@@ -1,9 +1,8 @@
 /* Singleton */
 const jUtils = {
 
-    executing: function(divId, mini) {
-        type = mini == undefined || mini == false ? "" : "little";
-        $('#' + divId).html("<img src=" + type + "\"/web_portal/img/iloader.gif\" border=\"0\"/>").show();
+    executing: function(divId) {
+        $('#' + divId).html("<img src=\"/web_portal/img/spinnerMD.gif\" border=\"0\"/>").show();
     },
 
     showing: function(divId, html) {
@@ -11,21 +10,11 @@ const jUtils = {
     },
 
     hiding: function(divId, clean) {
-        clean = (clean === false ? false : true);
         $('#' + divId).hide();
+
         if(clean) {
             $('#' + divId).html('&nbsp;');
         }
-    },
-
-    changeLang: function(filename, lang, root) {
-        root = root == undefined ? '' : root;
-        jQuery.i18n.properties({
-            name: filename,
-            path:  root + '/web_portal/js/properties/',
-            mode: 'map',
-            language: lang
-        });
     },
 
     isValidEmail: function (mail) {
@@ -57,14 +46,43 @@ const jUtils = {
             window.location.href = location;
     },
 
+    toIdentifier: (key) => {
+        const _key = key.toUpperCase();
+        if(Id[_key] !== undefined) {
+            return "#"+key;
+        } else if(Class[_key] !== undefined) {
+            return "."+key;
+        }
+        return key;
+    },
+
     loadModule: (module) => {
         module.getEventHandlers().forEach(evt => {
             evt.cnfg.forEach(cnfg => {
                 /* click is the default event type */
                 const event_type = cnfg.event_type || "click";
                 console.log("Handle Click For CTX = %o ; CNFG = %o ; EVT_TYPE = %o", evt.ctx, cnfg, event_type);
-                $(evt.ctx).delegate(cnfg.delegate, event_type, cnfg.handler);
+                $(jUtils.toIdentifier(evt.ctx)).delegate(jUtils.toIdentifier(cnfg.delegate), event_type, cnfg.handler);
             });
         });
+    },
+
+    dataToJson: (data) => {
+        const elems = data.split("&");
+        return elems.reduce((acc, elem) => {
+            const values = elem.split("=");
+            const key = values[0];
+            const value = values[1];
+            acc[key] = value;
+            return acc;
+        }, {});
+    },
+
+    addTitle: (title) => {
+        return `<div class="card">
+            <div class="card-header">
+                <h2 class="title" >${title}</h2>
+            </div>
+        </div>`;
     }
 };

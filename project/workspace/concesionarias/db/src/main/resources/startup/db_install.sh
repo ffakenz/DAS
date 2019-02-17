@@ -1,12 +1,16 @@
 #!/usr/bin/env bash
 
 function db_install() {
-    PORT=$1
-    echo "Installing DB in mssql_concesionarias_${PORT}"
-    docker exec -d mssql_concesionarias_${PORT} sh -c "./sqlcmd -S localhost -U SA -P Das12345 -i ./scripts/script.sql"
+    CONTAINER=$1
+    echo "${CONTAINER}"
+    docker exec -d ${CONTAINER} sh -c "./sqlcmd -S localhost -U SA -P Das12345 -i ./scripts/script.sql"
 }
 
 echo "Installing DBs"
-db_install 1434
-db_install 1435
-db_install 1436
+db_install 'axis_one'
+db_install 'cxf_one'
+db_install 'rest_one'
+db_install 'rest_two'
+db_install 'cxf_two'
+
+# db_install 'mssql_concesionarias_1434'

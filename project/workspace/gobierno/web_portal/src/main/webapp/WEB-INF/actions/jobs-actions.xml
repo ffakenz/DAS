@@ -6,5 +6,8 @@
     <action-mappings>
         <action type="JobsConsumeAction" path="/JobsConsume.do">
         </action>
+        <action type="ViewConsumoJobResultsAction" path="/ViewConsumoJobResults.do">
+            <forward name="success" path="/profiles/admin/tableConsumoJobResults.jsp"/>
+        </action>
     </action-mappings>
 </actions>

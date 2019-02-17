@@ -1,26 +1,23 @@
 const LoginConfig = (module) => [
     { 
-        ctx: "#header_home", 
+        ctx: Id.HEADER_HOME,
         cnfg: [
-            { delegate: "#logout_btn", handler: module.closeSession }
+            { delegate: Id.LOGOUT_BTN, handler: module.closeSession }
+            , { delegate: Id.SHOW_LOGIN_BTN, handler: module.showLogin }
+            , { delegate: Id.GO_TO_PROFILE_BTN, handler: module.goToProfile }
+        ]
+    },
+    {
+        ctx: Id.LOGOUT_DIV,
+        cnfg: [
+            { delegate: Id.LOGOUT_BTN, handler: module.closeSession }
         ]
     },
     { 
-        ctx: "#login_form", 
+        ctx: Class.LOGINBOX,
         cnfg: [
-            { delegate: "#login_btn", handler: module.validarUsuario }
-        ]
-    },
-    { 
-        ctx: "#first_login_div", 
-        cnfg: [
-            { delegate: "#first_login_btn", handler: module.goToPrimerIngreso }
-        ]
-    },
-    { 
-        ctx: "#login_primer_ingreso_form", 
-        cnfg: [
-            { delegate: "#login_registrar_btn", handler: module.registrarUsuario }
+            { delegate: Id.FIRST_LOGIN_BTN, handler: module.goToPrimerIngreso },
+            { delegate: Id.LOGIN_BTN, handler: module.validarUsuario }
         ]
     }
 ];

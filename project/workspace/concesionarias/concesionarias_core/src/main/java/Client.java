@@ -19,25 +19,25 @@ public class Client {
 
         // use api 1
         // final Function<Connection, List<NotificationUpdate>> all =
-        // notificationUpdate .consultarPlanes("GOBIERNO-INCENTIVO-2018", Timestamp.valueOf("2018-01-08 20:58:00"));
+        // notificationUpdate .consultarPlanes("GOB", Timestamp.valueOf("2018-01-08 20:58:00"));
 
         final List<NotificationUpdate> planes =
-                mssqlFactory.withConnection(notificationUpdate .consultarPlanes("GOBIERNO-INCENTIVO-2018", Timestamp.valueOf("2018-01-08 20:58:00")));
+                mssqlFactory.withConnection(notificationUpdate.consultarPlanes("GOB", Timestamp.valueOf("2018-01-08 20:58:00"), Timestamp.valueOf("2019-01-08 20:58:00")));
         planes.forEach(System.out::println);
 
         /*
         // use api 2
-        Optional<PlanBean> plan = mssqlFactory.withConnection(planDAO.consultarPlan("GOBIERNO-INCENTIVO-2018", 1L)::apply);
+        Optional<PlanBean> plan = mssqlFactory.withConnection(planDAO.consultarPlan("GOB", 1L)::apply);
         String result = plan.map(p -> p.toString()).get();
-        System.out.println(result);
+        log.debug(result);
 
         // use api 3
-        mssqlFactory.withConnection(planDAO.cancelarPlan("GOBIERNO-INCENTIVO-2018", plan.get().getId().longValue())::apply);
+        mssqlFactory.withConnection(planDAO.cancelarPlan("GOB", plan.get().getId().longValue())::apply);
 
         // use api 2
-        Optional<PlanBean> planCancelado = mssqlFactory.withConnection(planDAO.consultarPlan("GOBIERNO-INCENTIVO-2018", 1L)::apply);
+        Optional<PlanBean> planCancelado = mssqlFactory.withConnection(planDAO.consultarPlan("GOB", 1L)::apply);
         String resultCancelado = planCancelado.map(p -> p.toString()).get();
-        System.out.println(resultCancelado);
+        log.debug(resultCancelado);
         */
 
         /*mssqlFactory.withConnection((Connection c) -> {
@@ -47,7 +47,7 @@ public class Client {
                         new MyResultSet(rs, PlanBean.class).mapToObjectList();
                 return planes2;
             } catch (SQLException e) {
-                System.out.println(e.getMessage());
+                log.debug(e.getMessage());
                 e.printStackTrace();
             }
             return new ArrayList<>();

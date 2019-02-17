@@ -3,6 +3,8 @@ package ar.edu.ubp.das.src.estado_cuentas.forms;
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.annotations.Column;
 import ar.edu.ubp.das.mvc.db.annotations.Entity;
+import beans.PlanBean;
+import utils.JsonUtils;
 
 import java.sql.Timestamp;
 
@@ -29,16 +31,7 @@ public class EstadoCuentasForm extends DynaActionForm {
 
     @Override
     public String toString() {
-        return "EstadoCuentasForm{" +
-                "id=" + id +
-                ", concesionariaId=" + concesionariaId +
-                ", nroPlanConcesionaria=" + nroPlanConcesionaria +
-                ", documentoConsumer=" + documentoConsumer +
-                ", vehiculo=" + vehiculo +
-                ", fechaAltaConcesionaria=" + fechaAltaConcesionaria +
-                ", fechaAltaSistema=" + fechaAltaSistema +
-                ", fechaUltimaActualizacion=" + fechaUltimaActualizacion +
-                '}';
+        return JsonUtils.toJsonString(this);
     }
 
     public Long getId() {
@@ -111,5 +104,18 @@ public class EstadoCuentasForm extends DynaActionForm {
 
     public void setEstado(final String estado) {
         this.estado = estado;
+    }
+
+    public static EstadoCuentasForm fromPlanBean(final PlanBean planBean, final Long concesionariaId) {
+        final EstadoCuentasForm estadoCuentasForm = new EstadoCuentasForm();
+
+        estadoCuentasForm.setConcesionariaId(concesionariaId);
+        estadoCuentasForm.setDocumentoCliente(planBean.getClienteDocumento());
+        estadoCuentasForm.setNroPlanConcesionaria(planBean.getPlanId());
+        estadoCuentasForm.setVehiculo(planBean.getVehiculoId());
+        estadoCuentasForm.setEstado(planBean.getPlanEstado()); // !!!
+        estadoCuentasForm.setFechaAltaConcesionaria(planBean.getPlanFechaAlta());
+
+        return estadoCuentasForm;
     }
 }
