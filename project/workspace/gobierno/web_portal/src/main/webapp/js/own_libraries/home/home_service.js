@@ -1,5 +1,4 @@
 const HomeService = {
-
     GET_CONSULTAR_APROBADAS() {
         $("#loadingDiv").modal("show");
         jUtils.executing("loadingDiv");

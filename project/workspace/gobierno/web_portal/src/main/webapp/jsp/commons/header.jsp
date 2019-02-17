@@ -35,5 +35,6 @@
             </c:when>
             <c:otherwise></c:otherwise>
         </c:choose>
+        <%@include file="./language.jsp" %>
     </nav>
 </div>

@@ -8,6 +8,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <fmt:setBundle basename="properties.etiquetas" var="etq" scope="session"/>
+<fmt:setLocale value="${idioma}" scope="session" />
 
 <!DOCTYPE html>
 <html>
@@ -35,6 +36,7 @@
             <!-- Page Content -->
             <div id="page-content-wrapper">
 
+                <!-- ### HEADER ### -->
                 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom" style="padding-left: 80% !IMPORTANT;">
                     <div id="go_to_home_div" style="margin-right: 5px;">
                         <button id="go_to_home_btn" name="login" class="btn btn-primary pull-right" >Volver al home</button>
@@ -42,7 +44,7 @@
                     <div id="logout_div" style="margin-left: 5px;">
                         <button id="logout_btn" name="logout" class="btn btn-primary pull-right">Cerrar Sesion</button>
                     </div>
-
+                    <%@include file="../commons/language.jsp" %>
 
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>

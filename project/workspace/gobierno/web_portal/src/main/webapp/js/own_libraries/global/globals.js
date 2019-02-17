@@ -85,8 +85,7 @@ const Id = {
     CREATE_SORTEO_BTN: "create_sorteo_btn",
     UPDATE_SORTEO_BTN: "update_sorteo_btn",
     LANG_DIV: "lang_div",
-    ES_LANG_BTN: "es_lang_btn",
-    EN_LANG_BTN: "en_lang_btn"
+    LANG_SELECT: "lang_select"
 };
 
 const Class = {
@@ -101,5 +100,6 @@ const Class = {
     ACTUALIZAR_FECHA_SORTEO_BTN: "actualizar_fecha_sorteo_btn",
     EMPTY_CELL: "empty_cell",
     SORTEO_CELL: "sorteo_cell",
-    CALENDAR_CELL: "calendar_cell"
+    CALENDAR_CELL: "calendar_cell",
+    LANG_BTN: "lang_btn"
 };

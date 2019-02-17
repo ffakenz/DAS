@@ -5,7 +5,7 @@
     </form-beans>
     <action-mappings>
         <action type="ChangeLanguageAction" path="/ChangeLanguage.do">
-            <forward name="success" path="/other/changeLanguage.jsp" />
+            <forward name="success" path="/util/success.jsp"/>
         </action>
     </action-mappings>
 </actions>
