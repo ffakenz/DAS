@@ -91,7 +91,7 @@ BEGIN
         , (3, 1005, 3, 2, '2018-03-02 22:58:02', 'en_proceso')
 
     INSERT INTO login(documento, log_out_time)
-    VALUES (111, GETDATE())
+    VALUES (111, SYSDATETIMEOFFSET() AT TIME ZONE 'Argentina Standard Time')
     	   , (222, default)
 
     INSERT INTO cuotas (
@@ -131,9 +131,6 @@ BEGIN
             , ('ganador')
             , ('cancelado')
             , ('pendiente_cancelacion')
-
-    INSERT INTO participantes(id_sorteo, id_plan, estado)
-    VALUES (1, 4, 'ganador')
 
     -- CONSUMO
     INSERT INTO estado_consumo(estado)

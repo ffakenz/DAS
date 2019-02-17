@@ -5,8 +5,8 @@ CREATE TABLE estado_cuentas (
     , dni_consumer BIGINT NOT NULL
     , vehiculo BIGINT NOT NULL
     , fecha_alta_concesionaria DATETIME NOT NULL
-    , fecha_alta_sistema DATETIME NOT NULL DEFAULT GETDATE()
-    , fecha_ultima_actualizacion DATETIME NOT NULL DEFAULT GETDATE()
+    , fecha_alta_sistema DATETIME NOT NULL DEFAULT SYSDATETIMEOFFSET() AT TIME ZONE 'Argentina Standard Time'
+    , fecha_ultima_actualizacion DATETIME NOT NULL DEFAULT SYSDATETIMEOFFSET() AT TIME ZONE 'Argentina Standard Time'
     , estado VARCHAR(30) NOT NULL -- cant_cuotas_pagadas <- trigger ??
     , PRIMARY KEY(id)
     , FOREIGN KEY(estado)                      REFERENCES tipos_estado_cuentas(tipo)

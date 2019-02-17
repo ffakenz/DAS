@@ -12,7 +12,7 @@ WITH aprobadas AS (
     FROM consumo c
         JOIN job_consumo jc ON c.id_job_consumo = jc.id
     WHERE c.estado = 'success' -- consumo exitoso
-        AND jc.fecha >= DATEADD(DAY, @days, GETDATE()) -- fecha considerada como actualizacion
+        AND jc.fecha >= DATEADD(DAY, @days, SYSDATETIMEOFFSET() AT TIME ZONE 'Argentina Standard Time') -- fecha considerada como actualizacion
 ), concesionarias_desactualizadas AS (
     SELECT *
     FROM aprobadas a

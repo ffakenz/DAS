@@ -4,7 +4,7 @@ CREATE PROCEDURE update_estado_cuentas_estado (
 ) AS
 UPDATE estado_cuentas
 SET estado = @estado
-    , fecha_ultima_actualizacion  = GETDATE()
+    , fecha_ultima_actualizacion  = SYSDATETIMEOFFSET() AT TIME ZONE 'Argentina Standard Time'
 WHERE id = @id;
 
 

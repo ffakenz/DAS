@@ -10,7 +10,7 @@ BEGIN
   ELSE
     BEGIN
       UPDATE concesionaria
-      SET fecha_alta = GETDATE()
+      SET fecha_alta = SYSDATETIMEOFFSET() AT TIME ZONE 'Argentina Standard Time'
           , codigo = @codigo
       WHERE id = @id
           AND codigo IS NULL

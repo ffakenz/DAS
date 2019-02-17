@@ -3,7 +3,7 @@ CREATE TABLE vehiculos (
 	, tipo              VARCHAR(100)    NOT NULL
 	, nombre            VARCHAR(100)    NOT NULL
 	, marca             VARCHAR(100)    NOT NULL
-	, fecha_de_alta     DATETIME        NOT NULL    DEFAULT GETDATE()
+	, fecha_de_alta     DATETIME        NOT NULL    DEFAULT SYSDATETIMEOFFSET() AT TIME ZONE 'Argentina Standard Time'
 	, precio            BIGINT          NOT NULL
 	, color             VARCHAR(100)    NOT NULL
 	, modelo            VARCHAR(100)    NOT NULL

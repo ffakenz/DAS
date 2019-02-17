@@ -5,7 +5,7 @@ CREATE TABLE cuotas (
     , fecha_vencimiento          DATETIME    NOT NULL
     , monto                      INT         NULL
     , fecha_pago                 DATETIME    NULL
-    , fecha_ultima_actualizacion DATETIME    NOT NULL DEFAULT GETDATE()
+    , fecha_ultima_actualizacion DATETIME    NOT NULL DEFAULT SYSDATETIMEOFFSET() AT TIME ZONE 'Argentina Standard Time'
     , PRIMARY KEY(nro_cuota, estado_cuenta_id)
     , FOREIGN KEY(estado_cuenta_id) REFERENCES estado_cuentas(id)
 );

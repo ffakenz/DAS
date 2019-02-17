@@ -7,7 +7,7 @@ CREATE PROCEDURE pagar_cuota (
 UPDATE cuotas
 SET monto = @monto
     , fecha_pago = @fecha_pago
-    , fecha_ultima_actualizacion = GETDATE()
+    , fecha_ultima_actualizacion = SYSDATETIMEOFFSET() AT TIME ZONE 'Argentina Standard Time'
 WHERE
     nro_cuota = @nro_cuota
     AND estado_cuenta_id = @estado_cuenta_id

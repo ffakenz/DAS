@@ -11,7 +11,7 @@ CREATE TABLE sorteos (
 	, dia_sorteo AS CAST (
         DATEPART(DAY, fecha_ejecucion)  AS INT
 	)
-	, fecha_creacion                    DATE    DEFAULT GETDATE()
+	, fecha_creacion                    DATE    DEFAULT SYSDATETIMEOFFSET() AT TIME ZONE 'Argentina Standard Time'
 	, PRIMARY KEY(id)
 	, FOREIGN KEY(estado) REFERENCES estado_sorteo(nombre)
 	, UNIQUE(fecha_ejecucion)
