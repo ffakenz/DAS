@@ -10,12 +10,5 @@ const HomeConfig = (module) => [
         cnfg: [
             { delegate: Id.GO_TO_HOME_BTN, handler: module.goToHome }
         ]
-    },
-    {
-        ctx: Id.LANG_DIV,
-        cnfg: [
-            { delegate: Id.ES_LANG_BTN, handler: translator.setIdioma },
-            { delegate: Id.EN_LANG_BTN, handler: translator.setIdioma }
-        ]
     }
 ];

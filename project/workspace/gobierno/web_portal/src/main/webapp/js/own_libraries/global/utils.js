@@ -17,16 +17,6 @@ const jUtils = {
         }
     },
 
-    changeLang: function(filename, lang, root) {
-        root = root == undefined ? '' : root;
-        jQuery.i18n.properties({
-            name: filename,
-            path:  root + '/web_portal/js/properties/',
-            mode: 'map',
-            language: lang
-        });
-    },
-
     isValidEmail: function (mail) {
 
         if ( /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail) ) {
