@@ -23,5 +23,9 @@ CREATE TABLE notification_update (
     , vehiculo_modelo       VARCHAR(100)            NULL
     , vehiculo_color        VARCHAR(100)            NULL
     , concesionaria_id      BIGINT                  NULL
+    , id_job_consumo        BIGINT                  NULL
+    , nro_consumo_result    BIGINT                  NULL
     , PRIMARY KEY(id)
+    , FOREIGN KEY(id_job_consumo, concesionaria_id, nro_consumo_result)
+        REFERENCES consumo_result(id_consumo, id_concesionaria, nro)
 );

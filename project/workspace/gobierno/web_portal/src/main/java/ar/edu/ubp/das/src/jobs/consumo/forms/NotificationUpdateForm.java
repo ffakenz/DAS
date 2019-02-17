@@ -4,6 +4,7 @@ import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.annotations.Column;
 import ar.edu.ubp.das.mvc.db.annotations.Entity;
 import com.google.gson.annotations.SerializedName;
+import utils.JsonUtils;
 
 import java.sql.Timestamp;
 
@@ -78,6 +79,15 @@ public class NotificationUpdateForm extends DynaActionForm {
     private String vehiculoColor;
     @Column(name = "concesionaria_id")
     private Long concesionariaId;
+    @Column(name = "id_job_consumo")
+    private Long idJobConsumo;
+    @Column(name = "nro_consumo_result")
+    private Long nroConsumoResult;
+
+    @Override
+    public String toString() {
+        return JsonUtils.toJsonString(this);
+    }
 
     public Long getPlanId() {
         return planId;
@@ -263,32 +273,19 @@ public class NotificationUpdateForm extends DynaActionForm {
         this.concesionariaId = concesionariaId;
     }
 
-    @Override
-    public String toString() {
-        return "NotificationUpdateForm{" +
-                "planId=" + planId +
-                ", planEstado='" + planEstado + '\'' +
-                ", planFechaAlta=" + planFechaAlta +
-                ", planFechaUltimaActualizacion=" + planFechaUltimaActualizacion +
-                ", planTipoDePlan='" + planTipoDePlan + '\'' +
-                ", cuotaNroCuota=" + cuotaNroCuota +
-                ", cuotaFechaVencimiento=" + cuotaFechaVencimiento +
-                ", cuotaMonto=" + cuotaMonto +
-                ", cuotaFechaPago=" + cuotaFechaPago +
-                ", cuotaFechaAlta=" + cuotaFechaAlta +
-                ", clienteDocumento=" + clienteDocumento +
-                ", clienteNombre='" + clienteNombre + '\'' +
-                ", clienteApellido='" + clienteApellido + '\'' +
-                ", clienteNroTelefono='" + clienteNroTelefono + '\'' +
-                ", clienteEmail='" + clienteEmail + '\'' +
-                ", vehiculoId=" + vehiculoId +
-                ", vehiculoTipo='" + vehiculoTipo + '\'' +
-                ", vehiculoNombre='" + vehiculoNombre + '\'' +
-                ", vehiculoPrecio=" + vehiculoPrecio +
-                ", vehiculoMarca='" + vehiculoMarca + '\'' +
-                ", vehiculoModelo='" + vehiculoModelo + '\'' +
-                ", vehiculoColor='" + vehiculoColor + '\'' +
-                ", concesionariaId=" + concesionariaId +
-                '}';
+    public Long getIdJobConsumo() {
+        return idJobConsumo;
+    }
+
+    public void setIdJobConsumo(final Long idJobConsumo) {
+        this.idJobConsumo = idJobConsumo;
+    }
+
+    public Long getNroConsumoResult() {
+        return nroConsumoResult;
+    }
+
+    public void setNroConsumoResult(final Long nroConsumoResult) {
+        this.nroConsumoResult = nroConsumoResult;
     }
 }

@@ -24,6 +24,13 @@
     <!--   CONSUMO                     -->
     <!-- ***************************** -->
 
+    <changeSet id="Drop table notification_update" author="DAS-Team" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="notification_update"/>
+        </preConditions>
+        <dropTable tableName="notification_update"/>
+    </changeSet>
+
     <changeSet id="Drop table consumo_result" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <tableExists tableName="consumo_result"/>
@@ -64,13 +71,6 @@
             <tableExists tableName="job_consumo"/>
         </preConditions>
         <dropTable tableName="job_consumo"/>
-    </changeSet>
-
-    <changeSet id="Drop table notification_update" author="DAS-Team" runAlways="true" runOnChange="true">
-        <preConditions onFail="MARK_RAN">
-            <tableExists tableName="notification_update"/>
-        </preConditions>
-        <dropTable tableName="notification_update"/>
     </changeSet>
 
 

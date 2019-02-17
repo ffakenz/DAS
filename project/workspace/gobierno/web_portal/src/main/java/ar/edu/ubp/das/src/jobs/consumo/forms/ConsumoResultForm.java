@@ -12,6 +12,8 @@ public class ConsumoResultForm extends DynaActionForm {
     private Long idConcesionaria;
     @Column(name = "id_consumo")
     private Long idConsumo;
+    @Column(name = "nro")
+    private Long nro;
     @Column(name = "description")
     private String description;
     @Column(name = "result")
@@ -31,6 +33,14 @@ public class ConsumoResultForm extends DynaActionForm {
 
     public void setIdConsumo(final Long idConsumo) {
         this.idConsumo = idConsumo;
+    }
+
+    public Long getNro() {
+        return nro;
+    }
+
+    public void setNro(final Long nro) {
+        this.nro = nro;
     }
 
     public String getDescription() {
