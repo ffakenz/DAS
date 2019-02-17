@@ -1,7 +1,6 @@
 package ar.edu.ubp.das.src.jobs.consumo.daos;
 
 import ar.edu.ubp.das.mvc.db.DaoImpl;
-import ar.edu.ubp.das.mvc.util.Pair;
 import ar.edu.ubp.das.src.jobs.consumo.forms.ConsumoForm;
 
 import java.sql.ResultSet;
@@ -53,8 +52,8 @@ public class MSConsumoDao extends DaoImpl<ConsumoForm> {
                 .findFirst();
     }
 
-    public Optional<Pair<Timestamp, Timestamp>> getLastPeriodTimeForConcesionaria(final Long concesionariaId) throws SQLException {
-        return this.getLastConsumo(concesionariaId).map(j -> Pair.of(j.getFrom(), j.getTo()));
+    public Optional<Timestamp> getLastPeriodTimeForConcesionaria(final Long concesionariaId) throws SQLException {
+        return this.getLastConsumo(concesionariaId).map(ConsumoForm::getFrom);
     }
 
     public Optional<String> getLastEstadoForConcesionaria(final Long concesionariaId) throws SQLException {

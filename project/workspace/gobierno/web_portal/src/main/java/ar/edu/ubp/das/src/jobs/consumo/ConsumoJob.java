@@ -1,7 +1,6 @@
 package ar.edu.ubp.das.src.jobs.consumo;
 
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
-import ar.edu.ubp.das.mvc.util.Pair;
 import ar.edu.ubp.das.src.concesionarias.daos.MSConcesionariasDao;
 import ar.edu.ubp.das.src.concesionarias.daos.MSConfigurarConcesionariaDao;
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
@@ -91,9 +90,8 @@ public class ConsumoJob implements Job {
 
                 // usando las configs obtenemos un cliente
                 final Optional<ConcesionariaServiceContract> cli = clientFactory.getClientFor(configs);
-                final Pair<Timestamp, Timestamp> lastJobPeriod = getLastJobPeriod(lastEstadoOpt, cId);
-                final Timestamp from = lastJobPeriod.fst;
-                final Timestamp to = lastJobPeriod.snd;
+                final Timestamp from = calculateFrom(lastEstadoOpt, cId);
+                final Timestamp to = DateUtils.getTimestamp(TO_DAYS);
 
                 if (!cli.isPresent()) {
                     log.error("[error: Fail when trying to create the client][config_tecno:{}]", JsonUtils.toJsonString(configs));
@@ -116,12 +114,13 @@ public class ConsumoJob implements Job {
                     for (final NotificationUpdate update : notificationUpdates) {
                         try {
 
-                            final NotificationUpdateForm notificationUpdateForm = transformNotificationUpdate(update, cId);
-                            if (this.consumoJobManager.getMsNotificationUpdateDao().valid(notificationUpdateForm)) {
+                            final NotificationUpdateForm nuForm = transformNotificationUpdate(update, cId);
+                            if (this.consumoJobManager.getMsNotificationUpdateDao().valid(nuForm)) {
                                 desnormalizer.updateDb(cId, update);
-                                this.consumoJobManager.getMsNotificationUpdateDao().insert(notificationUpdateForm);
+                                this.consumoJobManager.getMsNotificationUpdateDao().insert(nuForm);
+                                log.info("Consume Result inserted successfully for concesionaria {} [plan_id:{}][nro_cuota:{}][dni_cliente:{}]",
+                                        cId, nuForm.getPlanId(), nuForm.getCuotaNroCuota(), nuForm.getClienteDocumento());
                             }
-                            log.info("Consume Result is successfull for concesionaria {} [notification_update:{}]", cId, JsonUtils.toJsonString(notificationUpdateForm));
                             final String desc = "updateDb success for update: " + update;
                             logConsumoResultDb(cId, jobId, TipoConsumoResult.SUCCESS, desc);
 
@@ -161,12 +160,13 @@ public class ConsumoJob implements Job {
      * @return
      * @throws SQLException
      */
-    private Pair<Timestamp, Timestamp> getLastJobPeriod(final Optional<String> lastEstadoOpt, final Long concesionairaId) throws SQLException {
+    private Timestamp calculateFrom(final Optional<String> lastEstadoOpt, final Long concesionairaId) throws SQLException {
 
         if (lastEstadoOpt.isPresent() && lastEstadoOpt.get().equals(EstadoConsumo.FAILURE.name())) {
-            return this.consumoJobManager.getMsConsumoDao().getLastPeriodTimeForConcesionaria(concesionairaId).get();
+            return this.consumoJobManager.getMsConsumoDao()
+                            .getLastPeriodTimeForConcesionaria(concesionairaId).get();
         }
-        return Pair.of(DateUtils.getTimestamp(FROM_DAYS), DateUtils.getTimestamp(TO_DAYS));
+        return DateUtils.getTimestamp(FROM_DAYS);
     }
 
     /**

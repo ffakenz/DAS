@@ -35,7 +35,6 @@ public class ConcesionariaRestTwo extends MSSQLConsecionaria implements Concesio
                                   @QueryParam("from") final String from,
                                   @QueryParam("to") final String to) {
 
-
         final Timestamp fromParsed = Utils.fromStringToTimestamp(from);
         final Timestamp toParsed = Utils.fromStringToTimestamp(to);
 

@@ -12,7 +12,7 @@ echo "
 		</pm:health>
 	</soapenv:Body>
 </soapenv:Envelope>
-" | http POST http://localhost:8004/concesionaria_cxf_two/services/concesionaria_cxf_two
+" | http POST http://localhost:8002/concesionaria_cxf_one/services/concesionaria_cxf_one
 echo "
 <soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:pm=\"http://ws.das.edu.ubp.ar/\">
     <soapenv:Header></soapenv:Header>
@@ -22,4 +22,4 @@ echo "
 		</pm:health>
 	</soapenv:Body>
 </soapenv:Envelope>
-" | http POST http://localhost:8002/concesionaria_cxf_one/services/concesionaria_cxf_one
+" | http POST http://localhost:8004/concesionaria_cxf_two/services/concesionaria_cxf_two

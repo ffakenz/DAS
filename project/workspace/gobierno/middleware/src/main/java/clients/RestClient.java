@@ -67,9 +67,10 @@ public class RestClient implements ConcesionariaServiceContract {
 
             final int statusCode = resp.getStatusLine().getStatusCode();
 
-            if (statusCode == 500)
+            if (statusCode >= 500)
                 throw new ClientException("ENDPOINT IS DOWN = " + resp.toString());
-
+            if (statusCode >= 400)
+                throw new ClientException("BAD REQUEST = " + resp.toString());
 
             final String jsonPlanBean = EntityUtils.toString(responseEntity);
             return jsonPlanBean;
@@ -133,6 +134,7 @@ public class RestClient implements ConcesionariaServiceContract {
         final String jsonPlanBeans = call(GET, url);
         final NotificationUpdate[] notificationUpdates = JsonUtils.toObject(jsonPlanBeans, NotificationUpdate[].class);
         log.info("[GET consultarPlanes][URL {}][jsonPlanBeansResponse = {}][notificationUpdates = {}]", url, jsonPlanBeans, notificationUpdates);
+
         return Stream.of(notificationUpdates).collect(Collectors.toList());
 
     }
