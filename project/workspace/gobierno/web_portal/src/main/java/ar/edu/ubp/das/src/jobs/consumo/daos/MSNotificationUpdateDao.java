@@ -14,11 +14,12 @@ public class MSNotificationUpdateDao extends DaoImpl<NotificationUpdateForm> {
 
     @Override
     public void insert(final NotificationUpdateForm form) throws SQLException {
-        this.executeProcedure("dbo.log_notification_update(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", form,
+        this.executeProcedure("dbo.log_notification_update(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", form,
                 "planId", "planEstado", "planFechaAlta", "planFechaUltimaActualizacion",
-                "planTipoDePlan", "cuotaNroCuota", "cuotaFechaVencimiento", "cuotaMonto", "cuotaFechaPago", "cuotaFechaAlta",
-                "clienteDocumento", "clienteNombre", "clienteApellido", "clienteNroTelefono", "clienteEmail", "vehiculoId", "vehiculoTipo",
-                "vehiculoNombre", "vehiculoPrecio", "vehiculoMarca", "vehiculoModelo", "vehiculoColor", "concesionariaId");
+                "planTipoDePlan", "cuotaNroCuota", "cuotaFechaVencimiento", "cuotaMonto", "cuotaFechaPago",
+                "cuotaFechaAlta", "clienteDocumento", "clienteNombre", "clienteApellido", "clienteNroTelefono",
+                "clienteEmail", "vehiculoId", "vehiculoTipo", "vehiculoNombre", "vehiculoPrecio", "vehiculoMarca",
+                "vehiculoModelo", "vehiculoColor", "concesionariaId", "idJobConsumo", "nroConsumoResult");
     }
 
     @Override

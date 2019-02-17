@@ -14,8 +14,8 @@ public class MSConsumoResultDao extends DaoImpl<ConsumoResultForm> {
 
     @Override
     public void insert(final ConsumoResultForm form) throws SQLException {
-        this.executeProcedure("dbo.log_consumo_result(?, ?, ?, ?)", form,
-                "idConcesionaria", "idConsumo", "description", "result");
+        this.executeProcedure("dbo.log_consumo_result(?, ?, ?, ?, ?)", form,
+                "idConcesionaria", "idConsumo", "nro", "description", "result");
     }
 
     @Override

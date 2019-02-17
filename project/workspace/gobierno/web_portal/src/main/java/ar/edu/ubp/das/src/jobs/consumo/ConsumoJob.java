@@ -132,24 +132,27 @@ public class ConsumoJob {
                     final String description = String.format("consultarPlanes was success for offset [FROM:%s][TO:%s]", from, to);
                     logConsumoDb(cId, jobId, EstadoConsumo.SUCCESS, from, to, rqstId, description); // esto marca ultimo resultado como successs
 
+                    Long nroConsumoResult = 1L;
                     for (final NotificationUpdate update : notificationUpdates) {
                         try {
-
                             final NotificationUpdateForm nuForm = transformNotificationUpdate(update, cId);
                             if (this.consumoJobManager.getMsNotificationUpdateDao().valid(nuForm)) {
                                 desnormalizer.updateDb(cId, update);
+                                nuForm.setIdJobConsumo(jobId);
+                                nuForm.setNroConsumoResult(nroConsumoResult);
                                 this.consumoJobManager.getMsNotificationUpdateDao().insert(nuForm);
                                 log.info("Consume Result inserted successfully for concesionaria {} [plan_id:{}][nro_cuota:{}][dni_cliente:{}]",
                                         cId, nuForm.getPlanId(), nuForm.getCuotaNroCuota(), nuForm.getClienteDocumento());
                             }
-                            final String desc = "updateDb success for update: " + update;
-                            logConsumoResultDb(cId, jobId, TipoConsumoResult.SUCCESS, desc);
+                            final String desc = "updateDb success for update: " + update + " with idx: " + nroConsumoResult;
+                            logConsumoResultDb(cId, jobId, TipoConsumoResult.SUCCESS, desc, nroConsumoResult);
 
                         } catch (final SQLException ex) {
                             log.error("Problems with update db [exception:{}]", ex.getMessage());
-                            final String desc = "updateDb failed for update: " + update;
-                            logConsumoResultDb(cId, jobId, TipoConsumoResult.FAILURE, desc); // esto es un fallo en el ultimmo resultado
+                            final String desc = "updateDb failed for update: " + update + " with idx: " + nroConsumoResult;
+                            logConsumoResultDb(cId, jobId, TipoConsumoResult.FAILURE, desc, nroConsumoResult); // esto es un fallo en el ultimmo resultado
                         }
+                        nroConsumoResult++;
                     }
 
                 } catch (final ClientException ex) {
@@ -184,7 +187,7 @@ public class ConsumoJob {
 
         if (lastEstadoOpt.isPresent() && lastEstadoOpt.get().equals(EstadoConsumo.FAILURE.name())) {
             return this.consumoJobManager.getMsConsumoDao()
-                            .getLastPeriodTimeForConcesionaria(concesionairaId).get();
+                    .getLastPeriodTimeForConcesionaria(concesionairaId).get();
         }
         return DateUtils.getTimestamp(FROM_DAYS);
     }
@@ -225,14 +228,15 @@ public class ConsumoJob {
      * @param description
      * @throws SQLException
      */
-    private void logConsumoResultDb(final Long idConcesionaria, final Long jobId, final TipoConsumoResult tipoConsumoResult, final String description)
+    private void logConsumoResultDb(final Long idConcesionaria, final Long jobId, final TipoConsumoResult tipoConsumoResult, final String description, final Long nroConsumoResult)
             throws SQLException {
 
         final ConsumoResultForm consumoResultForm = new ConsumoResultForm();
         consumoResultForm.setIdConcesionaria(idConcesionaria);
         consumoResultForm.setIdConsumo(jobId);
-        consumoResultForm.setResult(tipoConsumoResult.name());
+        consumoResultForm.setNro(nroConsumoResult);
         consumoResultForm.setDescription(description);
+        consumoResultForm.setResult(tipoConsumoResult.name());
         this.consumoJobManager.getMsConsumoResultDao().insert(consumoResultForm);
     }
 

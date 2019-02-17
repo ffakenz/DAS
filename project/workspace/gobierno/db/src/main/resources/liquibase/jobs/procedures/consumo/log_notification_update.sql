@@ -22,6 +22,8 @@ CREATE PROCEDURE log_notification_update (
     , @vehiculo_modelo       VARCHAR(100)
     , @vehiculo_color        VARCHAR(100)
     , @concesionaria_id      BIGINT
+    , @id_job_consumo        BIGINT
+    , @nro_consumo_result    BIGINT
 ) AS
-INSERT INTO notification_update(plan_id,plan_estado,plan_fecha_alta,plan_fecha_ultima_actualizacion,plan_tipo_de_plan,cuota_nro_cuota,cuota_fecha_vencimiento,cuota_monto,cuota_fecha_pago,cuota_fecha_alta,cliente_documento,cliente_nombre,cliente_apellido,cliente_nro_telefono,cliente_email,vehiculo_id,vehiculo_tipo,vehiculo_nombre,vehiculo_precio,vehiculo_marca,vehiculo_modelo,vehiculo_color,concesionaria_id)
-VALUES(@plan_id,@plan_estado,@plan_fecha_alta,@plan_fecha_ultima_actualizacion,@plan_tipo_de_plan,@cuota_nro_cuota,@cuota_fecha_vencimiento,@cuota_monto,@cuota_fecha_pago,@cuota_fecha_alta,@cliente_documento,@cliente_nombre,@cliente_apellido,@cliente_nro_telefono,@cliente_email,@vehiculo_id,@vehiculo_tipo,@vehiculo_nombre,@vehiculo_precio,@vehiculo_marca,@vehiculo_modelo,@vehiculo_color,@concesionaria_id);
+INSERT INTO notification_update(plan_id,plan_estado,plan_fecha_alta,plan_fecha_ultima_actualizacion,plan_tipo_de_plan,cuota_nro_cuota,cuota_fecha_vencimiento,cuota_monto,cuota_fecha_pago,cuota_fecha_alta,cliente_documento,cliente_nombre,cliente_apellido,cliente_nro_telefono,cliente_email,vehiculo_id,vehiculo_tipo,vehiculo_nombre,vehiculo_precio,vehiculo_marca,vehiculo_modelo,vehiculo_color,concesionaria_id,id_job_consumo,nro_consumo_result)
+VALUES(@plan_id,@plan_estado,@plan_fecha_alta,@plan_fecha_ultima_actualizacion,@plan_tipo_de_plan,@cuota_nro_cuota,@cuota_fecha_vencimiento,@cuota_monto,@cuota_fecha_pago,@cuota_fecha_alta,@cliente_documento,@cliente_nombre,@cliente_apellido,@cliente_nro_telefono,@cliente_email,@vehiculo_id,@vehiculo_tipo,@vehiculo_nombre,@vehiculo_precio,@vehiculo_marca,@vehiculo_modelo,@vehiculo_color,@concesionaria_id,@id_job_consumo,@nro_consumo_result);

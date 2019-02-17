@@ -7,7 +7,7 @@ CREATE TABLE consumo_absoluto (
     , estado_cuenta_id  BIGINT          NULL
     , id_request_resp   VARCHAR(100)    NULL
     , estado            VARCHAR(100)    NOT NULL
-    , cause             VARCHAR(1000)   NOT NULL
+    , cause             VARCHAR(8000)   NOT NULL
     , PRIMARY KEY(id)
     , FOREIGN KEY(id_sorteo) REFERENCES sorteos(id)
 );
