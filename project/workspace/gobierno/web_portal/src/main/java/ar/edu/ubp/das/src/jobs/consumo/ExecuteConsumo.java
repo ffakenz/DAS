@@ -13,7 +13,6 @@ public class ExecuteConsumo {
 
     public static void main(final String[] args) {
 
-
         final DatasourceConfig dataSourceConfig = new DatasourceConfig();
         dataSourceConfig.setDriver("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         dataSourceConfig.setUrl("jdbc:sqlserver://localhost;databaseName=db_gobierno;");
@@ -23,14 +22,14 @@ public class ExecuteConsumo {
         final Timestamp fechaEjecucion = Timestamp.valueOf(ZonedDateTime.now().minusDays(15).toLocalDateTime());
         ConsumoJob consumoJob = new ConsumoJob(dataSourceConfig, ClientFactory.getInstance(), fechaEjecucion);
         // primer consumo que trae toda la info historica
-        FROM_DAYS = 1000;
-        TO_DAYS = 15;
-        consumoJob.execute(null);
+//        FROM_DAYS = -30;
+//        TO_DAYS = -15;
+//        consumoJob.execute(null);
 
 
         consumoJob = new ConsumoJob(dataSourceConfig, ClientFactory.getInstance());
         // primer consumo que trae toda la info historica
-        FROM_DAYS = 15;
+        FROM_DAYS = -15;
         TO_DAYS = 0;
         consumoJob.execute(null);
     }
