@@ -3,7 +3,7 @@ CREATE TABLE consumo (
     , id_concesionaria      BIGINT          NOT NULL
     , id_job_consumo        BIGINT          NOT NULL
     , estado                VARCHAR(100)    NOT NULL
-    , description           VARCHAR(1000)   NOT NULL
+    , description           VARCHAR(8000)   NOT NULL
     , [from]                DATETIME        NULL
     , [to]                  DATETIME        NULL
     , id_request_resp       VARCHAR(100)    NULL
