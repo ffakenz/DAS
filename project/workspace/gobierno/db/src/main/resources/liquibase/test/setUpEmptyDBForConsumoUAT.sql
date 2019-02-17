@@ -73,19 +73,19 @@ BEGIN
          , ('Naum', 'La Tablada5 5739', '24-93337511-5', '+5493513059165', 'c5@gmail.com', SYSDATETIMEOFFSET() AT TIME ZONE 'Argentina Standard Time', 'CODIGO_C5')
 
     INSERT INTO concesionaria_x_config_tecnologica(concesionaria_id, config_tecnologica)
-    VALUES (1, 'REST')
-         , (2, 'CXF')
-         , (3, 'AXIS')
-         , (4, 'REST')
+    VALUES (1, 'AXIS')
+         , (2, 'REST')
+         , (3, 'REST')
+         , (4, 'CXF')
          , (5, 'CXF')
 
     INSERT INTO concesionaria_config_params (concesionaria_id, config_tecno, config_param, value)
-    VALUES (3, 'AXIS', 'endpointUrl', 'http://localhost:8000/concesionaria_axis_one/services/ConcesionariaAxisOne.ConcesionariaAxisOneHttpEndpoint/')
-         , (3, 'AXIS', 'targetNameSpace', 'http://ws.ConcesionariaAxisOne/')
-         , (1, 'REST', 'url', 'http://localhost:8001/concesionaria_rest_one/concesionariaRestOne')
-         , (5, 'CXF', 'wsdlUrl', 'http://localhost:8002/concesionaria_cxf_one/services/concesionaria_cxf_one?wsdl')
-         , (4, 'REST', 'url', 'http://localhost:8003/concesionaria_rest_two/concesionariaRestTwo')
-         , (2, 'CXF', 'wsdlUrl', 'http://localhost:8004/concesionaria_cxf_two/services/concesionaria_cxf_two?wsdl')
+    VALUES (1, 'AXIS', 'endpointUrl', 'http://localhost:8000/concesionaria_axis_one/services/ConcesionariaAxisOne.ConcesionariaAxisOneHttpEndpoint/')
+         , (1, 'AXIS', 'targetNameSpace', 'http://ws.ConcesionariaAxisOne/')
+         , (2, 'REST', 'url', 'http://localhost:8001/concesionaria_rest_one/concesionariaRestOne')
+         , (3, 'REST', 'url', 'http://localhost:8003/concesionaria_rest_two/concesionariaRestTwo')
+         , (4, 'CXF', 'wsdlUrl', 'http://localhost:8002/concesionaria_cxf_one/services/concesionaria_cxf_one?wsdl')
+         , (5, 'CXF', 'wsdlUrl', 'http://localhost:8004/concesionaria_cxf_two/services/concesionaria_cxf_two?wsdl')
 
 END
 GO

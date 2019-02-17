@@ -49,3 +49,7 @@ project/\.DS_Store
 project/workspace/concesionarias/ws/
 
 *.code-workspace
+
+project/workspace/concesionarias/concesionarias_cxf/concesionaria_cxf_two/ws/jaxws/Health\.java
+
+project/workspace/concesionarias/concesionarias_cxf/concesionaria_cxf_two/ws/jaxws/HealthResponse\.java

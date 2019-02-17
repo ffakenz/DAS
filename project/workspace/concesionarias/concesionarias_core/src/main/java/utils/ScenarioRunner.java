@@ -20,7 +20,7 @@ public class ScenarioRunner {
 
     public void run(final ScenarioBuilder builder) {
 
-        final int cantClientes = 10;
+        final int cantClientes = 3;
         try {
             for (int i = 0; i < cantClientes; i ++) {
                 final NotificationUpdate bean = nextUpdate();

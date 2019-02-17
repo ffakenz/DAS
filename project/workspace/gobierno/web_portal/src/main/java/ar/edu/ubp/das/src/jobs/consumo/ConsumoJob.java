@@ -128,24 +128,25 @@ public class ConsumoJob {
                     // usamos el cliente p/ consultar planes
                     final ConcesionariaServiceContract client = cli.get(); // ifPresent was checked above
                     final List<NotificationUpdate> notificationUpdates = client.consultarPlanes(IDENTIFICADOR, from, to);
-                    log.info("Consume is successfull for concesionaria {} [notification_updates:{}]", cId, JsonUtils.toJsonString(notificationUpdates));
+                    log.info("Consume is successfull for concesionaria {} [notification_updates:{}]", cId, notificationUpdates.size());
                     final String description = String.format("consultarPlanes was success for offset [FROM:%s][TO:%s]", from, to);
                     logConsumoDb(cId, jobId, EstadoConsumo.SUCCESS, from, to, rqstId, description); // esto marca ultimo resultado como successs
 
                     Long nroConsumoResult = 1L;
                     for (final NotificationUpdate update : notificationUpdates) {
                         try {
+
                             final NotificationUpdateForm nuForm = transformNotificationUpdate(update, cId);
                             if (this.consumoJobManager.getMsNotificationUpdateDao().valid(nuForm)) {
                                 desnormalizer.updateDb(cId, update);
                                 nuForm.setIdJobConsumo(jobId);
                                 nuForm.setNroConsumoResult(nroConsumoResult);
+                                final String desc = "updateDb success for update: " + update + " with idx: " + nroConsumoResult;
+                                logConsumoResultDb(cId, jobId, TipoConsumoResult.SUCCESS, desc, nroConsumoResult);
                                 this.consumoJobManager.getMsNotificationUpdateDao().insert(nuForm);
                                 log.info("Consume Result inserted successfully for concesionaria {} [plan_id:{}][nro_cuota:{}][dni_cliente:{}]",
                                         cId, nuForm.getPlanId(), nuForm.getCuotaNroCuota(), nuForm.getClienteDocumento());
                             }
-                            final String desc = "updateDb success for update: " + update + " with idx: " + nroConsumoResult;
-                            logConsumoResultDb(cId, jobId, TipoConsumoResult.SUCCESS, desc, nroConsumoResult);
 
                         } catch (final SQLException ex) {
                             log.error("Problems with update db [exception:{}]", ex.getMessage());
