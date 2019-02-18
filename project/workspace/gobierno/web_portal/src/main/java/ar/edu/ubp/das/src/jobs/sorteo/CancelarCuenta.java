@@ -1,6 +1,8 @@
 package ar.edu.ubp.das.src.jobs.sorteo;
 
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
+import ar.edu.ubp.das.src.estado_cuentas.daos.MSEstadoCuentasDao;
+import ar.edu.ubp.das.src.estado_cuentas.forms.EstadoCuentasForm;
 import ar.edu.ubp.das.src.jobs.ClientFactoryAdapter;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.ParticipanteForm;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.SorteoForm;
@@ -15,8 +17,13 @@ import static ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo.PENDIENTE_NOTIFI
 
 class CancelarCuenta extends SorteoStep {
 
+    MSEstadoCuentasDao msEstadoCuentasDao;
+
     public CancelarCuenta(DatasourceConfig datasourceConfig, ClientFactoryAdapter clientFactoryAdapter) {
         super(datasourceConfig, clientFactoryAdapter);
+
+        msEstadoCuentasDao = new MSEstadoCuentasDao();
+        msEstadoCuentasDao.setDatasource(datasourceConfig);
     }
 
     @Override
@@ -26,7 +33,8 @@ class CancelarCuenta extends SorteoStep {
             final ParticipanteForm ganador = sorteoJobManager.getMsParticipanteDao()
                     .getGanadorBySorteo(sorteoForm.getId()).get();
             final ConcesionariaServiceContract client = getHttpClient(ganador.getIdConcesionaria());
-            client.cancelarPlan(Constants.IDENTIFICADOR, ganador.getIdPlan());
+            EstadoCuentasForm estadoCuentasForm = msEstadoCuentasDao.selectEstadoCuentasById(ganador.getIdPlan()).get();
+            client.cancelarPlan(Constants.IDENTIFICADOR, estadoCuentasForm.getNroPlanConcesionaria());
         } catch (final ClientException | SQLException e) {
             logSorteoFormDb(sorteoForm, PENDIENTE_CANCELACION, e.getMessage());
             throw new StepRunnerException(name);

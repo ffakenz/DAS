@@ -71,9 +71,7 @@ public class ConsumoAbsoluto {
 
         this.msConsumoAbsolutoDao = new MSConsumoAbsolutoDao();
         msConsumoAbsolutoDao.setDatasource(datasourceConfig);
-
     }
-
 
     // TODO : Change Return Time to DTO Response
     public boolean ejecutar(final SorteoForm sorteoForm) {
@@ -116,6 +114,7 @@ public class ConsumoAbsoluto {
             // TODO <- Improve this with comment below
             log.info("[ConsumoAbsoluto.ejecutar][SUCCESS]");
             consumoAbsolutoForm.setEstado(SUCCESS);
+            consumoAbsolutoForm.setConcesionariaId(null);
             consumoAbsolutoForm.setCause("job");
             logConsumoAbsolutoForm(consumoAbsolutoForm);
         }

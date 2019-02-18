@@ -4,9 +4,8 @@ import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.src.jobs.ClientFactoryAdapter;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.SorteoForm;
+import ar.edu.ubp.das.src.utils.DateUtils;
 import clients.factory.IClientFactory;
-import org.quartz.Job;
-import org.quartz.JobExecutionContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,7 +16,7 @@ import java.util.Optional;
 
 import static ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo.*;
 
-public class SorteoJob implements Job {
+public class SorteoJob {
 
     protected static final Logger log = LoggerFactory.getLogger(SorteoJob.class);
 
@@ -41,8 +40,7 @@ public class SorteoJob implements Job {
         this.sendEmail = sendEmail;
     }
 
-    @Override
-    public void execute(final JobExecutionContext jobExecutionContext) {
+    public void execute() {
 
         final Optional<SorteoForm> sorteoDeHoy = getSorteoDeHoy();
 
@@ -91,5 +89,27 @@ public class SorteoJob implements Job {
             }
         });
     }
+
+
+    public void createSorteo() {
+        SorteoForm sorteo = new SorteoForm();
+        sorteo.setFechaEjecucion(DateUtils.getDayDate());
+        try {
+            sorteoJobManager.getMsSorteoDao().insert(sorteo);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Optional<SorteoForm> getLastSorteo()  {
+        Optional<SorteoForm> lasJobCreated = Optional.empty();
+        try {
+            lasJobCreated = sorteoJobManager.getMsSorteoDao().select().stream().findFirst();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lasJobCreated;
+    }
+
 }
 

@@ -35,10 +35,11 @@ class NotificarGanador extends SorteoStep {
             }
 
         } catch (SQLException | MessagingException  e) {
-            e.printStackTrace();
-            sorteoForm.setEstado(PENDIENTE_NOTIFICACION_CONCESIONARIAS);
+            log.error("[exception:{}]", e.getMessage());
+            logSorteoFormDb(sorteoForm, PENDIENTE_NOTIFICACION_CONCESIONARIAS, e.getMessage());
         }
 
+        sorteoForm.setEstado(PENDIENTE_NOTIFICACION_CONCESIONARIAS);
         return sorteoForm;
     }
 

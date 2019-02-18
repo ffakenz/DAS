@@ -40,13 +40,21 @@ public class CXFClient implements ConcesionariaServiceContract {
         final JaxWsDynamicClientFactory dcf = JaxWsDynamicClientFactory.newInstance();
 
         try (final Client client = dcf.createClient(wsdlUrl)) {
-            // System.out.println("Consuming Service: " + client.getEndpoint().getService().getName().toString());
+
             final Object[] res = client.invoke(methodName, params);
 
-            if (res.length == 0)
-                throw new ClientException("ENDPOINT IS DOWN = 0");
+            Long statusCode =
+                    Long.parseLong(client.getResponseContext().get("org.apache.cxf.message.Message.RESPONSE_CODE").toString());
+
+            if (statusCode >= 500)
+                throw new ClientException("ENDPOINT IS DOWN = " + client.getResponseContext().get("org.apache.cxf.service.model.MessageInfo"));
+            if (statusCode >= 400)
+                throw new ClientException("BAD REQUEST = " + client.getResponseContext().get("org.apache.cxf.service.model.MessageInfo"));
+
+            if(res == null) return null;
 
             return res[0];
+
         } catch (final Exception e) {
             throw new ClientException("ENDPOINT IS DOWN = " + e.getMessage()); // reached if docker is not running
         }

@@ -85,8 +85,10 @@ public class RestClient implements ConcesionariaServiceContract {
 
             final int statusCode = resp.getStatusLine().getStatusCode();
 
-            if (statusCode == 500)
+            if (statusCode >= 500)
                 throw new ClientException("ENDPOINT IS DOWN = " + resp.toString());
+            if (statusCode >= 400)
+                throw new ClientException("BAD REQUEST = " + resp.toString());
 
         } catch (final IOException e) {
             throw new ClientException("ENDPOINT IS DOWN = " + e.getMessage()); // reached if docker is not running

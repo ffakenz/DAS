@@ -57,6 +57,6 @@ public final class Constants {
     public static final String CONFIG_BTN = "config_btn";
 
     /************ SORTEO ****************************/
-    public static Integer CUOTAS_MIN = 0;
-    public static Integer CUOTAS_MAX = 2;
+    public static Integer CUOTAS_MIN = 10;
+    public static Integer CUOTAS_MAX = 36;
 }

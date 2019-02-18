@@ -22,7 +22,7 @@ public class EjecutarSorteoAction implements Action {
 
         final DatasourceConfig datasourceConfig = ModuleConfigImpl.getDatasourceById("default");
         final SorteoJob sorteoJob = new SorteoJob(datasourceConfig, ClientFactory.getInstance(), new SendEmail());
-        sorteoJob.execute(null);
+        sorteoJob.execute();
 
         return mapping.getForwardByName(ResponseForward.SUCCESS.getForward());
     }

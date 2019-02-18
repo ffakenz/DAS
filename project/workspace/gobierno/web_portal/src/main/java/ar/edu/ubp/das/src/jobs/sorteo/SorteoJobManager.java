@@ -10,6 +10,7 @@ public class SorteoJobManager {
     private MSSorteoDao msSorteoDao;
     private MSParticipanteDao msParticipanteDao;
     private MSConsumerDao msConsumerDao;
+    private DatasourceConfig datasourceConfig;
 
     public SorteoJobManager(final DatasourceConfig datasourceConfig) {
         this.msSorteoDao = new MSSorteoDao();
@@ -18,6 +19,7 @@ public class SorteoJobManager {
         this.msParticipanteDao.setDatasource(datasourceConfig);
         this.msConsumerDao = new MSConsumerDao();
         this.msConsumerDao.setDatasource(datasourceConfig);
+        this.datasourceConfig = datasourceConfig;
     }
 
     public MSSorteoDao getMsSorteoDao() {

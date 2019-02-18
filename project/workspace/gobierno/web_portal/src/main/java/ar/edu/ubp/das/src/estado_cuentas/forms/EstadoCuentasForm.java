@@ -7,6 +7,8 @@ import beans.PlanBean;
 import utils.JsonUtils;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
 
 @Entity
 public class EstadoCuentasForm extends DynaActionForm {
@@ -117,5 +119,17 @@ public class EstadoCuentasForm extends DynaActionForm {
         estadoCuentasForm.setFechaAltaConcesionaria(planBean.getPlanFechaAlta());
 
         return estadoCuentasForm;
+    }
+
+    public static void main(String[] args) {
+        Timestamp val = Timestamp.valueOf("2019-02-17 19:58:29.637");
+        Date date = java.sql.Date.valueOf("2019-02-17");
+        // System.out.println(val.before(date));
+
+        boolean result = new ArrayList<Integer>()
+                .stream()
+                .allMatch(c -> c > 1);
+
+        System.out.println(result);
     }
 }

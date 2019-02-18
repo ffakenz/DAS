@@ -54,7 +54,7 @@ public class SorteoJobSpec {
     public void test_01() throws SQLException {
         // without sorteo , base case
         sorteoJob = new SorteoJob(datasourceConfig, new ClientFactoryStub(null), new SendEmailStubSuccess());
-        sorteoJob.execute(null);
+        sorteoJob.execute();
 
         assertEquals(0, sorteoJobManager.getMsSorteoDao().select().size());
     }
@@ -65,7 +65,7 @@ public class SorteoJobSpec {
         sorteoJobScenarios.setSorteoNuevoParaHoy();
 
         sorteoJob = new SorteoJob(datasourceConfig, new ClientFactoryStub(null), new SendEmailStubSuccess());
-        sorteoJob.execute(null);
+        sorteoJob.execute();
 
         assertEquals(1, sorteoJobManager.getMsSorteoDao().select().size());
 
@@ -86,13 +86,13 @@ public class SorteoJobSpec {
         }};
 
         sorteoJob = new SorteoJob(datasourceConfig, new ClientFactoryStub(concesionariasXnotificationFileName), new SendEmailStubSuccess());
-        sorteoJob.execute(null);
+        sorteoJob.execute();
 
         // seteamos valores de cuotas para los que sabemos que no tenemos estados de cuenta que cumplan
         Constants.CUOTAS_MIN = 10;
         Constants.CUOTAS_MAX = 20;
 
-        sorteoJob.execute(null);
+        sorteoJob.execute();
 
         assertEquals(1, sorteoJobManager.getMsSorteoDao().select().size());
         Optional<SorteoForm> sorteoById = sorteoJobManager.getMsSorteoDao().getSorteoById(1L);
@@ -109,7 +109,7 @@ public class SorteoJobSpec {
         sorteoJobScenarios.setEstadoCuentaForConcesionaria(123L, concesionariaForm);
 
         sorteoJob = new SorteoJob(datasourceConfig, ClientFactory.getInstance(), new SendEmailStubSuccess());
-        sorteoJob.execute(null);
+        sorteoJob.execute();
 
         assertEquals(1, sorteoJobManager.getMsSorteoDao().select().size());
         Optional<SorteoForm> sorteoById = sorteoJobManager.getMsSorteoDao().getSorteoById(1L);
@@ -133,7 +133,7 @@ public class SorteoJobSpec {
         }};
 
         sorteoJob = new SorteoJob(datasourceConfig, new ClientFactoryStub(concesionariasXnotificationFileName), new SendEmailStubSuccess());
-        sorteoJob.execute(null);
+        sorteoJob.execute();
 
         assertEquals(1, sorteoJobManager.getMsSorteoDao().select().size());
         Optional<SorteoForm> sorteoById = sorteoJobManager.getMsSorteoDao().getSorteoById(1L);
@@ -158,7 +158,7 @@ public class SorteoJobSpec {
         }};
 
         sorteoJob = new SorteoJob(datasourceConfig, new ClientFactoryStub(concesionariasXnotificationFileName), new SendEmailStubSuccess());
-        sorteoJob.execute(null);
+        sorteoJob.execute();
 
         assertEquals(1, sorteoJobManager.getMsSorteoDao().select().size());
         Optional<SorteoForm> sorteoById = sorteoJobManager.getMsSorteoDao().getSorteoById(1L);

@@ -59,6 +59,7 @@ public class AxisClient implements ConcesionariaServiceContract {
             opts.setTo(new EndpointReference(endpointUrl));
             serviceClient.setOptions(opts);
             serviceClient.fireAndForget(method); // Note: this is the only line difference with executeMethod
+
         } catch (final AxisFault e) {
             throw new ClientException("ENDPOINT IS DOWN = " + e.getMessage()); // reached if docker is not running
         }

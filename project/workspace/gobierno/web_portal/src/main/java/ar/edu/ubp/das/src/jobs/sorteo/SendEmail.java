@@ -12,8 +12,8 @@ public class SendEmail {
 
     private static final Logger log = LoggerFactory.getLogger(SendEmail.class);
 
-    private static final String username = "iroccalada@gmail.com";
-    private static final String password = "Nacho_040194";
+    private static final String username = "ubpdas2019@gmail.com";
+    private static final String password = "Das12345";
 
     private static Session session = Session.getDefaultInstance(setAndGetEmailProperties(),
             new Authenticator(){
@@ -26,7 +26,6 @@ public class SendEmail {
         try{
             submitEmail(emailRecipient, subject, body);
         } catch (MessagingException mex) {
-            log.error("[exception:{}]", mex.getMessage());
             throw mex;
         }
     }
