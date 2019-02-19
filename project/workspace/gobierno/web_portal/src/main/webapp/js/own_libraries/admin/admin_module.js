@@ -3,13 +3,6 @@ class Admin extends Module {
         super(config);
     }
 
-    testConsumo(evt) {
-        evt.preventDefault();
-        jUtils.hiding("calendar_main_div",true);
-        console.log("testConsumo, [EVENT] = %o", evt);
-        AdminService.GET_TEST_CONSUMO();
-    }
-
     showConcesionarias(evt) {
         evt.preventDefault();
         jUtils.hiding("calendar_main_div",true);
@@ -40,20 +33,6 @@ class Admin extends Module {
         jUtils.hiding("calendar_main_div",true);
         console.log("showJobResultsReport, [EVENT] = %o", evt);
         ConsumoService.GET_JOB_RESULTS_REPORT();
-    }
-
-    executeConsumo(evt) {
-        evt.preventDefault();
-        jUtils.hiding("calendar_main_div",true);
-        console.log("executeConsumo, [EVENT] = %o", evt);
-        AdminService.EXECUTE_CONSUMO();
-    }
-
-    executeSorteo(evt) {
-        evt.preventDefault();
-        jUtils.hiding("calendar_main_div",true);
-        console.log("executeSorteo, [EVENT] = %o", evt);
-        AdminService.EXECUTE_SORTEO();
     }
 };
 

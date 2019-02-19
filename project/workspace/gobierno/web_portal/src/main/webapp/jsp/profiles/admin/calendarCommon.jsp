@@ -25,21 +25,16 @@
   int intMonth = new Integer(currentMonthString).intValue();
   int intYear  = new Integer(currentYearString).intValue();
 
-  // determine the name of the current intMonth
-  String monthNames[] = {"January",
-                         "February",
-                         "March",
-                         "April",
-                         "May",
-                         "June",
-                         "July",
-                         "August",
-                         "September",
-                         "October",
-                         "November",
-                         "December" };
+  String lang = (String) request.getSession().getAttribute("idioma");
 
-  String monthName = monthNames[intMonth];
+  // determine the name of the current intMonth
+  String englishMonthNames[] = {"January","February","March","April","May","June",
+                         "July","August","September","October","November","December" };
+
+  String spanishMonthNames[] = {"Enero","Febrero","Marzo","Abril","Mayo","Junio",
+                           "Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre" };
+
+  String monthName = lang.equals("en") ? englishMonthNames[intMonth] : spanishMonthNames[intMonth];
 
   // determine the next/previous month and year.
   // this is really only needed by calendar.jsp, but i moved it here

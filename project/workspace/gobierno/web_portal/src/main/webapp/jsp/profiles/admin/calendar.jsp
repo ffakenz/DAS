@@ -6,6 +6,7 @@
                 %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <fmt:setBundle basename="properties.etiquetas" var="etq" scope="session"/>
+<fmt:setLocale value="${idioma}" scope="session" />
 
 <%@ page import="ar.edu.ubp.das.src.jobs.sorteo.forms.SorteoForm" %>
 <%@ page import="java.util.List" %>
@@ -23,7 +24,7 @@
 <%@ include file="calendarCommon.jsp" %>
 <div class="card">
     <div class="card-header">
-        <h2 class="title" >Calendario Sorteo</h2>
+        <h2 class="title" ><fmt:message key="calendar_title" bundle="${etq}" /></h2>
     </div>
 </div>
 <table border="1" cellspacing="0" cellpadding="4" id="calendar_table">

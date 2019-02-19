@@ -19,14 +19,6 @@ class Calendario extends Module {
         CalendarioService.GET_CALENDAR_CELL_MODAL(data);            
     }
 
-    ejecutarSorteo(evt) {
-        evt.preventDefault();
-        console.log("ejecutarSorteo, [EVENT] = %o", evt);
-        const idButton = evt.target.id;
-        const idSorteo = idButton.split("-")[1];
-        CalendarioService.EJECUTAR_SORTEO(idSorteo);
-    }
-
     crearSorteo(evt) {
         evt.preventDefault();
         console.log("crearSorteo, [EVENT] = %o", evt);

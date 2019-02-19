@@ -6,6 +6,7 @@
 %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <fmt:setBundle basename="properties.etiquetas" var="etq" scope="session"/>
+<fmt:setLocale value="${idioma}" scope="session" />
 
 <%@ page import="ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm" %>
 <%@ page import="java.util.List" %>
@@ -21,26 +22,26 @@
             String row = FrontUtils.concesionariaFormRow(c);
             rows.append(row);
         }
-        result.append("<thead>                                                                                     ");
-        result.append("<tr>                                                                                        ");
-        result.append("   <th>Id</th>                                                                              ");
-        result.append("   <th>Nombre</th>                                                                          ");
-        result.append("   <th>Cuit</th>                                                                            ");
-        result.append("   <th>Codigo</th>                                                                          ");
-        result.append("   <th>Email</th>                                                                           ");
-        result.append("   <th>Direccion</th>                                                                       ");
-        result.append("   <th>Tel</th>                                                                             ");
-        result.append("   <th>FechaAlta</th>                                                                       ");
-        result.append("   <th>FechaRegistracion</th>                                                               ");
-        result.append("   <th>Action</th>                                                                          ");
-        result.append("   <th>Configurar</th>                                                                      ");
-        result.append("</tr>                                                                                       ");
-        result.append("</thead>                                                                                    ");
-        result.append("<tbody>                                                                                     ");
         result.append(    rows.toString()                                                                           );
-        result.append("</tbody>                                                                                    ");
    } catch(Exception e) {
         result.append(e.getMessage());
    }
 %>
+<thead>
+<tr>
+   <th><fmt:message key="table_conc_id_th" bundle="${etq}" /></th>
+   <th><fmt:message key="table_conc_name_th" bundle="${etq}" /></th>
+   <th><fmt:message key="table_conc_cuit_th" bundle="${etq}" /></th>
+   <th><fmt:message key="table_conc_code_th" bundle="${etq}" /></th>
+   <th><fmt:message key="table_conc_email_th" bundle="${etq}" /></th>
+   <th><fmt:message key="table_conc_dir_th" bundle="${etq}" /></th>
+   <th><fmt:message key="table_conc_tel_th" bundle="${etq}" /></th>
+   <th><fmt:message key="table_conc_created_at_th" bundle="${etq}" /></th>
+   <th><fmt:message key="table_conc_registered_at_th" bundle="${etq}" /></th>
+   <th><fmt:message key="table_conc_action_th" bundle="${etq}" /></th>
+   <th><fmt:message key="table_conc_config_th" bundle="${etq}" /></th>
+</tr>
+</thead>
+<tbody>
 <%= result.toString() %>
+</tbody>

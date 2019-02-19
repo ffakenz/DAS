@@ -65,27 +65,6 @@ const CalendarioService = {
         });
     },
 
-    EJECUTAR_SORTEO(idSorteo) {
-        $("#loadingDiv").modal("show");
-        jUtils.executing("loadingDiv");
-        $.ajax({
-            url: Action.EJECUTAR_SORTEO,
-            type: "post",
-            dataType: "html",
-            data: "id=" + idSorteo,
-            error: function (hr) {
-                console.log("AJAX RESULT EJECUTAR_SORTEO ERROR %o", hr.responseText);
-                jUtils.showing("resultado", hr);
-                $("#loadingDiv").modal("hide");
-            },
-            success: function (html) {
-                $("#loadingDiv").modal("hide");
-                console.log("AJAX RESULT EJECUTAR_SORTEO SUCCESS %o", html);
-                jUtils.showing("resultado", html);
-            }
-        });
-    },
-
     CREAR_SORTEO(data) {
         $("#loadingDiv").modal("show");
         jUtils.executing("loadingDiv");

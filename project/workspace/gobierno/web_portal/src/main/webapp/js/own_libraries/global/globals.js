@@ -1,7 +1,6 @@
 'use strict';
 
 const Action = {
-
     HOME_ENDPOINT : "/web_portal/home/Home.do",
     SHOW_REGISTRAR_CONCESIONARIA_ENDPOINT : "/web_portal/home/ShowRegistrarConcesionaria.do",
     /* LOGIN */
@@ -22,12 +21,9 @@ const Action = {
     CONFIG_CONCESIONARIA : "/web_portal/concesionarias/Configurar.do",
     /* LANGUAGE */
     CHANGE_LANGUAGE_ENDPOINT : "/web_portal/other/ChangeLanguage.do",
-    /* CONSUMO */
-    CONSUMO_TEST :  "/web_portal/consumo/Consumo.do",
     /* SORTEO  */
     GET_SORTEOS :  "/web_portal/sorteo/ConsultarSorteos.do",
     CREAR_SORTEO :  "/web_portal/sorteo/CrearSorteo.do",
-    EJECUTAR_SORTEO :  "/web_portal/sorteo/EjecutarSorteo.do",
     ACTUALIZAR_SORTEO :  "/web_portal/sorteo/ActualizarSorteo.do",
     GET_CALENDARIO: "/web_portal/sorteo/CalendarioAdmin.do",
     /* REPORTS */
@@ -70,8 +66,6 @@ const Id = {
     SHOW_CONFIG_CONCESIONARIAS_BTN: "show_config_concesionarias_btn",
     SHOW_SORTEOS_BTN: "show_sorteos_btn",
     SHOW_PLANES_BTN: "show_planes_btn",
-    EXECUTE_CONSUMO_BTN: "execute_consumo_btn",
-    EXECUTE_SORTEO_BTN: "execute_sorteo_btn",
     ADMIN_SIDE_BAR: "admin_side_bar",
     SHOW_JOB_RESULTS_REPORT_BTN: "show_job_results_report_btn",
     CONTENT_ADMIN_PAGE_DIV: "content_admin_page_div",
@@ -96,7 +90,6 @@ const Class = {
     DESAPROBAR_BTN: "desaprobar_btn",
     CONFIG_BTN: "config_btn",
     LOGINBOX: "loginbox",
-    EJECUTAR_SORTEO_BTN: "ejecutar_sorteo_btn",
     ACTUALIZAR_FECHA_SORTEO_BTN: "actualizar_fecha_sorteo_btn",
     EMPTY_CELL: "empty_cell",
     SORTEO_CELL: "sorteo_cell",

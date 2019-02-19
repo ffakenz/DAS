@@ -16,19 +16,23 @@
     <link type="text/css" rel="stylesheet" href="/web_portal/util/StyleSheet.do/load=simple-sidebar" />
     <link type="text/css" rel="stylesheet" href="/web_portal/util/StyleSheet.do/load=admin" />
     <body>
-
         <div class="d-flex" id="wrapper">
-
             <!-- Sidebar -->
             <div class="bg-light border-right" id="sidebar-wrapper">
-                <div class="sidebar-heading">Administrador</div>
+                <div class="sidebar-heading"><fmt:message key="gobierno_sidebar_heading" bundle="${etq}" /></div>
                 <div id="admin_side_bar" class="list-group list-group-flush">
-                    <a id="show_config_concesionarias_btn" class="list-group-item list-group-item-action bg-light">Configurar concesionarias</a>
-                    <a id="show_sorteos_btn" class="list-group-item list-group-item-action bg-light">Sorteos</a>
-                    <a id="show_planes_btn" class="list-group-item list-group-item-action bg-light">Planes</a>
-                    <a id="show_job_results_report_btn" class="list-group-item list-group-item-action bg-light">Job Results Report</a>
-                    <a id="execute_consumo_btn" class="list-group-item list-group-item-action bg-light">Consumir planes</a>
-                    <a id="execute_sorteo_btn" class="list-group-item list-group-item-action bg-light">Ejecutar sorteo</a>
+                    <a id="show_config_concesionarias_btn" class="list-group-item list-group-item-action bg-light">
+                        <fmt:message key="sidebar_option_config_concesionarias" bundle="${etq}" />
+                    </a>
+                    <a id="show_sorteos_btn" class="list-group-item list-group-item-action bg-light">
+                        <fmt:message key="sidebar_option_sorteos" bundle="${etq}" />
+                    </a>
+                    <a id="show_planes_btn" class="list-group-item list-group-item-action bg-light">
+                        <fmt:message key="sidebar_option_planes" bundle="${etq}" />
+                    </a>
+                    <a id="show_job_results_report_btn" class="list-group-item list-group-item-action bg-light">
+                        <fmt:message key="sidebar_option_job_results_report" bundle="${etq}" />
+                    </a>
                 </div>
             </div>
             <!-- /#sidebar-wrapper -->
@@ -39,10 +43,14 @@
                 <!-- ### HEADER ### -->
                 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom" style="padding-left: 80% !IMPORTANT;">
                     <div id="go_to_home_div" style="margin-right: 5px;">
-                        <button id="go_to_home_btn" name="login" class="btn btn-primary pull-right" >Volver al home</button>
+                        <button id="go_to_home_btn" name="login" class="btn btn-primary pull-right" >
+                            <fmt:message key="go_to_home_btn" bundle="${etq}" />
+                        </button>
                     </div>
                     <div id="logout_div" style="margin-left: 5px;">
-                        <button id="logout_btn" name="logout" class="btn btn-primary pull-right">Cerrar Sesion</button>
+                        <button id="logout_btn" name="logout" class="btn btn-primary pull-right">
+                            <fmt:message key="logout_btn" bundle="${etq}" />
+                        </button>
                     </div>
                     <%@include file="../commons/language.jsp" %>
 

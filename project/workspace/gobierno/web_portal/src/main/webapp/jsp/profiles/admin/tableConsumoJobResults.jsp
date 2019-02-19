@@ -6,6 +6,7 @@
                 %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <fmt:setBundle basename="properties.etiquetas" var="etq" scope="session"/>
+<fmt:setLocale value="${idioma}" scope="session" />
 
 <%@ page import="ar.edu.ubp.das.src.jobs.consumo.forms.ViewConsumoResultsForm" %>
 <%@ page import="java.util.List" %>
@@ -16,34 +17,35 @@
 <%
         StringBuilder result = new StringBuilder();
         try {
-        List<ViewConsumoResultsForm> viewResults =
-            (List<ViewConsumoResultsForm>) request.getAttribute(JOB_RESULTS_REPORT_RQST_ATTRIBUTE);
-        StringBuilder rows = new StringBuilder();
-        for( ViewConsumoResultsForm v : viewResults) {
-        String row = FrontUtils.viewConsumoResultsFormRow(v);
-        rows.append(row);
-        }
-        result.append("<thead>                                                                                      ");
-        result.append("<tr>                                                                                         ");
-        result.append("   <th>Job Id</th>                                                                           ");
-        result.append("   <th>Job Fecha Ejecucion</th>                                                              ");
-        result.append("   <th>Consumo Id</th>                                                                       ");
-        result.append("   <th>Concesionaria Id</th>                                                                 ");
-        result.append("   <th>Estado Consumo</th>                                                                   ");
-        result.append("   <th>From date</th>                                                                        ");
-        result.append("   <th>To date</th>                                                                          ");
-        result.append("   <th>Id Request-Resp Consumo</th>                                                          ");
-        result.append("   <th>Estado Description</th>                                                               ");
-        result.append("   <th>Consumo Result Id</th>                                                                ");
-        result.append("   <th>Consumo Result</th>                                                                   ");
-        result.append("   <th>Consumo Result Description</th>                                                       ");
-        result.append("</tr>                                                                                        ");
-        result.append("</thead>                                                                                     ");
-        result.append("<tbody>                                                                                      ");
-        result.append(rows.toString()                                                                                );
-        result.append("</tbody>                                                                                     ");
+            List<ViewConsumoResultsForm> viewResults =
+                (List<ViewConsumoResultsForm>) request.getAttribute(JOB_RESULTS_REPORT_RQST_ATTRIBUTE);
+            StringBuilder rows = new StringBuilder();
+            for( ViewConsumoResultsForm v : viewResults) {
+                String row = FrontUtils.viewConsumoResultsFormRow(v);
+                rows.append(row);
+            }
+            result.append(rows.toString()                                                                                    );
         } catch(Exception e) {
-        result.append(e.getMessage());
+            result.append(e.getMessage());
         }
         %>
+
+<thead>
+<tr>
+   <th><fmt:message key="table_consumo_job_id_th" bundle="${etq}" /></th>
+   <th><fmt:message key="table_consumo_job_fecha_ej_th" bundle="${etq}" /></th>
+   <th><fmt:message key="table_consumo_job_consumo_id_th" bundle="${etq}" /></th>
+   <th><fmt:message key="table_consumo_job_conc_id_th" bundle="${etq}" /></th>
+   <th><fmt:message key="table_consumo_job_estado_consumo_th" bundle="${etq}" /></th>
+   <th><fmt:message key="table_consumo_job_from_date_th" bundle="${etq}" /></th>
+   <th><fmt:message key="table_consumo_job_to_date_th" bundle="${etq}" /></th>
+   <th><fmt:message key="table_consumo_job_rqst_resp_th" bundle="${etq}" /></th>
+   <th><fmt:message key="table_consumo_job_estado_desc_th" bundle="${etq}" /></th>
+   <th><fmt:message key="table_consumo_job_consumo_result_id_th" bundle="${etq}" /></th>
+   <th><fmt:message key="table_consumo_job_consumo_result_th" bundle="${etq}" /></th>
+   <th><fmt:message key="table_consumo_job_consumo_result_desc_th" bundle="${etq}" /></th>
+</tr>
+</thead>
+<tbody>
 <%= result.toString() %>
+</tbody>
