@@ -4,6 +4,7 @@
 
 <!-- JQuery -->
 <script src="/web_portal/util/Javascript.do/load=external_libraries/jquery"></script>
+
 <!-- Bootstrap -->
 <script src="/web_portal/util/Javascript.do/load=external_libraries/bootstrap.min"></script>
 

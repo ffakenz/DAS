@@ -67,8 +67,7 @@
                     </div>
                     <div id="content_admin_page_div">
                         <div id="table_admin_result_title"></div>
-                        <table id="table_admin_result" class="table table-hover">
-                        </table>
+
                     </div>
 
                     <%@include file="../commons/resultado.jsp"%>
@@ -97,4 +96,5 @@
 
     <%@include file="../commons/footer.jsp"%>
     <label>USUARIO ADMIN CORRECTO ... ( Session de login nº:  ${sessionScope.ssid} )</label>
+
 </html>

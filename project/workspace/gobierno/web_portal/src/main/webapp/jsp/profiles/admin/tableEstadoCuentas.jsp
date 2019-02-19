@@ -28,6 +28,7 @@
             result.append(e.getMessage());
         }
 %>
+<table id="table_admin_result" class="table table-hover">
 <thead>
 <tr>
    <th><fmt:message key="table_estado_cuentas_id_th" bundle="${etq}" /></th>
@@ -43,3 +44,13 @@
 <tbody>
 <%= result.toString() %>
 </tbody>
+</table>
+
+<script src="/web_portal/js/external_libraries/datatables.min.js"></script>
+<script>
+        $(()=> {
+
+            $('#table_admin_result').DataTable();
+
+        });
+</script>

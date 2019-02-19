@@ -4,6 +4,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="icon" type="image/gif" href="/web_portal/img/spinnerMD.gif">
     <!-- Main -->
-    <link type="text/css" rel="stylesheet" href="/web_portal/util/StyleSheet.do/load=page,messages,table,flag-icon.min,language,flatly.bootstrap.min" />
+    <link type="text/css" rel="stylesheet" href="/web_portal/util/StyleSheet.do/load=page,messages,table,flag-icon.min,language,flatly.bootstrap.min,datatables.min" />
     <title><fmt:message key="page_title" bundle="${etq}" /></title>
 </head>

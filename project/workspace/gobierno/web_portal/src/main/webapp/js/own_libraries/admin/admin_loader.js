@@ -1,3 +1,4 @@
+
 $(window).on('load', () => {
     /*
     setTimeout(function(){
@@ -5,8 +6,6 @@ $(window).on('load', () => {
     }, 2000);
     */
     ConcesionariasService.GET_CONSULTAR_TODAS();
-
-
 
     console.log("Admin View executed on Load");
 });

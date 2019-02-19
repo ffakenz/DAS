@@ -84,5 +84,19 @@ const jUtils = {
                 <h2 class="title" >${title}</h2>
             </div>
         </div>`;
+    },
+
+    changeLang: (filenamme, lang, root) => {
+        root = root == undefined ? '' : root;
+        $.i18n.properties({
+            name: filenamme,
+            path: root + "/web_portal/js/properties",
+            mode: 'map',
+            language: lang,
+            callback: function() { 
+                $("#msg_welcome").text($.i18n.prop('msg_welcome')); 
+                $("#msg_selLang").text($.i18n.prop('msg_selLang', lang)); 
+            }
+        });
     }
 };

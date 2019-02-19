@@ -9,13 +9,13 @@ const ConsumoService = {
             dataType: "html",
             error: function (hr) {
                 console.log("AJAX RESULT GET_JOB_RESULTS_REPORT ERROR %o", hr.responseText);
-                jUtils.showing("table_admin_result", hr);
+                jUtils.showing("content_admin_page_div", html);
                 $("#loadingDiv").modal("hide");
             },
             success: function (html) {
                 $("#loadingDiv").modal("hide");
                 console.log("AJAX RESULT GET_JOB_RESULTS_REPORT SUCCESS %o", html);
-                jUtils.showing("table_admin_result", html);
+                jUtils.showing("content_admin_page_div", html);
                 $("#table_admin_result_title").html(jUtils.addTitle("Calendario Sorteo"));
             }
         });
