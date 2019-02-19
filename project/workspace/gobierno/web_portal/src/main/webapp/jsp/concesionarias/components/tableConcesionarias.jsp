@@ -6,7 +6,7 @@
 %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <fmt:setBundle basename="properties.etiquetas" var="etq" scope="session"/>
-<fmt:setLocale value="${idioma}" scope="session" />
+<fmt:setLocale value="${lang}" scope="session" />
 
 <%@ page import="ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm" %>
 <%@ page import="java.util.List" %>

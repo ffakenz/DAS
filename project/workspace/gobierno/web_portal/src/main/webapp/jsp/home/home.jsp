@@ -8,10 +8,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <fmt:setBundle basename="properties.etiquetas" var="etq" scope="session"/>
-<fmt:setLocale value="${idioma}" scope="session" />
+<fmt:setLocale value="${lang}" scope="session" />
 
 <!DOCTYPE html>
-<html lang="${idioma}">
+<html lang="${lang}">
     <%@include file="../commons/head.jsp" %>
     <body>
         <div class="content-body">

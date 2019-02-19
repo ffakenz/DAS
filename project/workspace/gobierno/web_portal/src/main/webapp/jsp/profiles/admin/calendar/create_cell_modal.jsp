@@ -7,7 +7,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page import="java.lang.Exception" %>
 <fmt:setBundle basename="properties.etiquetas" var="etq" scope="session"/>
-<fmt:setLocale value="${idioma}" scope="session" />
+<fmt:setLocale value="${lang}" scope="session" />
 
 <%
     String cellDay = (String) request.getAttribute("cell_day");

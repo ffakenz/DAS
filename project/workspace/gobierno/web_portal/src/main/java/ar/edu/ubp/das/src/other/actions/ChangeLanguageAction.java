@@ -32,7 +32,7 @@ public class ChangeLanguageAction implements Action {
 
 
         final HttpSession session = request.getSession();
-        session.setAttribute("idioma", form.getItem("idioma").orElse("en"));
+        session.setAttribute("lang", form.getItem("lang").orElse("en"));
 
         logAction(mapping, form, request, response);
         return mapping.getForwardByName("success");

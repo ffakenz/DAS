@@ -25,7 +25,7 @@
   int intMonth = new Integer(currentMonthString).intValue();
   int intYear  = new Integer(currentYearString).intValue();
 
-  String lang = (String) request.getSession().getAttribute("idioma");
+  String lang = (String) request.getSession().getAttribute("lang");
 
   // determine the name of the current intMonth
   String englishMonthNames[] = {"January","February","March","April","May","June",

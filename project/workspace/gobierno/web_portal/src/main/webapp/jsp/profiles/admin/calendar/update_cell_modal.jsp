@@ -12,7 +12,7 @@
 <%@ page import="ar.edu.ubp.das.src.utils.FrontUtils" %>
 
 <fmt:setBundle basename="properties.etiquetas" var="etq" scope="session"/>
-<fmt:setLocale value="${idioma}" scope="session" />
+<fmt:setLocale value="${lang}" scope="session" />
 <%
     String cellDay = (String) request.getAttribute("cell_day");
     String cellMonth = (String) request.getAttribute("cell_month");

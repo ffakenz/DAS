@@ -1,7 +1,7 @@
 <div id="lang_div" class="dropdown">
    <a class="btn btn-warning dropdown-toggle" href="#" data-toggle="dropdown">
        <c:choose>
-          <c:when test="${sessionScope.idioma == 'en'}">
+          <c:when test="${sessionScope.lang == 'en'}">
             <span class="flag-icon flag-icon-us"></span> <fmt:message key="lang_title" bundle="${etq}" />
             </a>
           </c:when>
