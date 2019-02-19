@@ -1,5 +1,5 @@
 CREATE TABLE conc_pendiente_notificacion (
-  id_sorteo                      BIGINT   IDENTITY
+  id_sorteo                      BIGINT   NOT NULL
 	, id_concesionaria             BIGINT   NOT NULL
 	, PRIMARY KEY(id_sorteo, id_concesionaria)
 	, FOREIGN KEY(id_sorteo) REFERENCES sorteos(id)

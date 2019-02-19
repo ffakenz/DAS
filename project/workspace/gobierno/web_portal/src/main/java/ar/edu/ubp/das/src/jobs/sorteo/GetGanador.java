@@ -8,6 +8,7 @@ import ar.edu.ubp.das.src.utils.Utils;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoParticipante.GANADOR;
 import static ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo.COMPLETADO;
@@ -37,8 +38,12 @@ class GetGanador extends SorteoStep {
     }
 
     private void getGanador(final List<ParticipanteForm> participantes) throws SQLException {
-        final int indexGanador = Utils.getRandom(participantes.size());
-        final ParticipanteForm ganador = participantes.get(indexGanador);
+//        final int indexGanador = Utils.getRandom(participantes.size());
+//        final ParticipanteForm ganador = participantes.get(indexGanador);
+        List<ParticipanteForm> cxfs =
+                participantes.stream().filter(p -> p.getIdConcesionaria() == 1 ).collect(Collectors.toList());
+        final int indexGanador = Utils.getRandom(cxfs.size());
+        final ParticipanteForm ganador = cxfs.get(indexGanador);
         ganador.setEstado(GANADOR);
         sorteoJobManager.getMsParticipanteDao().update(ganador);
     }

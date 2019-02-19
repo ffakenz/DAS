@@ -47,11 +47,11 @@ public class CXFClient implements ConcesionariaServiceContract {
                     Long.parseLong(client.getResponseContext().get("org.apache.cxf.message.Message.RESPONSE_CODE").toString());
 
             if (statusCode >= 500)
-                throw new ClientException("ENDPOINT IS DOWN = " + client.getResponseContext().get("org.apache.cxf.service.model.MessageInfo"));
+                throw new ClientException("ENDPOINT IS DOWN = " + client.getResponseContext().get("org.apache.cxf.service.model.MessageInfo").toString());
             if (statusCode >= 400)
-                throw new ClientException("BAD REQUEST = " + client.getResponseContext().get("org.apache.cxf.service.model.MessageInfo"));
+                throw new ClientException("BAD REQUEST = " + client.getResponseContext().get("org.apache.cxf.service.model.MessageInfo").toString());
 
-            if(res == null) return null;
+            if(res == null || res.length == 0) return null;
 
             return res[0];
 

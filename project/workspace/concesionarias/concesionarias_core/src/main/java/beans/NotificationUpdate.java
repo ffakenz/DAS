@@ -100,7 +100,9 @@ public class NotificationUpdate implements Serializable {
     }
 
     public void setPlanFechaAlta(final Timestamp planFechaAlta) {
+
         this.planFechaAlta = planFechaAlta;
+
     }
 
     public Timestamp getPlanFechaUltimaActualizacion() {

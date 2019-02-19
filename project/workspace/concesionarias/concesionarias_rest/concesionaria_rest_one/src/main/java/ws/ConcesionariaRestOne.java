@@ -24,7 +24,7 @@ public class ConcesionariaRestOne extends MSSQLConsecionaria implements Concesio
     protected static final Logger log = LoggerFactory.getLogger(ConcesionariaRestOne.class);
 
     private Gson gson = new GsonBuilder()
-            .setDateFormat("yyyy-MM-dd hh:mm:ss.SSS")
+            .setDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
             .create();
 
     @GET

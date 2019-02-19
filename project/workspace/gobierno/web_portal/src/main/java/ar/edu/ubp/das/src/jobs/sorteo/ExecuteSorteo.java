@@ -15,8 +15,10 @@ public class ExecuteSorteo {
 
         // Instantiate a manager for sorteo executions
         SorteoJob sorteoJob = new SorteoJob(dataSourceConfig, ClientFactory.getInstance(), new SendEmail());
+
         sorteoJob.createSorteo();
         sorteoJob.execute();
+
         sorteoJob.getLastSorteo().ifPresent(System.out::println);
     }
 

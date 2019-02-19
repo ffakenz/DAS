@@ -24,7 +24,7 @@ public class ConcesionariaCXFTwo extends MSSQLConsecionaria implements Concesion
     protected static final Logger log = LoggerFactory.getLogger(ConcesionariaCXFTwo.class);
 
     private Gson gson = new GsonBuilder()
-            .setDateFormat("yyyy-MM-dd hh:mm:ss.SSS")
+            .setDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
             .create();
 
     @WebMethod(operationName = "consultarPlanes", action = "urn:ConsultarPlanes")

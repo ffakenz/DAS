@@ -55,6 +55,10 @@ public class SorteoJob {
                 try {
                     final SorteoForm resultSorteo =
                             result.executeOnRoot(stepsByEstado, sorteoForm);
+
+                    resultSorteo.setEstado(COMPLETADO);
+                    logSorteoFormDb(sorteoForm);
+
                     log.info("[SorteoJob][SorteoForm:{}]", resultSorteo);
                 } catch (final StepRunnerException e) {
                     logSorteoFormDb(sorteoForm); // separate logSorteoFormDb function from result object

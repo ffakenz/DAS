@@ -34,6 +34,8 @@ public class MSConcPendienteNotificacionDao extends DaoImpl<ConcPendienteNotific
 
     public void delete(final ConcPendienteNotificacionForm form) throws SQLException {
 
+        this.executeProcedure("dbo.delete_conc_pendiente_notificacion(?,?)", form,
+                "idSorteo", "idConcesionaria");
     }
 
     public boolean valid(final ConcPendienteNotificacionForm form) throws SQLException {

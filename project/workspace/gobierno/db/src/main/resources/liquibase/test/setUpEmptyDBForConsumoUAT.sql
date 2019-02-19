@@ -66,11 +66,11 @@ BEGIN
     VALUES (111, 'irocca' , 'lam'  , 'gobierno')
 
     INSERT INTO concesionaria(nombre, direccion, cuit, tel, email, fecha_alta, codigo)
-    VALUES ('Montironi', 'La Tablada 5739', '21-93337511-1', '+5493513059161', 'c1@gmail.com', SYSDATETIMEOFFSET() AT TIME ZONE 'Argentina Standard Time', 'CODIGO_C1')
-         , ('Tagle', 'La Tablada2 5739', '22-93337511-2', '+5493513059162', 'c2@gmail.com', SYSDATETIMEOFFSET() AT TIME ZONE 'Argentina Standard Time', 'CODIGO_C2')
-         , ('Avant', 'La Tablada3 5739', '22-93337511-3', '+5493513059163', 'c3@gmail.com', SYSDATETIMEOFFSET() AT TIME ZONE 'Argentina Standard Time', 'CODIGO_C3')
-         , ('Auto City', 'La Tablada4 5739', '23-93337511-4', '+5493513059164', 'c4@gmail.com', SYSDATETIMEOFFSET() AT TIME ZONE 'Argentina Standard Time', 'CODIGO_C4')
-         , ('Naum', 'La Tablada5 5739', '24-93337511-5', '+5493513059165', 'c5@gmail.com', SYSDATETIMEOFFSET() AT TIME ZONE 'Argentina Standard Time', 'CODIGO_C5')
+    VALUES ('Montironi', 'La Tablada 5739', '21-93337511-1', '+5493513059161', 'iroccalada@gmail.com', SYSDATETIMEOFFSET() AT TIME ZONE 'Argentina Standard Time', 'CODIGO_C1')
+         , ('Tagle', 'La Tablada2 5739', '22-93337511-2', '+5493513059162', 'iroccalada@gmail.com', SYSDATETIMEOFFSET() AT TIME ZONE 'Argentina Standard Time', 'CODIGO_C2')
+         , ('Avant', 'La Tablada3 5739', '22-93337511-3', '+5493513059163', 'iroccalada@gmail.com', SYSDATETIMEOFFSET() AT TIME ZONE 'Argentina Standard Time', 'CODIGO_C3')
+         , ('Auto City', 'La Tablada4 5739', '23-93337511-4', '+5493513059164', 'iroccalada@gmail.com', SYSDATETIMEOFFSET() AT TIME ZONE 'Argentina Standard Time', 'CODIGO_C4')
+         , ('Naum', 'La Tablada5 5739', '24-93337511-5', '+5493513059165', 'iroccalada@gmail.com', SYSDATETIMEOFFSET() AT TIME ZONE 'Argentina Standard Time', 'CODIGO_C5')
 
     INSERT INTO concesionaria_x_config_tecnologica(concesionaria_id, config_tecnologica)
     VALUES (1, 'AXIS')

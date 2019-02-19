@@ -315,6 +315,20 @@
         <dropProcedure procedureName="get_conc_pendiente_notificacion"/>
     </changeSet>
 
+    <changeSet id="Drop procedure delete_conc_pendiente_notificacion" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'delete_conc_pendiente_notificacion'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="delete_conc_pendiente_notificacion"/>
+    </changeSet>
+
     <changeSet id="Drop procedure get_participantes_sorteo" author="DAS-Team" runAlways="true"
                runOnChange="true">
         <preConditions onFail="MARK_RAN">
@@ -888,6 +902,21 @@
         </preConditions>
         <sqlFile
                 path="/src/main/resources/liquibase/jobs/procedures/sorteo/get_conc_pendiente_notificacion.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure delete_conc_pendiente_notificacion" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'delete_conc_pendiente_notificacion'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/sorteo/delete_conc_pendiente_notificacion.sql"/>
     </changeSet>
 
     <changeSet id="Create procedure get_participantes_sorteo" author="DAS-Team" runAlways="true"
