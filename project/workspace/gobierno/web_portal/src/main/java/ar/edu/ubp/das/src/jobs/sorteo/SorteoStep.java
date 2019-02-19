@@ -84,10 +84,6 @@ abstract class SorteoStep {
         }
     }
 
-    protected void logSorteoFormDb(final SorteoForm sorteoForm) throws SQLException {
-        sorteoJobManager.getMsSorteoDao().update(sorteoForm);
-    }
-
     protected ConcesionariaServiceContract getHttpClient(final Long concesionariaId) throws StepRunnerException {
         final Optional<ConcesionariaServiceContract> clientForConcesionaria =
                 clientFactoryAdapter.getClientForConcesionaria(concesionariaId, configurarConcesionariaManager);

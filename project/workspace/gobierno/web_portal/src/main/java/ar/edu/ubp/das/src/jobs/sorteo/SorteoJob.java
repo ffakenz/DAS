@@ -57,13 +57,17 @@ public class SorteoJob {
                             result.executeOnRoot(stepsByEstado, sorteoForm);
                     log.info("[SorteoJob][SorteoForm:{}]", resultSorteo);
                 } catch (final StepRunnerException e) {
-                    result.logSorteoFormDb(sorteoForm); // separate logSorteoFormDb function from result object
+                    logSorteoFormDb(sorteoForm); // separate logSorteoFormDb function from result object
                     log.error("[exception:{}]", e.getMessage());
                 }
             } catch (final SQLException e) {
                 log.error("[exception:{}]", e.getMessage());
             }
         });
+    }
+
+    protected void logSorteoFormDb(final SorteoForm sorteoForm) throws SQLException {
+        sorteoJobManager.getMsSorteoDao().update(sorteoForm);
     }
 
     public Optional<SorteoForm> getSorteoDeHoy() {
