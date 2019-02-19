@@ -6,9 +6,8 @@ class ChangeLanguage extends Module {
     changeLang(evt) {
         evt.preventDefault();
         console.log("setIdioma, [EVENT] = %o", evt);
-        const lang = $(evt.target).data("id");
-        if(lang == null) alert("language %o", lang);
-        console.log("language %o", lang);
+        const lang = $(evt.target).closest("form").serialize();
+        console.log("lang %o", lang);
         ChangeLanguageService.SET_IDIOMA(lang);
     }
 };

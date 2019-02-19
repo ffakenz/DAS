@@ -4,7 +4,7 @@ const ChangeLanguageService = {
             url: Action.CHANGE_LANGUAGE_ENDPOINT,
             type: "post",
             dataType: "html",
-            data: "lang=" + lang,
+            data: lang,
             error: function(hr){
                 console.log("AJAX RESULT SET_IDIOMA [%o] ERROR %o", lang, hr.responseText);
             },

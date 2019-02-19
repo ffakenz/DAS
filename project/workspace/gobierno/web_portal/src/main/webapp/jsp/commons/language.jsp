@@ -12,10 +12,16 @@
     </a>
   <ul class="dropdown-menu">
      <li>
-        <a class="lang_btn dropdown-item" href="#" data-id="en"><span class="flag-icon flag-icon-us"></span> <fmt:message key="en_lang" bundle="${etq}" /></a>
+        <form method="post" action="javascript:void(0)">
+            <a class="lang_btn dropdown-item" href="#" ><span class="flag-icon flag-icon-us"></span> <fmt:message key="en_lang" bundle="${etq}" /></a>
+            <input type="hidden" name="lang" value="en" />
+        </form>
      </li>
      <li>
-        <a class="lang_btn dropdown-item" href="#" data-id="es"><span class="flag-icon flag-icon-ar"></span> <fmt:message key="es_lang" bundle="${etq}" /></a>
+        <form method="post" action="javascript:void(0)">
+            <a class="lang_btn dropdown-item" href="#" ><span class="flag-icon flag-icon-ar"></span> <fmt:message key="es_lang" bundle="${etq}" /></a>
+            <input type="hidden" name="lang" value="es" />
+        </form>
      </li>
   </ul>
 </div>
