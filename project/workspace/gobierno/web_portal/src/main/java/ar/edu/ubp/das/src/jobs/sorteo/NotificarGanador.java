@@ -8,44 +8,39 @@ import ar.edu.ubp.das.src.jobs.sorteo.forms.SorteoForm;
 
 import javax.mail.MessagingException;
 import java.sql.SQLException;
-import java.util.Optional;
 
-import static ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo.PENDIENTE_NOTIFICACION_CONCESIONARIAS;
+import static ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo.PENDIENTE_NOTIFICACION_GANADOR;
 
 class NotificarGanador extends SorteoStep {
 
     SendEmail sendEmail;
 
-    public NotificarGanador(DatasourceConfig datasourceConfig, ClientFactoryAdapter clientFactoryAdapter, SendEmail sendEmail) {
+    public NotificarGanador(final DatasourceConfig datasourceConfig, final ClientFactoryAdapter clientFactoryAdapter, final SendEmail sendEmail) {
         super(datasourceConfig, clientFactoryAdapter);
         this.sendEmail = sendEmail;
     }
 
     @Override
-    public SorteoForm runContext(final SorteoForm sorteoForm) throws StepRunnerException {
+    public SorteoForm runContext(final SorteoForm sorteoForm) throws StepRunnerException, SQLException {
 
         try {
-            Optional<ParticipanteForm> ganadorBySorteo =
-                    sorteoJobManager.getMsParticipanteDao().getGanadorBySorteo(sorteoForm.getId());
+            final ParticipanteForm ganadorBySorteo =
+                    sorteoJobManager.getMsParticipanteDao().getGanadorBySorteo(sorteoForm.getId()).get(); // Ganador should be an attribute in SorteoForm
 
-            if(ganadorBySorteo.isPresent()) {
-                ConsumerForm consumerForm = sorteoJobManager.getMsConsumerDao().selectById(ganadorBySorteo.get().getIdConsumer()).get();
+            final ConsumerForm consumerForm = sorteoJobManager.getMsConsumerDao().selectById(ganadorBySorteo.getIdConsumer()).get();
+            sendEmail.to(consumerForm.getEmail(), "Felicitaciones sos el ganador !!!", getContentEmailGanador());
 
-                sendEmail.to(consumerForm.getEmail(), "Felicitaciones sos el ganador !!!", getContentEmailGanador());
-            }
-
-        } catch (SQLException | MessagingException  e) {
-            log.error("[exception:{}]", e.getMessage());
-            logSorteoFormDb(sorteoForm, PENDIENTE_NOTIFICACION_CONCESIONARIAS, e.getMessage());
+        } catch (final MessagingException e) {
+            sorteoForm.setEstado(PENDIENTE_NOTIFICACION_GANADOR);
+            throw new StepRunnerException(e.getMessage());
         }
 
-        sorteoForm.setEstado(PENDIENTE_NOTIFICACION_CONCESIONARIAS);
         return sorteoForm;
     }
 
     private String getContentEmailGanador() {
 
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
 
         sb.append("<h1>SOS EL ACREDOR DE UN 0KM</h1>");
         sb.append("<h3>Por favor contactate con tu concesionaria para resolver la entrega de tu auto</h3>");

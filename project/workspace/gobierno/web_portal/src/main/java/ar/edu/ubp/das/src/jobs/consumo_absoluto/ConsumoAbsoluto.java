@@ -87,7 +87,7 @@ public class ConsumoAbsoluto {
             client.ifPresent(cli -> {
                 final List<EstadoCuentasForm> estadoCuentasForms = this.getAllEstadoCuentasByConcesionaria(consumoAbsolutoForm, aprobada.getId());
                 for (final EstadoCuentasForm estadoCuentasForm : estadoCuentasForms) {
-                    if(estadoCuentasForm.getFechaUltimaActualizacion().before(sorteoForm.getFechaCreacion())) {
+                    if (estadoCuentasForm.getFechaUltimaActualizacion().before(sorteoForm.getFechaCreacion())) {
 
                         final String rqstId = UUID.randomUUID().toString();
                         final Optional<PlanBean> planBean = this.consultarPlan(cli, consumoAbsolutoForm, estadoCuentasForm, rqstId);
@@ -122,11 +122,11 @@ public class ConsumoAbsoluto {
         return consumoAbsolutoForm.getEstadoConsumo().equals(SUCCESS);
     }
 
-    private List<ConcesionariaForm> getAprobadas(ConsumoAbsolutoForm consumoAbsolutoForm) {
+    private List<ConcesionariaForm> getAprobadas(final ConsumoAbsolutoForm consumoAbsolutoForm) {
         List<ConcesionariaForm> aprobadas = new ArrayList<>();
         try {
             aprobadas = concesionariasManager.getDao().selectAprobadas();
-        } catch (SQLException e) {
+        } catch (final SQLException e) {
             e.printStackTrace();
             log.error("[ConsumoAbsoluto.ejecutar][FAILED getAllConcesionariasAprobadasDesactualizadas]");
             consumoAbsolutoForm.setEstado(FAILURE);
@@ -236,7 +236,7 @@ public class ConsumoAbsoluto {
     }
 
     /* LOGGERS */
-    public void logConsumoAbsolutoForm(final ConsumoAbsolutoForm consumoAbsolutoForm) {
+    private void logConsumoAbsolutoForm(final ConsumoAbsolutoForm consumoAbsolutoForm) {
         if (consumoAbsolutoForm.isForConcesionariaPlan()) {
             msConsumoAbsolutoDao.insertConsumoAbsolutoConcesionaria(consumoAbsolutoForm);
         } else if (consumoAbsolutoForm.isForConcesionaria()) {

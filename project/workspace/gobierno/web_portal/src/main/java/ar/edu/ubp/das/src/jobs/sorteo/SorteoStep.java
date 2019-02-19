@@ -13,13 +13,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Optional;
 
 abstract class SorteoStep {
 
     protected static final Logger log = LoggerFactory.getLogger(SorteoStep.class);
 
-    protected abstract SorteoForm runContext(final SorteoForm sorteoForm) throws StepRunnerException;
+    protected abstract SorteoForm runContext(final SorteoForm sorteoForm) throws StepRunnerException, SQLException;
 
     protected String name;
     protected SorteoStep next;
@@ -31,7 +32,7 @@ abstract class SorteoStep {
     protected ConcesionariasManager concesionariasManager;
 
 
-    public SorteoStep(DatasourceConfig datasourceConfig, ClientFactoryAdapter clientFactoryAdapter) {
+    public SorteoStep(final DatasourceConfig datasourceConfig, final ClientFactoryAdapter clientFactoryAdapter) {
         this.name = this.getClass().getSimpleName();
 
         this.datasourceConfig = datasourceConfig;
@@ -54,12 +55,13 @@ abstract class SorteoStep {
         return next;
     }
 
-    public SorteoForm executeOnRoot(final String stepNameToRun, final SorteoForm sorteoForm) throws StepRunnerException {
-        return this.root().execute(stepNameToRun, sorteoForm);
+
+    public SorteoForm executeOnRoot(final HashMap<EstadoSorteo, String> stepsByEstado, final SorteoForm sorteoForm) throws StepRunnerException, SQLException {
+        final String stateToExecute = stepsByEstado.get(sorteoForm.getEstadoSorteo());
+        return this.root().execute(stateToExecute, sorteoForm);
     }
 
-    private SorteoForm execute(final String stepNameToRun, final SorteoForm sorteoForm) throws StepRunnerException {
-
+    private SorteoForm execute(final String stepNameToRun, final SorteoForm sorteoForm) throws StepRunnerException, SQLException {
         if (name.equals(stepNameToRun)) {
             System.out.println("START STEP: " + name);
             final SorteoForm result = runContext(sorteoForm);
@@ -82,28 +84,8 @@ abstract class SorteoStep {
         }
     }
 
-    protected void logSorteoFormDb(final SorteoForm sorteoForm, final EstadoSorteo estadoSorteo, final String errorMsg) throws StepRunnerException {
-
-        log.error("[exception:{}]", errorMsg);
-
-        sorteoForm.setEstado(estadoSorteo);
-        try {
-            sorteoJobManager.getMsSorteoDao().update(sorteoForm);
-        } catch (final SQLException e) {
-            e.printStackTrace();
-            throw new StepRunnerException(name);
-        }
-    }
-
-    protected void logSorteoFormDb(final SorteoForm sorteoForm, final EstadoSorteo estadoSorteo) throws StepRunnerException {
-
-        sorteoForm.setEstado(estadoSorteo);
-        try {
-            sorteoJobManager.getMsSorteoDao().update(sorteoForm);
-        } catch (final SQLException e) {
-            e.printStackTrace();
-            throw new StepRunnerException(name);
-        }
+    protected void logSorteoFormDb(final SorteoForm sorteoForm) throws SQLException {
+        sorteoJobManager.getMsSorteoDao().update(sorteoForm);
     }
 
     protected ConcesionariaServiceContract getHttpClient(final Long concesionariaId) throws StepRunnerException {

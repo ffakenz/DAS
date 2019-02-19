@@ -78,11 +78,11 @@
     <!--   SORTEO                      -->
     <!-- ***************************** -->
 
-    <changeSet id="Drop table concesionarias_notificadas" author="DAS-Team" runAlways="true" runOnChange="true">
+    <changeSet id="Drop table conc_pendiente_notificacion" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
-            <tableExists tableName="concesionarias_notificadas"/>
+            <tableExists tableName="conc_pendiente_notificacion"/>
         </preConditions>
-        <dropTable tableName="concesionarias_notificadas"/>
+        <dropTable tableName="conc_pendiente_notificacion"/>
     </changeSet>
 
     <changeSet id="Drop table participantes" author="DAS-Team" runAlways="true" runOnChange="true">

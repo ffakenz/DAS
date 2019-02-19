@@ -33,7 +33,7 @@ public class SorteoJob {
     private final SorteoJobManager sorteoJobManager;
     private final SendEmail sendEmail;
 
-    public SorteoJob(DatasourceConfig datasourceConfig, final IClientFactory iClientFactory, SendEmail sendEmail) {
+    public SorteoJob(final DatasourceConfig datasourceConfig, final IClientFactory iClientFactory, final SendEmail sendEmail) {
         this.datasourceConfig = datasourceConfig;
         this.clientFactoryAdapter = new ClientFactoryAdapter(iClientFactory);
         this.sorteoJobManager = new SorteoJobManager(datasourceConfig);
@@ -50,13 +50,17 @@ public class SorteoJob {
                 .then(new NotificarGanador(datasourceConfig, clientFactoryAdapter, sendEmail))
                 .then(new NotificarConcesionarias(datasourceConfig, clientFactoryAdapter, sendEmail));
 
-        sorteoDeHoy.ifPresent(sorteoForm -> {
-
+        sorteoDeHoy.ifPresent(sorteoForm -> {  //sorteoForm puede estar en nuevo, pendiente_x
             try {
-                final SorteoForm resultSorteo =
-                        result.executeOnRoot(stepsByEstado.get(sorteoForm.getEstadoSorteo()), sorteoForm);
-                System.out.println(resultSorteo);
-            } catch (final StepRunnerException e) {
+                try {
+                    final SorteoForm resultSorteo =
+                            result.executeOnRoot(stepsByEstado, sorteoForm);
+                    log.info("[SorteoJob][SorteoForm:{}]", resultSorteo);
+                } catch (final StepRunnerException e) {
+                    result.logSorteoFormDb(sorteoForm); // separate logSorteoFormDb function from result object
+                    log.error("[exception:{}]", e.getMessage());
+                }
+            } catch (final SQLException e) {
                 log.error("[exception:{}]", e.getMessage());
             }
         });
@@ -92,20 +96,20 @@ public class SorteoJob {
 
 
     public void createSorteo() {
-        SorteoForm sorteo = new SorteoForm();
+        final SorteoForm sorteo = new SorteoForm();
         sorteo.setFechaEjecucion(DateUtils.getDayDate());
         try {
             sorteoJobManager.getMsSorteoDao().insert(sorteo);
-        } catch (SQLException e) {
+        } catch (final SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public Optional<SorteoForm> getLastSorteo()  {
+    public Optional<SorteoForm> getLastSorteo() {
         Optional<SorteoForm> lasJobCreated = Optional.empty();
         try {
             lasJobCreated = sorteoJobManager.getMsSorteoDao().select().stream().findFirst();
-        } catch (SQLException e) {
+        } catch (final SQLException e) {
             e.printStackTrace();
         }
         return lasJobCreated;

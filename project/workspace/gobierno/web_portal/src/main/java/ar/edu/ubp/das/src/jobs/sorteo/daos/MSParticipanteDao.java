@@ -38,6 +38,15 @@ public class MSParticipanteDao extends DaoImpl<ParticipanteForm> {
         return null;
     }
 
+    public List<ParticipanteForm> selectBySorteo(final Long sorteoId) throws SQLException {
+        this.connect();
+        this.setProcedure("dbo.get_participantes_sorteo(?)", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        this.setParameter(1, sorteoId);
+        final List<ParticipanteForm> result = this.executeQuery();
+        this.disconnect();
+        return result;
+    }
+
     @Override
     public boolean valid(final ParticipanteForm form) throws SQLException {
         return false;

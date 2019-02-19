@@ -13,13 +13,12 @@ import clients.responses.ClientException;
 import java.sql.SQLException;
 
 import static ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo.PENDIENTE_CANCELACION;
-import static ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo.PENDIENTE_NOTIFICACION_GANADOR;
 
 class CancelarCuenta extends SorteoStep {
 
     MSEstadoCuentasDao msEstadoCuentasDao;
 
-    public CancelarCuenta(DatasourceConfig datasourceConfig, ClientFactoryAdapter clientFactoryAdapter) {
+    public CancelarCuenta(final DatasourceConfig datasourceConfig, final ClientFactoryAdapter clientFactoryAdapter) {
         super(datasourceConfig, clientFactoryAdapter);
 
         msEstadoCuentasDao = new MSEstadoCuentasDao();
@@ -27,20 +26,19 @@ class CancelarCuenta extends SorteoStep {
     }
 
     @Override
-    public SorteoForm runContext(final SorteoForm sorteoForm) throws StepRunnerException {
+    public SorteoForm runContext(final SorteoForm sorteoForm) throws StepRunnerException, SQLException {
 
         try {
             final ParticipanteForm ganador = sorteoJobManager.getMsParticipanteDao()
-                    .getGanadorBySorteo(sorteoForm.getId()).get();
+                    .getGanadorBySorteo(sorteoForm.getId()).get(); // Ganador deberia ser un atributo del sorteo
             final ConcesionariaServiceContract client = getHttpClient(ganador.getIdConcesionaria());
-            EstadoCuentasForm estadoCuentasForm = msEstadoCuentasDao.selectEstadoCuentasById(ganador.getIdPlan()).get();
+            final EstadoCuentasForm estadoCuentasForm = msEstadoCuentasDao.selectEstadoCuentasById(ganador.getIdPlan()).get();
             client.cancelarPlan(Constants.IDENTIFICADOR, estadoCuentasForm.getNroPlanConcesionaria());
-        } catch (final ClientException | SQLException e) {
-            logSorteoFormDb(sorteoForm, PENDIENTE_CANCELACION, e.getMessage());
+        } catch (final ClientException e) {
+            sorteoForm.setEstado(PENDIENTE_CANCELACION);
             throw new StepRunnerException(name);
         }
 
-        sorteoForm.setEstado(PENDIENTE_NOTIFICACION_GANADOR);
         return sorteoForm;
     }
 }

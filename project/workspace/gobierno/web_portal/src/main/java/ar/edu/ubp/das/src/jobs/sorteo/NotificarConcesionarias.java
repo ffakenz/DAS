@@ -4,8 +4,8 @@ import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
 import ar.edu.ubp.das.src.consumers.forms.ConsumerForm;
 import ar.edu.ubp.das.src.jobs.ClientFactoryAdapter;
-import ar.edu.ubp.das.src.jobs.sorteo.daos.MSConcesionariasNotificadasDao;
-import ar.edu.ubp.das.src.jobs.sorteo.forms.ConcesionariasNotificadasForm;
+import ar.edu.ubp.das.src.jobs.sorteo.daos.MSConcPendienteNotificacionDao;
+import ar.edu.ubp.das.src.jobs.sorteo.forms.ConcPendienteNotificacionForm;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.ParticipanteForm;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.SorteoForm;
 
@@ -13,98 +13,68 @@ import javax.mail.MessagingException;
 import java.sql.SQLException;
 import java.util.List;
 
-import static ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo.COMPLETADO;
 import static ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo.PENDIENTE_NOTIFICACION_CONCESIONARIAS;
 
 class NotificarConcesionarias extends SorteoStep {
 
     private SendEmail sendEmail;
-    private MSConcesionariasNotificadasDao msConcNotifDao;
+    private MSConcPendienteNotificacionDao msPendienteNotificadas;
 
-    public NotificarConcesionarias(DatasourceConfig datasourceConfig, ClientFactoryAdapter clientFactoryAdapter, SendEmail sendEmail) {
+    public NotificarConcesionarias(final DatasourceConfig datasourceConfig, final ClientFactoryAdapter clientFactoryAdapter, final SendEmail sendEmail) {
         super(datasourceConfig, clientFactoryAdapter);
         this.sendEmail = sendEmail;
-        this.msConcNotifDao = new MSConcesionariasNotificadasDao();
-        msConcNotifDao.setDatasource(datasourceConfig);
+        this.msPendienteNotificadas = new MSConcPendienteNotificacionDao();
+        msPendienteNotificadas.setDatasource(datasourceConfig);
     }
 
     @Override
-    public SorteoForm runContext(final SorteoForm sorteoForm) throws StepRunnerException {
+    public SorteoForm runContext(final SorteoForm sorteoForm) throws StepRunnerException, SQLException {
+        // todo: Ganador should be an attribute in SorteoForm
+        final ParticipanteForm ganador = sorteoJobManager.getMsParticipanteDao().getGanadorBySorteo(sorteoForm.getId()).get();
 
-        try {
-            // todo: change table to pendientes_notificadas
-            List<ConcesionariasNotificadasForm> pendientesNotificacion = msConcNotifDao.select(sorteoForm.getId());
-            final ParticipanteForm ganador = sorteoJobManager.getMsParticipanteDao().getGanadorBySorteo(sorteoForm.getId()).get();
-
-            if(pendientesNotificacion.isEmpty())
-                notification(sorteoForm, ganador);
-            else
-                renotification(pendientesNotificacion, ganador);
-
-            existsPendientes(sorteoForm);
-
-        } catch (final SQLException e) {
-            logSorteoFormDb(sorteoForm, PENDIENTE_NOTIFICACION_CONCESIONARIAS);
-            throw new StepRunnerException(e.getMessage());
+        if (!sorteoForm.getEstadoSorteo().equals(PENDIENTE_NOTIFICACION_CONCESIONARIAS))
+            notification(sorteoForm, ganador);
+        else {
+            final List<ConcPendienteNotificacionForm> pendientesNotificacion = msPendienteNotificadas.select(sorteoForm.getId());
+            renotification(pendientesNotificacion, ganador);
         }
 
-        logSorteoFormDb(sorteoForm, COMPLETADO);
+        if (!msPendienteNotificadas.select(sorteoForm.getId()).isEmpty()) {
+            final String message = String.format("[exception:%s]", "Hay concesionarias pendientes de notificacion");
+            sorteoForm.setEstado(PENDIENTE_NOTIFICACION_CONCESIONARIAS);
+            throw new StepRunnerException(message);
+        }
+
         return sorteoForm;
     }
 
-    private void renotification(List<ConcesionariasNotificadasForm> pendientesNotificacion, ParticipanteForm ganador)
-            throws SQLException {
-
-        for (ConcesionariasNotificadasForm pendiente : pendientesNotificacion) {
-
-            ConcesionariaForm concesionariaForm = concesionariasManager.getDao().selectById(pendiente.getIdConcesionaria()).get();
-
+    private void renotification(final List<ConcPendienteNotificacionForm> pendientesNotificacion, final ParticipanteForm ganador) throws SQLException {
+        for (final ConcPendienteNotificacionForm pendiente : pendientesNotificacion) {
+            final ConcesionariaForm concesionariaForm = concesionariasManager.getDao().selectById(pendiente.getIdConcesionaria()).get();
             try {
                 sendEmail.to(concesionariaForm.getEmail(), "Hay un nuevo ganador !!", getEmailContent(ganador));
-                // todo: make delete procedure
-                msConcNotifDao.delete(pendiente);
-
-            } catch (SQLException | MessagingException e) {
-                log.error("[exception:{}]", e.getMessage());
-                continue;
+                msPendienteNotificadas.delete(pendiente);
+            } catch (final MessagingException e) {
+                e.printStackTrace();
             }
         }
-
-
-
-
     }
 
-    private void notification(SorteoForm sorteoForm, ParticipanteForm ganador) throws SQLException, StepRunnerException {
-
+    private void notification(final SorteoForm sorteoForm, final ParticipanteForm ganador) throws SQLException, StepRunnerException {
         final List<ConcesionariaForm> aprobadas = concesionariasManager.getDao().selectAprobadas();
         for (final ConcesionariaForm aprobada : aprobadas) {
             try {
                 sendEmail.to(aprobada.getEmail(), "Hay un nuevo ganador !!", getEmailContent(ganador));
-            } catch (SQLException | MessagingException e ) {
-                log.error("[exception:{}]", e.getMessage());
-                ConcesionariasNotificadasForm form = new ConcesionariasNotificadasForm(sorteoForm.getId(), aprobada.getId());
-                msConcNotifDao.insert(form);
+            } catch (final MessagingException e) {
+                final ConcPendienteNotificacionForm form = new ConcPendienteNotificacionForm(sorteoForm.getId(), aprobada.getId());
+                msPendienteNotificadas.insert(form);
             }
         }
     }
 
-    private void existsPendientes(SorteoForm sorteoForm) throws SQLException, StepRunnerException {
-
-        if (!msConcNotifDao.select(sorteoForm.getId()).isEmpty()) {
-
-            logSorteoFormDb(sorteoForm, PENDIENTE_NOTIFICACION_CONCESIONARIAS);
-            String message = String.format("[exception:%s]", "Hay concesionarias pendientes de notificacion");
-            log.error(message);
-            throw new StepRunnerException(message);
-        }
-    }
-
-    private String getEmailContent(ParticipanteForm ganador) throws SQLException {
-
-        ConsumerForm consumerForm = sorteoJobManager.getMsConsumerDao().selectById(ganador.getIdConsumer()).get();
-
-        StringBuilder sb = new StringBuilder();
+    private String getEmailContent(final ParticipanteForm ganador) throws SQLException {
+        final ConsumerForm consumerForm = sorteoJobManager.getMsConsumerDao().selectById(ganador.getIdConsumer()).get();
+        final StringBuilder sb = new StringBuilder();
         sb.append("<h1> El ganador del nuevo sorteo es: ");
         sb.append(consumerForm.getNombre() + " " + consumerForm.getApellido());
         sb.append("<h1>");

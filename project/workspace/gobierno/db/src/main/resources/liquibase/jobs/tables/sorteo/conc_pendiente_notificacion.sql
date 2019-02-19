@@ -1,4 +1,4 @@
-CREATE TABLE concesionarias_notificadas (
+CREATE TABLE conc_pendiente_notificacion (
   id_sorteo                      BIGINT   IDENTITY
 	, id_concesionaria             BIGINT   NOT NULL
 	, PRIMARY KEY(id_sorteo, id_concesionaria)

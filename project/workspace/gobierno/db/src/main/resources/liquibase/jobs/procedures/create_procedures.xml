@@ -301,7 +301,7 @@
     <!-- ******************************* -->
     <!--  DROPS SORTEO                   -->
     <!-- ******************************* -->
-    <changeSet id="Drop procedure get_concesionarias_notificadas" author="DAS-Team" runAlways="true"
+    <changeSet id="Drop procedure get_conc_pendiente_notificacion" author="DAS-Team" runAlways="true"
                runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="1">
@@ -309,10 +309,24 @@
                 FROM information_schema.routines
                 WHERE ROUTINE_TYPE = 'PROCEDURE'
                 AND SPECIFIC_CATALOG = 'db_gobierno'
-                AND ROUTINE_NAME = 'get_concesionarias_notificadas'
+                AND ROUTINE_NAME = 'get_conc_pendiente_notificacion'
             </sqlCheck>
         </preConditions>
-        <dropProcedure procedureName="get_concesionarias_notificadas"/>
+        <dropProcedure procedureName="get_conc_pendiente_notificacion"/>
+    </changeSet>
+
+    <changeSet id="Drop procedure get_participantes_sorteo" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_participantes_sorteo'
+            </sqlCheck>
+        </preConditions>
+        <dropProcedure procedureName="get_participantes_sorteo"/>
     </changeSet>
 
     <changeSet id="Drop procedure get_ganador_by_sorteo_id" author="DAS-Team" runAlways="true"
@@ -357,7 +371,7 @@
         <dropProcedure procedureName="get_sorteos_pendientes"/>
     </changeSet>
 
-    <changeSet id="Drop procedure log_concesionarias_notificadas" author="DAS-Team" runAlways="true"
+    <changeSet id="Drop procedure log_conc_pendiente_notificacion" author="DAS-Team" runAlways="true"
                runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="1">
@@ -365,10 +379,10 @@
                 FROM information_schema.routines
                 WHERE ROUTINE_TYPE = 'PROCEDURE'
                 AND SPECIFIC_CATALOG = 'db_gobierno'
-                AND ROUTINE_NAME = 'log_concesionarias_notificadas'
+                AND ROUTINE_NAME = 'log_conc_pendiente_notificacion'
             </sqlCheck>
         </preConditions>
-        <dropProcedure procedureName="log_concesionarias_notificadas"/>
+        <dropProcedure procedureName="log_conc_pendiente_notificacion"/>
     </changeSet>
 
     <changeSet id="Drop procedure get_ultimo_ganador" author="DAS-Team" runAlways="true"
@@ -861,7 +875,7 @@
     <!--  CREATE SORTEO                  -->
     <!-- ******************************* -->
 
-    <changeSet id="Create procedure get_concesionarias_notificadas" author="DAS-Team" runAlways="true"
+    <changeSet id="Create procedure get_conc_pendiente_notificacion" author="DAS-Team" runAlways="true"
                runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
@@ -869,11 +883,26 @@
                 FROM information_schema.routines
                 WHERE ROUTINE_TYPE = 'PROCEDURE'
                 AND SPECIFIC_CATALOG = 'db_gobierno'
-                AND ROUTINE_NAME = 'get_concesionarias_notificadas'
+                AND ROUTINE_NAME = 'get_conc_pendiente_notificacion'
             </sqlCheck>
         </preConditions>
         <sqlFile
-                path="/src/main/resources/liquibase/jobs/procedures/sorteo/get_concesionarias_notificadas.sql"/>
+                path="/src/main/resources/liquibase/jobs/procedures/sorteo/get_conc_pendiente_notificacion.sql"/>
+    </changeSet>
+
+    <changeSet id="Create procedure get_participantes_sorteo" author="DAS-Team" runAlways="true"
+               runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM information_schema.routines
+                WHERE ROUTINE_TYPE = 'PROCEDURE'
+                AND SPECIFIC_CATALOG = 'db_gobierno'
+                AND ROUTINE_NAME = 'get_participantes_sorteo'
+            </sqlCheck>
+        </preConditions>
+        <sqlFile
+                path="/src/main/resources/liquibase/jobs/procedures/sorteo/get_participantes_sorteo.sql"/>
     </changeSet>
 
     <changeSet id="Create procedure get_ganador_by_sorteo_id" author="DAS-Team" runAlways="true"
@@ -921,7 +950,7 @@
                 path="/src/main/resources/liquibase/jobs/procedures/sorteo/get_sorteos_pendientes.sql"/>
     </changeSet>
 
-    <changeSet id="Create procedure log_concesionarias_notificadas" author="DAS-Team" runAlways="true"
+    <changeSet id="Create procedure log_conc_pendiente_notificacion" author="DAS-Team" runAlways="true"
                runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
@@ -929,11 +958,11 @@
                 FROM information_schema.routines
                 WHERE ROUTINE_TYPE = 'PROCEDURE'
                 AND SPECIFIC_CATALOG = 'db_gobierno'
-                AND ROUTINE_NAME = 'log_concesionarias_notificadas'
+                AND ROUTINE_NAME = 'log_conc_pendiente_notificacion'
             </sqlCheck>
         </preConditions>
         <sqlFile
-                path="/src/main/resources/liquibase/jobs/procedures/sorteo/log_concesionarias_notificadas.sql"/>
+                path="/src/main/resources/liquibase/jobs/procedures/sorteo/log_conc_pendiente_notificacion.sql"/>
     </changeSet>
 
     <changeSet id="Create procedure get_ultimo_ganador" author="DAS-Team" runAlways="true"

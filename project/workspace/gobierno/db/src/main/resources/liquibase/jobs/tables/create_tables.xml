@@ -107,13 +107,13 @@
         <sqlFile path="/src/main/resources/liquibase/jobs/tables/sorteo/participantes.sql"/>
     </changeSet>
 
-    <changeSet id="Create table concesionarias_notificadas" author="DAS-Team" runAlways="true" runOnChange="true">
+    <changeSet id="Create table conc_pendiente_notificacion" author="DAS-Team" runAlways="true" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists tableName="concesionarias_notificadas"/>
+                <tableExists tableName="conc_pendiente_notificacion"/>
             </not>
         </preConditions>
-        <sqlFile path="/src/main/resources/liquibase/jobs/tables/sorteo/concesionarias_notificadas.sql"/>
+        <sqlFile path="/src/main/resources/liquibase/jobs/tables/sorteo/conc_pendiente_notificacion.sql"/>
     </changeSet>
 
     <!-- ***************************** -->

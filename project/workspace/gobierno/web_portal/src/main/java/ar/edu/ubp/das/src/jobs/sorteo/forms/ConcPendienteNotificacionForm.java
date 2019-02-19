@@ -6,14 +6,14 @@ import ar.edu.ubp.das.mvc.db.annotations.Entity;
 import utils.JsonUtils;
 
 @Entity
-public class ConcesionariasNotificadasForm extends DynaActionForm {
+public class ConcPendienteNotificacionForm extends DynaActionForm {
 
     @Column(name = "id_sorteo")
     private Long idSorteo;
     @Column(name = "id_concesionaria")
     private Long idConcesionaria;
 
-    public ConcesionariasNotificadasForm(Long idSorteo, Long idConcesionaria) {
+    public ConcPendienteNotificacionForm(final Long idSorteo, final Long idConcesionaria) {
         this.idSorteo = idSorteo;
         this.idConcesionaria = idConcesionaria;
     }
@@ -22,7 +22,7 @@ public class ConcesionariasNotificadasForm extends DynaActionForm {
         return idSorteo;
     }
 
-    public void setIdSorteo(Long idSorteo) {
+    public void setIdSorteo(final Long idSorteo) {
         this.idSorteo = idSorteo;
     }
 
@@ -30,7 +30,7 @@ public class ConcesionariasNotificadasForm extends DynaActionForm {
         return idConcesionaria;
     }
 
-    public void setIdConcesionaria(Long idConcesionaria) {
+    public void setIdConcesionaria(final Long idConcesionaria) {
         this.idConcesionaria = idConcesionaria;
     }
 
