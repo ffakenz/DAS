@@ -217,20 +217,14 @@ public class ConsumoAbsoluto {
 
     private EstadoCuentasForm updateEstadoCuentaDb(final PlanBean planBean, final Long concesionariaId) throws SQLException {
         final EstadoCuentasForm estadoCuenta = EstadoCuentasForm.fromPlanBean(planBean, concesionariaId);
-
         return estadoCuentasManager.getDao().upsert(estadoCuenta); // will be always update
     }
 
     private void updateCuotaDb(final PlanBean update, final Long estadoCuentaId) throws SQLException {
 
         for (final CuotaBean cuotaBean : update.getCuotas()) {
-            final CuotasForm cuota = new CuotasForm();
+            final CuotasForm cuota = CuotasForm.fromCuotaBean(cuotaBean);
             cuota.setEstadoCuentaId(estadoCuentaId);
-            cuota.setNroCuota(cuotaBean.getCuotaNroCuota());
-            cuota.setFechaVencimiento(cuotaBean.getCuotaFechaVencimiento());
-            cuota.setMonto(cuotaBean.getCuotaMonto());
-            cuota.setFechaPago(cuotaBean.getCuotaFechaPago());
-            cuota.setFechaAltaConcesionaria(cuotaBean.getCuotaFechaAlta());
             cuotasManager.getDao().upsert(cuota);
         }
     }

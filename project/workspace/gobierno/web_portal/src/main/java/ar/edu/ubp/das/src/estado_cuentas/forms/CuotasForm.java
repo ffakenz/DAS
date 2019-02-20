@@ -3,6 +3,8 @@ package ar.edu.ubp.das.src.estado_cuentas.forms;
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.annotations.Column;
 import ar.edu.ubp.das.mvc.db.annotations.Entity;
+import beans.CuotaBean;
+import beans.NotificationUpdate;
 
 import java.sql.Timestamp;
 import java.util.Objects;
@@ -92,6 +94,26 @@ public class CuotasForm extends DynaActionForm {
 
     public void setFechaUltimaActualizacion(final Timestamp fechaUltimaActualizacion) {
         this.fechaUltimaActualizacion = fechaUltimaActualizacion;
+    }
+
+    public static CuotasForm fromNotificationUpdate(NotificationUpdate update) {
+        final CuotasForm cuota = new CuotasForm();
+        cuota.setNroCuota(update.getCuotaNroCuota());
+        cuota.setFechaVencimiento(update.getCuotaFechaVencimiento());
+        cuota.setMonto(update.getCuotaMonto());
+        cuota.setFechaPago(update.getCuotaFechaPago());
+        cuota.setFechaAltaConcesionaria(update.getCuotaFechaAlta());
+        return cuota;
+    }
+
+    public static CuotasForm fromCuotaBean(CuotaBean cuotaBean) {
+        CuotasForm cuota = new CuotasForm();
+        cuota.setNroCuota(cuotaBean.getCuotaNroCuota());
+        cuota.setFechaVencimiento(cuotaBean.getCuotaFechaVencimiento());
+        cuota.setMonto(cuotaBean.getCuotaMonto());
+        cuota.setFechaPago(cuotaBean.getCuotaFechaPago());
+        cuota.setFechaAltaConcesionaria(cuotaBean.getCuotaFechaAlta());
+        return cuota;
     }
 
     @Override

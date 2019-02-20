@@ -84,14 +84,7 @@ public class Desnormalizer {
      * @throws SQLException
      */
     public EstadoCuentasForm updateEstadoCuentaDb(final NotificationUpdate update, final Long concesionariaId) throws SQLException {
-
-        final EstadoCuentasForm estadoCuenta = new EstadoCuentasForm();
-        estadoCuenta.setConcesionariaId(concesionariaId);
-        estadoCuenta.setNroPlanConcesionaria(update.getPlanId());
-        estadoCuenta.setDocumentoCliente(update.getClienteDocumento());
-        estadoCuenta.setVehiculo(update.getVehiculoId());
-        estadoCuenta.setFechaAltaConcesionaria(update.getPlanFechaAlta());
-        estadoCuenta.setEstado(update.getPlanEstado()); // !!!
+        final EstadoCuentasForm estadoCuenta = EstadoCuentasForm.fromNotificationUpdate(update, concesionariaId);
         return estadoCuentasManager.getDao().upsert(estadoCuenta);
     }
 
@@ -100,14 +93,8 @@ public class Desnormalizer {
      * @throws SQLException
      */
     public void updateCuotaDb(final NotificationUpdate update, final Long estadoCuentaId) throws SQLException {
-
-        final CuotasForm cuota = new CuotasForm();
+        final CuotasForm cuota = CuotasForm.fromNotificationUpdate(update);
         cuota.setEstadoCuentaId(estadoCuentaId);
-        cuota.setNroCuota(update.getCuotaNroCuota());
-        cuota.setFechaVencimiento(update.getCuotaFechaVencimiento());
-        cuota.setMonto(update.getCuotaMonto());
-        cuota.setFechaPago(update.getCuotaFechaPago());
-        cuota.setFechaAltaConcesionaria(update.getCuotaFechaAlta());
         cuotasManager.getDao().upsert(cuota);
     }
 }

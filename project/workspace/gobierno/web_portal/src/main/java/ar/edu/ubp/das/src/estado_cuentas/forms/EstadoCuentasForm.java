@@ -3,6 +3,7 @@ package ar.edu.ubp.das.src.estado_cuentas.forms;
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.annotations.Column;
 import ar.edu.ubp.das.mvc.db.annotations.Entity;
+import beans.NotificationUpdate;
 import beans.PlanBean;
 import utils.JsonUtils;
 
@@ -117,6 +118,19 @@ public class EstadoCuentasForm extends DynaActionForm {
         estadoCuentasForm.setVehiculo(planBean.getVehiculoId());
         estadoCuentasForm.setEstado(planBean.getPlanEstado()); // !!!
         estadoCuentasForm.setFechaAltaConcesionaria(planBean.getPlanFechaAlta());
+
+        return estadoCuentasForm;
+    }
+
+    public static EstadoCuentasForm fromNotificationUpdate(final NotificationUpdate update, final Long concesionariaId) {
+        final EstadoCuentasForm estadoCuentasForm = new EstadoCuentasForm();
+
+        estadoCuentasForm.setConcesionariaId(concesionariaId);
+        estadoCuentasForm.setDocumentoCliente(update.getClienteDocumento());
+        estadoCuentasForm.setNroPlanConcesionaria(update.getPlanId());
+        estadoCuentasForm.setVehiculo(update.getVehiculoId());
+        estadoCuentasForm.setEstado(update.getPlanEstado()); // !!!
+        estadoCuentasForm.setFechaAltaConcesionaria(update.getPlanFechaAlta());
 
         return estadoCuentasForm;
     }
