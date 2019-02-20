@@ -6,7 +6,7 @@
 %>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <fmt:setBundle basename="properties.etiquetas" var="etq" scope="session"/>
 <fmt:setLocale value="${lang}" scope="session" />
 
@@ -65,11 +65,8 @@
                         <link type="text/css" rel="stylesheet" href="/web_portal/util/StyleSheet.do/load=calendar" />
                         <div id="calendar_main_div"></div>
                     </div>
-                    <div id="content_admin_page_div">
 
-                    </div>
-
-                    <%@include file="../commons/resultado.jsp"%>
+                    <div id="content_admin_page_div"></div>
 
                     <!-- Modal -->
                     <div class="modal">
@@ -93,7 +90,6 @@
     </body>
 
     <%@include file="../commons/footer.jsp"%>
-    <label>USUARIO ADMIN CORRECTO ... ( Session de login nº:  ${sessionScope.ssid} )</label>
 
 
 </html>

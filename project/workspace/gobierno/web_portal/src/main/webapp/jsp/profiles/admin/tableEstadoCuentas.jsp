@@ -31,13 +31,11 @@
 <table id="table_admin_result" class="stripe">
 <thead>
 <tr>
-   <th><fmt:message key="table_estado_cuentas_id_th" bundle="${etq}" /></th>
    <th><fmt:message key="table_estado_cuentas_estado_th" bundle="${etq}" /></th>
    <th><fmt:message key="table_estado_cuentas_conc_id_th" bundle="${etq}" /></th>
    <th><fmt:message key="table_estado_cuentas_nro_plan_conc_th" bundle="${etq}" /></th>
    <th><fmt:message key="table_estado_cuentas_doc_cli_th" bundle="${etq}" /></th>
    <th><fmt:message key="table_estado_cuentas_fecha_alta_conc_th" bundle="${etq}" /></th>
-   <th><fmt:message key="table_estado_cuentas_fecha_alta_sys_th" bundle="${etq}" /></th>
    <th><fmt:message key="table_estado_cuentas_vehiculo_th" bundle="${etq}" /></th>
 </tr>
 </thead>

@@ -22,11 +22,7 @@
 <%-- TODO: CLEAN UP THE PAGE TAG ABOVE --%>
 
 <%@ include file="calendarCommon.jsp" %>
-<div class="card">
-    <div class="card-header">
-        <h2 class="title" ><fmt:message key="calendar_title" bundle="${etq}" /></h2>
-    </div>
-</div>
+<h1 style="caption-side: top; color:#95a5a6; text-align:left"><fmt:message key="calendar_title" bundle="${etq}" /></h1>
 <table border="1" cellspacing="0" cellpadding="4" id="calendar_table">
   <tr>
     <td width="100%" colspan="7" class="month_year_header">

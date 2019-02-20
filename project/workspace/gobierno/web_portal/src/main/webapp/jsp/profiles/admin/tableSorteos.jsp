@@ -32,10 +32,6 @@
 <table id="table_admin_result" class="stripe">
 <thead>
 <tr>
-   <th><fmt:message key="table_sorteos_id_th" bundle="${etq}" /></th>
-   <th><fmt:message key="table_sorteos_day_th" bundle="${etq}" /></th>
-   <th><fmt:message key="table_sorteos_month_th" bundle="${etq}" /></th>
-   <th><fmt:message key="table_sorteos_year_th" bundle="${etq}" /></th>
    <th><fmt:message key="table_sorteos_state_th" bundle="${etq}" /></th>
    <th><fmt:message key="table_sorteos_created_at_th" bundle="${etq}" /></th>
    <th><fmt:message key="table_sorteos_execution_date_th" bundle="${etq}" /></th>
