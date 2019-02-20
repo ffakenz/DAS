@@ -11,11 +11,11 @@
         </action>
 
         <action type="AprobarConcesionariaAction" path="/AprobarConcesionaria.do">
-            <forward name="success" path="/concesionarias/successAprobar.jsp"/>
+            <forward name="success" path="/concesionarias/successConcesionaria.jsp"/>
         </action>
 
         <action type="DesAprobarConcesionariaAction" path="/DesAprobarConcesionaria.do">
-            <forward name="success" path="/concesionarias/successDesAprobar.jsp"/>
+            <forward name="success" path="/concesionarias/successConcesionaria.jsp"/>
         </action>
 
         <action type="ConsultarAprobadasAction" path="/ConsultarAprobadas.do">

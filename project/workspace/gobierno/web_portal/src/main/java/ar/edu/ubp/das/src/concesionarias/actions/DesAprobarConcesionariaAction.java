@@ -38,7 +38,7 @@ public class DesAprobarConcesionariaAction implements Action {
             final ConsultarConcesionariaInteractor consultarConcesionariaInteractor = new ConsultarConcesionariaInteractor(msConcesionariaDao);
             final InteractorResponse<Optional<ConcesionariaForm>> aprobada = consultarConcesionariaInteractor.execute(form);
 
-            request.setAttribute(DESAPROBADA_RQST_ATTRIBUTE, aprobada.getResult().get());
+            request.setAttribute(CONCESIONARIA_RQST, aprobada.getResult().get());
         }
 
         logAction(mapping, form, request, response);

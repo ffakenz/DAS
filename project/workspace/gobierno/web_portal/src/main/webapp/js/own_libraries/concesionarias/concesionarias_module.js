@@ -51,9 +51,18 @@ class Concesionarias extends Module {
     configurarHandler(evt) {
         evt.preventDefault();
         console.log("configurarHandler, [EVENT] = %o", evt);
-        console.log("Configurando Concesionaria %o", evt.target.id);
         const idButton = evt.target.id;
         const idConcesionaria = idButton.split("-")[1];
+        console.log("Configurando Concesionaria %o", idConcesionaria);
+
+        const target = $(evt.target);
+        const tr = $(target).closest('tr');
+        const className = $(tr).prop('className');
+        if(className.includes('concesionaria_no_aprobada')) {
+            console.error("Configurando Concesionaria %o NO aprobada", idConcesionaria);
+            return;
+        }
+
         ConcesionariasService.POST_CONSULTAR_CONFIG_PARAM(idConcesionaria, ConcesionariasHelpers.formConsultarConfig);
     }
 

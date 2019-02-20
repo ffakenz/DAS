@@ -35,9 +35,8 @@ public final class Constants {
 
     /************ SERVLET REQUEST ATTRIBUTES ****************************/
     public static final String RESULT_RQST_ATTRIBUTE = "result";
-    public static final String APROBADA_RQST_ATTRIBUTE = "aprobada";
+    public static final String CONCESIONARIA_RQST = "concesionaria_rqst";
     public static final String APROBADAS_RQST_ATTRIBUTE = "aprobadas";
-    public static final String DESAPROBADA_RQST_ATTRIBUTE = "desaprobada";
     public static final String CONFIG_SUCCEDD_RQST_ATTRIBUTE = "configurationSucceeded";
     public static final String CONFIG_PARAMS_LIST_RQST_ATTRIBUTE = "configParams";
     public static final String CONCESIONARIAS_LIST_RQST_ATTRIBUTE = "concesionariasList";
