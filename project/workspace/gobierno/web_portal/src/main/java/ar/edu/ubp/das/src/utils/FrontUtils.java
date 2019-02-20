@@ -26,7 +26,7 @@ public class FrontUtils {
     public static String sorteosFormRow(final SorteoForm sorteo) {
         final StringBuilder rows = new StringBuilder();
 
-        rows.append("<tr id=\"" + SORTEO_ROW + "-" + sorteo.getId() + "\" class=\"table-primary\">");
+        rows.append("<tr id=\"" + SORTEO_ROW + "-" + sorteo.getId() + "\" >");
         rows.append("<td>" + sorteo.getId() + "</td>");
         rows.append("<td>" + sorteo.getDiaSorteo() + "</td>");
         rows.append("<td>" + sorteo.getMesSorteo() + "</td>");
@@ -40,7 +40,7 @@ public class FrontUtils {
 
     public static String viewConsumoResultsFormRow(final ViewConsumoResultsForm view) {
         final StringBuilder rows = new StringBuilder();
-        rows.append("<tr id=\"" + VIEW_CONSUMO_RESULTS_ROW + "-" + view.getJobId() + "\" class=\"table-primary\">");
+        rows.append("<tr id=\"" + VIEW_CONSUMO_RESULTS_ROW + "-" + view.getJobId() + "\" >");
         rows.append("<td>" + view.getJobId() + "</td>");
         rows.append("<td>" + view.getJobFechaEjecucion() + "</td>");
         rows.append("<td>" + view.getConsumoId() + "</td>");
@@ -59,7 +59,7 @@ public class FrontUtils {
 
     public static String estadoCuentasFormRow(final EstadoCuentasForm e) {
         final StringBuilder rows = new StringBuilder();
-        rows.append("<tr id=\"" + ESTADO_CUENTA_ROW + "-" + e.getId() + "\" class=\"table-primary\">");
+        rows.append("<tr id=\"" + ESTADO_CUENTA_ROW + "-" + e.getId() + "\" >");
         rows.append("<td>" + e.getId() + "</td>");
         rows.append("<td>" + e.getEstado() + "</td>");
         rows.append("<td>" + e.getConcesionariaId() + "</td>");
@@ -76,7 +76,7 @@ public class FrontUtils {
 
         final StringBuilder rows = new StringBuilder();
         final String clase = c.getCodigo() == null ? CONCESIONARIA_NO_APROBADA : CONCESIONARIA_APROBADA;
-        rows.append("<tr id=\"" + CONCESIONARIA_ROW + "-" + c.getId() + "\" class=\"" + clase + " table-primary\">");
+        rows.append("<tr id=\"" + CONCESIONARIA_ROW + "-" + c.getId() + "\" class=\"" + clase + "\">");
         rows.append("<td>" + c.getId() + "</td>");
         rows.append("<td>" + c.getNombre() + "</td>");
         rows.append("<td>" + c.getCuit() + "</td>");

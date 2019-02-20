@@ -16,7 +16,6 @@ const ConsumoService = {
                 $("#loadingDiv").modal("hide");
                 console.log("AJAX RESULT GET_JOB_RESULTS_REPORT SUCCESS %o", html);
                 jUtils.showing("content_admin_page_div", html);
-                $("#table_admin_result_title").html(jUtils.addTitle("Calendario Sorteo"));
             }
         });
     }

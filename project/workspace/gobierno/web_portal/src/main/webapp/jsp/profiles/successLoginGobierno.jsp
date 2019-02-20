@@ -13,8 +13,8 @@
 <!DOCTYPE html>
 <html>
     <%@include file="../commons/head.jsp" %>
-    <link type="text/css" rel="stylesheet" href="/web_portal/util/StyleSheet.do/load=simple-sidebar" />
-    <link type="text/css" rel="stylesheet" href="/web_portal/util/StyleSheet.do/load=admin" />
+    <link type="text/css" rel="stylesheet" href="/web_portal/util/StyleSheet.do/load=simple-sidebar,admin,dataTables.bootstrap4.min" />
+
     <body>
         <div class="d-flex" id="wrapper">
             <!-- Sidebar -->
@@ -66,7 +66,6 @@
                         <div id="calendar_main_div"></div>
                     </div>
                     <div id="content_admin_page_div">
-                        <div id="table_admin_result_title"></div>
 
                     </div>
 

@@ -136,3 +136,7 @@ img.d-block.w-100.h-50 {
   height: 230px !important;
   width: 230px !important;
 }
+
+div#table_admin_result_wrapper {
+    margin-top: 20px;
+}
