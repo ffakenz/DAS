@@ -48,7 +48,7 @@
 
         %>
 
-            <tr id=<%= concesionariaRowId %> class=<%= concesionariaRowClass %> >
+            <tr id="<%= concesionariaRowId %>" class="<%= concesionariaRowClass %>" >
                 <td> <%= c.getNombre() %> </td>
                 <td> <%= c.getCuit() %> </td>
                 <td> <%= FrontUtils.emptyIfNull(c.getCodigo()) %> </td>
@@ -64,36 +64,36 @@
 
                 <% if (concesionariaRowClass.equals(CONCESIONARIA_NO_APROBADA)) {
                     String aprobarBtnId = APROBAR_BTN + "-" + c.getId();
-                    String aprobarBtnClass = APROBAR_BTN + " btn btn-success";
+                    String aprobarBtnClass = String.format("btn btn-success %s", APROBAR_BTN );
                     String aprobarBtnDesc = "Aprobar";
                 %>
 
                     <td>
-                        <button type="button" id=<%= aprobarBtnId %> class=<%= aprobarBtnClass %> >
+                        <button type="button" id="<%= aprobarBtnId %>" class="<%= aprobarBtnClass %>" >
                             <%= aprobarBtnDesc %>
                         </button>
                     </td>
 
                 <% } else {
                     String desaprobarBtnId = DESAPROBAR_BTN + "-" + c.getId();
-                    String desaprobarBtnClass = DESAPROBAR_BTN + " btn btn-danger";
+                    String desaprobarBtnClass = String.format("btn btn-danger %s", DESAPROBAR_BTN );
                     String desaprobarBtnDesc = "Desaprobar";
                 %>
 
                     <td>
-                        <button type="button" id=<%= desaprobarBtnId %> class=<%= desaprobarBtnClass %> >
+                        <button type="button" id="<%= desaprobarBtnId %>" class="<%= desaprobarBtnClass %>" >
                             <%= desaprobarBtnDesc %>
                         </button>
                     </td>
 
                 <% } // END IF ELSE
                     String configBtnId = CONFIG_BTN + "-" + c.getId();
-                    String configBtnClass = CONFIG_BTN + " btn btn-info";
+                    String configBtnClass = String.format("btn btn-info %s", CONFIG_BTN );
                     String configBtnDesc = "Configurar";
                 %>
 
                 <td>
-                    <button type="button" id=<%= configBtnId %> class=<%= configBtnClass %> >
+                    <button type="button" id="<%= configBtnId %>" class="<%= configBtnClass %>" >
                         <%= configBtnDesc %>
                     </button>
                 </td>

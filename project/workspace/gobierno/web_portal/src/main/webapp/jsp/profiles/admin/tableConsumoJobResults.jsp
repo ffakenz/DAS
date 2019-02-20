@@ -49,7 +49,7 @@
             final String viewId = VIEW_CONSUMO_RESULTS_ROW + "-" + view.getJobId();
             // todo: show and check possible null values
         %>
-            <tr id= <%= viewId %> >
+            <tr id="<%= viewId %>" >
                 <td> <%= view.getJobId() %> </td>
                 <td>
                     <fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="<%= view.getJobFechaEjecucion() %>" />

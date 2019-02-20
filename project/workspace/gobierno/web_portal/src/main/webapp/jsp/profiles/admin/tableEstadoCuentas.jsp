@@ -43,7 +43,7 @@
             final String estadoCuentaRowId = ESTADO_CUENTA_ROW + "-" + ec.getId();
             // todo: implement procedure to obtain concesionaria name, and vehiculo name
         %>
-            <tr id= <%= estadoCuentaRowId %> >
+            <tr id="<%= estadoCuentaRowId %>">
             <td> <%= ec.getEstado() %> </td>
             <td> <%= ec.getConcesionariaId() %> </td>
             <td> <%= ec.getNroPlanConcesionaria() %> </td>

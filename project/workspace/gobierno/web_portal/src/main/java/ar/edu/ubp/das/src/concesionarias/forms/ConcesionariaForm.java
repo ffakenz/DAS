@@ -113,4 +113,9 @@ public class ConcesionariaForm extends DynaActionForm {
                 Objects.equals(this.id, ((ConcesionariaForm) other).id) ||
                 Objects.equals(this.cuit, ((ConcesionariaForm) other).cuit);
     }
+
+    public static void main(final String[] args) {
+        final String yo = String.format("hola %s", "yo");
+        System.out.println(yo);
+    }
 }

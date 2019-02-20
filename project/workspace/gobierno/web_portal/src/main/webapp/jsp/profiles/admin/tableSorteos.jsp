@@ -38,7 +38,7 @@
 
             final String sorteoRowId = SORTEO_ROW + "-" + sorteo.getId() ;
         %>
-            <tr id=<%= sorteoRowId %>  >
+            <tr id="<%= sorteoRowId %>"  >
                 <td> <%= sorteo.getEstado() %> </td>
                 <td>
                     <fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="<%= sorteo.getFechaCreacion() %>" />
