@@ -4,31 +4,23 @@
                 contentType="text/html; charset=utf-8"
                 pageEncoding="utf-8"
                 %>
+<%-- JSTL --%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<%-- Language --%>
 <fmt:setBundle basename="properties.etiquetas" var="etq" scope="session"/>
 <fmt:setLocale value="${lang}" scope="session" />
 
-<%@ page import="ar.edu.ubp.das.src.jobs.sorteo.forms.SorteoForm" %>
+<%-- Common Imports --%>
+<%@ page import="static ar.edu.ubp.das.src.utils.Constants.*" %>
+<%@ page import="ar.edu.ubp.das.src.utils.FrontUtils" %>
+
+<%-- Specific Imports --%>
 <%@ page import="java.util.List" %>
 <%@ page import="java.lang.Exception" %>
+<%@ page import="ar.edu.ubp.das.src.jobs.sorteo.forms.SorteoForm" %>
 
-<%@ page import="static ar.edu.ubp.das.src.utils.Constants.SORTEOS_LIST_RQST_ATTRIBUTE" %>
-<%@ page import="ar.edu.ubp.das.src.utils.FrontUtils" %>
-<%
-        StringBuilder result = new StringBuilder();
-        try {
-            List<SorteoForm> sorteosList = (List<SorteoForm>) request.getAttribute(SORTEOS_LIST_RQST_ATTRIBUTE);
-            StringBuilder rows = new StringBuilder();
-            for(SorteoForm ec : sorteosList) {
-                String row = FrontUtils.sorteosFormRow(ec);
-                rows.append(row);
-            }
-            result.append(rows.toString());
-        } catch(Exception e) {
-            result.append(e.getMessage());
-        }
-%>
 <table id="table_admin_result" class="stripe">
 <thead>
 <tr>
@@ -38,7 +30,29 @@
 </tr>
 </thead>
 <tbody>
-<%= result.toString() %>
+
+<%
+    try {
+        List<SorteoForm> sorteosList = (List<SorteoForm>) request.getAttribute(SORTEOS_LIST_RQST_ATTRIBUTE);
+        for(SorteoForm sorteo : sorteosList) {
+
+            final String sorteoRowId = SORTEO_ROW + "-" + sorteo.getId() ;
+        %>
+            <tr id=<%= sorteoRowId %>  >
+            <td><%= sorteo.getEstado() %></td>
+            <td>
+                <fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="<%= sorteo.getFechaCreacion() %>" />
+            </td>
+            <td>
+                <fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="<%= sorteo.getFechaEjecucion() %>" />
+            </td>
+            </tr>
+        <% } // END FOR LOOP
+    } catch(Exception e) {
+        e.getMessage();
+    }
+%>
+
 </tbody>
 </table>
 

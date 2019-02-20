@@ -4,17 +4,23 @@
         contentType="text/html; charset=utf-8"
         pageEncoding="utf-8"
 %>
+<%-- JSTL --%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<%-- Language --%>
 <fmt:setBundle basename="properties.etiquetas" var="etq" scope="session"/>
 <fmt:setLocale value="${lang}" scope="session" />
 
-<%@ page import="ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.lang.Exception" %>
+<%-- Common Imports --%>
 <%@ page import="static ar.edu.ubp.das.src.utils.Constants.*" %>
 <%@ page import="ar.edu.ubp.das.src.utils.FrontUtils" %>
+
+<%-- Specific Imports --%>
+<%@ page import="java.util.List" %>
+<%@ page import="java.lang.Exception" %>
+<%@ page import="ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm" %>
+
 <table id="table_admin_result" class="stripe">
 <thead>
 <tr>
@@ -33,14 +39,14 @@
 <tbody>
 
 <%
-    StringBuilder result = new StringBuilder();
     try {
         List<ConcesionariaForm> concesionariaFormList = (List<ConcesionariaForm>) request.getAttribute(CONCESIONARIAS_LIST_RQST_ATTRIBUTE);
         for( ConcesionariaForm c : concesionariaFormList) {
 
             final String concesionariaRowId = CONCESIONARIA_ROW + "-" + c.getId() ;
             final String concesionariaRowClass = c.getCodigo() == null ? CONCESIONARIA_NO_APROBADA : CONCESIONARIA_APROBADA;
-%>
+
+        %>
 
             <tr id=<%= concesionariaRowId %> class=<%= concesionariaRowClass %> >
                 <td> <%= c.getNombre() %> </td>
@@ -61,6 +67,7 @@
                     String aprobarBtnClass = APROBAR_BTN + " btn btn-success";
                     String aprobarBtnDesc = "Aprobar";
                 %>
+
                     <td>
                         <button type="button" id=<%= aprobarBtnId %> class=<%= aprobarBtnClass %> >
                             <%= aprobarBtnDesc %>
@@ -78,7 +85,8 @@
                             <%= desaprobarBtnDesc %>
                         </button>
                     </td>
-                <% }
+
+                <% } // END IF ELSE
                     String configBtnId = CONFIG_BTN + "-" + c.getId();
                     String configBtnClass = CONFIG_BTN + " btn btn-info";
                     String configBtnDesc = "Configurar";
@@ -90,8 +98,7 @@
                     </button>
                 </td>
             </tr>
-<%
-        } // END FOR LOOP
+        <% } // END FOR LOOP
    } catch(Exception e) {
        e.getMessage();
    }
