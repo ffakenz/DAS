@@ -4,31 +4,23 @@
                 contentType="text/html; charset=utf-8"
                 pageEncoding="utf-8"
                 %>
+<%-- JSTL --%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%-- Language --%>
 <fmt:setBundle basename="properties.etiquetas" var="etq" scope="session"/>
 <fmt:setLocale value="${lang}" scope="session" />
 
-<%@ page import="ar.edu.ubp.das.src.jobs.consumo.forms.ViewConsumoResultsForm" %>
+<%-- Common Imports --%>
+<%@ page import="static ar.edu.ubp.das.src.utils.Constants.*" %>
+<%@ page import="ar.edu.ubp.das.src.utils.FrontUtils" %>
+
+<%-- Specific Imports --%>
 <%@ page import="java.util.List" %>
 <%@ page import="java.lang.Exception" %>
+<%@ page import="ar.edu.ubp.das.src.jobs.consumo.forms.ViewConsumoResultsForm" %>
 
-<%@ page import="static ar.edu.ubp.das.src.utils.Constants.JOB_RESULTS_REPORT_RQST_ATTRIBUTE" %>
-<%@ page import="ar.edu.ubp.das.src.utils.FrontUtils" %>
-<%
-        StringBuilder result = new StringBuilder();
-        try {
-            List<ViewConsumoResultsForm> viewResults =
-                (List<ViewConsumoResultsForm>) request.getAttribute(JOB_RESULTS_REPORT_RQST_ATTRIBUTE);
-            StringBuilder rows = new StringBuilder();
-            for( ViewConsumoResultsForm v : viewResults) {
-                String row = FrontUtils.viewConsumoResultsFormRow(v);
-                rows.append(row);
-            }
-            result.append(rows.toString()                                                                                    );
-        } catch(Exception e) {
-            result.append(e.getMessage());
-        }
-        %>
 
 <table id="table_admin_result" class="stripe">
 <thead>
@@ -48,11 +40,43 @@
 </tr>
 </thead>
 <tbody>
-<%= result.toString() %>
+
+<%
+    try {
+        List<ViewConsumoResultsForm> viewResults = (List<ViewConsumoResultsForm>) request.getAttribute(JOB_RESULTS_REPORT_RQST_ATTRIBUTE);
+        for( ViewConsumoResultsForm view : viewResults) {
+
+            final String viewId = VIEW_CONSUMO_RESULTS_ROW + "-" + view.getJobId();
+            // todo: show and check possible null values
+        %>
+            <tr id= <%= viewId %> >
+                <td> <%= view.getJobId() %> </td>
+                <td>
+                    <fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="<%= view.getJobFechaEjecucion() %>" />
+                </td>
+                <td> <%= view.getConsumoId() %> </td>
+                <td> <%= view.getConcesionariaId() %> </td>
+                <td> <%= view.getEstadoConsumo() %> </td>
+                <td>
+                    <fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="<%= view.getFromConsumo() %>" />
+                </td>
+                <td>
+                    <fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="<%= view.getToConsumo() %>" />
+                </td>
+                <td> <%= view.getIdRequestRespConsumo() %> </td>
+                <td> <%= view.getEstadoDescription() %> </td>
+                <td> <%= view.getConsumoResultId() %> </td>
+                <td> <%= view.getConsumoResult() %> </td>
+                <td> <%= view.getConsumoResultDescription() %> </td>
+            </tr>
+        <% } // END FOR LOOP
+    } catch(Exception e) {
+        e.getMessage();
+    }
+%>
+
 </tbody>
 </table>
-
-<c:set var = "title" scope = "session" value ="<fmt:message key='table_consumo_job_consumo_result_title' bundle='${etq}' />" />
 
 <jsp:include page="../../commons/datatable.jsp">
     <jsp:param name="title" value="Results" />
