@@ -8,7 +8,7 @@ const EstadoCuentaService = {
             dataType: "html",
             error: function(hr){
                 console.log("AJAX RESULT GET_CONSULTAR_TODOS ERROR %o", hr.responseText);
-                jUtils.showing("content_admin_page_div", html);
+                jUtils.showing("content_admin_page_div", hr);
                 $("#loadingDiv").modal("hide");
             },
             success: function(html) {

@@ -92,8 +92,8 @@
         <!-- /#wrapper -->
     </body>
 
-
     <%@include file="../commons/footer.jsp"%>
     <label>USUARIO ADMIN CORRECTO ... ( Session de login nº:  ${sessionScope.ssid} )</label>
+
 
 </html>

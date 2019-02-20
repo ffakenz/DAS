@@ -1,6 +1,6 @@
 const ConcesionariasConfig = (module) => [
     { 
-        ctx: Id.TABLE_ADMIN_RESULT,
+        ctx: Id.CONTENT_ADMIN_PAGE_DIV,
         cnfg: [
             { delegate: Class.APROBAR_BTN, handler: module.aprobarHandler }
             , { delegate: Class.DESAPROBAR_BTN, handler: module.desAprobarHandler }

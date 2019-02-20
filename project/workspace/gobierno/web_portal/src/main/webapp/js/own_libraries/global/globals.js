@@ -69,7 +69,6 @@ const Id = {
     ADMIN_SIDE_BAR: "admin_side_bar",
     SHOW_JOB_RESULTS_REPORT_BTN: "show_job_results_report_btn",
     CONTENT_ADMIN_PAGE_DIV: "content_admin_page_div",
-    TABLE_ADMIN_RESULT: "content_admin_page_div", /* "table_admin_result", */
     CALENDAR_MAIN_DIV: "calendar_main_div",
     CALENDAR_NEXT: "calendar_next",
     CALENDAR_PREV: "calendar_prev",
