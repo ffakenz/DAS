@@ -1,12 +1,10 @@
 package ar.edu.ubp.das.src.utils;
 
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
-import ar.edu.ubp.das.src.estado_cuentas.forms.EstadoCuentasForm;
 import ar.edu.ubp.das.src.jobs.consumo.forms.ViewConsumoResultsForm;
 
 import java.util.List;
 
-import static ar.edu.ubp.das.src.utils.Constants.ESTADO_CUENTA_ROW;
 import static ar.edu.ubp.das.src.utils.Constants.VIEW_CONSUMO_RESULTS_ROW;
 
 public class FrontUtils {
@@ -39,21 +37,6 @@ public class FrontUtils {
         rows.append("<td>" + view.getConsumoResultId() + "</td>");
         rows.append("<td>" + view.getConsumoResult() + "</td>");
         rows.append("<td>" + view.getConsumoResultDescription() + "</td>");
-        rows.append("</tr>");
-        return rows.toString();
-    }
-
-    public static String estadoCuentasFormRow(final EstadoCuentasForm e) {
-
-        // todo: implement procedure to obtain concesionaria name, and vehiculo name
-        final StringBuilder rows = new StringBuilder();
-        rows.append("<tr id=\"" + ESTADO_CUENTA_ROW + "-" + e.getId() + "\" >");
-        rows.append("<td>" + e.getEstado() + "</td>");
-        rows.append("<td>" + e.getConcesionariaId() + "</td>");
-        rows.append("<td>" + e.getNroPlanConcesionaria() + "</td>");
-        rows.append("<td>" + e.getDocumentoCliente() + "</td>");
-        rows.append("<td>" + e.getFechaAltaConcesionaria() + "</td>");
-        rows.append("<td>" + e.getVehiculo() + "</td>");
         rows.append("</tr>");
         return rows.toString();
     }

@@ -4,30 +4,24 @@
                 contentType="text/html; charset=utf-8"
                 pageEncoding="utf-8"
                 %>
+<%-- JSTL --%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <fmt:setBundle basename="properties.etiquetas" var="etq" scope="session"/>
+
+<%-- Language --%>
+<fmt:setLocale value="${lang}" scope="session" />
 <fmt:setLocale value="${lang}" scope="session" />
 
-<%@ page import="ar.edu.ubp.das.src.estado_cuentas.forms.EstadoCuentasForm" %>
+<%-- Common Imports --%>
+<%@ page import="static ar.edu.ubp.das.src.utils.Constants.*" %>
+<%@ page import="ar.edu.ubp.das.src.utils.FrontUtils" %>
+
+<%-- Specific Imports --%>
 <%@ page import="java.util.List" %>
 <%@ page import="java.lang.Exception" %>
+<%@ page import="ar.edu.ubp.das.src.estado_cuentas.forms.EstadoCuentasForm" %>
 
-<%@ page import="static ar.edu.ubp.das.src.utils.Constants.ESTADO_CUENTAS_LIST_RQST_ATTRIBUTE" %>
-<%@ page import="ar.edu.ubp.das.src.utils.FrontUtils" %>
-<%
-        StringBuilder result = new StringBuilder();
-        try {
-            List<EstadoCuentasForm> estadoCuentasFormList = (List<EstadoCuentasForm>) request.getAttribute(ESTADO_CUENTAS_LIST_RQST_ATTRIBUTE);
-            StringBuilder rows = new StringBuilder();
-            for( EstadoCuentasForm ec : estadoCuentasFormList) {
-                String row = FrontUtils.estadoCuentasFormRow(ec);
-                rows.append(row);
-            }
-            result.append(rows.toString()                                                                                    );
-        } catch(Exception e) {
-            result.append(e.getMessage());
-        }
-%>
+
 <table id="table_admin_result" class="stripe">
 <thead>
 <tr>
@@ -40,7 +34,31 @@
 </tr>
 </thead>
 <tbody>
-<%= result.toString() %>
+
+<%
+    StringBuilder result = new StringBuilder();
+    try {
+        List<EstadoCuentasForm> estadoCuentasFormList = (List<EstadoCuentasForm>) request.getAttribute(ESTADO_CUENTAS_LIST_RQST_ATTRIBUTE);
+        for( EstadoCuentasForm ec : estadoCuentasFormList) {
+            final String estadoCuentaRowId = ESTADO_CUENTA_ROW + "-" + ec.getId();
+            // todo: implement procedure to obtain concesionaria name, and vehiculo name
+        %>
+            <tr id= <%= estadoCuentaRowId %> >
+            <td> <%= ec.getEstado() %> </td>
+            <td> <%= ec.getConcesionariaId() %> </td>
+            <td> <%= ec.getNroPlanConcesionaria() %> </td>
+            <td> <%= ec.getDocumentoCliente() %> </td>
+            <td>
+                <fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="<%= ec.getFechaAltaConcesionaria() %>" />
+            </td>
+            <td> <%= ec.getVehiculo() %> </td>
+            </tr>
+        <% } // END FOR LOOP
+    } catch(Exception e) {
+            e.getMessage();
+    }
+%>
+
 </tbody>
 </table>
 
