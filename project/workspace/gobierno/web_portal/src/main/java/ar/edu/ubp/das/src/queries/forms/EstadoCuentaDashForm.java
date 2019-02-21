@@ -2,10 +2,12 @@ package ar.edu.ubp.das.src.queries.forms;
 
 import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.db.annotations.Column;
+import ar.edu.ubp.das.mvc.db.annotations.Entity;
 import utils.JsonUtils;
 
 import java.sql.Timestamp;
 
+@Entity
 public class EstadoCuentaDashForm extends DynaActionForm {
 
     @Column(name = "nombre_cliente")
