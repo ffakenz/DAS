@@ -1,29 +1,25 @@
-import beans.NotificationUpdate;
 import clients.ConcesionariaServiceContract;
 import clients.factory.ClientFactory;
 import clients.factory.ClientType;
 import clients.responses.ClientException;
 
-import java.sql.Timestamp;
-import java.time.ZonedDateTime;
 import java.util.HashMap;
-import java.util.List;
 
 public class ClientExample {
 
     static void consumeService(final ConcesionariaServiceContract client) throws ClientException {
         final String identificador = "GOB";
-        final Timestamp from = Timestamp.valueOf(ZonedDateTime.now().minusYears(3).toLocalDateTime());
-        final Timestamp to = Timestamp.valueOf(ZonedDateTime.now().toLocalDateTime());
+//        final Timestamp from = Timestamp.valueOf(ZonedDateTime.now().minusYears(3).toLocalDateTime());
+//        final Timestamp to = Timestamp.valueOf(ZonedDateTime.now().toLocalDateTime());
 
 
-        System.out.println("consultarPlanes");
-        final List<NotificationUpdate> notificationUpdates =
-                client.consultarPlanes(identificador, from, to);
-        notificationUpdates.forEach(System.out::println);
+//        System.out.println("consultarPlanes");
+//        final List<NotificationUpdate> notificationUpdates =
+//                client.consultarPlanes(identificador, from, to);
+//        notificationUpdates.forEach(System.out::println);
 
-//        System.out.println("cancelarPlan");
-//        client.cancelarPlan(identificador, 1L);
+        System.out.println("notificarGanador");
+        client.notificarGanador(identificador, 2L, 97769788L);
 
 //        System.out.println("consultarPlan");
 //        final PlanBean plan0 = client.consultarPlan(identificador, 999L);
@@ -35,10 +31,10 @@ public class ClientExample {
         try {
             System.out.println("Running AXIS");
             runAxis();
-            System.out.println("Running REST");
-            runRest();
-            System.out.println("Running CXF");
-            runCxf();
+//            System.out.println("Running REST");
+//            runRest();
+//            System.out.println("Running CXF");
+//            runCxf();
         } catch (final ClientException e) {
             e.printStackTrace();
         }

@@ -81,9 +81,9 @@ public class CXFClient implements ConcesionariaServiceContract {
     }
 
     @Override
-    public void cancelarPlan(final String identificador, final Long planId) throws ClientException {
-        executeMethod(CANCELAR_PLAN, identificador, planId);
-        log.info("[POST cancelarPlan][planId {}]", planId);
+    public void notificarGanador(String identificador, Long planId, Long documento) throws ClientException {
+        executeMethod(NOTIFICAR_GANADOR, identificador, planId, documento);
+        log.info("[POST notificarGanador][planId {}][documento:{}]", planId, documento);
     }
 
     @Override

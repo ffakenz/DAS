@@ -40,10 +40,10 @@ class GetGanador extends SorteoStep {
     private void getGanador(final List<ParticipanteForm> participantes) throws SQLException {
 //        final int indexGanador = Utils.getRandom(participantes.size());
 //        final ParticipanteForm ganador = participantes.get(indexGanador);
-        List<ParticipanteForm> cxfs =
-                participantes.stream().filter(p -> p.getIdConcesionaria() == 1 ).collect(Collectors.toList());
-        final int indexGanador = Utils.getRandom(cxfs.size());
-        final ParticipanteForm ganador = cxfs.get(indexGanador);
+        List<ParticipanteForm> concGanadora =
+                participantes.stream().filter(p -> p.getIdConcesionaria() == 4 ).collect(Collectors.toList());
+        final int indexGanador = Utils.getRandom(concGanadora.size());
+        final ParticipanteForm ganador = concGanadora.get(indexGanador);
         ganador.setEstado(GANADOR);
         sorteoJobManager.getMsParticipanteDao().update(ganador);
     }

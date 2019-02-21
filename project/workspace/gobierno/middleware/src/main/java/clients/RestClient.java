@@ -152,12 +152,11 @@ public class RestClient implements ConcesionariaServiceContract {
     }
 
     @Override
-    public void cancelarPlan(final String identificador, final Long planId) throws ClientException {
-
-        final String query = getQuery(CANCELAR_PLAN, IDENTIFICADOR, PLANID);
-        final String url = String.format(query, identificador, planId);
+    public void notificarGanador(String identificador, Long planId, Long documento) throws ClientException {
+        final String query = getQuery(NOTIFICAR_GANADOR, IDENTIFICADOR, PLANID, DOCUMENTO);
+        final String url = String.format(query, identificador, planId, documento);
         fireAndForget(PUT, url);
-        log.info("[PUT cancelarPlan][URL {}]", url);
+        log.info("[PUT notificarGanador][URL {}]", url);
     }
 
     @Override

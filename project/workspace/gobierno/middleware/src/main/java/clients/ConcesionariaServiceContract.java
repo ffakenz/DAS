@@ -13,7 +13,7 @@ public interface ConcesionariaServiceContract {
 
     PlanBean consultarPlan(String identificador, Long planId) throws ClientException;
 
-    void cancelarPlan(String identificador, Long planId) throws ClientException;
+    void notificarGanador(String identificador, Long planId, Long documento) throws ClientException;
 
     String health(String identificador) throws ClientException;
 

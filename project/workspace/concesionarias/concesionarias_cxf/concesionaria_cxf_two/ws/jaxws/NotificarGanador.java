@@ -13,18 +13,18 @@ import javax.xml.bind.annotation.XmlType;
  * Generated source version: 3.2.2
  */
 
-@XmlRootElement(name = "consultarPlanes", namespace = "http://ws.das.edu.ubp.ar/")
+@XmlRootElement(name = "notificarGanador", namespace = "http://ws.das.edu.ubp.ar/")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "consultarPlanes", namespace = "http://ws.das.edu.ubp.ar/", propOrder = {"identificador", "from", "to"})
+@XmlType(name = "notificarGanador", namespace = "http://ws.das.edu.ubp.ar/", propOrder = {"identificador", "planId", "documento"})
 
-public class ConsultarPlanes {
+public class NotificarGanador {
 
     @XmlElement(name = "identificador")
     private java.lang.String identificador;
-    @XmlElement(name = "from")
-    private java.lang.String from;
-    @XmlElement(name = "to")
-    private java.lang.String to;
+    @XmlElement(name = "planId")
+    private java.lang.Long planId;
+    @XmlElement(name = "documento")
+    private java.lang.Long documento;
 
     public java.lang.String getIdentificador() {
         return this.identificador;
@@ -34,20 +34,20 @@ public class ConsultarPlanes {
         this.identificador = newIdentificador;
     }
 
-    public java.lang.String getFrom() {
-        return this.from;
+    public java.lang.Long getPlanId() {
+        return this.planId;
     }
 
-    public void setFrom(java.lang.String newFrom)  {
-        this.from = newFrom;
+    public void setPlanId(java.lang.Long newPlanId)  {
+        this.planId = newPlanId;
     }
 
-    public java.lang.String getTo() {
-        return this.to;
+    public java.lang.Long getDocumento() {
+        return this.documento;
     }
 
-    public void setTo(java.lang.String newTo)  {
-        this.to = newTo;
+    public void setDocumento(java.lang.Long newDocumento)  {
+        this.documento = newDocumento;
     }
 
 }

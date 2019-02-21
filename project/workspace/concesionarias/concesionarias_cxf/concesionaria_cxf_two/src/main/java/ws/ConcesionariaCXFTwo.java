@@ -63,11 +63,13 @@ public class ConcesionariaCXFTwo extends MSSQLConsecionaria implements Concesion
         return gson.toJson(plan);
     }
 
-    @WebMethod(operationName = "cancelarPlan", action = "urn:CancelarPlan")
+    @WebMethod(operationName = "notificarGanador", action = "urn:NotificarGanador")
     @Override
-    public void cancelarPlan(@WebParam(name = "identificador") final String identificador, @WebParam(name = "planId") final Long planId) {
-        log.debug("Cxf cancelar plan id -> " + planId + " - identificador -> " + identificador);
-        abstractFactory.withConnection(notificationUpdateDAO.cancelarPlan(identificador, planId));
+    public void notificarGanador(@WebParam(name = "identificador") final String identificador
+            , @WebParam(name = "planId") final Long planId
+            , @WebParam(name = "documento") final Long documento) {
+        log.debug("Cxf notificar ganador: plan id -> " + planId + " - documento -> " + documento + " - identificador -> " + identificador);
+        abstractFactory.withConnection(notificationUpdateDAO.cancelarPlan(identificador, planId, documento));
     }
 
     @WebMethod(operationName = "health", action = "urn:Health")

@@ -13,11 +13,6 @@ public class ConcPendienteNotificacionForm extends DynaActionForm {
     @Column(name = "id_concesionaria")
     private Long idConcesionaria;
 
-    public ConcPendienteNotificacionForm(final Long idSorteo, final Long idConcesionaria) {
-        this.idSorteo = idSorteo;
-        this.idConcesionaria = idConcesionaria;
-    }
-
     public Long getIdSorteo() {
         return idSorteo;
     }

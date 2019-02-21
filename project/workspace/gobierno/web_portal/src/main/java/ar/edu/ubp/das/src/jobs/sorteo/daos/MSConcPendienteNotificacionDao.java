@@ -18,7 +18,7 @@ public class MSConcPendienteNotificacionDao extends DaoImpl<ConcPendienteNotific
         this.executeProcedure("dbo.log_conc_pendiente_notificacion(?,?)", form, "idSorteo", "idConcesionaria");
     }
 
-    public List<ConcPendienteNotificacionForm> select(final Long idSorteo) throws SQLException {
+    public List<ConcPendienteNotificacionForm> selectBySorteoId(final Long idSorteo) throws SQLException {
 
         this.connect();
         this.setProcedure("dbo.get_conc_pendiente_notificacion(?)", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);

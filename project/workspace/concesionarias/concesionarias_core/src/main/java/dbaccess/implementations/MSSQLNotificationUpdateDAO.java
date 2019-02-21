@@ -70,8 +70,8 @@ public class MSSQLNotificationUpdateDAO implements NotificationUpdateDAO {
     }
 
     @Override
-    public Function<Connection, Void> cancelarPlan(final String identificador, final Long planId) {
-        final String cancelarPlanQuery = "{ CALL cancelar_plan(?, ?) };";
+    public Function<Connection, Void> cancelarPlan(final String identificador, final Long planId, final Long documento) {
+        final String cancelarPlanQuery = "{ CALL cancelar_plan(?, ?, ?) };";
 
         return (Connection c) -> {
             try (final CallableStatement cs = c.prepareCall(cancelarPlanQuery)) {
@@ -79,6 +79,7 @@ public class MSSQLNotificationUpdateDAO implements NotificationUpdateDAO {
 
                 cs.setString(1, identificador);
                 cs.setLong(2, planId);
+                cs.setLong(3, documento);
                 cs.execute();
 
                 c.commit();

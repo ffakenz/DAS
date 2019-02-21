@@ -25,9 +25,10 @@ public class MiddlewareConstants {
     public static final String FROM = "from";
     public static final String TO = "to";
     public static final String PLANID = "planId";
+    public static final String DOCUMENTO = "documento";
     public static final String CONSULTAR_PLANES = "consultarPlanes";
     public static final String CONSULTAR_PLAN = "consultarPlan";
-    public static final String CANCELAR_PLAN = "cancelarPlan";
+    public static final String NOTIFICAR_GANADOR = "notificarGanador";
     public static final String HEALTH = "health";
 
 }

@@ -67,11 +67,13 @@ public class ConcesionariaRestOne extends MSSQLConsecionaria implements Concesio
     }
 
     @PUT
-    @Path("/cancelarPlan")
+    @Path("/notificarGanador")
     @Override
-    public void cancelarPlan(@QueryParam("identificador") final String identificador, @QueryParam("planId") final Long planId) {
-        log.debug("Rest cancelar plan id -> " + planId + " - identificador -> " + identificador);
-        abstractFactory.withConnection(notificationUpdateDAO.cancelarPlan(identificador, planId));
+    public void notificarGanador(@QueryParam("identificador") final String identificador
+            , @QueryParam("planId") final Long planId
+            , @QueryParam("documento") final Long documento) {
+        log.debug("Rest notificar ganador: plan id -> " + planId + " - documento -> " + documento + " - identificador -> " + identificador);
+        abstractFactory.withConnection(notificationUpdateDAO.cancelarPlan(identificador, planId, documento));
     }
 
     @GET

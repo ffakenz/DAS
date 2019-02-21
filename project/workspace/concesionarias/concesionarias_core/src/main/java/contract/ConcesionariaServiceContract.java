@@ -9,7 +9,7 @@ public interface ConcesionariaServiceContract {
     String consultarPlan(String identificador, Long planId);
 
     // String => Long => ()
-    void cancelarPlan(String identificador, Long planId);
+    void notificarGanador(final String identificador, final Long planId, final Long documento);
 
     // String => String
     String health(String identificador);

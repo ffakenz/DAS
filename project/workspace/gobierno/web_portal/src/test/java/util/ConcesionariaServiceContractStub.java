@@ -67,7 +67,7 @@ class ConcesionariaServiceContractStub implements ConcesionariaServiceContract {
     }
 
     @Override
-    public void cancelarPlan(final String identificador, final Long planId) throws ClientException {
+    public void notificarGanador(String identificador, Long planId, Long documento) throws ClientException {
 
     }
 

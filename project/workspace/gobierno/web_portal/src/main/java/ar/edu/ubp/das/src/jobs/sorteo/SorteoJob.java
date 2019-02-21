@@ -23,9 +23,8 @@ public class SorteoJob {
     private static HashMap<EstadoSorteo, String> stepsByEstado = new HashMap<EstadoSorteo, String>() {{
         put(NUEVO, RunConsumoAbsoluto.class.getSimpleName());
         put(PENDIENTE_CONSUMO, RunConsumoAbsoluto.class.getSimpleName());
-        put(PENDIENTE_CANCELACION, CancelarCuenta.class.getSimpleName());
-        put(PENDIENTE_NOTIFICACION_GANADOR, NotificarGanador.class.getSimpleName());
         put(PENDIENTE_NOTIFICACION_CONCESIONARIAS, NotificarConcesionarias.class.getSimpleName());
+        put(PENDIENTE_NOTIFICACION_GANADOR, NotificarGanador.class.getSimpleName());
     }};
 
     private final DatasourceConfig datasourceConfig;
@@ -46,9 +45,8 @@ public class SorteoJob {
 
         final SorteoStep result = new RunConsumoAbsoluto(datasourceConfig, clientFactoryAdapter)
                 .then(new GetGanador(datasourceConfig, clientFactoryAdapter))
-                .then(new CancelarCuenta(datasourceConfig, clientFactoryAdapter))
-                .then(new NotificarGanador(datasourceConfig, clientFactoryAdapter, sendEmail))
-                .then(new NotificarConcesionarias(datasourceConfig, clientFactoryAdapter, sendEmail));
+                .then(new NotificarConcesionarias(datasourceConfig, clientFactoryAdapter))
+                .then(new NotificarGanador(datasourceConfig, clientFactoryAdapter, sendEmail));
 
         sorteoDeHoy.ifPresent(sorteoForm -> {  //sorteoForm puede estar en nuevo, pendiente_x
             try {

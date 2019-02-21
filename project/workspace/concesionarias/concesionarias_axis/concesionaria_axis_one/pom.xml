@@ -28,7 +28,7 @@
             <plugin>
                 <groupId>org.apache.axis2</groupId>
                 <artifactId>axis2-java2wsdl-maven-plugin</artifactId>
-                <version>${axis.version}</version>
+                <version>1.6.2</version>
                 <executions>
                     <execution>
                         <phase>process-classes</phase>

@@ -2,14 +2,17 @@ package ar.edu.ubp.das.src.jobs.sorteo;
 
 import ar.edu.ubp.das.mvc.config.DatasourceConfig;
 import ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm;
-import ar.edu.ubp.das.src.consumers.forms.ConsumerForm;
+import ar.edu.ubp.das.src.estado_cuentas.daos.MSEstadoCuentasDao;
+import ar.edu.ubp.das.src.estado_cuentas.forms.EstadoCuentasForm;
 import ar.edu.ubp.das.src.jobs.ClientFactoryAdapter;
 import ar.edu.ubp.das.src.jobs.sorteo.daos.MSConcPendienteNotificacionDao;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.ConcPendienteNotificacionForm;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.ParticipanteForm;
 import ar.edu.ubp.das.src.jobs.sorteo.forms.SorteoForm;
+import ar.edu.ubp.das.src.utils.Constants;
+import clients.ConcesionariaServiceContract;
+import clients.responses.ClientException;
 
-import javax.mail.MessagingException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -17,73 +20,72 @@ import static ar.edu.ubp.das.src.jobs.sorteo.forms.EstadoSorteo.PENDIENTE_NOTIFI
 
 class NotificarConcesionarias extends SorteoStep {
 
-    private SendEmail sendEmail;
+    private MSEstadoCuentasDao msEstadoCuentasDao;
     private MSConcPendienteNotificacionDao msPendienteNotificadas;
 
-    public NotificarConcesionarias(final DatasourceConfig datasourceConfig, final ClientFactoryAdapter clientFactoryAdapter, final SendEmail sendEmail) {
+    public NotificarConcesionarias(final DatasourceConfig datasourceConfig, final ClientFactoryAdapter clientFactoryAdapter) {
         super(datasourceConfig, clientFactoryAdapter);
-        this.sendEmail = sendEmail;
+
+        msEstadoCuentasDao = new MSEstadoCuentasDao();
+        msEstadoCuentasDao.setDatasource(datasourceConfig);
+
         this.msPendienteNotificadas = new MSConcPendienteNotificacionDao();
         msPendienteNotificadas.setDatasource(datasourceConfig);
     }
 
     @Override
     public SorteoForm runContext(final SorteoForm sorteoForm) throws StepRunnerException, SQLException {
+
         // todo: Ganador should be an attribute in SorteoForm
         final ParticipanteForm ganador = sorteoJobManager.getMsParticipanteDao().getGanadorBySorteo(sorteoForm.getId()).get();
+        final EstadoCuentasForm estadoCuentasForm = msEstadoCuentasDao.selectEstadoCuentasById(ganador.getIdPlan()).get();
 
         if (!sorteoForm.getEstadoSorteo().equals(PENDIENTE_NOTIFICACION_CONCESIONARIAS))
-            notification(sorteoForm, ganador);
+            notification(sorteoForm, estadoCuentasForm);
         else {
-            final List<ConcPendienteNotificacionForm> pendientesNotificacion = msPendienteNotificadas.select(sorteoForm.getId());
-            renotification(pendientesNotificacion, ganador);
+            final List<ConcPendienteNotificacionForm> pendientesNotificacion = msPendienteNotificadas.selectBySorteoId(sorteoForm.getId());
+            renotification(pendientesNotificacion, estadoCuentasForm);
         }
 
-        if (!msPendienteNotificadas.select(sorteoForm.getId()).isEmpty()) {
+        if (!msPendienteNotificadas.selectBySorteoId(sorteoForm.getId()).isEmpty()) {
             final String message = String.format("[exception:%s]", "Hay concesionarias pendientes de notificacion");
             sorteoForm.setEstado(PENDIENTE_NOTIFICACION_CONCESIONARIAS);
             throw new StepRunnerException(message);
         }
 
+
         return sorteoForm;
     }
 
-    private void renotification(final List<ConcPendienteNotificacionForm> pendientesNotificacion, final ParticipanteForm ganador) throws SQLException {
+
+    private void renotification(final List<ConcPendienteNotificacionForm> pendientesNotificacion, final EstadoCuentasForm ganador) throws SQLException, StepRunnerException {
         for (final ConcPendienteNotificacionForm pendiente : pendientesNotificacion) {
-            final ConcesionariaForm concesionariaForm = concesionariasManager.getDao().selectById(pendiente.getIdConcesionaria()).get();
             try {
-                sendEmail.to(concesionariaForm.getEmail(), "Hay un nuevo ganador !!", getEmailContent(ganador));
+                final ConcesionariaServiceContract client = getHttpClient(pendiente.getIdConcesionaria());
+                client.notificarGanador(Constants.IDENTIFICADOR, ganador.getNroPlanConcesionaria(), ganador.getDocumentoCliente());
                 msPendienteNotificadas.delete(pendiente);
-            } catch (final MessagingException e) {
+            } catch (final ClientException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    private void notification(final SorteoForm sorteoForm, final ParticipanteForm ganador) throws SQLException, StepRunnerException {
+    private void notification(final SorteoForm sorteoForm, final EstadoCuentasForm ganador) throws SQLException, StepRunnerException {
+
         final List<ConcesionariaForm> aprobadas = concesionariasManager.getDao().selectAprobadas();
+
         for (final ConcesionariaForm aprobada : aprobadas) {
+
             try {
-                sendEmail.to(aprobada.getEmail(), "Hay un nuevo ganador !!", getEmailContent(ganador));
-            } catch (final MessagingException e) {
-                final ConcPendienteNotificacionForm form = new ConcPendienteNotificacionForm(sorteoForm.getId(), aprobada.getId());
+                final ConcesionariaServiceContract client = getHttpClient(aprobada.getId());
+                client.notificarGanador(Constants.IDENTIFICADOR, ganador.getNroPlanConcesionaria(), ganador.getDocumentoCliente());
+            } catch (final ClientException e) {
+                e.printStackTrace();
+                final ConcPendienteNotificacionForm form = new ConcPendienteNotificacionForm();
+                form.setIdConcesionaria(aprobada.getId());
+                form.setIdSorteo(sorteoForm.getId());
                 msPendienteNotificadas.insert(form);
             }
         }
-    }
-
-    private String getEmailContent(final ParticipanteForm ganador) throws SQLException {
-        final ConsumerForm consumerForm = sorteoJobManager.getMsConsumerDao().selectById(ganador.getIdConsumer()).get();
-        final StringBuilder sb = new StringBuilder();
-        sb.append("<h1> El ganador del nuevo sorteo es: ");
-        sb.append(consumerForm.getNombre() + " " + consumerForm.getApellido());
-        sb.append("<h1>");
-        sb.append("<br>");
-        sb.append("<h2>");
-        sb.append("Documento del ganador: ");
-        sb.append(consumerForm.getDocumento());
-        sb.append("</h2>");
-
-        return sb.toString();
     }
 }

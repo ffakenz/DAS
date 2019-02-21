@@ -13,6 +13,7 @@ import java.util.Date;
 
 @Entity
 public class EstadoCuentasForm extends DynaActionForm {
+
     @Column(name = "id")
     private Long id;
     @Column(name = "concesionaria")

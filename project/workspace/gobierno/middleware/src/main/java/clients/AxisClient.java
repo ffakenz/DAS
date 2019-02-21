@@ -129,14 +129,16 @@ public class AxisClient implements ConcesionariaServiceContract {
     }
 
     @Override
-    public void cancelarPlan(final String identificador, final Long planId) throws ClientException {
-        final OMElement method = createMethod(CANCELAR_PLAN);
+    public void notificarGanador(final String identificador, final Long planId, final Long documento) throws ClientException {
+        final OMElement method = createMethod(NOTIFICAR_GANADOR);
         final OMElement param = createParam(IDENTIFICADOR, identificador);
         final OMElement param2 = createParam(PLANID, planId);
+        final OMElement param3 = createParam(DOCUMENTO, documento);
         method.addChild(param);
         method.addChild(param2);
+        method.addChild(param3);
         call(method);
-        log.info("[POST cancelarPlan][method {}]", method);
+        log.info("[POST notificarGanador][method {}]", method);
     }
 
     @Override
