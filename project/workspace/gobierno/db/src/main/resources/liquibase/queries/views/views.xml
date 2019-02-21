@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+	
+	<!-- ***************************** -->
+	<!--   TABLE DROP CHANGE-SETS      -->
+	<!-- ***************************** -->
+	<changeSet id="Create view estado_cuentas_dash" author="DAS-Team" runAlways="true" runOnChange="true">
+		<createView replaceIfExists="true"
+		            schemaName="dbo"
+		            viewName="estado_cuentas_dash">
+			WITH _clientes
+			AS (SELECT c.id,
+			c.documento,
+			c.nombre,
+			c.apellido,
+			c.nro_telefono,
+			c.email,
+			c.fecha_de_alta
+			FROM consumers c), _planes
+			AS (SELECT ec.id,
+			ec.estado,
+			ec.concesionaria,
+			ec.nro_plan_concesionaria,
+			ec.dni_consumer,
+			ec.vehiculo,
+			ec.fecha_alta_concesionaria,
+			ec.fecha_alta_sistema,
+			ec.fecha_ultima_actualizacion
+			FROM estado_cuentas ec), _cuotas
+			AS (SELECT cu.nro_cuota,
+			cu.estado_cuenta_id,
+			cu.monto,
+			cu.fecha_alta_concesionaria,
+			cu.fecha_pago,
+			cu.fecha_vencimiento,
+			cu.fecha_ultima_actualizacion
+			FROM cuotas cu), _vehiculos
+			AS (SELECT v.id,
+			v.tipo,
+			v.nombre,
+			v.marca,
+			v.fecha_de_alta,
+			v.precio,
+			v.color,
+			v.modelo
+			FROM vehiculos v), _concesionarias
+			AS (SELECT DISTINCT c.id,
+			c.nombre,
+			c.fecha_registracion,
+			c.fecha_alta,
+			c.codigo,
+			c.direccion,
+			c.cuit,
+			c.tel,
+			c.email,
+			cp.config_tecno
+			FROM concesionaria c
+			JOIN concesionaria_config_params cp
+			ON c.id = cp.concesionaria_id
+			WHERE c.codigo IS NOT NULL
+			AND cp.is_valid = 1) , _join
+			AS (SELECT Concat(cli.nombre, ' ', cli.apellido) AS 'nombre_cliente',
+			cli.documento AS 'documento_cliente',
+			p.estado AS 'estado_plan',
+			Concat(conc.nombre, ' ( ', conc.config_tecno,' )') AS 'nombre_concesionaria',
+			p.nro_plan_concesionaria AS 'nro_plan_concesionaria',
+			v.nombre AS 'vehiculo_nombre',
+			v.precio AS 'vehiculo_precio',
+			cli.email AS 'email_cliente',
+			conc.email AS 'concesionaria_email',
+			Max(p.fecha_ultima_actualizacion) AS 'fecha_ultima_actualizacion_plan',
+			Max(cu.fecha_ultima_actualizacion) AS 'fecha_ultima_actualizacion_cuota',
+			Sum(CASE WHEN cu.fecha_pago IS NOT NULL THEN 1 ELSE 0 END) AS 'total_cuotas_pagas',
+			Min(CASE WHEN cu.fecha_pago IS NOT NULL THEN cu.monto ELSE NULL END) AS 'minima_cuota_paga',
+			Max(CASE WHEN cu.fecha_pago IS NOT NULL THEN cu.monto ELSE NULL END) AS 'max_cuota_paga',
+			Avg(CASE WHEN cu.fecha_pago IS NOT NULL THEN cu.monto ELSE NULL END) AS 'avg_cuota_paga',
+			Sum(CASE WHEN cu.fecha_pago IS NOT NULL THEN cu.monto ELSE NULL END) AS 'total_monto_pagado'
+			FROM _clientes cli
+			LEFT JOIN _planes p
+			ON cli.documento = p.dni_consumer
+			LEFT JOIN _cuotas cu
+			ON p.id = cu.estado_cuenta_id
+			INNER JOIN _concesionarias conc
+			ON p.concesionaria = conc.id
+			INNER JOIN vehiculos v
+			ON p.vehiculo = v.id
+			GROUP BY cli.nombre,
+			cli.apellido,
+			cli.documento,
+			p.estado,
+			conc.nombre,
+			conc.config_tecno,
+			p.nro_plan_concesionaria,
+			v.nombre,
+			cli.email,
+			conc.email,
+			v.precio)
+			SELECT nombre_cliente,
+			documento_cliente,
+			estado_plan,
+			nombre_concesionaria,
+			nro_plan_concesionaria,
+			vehiculo_nombre,
+			email_cliente,
+			concesionaria_email,
+			fecha_ultima_actualizacion_plan,
+			fecha_ultima_actualizacion_cuota,
+			total_cuotas_pagas,
+			60 - total_cuotas_pagas AS 'total_cuotas_por_pagar',
+			minima_cuota_paga,
+			max_cuota_paga,
+			avg_cuota_paga,
+			total_monto_pagado,
+			vehiculo_precio - total_monto_pagado AS total_monto_por_pagar,
+			vehiculo_precio
+			FROM _join
+		</createView>
+	</changeSet>
+</databaseChangeLog>

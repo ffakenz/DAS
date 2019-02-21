@@ -17,5 +17,25 @@ const EstadoCuentaService = {
                 jUtils.showing("content_admin_page_div", html);
             }
         });
+    },
+
+    GET_ESTADO_CUENTA_DASH() {
+        $("#loadingDiv").modal("show");
+        jUtils.executing("loadingDiv");
+        $.ajax({
+                url: Action.ESTADO_CUENTA_DASH,
+            type: "get",
+            dataType: "html",
+            error: function(hr){
+                console.log("AJAX RESULT GET_ESTADO_CUENTA_DASH ERROR %o", hr.responseText);
+                jUtils.showing("content_admin_page_div", hr);
+                $("#loadingDiv").modal("hide");
+            },
+            success: function(html) {
+                $("#loadingDiv").modal("hide");
+                console.log("AJAX RESULT GET_ESTADO_CUENTA_DASH SUCCESS %o", html);
+                jUtils.showing("content_admin_page_div", html);
+            }
+        });
     }
 };

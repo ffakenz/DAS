@@ -1,64 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <databaseChangeLog
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
-
-    <!-- ########################################### -->
-    <!-- Main drops change-sets                      -->
-    <!-- ########################################### -->
-    <include file="/src/main/resources/liquibase/jobs/drops/drop_tables.xml"/>
-    <include file="/src/main/resources/liquibase/estado_cuentas/drops/drop_tables.xml"/>
-    <include file="/src/main/resources/liquibase/consumers/drops/drop_tables.xml"/>
-    <include file="/src/main/resources/liquibase/vehiculos/drops/drop_tables.xml"/>
-    <include file="/src/main/resources/liquibase/concesionarias/drops/drop_tables.xml"/>
-    <include file="/src/main/resources/liquibase/login/drops/drop_tables.xml"/>
-    <include file="/src/main/resources/liquibase/usuarios/drops/drop_tables.xml"/>
-
-
-    <!-- ########################################### -->
-    <!-- Main create table change-sets               -->
-    <!-- ########################################### -->
-    <include file="/src/main/resources/liquibase/usuarios/tables/create_tables.xml"/>
-    <include file="/src/main/resources/liquibase/login/tables/create_tables.xml"/>
-    <include file="/src/main/resources/liquibase/concesionarias/tables/create_tables.xml"/>
-    <include file="/src/main/resources/liquibase/vehiculos/tables/create_tables.xml"/>
-    <include file="/src/main/resources/liquibase/consumers/tables/create_tables.xml"/>
-    <include file="/src/main/resources/liquibase/estado_cuentas/tables/create_tables.xml"/>
-    <include file="/src/main/resources/liquibase/jobs/tables/create_tables.xml"/>
-
-
-    <!-- ########################################### -->
-    <!-- Main triggers change-sets                   -->
-    <!-- ########################################### -->
-    <!-- include file="/src/main/resources/liquibase/estado_cuentas/triggers/triggers.xml"/-->
-    <include file="/src/main/resources/liquibase/usuarios/triggers/triggers.xml"/>
-
-    <!-- ########################################### -->
-    <!-- Main procedures change-sets                 -->
-    <!-- ########################################### -->
-    <include file="/src/main/resources/liquibase/jobs/procedures/create_procedures.xml"/>
-    <include file="/src/main/resources/liquibase/usuarios/procedures/create_procedures.xml"/>
-    <include file="/src/main/resources/liquibase/login/procedures/create_procedures.xml"/>
-    <include file="/src/main/resources/liquibase/vehiculos/procedures/create_procedures.xml"/>
-    <include file="/src/main/resources/liquibase/concesionarias/procedures/create_procedures.xml"/>
-    <include file="/src/main/resources/liquibase/consumers/procedures/create_procedures.xml"/>
-    <include file="/src/main/resources/liquibase/estado_cuentas/procedures/create_procedures.xml"/>
-
-    <!-- ########################################### -->
-    <!-- Main populate change-sets                   -->
-    <!-- ########################################### -->
-    <include file="/src/main/resources/liquibase/populate/populate_tables.xml"/>
-
-    <!-- ########################################### -->
-    <!-- Test procedures change-sets                 -->
-    <!-- ########################################### -->
-    <include file="/src/main/resources/liquibase/test/test_procedures.xml"/>
-
-    <!-- ########################################### -->
-    <!-- Main create and drop views change-sets      -->
-    <!-- ########################################### -->
-    <include file="/src/main/resources/liquibase/jobs/views/views.xml"/>
+	
+	<!-- ########################################### -->
+	<!-- Main drops change-sets                      -->
+	<!-- ########################################### -->
+	<include file="/src/main/resources/liquibase/jobs/drops/drop_tables.xml"/>
+	<include file="/src/main/resources/liquibase/estado_cuentas/drops/drop_tables.xml"/>
+	<include file="/src/main/resources/liquibase/consumers/drops/drop_tables.xml"/>
+	<include file="/src/main/resources/liquibase/vehiculos/drops/drop_tables.xml"/>
+	<include file="/src/main/resources/liquibase/concesionarias/drops/drop_tables.xml"/>
+	<include file="/src/main/resources/liquibase/login/drops/drop_tables.xml"/>
+	<include file="/src/main/resources/liquibase/usuarios/drops/drop_tables.xml"/>
+	
+	
+	<!-- ########################################### -->
+	<!-- Main create table change-sets               -->
+	<!-- ########################################### -->
+	<include file="/src/main/resources/liquibase/usuarios/tables/create_tables.xml"/>
+	<include file="/src/main/resources/liquibase/login/tables/create_tables.xml"/>
+	<include file="/src/main/resources/liquibase/concesionarias/tables/create_tables.xml"/>
+	<include file="/src/main/resources/liquibase/vehiculos/tables/create_tables.xml"/>
+	<include file="/src/main/resources/liquibase/consumers/tables/create_tables.xml"/>
+	<include file="/src/main/resources/liquibase/estado_cuentas/tables/create_tables.xml"/>
+	<include file="/src/main/resources/liquibase/jobs/tables/create_tables.xml"/>
+	
+	
+	<!-- ########################################### -->
+	<!-- Main triggers change-sets                   -->
+	<!-- ########################################### -->
+	<!-- include file="/src/main/resources/liquibase/estado_cuentas/triggers/triggers.xml"/-->
+	<include file="/src/main/resources/liquibase/usuarios/triggers/triggers.xml"/>
+	
+	<!-- ########################################### -->
+	<!-- Main procedures change-sets                 -->
+	<!-- ########################################### -->
+	<include file="/src/main/resources/liquibase/jobs/procedures/create_procedures.xml"/>
+	<include file="/src/main/resources/liquibase/usuarios/procedures/create_procedures.xml"/>
+	<include file="/src/main/resources/liquibase/login/procedures/create_procedures.xml"/>
+	<include file="/src/main/resources/liquibase/vehiculos/procedures/create_procedures.xml"/>
+	<include file="/src/main/resources/liquibase/concesionarias/procedures/create_procedures.xml"/>
+	<include file="/src/main/resources/liquibase/consumers/procedures/create_procedures.xml"/>
+	<include file="/src/main/resources/liquibase/estado_cuentas/procedures/create_procedures.xml"/>
+	
+	<!-- ########################################### -->
+	<!-- Main populate change-sets                   -->
+	<!-- ########################################### -->
+	<include file="/src/main/resources/liquibase/populate/populate_tables.xml"/>
+	
+	<!-- ########################################### -->
+	<!-- Test procedures change-sets                 -->
+	<!-- ########################################### -->
+	<include file="/src/main/resources/liquibase/test/test_procedures.xml"/>
+	
+	<!-- ########################################### -->
+	<!-- Main create and drop views change-sets      -->
+	<!-- ########################################### -->
+	<include file="/src/main/resources/liquibase/jobs/views/views.xml"/>
+	<include file="/src/main/resources/liquibase/queries/views/views.xml"/>
+	<include file="/src/main/resources/liquibase/queries/procedures/create_procedures.xml"/>
 
 </databaseChangeLog>

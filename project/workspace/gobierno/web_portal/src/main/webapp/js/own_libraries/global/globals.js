@@ -29,7 +29,10 @@ const Action = {
     /* REPORTS */
     GET_JOB_RESULTS_REPORT: "/web_portal/jobs/ViewConsumoJobResults.do",
     /* CALENDAR */
-    GET_CALENDAR_CELL_MODAL: "/web_portal/sorteo/CalendarCellModal.do"
+    GET_CALENDAR_CELL_MODAL: "/web_portal/sorteo/CalendarCellModal.do",
+    GET_JOB_RESULTS_REPORT: "/web_portal/jobs/ViewConsumoJobResults.do",
+    /* QUERIES */
+    ESTADO_CUENTA_DASH :  "/web_portal/queries/EstadoCuentaDash.do"
 };
 
 const ConfigTecno = {

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="../schema/actions.xsd">
+	<form-beans>
+	</form-beans>
+	<action-mappings>
+		<action type="EstadoCuentaDashAction" path="/EstadoCuentaDash.do">
+			<forward name="success" path="/profiles/admin/queries/estadoCuentaDash.jsp"/>
+		</action>
+	</action-mappings>
+</actions>

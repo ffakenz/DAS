@@ -25,7 +25,7 @@ class Admin extends Module {
         evt.preventDefault();
         jUtils.hiding("calendar_main_div",true);
         console.log("showPlanes, [EVENT] = %o", evt);
-        EstadoCuentaService.GET_CONSULTAR_TODOS();
+        EstadoCuentaService.GET_ESTADO_CUENTA_DASH();
     }
 
     showJobResultsReport(evt) {
