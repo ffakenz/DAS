@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div id="header_home">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary gradient-background">
         <ul class="navbar-nav mr-auto">
             <c:choose>
                 <c:when test="${sessionScope.ssid != null}">

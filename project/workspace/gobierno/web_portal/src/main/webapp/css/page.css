@@ -80,6 +80,10 @@ img.d-block.w-100.h-50 {
   margin-top: 23rem;
 }
 
+.gradient-background {
+  /*background-image: radial-gradient(#100735, #2c3e50);*/
+  background: linear-gradient(to top, #485563, #29323c);
+}
 
 /* SIDE BAR */
 .wrapper {
@@ -97,6 +101,13 @@ img.d-block.w-100.h-50 {
   background: #7386D5;
   color: #fff;
   transition: all 0.3s;
+}
+
+div#sidebar-wrapper {
+  font-family: Palatino !important;
+  font-weight: bold;
+  font-size: 15px;
+  color: white;
 }
 
 /* PUT DIV SPINNER IN CENTER */
