@@ -22,7 +22,7 @@
 <%@ page import="ar.edu.ubp.das.src.jobs.consumo.forms.ViewConsumoResultsForm" %>
 
 
-<table id="table_admin_result" class="stripe">
+<table id="table_admin_result" class="stripe table_report">
 <thead>
 <tr>
    <th><fmt:message key="table_consumo_job_id_th" bundle="${etq}" /></th>
@@ -78,6 +78,8 @@
 </tbody>
 </table>
 
+<fmt:message key="table_consumo_job_consumo_result_title" var="title" bundle="${etq}" />
+
 <jsp:include page="../../commons/datatable.jsp">
-    <jsp:param name="title" value="Results" />
+    <jsp:param name="title" value="${title}"/>
 </jsp:include>

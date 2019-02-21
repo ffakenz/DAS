@@ -151,3 +151,9 @@ div#sidebar-wrapper {
 div#table_admin_result_wrapper {
     margin-top: 20px;
 }
+
+
+/* TABLES REPORT */
+.table_report {
+  margin: 15px;
+}

@@ -21,7 +21,7 @@
 <%@ page import="java.lang.Exception" %>
 <%@ page import="ar.edu.ubp.das.src.jobs.sorteo.forms.SorteoForm" %>
 
-<table id="table_admin_result" class="stripe">
+<table id="table_admin_result" class="stripe table_report">
 <thead>
 <tr>
    <th><fmt:message key="table_sorteos_state_th" bundle="${etq}" /></th>
@@ -56,6 +56,8 @@
 </tbody>
 </table>
 
+<fmt:message key="table_sorteos_title" var="title" bundle="${etq}" />
+
 <jsp:include page="../../commons/datatable.jsp">
-    <jsp:param name="title" value="Sorteos"/>
+    <jsp:param name="title" value="${title}"/>
 </jsp:include>
