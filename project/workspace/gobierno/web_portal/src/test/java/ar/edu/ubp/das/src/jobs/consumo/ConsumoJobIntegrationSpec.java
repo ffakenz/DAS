@@ -92,7 +92,7 @@ public class ConsumoJobIntegrationSpec {
         final ConcesionariaForm concesionariaFormREST = consumoJobScenarios.setConcesionaria(REST, true);
 
         // set invalid url to the service, this is to get unavailable service (the causes may be a lot we test only this)
-        List<ConfigurarConcesionariaForm> configurarConcesionariaForms = msConfigurarConcesionariaDao.selectParamsByConcesionariaId(concesionariaFormREST.getId());
+        final List<ConfigurarConcesionariaForm> configurarConcesionariaForms = msConfigurarConcesionariaDao.selectParamsByConcesionariaId(concesionariaFormREST.getId());
 
         // we know that we have a rest concesionaria, so they have only one param
         configurarConcesionariaForms.get(0).setValue("url.invalida.com");
@@ -265,7 +265,7 @@ public class ConsumoJobIntegrationSpec {
         assertEquals(1, consumoJobManager.getMsJobConsumoDao().select().size());
 
         // asserts on consumo
-        List<ConsumoForm> allConsumos = consumoJobManager.getMsConsumoDao().select(null);
+        final List<ConsumoForm> allConsumos = consumoJobManager.getMsConsumoDao().select(null);
         assertEquals(2, allConsumos.size());
         assertTrue(allConsumos.stream()
                 .allMatch(c -> c.getEstado().equals(SUCCESS.toString()))
@@ -276,7 +276,7 @@ public class ConsumoJobIntegrationSpec {
 
         assertTrue(consumoJobManager.getMsConsumoResultDao().select(null)
                 .stream()
-                .allMatch( c -> c.getResult().equals(SUCCESS.toString()))
+                .allMatch(c -> c.getResult().equals(SUCCESS.toString()))
         );
     }
 
@@ -300,7 +300,7 @@ public class ConsumoJobIntegrationSpec {
         assertEquals(1, consumoJobManager.getMsJobConsumoDao().select().size());
 
         // asserts on consumo
-        List<ConsumoForm> allConsumos = consumoJobManager.getMsConsumoDao().select(null);
+        final List<ConsumoForm> allConsumos = consumoJobManager.getMsConsumoDao().select(null);
         assertEquals(2, allConsumos.size());
         assertTrue(allConsumos.stream()
                 .allMatch(c -> c.getEstado().equals(SUCCESS))
@@ -311,14 +311,14 @@ public class ConsumoJobIntegrationSpec {
 
         assertEquals(2, consumoJobManager.getMsConsumoResultDao().select(null)
                 .stream()
-                .filter( c -> c.getResult().equals(SUCCESS))
+                .filter(c -> c.getResult().equals(SUCCESS))
                 .collect(Collectors.toList())
                 .size()
         );
 
         assertEquals(1, consumoJobManager.getMsConsumoResultDao().select(null)
                 .stream()
-                .filter( c -> c.getResult().equals(FAILURE.toString()))
+                .filter(c -> c.getResult().equals(FAILURE.toString()))
                 .collect(Collectors.toList())
                 .size()
         );
@@ -343,7 +343,7 @@ public class ConsumoJobIntegrationSpec {
         assertEquals(1, consumoJobManager.getMsJobConsumoDao().select().size());
 
         // asserts on consumo
-        List<ConsumoForm> allConsumos = consumoJobManager.getMsConsumoDao().select(null);
+        final List<ConsumoForm> allConsumos = consumoJobManager.getMsConsumoDao().select(null);
         assertEquals(2, allConsumos.size());
 
         assertEquals(1, allConsumos.stream()
@@ -381,7 +381,7 @@ public class ConsumoJobIntegrationSpec {
         assertEquals(1, consumoJobManager.getMsJobConsumoDao().select().size());
 
         // asserts on consumo
-        List<ConsumoForm> allConsumos = consumoJobManager.getMsConsumoDao().select(null);
+        final List<ConsumoForm> allConsumos = consumoJobManager.getMsConsumoDao().select(null);
         assertEquals(2, allConsumos.size());
 
         assertEquals(1, allConsumos.stream()
@@ -419,7 +419,7 @@ public class ConsumoJobIntegrationSpec {
         assertEquals(1, consumoJobManager.getMsJobConsumoDao().select().size());
 
         // asserts on consumo
-        List<ConsumoForm> allConsumos = consumoJobManager.getMsConsumoDao().select(null);
+        final List<ConsumoForm> allConsumos = consumoJobManager.getMsConsumoDao().select(null);
         assertEquals(2, allConsumos.size());
 
         assertEquals(1, allConsumos.stream()
@@ -460,7 +460,7 @@ public class ConsumoJobIntegrationSpec {
         assertEquals(1, consumoJobManager.getMsJobConsumoDao().select().size());
 
         // asserts on consumo
-        List<ConsumoForm> allConsumos = consumoJobManager.getMsConsumoDao().select(null);
+        final List<ConsumoForm> allConsumos = consumoJobManager.getMsConsumoDao().select(null);
         assertEquals(3, allConsumos.size());
 
         assertEquals(3, allConsumos.stream()
