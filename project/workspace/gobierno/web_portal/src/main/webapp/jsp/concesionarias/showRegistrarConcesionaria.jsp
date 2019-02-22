@@ -16,22 +16,23 @@
         <div class="content-body">
             <%@include file="../commons/header.jsp"%>
             <link type="text/css" rel="stylesheet" href="/web_portal/util/StyleSheet.do/load=loginbox" />
-
             <div class="loginbox loginbox-registrar">
                 <img src="/web_portal/img/login/avatar.png" class="avatar"/>
-                <h1>Registracion concesionaria</h1>
+                <h1><fmt:message key="registrar_conc_h1" bundle="${etq}" /></h1>
                 <form class="form-horizontal" id="form_registrar_concesionaria" method="post"/>
-                <p>Nombre</p>
+                <p><fmt:message key="registrar_conc_nombre_lbl" bundle="${etq}" /></p>
                 <input id="nombre" name="nombre" type="text" placeholder="" value="Concesionaria Fiat" required=""/>
-                <p>Direccion</p>
+                <p><fmt:message key="registrar_conc_dir_lbl" bundle="${etq}" /></p>
                 <input id="direccion" name="direccion" type="text" value="Aca en la China" placeholder="" />
-                <p>CUIT</p>
+                <p><fmt:message key="registrar_conc_cuit_lbl" bundle="${etq}" /></p>
                 <input id="cuit" name="cuit" type="text" placeholder="" value="20-93337511-1" required="" onkeypress="javascript:return jUtils.validNum();"/>
-                <p>Telefono</p>
+                <p><fmt:message key="registrar_conc_tel_lbl" bundle="${etq}" /></p>
                 <input id="tel" name="tel" type="text" placeholder="" value="3513059165"  required="" onkeypress="javascript:return jUtils.validNum();"/>
-                <p>Email</p>
+                <p><fmt:message key="registrar_conc_email_lbl" bundle="${etq}" /></p>
                 <input id="email" name="email" type="text" placeholder="" value="email@email.com" required=""/>
-                <input id="concesionaria_registrar_send_form_btn" type="submit" name="btn_send_form" value="Enviar info"/>
+                <input id="concesionaria_registrar_send_form_btn" type="submit" name="btn_send_form">
+                    <fmt:message key="registrar_conc_confirm_btn" bundle="${etq}" />
+                </input>
                 </form>
             </div>
         </div>
