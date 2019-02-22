@@ -43,36 +43,33 @@
     <% if (concesionariaRowClass.equals(CONCESIONARIA_NO_APROBADA)) {
         String aprobarBtnId = APROBAR_BTN + "-" + aprobada.getId();
         String aprobarBtnClass = String.format("btn btn-success %s", APROBAR_BTN );
-        String aprobarBtnDesc = "Aprobar";
     %>
 
         <td>
             <button type="button" id="<%= aprobarBtnId %>" class="<%= aprobarBtnClass %>" >
-                <%= aprobarBtnDesc %>
+                <fmt:message key="table_conc_aprobar_btn" bundle="${etq}" />
             </button>
         </td>
 
     <% } else {
         String desaprobarBtnId = DESAPROBAR_BTN + "-" + aprobada.getId();
         String desaprobarBtnClass = String.format("btn btn-danger %s", DESAPROBAR_BTN );
-        String desaprobarBtnDesc = "Desaprobar";
     %>
 
         <td>
             <button type="button" id="<%= desaprobarBtnId %>" class="<%= desaprobarBtnClass %>" >
-                <%= desaprobarBtnDesc %>
+                <fmt:message key="table_conc_desaprobar_btn" bundle="${etq}" />
             </button>
         </td>
 
     <% } // END IF ELSE
         String configBtnId = CONFIG_BTN + "-" + aprobada.getId();
         String configBtnClass = String.format("btn btn-info %s", CONFIG_BTN );
-        String configBtnDesc = "Configurar";
     %>
 
     <td>
         <button type="button" id="<%= configBtnId %>" class="<%= configBtnClass %>" >
-            <%= configBtnDesc %>
+            <fmt:message key="table_conc_configurar_btn" bundle="${etq}" />
         </button>
     </td>
 </tr>
