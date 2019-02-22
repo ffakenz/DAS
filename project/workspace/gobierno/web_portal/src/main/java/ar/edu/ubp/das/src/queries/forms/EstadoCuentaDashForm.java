@@ -35,17 +35,17 @@ public class EstadoCuentaDashForm extends DynaActionForm {
     @Column(name = "total_cuotas_por_pagar")
     private Integer totalCuotasPorPagar;
     @Column(name = "minima_cuota_paga")
-    private Double minimaCuotaPaga;
+    private Integer minimaCuotaPaga;
     @Column(name = "max_cuota_paga")
-    private Double maxCuotaPaga;
+    private Integer maxCuotaPaga;
     @Column(name = "avg_cuota_paga")
-    private Double avgCuotaPaga;
+    private Integer avgCuotaPaga;
     @Column(name = "total_monto_pagado")
-    private Double totalMontoPagado;
+    private Integer totalMontoPagado;
     @Column(name = "total_monto_por_pagar")
-    private Double totalMontoPorPagar;
+    private Long totalMontoPorPagar;
     @Column(name = "vehiculo_precio")
-    private Double vehiculoPrecio;
+    private Long vehiculoPrecio;
 
 
     @Override
@@ -149,51 +149,51 @@ public class EstadoCuentaDashForm extends DynaActionForm {
         this.totalCuotasPorPagar = totalCuotasPorPagar;
     }
 
-    public Double getMinimaCuotaPaga() {
+    public Integer getMinimaCuotaPaga() {
         return minimaCuotaPaga;
     }
 
-    public void setMinimaCuotaPaga(final Double minimaCuotaPaga) {
+    public void setMinimaCuotaPaga(Integer minimaCuotaPaga) {
         this.minimaCuotaPaga = minimaCuotaPaga;
     }
 
-    public Double getMaxCuotaPaga() {
+    public Integer getMaxCuotaPaga() {
         return maxCuotaPaga;
     }
 
-    public void setMaxCuotaPaga(final Double maxCuotaPaga) {
+    public void setMaxCuotaPaga(Integer maxCuotaPaga) {
         this.maxCuotaPaga = maxCuotaPaga;
     }
 
-    public Double getAvgCuotaPaga() {
+    public Integer getAvgCuotaPaga() {
         return avgCuotaPaga;
     }
 
-    public void setAvgCuotaPaga(final Double avgCuotaPaga) {
+    public void setAvgCuotaPaga(Integer avgCuotaPaga) {
         this.avgCuotaPaga = avgCuotaPaga;
     }
 
-    public Double getTotalMontoPagado() {
+    public Integer getTotalMontoPagado() {
         return totalMontoPagado;
     }
 
-    public void setTotalMontoPagado(final Double totalMontoPagado) {
+    public void setTotalMontoPagado(Integer totalMontoPagado) {
         this.totalMontoPagado = totalMontoPagado;
     }
 
-    public Double getTotalMontoPorPagar() {
+    public Long getTotalMontoPorPagar() {
         return totalMontoPorPagar;
     }
 
-    public void setTotalMontoPorPagar(final Double totalMontoPorPagar) {
+    public void setTotalMontoPorPagar(Long totalMontoPorPagar) {
         this.totalMontoPorPagar = totalMontoPorPagar;
     }
 
-    public Double getVehiculoPrecio() {
+    public Long getVehiculoPrecio() {
         return vehiculoPrecio;
     }
 
-    public void setVehiculoPrecio(final Double vehiculoPrecio) {
+    public void setVehiculoPrecio(Long vehiculoPrecio) {
         this.vehiculoPrecio = vehiculoPrecio;
     }
 }

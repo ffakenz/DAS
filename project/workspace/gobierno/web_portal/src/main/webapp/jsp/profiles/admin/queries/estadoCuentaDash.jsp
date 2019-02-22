@@ -70,11 +70,11 @@
                 </td>
                 <td> <%= row.getTotalCuotasPagas() %> </td>
                 <td> <%= row.getTotalCuotasPorPagar() %> </td>
-                <td> <%= row.getMinimaCuotaPaga() %> </td>
-                <td> <%= row.getMaxCuotaPaga() %> </td>
-                <td> <%= row.getAvgCuotaPaga() %> </td>
-                <td> <%= row.getTotalMontoPagado() %> </td>
-                <td> <%= row.getTotalMontoPorPagar() %> </td>
+                <td> <%= FrontUtils.emptyIfNull(row.getMinimaCuotaPaga()) %> </td>
+                <td> <%= FrontUtils.emptyIfNull(row.getMaxCuotaPaga()) %> </td>
+                <td> <%= FrontUtils.emptyIfNull(row.getAvgCuotaPaga()) %> </td>
+                <td> <%= FrontUtils.emptyIfNull(row.getTotalMontoPagado()) %> </td>
+                <td> <%= FrontUtils.emptyIfNull(row.getTotalMontoPorPagar()) %> </td>
                 <td> <%= row.getVehiculoPrecio() %> </td>
             </tr>
         <% } // END FOR LOOP

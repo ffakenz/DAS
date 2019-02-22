@@ -20,7 +20,7 @@
 <%-- TODO: CLEAN UP THE PAGE TAG ABOVE --%>
 
 <%@ include file="calendarCommon.jsp" %>
-<h1 style="caption-side: top; color:#95a5a6; text-align:left"><fmt:message key="calendar_title" bundle="${etq}" /></h1>
+<h1 style="caption-side: top; color:#778182; text-align:left"><fmt:message key="calendar_title" bundle="${etq}" /></h1>
 <table border="1" cellspacing="0" cellpadding="4" id="calendar_table">
   <tr>
     <td width="100%" colspan="7" class="month_year_header">
@@ -141,7 +141,7 @@
   <tr>
     <td id="prev_link">
       <form method="post">
-        <input type="button" id="calendar_prev" value=" << "/>
+        <input type="button" class="btn-primary" id="calendar_prev" value=" << "/>
         <input type="hidden" name="month" value="<%=prevMonth%>"/>
         <input type="hidden" name="year" value="<%=prevYear%>"/>
       </form>
@@ -150,7 +150,7 @@
     </td>
     <td id="next_link">
       <form method="post">
-        <input type="button" id="calendar_next" value=" >> "/>
+        <input type="button" class="btn-primary" id="calendar_next" value=" >> "/>
         <input type="hidden" name="month" value="<%=nextMonth%>"/>
         <input type="hidden" name="year" value="<%=nextYear%>"/>
       </form>

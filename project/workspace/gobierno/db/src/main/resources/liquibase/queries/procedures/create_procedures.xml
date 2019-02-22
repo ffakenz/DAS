@@ -14,7 +14,7 @@
 				SELECT COUNT(*)
 				FROM information_schema.routines
 				WHERE ROUTINE_TYPE = 'PROCEDURE'
-				AND SPECIFIC_CATALOG = 'q_estado_cuentas_dash'
+				AND SPECIFIC_CATALOG = 'db_gobierno'
 				AND ROUTINE_NAME = 'q_estado_cuentas_dash'
 			</sqlCheck>
 		</preConditions>

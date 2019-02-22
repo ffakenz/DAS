@@ -22,7 +22,7 @@
 <%@ page import="ar.edu.ubp.das.src.estado_cuentas.forms.EstadoCuentasForm" %>
 
 
-<table id="table_admin_result" class="stripe table_report display nowrap" style="width:100%">
+<table id="table_admin_result" class="table_report display nowrap row-border hover order-colum" style="width:100%">
 <thead>
 <tr>
    <th><fmt:message key="table_estado_cuentas_estado_th" bundle="${etq}" /></th>

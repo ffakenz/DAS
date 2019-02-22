@@ -156,3 +156,18 @@ div#table_admin_result_wrapper {
 .table_report {
   margin: 15px;
 }
+
+td.highlight {
+  background-color: whitesmoke !important;
+}
+
+button.buttons-pdf {
+  color: rgb(255, 255, 255);
+  background-color: rgb(44, 62, 80);
+  border-color: rgb(44, 62, 80);
+}
+
+div#content_admin_page_div {
+  background: #e1e0e6;
+  padding: 15px;
+}

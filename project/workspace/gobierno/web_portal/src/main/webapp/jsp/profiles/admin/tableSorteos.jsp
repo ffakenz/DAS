@@ -21,7 +21,7 @@
 <%@ page import="java.lang.Exception" %>
 <%@ page import="ar.edu.ubp.das.src.jobs.sorteo.forms.SorteoForm" %>
 
-<table id="table_admin_result" class="stripe table_report display nowrap" style="width:100%">
+<table id="table_admin_result" class="table_report display nowrap row-border hover order-colum" style="width:100%">
 <thead>
 <tr>
    <th><fmt:message key="table_sorteos_state_th" bundle="${etq}" /></th>
