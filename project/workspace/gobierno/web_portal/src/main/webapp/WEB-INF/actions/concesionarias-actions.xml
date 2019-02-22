@@ -19,7 +19,7 @@
 		</action>
 		
 		<action type="ConsultarAprobadasAction" path="/ConsultarAprobadas.do">
-			<forward name="success" path="/concesionarias/getAprobadas.jsp"/>
+			<forward name="success" path="/concesionarias/components/tableAprobadas.jsp"/>
 		</action>
 		
 		<action type="ConsultarConcesionariaConfigParamAction" path="/ConsultarConcesionariaConfigParam.do" json="true">

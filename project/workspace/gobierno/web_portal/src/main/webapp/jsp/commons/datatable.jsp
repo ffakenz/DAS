@@ -19,7 +19,6 @@
             $('#table_admin_result').append('<caption style="caption-side: top"> <h1>'+title+'</h1> </caption>');
 
             $('#table_admin_result').DataTable( {
-                scrollX: true,
                 dom: 'Bfrtip',
                 buttons: [
                     {

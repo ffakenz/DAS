@@ -37,7 +37,6 @@
 </tr>
 </thead>
 <tbody>
-
 <%
     try {
         List<ConcesionariaForm> concesionariaFormList = (List<ConcesionariaForm>) request.getAttribute(CONCESIONARIAS_LIST_RQST_ATTRIBUTE);

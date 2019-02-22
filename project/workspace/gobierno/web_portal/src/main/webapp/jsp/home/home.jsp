@@ -16,20 +16,6 @@
     <body>
         <div class="content-body">
             <%@include file="../commons/header.jsp"%>
-
-            <!-- concesionarias aprobadas -->
-            <div class="jumbotron">
-                <h1 class="display-3"><fmt:message key="concesionarias_disponibles" bundle="${etq}" /></h1>
-                <hr class="my-4">
-                <div id="conc_aprobadas_div"></div>
-                <br><hr class="my-4"><br>
-                <p class="lead">
-                    <fmt:message key="paragraph_lead" bundle="${etq}" />
-                    <a href="/web_portal/home/ShowRegistrarConcesionaria.do" name="registrarConcesionaria">
-                        <fmt:message key="anchor_lead" bundle="${etq}" />
-                    </a>
-                </p>
-            </div>
             <!-- carousel -->
             <div class="card">
                 <div class="card-header">
@@ -38,7 +24,6 @@
             </div>
             <%@include file="./carousel_home.jsp"%>
             <HR>
-
             <div id="plan_incentivo_text" class="card">
                 <div class="card-header">
                     <h2 class="card-title"><fmt:message key="plan_incentivo_card_title" bundle="${etq}" /></h2>
@@ -50,15 +35,30 @@
                     <h5 class="card-title"><fmt:message key="plan_incentivo_h5" bundle="${etq}" /></h5>
                 </div>
             </div>
-
+            <!-- concesionarias aprobadas -->
+            <link type="text/css" rel="stylesheet" href="/web_portal/util/StyleSheet.do/load=dataTables.bootstrap4.min" />
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="title" ><fmt:message key="concesionarias_disponibles" bundle="${etq}" /></h2>
+                </div>
+            </div>
+            <div id="conc_aprobadas_div" class="my_container"></div>
+            <!-- jumbotron -->
+            <div class="jumbotron">
+                <p class="lead">
+                    <fmt:message key="paragraph_lead" bundle="${etq}" />
+                    <a href="/web_portal/home/ShowRegistrarConcesionaria.do" name="registrarConcesionaria">
+                        <fmt:message key="anchor_lead" bundle="${etq}" />
+                    </a>
+                </p>
+            </div>
+            <!-- Nuestros Partners -->
             <div class="card">
                 <div class="card-header">
                     <h2 class="title" ><fmt:message key="our_partners" bundle="${etq}" /></h2>
                 </div>
             </div>
-
             <div class="nuestros_partners_div">
-
                 <hr class="my-4">
                 <div class="marcas_partners" style="border-right: 2px solid #eee">
                     <div class="logos_marcas">
