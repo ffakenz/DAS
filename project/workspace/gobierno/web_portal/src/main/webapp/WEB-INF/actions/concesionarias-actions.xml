@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <actions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="../schema/actions.xsd">
-    <form-beans>
-    </form-beans>
-    <action-mappings>
-
-        <action type="RegistrarConcesionariaAction" path="/RegistrarConcesionaria.do">
-            <forward name="success" path="/concesionarias/successRegistrar.jsp"/>
-            <forward name="failure" path="/concesionarias/failureRegistrar.jsp"/>
-        </action>
-
-        <action type="AprobarConcesionariaAction" path="/AprobarConcesionaria.do">
-            <forward name="success" path="/concesionarias/successConcesionaria.jsp"/>
-        </action>
-
-        <action type="DesAprobarConcesionariaAction" path="/DesAprobarConcesionaria.do">
-            <forward name="success" path="/concesionarias/successConcesionaria.jsp"/>
-        </action>
-
-        <action type="ConsultarAprobadasAction" path="/ConsultarAprobadas.do">
-            <forward name="success" path="/concesionarias/getAprobadas.jsp"/>
-        </action>
-
-        <action type="ConsultarConcesionariaConfigParamAction" path="/ConsultarConcesionariaConfigParam.do" json="true">
-        </action>
-
-        <action type="ConsultarConcesionariasAction" path="/ConsultarConcesionarias.do">
-            <forward name="success" path="/concesionarias/components/tableConcesionarias.jsp"/>
-        </action>
-
-        <action type="ConfigurarAction" path="/Configurar.do" json="true">
-            <forward name="warning" path="/concesionarias/failureConfigurar.jsp"/>
-            <forward name="failure" path="/concesionarias/failureConfigurar.jsp"/>
-        </action>
-
-        <action type="TestConfigAction" path="/TestConfig.do">
-            <forward name="success" path="/concesionarias/testConfigSuccess.jsp"/>
-            <forward name="warning" path="/concesionarias/testConfigError.jsp"/>
-            <forward name="failure" path="/concesionarias/testConfigError.jsp"/>
-        </action>
-
-    </action-mappings>
+	<form-beans>
+	</form-beans>
+	<action-mappings>
+		
+		<action type="RegistrarConcesionariaAction" path="/RegistrarConcesionaria.do">
+			<forward name="success" path="/concesionarias/successRegistrar.jsp"/>
+			<forward name="failure" path="/concesionarias/failureRegistrar.jsp"/>
+		</action>
+		
+		<action type="AprobarConcesionariaAction" path="/AprobarConcesionaria.do">
+			<forward name="success" path="/concesionarias/successConcesionaria.jsp"/>
+		</action>
+		
+		<action type="DesAprobarConcesionariaAction" path="/DesAprobarConcesionaria.do">
+			<forward name="success" path="/concesionarias/successConcesionaria.jsp"/>
+		</action>
+		
+		<action type="ConsultarAprobadasAction" path="/ConsultarAprobadas.do">
+			<forward name="success" path="/concesionarias/getAprobadas.jsp"/>
+		</action>
+		
+		<action type="ConsultarConcesionariaConfigParamAction" path="/ConsultarConcesionariaConfigParam.do" json="true">
+		</action>
+		
+		<action type="ConsultarConcesionariasAction" path="/ConsultarConcesionarias.do">
+			<forward name="success" path="/concesionarias/components/tableConcesionarias.jsp"/>
+		</action>
+		
+		<action type="ConfigurarAction" path="/Configurar.do" json="true">
+			<forward name="warning" path="/concesionarias/failureConfigurar.jsp"/>
+			<forward name="failure" path="/concesionarias/failureConfigurar.jsp"/>
+		</action>
+		
+		<action type="TestConfigAction" path="/TestConfig.do">
+			<forward name="success" path="/concesionarias/testConfig.jsp"/>
+			<forward name="warning" path="/concesionarias/testConfig.jsp"/>
+			<forward name="failure" path="/concesionarias/testConfig.jsp"/>
+		</action>
+	
+	</action-mappings>
 </actions>

@@ -6,6 +6,7 @@ import ar.edu.ubp.das.mvc.action.DynaActionForm;
 import ar.edu.ubp.das.mvc.config.ForwardConfig;
 import ar.edu.ubp.das.src.concesionarias.TestConfigInteractor;
 import ar.edu.ubp.das.src.core.InteractorResponse;
+import ar.edu.ubp.das.src.core.ResponseForward;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +23,11 @@ public class TestConfigAction implements Action {
         final TestConfigInteractor testConfigInteractor = new TestConfigInteractor();
         final InteractorResponse<String> resp = testConfigInteractor.execute(form);
 
+        if (resp.getResponse().equals(ResponseForward.SUCCESS)) {
+            request.setAttribute("result", "OK");
+        } else {
+            request.setAttribute("result", "FAIL");
+        }
         logAction(mapping, form, request, response);
         return mapping.getForwardByName(resp.getResponse().getForward());
     }
