@@ -16,7 +16,6 @@
 <script src="/web_portal/js/external_libraries/vfs_fonts.js"></script>
 <script src="/web_portal/js/external_libraries/buttons.html5.min.js"></script>
 
-
 <fmt:message key="datatables_empty_table" var="empty_table" bundle="${etq}" />
 <fmt:message key="datatables_zero_records" var="zero_records" bundle="${etq}" />
 <fmt:message key="datatables_info" var="info" bundle="${etq}" />
