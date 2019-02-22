@@ -26,6 +26,8 @@ public class EstadoCuentaDashForm extends DynaActionForm {
     private String emailCliente;
     @Column(name = "concesionaria_email")
     private String concesionariaEmail;
+    @Column(name = "concesionaria_id")
+    private Long concesionariaId;
     @Column(name = "fecha_ultima_actualizacion_plan")
     private Timestamp fechaUltimaActualizacionPlan;
     @Column(name = "fecha_ultima_actualizacion_cuota")
@@ -153,7 +155,7 @@ public class EstadoCuentaDashForm extends DynaActionForm {
         return minimaCuotaPaga;
     }
 
-    public void setMinimaCuotaPaga(Integer minimaCuotaPaga) {
+    public void setMinimaCuotaPaga(final Integer minimaCuotaPaga) {
         this.minimaCuotaPaga = minimaCuotaPaga;
     }
 
@@ -161,7 +163,7 @@ public class EstadoCuentaDashForm extends DynaActionForm {
         return maxCuotaPaga;
     }
 
-    public void setMaxCuotaPaga(Integer maxCuotaPaga) {
+    public void setMaxCuotaPaga(final Integer maxCuotaPaga) {
         this.maxCuotaPaga = maxCuotaPaga;
     }
 
@@ -169,7 +171,7 @@ public class EstadoCuentaDashForm extends DynaActionForm {
         return avgCuotaPaga;
     }
 
-    public void setAvgCuotaPaga(Integer avgCuotaPaga) {
+    public void setAvgCuotaPaga(final Integer avgCuotaPaga) {
         this.avgCuotaPaga = avgCuotaPaga;
     }
 
@@ -177,7 +179,7 @@ public class EstadoCuentaDashForm extends DynaActionForm {
         return totalMontoPagado;
     }
 
-    public void setTotalMontoPagado(Integer totalMontoPagado) {
+    public void setTotalMontoPagado(final Integer totalMontoPagado) {
         this.totalMontoPagado = totalMontoPagado;
     }
 
@@ -185,7 +187,7 @@ public class EstadoCuentaDashForm extends DynaActionForm {
         return totalMontoPorPagar;
     }
 
-    public void setTotalMontoPorPagar(Long totalMontoPorPagar) {
+    public void setTotalMontoPorPagar(final Long totalMontoPorPagar) {
         this.totalMontoPorPagar = totalMontoPorPagar;
     }
 
@@ -193,7 +195,17 @@ public class EstadoCuentaDashForm extends DynaActionForm {
         return vehiculoPrecio;
     }
 
-    public void setVehiculoPrecio(Long vehiculoPrecio) {
+    public void setVehiculoPrecio(final Long vehiculoPrecio) {
         this.vehiculoPrecio = vehiculoPrecio;
     }
+
+
+    public Long getConcesionariaId() {
+        return concesionariaId;
+    }
+
+    public void setConcesionariaId(final Long concesionariaId) {
+        this.concesionariaId = concesionariaId;
+    }
+
 }

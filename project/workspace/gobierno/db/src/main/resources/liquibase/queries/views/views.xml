@@ -72,6 +72,7 @@
 			v.precio AS 'vehiculo_precio',
 			cli.email AS 'email_cliente',
 			conc.email AS 'concesionaria_email',
+			conc.id AS 'concesionaria_id',
 			Max(p.fecha_ultima_actualizacion) AS 'fecha_ultima_actualizacion_plan',
 			Max(cu.fecha_ultima_actualizacion) AS 'fecha_ultima_actualizacion_cuota',
 			Sum(CASE WHEN cu.fecha_pago IS NOT NULL THEN 1 ELSE 0 END) AS 'total_cuotas_pagas',
@@ -98,6 +99,7 @@
 			v.nombre,
 			cli.email,
 			conc.email,
+			conc.id,
 			v.precio)
 			SELECT nombre_cliente,
 			documento_cliente,
@@ -107,6 +109,7 @@
 			vehiculo_nombre,
 			email_cliente,
 			concesionaria_email,
+			concesionaria_id,
 			fecha_ultima_actualizacion_plan,
 			fecha_ultima_actualizacion_cuota,
 			total_cuotas_pagas,

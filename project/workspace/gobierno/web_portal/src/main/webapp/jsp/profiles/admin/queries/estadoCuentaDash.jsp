@@ -24,6 +24,7 @@
 <table id="table_admin_result" class="stripe">
 <thead>
 <tr>
+   <th><fmt:message key="update_cell_update_btn" bundle="${etq}" /></th>
    <th><fmt:message key="table_estado_cuenta_dash_nombreCliente_th" bundle="${etq}" /></th>
    <th><fmt:message key="table_estado_cuenta_dash_documentoCliente_th" bundle="${etq}" /></th>
    <th><fmt:message key="table_estado_cuenta_dash_estadoPlan_th" bundle="${etq}" /></th>
@@ -50,10 +51,19 @@
     try {
         List<EstadoCuentaDashForm> dashrows = (List<EstadoCuentaDashForm>) request.getAttribute(QUERY_RESULT_RQST_ATTRIBUTE);
         for(EstadoCuentaDashForm row : dashrows) {
-
-            final String rowId = ESTADO_CUENTA_DASH_ROW + "-" + row.getDocumentoCliente() + "_" + row.getNroPlanConcesionaria() ;
+            String updateBtnClass = String.format("btn btn-info %s", "estado_cuenta_update_btn");
         %>
-            <tr id="<%= rowId %>"  >
+            <tr>
+                <td>
+                    <form method="post">
+                        <input type="hidden" name="documento" value="<%= row.getDocumentoCliente() %>"/>
+                        <input type="hidden" name="nro_plan_concesionaria" value="<%= row.getNroPlanConcesionaria() %>"/>
+                        <input type="hidden" name="id_concesionaria" value="<%= row.getConcesionariaId() %>"/>
+                        <button type="button" class="<%= updateBtnClass %>" >
+                            <fmt:message key="update_cell_update_btn" bundle="${etq}" />
+                        </button>
+                    </form>
+                </td>
                 <td> <%= row.getNombreCliente() %> </td>
                 <td> <%= row.getDocumentoCliente() %> </td>
                 <td> <%= row.getEstadoPlan() %> </td>

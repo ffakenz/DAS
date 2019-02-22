@@ -34,6 +34,14 @@ class Admin extends Module {
         console.log("showJobResultsReport, [EVENT] = %o", evt);
         ConsumoService.GET_JOB_RESULTS_REPORT();
     }
+
+    updateEstadoCuenta(evt) {
+        evt.preventDefault();
+        console.log("updateEstadoCuenta, [EVENT] = %o", evt);
+        const data = $(evt.target).closest('form').serialize();
+        console.log("updateEstadoCuenta, [DATA] = %o", data );
+        AdminService.UPDATE_ESTADO_CUENTA(data);
+    }
 };
 
 $(() => {

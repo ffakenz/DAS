@@ -58,6 +58,7 @@ public final class Constants {
     public static final String APROBAR_BTN = "aprobar_btn";
     public static final String DESAPROBAR_BTN = "desaprobar_btn";
     public static final String CONFIG_BTN = "config_btn";
+    public static final String UPDATE_BTN = "update_btn";
 
     /************ SORTEO ****************************/
     public static Integer CUOTAS_MIN = 10;

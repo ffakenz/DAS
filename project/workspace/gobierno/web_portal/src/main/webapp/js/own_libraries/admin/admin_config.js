@@ -7,6 +7,11 @@ const AdminConfig = (module) => [
             { delegate: Id.SHOW_SORTEOS_BTN, handler: module.showSorteos },
             { delegate: Id.SHOW_PLANES_BTN, handler: module.showPlanes }
         ]
+    },
+    {
+        ctx: Id.CONTENT_ADMIN_PAGE_DIV,
+        cnfg: [
+            { delegate: Class.ESTADO_CUENTA_UPDATE_BTN, handler: module.updateEstadoCuenta }
+        ]
     }
-
 ];

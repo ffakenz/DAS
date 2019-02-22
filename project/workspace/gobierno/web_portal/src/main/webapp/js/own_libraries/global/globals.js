@@ -31,7 +31,8 @@ const Action = {
     /* CALENDAR */
     GET_CALENDAR_CELL_MODAL: "/web_portal/sorteo/CalendarCellModal.do",
     /* QUERIES */
-    ESTADO_CUENTA_DASH :  "/web_portal/queries/EstadoCuentaDash.do"
+    ESTADO_CUENTA_DASH :  "/web_portal/queries/EstadoCuentaDash.do",
+    UPDATE_ESTADO_CUENTA :  "/web_portal/queries/UpdateEstadoCuentaDash.do"
 };
 
 const ConfigTecno = {
@@ -80,7 +81,8 @@ const Id = {
     CREATE_SORTEO_BTN: "create_sorteo_btn",
     UPDATE_SORTEO_BTN: "update_sorteo_btn",
     LANG_DIV: "lang_div",
-    LANG_SELECT: "lang_select"
+    LANG_SELECT: "lang_select",
+    TABLE_ADMIN_RESULT: "table_admin_result"
 };
 
 const Class = {
@@ -95,5 +97,6 @@ const Class = {
     EMPTY_CELL: "empty_cell",
     SORTEO_CELL: "sorteo_cell",
     CALENDAR_CELL: "calendar_cell",
-    LANG_BTN: "lang_btn"
+    LANG_BTN: "lang_btn",
+    ESTADO_CUENTA_UPDATE_BTN: "estado_cuenta_update_btn"
 };
