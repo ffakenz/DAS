@@ -21,11 +21,10 @@
 <%@ page import="java.lang.Exception" %>
 <%@ page import="ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm" %>
 
-<table id="aprobadas_table" class="stripe table_report">
+<table id="aprobadas_table" class="table_report display nowrap row-border hover order-colum">
 <thead>
 <tr>
    <th><fmt:message key="table_conc_name_th" bundle="${etq}" /></th>
-   <th><fmt:message key="table_conc_cuit_th" bundle="${etq}" /></th>
    <th><fmt:message key="table_conc_email_th" bundle="${etq}" /></th>
    <th><fmt:message key="table_conc_dir_th" bundle="${etq}" /></th>
    <th><fmt:message key="table_conc_tel_th" bundle="${etq}" /></th>
