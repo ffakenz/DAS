@@ -86,6 +86,8 @@
 </tbody>
 </table>
 
+<fmt:message key="table_estado_cuentas_dash_title" var="title" bundle="${etq}" />
+
 <jsp:include page="../../../commons/datatable.jsp">
-    <jsp:param name="title" value="Estado de Cuentas"/>
+    <jsp:param name="title" value="${title}"/>
 </jsp:include>

@@ -36,7 +36,7 @@ class Login extends Module {
 
     registrarUsuario(evt) {
         evt.preventDefault();
-        console.log("validarUsuario = %o", evt);
+        console.log("registrarUsuario = %o", evt);
         const url = Action.LOGIN_PRIMER_INGRESO;
         $('#login_primer_ingreso_form')
             .attr('action', url)

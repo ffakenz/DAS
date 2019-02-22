@@ -7,7 +7,7 @@
                   <img src="/web_portal/img/github_logo.jpg" class="img-thumbnail">
                 </a>
 
-                <a href="#" style="float:right">Back to top</a>
+                <a href="#" style="float:right"><fmt:message key="footer_back_top_btn" bundle="${etq}" /></a>
         </nav>
     </div>
 </footer>
