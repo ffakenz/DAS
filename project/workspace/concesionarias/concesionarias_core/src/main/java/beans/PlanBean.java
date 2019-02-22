@@ -56,7 +56,7 @@ public class PlanBean implements Serializable {
         bean.setClienteDocumento(notificationUpdate.getClienteDocumento());
         bean.setClienteApellido(notificationUpdate.getClienteApellido());
         bean.setClienteNombre(notificationUpdate.getClienteNombre());
-        bean.setClienteEmail(notificationUpdate.getClienteApellido());
+        bean.setClienteEmail(notificationUpdate.getClienteEmail());
         bean.setClienteNroTelefono(notificationUpdate.getClienteNroTelefono());
         bean.setVehiculoId(notificationUpdate.getVehiculoId());
         bean.setVehiculoMarca(notificationUpdate.getVehiculoMarca());
