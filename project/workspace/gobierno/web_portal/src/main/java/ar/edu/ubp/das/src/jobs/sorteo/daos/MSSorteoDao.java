@@ -114,4 +114,7 @@ public class MSSorteoDao extends DaoImpl<SorteoForm> {
                 .collect(Collectors.toList());
     }
 
+//    public List<SorteoForm> getSorteosData() throws SQLException {
+//        return this.executeQueryProcedure("dbo.get_sorteos_report_table");
+//    }
 }

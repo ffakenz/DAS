@@ -26,14 +26,14 @@
 <tr>
    <th><fmt:message key="table_conc_name_th" bundle="${etq}" /></th>
    <th><fmt:message key="table_conc_cuit_th" bundle="${etq}" /></th>
-   <th><fmt:message key="table_conc_code_th" bundle="${etq}" /></th>
    <th><fmt:message key="table_conc_email_th" bundle="${etq}" /></th>
    <th><fmt:message key="table_conc_dir_th" bundle="${etq}" /></th>
    <th><fmt:message key="table_conc_tel_th" bundle="${etq}" /></th>
-   <th><fmt:message key="table_conc_created_at_th" bundle="${etq}" /></th>
-   <th><fmt:message key="table_conc_registered_at_th" bundle="${etq}" /></th>
    <th><fmt:message key="table_conc_action_th" bundle="${etq}" /></th>
    <th><fmt:message key="table_conc_config_th" bundle="${etq}" /></th>
+   <th><fmt:message key="table_conc_code_th" bundle="${etq}" /></th>
+   <th><fmt:message key="table_conc_created_at_th" bundle="${etq}" /></th>
+   <th><fmt:message key="table_conc_registered_at_th" bundle="${etq}" /></th>
 </tr>
 </thead>
 <tbody>
@@ -50,17 +50,9 @@
             <tr id="<%= concesionariaRowId %>" class="<%= concesionariaRowClass %>" >
                 <td> <%= c.getNombre() %> </td>
                 <td> <%= c.getCuit() %> </td>
-                <td> <%= FrontUtils.emptyIfNull(c.getCodigo()) %> </td>
                 <td> <%= c.getEmail() %> </td>
                 <td> <%= c.getDireccion() %> </td>
                 <td> <%= c.getTel() %> </td>
-                <td>
-                    <fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="<%= c.getFechaAlta() %>" />
-                </td>
-                <td>
-                    <fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="<%= c.getFechaRegistracion() %>" />
-                </td>
-
                 <% if (concesionariaRowClass.equals(CONCESIONARIA_NO_APROBADA)) {
                     String aprobarBtnId = APROBAR_BTN + "-" + c.getId();
                     String aprobarBtnClass = String.format("btn btn-success %s", APROBAR_BTN );
@@ -93,6 +85,14 @@
                         <fmt:message key="table_conc_configurar_btn" bundle="${etq}" />
                     </button>
                 </td>
+                <td> <%= FrontUtils.emptyIfNull(c.getCodigo()) %> </td>
+                <td>
+                    <fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="<%= c.getFechaAlta() %>" />
+                </td>
+                <td>
+                    <fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="<%= c.getFechaRegistracion() %>" />
+                </td>
+
             </tr>
         <% } // END FOR LOOP
    } catch(Exception e) {

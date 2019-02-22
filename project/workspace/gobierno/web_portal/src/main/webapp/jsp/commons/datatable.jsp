@@ -19,6 +19,9 @@
             $('#table_admin_result').append('<caption style="caption-side: top"> <h1>'+title+'</h1> </caption>');
 
             $('#table_admin_result').DataTable( {
+                "scrollY": "20rem",
+                "scrollCollapse": true,
+                "paging": false,
                 "scrollX": true,
                 dom: 'Bfrtip',
                 buttons: [
