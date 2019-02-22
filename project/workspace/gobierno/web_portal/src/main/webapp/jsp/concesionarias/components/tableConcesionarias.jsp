@@ -21,7 +21,7 @@
 <%@ page import="java.lang.Exception" %>
 <%@ page import="ar.edu.ubp.das.src.concesionarias.forms.ConcesionariaForm" %>
 
-<table id="table_admin_result" class="stripe table_report">
+<table id="table_admin_result" class="stripe table_report display nowrap" style="width:100%">
 <thead>
 <tr>
    <th><fmt:message key="table_conc_name_th" bundle="${etq}" /></th>

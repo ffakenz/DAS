@@ -22,7 +22,7 @@
 <%@ page import="ar.edu.ubp.das.src.jobs.consumo.forms.ViewConsumoResultsForm" %>
 
 
-<table id="table_admin_result" class="stripe table_report">
+<table id="table_admin_result" class="stripe table_report display nowrap" style="width:100%">
 <thead>
 <tr>
    <th><fmt:message key="table_consumo_job_id_th" bundle="${etq}" /></th>
