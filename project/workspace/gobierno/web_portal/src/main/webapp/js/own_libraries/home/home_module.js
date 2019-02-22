@@ -10,8 +10,6 @@ class Home extends Module {
     goToHome(evt) {
         jUtils.moveLocationTo(Action.HOME_ENDPOINT);
     }
-
- 
 };
 
 $(() => {

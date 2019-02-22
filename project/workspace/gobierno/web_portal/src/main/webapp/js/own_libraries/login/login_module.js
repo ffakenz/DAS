@@ -4,14 +4,19 @@ class Login extends Module {
     }
 
     goToProfile(evt) {
+        evt.preventDefault();
+        console.log("goToProfile = %o", evt);
         jUtils.moveLocationTo(Action.LOGIN_ENDPOINT);
     }
 
-    showLogin(evt) {
+    showLogin(evt) {    
+        evt.preventDefault();
+        console.log("showLogin = %o", evt);
         jUtils.moveLocationTo(Action.SHOW_LOGIN_ENDPOINT);
     }
 
     closeSession(evt) {
+        evt.preventDefault();
         console.log("closeSession = %o", evt);
         jUtils.moveLocationTo(Action.LOGOUT_ENDPOINT);
     }
@@ -25,13 +30,13 @@ class Login extends Module {
 
     goToPrimerIngreso(evt) {
         evt.preventDefault();
-        window.location.href = Action.SHOW_LOGIN_PRIMER_INGRESO;
+        console.log("goToPrimerIngreso = %o", evt);
+        jUtils.moveLocationTo(Action.SHOW_LOGIN_PRIMER_INGRESO);
     }
 
     registrarUsuario(evt) {
         evt.preventDefault();
-        
-        console.log("%o", evt);
+        console.log("validarUsuario = %o", evt);
         const url = Action.LOGIN_PRIMER_INGRESO;
         $('#login_primer_ingreso_form')
             .attr('action', url)

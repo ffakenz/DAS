@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <actions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="../schema/actions.xsd">
-    <form-beans>
-    </form-beans>
-    <action-mappings>
-
-        <action type="LoginAction" path="/Login.do">
-            <forward name="success_gobierno" path="/profiles/successLoginGobierno.jsp"/>
-            <forward name="success_consumer" path="/profiles/successLoginConsumer.jsp"/>
-            <forward name="warning" path="/login/failures/failParamsLogin.jsp"/>
-            <forward name="failure" path="/login/failures/failLogin.jsp"/>
-        </action>
-
-        <action type="LogoutAction" path="/Logout.do">
-            <forward name="success" path="/web_portal" redirect="true"/>
-        </action>
-    </action-mappings>
+	<form-beans>
+	</form-beans>
+	<action-mappings>
+		
+		<action type="LoginAction" path="/Login.do">
+			<forward name="success_gobierno" path="/profiles/successLoginGobierno.jsp"/>
+			<forward name="success_consumer" path="/profiles/successLoginConsumer.jsp"/>
+			<forward name="warning" path="/login/login.jsp"/>
+			<forward name="failure" path="/login/login.jsp"/>
+		</action>
+		
+		<action type="LogoutAction" path="/Logout.do">
+			<forward name="success" path="/web_portal" redirect="true"/>
+		</action>
+	</action-mappings>
 </actions>

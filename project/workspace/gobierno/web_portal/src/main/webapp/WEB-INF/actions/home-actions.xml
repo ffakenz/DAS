@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <actions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="../schema/actions.xsd">
-    <form-beans>
-    </form-beans>
-    <action-mappings>
-
-        <action type="SuccessAction" path="/Home.do">
-            <forward name="success" path="/home/home.jsp" />
-        </action>
-
-        <action type="SuccessAction" path="/ShowLogin.do">
-            <forward name="success" path="/login/login.jsp" />
-        </action>
-
-        <action type="SuccessAction" path="/ShowRegistrarConcesionaria.do">
-            <forward name="success" path="/concesionarias/showRegistrarConcesionaria.jsp" />
-        </action>
-
-    </action-mappings>
+	<form-beans>
+	</form-beans>
+	<action-mappings>
+		
+		<action type="SuccessAction" path="/Home.do">
+			<forward name="success" path="/home/home.jsp"/>
+		</action>
+		
+		<action type="ShowLoginAction" path="/ShowLogin.do">
+			<forward name="success" path="/login/login.jsp"/>
+		</action>
+		
+		<action type="SuccessAction" path="/ShowRegistrarConcesionaria.do">
+			<forward name="success" path="/concesionarias/showRegistrarConcesionaria.jsp"/>
+		</action>
+	
+	</action-mappings>
 </actions>

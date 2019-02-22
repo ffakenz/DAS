@@ -4,6 +4,8 @@
         pageEncoding="utf-8"
 %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<fmt:setBundle basename="properties.etiquetas" var="etq" scope="session"/>
+<fmt:setLocale value="${lang}" scope="session" />
 <!DOCTYPE html>
 <html>
     <%@include file="../commons/head.jsp" %>
@@ -13,7 +15,11 @@
             <link type="text/css" rel="stylesheet" href="/web_portal/util/StyleSheet.do/load=loginbox" />
             <div class="loginbox loginbox-login">
                 <img src="/web_portal/img/login/avatar.png" class="avatar"/>
-                <h1 style="text-align: center"> Primer Ingreso</h1>
+                <%
+                    String cabecera = (String) request.getAttribute("cabecera"); // in case of failure
+                    String title = (cabecera != null) ? cabecera : "primer_ingreso_cabecera"; // in case of first call
+                %>
+                <h1><fmt:message key="<%= title %>" bundle="${etq}" /></h1>
                 <form id="login_primer_ingreso_form" method="post">
                     <p><fmt:message key="login_documento" bundle="${etq}" /></p>
                     <input type="text" name="documento" id="documento" required placeholder="<fmt:message key="login_documento" bundle="${etq}" />">

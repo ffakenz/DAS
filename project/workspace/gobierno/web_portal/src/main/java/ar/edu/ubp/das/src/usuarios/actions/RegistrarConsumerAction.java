@@ -7,6 +7,7 @@ import ar.edu.ubp.das.mvc.config.ForwardConfig;
 import ar.edu.ubp.das.mvc.db.DaoFactory;
 import ar.edu.ubp.das.mvc.db.DaoImpl;
 import ar.edu.ubp.das.src.core.InteractorResponse;
+import ar.edu.ubp.das.src.core.ResponseForward;
 import ar.edu.ubp.das.src.usuarios.UsuarioUpdateInteractor;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,8 +33,14 @@ public class RegistrarConsumerAction implements Action {
 
         final UsuarioUpdateInteractor usuarioUpdateInteractor = new UsuarioUpdateInteractor(msUsuariosDao);
 
-        final InteractorResponse<Boolean> resp = usuarioUpdateInteractor.execute(form);
+        final InteractorResponse<Boolean> result = usuarioUpdateInteractor.execute(form);
 
-        return mapping.getForwardByName(resp.getResponse().getForward());
+        if (result.getResponse().getForward().equals(ResponseForward.WARNING.getForward())) {
+            request.setAttribute("cabecera", "usuario_failure");
+        } else if (result.getResponse().getForward().equals(ResponseForward.FAILURE.getForward())) {
+            request.setAttribute("cabecera", "invalid_data");
+        }
+
+        return mapping.getForwardByName(result.getResponse().getForward());
     }
 }

@@ -54,6 +54,10 @@ public class LoginAction implements Action {
 
             log.info("[ssid:{}][user_type:{}][forward_name:{}]", result.getResult(), usuarioForm.getRol(), forwardName);
             return mapping.getForwardByName(forwardName);
+        } else if (result.getResponse().getForward().equals(ResponseForward.WARNING.getForward())) {
+            request.setAttribute("cabecera", "dni_not_valid");
+        } else if (result.getResponse().getForward().equals(ResponseForward.FAILURE.getForward())) {
+            request.setAttribute("cabecera", "usuario_failure");
         }
 
         logAction(mapping, form, request, response);

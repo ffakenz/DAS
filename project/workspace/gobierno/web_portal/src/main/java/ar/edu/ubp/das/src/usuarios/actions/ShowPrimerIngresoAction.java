@@ -8,7 +8,7 @@ import ar.edu.ubp.das.mvc.config.ForwardConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class SuccessAction implements Action {
+public class ShowPrimerIngresoAction implements Action {
 
     @Override
     public ForwardConfig execute(final ActionMapping mapping, final DynaActionForm form, final HttpServletRequest request,
