@@ -34,11 +34,11 @@
   String spanishMonthNames[] = {"Enero","Febrero","Marzo","Abril","Mayo","Junio",
                            "Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre" };
 
-  String portugueseMonthNames[] = {"Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+  String portugueseMonthNames[] = {"Janeiro", "Fevereiro", "Mar&ccedilo", "Abril", "Maio", "Junho",
                                   "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" };
 
   String monthName;
-  if(lang.equals("br")) monthName = portugueseMonthNames[intMonth];
+  if(lang.equals("pt")) monthName = portugueseMonthNames[intMonth];
   else if(lang.equals("es")) monthName = spanishMonthNames[intMonth];
   else monthName = englishMonthNames[intMonth];
 
