@@ -34,3 +34,10 @@
 .flag-icon-us.flag-icon-squared {
   background-image: url(/web_portal/img/i18n/us.svg);
 }
+
+.flag-icon-br {
+  background-image: url(/web_portal/img/i18n/br.svg);
+}
+.flag-icon-br.flag-icon-squared {
+  background-image: url(/web_portal/img/i18n/br.svg);
+}

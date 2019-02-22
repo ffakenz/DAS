@@ -34,7 +34,14 @@
   String spanishMonthNames[] = {"Enero","Febrero","Marzo","Abril","Mayo","Junio",
                            "Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre" };
 
-  String monthName = lang.equals("en") ? englishMonthNames[intMonth] : spanishMonthNames[intMonth];
+  String portugueseMonthNames[] = {"Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+                                  "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" };
+
+  String monthName;
+  if(lang.equals("br")) monthName = portugueseMonthNames[intMonth];
+  else if(lang.equals("es")) monthName = spanishMonthNames[intMonth];
+  else monthName = englishMonthNames[intMonth];
+
 
   // determine the next/previous month and year.
   // this is really only needed by calendar.jsp, but i moved it here
