@@ -168,6 +168,10 @@ button.buttons-pdf {
 }
 
 div#content_admin_page_div {
-  background: #e1e0e6;
+  background: white;
   padding: 15px;
+}
+
+div#page-content-wrapper {
+  background: #e1e0e6;
 }
