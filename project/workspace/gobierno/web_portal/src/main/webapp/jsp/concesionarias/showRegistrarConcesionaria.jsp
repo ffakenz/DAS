@@ -25,7 +25,7 @@
                 <p><fmt:message key="registrar_conc_dir_lbl" bundle="${etq}" /></p>
                 <input id="direccion" name="direccion" type="text" value="Aca en la China" placeholder="" />
                 <p><fmt:message key="registrar_conc_cuit_lbl" bundle="${etq}" /></p>
-                <input id="cuit" name="cuit" type="text" placeholder="" value="20-93337511-1" required="" onkeypress="javascript:return jUtils.validNum();"/>
+                <input id="cuit" name="cuit" type="text" placeholder="" value="20-93337511-1" required=""/>
                 <p><fmt:message key="registrar_conc_tel_lbl" bundle="${etq}" /></p>
                 <input id="tel" name="tel" type="text" placeholder="" value="3513059165"  required="" onkeypress="javascript:return jUtils.validNum();"/>
                 <p><fmt:message key="registrar_conc_email_lbl" bundle="${etq}" /></p>

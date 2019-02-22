@@ -28,9 +28,8 @@ const jUtils = {
         return false;
     },
 
-    inputsAreOk : function (form) {
-        return Array.from(form.find("input")).reduce((acc, elem) => {
-            console.log(elem.name, elem.value);
+    inputsAreOk : function (inputs) {
+        return Array.from(inputs).reduce((acc, elem) => {
             if ($.trim(elem.value) === "") acc = acc && false;
             else acc = acc && true;
             return acc;

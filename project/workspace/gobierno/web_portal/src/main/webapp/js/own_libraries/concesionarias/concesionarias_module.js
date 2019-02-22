@@ -100,9 +100,8 @@ class Concesionarias extends Module {
         console.log("registrarConcesionaria, [EVENT] = %o", evt);
         const _formRegistrarConcesionaria = $('#form_registrar_concesionaria');
         const _email = $("#email");
-        const isFormValid =
-            jUtils.inputsAreOk(_formRegistrarConcesionaria) && 
-            jUtils.isValidEmail(_email.val());    
+        const isFormValid = jUtils.inputsAreOk(_formRegistrarConcesionaria.find("input").not("[type=submit]")) &&
+            jUtils.isValidEmail(_email.val());
 
         if(!isFormValid) {
             console.log("Form is Invalid");
