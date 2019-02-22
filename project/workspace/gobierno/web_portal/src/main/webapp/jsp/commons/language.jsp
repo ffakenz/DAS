@@ -5,7 +5,7 @@
             <span class="flag-icon flag-icon-ar"></span> <fmt:message key="lang_title" bundle="${etq}" />
             </a>
           </c:when>
-          <c:when test="${sessionScope.lang == 'br'}">
+          <c:when test="${sessionScope.lang == 'pt'}">
               <span class="flag-icon flag-icon-br"></span> <fmt:message key="lang_title" bundle="${etq}" />
               </a>
           </c:when>
@@ -29,8 +29,8 @@
      </li>
      <li>
         <form method="post" action="javascript:void(0)">
-            <a class="lang_btn dropdown-item" href="#" ><span class="flag-icon flag-icon-br"></span> <fmt:message key="br_lang" bundle="${etq}" /></a>
-            <input type="hidden" name="lang" value="br" />
+            <a class="lang_btn dropdown-item" href="#" ><span class="flag-icon flag-icon-br"></span> <fmt:message key="pt_lang" bundle="${etq}" /></a>
+            <input type="hidden" name="lang" value="pt" />
         </form>
      </li>
   </ul>
